@@ -1,3 +1,4 @@
+"use strict";
 /* tslint:disable */
 /* eslint-disable */
 /**
@@ -11,7 +12,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-export class Configuration {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Configuration = void 0;
+class Configuration {
     constructor(param = {}) {
         this.apiKey = param.apiKey;
         this.username = param.username;
@@ -42,3 +45,4 @@ export class Configuration {
         return mime !== null && (jsonMime.test(mime) || mime.toLowerCase() === 'application/json-patch+json');
     }
 }
+exports.Configuration = Configuration;
