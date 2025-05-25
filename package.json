@@ -1,0 +1,32 @@
+{
+  "name": "hallocasa-api-client",
+  "version": "0.1.0",
+  "description": "TypeScript client for Hallocasa API",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "generate": "openapi-generator-cli generate -i ../hallocasa-openapi.json -g typescript-axios -o src/generated --skip-validate-spec",
+    "update-client": "node scripts/update-client.js",
+    "postgenerate": "npm run update-client",
+    "build": "tsc",
+    "clean": "rimraf dist",
+    "prepare": "npm run build",
+    "test": "node test.js"
+  },
+  "keywords": [
+    "hallocasa",
+    "api",
+    "client",
+    "typescript",
+    "openapi"
+  ],
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.7.0",
+    "axios": "^1.6.0",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.5.3"
+  },
+  "peerDependencies": {
+    "axios": "^1.6.0"
+  }
+} 
