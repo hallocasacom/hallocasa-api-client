@@ -81,11 +81,11 @@ export interface Alert {
      */
     'userAlertType'?: AlertUserAlertTypeEnum;
     /**
-     *
-     * @type {NotificationBody}
+     * Alert criteria in JSON format
+     * @type {object}
      * @memberof Alert
      */
-    'alertCriteria'?: NotificationBody;
+    'alertCriteria'?: object;
     /**
      *
      * @type {boolean}
@@ -99,11 +99,11 @@ export interface Alert {
      */
     'lastNotification'?: string;
     /**
-     *
-     * @type {NotificationBody}
+     * Alert result data in JSON format
+     * @type {object}
      * @memberof Alert
      */
-    'result'?: NotificationBody;
+    'result'?: object;
     /**
      *
      * @type {number}
@@ -821,22 +821,6 @@ export type DropdownOptionGroupTranslationManagementEnum = typeof DropdownOption
 /**
  *
  * @export
- * @interface ExchangeRateMap
- */
-export interface ExchangeRateMap {
-    [key: string]: {
-        [key: string]: number;
-    } | any;
-    /**
-     *
-     * @type {boolean}
-     * @memberof ExchangeRateMap
-     */
-    'empty'?: boolean;
-}
-/**
- *
- * @export
  * @interface FBPropertyDto
  */
 export interface FBPropertyDto {
@@ -992,11 +976,11 @@ export interface Favorite {
      */
     'resourceId': string;
     /**
-     *
-     * @type {NotificationBody}
+     * Resource data in JSON format
+     * @type {object}
      * @memberof Favorite
      */
-    'resource'?: NotificationBody;
+    'resource'?: object;
 }
 export declare const FavoriteResourceTypeEnum: {
     readonly Property: "PROPERTY";
@@ -2023,59 +2007,6 @@ export type HcFilterTypeEntryRangeFieldPresentationEnum = typeof HcFilterTypeEnt
 /**
  *
  * @export
- * @interface JsonObject
- */
-export interface JsonObject {
-    [key: string]: JsonValue | any;
-    /**
-     *
-     * @type {string}
-     * @memberof JsonObject
-     */
-    'valueType'?: JsonObjectValueTypeEnum;
-    /**
-     *
-     * @type {boolean}
-     * @memberof JsonObject
-     */
-    'empty'?: boolean;
-}
-export declare const JsonObjectValueTypeEnum: {
-    readonly Array: "ARRAY";
-    readonly Object: "OBJECT";
-    readonly String: "STRING";
-    readonly Number: "NUMBER";
-    readonly True: "TRUE";
-    readonly False: "FALSE";
-    readonly Null: "NULL";
-};
-export type JsonObjectValueTypeEnum = typeof JsonObjectValueTypeEnum[keyof typeof JsonObjectValueTypeEnum];
-/**
- *
- * @export
- * @interface JsonValue
- */
-export interface JsonValue {
-    /**
-     *
-     * @type {string}
-     * @memberof JsonValue
-     */
-    'valueType'?: JsonValueValueTypeEnum;
-}
-export declare const JsonValueValueTypeEnum: {
-    readonly Array: "ARRAY";
-    readonly Object: "OBJECT";
-    readonly String: "STRING";
-    readonly Number: "NUMBER";
-    readonly True: "TRUE";
-    readonly False: "FALSE";
-    readonly Null: "NULL";
-};
-export type JsonValueValueTypeEnum = typeof JsonValueValueTypeEnum[keyof typeof JsonValueValueTypeEnum];
-/**
- *
- * @export
  * @interface Language
  */
 export interface Language {
@@ -2308,11 +2239,11 @@ export interface Notification {
      */
     'currentDateTime'?: string;
     /**
-     *
-     * @type {NotificationBody}
+     * Notification body data in JSON format
+     * @type {object}
      * @memberof Notification
      */
-    'body'?: NotificationBody;
+    'body'?: object;
 }
 export declare const NotificationTypeEnum: {
     readonly ToBrokerAlertCreated: "TO_BROKER__ALERT_CREATED";
@@ -2325,36 +2256,6 @@ export declare const NotificationTypeEnum: {
     readonly ToUserNewsletterListing: "TO_USER__NEWSLETTER_LISTING";
 };
 export type NotificationTypeEnum = typeof NotificationTypeEnum[keyof typeof NotificationTypeEnum];
-/**
- *
- * @export
- * @interface NotificationBody
- */
-export interface NotificationBody {
-    [key: string]: JsonValue | any;
-    /**
-     *
-     * @type {string}
-     * @memberof NotificationBody
-     */
-    'valueType'?: NotificationBodyValueTypeEnum;
-    /**
-     *
-     * @type {boolean}
-     * @memberof NotificationBody
-     */
-    'empty'?: boolean;
-}
-export declare const NotificationBodyValueTypeEnum: {
-    readonly Array: "ARRAY";
-    readonly Object: "OBJECT";
-    readonly String: "STRING";
-    readonly Number: "NUMBER";
-    readonly True: "TRUE";
-    readonly False: "FALSE";
-    readonly Null: "NULL";
-};
-export type NotificationBodyValueTypeEnum = typeof NotificationBodyValueTypeEnum[keyof typeof NotificationBodyValueTypeEnum];
 /**
  *
  * @export
@@ -3692,6 +3593,12 @@ export interface SkilledUser {
      * @type {string}
      * @memberof SkilledUser
      */
+    'groupMemberStatus'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
     'imprintImageLink'?: string;
 }
 /**
@@ -3726,17 +3633,17 @@ export interface StripeEvent {
  */
 export interface StripeEventData {
     /**
-     *
-     * @type {NotificationBody}
+     * Stripe event object data in JSON format
+     * @type {object}
      * @memberof StripeEventData
      */
-    'object'?: NotificationBody;
+    'object'?: object;
     /**
-     *
-     * @type {JsonObject}
+     * Previous attributes of the object before the event
+     * @type {object}
      * @memberof StripeEventData
      */
-    'previous_attributes'?: JsonObject;
+    'previous_attributes'?: object;
 }
 /**
  *
@@ -4477,10 +4384,10 @@ export interface UserDto {
     'confirmedFlag'?: boolean;
     /**
      *
-     * @type {Array<JsonObject>}
+     * @type {Array<object>}
      * @memberof UserDto
      */
-    'subscriptions'?: Array<JsonObject>;
+    'subscriptions'?: Array<object>;
     /**
      *
      * @type {Array<UserPermission>}
@@ -4489,7 +4396,7 @@ export interface UserDto {
     'userPermissions'?: Array<UserPermission>;
 }
 /**
- *
+ * Filter request for searching users with various criteria including location, user types, languages, and business focus areas
  * @export
  * @interface UserFilterRequest
  */
@@ -4499,103 +4406,109 @@ export interface UserFilterRequest {
      * @type {UserFilterResultSpec}
      * @memberof UserFilterRequest
      */
-    'resultRequest'?: UserFilterResultSpec;
+    'resultRequest': UserFilterResultSpec;
     /**
-     *
+     * Filter by user name (partial match supported)
      * @type {string}
      * @memberof UserFilterRequest
      */
     'name'?: string;
     /**
-     *
+     * Filter by countries where users operate
      * @type {Array<Country>}
      * @memberof UserFilterRequest
      */
     'countries'?: Array<Country>;
     /**
-     *
+     * Latitude for location-based search (must be used with longitude and radius)
      * @type {number}
      * @memberof UserFilterRequest
      */
     'latitude'?: number;
     /**
-     *
+     * Longitude for location-based search (must be used with latitude and radius)
      * @type {number}
      * @memberof UserFilterRequest
      */
     'longitude'?: number;
     /**
-     *
+     * Search radius in kilometers for location-based search (must be used with latitude and longitude)
      * @type {number}
      * @memberof UserFilterRequest
      */
     'radius'?: number;
     /**
-     *
+     * Filter by user types
      * @type {Array<UserType>}
      * @memberof UserFilterRequest
      */
     'userTypes'?: Array<UserType>;
     /**
-     *
+     * Filter by languages spoken by users
      * @type {Array<Language>}
      * @memberof UserFilterRequest
      */
     'languages'?: Array<Language>;
     /**
-     *
+     * Filter only users with WhatsApp
      * @type {boolean}
      * @memberof UserFilterRequest
      */
     'filterWhatsApp'?: boolean;
     /**
-     *
+     * Filter only users with telephone number
      * @type {boolean}
      * @memberof UserFilterRequest
      */
     'filterTelephoneNumber'?: boolean;
     /**
-     *
+     * Filter only users with Google Place ID
      * @type {boolean}
      * @memberof UserFilterRequest
      */
     'filterGooglePlaceId'?: boolean;
     /**
-     *
+     * Filter users focused on commercial properties
      * @type {boolean}
      * @memberof UserFilterRequest
      */
     'filterFocusOnCommercial'?: boolean;
     /**
-     *
+     * Filter users focused on residential properties
      * @type {boolean}
      * @memberof UserFilterRequest
      */
     'filterFocusOnResidential'?: boolean;
     /**
-     *
+     * Filter users focused on rental properties
      * @type {boolean}
      * @memberof UserFilterRequest
      */
     'filterFocusOnRental'?: boolean;
     /**
-     *
+     * Filter users focused on selling properties
      * @type {boolean}
      * @memberof UserFilterRequest
      */
     'filterFocusOnSelling'?: boolean;
     /**
-     *
+     * Filter users with social media presence
      * @type {boolean}
      * @memberof UserFilterRequest
      */
     'filterSocial'?: boolean;
     /**
-     *
+     * Filter by brokerage IDs
      * @type {Array<number>}
      * @memberof UserFilterRequest
      */
     'brokerages'?: Array<number>;
+    /**
+     * Filter by specific user IDs
+     * @type {Array<number>}
+     * @memberof UserFilterRequest
+     */
+    'userIds'?: Array<number>;
 }
 /**
  *
@@ -4617,7 +4530,7 @@ export interface UserFilterResult {
     'userList'?: Array<SkilledUser>;
 }
 /**
- *
+ * Result specification for pagination and sorting of user search results
  * @export
  * @interface UserFilterResultSpec
  */
@@ -4665,13 +4578,13 @@ export interface UserFilterResultSpec {
      */
     'orderBy'?: Array<string>;
     /**
-     *
+     * Sort users by most recent login first
      * @type {boolean}
      * @memberof UserFilterResultSpec
      */
     'orderByMostRecentLogin'?: boolean;
     /**
-     *
+     * Sort users by least recent login first
      * @type {boolean}
      * @memberof UserFilterResultSpec
      */
@@ -4934,10 +4847,11 @@ export declare const AlertsApiAxiosParamCreator: (configuration?: Configuration)
     /**
      * Triggers the sending of customized property alerts to users
      * @summary Send customized property alerts
+     * @param {number} userId ID of the user
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    sendAlert: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    sendAlert: (userId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * AlertsApi - functional programming interface
@@ -4998,10 +4912,11 @@ export declare const AlertsApiFp: (configuration?: Configuration) => {
     /**
      * Triggers the sending of customized property alerts to users
      * @summary Send customized property alerts
+     * @param {number} userId ID of the user
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    sendAlert(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>>;
+    sendAlert(userId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>>;
 };
 /**
  * AlertsApi - factory interface
@@ -5059,10 +4974,11 @@ export declare const AlertsApiFactory: (configuration?: Configuration, basePath?
     /**
      * Triggers the sending of customized property alerts to users
      * @summary Send customized property alerts
+     * @param {AlertsApiSendAlertRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    sendAlert(options?: RawAxiosRequestConfig): AxiosPromise<string>;
+    sendAlert(requestParameters: AlertsApiSendAlertRequest, options?: RawAxiosRequestConfig): AxiosPromise<string>;
 };
 /**
  * Request parameters for deleteAlert1 operation in AlertsApi.
@@ -5161,6 +5077,19 @@ export interface AlertsApiSaveAlert1Request {
     readonly alert: Alert;
 }
 /**
+ * Request parameters for sendAlert operation in AlertsApi.
+ * @export
+ * @interface AlertsApiSendAlertRequest
+ */
+export interface AlertsApiSendAlertRequest {
+    /**
+     * ID of the user
+     * @type {number}
+     * @memberof AlertsApiSendAlert
+     */
+    readonly userId: number;
+}
+/**
  * AlertsApi - object-oriented interface
  * @export
  * @class AlertsApi
@@ -5224,11 +5153,12 @@ export declare class AlertsApi extends BaseAPI {
     /**
      * Triggers the sending of customized property alerts to users
      * @summary Send customized property alerts
+     * @param {AlertsApiSendAlertRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AlertsApi
      */
-    sendAlert(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any>>;
+    sendAlert(requestParameters: AlertsApiSendAlertRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any>>;
 }
 /**
  * AllowancesApi - axios parameter creator
@@ -6059,7 +5989,11 @@ export declare const ExchangeRatesApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    findExchangeRates1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ExchangeRateMap>>;
+    findExchangeRates1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<{
+        [key: string]: {
+            [key: string]: number;
+        };
+    }>>;
 };
 /**
  * ExchangeRatesApi - factory interface
@@ -6072,7 +6006,11 @@ export declare const ExchangeRatesApiFactory: (configuration?: Configuration, ba
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    findExchangeRates1(options?: RawAxiosRequestConfig): AxiosPromise<ExchangeRateMap>;
+    findExchangeRates1(options?: RawAxiosRequestConfig): AxiosPromise<{
+        [key: string]: {
+            [key: string]: number;
+        };
+    }>;
 };
 /**
  * ExchangeRatesApi - object-oriented interface
@@ -6088,7 +6026,11 @@ export declare class ExchangeRatesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ExchangeRatesApi
      */
-    findExchangeRates1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ExchangeRateMap, any>>;
+    findExchangeRates1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<{
+        [key: string]: {
+            [key: string]: number;
+        };
+    }, any>>;
 }
 /**
  * FacebookPropertiesApi - axios parameter creator
@@ -8193,10 +8135,11 @@ export declare const PropertiesApiAxiosParamCreator: (configuration?: Configurat
      *
      * @summary Search properties with specified filters
      * @param {PropertyFilterCriteria} propertyFilterCriteria Property filter criteria
+     * @param {boolean} [bypassCache] Bypass cache and fetch fresh data from database
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    findProperties1: (propertyFilterCriteria: PropertyFilterCriteria, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    findProperties1: (propertyFilterCriteria: PropertyFilterCriteria, bypassCache?: boolean, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      *
      * @summary Return the property list with specified user id
@@ -8319,10 +8262,11 @@ export declare const PropertiesApiFp: (configuration?: Configuration) => {
      *
      * @summary Search properties with specified filters
      * @param {PropertyFilterCriteria} propertyFilterCriteria Property filter criteria
+     * @param {boolean} [bypassCache] Bypass cache and fetch fresh data from database
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    findProperties1(propertyFilterCriteria: PropertyFilterCriteria, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Property>>>;
+    findProperties1(propertyFilterCriteria: PropertyFilterCriteria, bypassCache?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Property>>>;
     /**
      *
      * @summary Return the property list with specified user id
@@ -8582,6 +8526,12 @@ export interface PropertiesApiFindProperties1Request {
      * @memberof PropertiesApiFindProperties1
      */
     readonly propertyFilterCriteria: PropertyFilterCriteria;
+    /**
+     * Bypass cache and fetch fresh data from database
+     * @type {boolean}
+     * @memberof PropertiesApiFindProperties1
+     */
+    readonly bypassCache?: boolean;
 }
 /**
  * Request parameters for findPropertiesByLocationRange1 operation in PropertiesApi.
@@ -9359,10 +9309,11 @@ export declare const PropertyFiltersApiAxiosParamCreator: (configuration?: Confi
      * Retrieves options for a specific property filter based on submitted filters
      * @summary Get property field options
      * @param {number} filterId ID of the filter to get options for
+     * @param {Array<PropertyFilterSubmission>} propertyFilterSubmission List of property filter submissions
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getPropertyFieldOptions1: (filterId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    getPropertyFieldOptions1: (filterId: number, propertyFilterSubmission: Array<PropertyFilterSubmission>, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Retrieves a list of property filters, optionally filtered by filter nature IDs
      * @summary Get property filters
@@ -9381,10 +9332,11 @@ export declare const PropertyFiltersApiFp: (configuration?: Configuration) => {
      * Retrieves options for a specific property filter based on submitted filters
      * @summary Get property field options
      * @param {number} filterId ID of the filter to get options for
+     * @param {Array<PropertyFilterSubmission>} propertyFilterSubmission List of property filter submissions
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getPropertyFieldOptions1(filterId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
+    getPropertyFieldOptions1(filterId: number, propertyFilterSubmission: Array<PropertyFilterSubmission>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
     /**
      * Retrieves a list of property filters, optionally filtered by filter nature IDs
      * @summary Get property filters
@@ -9428,6 +9380,12 @@ export interface PropertyFiltersApiGetPropertyFieldOptions1Request {
      * @memberof PropertyFiltersApiGetPropertyFieldOptions1
      */
     readonly filterId: number;
+    /**
+     * List of property filter submissions
+     * @type {Array<PropertyFilterSubmission>}
+     * @memberof PropertyFiltersApiGetPropertyFieldOptions1
+     */
+    readonly propertyFilterSubmission: Array<PropertyFilterSubmission>;
 }
 /**
  * Request parameters for getPropertyFilters operation in PropertyFiltersApi.
@@ -10114,10 +10072,11 @@ export declare const TestimonialApiAxiosParamCreator: (configuration?: Configura
     /**
      * Consider that only user can save new testimonials
      * @summary Create or update the Testimonial supplied
+     * @param {Testimonial} testimonial Testimonial to persist
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    saveTestimonial1: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    saveTestimonial1: (testimonial: Testimonial, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * TestimonialApi - functional programming interface
@@ -10176,10 +10135,11 @@ export declare const TestimonialApiFp: (configuration?: Configuration) => {
     /**
      * Consider that only user can save new testimonials
      * @summary Create or update the Testimonial supplied
+     * @param {Testimonial} testimonial Testimonial to persist
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    saveTestimonial1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Testimonial>>;
+    saveTestimonial1(testimonial: Testimonial, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Testimonial>>;
 };
 /**
  * TestimonialApi - factory interface
@@ -10235,10 +10195,11 @@ export declare const TestimonialApiFactory: (configuration?: Configuration, base
     /**
      * Consider that only user can save new testimonials
      * @summary Create or update the Testimonial supplied
+     * @param {TestimonialApiSaveTestimonial1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    saveTestimonial1(options?: RawAxiosRequestConfig): AxiosPromise<Testimonial>;
+    saveTestimonial1(requestParameters: TestimonialApiSaveTestimonial1Request, options?: RawAxiosRequestConfig): AxiosPromise<Testimonial>;
 };
 /**
  * Request parameters for changePublicationStatus operation in TestimonialApi.
@@ -10311,6 +10272,19 @@ export interface TestimonialApiFindTestimonial1Request {
     readonly testimonialId: string;
 }
 /**
+ * Request parameters for saveTestimonial1 operation in TestimonialApi.
+ * @export
+ * @interface TestimonialApiSaveTestimonial1Request
+ */
+export interface TestimonialApiSaveTestimonial1Request {
+    /**
+     * Testimonial to persist
+     * @type {Testimonial}
+     * @memberof TestimonialApiSaveTestimonial1
+     */
+    readonly testimonial: Testimonial;
+}
+/**
  * TestimonialApi - object-oriented interface
  * @export
  * @class TestimonialApi
@@ -10372,11 +10346,12 @@ export declare class TestimonialApi extends BaseAPI {
     /**
      * Consider that only user can save new testimonials
      * @summary Create or update the Testimonial supplied
+     * @param {TestimonialApiSaveTestimonial1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TestimonialApi
      */
-    saveTestimonial1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Testimonial, any>>;
+    saveTestimonial1(requestParameters: TestimonialApiSaveTestimonial1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Testimonial, any>>;
 }
 /**
  * TextTranslationsApi - axios parameter creator
@@ -10799,10 +10774,11 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      * Verifies the code that was sent to the user\'s phone
      * @summary Verify the phone code sent to user
      * @param {number} userId
+     * @param {PhoneCodeCheckResource} phoneCodeCheckResource Phone code verification details
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    checkPhoneVerificationCodeCommand1: (userId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    checkPhoneVerificationCodeCommand1: (userId: number, phoneCodeCheckResource: PhoneCodeCheckResource, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Allows a user to endorse another user\'s skill
      * @summary Endorse a user skill
@@ -10816,10 +10792,11 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
     /**
      * Retrieves a random selection of users based on specified criteria
      * @summary Fetch random list of users, with basic data
+     * @param {UserListRequest} userListRequest User list request parameters
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    fetchRandomUsers1: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    fetchRandomUsers1: (userListRequest: UserListRequest, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Gets detailed user information by user ID
      * @summary Fetch user detail according to its id
@@ -10896,12 +10873,13 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
     /**
      * Creates a new user account in the system
      * @summary Register new user in the system
+     * @param {SkilledUser} skilledUser User registration data
      * @param {string} [origin]
      * @param {boolean} [skipEmailValidation] Skip email validation step
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    register1: (origin?: string, skipEmailValidation?: boolean, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    register1: (skilledUser: SkilledUser, origin?: string, skipEmailValidation?: boolean, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Sends an activation link to the user\'s email for account verification
      * @summary Request activation link
@@ -10940,11 +10918,12 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
     /**
      * Updates user profile information in the system
      * @summary Save the data of user in the system
+     * @param {SkilledUser} skilledUser User data to save
      * @param {string} [oAuthToken]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    save: (oAuthToken?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    save: (skilledUser: SkilledUser, oAuthToken?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      *
      * @param {LogEntry} [logEntry]
@@ -10953,12 +10932,22 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      */
     saveLog1: (logEntry?: LogEntry, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Searches for users matching the specified filter criteria
-     * @summary Search users with specified filters
+     * Searches for users within a specific group matching the specified filter criteria
+     * @summary Search users within a specified group
+     * @param {string} groupId Group ID
+     * @param {UserFilterRequest} userFilterRequest User search filters within the group. Supports filtering by user attributes, location, skills, and social preferences. The resultRequest field controls pagination and sorting. Only one sort order can be specified at a time.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    searchUsers1: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    searchGroupUsers1: (groupId: string, userFilterRequest: UserFilterRequest, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Searches for users matching the specified filter criteria
+     * @summary Search users with specified filters
+     * @param {UserFilterRequest} userFilterRequest User search filters
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    searchUsers1: (userFilterRequest: UserFilterRequest, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      *
      * @param {*} [options] Override http request option.
@@ -10969,10 +10958,11 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      * Sends a verification code to the user\'s phone number for verification purposes
      * @summary Send a code to the previously saved phone number of the user
      * @param {number} userId
+     * @param {PhoneCodeRequestResource} phoneCodeRequestResource Phone code request details
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    sendPhoneVerificationCodeCommand1: (userId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    sendPhoneVerificationCodeCommand1: (userId: number, phoneCodeRequestResource: PhoneCodeRequestResource, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * UsersApi - functional programming interface
@@ -10999,10 +10989,11 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      * Verifies the code that was sent to the user\'s phone
      * @summary Verify the phone code sent to user
      * @param {number} userId
+     * @param {PhoneCodeCheckResource} phoneCodeCheckResource Phone code verification details
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    checkPhoneVerificationCodeCommand1(userId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PhoneCodeCheckResource>>;
+    checkPhoneVerificationCodeCommand1(userId: number, phoneCodeCheckResource: PhoneCodeCheckResource, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PhoneCodeCheckResource>>;
     /**
      * Allows a user to endorse another user\'s skill
      * @summary Endorse a user skill
@@ -11016,10 +11007,11 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
     /**
      * Retrieves a random selection of users based on specified criteria
      * @summary Fetch random list of users, with basic data
+     * @param {UserListRequest} userListRequest User list request parameters
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    fetchRandomUsers1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SkilledUser>>>;
+    fetchRandomUsers1(userListRequest: UserListRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SkilledUser>>>;
     /**
      * Gets detailed user information by user ID
      * @summary Fetch user detail according to its id
@@ -11096,12 +11088,13 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
     /**
      * Creates a new user account in the system
      * @summary Register new user in the system
+     * @param {SkilledUser} skilledUser User registration data
      * @param {string} [origin]
      * @param {boolean} [skipEmailValidation] Skip email validation step
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    register1(origin?: string, skipEmailValidation?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    register1(skilledUser: SkilledUser, origin?: string, skipEmailValidation?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
      * Sends an activation link to the user\'s email for account verification
      * @summary Request activation link
@@ -11140,11 +11133,12 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
     /**
      * Updates user profile information in the system
      * @summary Save the data of user in the system
+     * @param {SkilledUser} skilledUser User data to save
      * @param {string} [oAuthToken]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    save(oAuthToken?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>>;
+    save(skilledUser: SkilledUser, oAuthToken?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>>;
     /**
      *
      * @param {LogEntry} [logEntry]
@@ -11153,12 +11147,22 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      */
     saveLog1(logEntry?: LogEntry, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
-     * Searches for users matching the specified filter criteria
-     * @summary Search users with specified filters
+     * Searches for users within a specific group matching the specified filter criteria
+     * @summary Search users within a specified group
+     * @param {string} groupId Group ID
+     * @param {UserFilterRequest} userFilterRequest User search filters within the group. Supports filtering by user attributes, location, skills, and social preferences. The resultRequest field controls pagination and sorting. Only one sort order can be specified at a time.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    searchUsers1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserFilterResult>>;
+    searchGroupUsers1(groupId: string, userFilterRequest: UserFilterRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserFilterResult>>;
+    /**
+     * Searches for users matching the specified filter criteria
+     * @summary Search users with specified filters
+     * @param {UserFilterRequest} userFilterRequest User search filters
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    searchUsers1(userFilterRequest: UserFilterRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserFilterResult>>;
     /**
      *
      * @param {*} [options] Override http request option.
@@ -11169,10 +11173,11 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      * Sends a verification code to the user\'s phone number for verification purposes
      * @summary Send a code to the previously saved phone number of the user
      * @param {number} userId
+     * @param {PhoneCodeRequestResource} phoneCodeRequestResource Phone code request details
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    sendPhoneVerificationCodeCommand1(userId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PhoneCodeRequestResource>>;
+    sendPhoneVerificationCodeCommand1(userId: number, phoneCodeRequestResource: PhoneCodeRequestResource, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PhoneCodeRequestResource>>;
 };
 /**
  * UsersApi - factory interface
@@ -11213,10 +11218,11 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
     /**
      * Retrieves a random selection of users based on specified criteria
      * @summary Fetch random list of users, with basic data
+     * @param {UsersApiFetchRandomUsers1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    fetchRandomUsers1(options?: RawAxiosRequestConfig): AxiosPromise<Array<SkilledUser>>;
+    fetchRandomUsers1(requestParameters: UsersApiFetchRandomUsers1Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<SkilledUser>>;
     /**
      * Gets detailed user information by user ID
      * @summary Fetch user detail according to its id
@@ -11288,7 +11294,7 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    register1(requestParameters?: UsersApiRegister1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    register1(requestParameters: UsersApiRegister1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
     /**
      * Sends an activation link to the user\'s email for account verification
      * @summary Request activation link
@@ -11328,7 +11334,7 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    save(requestParameters?: UsersApiSaveRequest, options?: RawAxiosRequestConfig): AxiosPromise<string>;
+    save(requestParameters: UsersApiSaveRequest, options?: RawAxiosRequestConfig): AxiosPromise<string>;
     /**
      *
      * @param {UsersApiSaveLog1Request} requestParameters Request parameters.
@@ -11337,12 +11343,21 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
      */
     saveLog1(requestParameters?: UsersApiSaveLog1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
     /**
-     * Searches for users matching the specified filter criteria
-     * @summary Search users with specified filters
+     * Searches for users within a specific group matching the specified filter criteria
+     * @summary Search users within a specified group
+     * @param {UsersApiSearchGroupUsers1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    searchUsers1(options?: RawAxiosRequestConfig): AxiosPromise<UserFilterResult>;
+    searchGroupUsers1(requestParameters: UsersApiSearchGroupUsers1Request, options?: RawAxiosRequestConfig): AxiosPromise<UserFilterResult>;
+    /**
+     * Searches for users matching the specified filter criteria
+     * @summary Search users with specified filters
+     * @param {UsersApiSearchUsers1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    searchUsers1(requestParameters: UsersApiSearchUsers1Request, options?: RawAxiosRequestConfig): AxiosPromise<UserFilterResult>;
     /**
      *
      * @param {*} [options] Override http request option.
@@ -11389,6 +11404,12 @@ export interface UsersApiCheckPhoneVerificationCodeCommand1Request {
      * @memberof UsersApiCheckPhoneVerificationCodeCommand1
      */
     readonly userId: number;
+    /**
+     * Phone code verification details
+     * @type {PhoneCodeCheckResource}
+     * @memberof UsersApiCheckPhoneVerificationCodeCommand1
+     */
+    readonly phoneCodeCheckResource: PhoneCodeCheckResource;
 }
 /**
  * Request parameters for endorseUserSkill1 operation in UsersApi.
@@ -11414,6 +11435,19 @@ export interface UsersApiEndorseUserSkill1Request {
      * @memberof UsersApiEndorseUserSkill1
      */
     readonly skillEndorsement: SkillEndorsement;
+}
+/**
+ * Request parameters for fetchRandomUsers1 operation in UsersApi.
+ * @export
+ * @interface UsersApiFetchRandomUsers1Request
+ */
+export interface UsersApiFetchRandomUsers1Request {
+    /**
+     * User list request parameters
+     * @type {UserListRequest}
+     * @memberof UsersApiFetchRandomUsers1
+     */
+    readonly userListRequest: UserListRequest;
 }
 /**
  * Request parameters for find operation in UsersApi.
@@ -11580,6 +11614,12 @@ export interface UsersApiPreviewPropertyRequest {
  */
 export interface UsersApiRegister1Request {
     /**
+     * User registration data
+     * @type {SkilledUser}
+     * @memberof UsersApiRegister1
+     */
+    readonly skilledUser: SkilledUser;
+    /**
      *
      * @type {string}
      * @memberof UsersApiRegister1
@@ -11669,6 +11709,12 @@ export interface UsersApiRetrieveUserSkillsRequest {
  */
 export interface UsersApiSaveRequest {
     /**
+     * User data to save
+     * @type {SkilledUser}
+     * @memberof UsersApiSave
+     */
+    readonly skilledUser: SkilledUser;
+    /**
      *
      * @type {string}
      * @memberof UsersApiSave
@@ -11689,6 +11735,38 @@ export interface UsersApiSaveLog1Request {
     readonly logEntry?: LogEntry;
 }
 /**
+ * Request parameters for searchGroupUsers1 operation in UsersApi.
+ * @export
+ * @interface UsersApiSearchGroupUsers1Request
+ */
+export interface UsersApiSearchGroupUsers1Request {
+    /**
+     * Group ID
+     * @type {string}
+     * @memberof UsersApiSearchGroupUsers1
+     */
+    readonly groupId: string;
+    /**
+     * User search filters within the group. Supports filtering by user attributes, location, skills, and social preferences. The resultRequest field controls pagination and sorting. Only one sort order can be specified at a time.
+     * @type {UserFilterRequest}
+     * @memberof UsersApiSearchGroupUsers1
+     */
+    readonly userFilterRequest: UserFilterRequest;
+}
+/**
+ * Request parameters for searchUsers1 operation in UsersApi.
+ * @export
+ * @interface UsersApiSearchUsers1Request
+ */
+export interface UsersApiSearchUsers1Request {
+    /**
+     * User search filters
+     * @type {UserFilterRequest}
+     * @memberof UsersApiSearchUsers1
+     */
+    readonly userFilterRequest: UserFilterRequest;
+}
+/**
  * Request parameters for sendPhoneVerificationCodeCommand1 operation in UsersApi.
  * @export
  * @interface UsersApiSendPhoneVerificationCodeCommand1Request
@@ -11700,6 +11778,12 @@ export interface UsersApiSendPhoneVerificationCodeCommand1Request {
      * @memberof UsersApiSendPhoneVerificationCodeCommand1
      */
     readonly userId: number;
+    /**
+     * Phone code request details
+     * @type {PhoneCodeRequestResource}
+     * @memberof UsersApiSendPhoneVerificationCodeCommand1
+     */
+    readonly phoneCodeRequestResource: PhoneCodeRequestResource;
 }
 /**
  * UsersApi - object-oriented interface
@@ -11746,11 +11830,12 @@ export declare class UsersApi extends BaseAPI {
     /**
      * Retrieves a random selection of users based on specified criteria
      * @summary Fetch random list of users, with basic data
+     * @param {UsersApiFetchRandomUsers1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    fetchRandomUsers1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkilledUser[], any>>;
+    fetchRandomUsers1(requestParameters: UsersApiFetchRandomUsers1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkilledUser[], any>>;
     /**
      * Gets detailed user information by user ID
      * @summary Fetch user detail according to its id
@@ -11831,7 +11916,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    register1(requestParameters?: UsersApiRegister1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    register1(requestParameters: UsersApiRegister1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
     /**
      * Sends an activation link to the user\'s email for account verification
      * @summary Request activation link
@@ -11876,7 +11961,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    save(requestParameters?: UsersApiSaveRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any>>;
+    save(requestParameters: UsersApiSaveRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any>>;
     /**
      *
      * @param {UsersApiSaveLog1Request} requestParameters Request parameters.
@@ -11886,13 +11971,23 @@ export declare class UsersApi extends BaseAPI {
      */
     saveLog1(requestParameters?: UsersApiSaveLog1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
     /**
-     * Searches for users matching the specified filter criteria
-     * @summary Search users with specified filters
+     * Searches for users within a specific group matching the specified filter criteria
+     * @summary Search users within a specified group
+     * @param {UsersApiSearchGroupUsers1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    searchUsers1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserFilterResult, any>>;
+    searchGroupUsers1(requestParameters: UsersApiSearchGroupUsers1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserFilterResult, any>>;
+    /**
+     * Searches for users matching the specified filter criteria
+     * @summary Search users with specified filters
+     * @param {UsersApiSearchUsers1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    searchUsers1(requestParameters: UsersApiSearchUsers1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserFilterResult, any>>;
     /**
      *
      * @param {*} [options] Override http request option.

@@ -10,14 +10,6 @@
     },
     "version" : "v1"
   },
-  "servers" : [ {
-    "url" : "/hallocasa-api/api",
-    "description" : "Hallocasa API Server"
-  } ],
-  "security" : [ {
-    "oAuthCode" : [ ],
-    "oAuthClientId" : [ ]
-  } ],
   "tags" : [ {
     "name" : "chat-tickets",
     "description" : "Chat ticket management endpoints"
@@ -70,11 +62,11 @@
     "name" : "favorites",
     "description" : "API to manage user favorites"
   }, {
+    "name" : "users",
+    "description" : "User group search operations"
+  }, {
     "name" : "skills",
     "description" : "Operations related to user skills"
-  }, {
-    "name" : "users",
-    "description" : "User management operations"
   } ],
   "paths" : {
     "/chat/attachments" : {
@@ -3299,6 +3291,40 @@
         } ],
         "requestBody" : {
           "description" : "List of property filter submissions",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/PropertyFilterSubmission"
+                }
+              },
+              "examples" : {
+                "FilterSubmissionExample" : {
+                  "description" : "FilterSubmissionExample",
+                  "value" : [ {
+                    "apply" : true,
+                    "propertyFilter" : {
+                      "filter" : {
+                        "id" : 2,
+                        "name" : "Location"
+                      },
+                      "propertyField" : {
+                        "id" : 10,
+                        "name" : "Location"
+                      }
+                    },
+                    "minValue" : null,
+                    "maxValue" : null,
+                    "latitudeValue" : 40.7128,
+                    "longitudeValue" : -74.006,
+                    "radiusValue" : 10,
+                    "selectedFilterOptions" : [ ]
+                  } ]
+                }
+              }
+            }
+          },
           "required" : true
         },
         "responses" : {
@@ -3778,6 +3804,16 @@
         "tags" : [ "properties" ],
         "summary" : "Search properties with specified filters",
         "operationId" : "findProperties_1",
+        "parameters" : [ {
+          "name" : "bypassCache",
+          "in" : "query",
+          "description" : "Bypass cache and fetch fresh data from database",
+          "schema" : {
+            "type" : "boolean",
+            "default" : false
+          },
+          "example" : true
+        } ],
         "requestBody" : {
           "description" : "Property filter criteria",
           "content" : {
@@ -4647,7 +4683,25 @@
         "description" : "Consider that only user can save new testimonials",
         "operationId" : "saveTestimonial_1",
         "requestBody" : {
-          "description" : "Testimonial to persist"
+          "description" : "Testimonial to persist",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Testimonial"
+              },
+              "example" : {
+                "publisher" : {
+                  "id" : 101
+                },
+                "user" : {
+                  "id" : 202
+                },
+                "text" : "Excellent communication and professionalism",
+                "rating" : 5
+              }
+            }
+          },
+          "required" : true
         },
         "responses" : {
           "401" : {
@@ -5899,6 +5953,16 @@
         "summary" : "Send customized property alerts",
         "description" : "Triggers the sending of customized property alerts to users",
         "operationId" : "sendAlert",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "ID of the user",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
         "responses" : {
           "200" : {
             "description" : "Alerts sent successfully",
@@ -6210,6 +6274,153 @@
         }
       }
     },
+    "/groups/{groupId}/users/search" : {
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Search users within a specified group",
+        "description" : "Searches for users within a specific group matching the specified filter criteria",
+        "operationId" : "searchGroupUsers_1",
+        "parameters" : [ {
+          "name" : "groupId",
+          "in" : "path",
+          "description" : "Group ID",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "group123"
+        } ],
+        "requestBody" : {
+          "description" : "User search filters within the group. Supports filtering by user attributes, location, skills, and social preferences. The resultRequest field controls pagination and sorting. Only one sort order can be specified at a time.",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UserFilterRequest"
+              },
+              "examples" : {
+                "comprehensiveFilter" : {
+                  "summary" : "Comprehensive filter with all options",
+                  "description" : "comprehensiveFilter",
+                  "value" : {
+                    "resultRequest" : {
+                      "pageFrom" : 0,
+                      "pageTo" : 20,
+                      "orderByMostRecentLogin" : true,
+                      "orderByLessRecentLogin" : false,
+                      "orderByMostRecent" : false,
+                      "orderByLessRecent" : false,
+                      "asc" : false,
+                      "loadCount" : true,
+                      "orderBy" : [ "lastName", "firstName" ]
+                    },
+                    "name" : "John",
+                    "countries" : [ "US", "CA" ],
+                    "latitude" : 40.7128,
+                    "longitude" : -74.006,
+                    "radius" : 50,
+                    "userTypes" : [ "BROKER", "AGENT" ],
+                    "languages" : [ "EN", "ES" ],
+                    "filterWhatsApp" : true,
+                    "filterTelephoneNumber" : true,
+                    "filterGooglePlaceId" : false,
+                    "filterFocusOnCommercial" : true,
+                    "filterFocusOnResidential" : false,
+                    "filterFocusOnRental" : true,
+                    "filterFocusOnSelling" : false,
+                    "filterSocial" : true,
+                    "brokerages" : [ 123, 456 ],
+                    "userIds" : [ 789, 1011 ]
+                  }
+                },
+                "simpleNameSearch" : {
+                  "summary" : "Simple search by name",
+                  "description" : "simpleNameSearch",
+                  "value" : {
+                    "resultRequest" : {
+                      "pageFrom" : 0,
+                      "pageTo" : 10,
+                      "loadCount" : true
+                    },
+                    "name" : "Smith"
+                  }
+                },
+                "locationBasedSearch" : {
+                  "summary" : "Location-based search with radius",
+                  "description" : "locationBasedSearch",
+                  "value" : {
+                    "resultRequest" : {
+                      "pageFrom" : 0,
+                      "pageTo" : 50,
+                      "orderByMostRecent" : true,
+                      "loadCount" : true
+                    },
+                    "latitude" : 40.7128,
+                    "longitude" : -74.006,
+                    "radius" : 25,
+                    "userTypes" : [ "BROKER" ],
+                    "filterFocusOnCommercial" : true
+                  }
+                },
+                "specificUsersSearch" : {
+                  "summary" : "Search for specific users by ID",
+                  "description" : "specificUsersSearch",
+                  "value" : {
+                    "resultRequest" : {
+                      "pageFrom" : 0,
+                      "pageTo" : 100
+                    },
+                    "userIds" : [ 123, 456, 789 ]
+                  }
+                }
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "403" : {
+            "description" : "If user is not a member or owner of the group"
+          },
+          "404" : {
+            "description" : "If group is not found"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/UserFilterResult"
+                },
+                "examples" : {
+                  "groupUserSearchResult" : {
+                    "summary" : "Group user search results",
+                    "description" : "groupUserSearchResult",
+                    "value" : {
+                      "users" : [ {
+                        "id" : 123,
+                        "firstName" : "John",
+                        "lastName" : "Doe",
+                        "skills" : [ "Real Estate" ],
+                        "groupMemberStatus" : "ACCEPTED"
+                      } ],
+                      "total" : 1,
+                      "page" : 1,
+                      "pageSize" : 20
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/skills" : {
       "get" : {
         "tags" : [ "skills" ],
@@ -6345,6 +6556,22 @@
         } ],
         "requestBody" : {
           "description" : "Phone code verification details",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PhoneCodeCheckResource"
+              },
+              "examples" : {
+                "phoneCodeCheckExample" : {
+                  "summary" : "Example phone code verification",
+                  "description" : "phoneCodeCheckExample",
+                  "value" : {
+                    "code" : "123456"
+                  }
+                }
+              }
+            }
+          },
           "required" : true
         },
         "responses" : {
@@ -6387,6 +6614,24 @@
         "operationId" : "fetchRandomUsers_1",
         "requestBody" : {
           "description" : "User list request parameters",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UserListRequest"
+              },
+              "examples" : {
+                "userListRequest" : {
+                  "summary" : "Example user list request",
+                  "description" : "userListRequest",
+                  "value" : {
+                    "count" : 10,
+                    "excludeUserIds" : [ 123, 456 ],
+                    "targetLocationCountryCode" : "US"
+                  }
+                }
+              }
+            }
+          },
           "required" : true
         },
         "responses" : {
@@ -6548,6 +6793,27 @@
         } ],
         "requestBody" : {
           "description" : "User data to save",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/SkilledUser"
+              },
+              "examples" : {
+                "userExample" : {
+                  "summary" : "Example user data",
+                  "description" : "userExample",
+                  "value" : {
+                    "id" : 123,
+                    "email" : "user@example.com",
+                    "firstName" : "John",
+                    "lastName" : "Doe",
+                    "profileName" : "johndoe",
+                    "cellPhone" : "+1234567890"
+                  }
+                }
+              }
+            }
+          },
           "required" : true
         },
         "responses" : {
@@ -6804,6 +7070,27 @@
         } ],
         "requestBody" : {
           "description" : "User registration data",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/SkilledUser"
+              },
+              "examples" : {
+                "userRegistration" : {
+                  "summary" : "Example user registration data",
+                  "description" : "userRegistration",
+                  "value" : {
+                    "email" : "newuser@example.com",
+                    "password" : "Password123",
+                    "firstName" : "Jane",
+                    "lastName" : "Smith",
+                    "profileName" : "janesmith",
+                    "cellPhone" : "+1234567890"
+                  }
+                }
+              }
+            }
+          },
           "required" : true
         },
         "responses" : {
@@ -6874,6 +7161,85 @@
         "operationId" : "searchUsers_1",
         "requestBody" : {
           "description" : "User search filters",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UserFilterRequest"
+              },
+              "examples" : {
+                "basicSearch" : {
+                  "summary" : "Basic user search by name and location",
+                  "description" : "basicSearch",
+                  "value" : {
+                    "resultRequest" : {
+                      "pageSize" : 20,
+                      "pageNumber" : 1,
+                      "orderByMostRecent" : true
+                    },
+                    "name" : "John",
+                    "countries" : [ "US", "CA" ]
+                  }
+                },
+                "locationBasedSearch" : {
+                  "summary" : "Search users within 50km radius",
+                  "description" : "locationBasedSearch",
+                  "value" : {
+                    "resultRequest" : {
+                      "pageSize" : 10,
+                      "pageNumber" : 1
+                    },
+                    "latitude" : 40.7128,
+                    "longitude" : -74.006,
+                    "radius" : 50,
+                    "userTypes" : [ "BROKER", "AGENT" ]
+                  }
+                },
+                "advancedSearch" : {
+                  "summary" : "Advanced search with multiple filters",
+                  "description" : "advancedSearch",
+                  "value" : {
+                    "resultRequest" : {
+                      "pageSize" : 25,
+                      "pageNumber" : 1,
+                      "orderByMostRecentLogin" : true
+                    },
+                    "countries" : [ "US" ],
+                    "userTypes" : [ "BROKER" ],
+                    "languages" : [ "EN", "ES" ],
+                    "filterWhatsApp" : true,
+                    "filterTelephoneNumber" : true,
+                    "filterFocusOnCommercial" : true,
+                    "filterFocusOnRental" : true,
+                    "filterSocial" : true
+                  }
+                },
+                "brokerageSearch" : {
+                  "summary" : "Search users by specific brokerages",
+                  "description" : "brokerageSearch",
+                  "value" : {
+                    "resultRequest" : {
+                      "pageSize" : 15,
+                      "pageNumber" : 1
+                    },
+                    "brokerages" : [ 123, 456, 789 ],
+                    "filterFocusOnResidential" : true,
+                    "filterFocusOnSelling" : true
+                  }
+                },
+                "specificUsersSearch" : {
+                  "summary" : "Search specific users by IDs",
+                  "description" : "specificUsersSearch",
+                  "value" : {
+                    "resultRequest" : {
+                      "pageSize" : 50,
+                      "pageNumber" : 1
+                    },
+                    "userIds" : [ 100, 200, 300, 400, 500 ]
+                  }
+                }
+              }
+            }
+          },
           "required" : true
         },
         "responses" : {
@@ -6945,6 +7311,22 @@
         } ],
         "requestBody" : {
           "description" : "Phone code request details",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PhoneCodeRequestResource"
+              },
+              "examples" : {
+                "phoneCodeRequestExample" : {
+                  "summary" : "Example phone code request",
+                  "description" : "phoneCodeRequestExample",
+                  "value" : {
+                    "verificationType" : "SMS"
+                  }
+                }
+              }
+            }
+          },
           "required" : true
         },
         "responses" : {
@@ -7643,30 +8025,6 @@
           }
         }
       },
-      "JsonObject" : {
-        "type" : "object",
-        "properties" : {
-          "valueType" : {
-            "type" : "string",
-            "enum" : [ "ARRAY", "OBJECT", "STRING", "NUMBER", "TRUE", "FALSE", "NULL" ]
-          },
-          "empty" : {
-            "type" : "boolean"
-          }
-        },
-        "additionalProperties" : {
-          "$ref" : "#/components/schemas/JsonValue"
-        }
-      },
-      "JsonValue" : {
-        "type" : "object",
-        "properties" : {
-          "valueType" : {
-            "type" : "string",
-            "enum" : [ "ARRAY", "OBJECT", "STRING", "NUMBER", "TRUE", "FALSE", "NULL" ]
-          }
-        }
-      },
       "Notification" : {
         "required" : [ "email", "type" ],
         "type" : "object",
@@ -7688,17 +8046,10 @@
           },
           "body" : {
             "type" : "object",
-            "properties" : {
-              "valueType" : {
-                "type" : "string",
-                "enum" : [ "ARRAY", "OBJECT", "STRING", "NUMBER", "TRUE", "FALSE", "NULL" ]
-              },
-              "empty" : {
-                "type" : "boolean"
-              }
-            },
-            "additionalProperties" : {
-              "$ref" : "#/components/schemas/JsonValue"
+            "description" : "Notification body data in JSON format",
+            "example" : {
+              "message" : "You have a new alert",
+              "count" : 5
             }
           }
         }
@@ -7804,16 +8155,38 @@
       },
       "ExchangeRateMap" : {
         "type" : "object",
-        "properties" : {
-          "empty" : {
-            "type" : "boolean"
-          }
-        },
         "additionalProperties" : {
           "type" : "object",
           "additionalProperties" : {
             "type" : "number",
+            "description" : "Exchange rate map where each currency code maps to its exchange rates with other currencies",
             "format" : "double"
+          },
+          "description" : "Exchange rate map where each currency code maps to its exchange rates with other currencies",
+          "example" : {
+            "USD" : {
+              "EUR" : 0.85,
+              "GBP" : 0.74,
+              "CAD" : 1.31
+            },
+            "EUR" : {
+              "USD" : 1.18,
+              "GBP" : 0.87,
+              "CAD" : 1.12
+            }
+          }
+        },
+        "description" : "Exchange rate map where each currency code maps to its exchange rates with other currencies",
+        "example" : {
+          "USD" : {
+            "EUR" : 0.85,
+            "GBP" : 0.74,
+            "CAD" : 1.31
+          },
+          "EUR" : {
+            "USD" : 1.18,
+            "GBP" : 0.87,
+            "CAD" : 1.12
           }
         }
       },
@@ -9294,7 +9667,7 @@
           "subscriptions" : {
             "type" : "array",
             "items" : {
-              "$ref" : "#/components/schemas/JsonObject"
+              "type" : "object"
             }
           },
           "userPermissions" : {
@@ -9485,21 +9858,19 @@
         "properties" : {
           "object" : {
             "type" : "object",
-            "properties" : {
-              "valueType" : {
-                "type" : "string",
-                "enum" : [ "ARRAY", "OBJECT", "STRING", "NUMBER", "TRUE", "FALSE", "NULL" ]
-              },
-              "empty" : {
-                "type" : "boolean"
-              }
-            },
-            "additionalProperties" : {
-              "$ref" : "#/components/schemas/JsonValue"
+            "description" : "Stripe event object data in JSON format",
+            "example" : {
+              "id" : "sub_123",
+              "customer" : "cus_456",
+              "status" : "active"
             }
           },
           "previous_attributes" : {
-            "$ref" : "#/components/schemas/JsonObject"
+            "type" : "object",
+            "description" : "Previous attributes of the object before the event",
+            "example" : {
+              "status" : "trialing"
+            }
           }
         }
       },
@@ -9544,17 +9915,11 @@
           },
           "alertCriteria" : {
             "type" : "object",
-            "properties" : {
-              "valueType" : {
-                "type" : "string",
-                "enum" : [ "ARRAY", "OBJECT", "STRING", "NUMBER", "TRUE", "FALSE", "NULL" ]
-              },
-              "empty" : {
-                "type" : "boolean"
-              }
-            },
-            "additionalProperties" : {
-              "$ref" : "#/components/schemas/JsonValue"
+            "description" : "Alert criteria in JSON format",
+            "example" : {
+              "priceMin" : 100000,
+              "priceMax" : 300000,
+              "location" : "Miami"
             }
           },
           "allowBrokerContact" : {
@@ -9566,17 +9931,10 @@
           },
           "result" : {
             "type" : "object",
-            "properties" : {
-              "valueType" : {
-                "type" : "string",
-                "enum" : [ "ARRAY", "OBJECT", "STRING", "NUMBER", "TRUE", "FALSE", "NULL" ]
-              },
-              "empty" : {
-                "type" : "boolean"
-              }
-            },
-            "additionalProperties" : {
-              "$ref" : "#/components/schemas/JsonValue"
+            "description" : "Alert result data in JSON format",
+            "example" : {
+              "matchCount" : 5,
+              "properties" : [ ]
             }
           },
           "newsletterOwnerId" : {
@@ -9864,6 +10222,9 @@
           "brokerage" : {
             "$ref" : "#/components/schemas/Brokerage"
           },
+          "groupMemberStatus" : {
+            "type" : "string"
+          },
           "imprintImageLink" : {
             "type" : "string",
             "writeOnly" : true
@@ -9923,20 +10284,188 @@
           },
           "resource" : {
             "type" : "object",
-            "properties" : {
-              "valueType" : {
-                "type" : "string",
-                "enum" : [ "ARRAY", "OBJECT", "STRING", "NUMBER", "TRUE", "FALSE", "NULL" ]
-              },
-              "empty" : {
-                "type" : "boolean"
-              }
-            },
-            "additionalProperties" : {
-              "$ref" : "#/components/schemas/JsonValue"
+            "description" : "Resource data in JSON format",
+            "example" : {
+              "id" : "123",
+              "title" : "Beautiful Beach House",
+              "price" : 250000
             }
           }
         }
+      },
+      "UserFilterResult" : {
+        "type" : "object",
+        "properties" : {
+          "count" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "userList" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/SkilledUser"
+            }
+          }
+        }
+      },
+      "UserFilterRequest" : {
+        "required" : [ "resultRequest" ],
+        "type" : "object",
+        "properties" : {
+          "resultRequest" : {
+            "$ref" : "#/components/schemas/UserFilterResultSpec"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Filter by user name (partial match supported)",
+            "example" : "John Doe"
+          },
+          "countries" : {
+            "type" : "array",
+            "description" : "Filter by countries where users operate",
+            "example" : [ "US", "CA" ],
+            "items" : {
+              "$ref" : "#/components/schemas/Country"
+            }
+          },
+          "latitude" : {
+            "type" : "number",
+            "description" : "Latitude for location-based search (must be used with longitude and radius)",
+            "format" : "double",
+            "example" : 40.7128
+          },
+          "longitude" : {
+            "type" : "number",
+            "description" : "Longitude for location-based search (must be used with latitude and radius)",
+            "format" : "double",
+            "example" : -74.006
+          },
+          "radius" : {
+            "type" : "integer",
+            "description" : "Search radius in kilometers for location-based search (must be used with latitude and longitude)",
+            "format" : "int32",
+            "example" : 50
+          },
+          "userTypes" : {
+            "type" : "array",
+            "description" : "Filter by user types",
+            "example" : [ "BROKER", "AGENT" ],
+            "items" : {
+              "$ref" : "#/components/schemas/UserType"
+            }
+          },
+          "languages" : {
+            "type" : "array",
+            "description" : "Filter by languages spoken by users",
+            "example" : [ "EN", "ES" ],
+            "items" : {
+              "$ref" : "#/components/schemas/Language"
+            }
+          },
+          "filterWhatsApp" : {
+            "type" : "boolean",
+            "description" : "Filter only users with WhatsApp",
+            "example" : true
+          },
+          "filterTelephoneNumber" : {
+            "type" : "boolean",
+            "description" : "Filter only users with telephone number",
+            "example" : true
+          },
+          "filterGooglePlaceId" : {
+            "type" : "boolean",
+            "description" : "Filter only users with Google Place ID",
+            "example" : false
+          },
+          "filterFocusOnCommercial" : {
+            "type" : "boolean",
+            "description" : "Filter users focused on commercial properties",
+            "example" : true
+          },
+          "filterFocusOnResidential" : {
+            "type" : "boolean",
+            "description" : "Filter users focused on residential properties",
+            "example" : false
+          },
+          "filterFocusOnRental" : {
+            "type" : "boolean",
+            "description" : "Filter users focused on rental properties",
+            "example" : true
+          },
+          "filterFocusOnSelling" : {
+            "type" : "boolean",
+            "description" : "Filter users focused on selling properties",
+            "example" : false
+          },
+          "filterSocial" : {
+            "type" : "boolean",
+            "description" : "Filter users with social media presence",
+            "example" : true
+          },
+          "brokerages" : {
+            "type" : "array",
+            "description" : "Filter by brokerage IDs",
+            "example" : [ 123, 456 ],
+            "items" : {
+              "type" : "integer",
+              "description" : "Filter by brokerage IDs",
+              "format" : "int64"
+            }
+          },
+          "userIds" : {
+            "type" : "array",
+            "description" : "Filter by specific user IDs",
+            "example" : [ 789, 1011 ],
+            "items" : {
+              "type" : "integer",
+              "description" : "Filter by specific user IDs",
+              "format" : "int64"
+            }
+          }
+        },
+        "description" : "Filter request for searching users with various criteria including location, user types, languages, and business focus areas"
+      },
+      "UserFilterResultSpec" : {
+        "type" : "object",
+        "properties" : {
+          "pageFrom" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "pageTo" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "orderByMostRecent" : {
+            "type" : "boolean"
+          },
+          "orderByLessRecent" : {
+            "type" : "boolean"
+          },
+          "asc" : {
+            "type" : "boolean"
+          },
+          "loadCount" : {
+            "type" : "boolean"
+          },
+          "orderBy" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "orderByMostRecentLogin" : {
+            "type" : "boolean",
+            "description" : "Sort users by most recent login first",
+            "example" : true
+          },
+          "orderByLessRecentLogin" : {
+            "type" : "boolean",
+            "description" : "Sort users by least recent login first",
+            "example" : false
+          }
+        },
+        "description" : "Result specification for pagination and sorting of user search results"
       },
       "PhoneCodeCheckResource" : {
         "required" : [ "code" ],
@@ -9990,130 +10519,6 @@
           "created" : {
             "type" : "string",
             "format" : "date-time"
-          }
-        }
-      },
-      "UserFilterResult" : {
-        "type" : "object",
-        "properties" : {
-          "count" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "userList" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/SkilledUser"
-            }
-          }
-        }
-      },
-      "UserFilterRequest" : {
-        "type" : "object",
-        "properties" : {
-          "resultRequest" : {
-            "$ref" : "#/components/schemas/UserFilterResultSpec"
-          },
-          "name" : {
-            "type" : "string"
-          },
-          "countries" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/Country"
-            }
-          },
-          "latitude" : {
-            "type" : "number",
-            "format" : "double"
-          },
-          "longitude" : {
-            "type" : "number",
-            "format" : "double"
-          },
-          "radius" : {
-            "type" : "integer",
-            "format" : "int32"
-          },
-          "userTypes" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/UserType"
-            }
-          },
-          "languages" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/Language"
-            }
-          },
-          "filterWhatsApp" : {
-            "type" : "boolean"
-          },
-          "filterTelephoneNumber" : {
-            "type" : "boolean"
-          },
-          "filterGooglePlaceId" : {
-            "type" : "boolean"
-          },
-          "filterFocusOnCommercial" : {
-            "type" : "boolean"
-          },
-          "filterFocusOnResidential" : {
-            "type" : "boolean"
-          },
-          "filterFocusOnRental" : {
-            "type" : "boolean"
-          },
-          "filterFocusOnSelling" : {
-            "type" : "boolean"
-          },
-          "filterSocial" : {
-            "type" : "boolean"
-          },
-          "brokerages" : {
-            "type" : "array",
-            "items" : {
-              "type" : "integer",
-              "format" : "int64"
-            }
-          }
-        }
-      },
-      "UserFilterResultSpec" : {
-        "type" : "object",
-        "properties" : {
-          "pageFrom" : {
-            "type" : "integer",
-            "format" : "int32"
-          },
-          "pageTo" : {
-            "type" : "integer",
-            "format" : "int32"
-          },
-          "orderByMostRecent" : {
-            "type" : "boolean"
-          },
-          "orderByLessRecent" : {
-            "type" : "boolean"
-          },
-          "asc" : {
-            "type" : "boolean"
-          },
-          "loadCount" : {
-            "type" : "boolean"
-          },
-          "orderBy" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
-            }
-          },
-          "orderByMostRecentLogin" : {
-            "type" : "boolean"
-          },
-          "orderByLessRecentLogin" : {
-            "type" : "boolean"
           }
         }
       },
