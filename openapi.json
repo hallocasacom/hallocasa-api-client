@@ -10,6 +10,14 @@
     },
     "version" : "v1"
   },
+  "servers" : [ {
+    "url" : "/hallocasa-api/api",
+    "description" : "Hallocasa API Server"
+  } ],
+  "security" : [ {
+    "oAuthCode" : [ ],
+    "oAuthClientId" : [ ]
+  } ],
   "tags" : [ {
     "name" : "chat-tickets",
     "description" : "Chat ticket management endpoints"
@@ -6415,7 +6423,10 @@
               }
             }
           }
-        }
+        },
+        "security" : [ {
+          "oAuthToken" : [ ]
+        } ]
       }
     },
     "/skills" : {
@@ -10535,6 +10546,12 @@
         "type" : "apiKey",
         "description" : "OAuth client identifier (default: hallocasa_frontend)",
         "name" : "O-Auth-Client-Id",
+        "in" : "header"
+      },
+      "oAuthToken" : {
+        "type" : "apiKey",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
         "in" : "header"
       },
       "oAuthCode" : {
