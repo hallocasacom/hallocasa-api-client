@@ -11284,7 +11284,7 @@ export const PropertiesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findProperties1(propertyFilterCriteria: PropertyFilterCriteria, bypassCache?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Property>>> {
+        async findProperties1(propertyFilterCriteria: PropertyFilterCriteria, bypassCache?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PropertyFilterResult>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.findProperties1(propertyFilterCriteria, bypassCache, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PropertiesApi.findProperties1']?.[localVarOperationServerIndex]?.url;
@@ -11476,7 +11476,7 @@ export const PropertiesApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findProperties1(requestParameters: PropertiesApiFindProperties1Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<Property>> {
+        findProperties1(requestParameters: PropertiesApiFindProperties1Request, options?: RawAxiosRequestConfig): AxiosPromise<PropertyFilterResult> {
             return localVarFp.findProperties1(requestParameters.propertyFilterCriteria, requestParameters.bypassCache, options).then((request) => request(axios, basePath));
         },
         /**

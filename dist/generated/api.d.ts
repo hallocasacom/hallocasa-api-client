@@ -8266,7 +8266,7 @@ export declare const PropertiesApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    findProperties1(propertyFilterCriteria: PropertyFilterCriteria, bypassCache?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Property>>>;
+    findProperties1(propertyFilterCriteria: PropertyFilterCriteria, bypassCache?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PropertyFilterResult>>;
     /**
      *
      * @summary Return the property list with specified user id
@@ -8391,7 +8391,7 @@ export declare const PropertiesApiFactory: (configuration?: Configuration, baseP
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    findProperties1(requestParameters: PropertiesApiFindProperties1Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<Property>>;
+    findProperties1(requestParameters: PropertiesApiFindProperties1Request, options?: RawAxiosRequestConfig): AxiosPromise<PropertyFilterResult>;
     /**
      *
      * @summary Return the property list with specified user id
@@ -8698,7 +8698,7 @@ export declare class PropertiesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertiesApi
      */
-    findProperties1(requestParameters: PropertiesApiFindProperties1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property[], any>>;
+    findProperties1(requestParameters: PropertiesApiFindProperties1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PropertyFilterResult, any>>;
     /**
      *
      * @summary Return the property list with specified user id

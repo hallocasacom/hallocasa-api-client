@@ -3837,10 +3837,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "array",
-                  "items" : {
-                    "$ref" : "#/components/schemas/Property"
-                  }
+                  "$ref" : "#/components/schemas/PropertyFilterResult"
                 },
                 "examples" : {
                   "searchResultsExample" : {
@@ -9455,6 +9452,21 @@
           }
         }
       },
+      "PropertyFilterResult" : {
+        "type" : "object",
+        "properties" : {
+          "count" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "propertyList" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Property"
+            }
+          }
+        }
+      },
       "WeeklyAlertRange" : {
         "type" : "object",
         "properties" : {
@@ -9507,21 +9519,6 @@
             "type" : "array",
             "items" : {
               "$ref" : "#/components/schemas/Testimonial"
-            }
-          }
-        }
-      },
-      "PropertyFilterResult" : {
-        "type" : "object",
-        "properties" : {
-          "count" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "propertyList" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/Property"
             }
           }
         }
