@@ -3467,6 +3467,18 @@ export interface SkilledUser {
      * @type {number}
      * @memberof SkilledUser
      */
+    'googleRating'?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof SkilledUser
+     */
+    'googleUserRatingsTotal'?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof SkilledUser
+     */
     'achievementsYearsOfExperience'?: number;
     /**
      *
@@ -4193,6 +4205,18 @@ export interface User {
      * @memberof User
      */
     'googlePlaceReviews'?: Array<GooglePlaceReview>;
+    /**
+     *
+     * @type {number}
+     * @memberof User
+     */
+    'googleRating'?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof User
+     */
+    'googleUserRatingsTotal'?: number;
     /**
      *
      * @type {number}

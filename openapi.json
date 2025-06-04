@@ -10,14 +10,6 @@
     },
     "version" : "v1"
   },
-  "servers" : [ {
-    "url" : "/hallocasa-api/api",
-    "description" : "Hallocasa API Server"
-  } ],
-  "security" : [ {
-    "oAuthCode" : [ ],
-    "oAuthClientId" : [ ]
-  } ],
   "tags" : [ {
     "name" : "chat-tickets",
     "description" : "Chat ticket management endpoints"
@@ -7809,6 +7801,14 @@
               "$ref" : "#/components/schemas/GooglePlaceReview"
             }
           },
+          "googleRating" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "googleUserRatingsTotal" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
           "achievementsYearsOfExperience" : {
             "type" : "integer",
             "format" : "int32"
@@ -10161,6 +10161,14 @@
               "$ref" : "#/components/schemas/GooglePlaceReview"
             }
           },
+          "googleRating" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "googleUserRatingsTotal" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
           "achievementsYearsOfExperience" : {
             "type" : "integer",
             "format" : "int32"
@@ -10542,6 +10550,12 @@
       }
     },
     "securitySchemes" : {
+      "oAuthCode" : {
+        "type" : "apiKey",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
+        "in" : "header"
+      },
       "oAuthClientId" : {
         "type" : "apiKey",
         "description" : "OAuth client identifier (default: hallocasa_frontend)",
@@ -10552,12 +10566,6 @@
         "type" : "apiKey",
         "description" : "OAuth access token for authenticated requests",
         "name" : "O-Auth-Token",
-        "in" : "header"
-      },
-      "oAuthCode" : {
-        "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
         "in" : "header"
       }
     }
