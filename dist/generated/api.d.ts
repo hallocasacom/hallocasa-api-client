@@ -4533,6 +4533,12 @@ export interface UserFilterRequest {
      * @memberof UserFilterRequest
      */
     'userIds'?: Array<number>;
+    /**
+     * Filter by user skills
+     * @type {Array<Skill>}
+     * @memberof UserFilterRequest
+     */
+    'skills'?: Array<Skill>;
 }
 /**
  *

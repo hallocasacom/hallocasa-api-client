@@ -7206,6 +7206,13 @@
                     "countries" : [ "US" ],
                     "userTypes" : [ "BROKER" ],
                     "languages" : [ "EN", "ES" ],
+                    "skills" : [ {
+                      "id" : 1,
+                      "label" : "Real Estate"
+                    }, {
+                      "id" : 2,
+                      "label" : "Marketing"
+                    } ],
                     "filterWhatsApp" : true,
                     "filterTelephoneNumber" : true,
                     "filterFocusOnCommercial" : true,
@@ -7235,6 +7242,29 @@
                       "pageNumber" : 1
                     },
                     "userIds" : [ 100, 200, 300, 400, 500 ]
+                  }
+                },
+                "skillsBasedSearch" : {
+                  "summary" : "Search users by specific skills",
+                  "description" : "skillsBasedSearch",
+                  "value" : {
+                    "resultRequest" : {
+                      "pageSize" : 20,
+                      "pageNumber" : 1,
+                      "orderByMostRecent" : true
+                    },
+                    "skills" : [ {
+                      "id" : 1,
+                      "label" : "Real Estate"
+                    }, {
+                      "id" : 3,
+                      "label" : "Sales"
+                    }, {
+                      "id" : 5,
+                      "label" : "Property Management"
+                    } ],
+                    "countries" : [ "US" ],
+                    "filterFocusOnCommercial" : true
                   }
                 }
               }
@@ -10437,6 +10467,14 @@
               "description" : "Filter by specific user IDs",
               "format" : "int64"
             }
+          },
+          "skills" : {
+            "type" : "array",
+            "description" : "Filter by user skills",
+            "example" : [ "Real Estate", "Marketing", "Sales" ],
+            "items" : {
+              "$ref" : "#/components/schemas/Skill"
+            }
           }
         },
         "description" : "Filter request for searching users with various criteria including location, user types, languages, and business focus areas"
@@ -10550,10 +10588,10 @@
       }
     },
     "securitySchemes" : {
-      "oAuthCode" : {
+      "oAuthToken" : {
         "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
         "in" : "header"
       },
       "oAuthClientId" : {
@@ -10562,10 +10600,10 @@
         "name" : "O-Auth-Client-Id",
         "in" : "header"
       },
-      "oAuthToken" : {
+      "oAuthCode" : {
         "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
         "in" : "header"
       }
     }
