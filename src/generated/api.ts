@@ -3678,6 +3678,12 @@ export interface SkilledUser {
     'groupMemberStatus'?: string;
     /**
      * 
+     * @type {Array<UserGroup>}
+     * @memberof SkilledUser
+     */
+    'groups'?: Array<UserGroup>;
+    /**
+     * 
      * @type {string}
      * @memberof SkilledUser
      */
@@ -4690,6 +4696,67 @@ export interface UserFilterResultSpec {
      * @memberof UserFilterResultSpec
      */
     'orderByLessRecentLogin'?: boolean;
+}
+/**
+ * 
+ * @export
+ * @interface UserGroup
+ */
+export interface UserGroup {
+    /**
+     * 
+     * @type {string}
+     * @memberof UserGroup
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserGroup
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserGroup
+     */
+    'logo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserGroup
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserGroup
+     */
+    'memberStatus'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserGroup
+     */
+    'joinedDate'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof UserGroup
+     */
+    'ownerId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserGroup
+     */
+    'ownerName'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof UserGroup
+     */
+    'owner'?: boolean;
 }
 /**
  * 
