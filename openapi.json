@@ -10,6 +10,14 @@
     },
     "version" : "v1"
   },
+  "servers" : [ {
+    "url" : "/hallocasa-api/api",
+    "description" : "Hallocasa API Server"
+  } ],
+  "security" : [ {
+    "oAuthCode" : [ ],
+    "oAuthClientId" : [ ]
+  } ],
   "tags" : [ {
     "name" : "chat-tickets",
     "description" : "Chat ticket management endpoints"
@@ -4014,7 +4022,7 @@
       "get" : {
         "tags" : [ "properties" ],
         "summary" : "Return the property with specified id",
-        "description" : "Filter the properties existing in system with specified id. Returns empty if none property match the id",
+        "description" : "Filter the properties existing in system with specified id. Returns empty if none property match the id. The property user includes subscription plan information.",
         "operationId" : "findPropertyOldUrl_1",
         "parameters" : [ {
           "name" : "id",
@@ -4029,13 +4037,62 @@
           "401" : {
             "description" : "If user is unauthorized"
           },
+          "404" : {
+            "description" : "If property not found"
+          },
           "500" : {
             "description" : "If server internal error"
           },
           "200" : {
-            "description" : "Ok. Generated resource",
+            "description" : "OK. Property found with enriched user information including subscription plan",
             "content" : {
-              "application/json" : { }
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Property"
+                },
+                "examples" : {
+                  "foundPropertyWithSubscription" : {
+                    "summary" : "Property with user subscription plan",
+                    "description" : "A sample property response including user subscription plan information",
+                    "value" : {
+                      "id" : "prop123456",
+                      "title" : "Beautiful Beach House",
+                      "price" : 450000,
+                      "currency" : "USD",
+                      "location" : {
+                        "country" : "Colombia",
+                        "city" : "Cartagena",
+                        "latitude" : 10.391049,
+                        "longitude" : -75.479426
+                      },
+                      "propertyType" : "HOUSE",
+                      "transactionType" : "SALE",
+                      "bathrooms" : 3,
+                      "bedrooms" : 4,
+                      "area" : 250,
+                      "description" : "Spectacular beachfront property with amazing ocean views",
+                      "features" : [ "POOL", "GARDEN", "TERRACE", "OCEAN_VIEW" ],
+                      "publicationState" : "PUBLISHED",
+                      "user" : {
+                        "id" : 12345,
+                        "firstName" : "John",
+                        "lastName" : "Doe",
+                        "email" : "john@example.com",
+                        "phone" : "+573001234567",
+                        "subscriptionPlanName" : "Professional",
+                        "chatStatus" : "ONLINE"
+                      },
+                      "images" : [ {
+                        "id" : "img123",
+                        "url" : "https://hallocasa.com/images/property123456_1.jpg",
+                        "order" : 1
+                      } ],
+                      "createdAt" : "2023-05-15T10:30:45Z",
+                      "updatedAt" : "2023-05-15T10:30:45Z"
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -7897,6 +7954,10 @@
           "referral" : {
             "type" : "string"
           },
+          "subscriptionPlanName" : {
+            "type" : "string",
+            "enum" : [ "Free", "Professional", "Business", "Brokerage" ]
+          },
           "imprintImageLink" : {
             "type" : "string",
             "writeOnly" : true
@@ -10257,15 +10318,15 @@
           "referral" : {
             "type" : "string"
           },
+          "subscriptionPlanName" : {
+            "type" : "string",
+            "enum" : [ "Free", "Professional", "Business", "Brokerage" ]
+          },
           "skills" : {
             "type" : "array",
             "items" : {
               "$ref" : "#/components/schemas/UserSkill"
             }
-          },
-          "subscriptionPlanName" : {
-            "type" : "string",
-            "enum" : [ "Free", "Professional", "Business", "Brokerage" ]
           },
           "brokerage" : {
             "$ref" : "#/components/schemas/Brokerage"

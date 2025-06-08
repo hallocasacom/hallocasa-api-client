@@ -3584,16 +3584,16 @@ export interface SkilledUser {
     'referral'?: string;
     /**
      *
-     * @type {Array<UserSkill>}
-     * @memberof SkilledUser
-     */
-    'skills'?: Array<UserSkill>;
-    /**
-     *
      * @type {string}
      * @memberof SkilledUser
      */
     'subscriptionPlanName'?: SkilledUserSubscriptionPlanNameEnum;
+    /**
+     *
+     * @type {Array<UserSkill>}
+     * @memberof SkilledUser
+     */
+    'skills'?: Array<UserSkill>;
     /**
      *
      * @type {Brokerage}
@@ -4343,8 +4343,21 @@ export interface User {
      * @type {string}
      * @memberof User
      */
+    'subscriptionPlanName'?: UserSubscriptionPlanNameEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof User
+     */
     'imprintImageLink'?: string;
 }
+export declare const UserSubscriptionPlanNameEnum: {
+    readonly Free: "Free";
+    readonly Professional: "Professional";
+    readonly Business: "Business";
+    readonly Brokerage: "Brokerage";
+};
+export type UserSubscriptionPlanNameEnum = typeof UserSubscriptionPlanNameEnum[keyof typeof UserSubscriptionPlanNameEnum];
 /**
  *
  * @export
@@ -8263,7 +8276,7 @@ export declare const PropertiesApiAxiosParamCreator: (configuration?: Configurat
      */
     findProperty1: (propertyId: string, password?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Filter the properties existing in system with specified id. Returns empty if none property match the id
+     * Filter the properties existing in system with specified id. Returns empty if none property match the id. The property user includes subscription plan information.
      * @summary Return the property with specified id
      * @param {string} id property id
      * @param {*} [options] Override http request option.
@@ -8390,13 +8403,13 @@ export declare const PropertiesApiFp: (configuration?: Configuration) => {
      */
     findProperty1(propertyId: string, password?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Property>>;
     /**
-     * Filter the properties existing in system with specified id. Returns empty if none property match the id
+     * Filter the properties existing in system with specified id. Returns empty if none property match the id. The property user includes subscription plan information.
      * @summary Return the property with specified id
      * @param {string} id property id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    findPropertyOldUrl1(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    findPropertyOldUrl1(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Property>>;
     /**
      *
      * @summary Password Protected Property for Signed in User
@@ -8514,13 +8527,13 @@ export declare const PropertiesApiFactory: (configuration?: Configuration, baseP
      */
     findProperty1(requestParameters: PropertiesApiFindProperty1Request, options?: RawAxiosRequestConfig): AxiosPromise<Property>;
     /**
-     * Filter the properties existing in system with specified id. Returns empty if none property match the id
+     * Filter the properties existing in system with specified id. Returns empty if none property match the id. The property user includes subscription plan information.
      * @summary Return the property with specified id
      * @param {PropertiesApiFindPropertyOldUrl1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    findPropertyOldUrl1(requestParameters: PropertiesApiFindPropertyOldUrl1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    findPropertyOldUrl1(requestParameters: PropertiesApiFindPropertyOldUrl1Request, options?: RawAxiosRequestConfig): AxiosPromise<Property>;
     /**
      *
      * @summary Password Protected Property for Signed in User
@@ -8823,14 +8836,14 @@ export declare class PropertiesApi extends BaseAPI {
      */
     findProperty1(requestParameters: PropertiesApiFindProperty1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property, any>>;
     /**
-     * Filter the properties existing in system with specified id. Returns empty if none property match the id
+     * Filter the properties existing in system with specified id. Returns empty if none property match the id. The property user includes subscription plan information.
      * @summary Return the property with specified id
      * @param {PropertiesApiFindPropertyOldUrl1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PropertiesApi
      */
-    findPropertyOldUrl1(requestParameters: PropertiesApiFindPropertyOldUrl1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    findPropertyOldUrl1(requestParameters: PropertiesApiFindPropertyOldUrl1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property, any>>;
     /**
      *
      * @summary Password Protected Property for Signed in User
