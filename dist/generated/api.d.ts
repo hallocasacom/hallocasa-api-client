@@ -3593,7 +3593,7 @@ export interface SkilledUser {
      * @type {string}
      * @memberof SkilledUser
      */
-    'subscriptionPlanName'?: string;
+    'subscriptionPlanName'?: SkilledUserSubscriptionPlanNameEnum;
     /**
      *
      * @type {Brokerage}
@@ -3619,6 +3619,13 @@ export interface SkilledUser {
      */
     'imprintImageLink'?: string;
 }
+export declare const SkilledUserSubscriptionPlanNameEnum: {
+    readonly Free: "Free";
+    readonly Professional: "Professional";
+    readonly Business: "Business";
+    readonly Brokerage: "Brokerage";
+};
+export type SkilledUserSubscriptionPlanNameEnum = typeof SkilledUserSubscriptionPlanNameEnum[keyof typeof SkilledUserSubscriptionPlanNameEnum];
 /**
  *
  * @export
@@ -10952,11 +10959,11 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
     /**
      * Retrieves all users who have subscribed to the specified subscription plan
      * @summary Gets the users subscribed to a subscription plan name like Professional
-     * @param {string} subscriptionPlanName
+     * @param {GetSubscribedUsers1SubscriptionPlanNameEnum} subscriptionPlanName
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getSubscribedUsers1: (subscriptionPlanName: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    getSubscribedUsers1: (subscriptionPlanName: GetSubscribedUsers1SubscriptionPlanNameEnum, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Generates an HTML preview of a user profile for sharing purposes
      * @summary Get HTML preview of a user profile
@@ -11167,11 +11174,11 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
     /**
      * Retrieves all users who have subscribed to the specified subscription plan
      * @summary Gets the users subscribed to a subscription plan name like Professional
-     * @param {string} subscriptionPlanName
+     * @param {GetSubscribedUsers1SubscriptionPlanNameEnum} subscriptionPlanName
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getSubscribedUsers1(subscriptionPlanName: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SubscribedUser>>>;
+    getSubscribedUsers1(subscriptionPlanName: GetSubscribedUsers1SubscriptionPlanNameEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SubscribedUser>>>;
     /**
      * Generates an HTML preview of a user profile for sharing purposes
      * @summary Get HTML preview of a user profile
@@ -11674,10 +11681,10 @@ export interface UsersApiFindUserConnectionsRequest {
 export interface UsersApiGetSubscribedUsers1Request {
     /**
      *
-     * @type {string}
+     * @type {'Free' | 'Professional' | 'Business' | 'Brokerage'}
      * @memberof UsersApiGetSubscribedUsers1
      */
-    readonly subscriptionPlanName: string;
+    readonly subscriptionPlanName: GetSubscribedUsers1SubscriptionPlanNameEnum;
 }
 /**
  * Request parameters for previewProperty operation in UsersApi.
@@ -12102,3 +12109,13 @@ export declare class UsersApi extends BaseAPI {
      */
     sendPhoneVerificationCodeCommand1(requestParameters: UsersApiSendPhoneVerificationCodeCommand1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PhoneCodeRequestResource, any>>;
 }
+/**
+ * @export
+ */
+export declare const GetSubscribedUsers1SubscriptionPlanNameEnum: {
+    readonly Free: "Free";
+    readonly Professional: "Professional";
+    readonly Business: "Business";
+    readonly Brokerage: "Brokerage";
+};
+export type GetSubscribedUsers1SubscriptionPlanNameEnum = typeof GetSubscribedUsers1SubscriptionPlanNameEnum[keyof typeof GetSubscribedUsers1SubscriptionPlanNameEnum];

@@ -10,6 +10,14 @@
     },
     "version" : "v1"
   },
+  "servers" : [ {
+    "url" : "/hallocasa-api/api",
+    "description" : "Hallocasa API Server"
+  } ],
+  "security" : [ {
+    "oAuthCode" : [ ],
+    "oAuthClientId" : [ ]
+  } ],
   "tags" : [ {
     "name" : "chat-tickets",
     "description" : "Chat ticket management endpoints"
@@ -6961,7 +6969,8 @@
           "required" : true,
           "schema" : {
             "type" : "string",
-            "example" : "Professional"
+            "example" : "Professional",
+            "enum" : [ "Free", "Professional", "Business", "Brokerage" ]
           }
         } ],
         "responses" : {
@@ -6970,6 +6979,9 @@
           },
           "500" : {
             "description" : "If server internal error"
+          },
+          "400" : {
+            "description" : "Invalid subscription plan name"
           },
           "200" : {
             "description" : "OK",
@@ -10263,7 +10275,8 @@
             }
           },
           "subscriptionPlanName" : {
-            "type" : "string"
+            "type" : "string",
+            "enum" : [ "Free", "Professional", "Business", "Brokerage" ]
           },
           "brokerage" : {
             "$ref" : "#/components/schemas/Brokerage"
@@ -10628,6 +10641,12 @@
       }
     },
     "securitySchemes" : {
+      "oAuthCode" : {
+        "type" : "apiKey",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
+        "in" : "header"
+      },
       "oAuthToken" : {
         "type" : "apiKey",
         "description" : "OAuth access token for authenticated requests",
@@ -10638,12 +10657,6 @@
         "type" : "apiKey",
         "description" : "OAuth client identifier (default: hallocasa_frontend)",
         "name" : "O-Auth-Client-Id",
-        "in" : "header"
-      },
-      "oAuthCode" : {
-        "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
         "in" : "header"
       }
     }
