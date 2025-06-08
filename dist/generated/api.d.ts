@@ -7551,7 +7551,7 @@ export declare const LocalesApiAxiosParamCreator: (configuration?: Configuration
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    find3: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    find1: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Retrieves the locale translations in the specified language
      * @summary Returns locale language list
@@ -7581,7 +7581,7 @@ export declare const LocalesApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    find3(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<LocaleSet>>>;
+    find1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<LocaleSet>>>;
     /**
      * Retrieves the locale translations in the specified language
      * @summary Returns locale language list
@@ -7610,7 +7610,7 @@ export declare const LocalesApiFactory: (configuration?: Configuration, basePath
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    find3(options?: RawAxiosRequestConfig): AxiosPromise<Array<LocaleSet>>;
+    find1(options?: RawAxiosRequestConfig): AxiosPromise<Array<LocaleSet>>;
     /**
      * Retrieves the locale translations in the specified language
      * @summary Returns locale language list
@@ -7675,7 +7675,7 @@ export declare class LocalesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof LocalesApi
      */
-    find3(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<LocaleSet[], any>>;
+    find1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<LocaleSet[], any>>;
     /**
      * Retrieves the locale translations in the specified language
      * @summary Returns locale language list
@@ -10902,30 +10902,6 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      */
     fetchRandomUsers1: (userListRequest: UserListRequest, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Gets detailed user information by user ID
-     * @summary Fetch user detail according to its id
-     * @param {number} userId user id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    find: (userId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     * Gets user information by their unique profile name
-     * @summary Fetch user detail according to its profile name
-     * @param {string} [profileName] User\&#39;s profile name
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    find1: (profileName?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     * Gets detailed information for multiple users by their IDs
-     * @summary Fetch multiple user detail according to its ids
-     * @param {string} userIds Comma-separated list of user IDs
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    findList1: (userIds: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
      *
      * @summary Return the property list with specified user id
      * @param {string} id user id
@@ -10949,6 +10925,22 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      */
     findTestimonialsByUser1: (id: string, pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Gets detailed user information by user ID
+     * @summary Fetch user detail according to its id
+     * @param {number} userId user id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findUserById1: (userId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Gets user information by their unique profile name
+     * @summary Fetch user detail according to its profile name
+     * @param {string} [profileName] User\&#39;s profile name
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findUserByProfileName1: (profileName?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Retrieves the list of connections for a specific user
      * @summary Get a user connections
      * @param {number} userId
@@ -10956,6 +10948,14 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      * @throws {RequiredError}
      */
     findUserConnections: (userId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Gets detailed information for multiple users by their IDs
+     * @summary Fetch multiple user detail according to its ids
+     * @param {string} userIds Comma-separated list of user IDs
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findUsersByIds1: (userIds: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Retrieves all users who have subscribed to the specified subscription plan
      * @summary Gets the users subscribed to a subscription plan name like Professional
@@ -11117,30 +11117,6 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      */
     fetchRandomUsers1(userListRequest: UserListRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SkilledUser>>>;
     /**
-     * Gets detailed user information by user ID
-     * @summary Fetch user detail according to its id
-     * @param {number} userId user id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    find(userId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SkilledUser>>;
-    /**
-     * Gets user information by their unique profile name
-     * @summary Fetch user detail according to its profile name
-     * @param {string} [profileName] User\&#39;s profile name
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    find1(profileName?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SkilledUser>>>;
-    /**
-     * Gets detailed information for multiple users by their IDs
-     * @summary Fetch multiple user detail according to its ids
-     * @param {string} userIds Comma-separated list of user IDs
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    findList1(userIds: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SkilledUser>>>;
-    /**
      *
      * @summary Return the property list with specified user id
      * @param {string} id user id
@@ -11164,6 +11140,22 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      */
     findTestimonialsByUser1(id: string, pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TestimonialFilterResult>>;
     /**
+     * Gets detailed user information by user ID
+     * @summary Fetch user detail according to its id
+     * @param {number} userId user id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findUserById1(userId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SkilledUser>>;
+    /**
+     * Gets user information by their unique profile name
+     * @summary Fetch user detail according to its profile name
+     * @param {string} [profileName] User\&#39;s profile name
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findUserByProfileName1(profileName?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SkilledUser>>;
+    /**
      * Retrieves the list of connections for a specific user
      * @summary Get a user connections
      * @param {number} userId
@@ -11171,6 +11163,14 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      * @throws {RequiredError}
      */
     findUserConnections(userId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SkilledUser>>>;
+    /**
+     * Gets detailed information for multiple users by their IDs
+     * @summary Fetch multiple user detail according to its ids
+     * @param {string} userIds Comma-separated list of user IDs
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findUsersByIds1(userIds: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SkilledUser>>>;
     /**
      * Retrieves all users who have subscribed to the specified subscription plan
      * @summary Gets the users subscribed to a subscription plan name like Professional
@@ -11328,30 +11328,6 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
      */
     fetchRandomUsers1(requestParameters: UsersApiFetchRandomUsers1Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<SkilledUser>>;
     /**
-     * Gets detailed user information by user ID
-     * @summary Fetch user detail according to its id
-     * @param {UsersApiFindRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    find(requestParameters: UsersApiFindRequest, options?: RawAxiosRequestConfig): AxiosPromise<SkilledUser>;
-    /**
-     * Gets user information by their unique profile name
-     * @summary Fetch user detail according to its profile name
-     * @param {UsersApiFind1Request} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    find1(requestParameters?: UsersApiFind1Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<SkilledUser>>;
-    /**
-     * Gets detailed information for multiple users by their IDs
-     * @summary Fetch multiple user detail according to its ids
-     * @param {UsersApiFindList1Request} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    findList1(requestParameters: UsersApiFindList1Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<SkilledUser>>;
-    /**
      *
      * @summary Return the property list with specified user id
      * @param {UsersApiFindPropertiesByUser1Request} requestParameters Request parameters.
@@ -11368,6 +11344,22 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
      */
     findTestimonialsByUser1(requestParameters: UsersApiFindTestimonialsByUser1Request, options?: RawAxiosRequestConfig): AxiosPromise<TestimonialFilterResult>;
     /**
+     * Gets detailed user information by user ID
+     * @summary Fetch user detail according to its id
+     * @param {UsersApiFindUserById1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findUserById1(requestParameters: UsersApiFindUserById1Request, options?: RawAxiosRequestConfig): AxiosPromise<SkilledUser>;
+    /**
+     * Gets user information by their unique profile name
+     * @summary Fetch user detail according to its profile name
+     * @param {UsersApiFindUserByProfileName1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findUserByProfileName1(requestParameters?: UsersApiFindUserByProfileName1Request, options?: RawAxiosRequestConfig): AxiosPromise<SkilledUser>;
+    /**
      * Retrieves the list of connections for a specific user
      * @summary Get a user connections
      * @param {UsersApiFindUserConnectionsRequest} requestParameters Request parameters.
@@ -11375,6 +11367,14 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
      * @throws {RequiredError}
      */
     findUserConnections(requestParameters: UsersApiFindUserConnectionsRequest, options?: RawAxiosRequestConfig): AxiosPromise<Array<SkilledUser>>;
+    /**
+     * Gets detailed information for multiple users by their IDs
+     * @summary Fetch multiple user detail according to its ids
+     * @param {UsersApiFindUsersByIds1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findUsersByIds1(requestParameters: UsersApiFindUsersByIds1Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<SkilledUser>>;
     /**
      * Retrieves all users who have subscribed to the specified subscription plan
      * @summary Gets the users subscribed to a subscription plan name like Professional
@@ -11554,45 +11554,6 @@ export interface UsersApiFetchRandomUsers1Request {
     readonly userListRequest: UserListRequest;
 }
 /**
- * Request parameters for find operation in UsersApi.
- * @export
- * @interface UsersApiFindRequest
- */
-export interface UsersApiFindRequest {
-    /**
-     * user id
-     * @type {number}
-     * @memberof UsersApiFind
-     */
-    readonly userId: number;
-}
-/**
- * Request parameters for find1 operation in UsersApi.
- * @export
- * @interface UsersApiFind1Request
- */
-export interface UsersApiFind1Request {
-    /**
-     * User\&#39;s profile name
-     * @type {string}
-     * @memberof UsersApiFind1
-     */
-    readonly profileName?: string;
-}
-/**
- * Request parameters for findList1 operation in UsersApi.
- * @export
- * @interface UsersApiFindList1Request
- */
-export interface UsersApiFindList1Request {
-    /**
-     * Comma-separated list of user IDs
-     * @type {string}
-     * @memberof UsersApiFindList1
-     */
-    readonly userIds: string;
-}
-/**
  * Request parameters for findPropertiesByUser1 operation in UsersApi.
  * @export
  * @interface UsersApiFindPropertiesByUser1Request
@@ -11661,6 +11622,32 @@ export interface UsersApiFindTestimonialsByUser1Request {
     readonly pageTo?: number;
 }
 /**
+ * Request parameters for findUserById1 operation in UsersApi.
+ * @export
+ * @interface UsersApiFindUserById1Request
+ */
+export interface UsersApiFindUserById1Request {
+    /**
+     * user id
+     * @type {number}
+     * @memberof UsersApiFindUserById1
+     */
+    readonly userId: number;
+}
+/**
+ * Request parameters for findUserByProfileName1 operation in UsersApi.
+ * @export
+ * @interface UsersApiFindUserByProfileName1Request
+ */
+export interface UsersApiFindUserByProfileName1Request {
+    /**
+     * User\&#39;s profile name
+     * @type {string}
+     * @memberof UsersApiFindUserByProfileName1
+     */
+    readonly profileName?: string;
+}
+/**
  * Request parameters for findUserConnections operation in UsersApi.
  * @export
  * @interface UsersApiFindUserConnectionsRequest
@@ -11672,6 +11659,19 @@ export interface UsersApiFindUserConnectionsRequest {
      * @memberof UsersApiFindUserConnections
      */
     readonly userId: number;
+}
+/**
+ * Request parameters for findUsersByIds1 operation in UsersApi.
+ * @export
+ * @interface UsersApiFindUsersByIds1Request
+ */
+export interface UsersApiFindUsersByIds1Request {
+    /**
+     * Comma-separated list of user IDs
+     * @type {string}
+     * @memberof UsersApiFindUsersByIds1
+     */
+    readonly userIds: string;
 }
 /**
  * Request parameters for getSubscribedUsers1 operation in UsersApi.
@@ -11941,33 +11941,6 @@ export declare class UsersApi extends BaseAPI {
      */
     fetchRandomUsers1(requestParameters: UsersApiFetchRandomUsers1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkilledUser[], any>>;
     /**
-     * Gets detailed user information by user ID
-     * @summary Fetch user detail according to its id
-     * @param {UsersApiFindRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UsersApi
-     */
-    find(requestParameters: UsersApiFindRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkilledUser, any>>;
-    /**
-     * Gets user information by their unique profile name
-     * @summary Fetch user detail according to its profile name
-     * @param {UsersApiFind1Request} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UsersApi
-     */
-    find1(requestParameters?: UsersApiFind1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkilledUser[], any>>;
-    /**
-     * Gets detailed information for multiple users by their IDs
-     * @summary Fetch multiple user detail according to its ids
-     * @param {UsersApiFindList1Request} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UsersApi
-     */
-    findList1(requestParameters: UsersApiFindList1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkilledUser[], any>>;
-    /**
      *
      * @summary Return the property list with specified user id
      * @param {UsersApiFindPropertiesByUser1Request} requestParameters Request parameters.
@@ -11986,6 +11959,24 @@ export declare class UsersApi extends BaseAPI {
      */
     findTestimonialsByUser1(requestParameters: UsersApiFindTestimonialsByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<TestimonialFilterResult, any>>;
     /**
+     * Gets detailed user information by user ID
+     * @summary Fetch user detail according to its id
+     * @param {UsersApiFindUserById1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    findUserById1(requestParameters: UsersApiFindUserById1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkilledUser, any>>;
+    /**
+     * Gets user information by their unique profile name
+     * @summary Fetch user detail according to its profile name
+     * @param {UsersApiFindUserByProfileName1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    findUserByProfileName1(requestParameters?: UsersApiFindUserByProfileName1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkilledUser, any>>;
+    /**
      * Retrieves the list of connections for a specific user
      * @summary Get a user connections
      * @param {UsersApiFindUserConnectionsRequest} requestParameters Request parameters.
@@ -11994,6 +11985,15 @@ export declare class UsersApi extends BaseAPI {
      * @memberof UsersApi
      */
     findUserConnections(requestParameters: UsersApiFindUserConnectionsRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkilledUser[], any>>;
+    /**
+     * Gets detailed information for multiple users by their IDs
+     * @summary Fetch multiple user detail according to its ids
+     * @param {UsersApiFindUsersByIds1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    findUsersByIds1(requestParameters: UsersApiFindUsersByIds1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkilledUser[], any>>;
     /**
      * Retrieves all users who have subscribed to the specified subscription plan
      * @summary Gets the users subscribed to a subscription plan name like Professional

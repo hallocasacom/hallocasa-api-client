@@ -10,14 +10,6 @@
     },
     "version" : "v1"
   },
-  "servers" : [ {
-    "url" : "/hallocasa-api/api",
-    "description" : "Hallocasa API Server"
-  } ],
-  "security" : [ {
-    "oAuthCode" : [ ],
-    "oAuthClientId" : [ ]
-  } ],
   "tags" : [ {
     "name" : "chat-tickets",
     "description" : "Chat ticket management endpoints"
@@ -1508,7 +1500,7 @@
         "tags" : [ "locales" ],
         "summary" : "Returns all language list locale entries",
         "description" : "Retrieves the complete list of available locales in the system",
-        "operationId" : "find_3",
+        "operationId" : "find_1",
         "responses" : {
           "401" : {
             "description" : "If user is unauthorized"
@@ -6687,7 +6679,7 @@
         "tags" : [ "users" ],
         "summary" : "Fetch user detail according to its id",
         "description" : "Gets detailed user information by user ID",
-        "operationId" : "find",
+        "operationId" : "findUserById_1",
         "parameters" : [ {
           "name" : "userId",
           "in" : "path",
@@ -6742,7 +6734,7 @@
         "tags" : [ "users" ],
         "summary" : "Fetch user detail according to its profile name",
         "description" : "Gets user information by their unique profile name",
-        "operationId" : "find_1",
+        "operationId" : "findUserByProfileName_1",
         "parameters" : [ {
           "name" : "profileName",
           "in" : "query",
@@ -6764,10 +6756,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "array",
-                  "items" : {
-                    "$ref" : "#/components/schemas/SkilledUser"
-                  }
+                  "$ref" : "#/components/schemas/SkilledUser"
                 },
                 "examples" : {
                   "userByProfileName" : {
@@ -6845,62 +6834,6 @@
         }
       }
     },
-    "/users/list/{userIds}" : {
-      "get" : {
-        "tags" : [ "users" ],
-        "summary" : "Fetch multiple user detail according to its ids",
-        "description" : "Gets detailed information for multiple users by their IDs",
-        "operationId" : "findList_1",
-        "parameters" : [ {
-          "name" : "userIds",
-          "in" : "path",
-          "description" : "Comma-separated list of user IDs",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          },
-          "example" : "123,456,789"
-        } ],
-        "responses" : {
-          "401" : {
-            "description" : "If user is unauthorized"
-          },
-          "500" : {
-            "description" : "If server internal error"
-          },
-          "200" : {
-            "description" : "Ok. Generated resource",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "array",
-                  "items" : {
-                    "$ref" : "#/components/schemas/SkilledUser"
-                  }
-                },
-                "examples" : {
-                  "userList" : {
-                    "summary" : "List of users",
-                    "description" : "userList",
-                    "value" : [ {
-                      "id" : 123,
-                      "email" : "user1@example.com",
-                      "firstName" : "John",
-                      "lastName" : "Doe"
-                    }, {
-                      "id" : 456,
-                      "email" : "user2@example.com",
-                      "firstName" : "Jane",
-                      "lastName" : "Smith"
-                    } ]
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/users/{userId}/connections" : {
       "get" : {
         "tags" : [ "users" ],
@@ -6948,6 +6881,62 @@
                       "firstName" : "Bob",
                       "lastName" : "Johnson",
                       "profileName" : "bjohnson"
+                    } ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/list/{userIds}" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "Fetch multiple user detail according to its ids",
+        "description" : "Gets detailed information for multiple users by their IDs",
+        "operationId" : "findUsersByIds_1",
+        "parameters" : [ {
+          "name" : "userIds",
+          "in" : "path",
+          "description" : "Comma-separated list of user IDs",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "123,456,789"
+        } ],
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Generated resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/SkilledUser"
+                  }
+                },
+                "examples" : {
+                  "userList" : {
+                    "summary" : "List of users",
+                    "description" : "userList",
+                    "value" : [ {
+                      "id" : 123,
+                      "email" : "user1@example.com",
+                      "firstName" : "John",
+                      "lastName" : "Doe"
+                    }, {
+                      "id" : 456,
+                      "email" : "user2@example.com",
+                      "firstName" : "Jane",
+                      "lastName" : "Smith"
                     } ]
                   }
                 }
@@ -10641,12 +10630,6 @@
       }
     },
     "securitySchemes" : {
-      "oAuthCode" : {
-        "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
-        "in" : "header"
-      },
       "oAuthToken" : {
         "type" : "apiKey",
         "description" : "OAuth access token for authenticated requests",
@@ -10657,6 +10640,12 @@
         "type" : "apiKey",
         "description" : "OAuth client identifier (default: hallocasa_frontend)",
         "name" : "O-Auth-Client-Id",
+        "in" : "header"
+      },
+      "oAuthCode" : {
+        "type" : "apiKey",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
         "in" : "header"
       }
     }
