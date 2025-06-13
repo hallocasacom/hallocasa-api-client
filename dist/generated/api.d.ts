@@ -176,6 +176,12 @@ export interface AuthInfoDto {
      * @memberof AuthInfoDto
      */
     'securityToken'?: SecurityToken;
+    /**
+     *
+     * @type {RefreshToken}
+     * @memberof AuthInfoDto
+     */
+    'refreshToken'?: RefreshToken;
 }
 /**
  *
@@ -3083,6 +3089,61 @@ export interface PropertyTypeGroup {
 /**
  *
  * @export
+ * @interface RefreshToken
+ */
+export interface RefreshToken {
+    /**
+     *
+     * @type {string}
+     * @memberof RefreshToken
+     */
+    'tokenValue'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof RefreshToken
+     */
+    'userId'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof RefreshToken
+     */
+    'clientId'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof RefreshToken
+     */
+    'issued'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof RefreshToken
+     */
+    'expires'?: string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof RefreshToken
+     */
+    'revoked'?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof RefreshToken
+     */
+    'valid'?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof RefreshToken
+     */
+    'expired'?: boolean;
+}
+/**
+ *
+ * @export
  * @interface ResultRequest
  */
 export interface ResultRequest {
@@ -3977,6 +4038,43 @@ export interface TextTranslation {
      * @memberof TextTranslation
      */
     'originalText'?: string;
+}
+/**
+ *
+ * @export
+ * @interface TokenResponseDto
+ */
+export interface TokenResponseDto {
+    /**
+     *
+     * @type {string}
+     * @memberof TokenResponseDto
+     */
+    'access_token'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof TokenResponseDto
+     */
+    'token_type'?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof TokenResponseDto
+     */
+    'expires_in'?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof TokenResponseDto
+     */
+    'refresh_token'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof TokenResponseDto
+     */
+    'scope'?: string;
 }
 /**
  *
@@ -9721,6 +9819,17 @@ export declare const SecurityApiAxiosParamCreator: (configuration?: Configuratio
      */
     authorize1: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Use a refresh token to obtain a new access token. The refresh token must be valid and not expired.
+     * @summary Refresh access token
+     * @param {string} grantType Must be \\\&#39;refresh_token\\\&#39;
+     * @param {string} refreshToken The refresh token
+     * @param {string} clientId Client application identifier
+     * @param {string} [clientSecret] Client application secret
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    refreshToken1: (grantType: string, refreshToken: string, clientId: string, clientSecret?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Exchanges the provided authorization code, username, and password for a token through which private application resources can be accessed. Note that the token expires in 15 minutes. When this happens, you must invoke this service again with the previously described parameters.
      * @summary Exchange authorization code for access token
      * @param {string} clientId Client application identifier
@@ -9733,6 +9842,16 @@ export declare const SecurityApiAxiosParamCreator: (configuration?: Configuratio
      * @throws {RequiredError}
      */
     requestToken1: (clientId: string, code: string, email: string, password: string, grantType?: string, clientSecret?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Revoke an access token or refresh token
+     * @summary Revoke a token
+     * @param {string} token The token to revoke
+     * @param {string} clientId Client application identifier
+     * @param {string} [tokenTypeHint] Hint about the type of token being revoked
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    revokeToken1: (token: string, clientId: string, tokenTypeHint?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * SecurityApi - functional programming interface
@@ -9747,6 +9866,17 @@ export declare const SecurityApiFp: (configuration?: Configuration) => {
      */
     authorize1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
+     * Use a refresh token to obtain a new access token. The refresh token must be valid and not expired.
+     * @summary Refresh access token
+     * @param {string} grantType Must be \\\&#39;refresh_token\\\&#39;
+     * @param {string} refreshToken The refresh token
+     * @param {string} clientId Client application identifier
+     * @param {string} [clientSecret] Client application secret
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    refreshToken1(grantType: string, refreshToken: string, clientId: string, clientSecret?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TokenResponseDto>>;
+    /**
      * Exchanges the provided authorization code, username, and password for a token through which private application resources can be accessed. Note that the token expires in 15 minutes. When this happens, you must invoke this service again with the previously described parameters.
      * @summary Exchange authorization code for access token
      * @param {string} clientId Client application identifier
@@ -9759,6 +9889,16 @@ export declare const SecurityApiFp: (configuration?: Configuration) => {
      * @throws {RequiredError}
      */
     requestToken1(clientId: string, code: string, email: string, password: string, grantType?: string, clientSecret?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthInfoDto>>;
+    /**
+     * Revoke an access token or refresh token
+     * @summary Revoke a token
+     * @param {string} token The token to revoke
+     * @param {string} clientId Client application identifier
+     * @param {string} [tokenTypeHint] Hint about the type of token being revoked
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    revokeToken1(token: string, clientId: string, tokenTypeHint?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
 };
 /**
  * SecurityApi - factory interface
@@ -9773,6 +9913,14 @@ export declare const SecurityApiFactory: (configuration?: Configuration, basePat
      */
     authorize1(options?: RawAxiosRequestConfig): AxiosPromise<void>;
     /**
+     * Use a refresh token to obtain a new access token. The refresh token must be valid and not expired.
+     * @summary Refresh access token
+     * @param {SecurityApiRefreshToken1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    refreshToken1(requestParameters: SecurityApiRefreshToken1Request, options?: RawAxiosRequestConfig): AxiosPromise<TokenResponseDto>;
+    /**
      * Exchanges the provided authorization code, username, and password for a token through which private application resources can be accessed. Note that the token expires in 15 minutes. When this happens, you must invoke this service again with the previously described parameters.
      * @summary Exchange authorization code for access token
      * @param {SecurityApiRequestToken1Request} requestParameters Request parameters.
@@ -9780,7 +9928,46 @@ export declare const SecurityApiFactory: (configuration?: Configuration, basePat
      * @throws {RequiredError}
      */
     requestToken1(requestParameters: SecurityApiRequestToken1Request, options?: RawAxiosRequestConfig): AxiosPromise<AuthInfoDto>;
+    /**
+     * Revoke an access token or refresh token
+     * @summary Revoke a token
+     * @param {SecurityApiRevokeToken1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    revokeToken1(requestParameters: SecurityApiRevokeToken1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
 };
+/**
+ * Request parameters for refreshToken1 operation in SecurityApi.
+ * @export
+ * @interface SecurityApiRefreshToken1Request
+ */
+export interface SecurityApiRefreshToken1Request {
+    /**
+     * Must be \\\&#39;refresh_token\\\&#39;
+     * @type {string}
+     * @memberof SecurityApiRefreshToken1
+     */
+    readonly grantType: string;
+    /**
+     * The refresh token
+     * @type {string}
+     * @memberof SecurityApiRefreshToken1
+     */
+    readonly refreshToken: string;
+    /**
+     * Client application identifier
+     * @type {string}
+     * @memberof SecurityApiRefreshToken1
+     */
+    readonly clientId: string;
+    /**
+     * Client application secret
+     * @type {string}
+     * @memberof SecurityApiRefreshToken1
+     */
+    readonly clientSecret?: string;
+}
 /**
  * Request parameters for requestToken1 operation in SecurityApi.
  * @export
@@ -9825,6 +10012,31 @@ export interface SecurityApiRequestToken1Request {
     readonly clientSecret?: string;
 }
 /**
+ * Request parameters for revokeToken1 operation in SecurityApi.
+ * @export
+ * @interface SecurityApiRevokeToken1Request
+ */
+export interface SecurityApiRevokeToken1Request {
+    /**
+     * The token to revoke
+     * @type {string}
+     * @memberof SecurityApiRevokeToken1
+     */
+    readonly token: string;
+    /**
+     * Client application identifier
+     * @type {string}
+     * @memberof SecurityApiRevokeToken1
+     */
+    readonly clientId: string;
+    /**
+     * Hint about the type of token being revoked
+     * @type {string}
+     * @memberof SecurityApiRevokeToken1
+     */
+    readonly tokenTypeHint?: string;
+}
+/**
  * SecurityApi - object-oriented interface
  * @export
  * @class SecurityApi
@@ -9840,6 +10052,15 @@ export declare class SecurityApi extends BaseAPI {
      */
     authorize1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
     /**
+     * Use a refresh token to obtain a new access token. The refresh token must be valid and not expired.
+     * @summary Refresh access token
+     * @param {SecurityApiRefreshToken1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SecurityApi
+     */
+    refreshToken1(requestParameters: SecurityApiRefreshToken1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<TokenResponseDto, any>>;
+    /**
      * Exchanges the provided authorization code, username, and password for a token through which private application resources can be accessed. Note that the token expires in 15 minutes. When this happens, you must invoke this service again with the previously described parameters.
      * @summary Exchange authorization code for access token
      * @param {SecurityApiRequestToken1Request} requestParameters Request parameters.
@@ -9848,6 +10069,15 @@ export declare class SecurityApi extends BaseAPI {
      * @memberof SecurityApi
      */
     requestToken1(requestParameters: SecurityApiRequestToken1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<AuthInfoDto, any>>;
+    /**
+     * Revoke an access token or refresh token
+     * @summary Revoke a token
+     * @param {SecurityApiRevokeToken1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SecurityApi
+     */
+    revokeToken1(requestParameters: SecurityApiRevokeToken1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
 }
 /**
  * SkillsApi - axios parameter creator
