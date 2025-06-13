@@ -5276,17 +5276,26 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/TokenResponseDto"
+                  "$ref" : "#/components/schemas/AuthInfoDto"
                 },
                 "examples" : {
                   "Successful token refresh" : {
                     "description" : "Successful token refresh",
                     "value" : {
-                      "access_token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-                      "token_type" : "Bearer",
-                      "expires_in" : 900,
-                      "refresh_token" : "def502004a8b5c3d...",
-                      "scope" : null
+                      "user" : {
+                        "id" : 1234,
+                        "email" : "user@example.com",
+                        "firstName" : "John",
+                        "lastName" : "Doe",
+                        "confirmedFlag" : true,
+                        "subscriptions" : [ ],
+                        "userPermissions" : [ "USER", "PROPERTY_PUBLISH" ]
+                      },
+                      "securityToken" : {
+                        "tokenValue" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+                        "registered" : 1651234567890,
+                        "expiresIn" : 900000
+                      }
                     }
                   }
                 }
@@ -9816,27 +9825,6 @@
         },
         "description" : "Token used for password recovery process"
       },
-      "TokenResponseDto" : {
-        "type" : "object",
-        "properties" : {
-          "access_token" : {
-            "type" : "string"
-          },
-          "token_type" : {
-            "type" : "string"
-          },
-          "expires_in" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "refresh_token" : {
-            "type" : "string"
-          },
-          "scope" : {
-            "type" : "string"
-          }
-        }
-      },
       "AuthInfoDto" : {
         "type" : "object",
         "properties" : {
@@ -9852,34 +9840,61 @@
         }
       },
       "RefreshToken" : {
+        "required" : [ "clientId", "email", "expires", "issued", "tokenValue" ],
         "type" : "object",
         "properties" : {
           "tokenValue" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "The actual refresh token value (JWT or random string)",
+            "example" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyMTIzIiwiaWF0IjoxNjQyMjQxNDAwfQ..."
           },
-          "userId" : {
-            "type" : "string"
+          "email" : {
+            "type" : "string",
+            "description" : "Unique identifier of the user who owns this refresh token",
+            "example" : "user123@example.com"
           },
           "clientId" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Identifier of the client application that requested this token",
+            "example" : "mobile-app"
           },
           "issued" : {
             "type" : "string",
-            "format" : "date-time"
+            "description" : "Date and time when the refresh token was issued",
+            "format" : "date-time",
+            "example" : "2024-01-15T10:30:00Z"
           },
           "expires" : {
             "type" : "string",
-            "format" : "date-time"
+            "description" : "Date and time when the refresh token expires",
+            "format" : "date-time",
+            "example" : "2024-02-15T10:30:00Z"
           },
           "revoked" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "description" : "Whether the refresh token has been revoked/invalidated",
+            "example" : false,
+            "default" : false
           },
           "valid" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "description" : "Checks if the refresh token is valid (not revoked and not expired)",
+            "example" : true
           },
           "expired" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "description" : "Checks if the refresh token has expired based on current date/time",
+            "example" : false
           }
+        },
+        "description" : "Represents a refresh token used for extending authentication sessions",
+        "example" : {
+          "tokenValue" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+          "userId" : "user123",
+          "clientId" : "mobile-app",
+          "issued" : "2024-01-15T10:30:00Z",
+          "expires" : "2024-02-15T10:30:00Z",
+          "revoked" : false
         }
       },
       "SecurityToken" : {
@@ -10853,16 +10868,16 @@
         "name" : "O-Auth-Token",
         "in" : "header"
       },
-      "oAuthCode" : {
-        "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
-        "in" : "header"
-      },
       "oAuthClientId" : {
         "type" : "apiKey",
         "description" : "OAuth client identifier (default: hallocasa_frontend)",
         "name" : "O-Auth-Client-Id",
+        "in" : "header"
+      },
+      "oAuthCode" : {
+        "type" : "apiKey",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
         "in" : "header"
       }
     }

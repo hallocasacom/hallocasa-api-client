@@ -3087,55 +3087,55 @@ export interface PropertyTypeGroup {
     'name'?: string;
 }
 /**
- *
+ * Represents a refresh token used for extending authentication sessions
  * @export
  * @interface RefreshToken
  */
 export interface RefreshToken {
     /**
-     *
+     * The actual refresh token value (JWT or random string)
      * @type {string}
      * @memberof RefreshToken
      */
-    'tokenValue'?: string;
+    'tokenValue': string;
     /**
-     *
+     * Unique identifier of the user who owns this refresh token
      * @type {string}
      * @memberof RefreshToken
      */
-    'userId'?: string;
+    'email': string;
     /**
-     *
+     * Identifier of the client application that requested this token
      * @type {string}
      * @memberof RefreshToken
      */
-    'clientId'?: string;
+    'clientId': string;
     /**
-     *
+     * Date and time when the refresh token was issued
      * @type {string}
      * @memberof RefreshToken
      */
-    'issued'?: string;
+    'issued': string;
     /**
-     *
+     * Date and time when the refresh token expires
      * @type {string}
      * @memberof RefreshToken
      */
-    'expires'?: string;
+    'expires': string;
     /**
-     *
+     * Whether the refresh token has been revoked/invalidated
      * @type {boolean}
      * @memberof RefreshToken
      */
     'revoked'?: boolean;
     /**
-     *
+     * Checks if the refresh token is valid (not revoked and not expired)
      * @type {boolean}
      * @memberof RefreshToken
      */
     'valid'?: boolean;
     /**
-     *
+     * Checks if the refresh token has expired based on current date/time
      * @type {boolean}
      * @memberof RefreshToken
      */
@@ -4038,43 +4038,6 @@ export interface TextTranslation {
      * @memberof TextTranslation
      */
     'originalText'?: string;
-}
-/**
- *
- * @export
- * @interface TokenResponseDto
- */
-export interface TokenResponseDto {
-    /**
-     *
-     * @type {string}
-     * @memberof TokenResponseDto
-     */
-    'access_token'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof TokenResponseDto
-     */
-    'token_type'?: string;
-    /**
-     *
-     * @type {number}
-     * @memberof TokenResponseDto
-     */
-    'expires_in'?: number;
-    /**
-     *
-     * @type {string}
-     * @memberof TokenResponseDto
-     */
-    'refresh_token'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof TokenResponseDto
-     */
-    'scope'?: string;
 }
 /**
  *
@@ -9875,7 +9838,7 @@ export declare const SecurityApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    refreshToken1(grantType: string, refreshToken: string, clientId: string, clientSecret?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TokenResponseDto>>;
+    refreshToken1(grantType: string, refreshToken: string, clientId: string, clientSecret?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthInfoDto>>;
     /**
      * Exchanges the provided authorization code, username, and password for a token through which private application resources can be accessed. Note that the token expires in 15 minutes. When this happens, you must invoke this service again with the previously described parameters.
      * @summary Exchange authorization code for access token
@@ -9919,7 +9882,7 @@ export declare const SecurityApiFactory: (configuration?: Configuration, basePat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    refreshToken1(requestParameters: SecurityApiRefreshToken1Request, options?: RawAxiosRequestConfig): AxiosPromise<TokenResponseDto>;
+    refreshToken1(requestParameters: SecurityApiRefreshToken1Request, options?: RawAxiosRequestConfig): AxiosPromise<AuthInfoDto>;
     /**
      * Exchanges the provided authorization code, username, and password for a token through which private application resources can be accessed. Note that the token expires in 15 minutes. When this happens, you must invoke this service again with the previously described parameters.
      * @summary Exchange authorization code for access token
@@ -10059,7 +10022,7 @@ export declare class SecurityApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SecurityApi
      */
-    refreshToken1(requestParameters: SecurityApiRefreshToken1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<TokenResponseDto, any>>;
+    refreshToken1(requestParameters: SecurityApiRefreshToken1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<AuthInfoDto, any>>;
     /**
      * Exchanges the provided authorization code, username, and password for a token through which private application resources can be accessed. Note that the token expires in 15 minutes. When this happens, you must invoke this service again with the previously described parameters.
      * @summary Exchange authorization code for access token
