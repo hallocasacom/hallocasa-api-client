@@ -10,14 +10,6 @@
     },
     "version" : "v1"
   },
-  "servers" : [ {
-    "url" : "/hallocasa-api/api",
-    "description" : "Hallocasa API Server"
-  } ],
-  "security" : [ {
-    "oAuthCode" : [ ],
-    "oAuthClientId" : [ ]
-  } ],
   "tags" : [ {
     "name" : "chat-tickets",
     "description" : "Chat ticket management endpoints"
@@ -5244,6 +5236,75 @@
         }
       }
     },
+    "/security/refresh" : {
+      "post" : {
+        "tags" : [ "security" ],
+        "summary" : "Refresh access token",
+        "description" : "Use a refresh token to obtain a new access token. The refresh token must be valid and not expired.",
+        "operationId" : "refreshToken_1",
+        "requestBody" : {
+          "content" : {
+            "application/x-www-form-urlencoded" : {
+              "schema" : {
+                "required" : [ "client_id", "grant_type", "refresh_token" ],
+                "type" : "object",
+                "properties" : {
+                  "grant_type" : {
+                    "type" : "string",
+                    "description" : "Must be 'refresh_token'"
+                  },
+                  "refresh_token" : {
+                    "type" : "string",
+                    "description" : "The refresh token"
+                  },
+                  "client_id" : {
+                    "type" : "string",
+                    "description" : "Client application identifier"
+                  },
+                  "client_secret" : {
+                    "type" : "string",
+                    "description" : "Client application secret"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Token refreshed successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TokenResponseDto"
+                },
+                "examples" : {
+                  "Successful token refresh" : {
+                    "description" : "Successful token refresh",
+                    "value" : {
+                      "access_token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+                      "token_type" : "Bearer",
+                      "expires_in" : 900,
+                      "refresh_token" : "def502004a8b5c3d...",
+                      "scope" : null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad request - invalid refresh token"
+          },
+          "401" : {
+            "description" : "Unauthorized - refresh token expired or revoked"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
     "/security/token" : {
       "post" : {
         "tags" : [ "security" ],
@@ -5254,10 +5315,10 @@
           "content" : {
             "application/x-www-form-urlencoded" : {
               "schema" : {
-                "required" : [ "client-id", "code", "email", "password" ],
+                "required" : [ "client_id", "code", "email", "password" ],
                 "type" : "object",
                 "properties" : {
-                  "client-id" : {
+                  "client_id" : {
                     "type" : "string",
                     "description" : "Client application identifier"
                   },
@@ -5326,6 +5387,46 @@
           },
           "500" : {
             "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/security/revoke" : {
+      "post" : {
+        "tags" : [ "security" ],
+        "summary" : "Revoke a token",
+        "description" : "Revoke an access token or refresh token",
+        "operationId" : "revokeToken_1",
+        "requestBody" : {
+          "content" : {
+            "application/x-www-form-urlencoded" : {
+              "schema" : {
+                "required" : [ "client_id", "token" ],
+                "type" : "object",
+                "properties" : {
+                  "token" : {
+                    "type" : "string",
+                    "description" : "The token to revoke"
+                  },
+                  "token_type_hint" : {
+                    "type" : "string",
+                    "description" : "Hint about the type of token being revoked"
+                  },
+                  "client_id" : {
+                    "type" : "string",
+                    "description" : "Client application identifier"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Token revoked successfully"
+          },
+          "400" : {
+            "description" : "Bad request - missing or invalid parameters"
           }
         }
       }
@@ -9715,6 +9816,27 @@
         },
         "description" : "Token used for password recovery process"
       },
+      "TokenResponseDto" : {
+        "type" : "object",
+        "properties" : {
+          "access_token" : {
+            "type" : "string"
+          },
+          "token_type" : {
+            "type" : "string"
+          },
+          "expires_in" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "refresh_token" : {
+            "type" : "string"
+          },
+          "scope" : {
+            "type" : "string"
+          }
+        }
+      },
       "AuthInfoDto" : {
         "type" : "object",
         "properties" : {
@@ -9723,6 +9845,40 @@
           },
           "securityToken" : {
             "$ref" : "#/components/schemas/SecurityToken"
+          },
+          "refreshToken" : {
+            "$ref" : "#/components/schemas/RefreshToken"
+          }
+        }
+      },
+      "RefreshToken" : {
+        "type" : "object",
+        "properties" : {
+          "tokenValue" : {
+            "type" : "string"
+          },
+          "userId" : {
+            "type" : "string"
+          },
+          "clientId" : {
+            "type" : "string"
+          },
+          "issued" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "expires" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "revoked" : {
+            "type" : "boolean"
+          },
+          "valid" : {
+            "type" : "boolean"
+          },
+          "expired" : {
+            "type" : "boolean"
           }
         }
       },
@@ -10697,16 +10853,16 @@
         "name" : "O-Auth-Token",
         "in" : "header"
       },
-      "oAuthClientId" : {
-        "type" : "apiKey",
-        "description" : "OAuth client identifier (default: hallocasa_frontend)",
-        "name" : "O-Auth-Client-Id",
-        "in" : "header"
-      },
       "oAuthCode" : {
         "type" : "apiKey",
         "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
         "name" : "O-Auth-Code",
+        "in" : "header"
+      },
+      "oAuthClientId" : {
+        "type" : "apiKey",
+        "description" : "OAuth client identifier (default: hallocasa_frontend)",
+        "name" : "O-Auth-Client-Id",
         "in" : "header"
       }
     }
