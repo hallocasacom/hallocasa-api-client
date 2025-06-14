@@ -16,6 +16,37 @@ import { BaseAPI } from './base';
 /**
  *
  * @export
+ * @interface AccessToken
+ */
+export interface AccessToken {
+    /**
+     *
+     * @type {string}
+     * @memberof AccessToken
+     */
+    'tokenValue'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof AccessToken
+     */
+    'registered'?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof AccessToken
+     */
+    'expiresIn'?: number;
+    /**
+     *
+     * @type {boolean}
+     * @memberof AccessToken
+     */
+    'expired'?: boolean;
+}
+/**
+ *
+ * @export
  * @interface Address
  */
 export interface Address {
@@ -172,10 +203,10 @@ export interface AuthInfoDto {
     'user'?: UserDto;
     /**
      *
-     * @type {SecurityToken}
+     * @type {AccessToken}
      * @memberof AuthInfoDto
      */
-    'securityToken'?: SecurityToken;
+    'accessToken'?: AccessToken;
     /**
      *
      * @type {RefreshToken}
@@ -3189,37 +3220,6 @@ export interface ResultRequest {
      * @memberof ResultRequest
      */
     'orderBy'?: Array<string>;
-}
-/**
- *
- * @export
- * @interface SecurityToken
- */
-export interface SecurityToken {
-    /**
-     *
-     * @type {string}
-     * @memberof SecurityToken
-     */
-    'tokenValue'?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof SecurityToken
-     */
-    'registered'?: string;
-    /**
-     *
-     * @type {number}
-     * @memberof SecurityToken
-     */
-    'expiresIn'?: number;
-    /**
-     *
-     * @type {boolean}
-     * @memberof SecurityToken
-     */
-    'expired'?: boolean;
 }
 /**
  *
@@ -9407,76 +9407,76 @@ export declare const UploadPropertiesFromUrl1FormatEnum: {
 };
 export type UploadPropertiesFromUrl1FormatEnum = typeof UploadPropertiesFromUrl1FormatEnum[keyof typeof UploadPropertiesFromUrl1FormatEnum];
 /**
- * PropertyFieldApi - axios parameter creator
+ * PropertyFieldsApi - axios parameter creator
  * @export
  */
-export declare const PropertyFieldApiAxiosParamCreator: (configuration?: Configuration) => {
+export declare const PropertyFieldsApiAxiosParamCreator: (configuration?: Configuration) => {
     /**
-     * Retrieves the list of property fields that will be showed when selecting the type, proposal, location, and country specified. All the property keys are required, otherwise system generate a bad request, because without all the parameters, it is not posible filter the property fields
-     * @summary Retrieves property fields filtered by key
-     * @param {PropertyKey} [propertyKey] key set of the property to filter
+     * Retrieves a filtered list of property fields based on the provided property key criteria. This endpoint returns the specific property fields that should be displayed when users select a combination of property type, proposal type, location, and country.  **Important:** All property key parameters (type, proposal, location, country) are required for proper filtering. Incomplete criteria will result in a 400 Bad Request response.  The returned fields are contextually relevant to the specified property characteristics and help users complete property listings with appropriate field options.
+     * @summary Filter property fields by property key criteria
+     * @param {PropertyKey} propertyKey Property key criteria for filtering fields. Must include: - **type**: Property type (e.g., \&#39;apartment\&#39;, \&#39;house\&#39;, \&#39;commercial\&#39;) - **proposal**: Proposal type (e.g., \&#39;sale\&#39;, \&#39;rent\&#39;, \&#39;both\&#39;) - **location**: Geographic location identifier - **country**: Country code or identifier  All fields are required for proper filtering functionality.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getPropertyFilters2: (propertyKey?: PropertyKey, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    getPropertyFilters2: (propertyKey: PropertyKey, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
- * PropertyFieldApi - functional programming interface
+ * PropertyFieldsApi - functional programming interface
  * @export
  */
-export declare const PropertyFieldApiFp: (configuration?: Configuration) => {
+export declare const PropertyFieldsApiFp: (configuration?: Configuration) => {
     /**
-     * Retrieves the list of property fields that will be showed when selecting the type, proposal, location, and country specified. All the property keys are required, otherwise system generate a bad request, because without all the parameters, it is not posible filter the property fields
-     * @summary Retrieves property fields filtered by key
-     * @param {PropertyKey} [propertyKey] key set of the property to filter
+     * Retrieves a filtered list of property fields based on the provided property key criteria. This endpoint returns the specific property fields that should be displayed when users select a combination of property type, proposal type, location, and country.  **Important:** All property key parameters (type, proposal, location, country) are required for proper filtering. Incomplete criteria will result in a 400 Bad Request response.  The returned fields are contextually relevant to the specified property characteristics and help users complete property listings with appropriate field options.
+     * @summary Filter property fields by property key criteria
+     * @param {PropertyKey} propertyKey Property key criteria for filtering fields. Must include: - **type**: Property type (e.g., \&#39;apartment\&#39;, \&#39;house\&#39;, \&#39;commercial\&#39;) - **proposal**: Proposal type (e.g., \&#39;sale\&#39;, \&#39;rent\&#39;, \&#39;both\&#39;) - **location**: Geographic location identifier - **country**: Country code or identifier  All fields are required for proper filtering functionality.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getPropertyFilters2(propertyKey?: PropertyKey, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    getPropertyFilters2(propertyKey: PropertyKey, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PropertyField>>>;
 };
 /**
- * PropertyFieldApi - factory interface
+ * PropertyFieldsApi - factory interface
  * @export
  */
-export declare const PropertyFieldApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+export declare const PropertyFieldsApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
     /**
-     * Retrieves the list of property fields that will be showed when selecting the type, proposal, location, and country specified. All the property keys are required, otherwise system generate a bad request, because without all the parameters, it is not posible filter the property fields
-     * @summary Retrieves property fields filtered by key
-     * @param {PropertyFieldApiGetPropertyFilters2Request} requestParameters Request parameters.
+     * Retrieves a filtered list of property fields based on the provided property key criteria. This endpoint returns the specific property fields that should be displayed when users select a combination of property type, proposal type, location, and country.  **Important:** All property key parameters (type, proposal, location, country) are required for proper filtering. Incomplete criteria will result in a 400 Bad Request response.  The returned fields are contextually relevant to the specified property characteristics and help users complete property listings with appropriate field options.
+     * @summary Filter property fields by property key criteria
+     * @param {PropertyFieldsApiGetPropertyFilters2Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getPropertyFilters2(requestParameters?: PropertyFieldApiGetPropertyFilters2Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    getPropertyFilters2(requestParameters: PropertyFieldsApiGetPropertyFilters2Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<PropertyField>>;
 };
 /**
- * Request parameters for getPropertyFilters2 operation in PropertyFieldApi.
+ * Request parameters for getPropertyFilters2 operation in PropertyFieldsApi.
  * @export
- * @interface PropertyFieldApiGetPropertyFilters2Request
+ * @interface PropertyFieldsApiGetPropertyFilters2Request
  */
-export interface PropertyFieldApiGetPropertyFilters2Request {
+export interface PropertyFieldsApiGetPropertyFilters2Request {
     /**
-     * key set of the property to filter
+     * Property key criteria for filtering fields. Must include: - **type**: Property type (e.g., \&#39;apartment\&#39;, \&#39;house\&#39;, \&#39;commercial\&#39;) - **proposal**: Proposal type (e.g., \&#39;sale\&#39;, \&#39;rent\&#39;, \&#39;both\&#39;) - **location**: Geographic location identifier - **country**: Country code or identifier  All fields are required for proper filtering functionality.
      * @type {PropertyKey}
-     * @memberof PropertyFieldApiGetPropertyFilters2
+     * @memberof PropertyFieldsApiGetPropertyFilters2
      */
-    readonly propertyKey?: PropertyKey;
+    readonly propertyKey: PropertyKey;
 }
 /**
- * PropertyFieldApi - object-oriented interface
+ * PropertyFieldsApi - object-oriented interface
  * @export
- * @class PropertyFieldApi
+ * @class PropertyFieldsApi
  * @extends {BaseAPI}
  */
-export declare class PropertyFieldApi extends BaseAPI {
+export declare class PropertyFieldsApi extends BaseAPI {
     /**
-     * Retrieves the list of property fields that will be showed when selecting the type, proposal, location, and country specified. All the property keys are required, otherwise system generate a bad request, because without all the parameters, it is not posible filter the property fields
-     * @summary Retrieves property fields filtered by key
-     * @param {PropertyFieldApiGetPropertyFilters2Request} requestParameters Request parameters.
+     * Retrieves a filtered list of property fields based on the provided property key criteria. This endpoint returns the specific property fields that should be displayed when users select a combination of property type, proposal type, location, and country.  **Important:** All property key parameters (type, proposal, location, country) are required for proper filtering. Incomplete criteria will result in a 400 Bad Request response.  The returned fields are contextually relevant to the specified property characteristics and help users complete property listings with appropriate field options.
+     * @summary Filter property fields by property key criteria
+     * @param {PropertyFieldsApiGetPropertyFilters2Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PropertyFieldApi
+     * @memberof PropertyFieldsApi
      */
-    getPropertyFilters2(requestParameters?: PropertyFieldApiGetPropertyFilters2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    getPropertyFilters2(requestParameters: PropertyFieldsApiGetPropertyFilters2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PropertyField[], any>>;
 }
 /**
  * PropertyFiltersApi - axios parameter creator

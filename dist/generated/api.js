@@ -18,7 +18,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ChatTicketsApiAxiosParamCreator = exports.BrokeragesApi = exports.BrokeragesApiFactory = exports.BrokeragesApiFp = exports.BrokeragesApiAxiosParamCreator = exports.AttachmentsApi = exports.AttachmentsApiFactory = exports.AttachmentsApiFp = exports.AttachmentsApiAxiosParamCreator = exports.AllowancesApi = exports.AllowancesApiFactory = exports.AllowancesApiFp = exports.AllowancesApiAxiosParamCreator = exports.AlertsApi = exports.AlertsApiFactory = exports.AlertsApiFp = exports.AlertsApiAxiosParamCreator = exports.UserSubscriptionDtoStatusEnum = exports.UserSubscriptionDtoRenewalTypeEnum = exports.UserSubscriptionPlanNameEnum = exports.SubscriptionPriceDtoRenewalTypeEnum = exports.SkilledUserSubscriptionPlanNameEnum = exports.PropertyFieldHcListerOptionEnum = exports.PropertyFieldData3TypeEnum = exports.PropertyFieldData2TypeEnum = exports.PropertyFieldData1TypeEnum = exports.PropertyFieldTextTypeEnum = exports.PropertyPublicationStateEnum = exports.NotificationTypeEnum = exports.HcFilterTypeEntryRangeFieldPresentationEnum = exports.HcFilterTypeEntryFilterTypeNatureEnum = exports.HcFilterTypeRangeFieldPresentationEnum = exports.HcFilterTypeFilterTypeNatureEnum = exports.HcFilterEntryFilterWorkerOptionEnum = exports.HcFilterEntryChoiceEnum = exports.HcFilterConditionMaxOperandEnum = exports.HcFilterConditionMinOperandEnum = exports.HcFilterHcListerOptionEnum = exports.HcFilterFilterWorkerOptionEnum = exports.HcFilterChoiceEnum = exports.GroupMemberGroupMemberStatusEnum = exports.GroupGroupStatusEnum = exports.FilterShowingStepSequenceAfterEnum = exports.FilterShowingStepSequenceBeforeEnum = exports.FavoriteResourceTypeEnum = exports.DropdownOptionGroupTranslationManagementEnum = exports.ConversationSummaryChatAllowanceTypeEnum = exports.CheckoutSessionDtoStatusEnum = exports.ChatAllowanceChatAllowanceTypeEnum = exports.AlertUserAlertTypeEnum = void 0;
 exports.LocalesApiFp = exports.LocalesApiAxiosParamCreator = exports.LanguagesApi = exports.LanguagesApiFactory = exports.LanguagesApiFp = exports.LanguagesApiAxiosParamCreator = exports.UpdateGroupMembershipStatus1StatusEnum = exports.GroupsApi = exports.GroupsApiFactory = exports.GroupsApiFp = exports.GroupsApiAxiosParamCreator = exports.GeoLocationApi = exports.GeoLocationApiFactory = exports.GeoLocationApiFp = exports.GeoLocationApiAxiosParamCreator = exports.FavoritesApi = exports.FavoritesApiFactory = exports.FavoritesApiFp = exports.FavoritesApiAxiosParamCreator = exports.FacebookPropertiesApi = exports.FacebookPropertiesApiFactory = exports.FacebookPropertiesApiFp = exports.FacebookPropertiesApiAxiosParamCreator = exports.ExchangeRatesApi = exports.ExchangeRatesApiFactory = exports.ExchangeRatesApiFp = exports.ExchangeRatesApiAxiosParamCreator = exports.EndorsementsApi = exports.EndorsementsApiFactory = exports.EndorsementsApiFp = exports.EndorsementsApiAxiosParamCreator = exports.CustomerSessionsApi = exports.CustomerSessionsApiFactory = exports.CustomerSessionsApiFp = exports.CustomerSessionsApiAxiosParamCreator = exports.CurrencyManagementApi = exports.CurrencyManagementApiFactory = exports.CurrencyManagementApiFp = exports.CurrencyManagementApiAxiosParamCreator = exports.CountriesApi = exports.CountriesApiFactory = exports.CountriesApiFp = exports.CountriesApiAxiosParamCreator = exports.CheckoutSessionsApi = exports.CheckoutSessionsApiFactory = exports.CheckoutSessionsApiFp = exports.CheckoutSessionsApiAxiosParamCreator = exports.ChatTicketsApi = exports.ChatTicketsApiFactory = exports.ChatTicketsApiFp = void 0;
-exports.SecurityApiAxiosParamCreator = exports.PropertyTypesApi = exports.PropertyTypesApiFactory = exports.PropertyTypesApiFp = exports.PropertyTypesApiAxiosParamCreator = exports.PropertyProposalsApi = exports.PropertyProposalsApiFactory = exports.PropertyProposalsApiFp = exports.PropertyProposalsApiAxiosParamCreator = exports.PropertyLocationsApi = exports.PropertyLocationsApiFactory = exports.PropertyLocationsApiFp = exports.PropertyLocationsApiAxiosParamCreator = exports.PropertyFiltersApi = exports.PropertyFiltersApiFactory = exports.PropertyFiltersApiFp = exports.PropertyFiltersApiAxiosParamCreator = exports.PropertyFieldApi = exports.PropertyFieldApiFactory = exports.PropertyFieldApiFp = exports.PropertyFieldApiAxiosParamCreator = exports.UploadPropertiesFromUrl1FormatEnum = exports.UploadProperties1FormatEnum = exports.PropertyBulkUploadsApi = exports.PropertyBulkUploadsApiFactory = exports.PropertyBulkUploadsApiFp = exports.PropertyBulkUploadsApiAxiosParamCreator = exports.PropertyBulkDownloadApi = exports.PropertyBulkDownloadApiFactory = exports.PropertyBulkDownloadApiFp = exports.PropertyBulkDownloadApiAxiosParamCreator = exports.PropertiesApi = exports.PropertiesApiFactory = exports.PropertiesApiFp = exports.PropertiesApiAxiosParamCreator = exports.PhonePrefixesApi = exports.PhonePrefixesApiFactory = exports.PhonePrefixesApiFp = exports.PhonePrefixesApiAxiosParamCreator = exports.PasswordRecoveryApi = exports.PasswordRecoveryApiFactory = exports.PasswordRecoveryApiFp = exports.PasswordRecoveryApiAxiosParamCreator = exports.GetByUserWithResult1TypeEnum = exports.MessagesApi = exports.MessagesApiFactory = exports.MessagesApiFp = exports.MessagesApiAxiosParamCreator = exports.LocalesApi = exports.LocalesApiFactory = void 0;
+exports.SecurityApiAxiosParamCreator = exports.PropertyTypesApi = exports.PropertyTypesApiFactory = exports.PropertyTypesApiFp = exports.PropertyTypesApiAxiosParamCreator = exports.PropertyProposalsApi = exports.PropertyProposalsApiFactory = exports.PropertyProposalsApiFp = exports.PropertyProposalsApiAxiosParamCreator = exports.PropertyLocationsApi = exports.PropertyLocationsApiFactory = exports.PropertyLocationsApiFp = exports.PropertyLocationsApiAxiosParamCreator = exports.PropertyFiltersApi = exports.PropertyFiltersApiFactory = exports.PropertyFiltersApiFp = exports.PropertyFiltersApiAxiosParamCreator = exports.PropertyFieldsApi = exports.PropertyFieldsApiFactory = exports.PropertyFieldsApiFp = exports.PropertyFieldsApiAxiosParamCreator = exports.UploadPropertiesFromUrl1FormatEnum = exports.UploadProperties1FormatEnum = exports.PropertyBulkUploadsApi = exports.PropertyBulkUploadsApiFactory = exports.PropertyBulkUploadsApiFp = exports.PropertyBulkUploadsApiAxiosParamCreator = exports.PropertyBulkDownloadApi = exports.PropertyBulkDownloadApiFactory = exports.PropertyBulkDownloadApiFp = exports.PropertyBulkDownloadApiAxiosParamCreator = exports.PropertiesApi = exports.PropertiesApiFactory = exports.PropertiesApiFp = exports.PropertiesApiAxiosParamCreator = exports.PhonePrefixesApi = exports.PhonePrefixesApiFactory = exports.PhonePrefixesApiFp = exports.PhonePrefixesApiAxiosParamCreator = exports.PasswordRecoveryApi = exports.PasswordRecoveryApiFactory = exports.PasswordRecoveryApiFp = exports.PasswordRecoveryApiAxiosParamCreator = exports.GetByUserWithResult1TypeEnum = exports.MessagesApi = exports.MessagesApiFactory = exports.MessagesApiFp = exports.MessagesApiAxiosParamCreator = exports.LocalesApi = exports.LocalesApiFactory = void 0;
 exports.GetSubscribedUsers1SubscriptionPlanNameEnum = exports.UsersApi = exports.UsersApiFactory = exports.UsersApiFp = exports.UsersApiAxiosParamCreator = exports.UserTypesApi = exports.UserTypesApiFactory = exports.UserTypesApiFp = exports.UserTypesApiAxiosParamCreator = exports.UserSummaryApi = exports.UserSummaryApiFactory = exports.UserSummaryApiFp = exports.UserSummaryApiAxiosParamCreator = exports.UserContractsApi = exports.UserContractsApiFactory = exports.UserContractsApiFp = exports.UserContractsApiAxiosParamCreator = exports.UserConnectionsApi = exports.UserConnectionsApiFactory = exports.UserConnectionsApiFp = exports.UserConnectionsApiAxiosParamCreator = exports.TextTranslationsApi = exports.TextTranslationsApiFactory = exports.TextTranslationsApiFp = exports.TextTranslationsApiAxiosParamCreator = exports.TestimonialApi = exports.TestimonialApiFactory = exports.TestimonialApiFp = exports.TestimonialApiAxiosParamCreator = exports.SubscriptionsApi = exports.SubscriptionsApiFactory = exports.SubscriptionsApiFp = exports.SubscriptionsApiAxiosParamCreator = exports.StripeWebhooksApi = exports.StripeWebhooksApiFactory = exports.StripeWebhooksApiFp = exports.StripeWebhooksApiAxiosParamCreator = exports.SkillsApi = exports.SkillsApiFactory = exports.SkillsApiFp = exports.SkillsApiAxiosParamCreator = exports.SecurityApi = exports.SecurityApiFactory = exports.SecurityApiFp = void 0;
 const axios_1 = __importDefault(require("axios"));
 // Some imports not used depending on template conditions
@@ -6348,19 +6348,21 @@ exports.UploadPropertiesFromUrl1FormatEnum = {
     Hallocasa: 'hallocasa'
 };
 /**
- * PropertyFieldApi - axios parameter creator
+ * PropertyFieldsApi - axios parameter creator
  * @export
  */
-const PropertyFieldApiAxiosParamCreator = function (configuration) {
+const PropertyFieldsApiAxiosParamCreator = function (configuration) {
     return {
         /**
-         * Retrieves the list of property fields that will be showed when selecting the type, proposal, location, and country specified. All the property keys are required, otherwise system generate a bad request, because without all the parameters, it is not posible filter the property fields
-         * @summary Retrieves property fields filtered by key
-         * @param {PropertyKey} [propertyKey] key set of the property to filter
+         * Retrieves a filtered list of property fields based on the provided property key criteria. This endpoint returns the specific property fields that should be displayed when users select a combination of property type, proposal type, location, and country.  **Important:** All property key parameters (type, proposal, location, country) are required for proper filtering. Incomplete criteria will result in a 400 Bad Request response.  The returned fields are contextually relevant to the specified property characteristics and help users complete property listings with appropriate field options.
+         * @summary Filter property fields by property key criteria
+         * @param {PropertyKey} propertyKey Property key criteria for filtering fields. Must include: - **type**: Property type (e.g., \&#39;apartment\&#39;, \&#39;house\&#39;, \&#39;commercial\&#39;) - **proposal**: Proposal type (e.g., \&#39;sale\&#39;, \&#39;rent\&#39;, \&#39;both\&#39;) - **location**: Geographic location identifier - **country**: Country code or identifier  All fields are required for proper filtering functionality.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         getPropertyFilters2: async (propertyKey, options = {}) => {
+            // verify required parameter 'propertyKey' is not null or undefined
+            (0, common_1.assertParamExists)('getPropertyFilters2', 'propertyKey', propertyKey);
             const localVarPath = `/property-fields/filter-by-key`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
@@ -6383,70 +6385,70 @@ const PropertyFieldApiAxiosParamCreator = function (configuration) {
         },
     };
 };
-exports.PropertyFieldApiAxiosParamCreator = PropertyFieldApiAxiosParamCreator;
+exports.PropertyFieldsApiAxiosParamCreator = PropertyFieldsApiAxiosParamCreator;
 /**
- * PropertyFieldApi - functional programming interface
+ * PropertyFieldsApi - functional programming interface
  * @export
  */
-const PropertyFieldApiFp = function (configuration) {
-    const localVarAxiosParamCreator = (0, exports.PropertyFieldApiAxiosParamCreator)(configuration);
+const PropertyFieldsApiFp = function (configuration) {
+    const localVarAxiosParamCreator = (0, exports.PropertyFieldsApiAxiosParamCreator)(configuration);
     return {
         /**
-         * Retrieves the list of property fields that will be showed when selecting the type, proposal, location, and country specified. All the property keys are required, otherwise system generate a bad request, because without all the parameters, it is not posible filter the property fields
-         * @summary Retrieves property fields filtered by key
-         * @param {PropertyKey} [propertyKey] key set of the property to filter
+         * Retrieves a filtered list of property fields based on the provided property key criteria. This endpoint returns the specific property fields that should be displayed when users select a combination of property type, proposal type, location, and country.  **Important:** All property key parameters (type, proposal, location, country) are required for proper filtering. Incomplete criteria will result in a 400 Bad Request response.  The returned fields are contextually relevant to the specified property characteristics and help users complete property listings with appropriate field options.
+         * @summary Filter property fields by property key criteria
+         * @param {PropertyKey} propertyKey Property key criteria for filtering fields. Must include: - **type**: Property type (e.g., \&#39;apartment\&#39;, \&#39;house\&#39;, \&#39;commercial\&#39;) - **proposal**: Proposal type (e.g., \&#39;sale\&#39;, \&#39;rent\&#39;, \&#39;both\&#39;) - **location**: Geographic location identifier - **country**: Country code or identifier  All fields are required for proper filtering functionality.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async getPropertyFilters2(propertyKey, options) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPropertyFilters2(propertyKey, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = base_1.operationServerMap['PropertyFieldApi.getPropertyFilters2']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = base_1.operationServerMap['PropertyFieldsApi.getPropertyFilters2']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     };
 };
-exports.PropertyFieldApiFp = PropertyFieldApiFp;
+exports.PropertyFieldsApiFp = PropertyFieldsApiFp;
 /**
- * PropertyFieldApi - factory interface
+ * PropertyFieldsApi - factory interface
  * @export
  */
-const PropertyFieldApiFactory = function (configuration, basePath, axios) {
-    const localVarFp = (0, exports.PropertyFieldApiFp)(configuration);
+const PropertyFieldsApiFactory = function (configuration, basePath, axios) {
+    const localVarFp = (0, exports.PropertyFieldsApiFp)(configuration);
     return {
         /**
-         * Retrieves the list of property fields that will be showed when selecting the type, proposal, location, and country specified. All the property keys are required, otherwise system generate a bad request, because without all the parameters, it is not posible filter the property fields
-         * @summary Retrieves property fields filtered by key
-         * @param {PropertyFieldApiGetPropertyFilters2Request} requestParameters Request parameters.
+         * Retrieves a filtered list of property fields based on the provided property key criteria. This endpoint returns the specific property fields that should be displayed when users select a combination of property type, proposal type, location, and country.  **Important:** All property key parameters (type, proposal, location, country) are required for proper filtering. Incomplete criteria will result in a 400 Bad Request response.  The returned fields are contextually relevant to the specified property characteristics and help users complete property listings with appropriate field options.
+         * @summary Filter property fields by property key criteria
+         * @param {PropertyFieldsApiGetPropertyFilters2Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPropertyFilters2(requestParameters = {}, options) {
+        getPropertyFilters2(requestParameters, options) {
             return localVarFp.getPropertyFilters2(requestParameters.propertyKey, options).then((request) => request(axios, basePath));
         },
     };
 };
-exports.PropertyFieldApiFactory = PropertyFieldApiFactory;
+exports.PropertyFieldsApiFactory = PropertyFieldsApiFactory;
 /**
- * PropertyFieldApi - object-oriented interface
+ * PropertyFieldsApi - object-oriented interface
  * @export
- * @class PropertyFieldApi
+ * @class PropertyFieldsApi
  * @extends {BaseAPI}
  */
-class PropertyFieldApi extends base_1.BaseAPI {
+class PropertyFieldsApi extends base_1.BaseAPI {
     /**
-     * Retrieves the list of property fields that will be showed when selecting the type, proposal, location, and country specified. All the property keys are required, otherwise system generate a bad request, because without all the parameters, it is not posible filter the property fields
-     * @summary Retrieves property fields filtered by key
-     * @param {PropertyFieldApiGetPropertyFilters2Request} requestParameters Request parameters.
+     * Retrieves a filtered list of property fields based on the provided property key criteria. This endpoint returns the specific property fields that should be displayed when users select a combination of property type, proposal type, location, and country.  **Important:** All property key parameters (type, proposal, location, country) are required for proper filtering. Incomplete criteria will result in a 400 Bad Request response.  The returned fields are contextually relevant to the specified property characteristics and help users complete property listings with appropriate field options.
+     * @summary Filter property fields by property key criteria
+     * @param {PropertyFieldsApiGetPropertyFilters2Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof PropertyFieldApi
+     * @memberof PropertyFieldsApi
      */
-    getPropertyFilters2(requestParameters = {}, options) {
-        return (0, exports.PropertyFieldApiFp)(this.configuration).getPropertyFilters2(requestParameters.propertyKey, options).then((request) => request(this.axios, this.basePath));
+    getPropertyFilters2(requestParameters, options) {
+        return (0, exports.PropertyFieldsApiFp)(this.configuration).getPropertyFilters2(requestParameters.propertyKey, options).then((request) => request(this.axios, this.basePath));
     }
 }
-exports.PropertyFieldApi = PropertyFieldApi;
+exports.PropertyFieldsApi = PropertyFieldsApi;
 /**
  * PropertyFiltersApi - axios parameter creator
  * @export

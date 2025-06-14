@@ -38,6 +38,9 @@
     "name" : "groups",
     "description" : "Operations related to property groups"
   }, {
+    "name" : "Property Fields",
+    "description" : "Operations for managing and retrieving property fields based on various criteria such as type, proposal, location, and country"
+  }, {
     "name" : "Property Filters",
     "description" : "API for managing property filters"
   }, {
@@ -3242,31 +3245,88 @@
     },
     "/property-fields/filter-by-key" : {
       "post" : {
-        "tags" : [ "Property Field" ],
-        "summary" : "Retrieves property fields filtered by key",
-        "description" : "Retrieves the list of property fields that will be showed when selecting the type, proposal, location, and country specified. All the property keys are required, otherwise system generate a bad request, because without all the parameters, it is not posible filter the property fields",
+        "tags" : [ "Property Fields" ],
+        "summary" : "Filter property fields by property key criteria",
+        "description" : "Retrieves a filtered list of property fields based on the provided property key criteria.\nThis endpoint returns the specific property fields that should be displayed when users\nselect a combination of property type, proposal type, location, and country.\n\n**Important:** All property key parameters (type, proposal, location, country) are required\nfor proper filtering. Incomplete criteria will result in a 400 Bad Request response.\n\nThe returned fields are contextually relevant to the specified property characteristics\nand help users complete property listings with appropriate field options.\n",
         "operationId" : "getPropertyFilters_2",
         "requestBody" : {
-          "description" : "key set of the property to filter",
+          "description" : "Property key criteria for filtering fields. Must include:\n- **type**: Property type (e.g., 'apartment', 'house', 'commercial')\n- **proposal**: Proposal type (e.g., 'sale', 'rent', 'both')\n- **location**: Geographic location identifier\n- **country**: Country code or identifier\n\nAll fields are required for proper filtering functionality.\n",
           "content" : {
             "application/json" : {
               "schema" : {
                 "$ref" : "#/components/schemas/PropertyKey"
               }
             }
-          }
+          },
+          "required" : true
         },
         "responses" : {
+          "200" : {
+            "description" : "Successfully retrieved filtered property fields",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/PropertyField"
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request - Missing required property key parameters (type, proposal, location, or country)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string",
+                  "description" : "Error details about missing or invalid parameters"
+                }
+              }
+            }
+          },
           "401" : {
-            "description" : "If user is unauthorized"
+            "description" : "Unauthorized - Authentication required or invalid credentials provided",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string",
+                  "description" : "Authentication error details"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden - User lacks permission to access property fields",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string",
+                  "description" : "Authorization error details"
+                }
+              }
+            }
+          },
+          "422" : {
+            "description" : "Unprocessable Entity - Invalid property key combination or values",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string",
+                  "description" : "Validation error details"
+                }
+              }
+            }
           },
           "500" : {
-            "description" : "If server internal error"
-          },
-          "200" : {
-            "description" : "Ok. Generated resource",
+            "description" : "Internal Server Error - Unexpected server error occurred",
             "content" : {
-              "application/json" : { }
+              "application/json" : {
+                "schema" : {
+                  "type" : "string",
+                  "description" : "Internal server error details"
+                }
+              }
             }
           }
         }
@@ -5291,10 +5351,17 @@
                         "subscriptions" : [ ],
                         "userPermissions" : [ "USER", "PROPERTY_PUBLISH" ]
                       },
-                      "securityToken" : {
+                      "accessToken" : {
                         "tokenValue" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
                         "registered" : 1651234567890,
                         "expiresIn" : 900000
+                      },
+                      "refreshToken" : {
+                        "tokenValue" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+                        "email" : "user@example.com",
+                        "clientId" : "hallocasa-client",
+                        "issued" : 1651234567890,
+                        "expires" : 1651234567890
                       }
                     }
                   }
@@ -5377,7 +5444,7 @@
                         "subscriptions" : [ ],
                         "userPermissions" : [ "USER", "PROPERTY_PUBLISH" ]
                       },
-                      "securityToken" : {
+                      "accessToken" : {
                         "tokenValue" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
                         "registered" : 1651234567890,
                         "expiresIn" : 900000
@@ -9825,14 +9892,33 @@
         },
         "description" : "Token used for password recovery process"
       },
+      "AccessToken" : {
+        "type" : "object",
+        "properties" : {
+          "tokenValue" : {
+            "type" : "string"
+          },
+          "registered" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "expiresIn" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "expired" : {
+            "type" : "boolean"
+          }
+        }
+      },
       "AuthInfoDto" : {
         "type" : "object",
         "properties" : {
           "user" : {
             "$ref" : "#/components/schemas/UserDto"
           },
-          "securityToken" : {
-            "$ref" : "#/components/schemas/SecurityToken"
+          "accessToken" : {
+            "$ref" : "#/components/schemas/AccessToken"
           },
           "refreshToken" : {
             "$ref" : "#/components/schemas/RefreshToken"
@@ -9895,25 +9981,6 @@
           "issued" : "2024-01-15T10:30:00Z",
           "expires" : "2024-02-15T10:30:00Z",
           "revoked" : false
-        }
-      },
-      "SecurityToken" : {
-        "type" : "object",
-        "properties" : {
-          "tokenValue" : {
-            "type" : "string"
-          },
-          "registered" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "expiresIn" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "expired" : {
-            "type" : "boolean"
-          }
         }
       },
       "UserDto" : {
@@ -10868,16 +10935,16 @@
         "name" : "O-Auth-Token",
         "in" : "header"
       },
-      "oAuthClientId" : {
-        "type" : "apiKey",
-        "description" : "OAuth client identifier (default: hallocasa_frontend)",
-        "name" : "O-Auth-Client-Id",
-        "in" : "header"
-      },
       "oAuthCode" : {
         "type" : "apiKey",
         "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
         "name" : "O-Auth-Code",
+        "in" : "header"
+      },
+      "oAuthClientId" : {
+        "type" : "apiKey",
+        "description" : "OAuth client identifier (default: hallocasa_frontend)",
+        "name" : "O-Auth-Client-Id",
         "in" : "header"
       }
     }
