@@ -10,6 +10,14 @@
     },
     "version" : "v1"
   },
+  "servers" : [ {
+    "url" : "/hallocasa-api/api",
+    "description" : "Hallocasa API Server"
+  } ],
+  "security" : [ {
+    "oAuthCode" : [ ],
+    "oAuthClientId" : [ ]
+  } ],
   "tags" : [ {
     "name" : "chat-tickets",
     "description" : "Chat ticket management endpoints"
@@ -2170,7 +2178,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/BaseFilterResult"
+                  "$ref" : "#/components/schemas/GroupMemberFilterResult"
                 },
                 "examples" : {
                   "groupMembers" : {
@@ -2709,7 +2717,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/BaseFilterResult"
+                  "$ref" : "#/components/schemas/GroupFilterResult"
                 },
                 "examples" : {
                   "Archived groups" : {
@@ -2958,7 +2966,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/BaseFilterResult"
+                  "$ref" : "#/components/schemas/GroupFilterResult"
                 },
                 "examples" : {
                   "User's groups" : {
@@ -3077,7 +3085,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/BaseFilterResult"
+                  "$ref" : "#/components/schemas/GroupFilterResult"
                 },
                 "examples" : {
                   "Inactive groups" : {
@@ -3118,49 +3126,123 @@
     "/groups/invited" : {
       "get" : {
         "tags" : [ "groups" ],
-        "summary" : "Return the groups list with specified user id that user has invitations of",
+        "summary" : "Get groups where the user has pending invitations",
+        "description" : "Returns a paginated list of groups where the current user has been invited but has not yet accepted or declined the invitation. These are groups owned by other users who have sent invitations to the current user.",
         "operationId" : "findInvitedGroupsByUser_1",
         "parameters" : [ {
           "name" : "pageFrom",
           "in" : "query",
+          "description" : "Starting page number for pagination (0-based)",
           "schema" : {
+            "minimum" : 0,
             "type" : "integer",
-            "format" : "int32"
-          }
+            "format" : "int32",
+            "default" : 0
+          },
+          "example" : 0
         }, {
           "name" : "pageTo",
           "in" : "query",
+          "description" : "Ending page number for pagination (exclusive)",
           "schema" : {
+            "minimum" : 1,
             "type" : "integer",
-            "format" : "int32"
-          }
+            "format" : "int32",
+            "default" : 10
+          },
+          "example" : 10
         } ],
         "responses" : {
           "200" : {
-            "description" : "Ok",
+            "description" : "Successfully retrieved invited groups",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/BaseFilterResult"
+                  "$ref" : "#/components/schemas/GroupFilterResult"
                 },
                 "examples" : {
-                  "Invited groups" : {
-                    "description" : "Invited groups",
+                  "Single invited group" : {
+                    "description" : "Response with one group where the user has a pending invitation",
                     "value" : {
-                      "results" : [ {
+                      "count" : 1,
+                      "list" : [ {
                         "id" : "group789",
                         "name" : "Waterfront Properties",
                         "description" : "A collection of waterfront properties",
                         "owner" : {
                           "id" : 1004,
-                          "name" : "Bob Smith"
+                          "email" : "bob@example.com",
+                          "firstName" : "Bob",
+                          "lastName" : "Smith",
+                          "imageLink" : "https://example.com/users/bob.jpg",
+                          "profileName" : "bob-smith"
                         },
-                        "active" : true,
-                        "createdDate" : "2023-03-10T09:45:00Z"
-                      } ],
-                      "total" : 1,
-                      "from" : 0,
-                      "to" : 10
+                        "locationLatitude" : 40.7128,
+                        "locationLongitude" : -74.006,
+                        "locationName" : "New York, NY",
+                        "locationDescription" : "Manhattan area",
+                        "backgroundImage" : "https://example.com/groups/bg789.jpg",
+                        "logo" : "https://example.com/groups/logo789.jpg",
+                        "creationDate" : "2023-03-10T09:45:00Z",
+                        "groupStatus" : "ACTIVE",
+                        "noOfMembers" : 5
+                      } ]
+                    }
+                  },
+                  "Multiple invited groups" : {
+                    "description" : "Response with multiple groups where the user has pending invitations",
+                    "value" : {
+                      "count" : 2,
+                      "list" : [ {
+                        "id" : "group789",
+                        "name" : "Waterfront Properties",
+                        "description" : "A collection of waterfront properties",
+                        "owner" : {
+                          "id" : 1004,
+                          "email" : "bob@example.com",
+                          "firstName" : "Bob",
+                          "lastName" : "Smith",
+                          "imageLink" : "https://example.com/users/bob.jpg",
+                          "profileName" : "bob-smith"
+                        },
+                        "locationLatitude" : 40.7128,
+                        "locationLongitude" : -74.006,
+                        "locationName" : "New York, NY",
+                        "locationDescription" : "Manhattan area",
+                        "backgroundImage" : "https://example.com/groups/bg789.jpg",
+                        "logo" : "https://example.com/groups/logo789.jpg",
+                        "creationDate" : "2023-03-10T09:45:00Z",
+                        "groupStatus" : "ACTIVE",
+                        "noOfMembers" : 5
+                      }, {
+                        "id" : "group456",
+                        "name" : "City Apartments",
+                        "description" : "Urban apartment listings",
+                        "owner" : {
+                          "id" : 1006,
+                          "email" : "carol@example.com",
+                          "firstName" : "Carol",
+                          "lastName" : "Wilson",
+                          "imageLink" : "https://example.com/users/carol.jpg",
+                          "profileName" : "carol-wilson"
+                        },
+                        "locationLatitude" : 34.0522,
+                        "locationLongitude" : -118.2437,
+                        "locationName" : "Los Angeles, CA",
+                        "locationDescription" : "Downtown area",
+                        "backgroundImage" : "https://example.com/groups/bg456.jpg",
+                        "logo" : "https://example.com/groups/logo456.jpg",
+                        "creationDate" : "2023-03-15T11:20:00Z",
+                        "groupStatus" : "ACTIVE",
+                        "noOfMembers" : 3
+                      } ]
+                    }
+                  },
+                  "Empty result" : {
+                    "description" : "Response when user has no pending group invitations",
+                    "value" : {
+                      "count" : 0,
+                      "list" : [ ]
                     }
                   }
                 }
@@ -3168,13 +3250,16 @@
             }
           },
           "400" : {
-            "description" : "UserId is invalid"
+            "description" : "Invalid request parameters (e.g., invalid pagination parameters)"
           },
           "401" : {
-            "description" : "If user is unauthorized"
+            "description" : "User is not authenticated"
           },
-          "404" : {
-            "description" : "User not found"
+          "403" : {
+            "description" : "User is not authorized to access this resource"
+          },
+          "500" : {
+            "description" : "Internal server error"
           }
         }
       }
@@ -3205,7 +3290,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/BaseFilterResult"
+                  "$ref" : "#/components/schemas/GroupFilterResult"
                 },
                 "examples" : {
                   "Requested groups" : {
@@ -5559,6 +5644,96 @@
           },
           "201" : {
             "description" : "Created checkout session"
+          }
+        }
+      }
+    },
+    "/stripe-webhooks/subscription-deleted" : {
+      "post" : {
+        "tags" : [ "stripe-webhooks" ],
+        "summary" : "Notify subscription deleted",
+        "operationId" : "postSubscriptionDeleted_1",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/StripeEvent"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Processed",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
+    "/stripe-webhooks/subscription-paused" : {
+      "post" : {
+        "tags" : [ "stripe-webhooks" ],
+        "summary" : "Notify subscription paused",
+        "operationId" : "postSubscriptionPaused_1",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/StripeEvent"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Processed",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
+    "/stripe-webhooks/trial-will-end" : {
+      "post" : {
+        "tags" : [ "stripe-webhooks" ],
+        "summary" : "Notify trial will end",
+        "operationId" : "postTrialWillEnd_1",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/StripeEvent"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Processed",
+            "content" : {
+              "application/json" : { }
+            }
           }
         }
       }
@@ -8662,21 +8837,6 @@
           }
         }
       },
-      "BaseFilterResult" : {
-        "type" : "object",
-        "properties" : {
-          "count" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "list" : {
-            "type" : "array",
-            "items" : {
-              "type" : "object"
-            }
-          }
-        }
-      },
       "CountryTelephonePrefix" : {
         "type" : "object",
         "properties" : {
@@ -8811,6 +8971,21 @@
           }
         }
       },
+      "GroupMemberFilterResult" : {
+        "type" : "object",
+        "properties" : {
+          "count" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "list" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/GroupMember"
+            }
+          }
+        }
+      },
       "UserDescription" : {
         "type" : "object",
         "properties" : {
@@ -8851,6 +9026,21 @@
           },
           "manageTooltip" : {
             "type" : "boolean"
+          }
+        }
+      },
+      "GroupFilterResult" : {
+        "type" : "object",
+        "properties" : {
+          "count" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "list" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Group"
+            }
           }
         }
       },
@@ -9228,6 +9418,21 @@
           }
         },
         "description" : "Group for categorizing property types"
+      },
+      "BaseFilterResult" : {
+        "type" : "object",
+        "properties" : {
+          "count" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "list" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object"
+            }
+          }
+        }
       },
       "CurrencyAmmount" : {
         "type" : "object",
@@ -9893,22 +10098,35 @@
         "description" : "Token used for password recovery process"
       },
       "AccessToken" : {
+        "required" : [ "expiresIn", "registered", "tokenValue" ],
         "type" : "object",
         "properties" : {
           "tokenValue" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "The actual access token value (JWT)",
+            "example" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyMTIzIiwiaWF0IjoxNjQyMjQxNDAwfQ..."
           },
           "registered" : {
-            "type" : "string",
-            "format" : "date-time"
+            "type" : "integer",
+            "description" : "Date and time when the access token was registered/issued",
+            "format" : "int64",
+            "example" : 1642241400
           },
           "expiresIn" : {
             "type" : "integer",
-            "format" : "int64"
+            "description" : "Token expiration time in milliseconds from the registered date",
+            "format" : "int64",
+            "example" : 3600000
           },
           "expired" : {
             "type" : "boolean"
           }
+        },
+        "description" : "Represents an access token used for API authentication and authorization",
+        "example" : {
+          "tokenValue" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyMTIzIiwiaWF0IjoxNjQyMjQxNDAwfQ...",
+          "registered" : 1642241400,
+          "expiresIn" : 3600000
         }
       },
       "AuthInfoDto" : {
@@ -9931,7 +10149,7 @@
         "properties" : {
           "tokenValue" : {
             "type" : "string",
-            "description" : "The actual refresh token value (JWT or random string)",
+            "description" : "The actual refresh token value (JWT)",
             "example" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyMTIzIiwiaWF0IjoxNjQyMjQxNDAwfQ..."
           },
           "email" : {

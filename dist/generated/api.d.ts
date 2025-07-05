@@ -14,29 +14,29 @@ import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import type { RequestArgs } from './base';
 import { BaseAPI } from './base';
 /**
- *
+ * Represents an access token used for API authentication and authorization
  * @export
  * @interface AccessToken
  */
 export interface AccessToken {
     /**
-     *
+     * The actual access token value (JWT)
      * @type {string}
      * @memberof AccessToken
      */
-    'tokenValue'?: string;
+    'tokenValue': string;
     /**
-     *
-     * @type {string}
-     * @memberof AccessToken
-     */
-    'registered'?: string;
-    /**
-     *
+     * Date and time when the access token was registered/issued
      * @type {number}
      * @memberof AccessToken
      */
-    'expiresIn'?: number;
+    'registered': number;
+    /**
+     * Token expiration time in milliseconds from the registered date
+     * @type {number}
+     * @memberof AccessToken
+     */
+    'expiresIn': number;
     /**
      *
      * @type {boolean}
@@ -1306,6 +1306,25 @@ export type GroupGroupStatusEnum = typeof GroupGroupStatusEnum[keyof typeof Grou
 /**
  *
  * @export
+ * @interface GroupFilterResult
+ */
+export interface GroupFilterResult {
+    /**
+     *
+     * @type {number}
+     * @memberof GroupFilterResult
+     */
+    'count'?: number;
+    /**
+     *
+     * @type {Array<Group>}
+     * @memberof GroupFilterResult
+     */
+    'list'?: Array<Group>;
+}
+/**
+ *
+ * @export
  * @interface GroupMember
  */
 export interface GroupMember {
@@ -1349,6 +1368,25 @@ export declare const GroupMemberGroupMemberStatusEnum: {
     readonly Left: "LEFT";
 };
 export type GroupMemberGroupMemberStatusEnum = typeof GroupMemberGroupMemberStatusEnum[keyof typeof GroupMemberGroupMemberStatusEnum];
+/**
+ *
+ * @export
+ * @interface GroupMemberFilterResult
+ */
+export interface GroupMemberFilterResult {
+    /**
+     *
+     * @type {number}
+     * @memberof GroupMemberFilterResult
+     */
+    'count'?: number;
+    /**
+     *
+     * @type {Array<GroupMember>}
+     * @memberof GroupMemberFilterResult
+     */
+    'list'?: Array<GroupMember>;
+}
 /**
  *
  * @export
@@ -3124,7 +3162,7 @@ export interface PropertyTypeGroup {
  */
 export interface RefreshToken {
     /**
-     * The actual refresh token value (JWT or random string)
+     * The actual refresh token value (JWT)
      * @type {string}
      * @memberof RefreshToken
      */
@@ -6664,10 +6702,10 @@ export declare const GroupsApiAxiosParamCreator: (configuration?: Configuration)
      */
     findInactiveGroupsByUser1: (pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     *
-     * @summary Return the groups list with specified user id that user has invitations of
-     * @param {number} [pageFrom]
-     * @param {number} [pageTo]
+     * Returns a paginated list of groups where the current user has been invited but has not yet accepted or declined the invitation. These are groups owned by other users who have sent invitations to the current user.
+     * @summary Get groups where the user has pending invitations
+     * @param {number} [pageFrom] Starting page number for pagination (0-based)
+     * @param {number} [pageTo] Ending page number for pagination (exclusive)
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -6780,7 +6818,7 @@ export declare const GroupsApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    findArchivedGroupsByUser1(pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BaseFilterResult>>;
+    findArchivedGroupsByUser1(pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupFilterResult>>;
     /**
      * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
      * @summary Return the group with specified id
@@ -6814,7 +6852,7 @@ export declare const GroupsApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    findGroupsByUser1(pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BaseFilterResult>>;
+    findGroupsByUser1(pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupFilterResult>>;
     /**
      *
      * @summary Return the groups list with specified user id that are inactive
@@ -6823,16 +6861,16 @@ export declare const GroupsApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    findInactiveGroupsByUser1(pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BaseFilterResult>>;
+    findInactiveGroupsByUser1(pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupFilterResult>>;
     /**
-     *
-     * @summary Return the groups list with specified user id that user has invitations of
-     * @param {number} [pageFrom]
-     * @param {number} [pageTo]
+     * Returns a paginated list of groups where the current user has been invited but has not yet accepted or declined the invitation. These are groups owned by other users who have sent invitations to the current user.
+     * @summary Get groups where the user has pending invitations
+     * @param {number} [pageFrom] Starting page number for pagination (0-based)
+     * @param {number} [pageTo] Ending page number for pagination (exclusive)
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    findInvitedGroupsByUser1(pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BaseFilterResult>>;
+    findInvitedGroupsByUser1(pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupFilterResult>>;
     /**
      *
      * @summary Return the groups list with specified user id that user has requested
@@ -6841,7 +6879,7 @@ export declare const GroupsApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    findRequestedGroupsByUser1(pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BaseFilterResult>>;
+    findRequestedGroupsByUser1(pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupFilterResult>>;
     /**
      * For Group Owners, this list will return removed, left, invited and requested members as well
      * @summary Show all members of Group
@@ -6851,7 +6889,7 @@ export declare const GroupsApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getGroupMembers1(groupId: string, pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BaseFilterResult>>;
+    getGroupMembers1(groupId: string, pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupMemberFilterResult>>;
     /**
      *
      * @summary Request Invitation to Group
@@ -6940,7 +6978,7 @@ export declare const GroupsApiFactory: (configuration?: Configuration, basePath?
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    findArchivedGroupsByUser1(requestParameters?: GroupsApiFindArchivedGroupsByUser1Request, options?: RawAxiosRequestConfig): AxiosPromise<BaseFilterResult>;
+    findArchivedGroupsByUser1(requestParameters?: GroupsApiFindArchivedGroupsByUser1Request, options?: RawAxiosRequestConfig): AxiosPromise<GroupFilterResult>;
     /**
      * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
      * @summary Return the group with specified id
@@ -6972,7 +7010,7 @@ export declare const GroupsApiFactory: (configuration?: Configuration, basePath?
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    findGroupsByUser1(requestParameters?: GroupsApiFindGroupsByUser1Request, options?: RawAxiosRequestConfig): AxiosPromise<BaseFilterResult>;
+    findGroupsByUser1(requestParameters?: GroupsApiFindGroupsByUser1Request, options?: RawAxiosRequestConfig): AxiosPromise<GroupFilterResult>;
     /**
      *
      * @summary Return the groups list with specified user id that are inactive
@@ -6980,15 +7018,15 @@ export declare const GroupsApiFactory: (configuration?: Configuration, basePath?
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    findInactiveGroupsByUser1(requestParameters?: GroupsApiFindInactiveGroupsByUser1Request, options?: RawAxiosRequestConfig): AxiosPromise<BaseFilterResult>;
+    findInactiveGroupsByUser1(requestParameters?: GroupsApiFindInactiveGroupsByUser1Request, options?: RawAxiosRequestConfig): AxiosPromise<GroupFilterResult>;
     /**
-     *
-     * @summary Return the groups list with specified user id that user has invitations of
+     * Returns a paginated list of groups where the current user has been invited but has not yet accepted or declined the invitation. These are groups owned by other users who have sent invitations to the current user.
+     * @summary Get groups where the user has pending invitations
      * @param {GroupsApiFindInvitedGroupsByUser1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    findInvitedGroupsByUser1(requestParameters?: GroupsApiFindInvitedGroupsByUser1Request, options?: RawAxiosRequestConfig): AxiosPromise<BaseFilterResult>;
+    findInvitedGroupsByUser1(requestParameters?: GroupsApiFindInvitedGroupsByUser1Request, options?: RawAxiosRequestConfig): AxiosPromise<GroupFilterResult>;
     /**
      *
      * @summary Return the groups list with specified user id that user has requested
@@ -6996,7 +7034,7 @@ export declare const GroupsApiFactory: (configuration?: Configuration, basePath?
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    findRequestedGroupsByUser1(requestParameters?: GroupsApiFindRequestedGroupsByUser1Request, options?: RawAxiosRequestConfig): AxiosPromise<BaseFilterResult>;
+    findRequestedGroupsByUser1(requestParameters?: GroupsApiFindRequestedGroupsByUser1Request, options?: RawAxiosRequestConfig): AxiosPromise<GroupFilterResult>;
     /**
      * For Group Owners, this list will return removed, left, invited and requested members as well
      * @summary Show all members of Group
@@ -7004,7 +7042,7 @@ export declare const GroupsApiFactory: (configuration?: Configuration, basePath?
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getGroupMembers1(requestParameters: GroupsApiGetGroupMembers1Request, options?: RawAxiosRequestConfig): AxiosPromise<BaseFilterResult>;
+    getGroupMembers1(requestParameters: GroupsApiGetGroupMembers1Request, options?: RawAxiosRequestConfig): AxiosPromise<GroupMemberFilterResult>;
     /**
      *
      * @summary Request Invitation to Group
@@ -7202,13 +7240,13 @@ export interface GroupsApiFindInactiveGroupsByUser1Request {
  */
 export interface GroupsApiFindInvitedGroupsByUser1Request {
     /**
-     *
+     * Starting page number for pagination (0-based)
      * @type {number}
      * @memberof GroupsApiFindInvitedGroupsByUser1
      */
     readonly pageFrom?: number;
     /**
-     *
+     * Ending page number for pagination (exclusive)
      * @type {number}
      * @memberof GroupsApiFindInvitedGroupsByUser1
      */
@@ -7396,7 +7434,7 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    findArchivedGroupsByUser1(requestParameters?: GroupsApiFindArchivedGroupsByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BaseFilterResult, any>>;
+    findArchivedGroupsByUser1(requestParameters?: GroupsApiFindArchivedGroupsByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupFilterResult, any>>;
     /**
      * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
      * @summary Return the group with specified id
@@ -7432,7 +7470,7 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    findGroupsByUser1(requestParameters?: GroupsApiFindGroupsByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BaseFilterResult, any>>;
+    findGroupsByUser1(requestParameters?: GroupsApiFindGroupsByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupFilterResult, any>>;
     /**
      *
      * @summary Return the groups list with specified user id that are inactive
@@ -7441,16 +7479,16 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    findInactiveGroupsByUser1(requestParameters?: GroupsApiFindInactiveGroupsByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BaseFilterResult, any>>;
+    findInactiveGroupsByUser1(requestParameters?: GroupsApiFindInactiveGroupsByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupFilterResult, any>>;
     /**
-     *
-     * @summary Return the groups list with specified user id that user has invitations of
+     * Returns a paginated list of groups where the current user has been invited but has not yet accepted or declined the invitation. These are groups owned by other users who have sent invitations to the current user.
+     * @summary Get groups where the user has pending invitations
      * @param {GroupsApiFindInvitedGroupsByUser1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    findInvitedGroupsByUser1(requestParameters?: GroupsApiFindInvitedGroupsByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BaseFilterResult, any>>;
+    findInvitedGroupsByUser1(requestParameters?: GroupsApiFindInvitedGroupsByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupFilterResult, any>>;
     /**
      *
      * @summary Return the groups list with specified user id that user has requested
@@ -7459,7 +7497,7 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    findRequestedGroupsByUser1(requestParameters?: GroupsApiFindRequestedGroupsByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BaseFilterResult, any>>;
+    findRequestedGroupsByUser1(requestParameters?: GroupsApiFindRequestedGroupsByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupFilterResult, any>>;
     /**
      * For Group Owners, this list will return removed, left, invited and requested members as well
      * @summary Show all members of Group
@@ -7468,7 +7506,7 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    getGroupMembers1(requestParameters: GroupsApiGetGroupMembers1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BaseFilterResult, any>>;
+    getGroupMembers1(requestParameters: GroupsApiGetGroupMembers1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupMemberFilterResult, any>>;
     /**
      *
      * @summary Request Invitation to Group
@@ -10104,6 +10142,30 @@ export declare class SkillsApi extends BaseAPI {
 export declare const StripeWebhooksApiAxiosParamCreator: (configuration?: Configuration) => {
     /**
      *
+     * @summary Notify subscription deleted
+     * @param {StripeEvent} [stripeEvent]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    postSubscriptionDeleted1: (stripeEvent?: StripeEvent, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @summary Notify subscription paused
+     * @param {StripeEvent} [stripeEvent]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    postSubscriptionPaused1: (stripeEvent?: StripeEvent, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @summary Notify trial will end
+     * @param {StripeEvent} [stripeEvent]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    postTrialWillEnd1: (stripeEvent?: StripeEvent, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
      * @summary Notify user subscription change
      * @param {StripeEvent} [stripeEvent]
      * @param {*} [options] Override http request option.
@@ -10116,6 +10178,30 @@ export declare const StripeWebhooksApiAxiosParamCreator: (configuration?: Config
  * @export
  */
 export declare const StripeWebhooksApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @summary Notify subscription deleted
+     * @param {StripeEvent} [stripeEvent]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    postSubscriptionDeleted1(stripeEvent?: StripeEvent, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     *
+     * @summary Notify subscription paused
+     * @param {StripeEvent} [stripeEvent]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    postSubscriptionPaused1(stripeEvent?: StripeEvent, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     *
+     * @summary Notify trial will end
+     * @param {StripeEvent} [stripeEvent]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    postTrialWillEnd1(stripeEvent?: StripeEvent, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
      *
      * @summary Notify user subscription change
@@ -10132,6 +10218,30 @@ export declare const StripeWebhooksApiFp: (configuration?: Configuration) => {
 export declare const StripeWebhooksApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
     /**
      *
+     * @summary Notify subscription deleted
+     * @param {StripeWebhooksApiPostSubscriptionDeleted1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    postSubscriptionDeleted1(requestParameters?: StripeWebhooksApiPostSubscriptionDeleted1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     *
+     * @summary Notify subscription paused
+     * @param {StripeWebhooksApiPostSubscriptionPaused1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    postSubscriptionPaused1(requestParameters?: StripeWebhooksApiPostSubscriptionPaused1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     *
+     * @summary Notify trial will end
+     * @param {StripeWebhooksApiPostTrialWillEnd1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    postTrialWillEnd1(requestParameters?: StripeWebhooksApiPostTrialWillEnd1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     *
      * @summary Notify user subscription change
      * @param {StripeWebhooksApiPostUserSubscriptionChange1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -10139,6 +10249,45 @@ export declare const StripeWebhooksApiFactory: (configuration?: Configuration, b
      */
     postUserSubscriptionChange1(requestParameters?: StripeWebhooksApiPostUserSubscriptionChange1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
 };
+/**
+ * Request parameters for postSubscriptionDeleted1 operation in StripeWebhooksApi.
+ * @export
+ * @interface StripeWebhooksApiPostSubscriptionDeleted1Request
+ */
+export interface StripeWebhooksApiPostSubscriptionDeleted1Request {
+    /**
+     *
+     * @type {StripeEvent}
+     * @memberof StripeWebhooksApiPostSubscriptionDeleted1
+     */
+    readonly stripeEvent?: StripeEvent;
+}
+/**
+ * Request parameters for postSubscriptionPaused1 operation in StripeWebhooksApi.
+ * @export
+ * @interface StripeWebhooksApiPostSubscriptionPaused1Request
+ */
+export interface StripeWebhooksApiPostSubscriptionPaused1Request {
+    /**
+     *
+     * @type {StripeEvent}
+     * @memberof StripeWebhooksApiPostSubscriptionPaused1
+     */
+    readonly stripeEvent?: StripeEvent;
+}
+/**
+ * Request parameters for postTrialWillEnd1 operation in StripeWebhooksApi.
+ * @export
+ * @interface StripeWebhooksApiPostTrialWillEnd1Request
+ */
+export interface StripeWebhooksApiPostTrialWillEnd1Request {
+    /**
+     *
+     * @type {StripeEvent}
+     * @memberof StripeWebhooksApiPostTrialWillEnd1
+     */
+    readonly stripeEvent?: StripeEvent;
+}
 /**
  * Request parameters for postUserSubscriptionChange1 operation in StripeWebhooksApi.
  * @export
@@ -10159,6 +10308,33 @@ export interface StripeWebhooksApiPostUserSubscriptionChange1Request {
  * @extends {BaseAPI}
  */
 export declare class StripeWebhooksApi extends BaseAPI {
+    /**
+     *
+     * @summary Notify subscription deleted
+     * @param {StripeWebhooksApiPostSubscriptionDeleted1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof StripeWebhooksApi
+     */
+    postSubscriptionDeleted1(requestParameters?: StripeWebhooksApiPostSubscriptionDeleted1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    /**
+     *
+     * @summary Notify subscription paused
+     * @param {StripeWebhooksApiPostSubscriptionPaused1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof StripeWebhooksApi
+     */
+    postSubscriptionPaused1(requestParameters?: StripeWebhooksApiPostSubscriptionPaused1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    /**
+     *
+     * @summary Notify trial will end
+     * @param {StripeWebhooksApiPostTrialWillEnd1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof StripeWebhooksApi
+     */
+    postTrialWillEnd1(requestParameters?: StripeWebhooksApiPostTrialWillEnd1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
     /**
      *
      * @summary Notify user subscription change
