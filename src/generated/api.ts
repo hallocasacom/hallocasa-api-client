@@ -249,25 +249,6 @@ export interface AutopilotUser {
 /**
  * 
  * @export
- * @interface BaseFilterResult
- */
-export interface BaseFilterResult {
-    /**
-     * 
-     * @type {number}
-     * @memberof BaseFilterResult
-     */
-    'count'?: number;
-    /**
-     * 
-     * @type {Array<object>}
-     * @memberof BaseFilterResult
-     */
-    'list'?: Array<object>;
-}
-/**
- * 
- * @export
  * @interface Brokerage
  */
 export interface Brokerage {
@@ -8793,6 +8774,49 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
+         * Searches for users within a specific group matching the specified filter criteria
+         * @summary Search users within a specified group
+         * @param {string} groupId Group ID
+         * @param {UserFilterRequest} userFilterRequest User search filters within the group. Supports filtering by user attributes, location, skills, and social preferences. The resultRequest field controls pagination and sorting. Only one sort order can be specified at a time.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        searchGroupUsers1: async (groupId: string, userFilterRequest: UserFilterRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'groupId' is not null or undefined
+            assertParamExists('searchGroupUsers1', 'groupId', groupId)
+            // verify required parameter 'userFilterRequest' is not null or undefined
+            assertParamExists('searchGroupUsers1', 'userFilterRequest', userFilterRequest)
+            const localVarPath = `/groups/{groupId}/users/search`
+                .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthToken required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Token", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(userFilterRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Acceptable Status values are:  ACCEPTED, REJECTED, REMOVED
          * @summary Update the group member status from groupId supplied
          * @param {string} groupId groupId
@@ -8939,7 +8963,7 @@ export const GroupsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findGroupPropertiesSearch1(groupId: string, propertyFilterCriteria?: PropertyFilterCriteria, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BaseFilterResult>> {
+        async findGroupPropertiesSearch1(groupId: string, propertyFilterCriteria?: PropertyFilterCriteria, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PropertyFilterResult>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.findGroupPropertiesSearch1(groupId, propertyFilterCriteria, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GroupsApi.findGroupPropertiesSearch1']?.[localVarOperationServerIndex]?.url;
@@ -9083,6 +9107,20 @@ export const GroupsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Searches for users within a specific group matching the specified filter criteria
+         * @summary Search users within a specified group
+         * @param {string} groupId Group ID
+         * @param {UserFilterRequest} userFilterRequest User search filters within the group. Supports filtering by user attributes, location, skills, and social preferences. The resultRequest field controls pagination and sorting. Only one sort order can be specified at a time.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async searchGroupUsers1(groupId: string, userFilterRequest: UserFilterRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserFilterResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.searchGroupUsers1(groupId, userFilterRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GroupsApi.searchGroupUsers1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Acceptable Status values are:  ACCEPTED, REJECTED, REMOVED
          * @summary Update the group member status from groupId supplied
          * @param {string} groupId groupId
@@ -9174,7 +9212,7 @@ export const GroupsApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findGroupPropertiesSearch1(requestParameters: GroupsApiFindGroupPropertiesSearch1Request, options?: RawAxiosRequestConfig): AxiosPromise<BaseFilterResult> {
+        findGroupPropertiesSearch1(requestParameters: GroupsApiFindGroupPropertiesSearch1Request, options?: RawAxiosRequestConfig): AxiosPromise<PropertyFilterResult> {
             return localVarFp.findGroupPropertiesSearch1(requestParameters.groupId, requestParameters.propertyFilterCriteria, options).then((request) => request(axios, basePath));
         },
         /**
@@ -9276,6 +9314,16 @@ export const GroupsApiFactory = function (configuration?: Configuration, basePat
          */
         saveGroup1(requestParameters: GroupsApiSaveGroup1Request = {}, options?: RawAxiosRequestConfig): AxiosPromise<Group> {
             return localVarFp.saveGroup1(requestParameters.group, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Searches for users within a specific group matching the specified filter criteria
+         * @summary Search users within a specified group
+         * @param {GroupsApiSearchGroupUsers1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        searchGroupUsers1(requestParameters: GroupsApiSearchGroupUsers1Request, options?: RawAxiosRequestConfig): AxiosPromise<UserFilterResult> {
+            return localVarFp.searchGroupUsers1(requestParameters.groupId, requestParameters.userFilterRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Acceptable Status values are:  ACCEPTED, REJECTED, REMOVED
@@ -9592,6 +9640,27 @@ export interface GroupsApiSaveGroup1Request {
 }
 
 /**
+ * Request parameters for searchGroupUsers1 operation in GroupsApi.
+ * @export
+ * @interface GroupsApiSearchGroupUsers1Request
+ */
+export interface GroupsApiSearchGroupUsers1Request {
+    /**
+     * Group ID
+     * @type {string}
+     * @memberof GroupsApiSearchGroupUsers1
+     */
+    readonly groupId: string
+
+    /**
+     * User search filters within the group. Supports filtering by user attributes, location, skills, and social preferences. The resultRequest field controls pagination and sorting. Only one sort order can be specified at a time.
+     * @type {UserFilterRequest}
+     * @memberof GroupsApiSearchGroupUsers1
+     */
+    readonly userFilterRequest: UserFilterRequest
+}
+
+/**
  * Request parameters for updateGroupMembershipStatus1 operation in GroupsApi.
  * @export
  * @interface GroupsApiUpdateGroupMembershipStatus1Request
@@ -9828,6 +9897,18 @@ export class GroupsApi extends BaseAPI {
      */
     public saveGroup1(requestParameters: GroupsApiSaveGroup1Request = {}, options?: RawAxiosRequestConfig) {
         return GroupsApiFp(this.configuration).saveGroup1(requestParameters.group, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Searches for users within a specific group matching the specified filter criteria
+     * @summary Search users within a specified group
+     * @param {GroupsApiSearchGroupUsers1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    public searchGroupUsers1(requestParameters: GroupsApiSearchGroupUsers1Request, options?: RawAxiosRequestConfig) {
+        return GroupsApiFp(this.configuration).searchGroupUsers1(requestParameters.groupId, requestParameters.userFilterRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -17753,49 +17834,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Searches for users within a specific group matching the specified filter criteria
-         * @summary Search users within a specified group
-         * @param {string} groupId Group ID
-         * @param {UserFilterRequest} userFilterRequest User search filters within the group. Supports filtering by user attributes, location, skills, and social preferences. The resultRequest field controls pagination and sorting. Only one sort order can be specified at a time.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        searchGroupUsers1: async (groupId: string, userFilterRequest: UserFilterRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'groupId' is not null or undefined
-            assertParamExists('searchGroupUsers1', 'groupId', groupId)
-            // verify required parameter 'userFilterRequest' is not null or undefined
-            assertParamExists('searchGroupUsers1', 'userFilterRequest', userFilterRequest)
-            const localVarPath = `/groups/{groupId}/users/search`
-                .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuthToken required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Token", configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(userFilterRequest, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Searches for users matching the specified filter criteria
          * @summary Search users with specified filters
          * @param {UserFilterRequest} userFilterRequest User search filters
@@ -18206,20 +18244,6 @@ export const UsersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Searches for users within a specific group matching the specified filter criteria
-         * @summary Search users within a specified group
-         * @param {string} groupId Group ID
-         * @param {UserFilterRequest} userFilterRequest User search filters within the group. Supports filtering by user attributes, location, skills, and social preferences. The resultRequest field controls pagination and sorting. Only one sort order can be specified at a time.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async searchGroupUsers1(groupId: string, userFilterRequest: UserFilterRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserFilterResult>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.searchGroupUsers1(groupId, userFilterRequest, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['UsersApi.searchGroupUsers1']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
          * Searches for users matching the specified filter criteria
          * @summary Search users with specified filters
          * @param {UserFilterRequest} userFilterRequest User search filters
@@ -18464,16 +18488,6 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          */
         saveLog1(requestParameters: UsersApiSaveLog1Request = {}, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.saveLog1(requestParameters.logEntry, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Searches for users within a specific group matching the specified filter criteria
-         * @summary Search users within a specified group
-         * @param {UsersApiSearchGroupUsers1Request} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        searchGroupUsers1(requestParameters: UsersApiSearchGroupUsers1Request, options?: RawAxiosRequestConfig): AxiosPromise<UserFilterResult> {
-            return localVarFp.searchGroupUsers1(requestParameters.groupId, requestParameters.userFilterRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Searches for users matching the specified filter criteria
@@ -18906,27 +18920,6 @@ export interface UsersApiSaveLog1Request {
 }
 
 /**
- * Request parameters for searchGroupUsers1 operation in UsersApi.
- * @export
- * @interface UsersApiSearchGroupUsers1Request
- */
-export interface UsersApiSearchGroupUsers1Request {
-    /**
-     * Group ID
-     * @type {string}
-     * @memberof UsersApiSearchGroupUsers1
-     */
-    readonly groupId: string
-
-    /**
-     * User search filters within the group. Supports filtering by user attributes, location, skills, and social preferences. The resultRequest field controls pagination and sorting. Only one sort order can be specified at a time.
-     * @type {UserFilterRequest}
-     * @memberof UsersApiSearchGroupUsers1
-     */
-    readonly userFilterRequest: UserFilterRequest
-}
-
-/**
  * Request parameters for searchUsers1 operation in UsersApi.
  * @export
  * @interface UsersApiSearchUsers1Request
@@ -19204,18 +19197,6 @@ export class UsersApi extends BaseAPI {
      */
     public saveLog1(requestParameters: UsersApiSaveLog1Request = {}, options?: RawAxiosRequestConfig) {
         return UsersApiFp(this.configuration).saveLog1(requestParameters.logEntry, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Searches for users within a specific group matching the specified filter criteria
-     * @summary Search users within a specified group
-     * @param {UsersApiSearchGroupUsers1Request} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UsersApi
-     */
-    public searchGroupUsers1(requestParameters: UsersApiSearchGroupUsers1Request, options?: RawAxiosRequestConfig) {
-        return UsersApiFp(this.configuration).searchGroupUsers1(requestParameters.groupId, requestParameters.userFilterRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

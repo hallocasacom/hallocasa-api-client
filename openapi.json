@@ -73,11 +73,11 @@
     "name" : "favorites",
     "description" : "API to manage user favorites"
   }, {
-    "name" : "users",
-    "description" : "User group search operations"
-  }, {
     "name" : "skills",
     "description" : "Operations related to user skills"
+  }, {
+    "name" : "users",
+    "description" : "User management operations"
   } ],
   "paths" : {
     "/chat/attachments" : {
@@ -2907,25 +2907,44 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/BaseFilterResult"
+                  "$ref" : "#/components/schemas/PropertyFilterResult"
                 },
                 "examples" : {
                   "Filtered property results" : {
                     "description" : "Filtered property results",
                     "value" : {
-                      "results" : [ {
+                      "count" : 1,
+                      "propertyList" : [ {
                         "id" : "prop123",
-                        "title" : "Luxury Villa",
-                        "price" : 500000,
-                        "currency" : "USD",
-                        "bedrooms" : 4,
-                        "bathrooms" : 3,
-                        "area" : 250,
-                        "areaUnit" : "m2"
-                      } ],
-                      "total" : 1,
-                      "from" : 0,
-                      "to" : 10
+                        "user" : {
+                          "id" : 1001,
+                          "firstName" : "John",
+                          "lastName" : "Doe"
+                        },
+                        "propertyType" : {
+                          "id" : 1,
+                          "name" : "House"
+                        },
+                        "propertyLocation" : {
+                          "id" : 1,
+                          "name" : "Urban"
+                        },
+                        "propertyProposal" : {
+                          "id" : 1,
+                          "name" : "Sale"
+                        },
+                        "country" : {
+                          "id" : 1,
+                          "name" : "Spain"
+                        },
+                        "publishDate" : "2023-01-15T10:30:00Z",
+                        "modifiedDate" : "2023-01-15T10:30:00Z",
+                        "publicationState" : "PUBLISHED",
+                        "isPrivate" : false,
+                        "isDraft" : false,
+                        "groupIds" : [ "group123" ],
+                        "fieldList" : [ ]
+                      } ]
                     }
                   }
                 }
@@ -6682,7 +6701,7 @@
     },
     "/groups/{groupId}/users/search" : {
       "post" : {
-        "tags" : [ "users" ],
+        "tags" : [ "groups" ],
         "summary" : "Search users within a specified group",
         "description" : "Searches for users within a specific group matching the specified filter criteria",
         "operationId" : "searchGroupUsers_1",
@@ -9419,17 +9438,17 @@
         },
         "description" : "Group for categorizing property types"
       },
-      "BaseFilterResult" : {
+      "PropertyFilterResult" : {
         "type" : "object",
         "properties" : {
           "count" : {
             "type" : "integer",
             "format" : "int64"
           },
-          "list" : {
+          "propertyList" : {
             "type" : "array",
             "items" : {
-              "type" : "object"
+              "$ref" : "#/components/schemas/Property"
             }
           }
         }
@@ -9934,21 +9953,6 @@
           },
           "propertyField" : {
             "$ref" : "#/components/schemas/PropertyField"
-          }
-        }
-      },
-      "PropertyFilterResult" : {
-        "type" : "object",
-        "properties" : {
-          "count" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "propertyList" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/Property"
-            }
           }
         }
       },
@@ -11147,12 +11151,6 @@
       }
     },
     "securitySchemes" : {
-      "oAuthToken" : {
-        "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
-        "in" : "header"
-      },
       "oAuthCode" : {
         "type" : "apiKey",
         "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
@@ -11163,6 +11161,12 @@
         "type" : "apiKey",
         "description" : "OAuth client identifier (default: hallocasa_frontend)",
         "name" : "O-Auth-Client-Id",
+        "in" : "header"
+      },
+      "oAuthToken" : {
+        "type" : "apiKey",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
         "in" : "header"
       }
     }
