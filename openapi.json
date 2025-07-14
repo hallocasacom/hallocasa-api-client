@@ -10,14 +10,6 @@
     },
     "version" : "v1"
   },
-  "servers" : [ {
-    "url" : "/hallocasa-api/api",
-    "description" : "Hallocasa API Server"
-  } ],
-  "security" : [ {
-    "oAuthCode" : [ ],
-    "oAuthClientId" : [ ]
-  } ],
   "tags" : [ {
     "name" : "chat-tickets",
     "description" : "Chat ticket management endpoints"
@@ -2869,91 +2861,6 @@
         }
       }
     },
-    "/groups/{groupId}/properties/search" : {
-      "post" : {
-        "tags" : [ "groups" ],
-        "summary" : "Return the group with specified id",
-        "description" : "Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it",
-        "operationId" : "findGroupPropertiesSearch_1",
-        "parameters" : [ {
-          "name" : "groupId",
-          "in" : "path",
-          "description" : "group id",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          },
-          "example" : "group123"
-        } ],
-        "requestBody" : {
-          "description" : "filters",
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/PropertyFilterCriteria"
-              }
-            }
-          }
-        },
-        "responses" : {
-          "401" : {
-            "description" : "If user is unauthorized"
-          },
-          "500" : {
-            "description" : "If server internal error"
-          },
-          "200" : {
-            "description" : "Ok. Generated resource",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/PropertyFilterResult"
-                },
-                "examples" : {
-                  "Filtered property results" : {
-                    "description" : "Filtered property results",
-                    "value" : {
-                      "count" : 1,
-                      "propertyList" : [ {
-                        "id" : "prop123",
-                        "user" : {
-                          "id" : 1001,
-                          "firstName" : "John",
-                          "lastName" : "Doe"
-                        },
-                        "propertyType" : {
-                          "id" : 1,
-                          "name" : "House"
-                        },
-                        "propertyLocation" : {
-                          "id" : 1,
-                          "name" : "Urban"
-                        },
-                        "propertyProposal" : {
-                          "id" : 1,
-                          "name" : "Sale"
-                        },
-                        "country" : {
-                          "id" : 1,
-                          "name" : "Spain"
-                        },
-                        "publishDate" : "2023-01-15T10:30:00Z",
-                        "modifiedDate" : "2023-01-15T10:30:00Z",
-                        "publicationState" : "PUBLISHED",
-                        "isPrivate" : false,
-                        "isDraft" : false,
-                        "groupIds" : [ "group123" ],
-                        "fieldList" : [ ]
-                      } ]
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/groups" : {
       "get" : {
         "tags" : [ "groups" ],
@@ -3343,6 +3250,189 @@
           },
           "404" : {
             "description" : "User not found"
+          }
+        }
+      }
+    },
+    "/groups/{id}/request-type-change" : {
+      "post" : {
+        "tags" : [ "groups" ],
+        "summary" : "Request a change in group type",
+        "description" : "Allows group owners to request a change in their group type from GROUP to ASSOCIATION or CERTIFICATION. IMPORTANT: Type changes are only allowed for basic groups (GROUP type). Once a group has been upgraded to ASSOCIATION or CERTIFICATION, no further type changes are possible. Only group owners can make these requests.",
+        "operationId" : "requestGroupTypeChange_1",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Group ID",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "group123"
+        }, {
+          "name" : "requestStatus",
+          "in" : "query",
+          "description" : "The type change being requested. Use NONE to cancel existing requests.",
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "NONE", "REQUESTING_ASSOCIATION", "REQUESTING_CERTIFICATION" ]
+          },
+          "examples" : {
+            "Request association status" : {
+              "description" : "Request association status",
+              "value" : "REQUESTING_ASSOCIATION"
+            },
+            "Request certification status" : {
+              "description" : "Request certification status",
+              "value" : "REQUESTING_CERTIFICATION"
+            },
+            "Cancel request" : {
+              "description" : "Cancel request",
+              "value" : "NONE"
+            }
+          }
+        } ],
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "403" : {
+            "description" : "If user is not the group owner"
+          },
+          "400" : {
+            "description" : "If request is invalid (e.g., group not found, group already upgraded, invalid transition)"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Request submitted successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Group"
+                },
+                "examples" : {
+                  "Group with association request" : {
+                    "description" : "Group with association request",
+                    "value" : {
+                      "id" : "group123",
+                      "name" : "Real Estate Professionals",
+                      "description" : "A group of real estate professionals",
+                      "groupType" : "GROUP",
+                      "requestStatus" : "REQUESTING_ASSOCIATION",
+                      "owner" : {
+                        "id" : 1001,
+                        "name" : "John Doe"
+                      },
+                      "active" : true,
+                      "createdDate" : "2023-05-18T08:25:00Z"
+                    }
+                  },
+                  "Group with certification request" : {
+                    "description" : "Group with certification request",
+                    "value" : {
+                      "id" : "group456",
+                      "name" : "Property Evaluators",
+                      "description" : "Professional property evaluation group",
+                      "groupType" : "ASSOCIATION",
+                      "requestStatus" : "REQUESTING_CERTIFICATION",
+                      "owner" : {
+                        "id" : 1002,
+                        "name" : "Jane Smith"
+                      },
+                      "active" : true,
+                      "createdDate" : "2023-05-18T08:25:00Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/groups/{groupId}/properties/search" : {
+      "post" : {
+        "tags" : [ "groups" ],
+        "summary" : "Return the group with specified id",
+        "description" : "Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it",
+        "operationId" : "searchGroupProperties_1",
+        "parameters" : [ {
+          "name" : "groupId",
+          "in" : "path",
+          "description" : "group id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "group123"
+        } ],
+        "requestBody" : {
+          "description" : "filters",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PropertyFilterCriteria"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Generated resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PropertyFilterResult"
+                },
+                "examples" : {
+                  "Filtered property results" : {
+                    "description" : "Filtered property results",
+                    "value" : {
+                      "count" : 1,
+                      "propertyList" : [ {
+                        "id" : "prop123",
+                        "user" : {
+                          "id" : 1001,
+                          "firstName" : "John",
+                          "lastName" : "Doe"
+                        },
+                        "propertyType" : {
+                          "id" : 1,
+                          "name" : "House"
+                        },
+                        "propertyLocation" : {
+                          "id" : 1,
+                          "name" : "Urban"
+                        },
+                        "propertyProposal" : {
+                          "id" : 1,
+                          "name" : "Sale"
+                        },
+                        "country" : {
+                          "id" : 1,
+                          "name" : "Spain"
+                        },
+                        "publishDate" : "2023-01-15T10:30:00Z",
+                        "modifiedDate" : "2023-01-15T10:30:00Z",
+                        "publicationState" : "PUBLISHED",
+                        "isPrivate" : false,
+                        "isDraft" : false,
+                        "groupIds" : [ "group123" ],
+                        "fieldList" : [ ]
+                      } ]
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -8955,6 +9045,14 @@
             "type" : "string",
             "enum" : [ "PENDING", "ACTIVE", "INACTIVE", "ARCHIVED", "DELETED" ]
           },
+          "groupType" : {
+            "type" : "string",
+            "enum" : [ "GROUP", "ASSOCIATION", "CERTIFICATION" ]
+          },
+          "requestStatus" : {
+            "type" : "string",
+            "enum" : [ "NONE", "REQUESTING_ASSOCIATION", "REQUESTING_CERTIFICATION" ]
+          },
           "backgroundImageBase64" : {
             "type" : "string"
           },
@@ -11151,10 +11249,10 @@
       }
     },
     "securitySchemes" : {
-      "oAuthCode" : {
+      "oAuthToken" : {
         "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
         "in" : "header"
       },
       "oAuthClientId" : {
@@ -11163,10 +11261,10 @@
         "name" : "O-Auth-Client-Id",
         "in" : "header"
       },
-      "oAuthToken" : {
+      "oAuthCode" : {
         "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
         "in" : "header"
       }
     }

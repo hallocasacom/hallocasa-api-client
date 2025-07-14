@@ -1262,6 +1262,18 @@ export interface Group {
      * @type {string}
      * @memberof Group
      */
+    'groupType'?: GroupGroupTypeEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof Group
+     */
+    'requestStatus'?: GroupRequestStatusEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof Group
+     */
     'backgroundImageBase64'?: string;
     /**
      *
@@ -1284,6 +1296,18 @@ export declare const GroupGroupStatusEnum: {
     readonly Deleted: "DELETED";
 };
 export type GroupGroupStatusEnum = typeof GroupGroupStatusEnum[keyof typeof GroupGroupStatusEnum];
+export declare const GroupGroupTypeEnum: {
+    readonly Group: "GROUP";
+    readonly Association: "ASSOCIATION";
+    readonly Certification: "CERTIFICATION";
+};
+export type GroupGroupTypeEnum = typeof GroupGroupTypeEnum[keyof typeof GroupGroupTypeEnum];
+export declare const GroupRequestStatusEnum: {
+    readonly None: "NONE";
+    readonly RequestingAssociation: "REQUESTING_ASSOCIATION";
+    readonly RequestingCertification: "REQUESTING_CERTIFICATION";
+};
+export type GroupRequestStatusEnum = typeof GroupRequestStatusEnum[keyof typeof GroupRequestStatusEnum];
 /**
  *
  * @export
@@ -6656,15 +6680,6 @@ export declare const GroupsApiAxiosParamCreator: (configuration?: Configuration)
      */
     findGroupProperties1: (groupId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
-     * @summary Return the group with specified id
-     * @param {string} groupId group id
-     * @param {PropertyFilterCriteria} [propertyFilterCriteria] filters
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    findGroupPropertiesSearch1: (groupId: string, propertyFilterCriteria?: PropertyFilterCriteria, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-    /**
      * This will return both owned Groups and Groups the user is a member of
      * @summary Return the groups list with specified user id
      * @param {number} [pageFrom] Start page number
@@ -6744,6 +6759,15 @@ export declare const GroupsApiAxiosParamCreator: (configuration?: Configuration)
      */
     groupRequest1: (groupId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Allows group owners to request a change in their group type from GROUP to ASSOCIATION or CERTIFICATION. IMPORTANT: Type changes are only allowed for basic groups (GROUP type). Once a group has been upgraded to ASSOCIATION or CERTIFICATION, no further type changes are possible. Only group owners can make these requests.
+     * @summary Request a change in group type
+     * @param {string} id Group ID
+     * @param {RequestGroupTypeChange1RequestStatusEnum} [requestStatus] The type change being requested. Use NONE to cancel existing requests.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    requestGroupTypeChange1: (id: string, requestStatus?: RequestGroupTypeChange1RequestStatusEnum, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Consider that only user can saveNew its groups
      * @summary Create or update the group supplied
      * @param {Group} [group] group to persist
@@ -6751,6 +6775,15 @@ export declare const GroupsApiAxiosParamCreator: (configuration?: Configuration)
      * @throws {RequiredError}
      */
     saveGroup1: (group?: Group, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
+     * @summary Return the group with specified id
+     * @param {string} groupId group id
+     * @param {PropertyFilterCriteria} [propertyFilterCriteria] filters
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    searchGroupProperties1: (groupId: string, propertyFilterCriteria?: PropertyFilterCriteria, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Searches for users within a specific group matching the specified filter criteria
      * @summary Search users within a specified group
@@ -6825,15 +6858,6 @@ export declare const GroupsApiFp: (configuration?: Configuration) => {
      * @throws {RequiredError}
      */
     findGroupProperties1(groupId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Property>>>;
-    /**
-     * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
-     * @summary Return the group with specified id
-     * @param {string} groupId group id
-     * @param {PropertyFilterCriteria} [propertyFilterCriteria] filters
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    findGroupPropertiesSearch1(groupId: string, propertyFilterCriteria?: PropertyFilterCriteria, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PropertyFilterResult>>;
     /**
      * This will return both owned Groups and Groups the user is a member of
      * @summary Return the groups list with specified user id
@@ -6914,6 +6938,15 @@ export declare const GroupsApiFp: (configuration?: Configuration) => {
      */
     groupRequest1(groupId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupMember>>;
     /**
+     * Allows group owners to request a change in their group type from GROUP to ASSOCIATION or CERTIFICATION. IMPORTANT: Type changes are only allowed for basic groups (GROUP type). Once a group has been upgraded to ASSOCIATION or CERTIFICATION, no further type changes are possible. Only group owners can make these requests.
+     * @summary Request a change in group type
+     * @param {string} id Group ID
+     * @param {RequestGroupTypeChange1RequestStatusEnum} [requestStatus] The type change being requested. Use NONE to cancel existing requests.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    requestGroupTypeChange1(id: string, requestStatus?: RequestGroupTypeChange1RequestStatusEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Group>>;
+    /**
      * Consider that only user can saveNew its groups
      * @summary Create or update the group supplied
      * @param {Group} [group] group to persist
@@ -6921,6 +6954,15 @@ export declare const GroupsApiFp: (configuration?: Configuration) => {
      * @throws {RequiredError}
      */
     saveGroup1(group?: Group, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Group>>;
+    /**
+     * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
+     * @summary Return the group with specified id
+     * @param {string} groupId group id
+     * @param {PropertyFilterCriteria} [propertyFilterCriteria] filters
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    searchGroupProperties1(groupId: string, propertyFilterCriteria?: PropertyFilterCriteria, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PropertyFilterResult>>;
     /**
      * Searches for users within a specific group matching the specified filter criteria
      * @summary Search users within a specified group
@@ -6995,14 +7037,6 @@ export declare const GroupsApiFactory: (configuration?: Configuration, basePath?
      */
     findGroupProperties1(requestParameters: GroupsApiFindGroupProperties1Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<Property>>;
     /**
-     * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
-     * @summary Return the group with specified id
-     * @param {GroupsApiFindGroupPropertiesSearch1Request} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    findGroupPropertiesSearch1(requestParameters: GroupsApiFindGroupPropertiesSearch1Request, options?: RawAxiosRequestConfig): AxiosPromise<PropertyFilterResult>;
-    /**
      * This will return both owned Groups and Groups the user is a member of
      * @summary Return the groups list with specified user id
      * @param {GroupsApiFindGroupsByUser1Request} requestParameters Request parameters.
@@ -7075,6 +7109,14 @@ export declare const GroupsApiFactory: (configuration?: Configuration, basePath?
      */
     groupRequest1(requestParameters: GroupsApiGroupRequest1Request, options?: RawAxiosRequestConfig): AxiosPromise<GroupMember>;
     /**
+     * Allows group owners to request a change in their group type from GROUP to ASSOCIATION or CERTIFICATION. IMPORTANT: Type changes are only allowed for basic groups (GROUP type). Once a group has been upgraded to ASSOCIATION or CERTIFICATION, no further type changes are possible. Only group owners can make these requests.
+     * @summary Request a change in group type
+     * @param {GroupsApiRequestGroupTypeChange1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    requestGroupTypeChange1(requestParameters: GroupsApiRequestGroupTypeChange1Request, options?: RawAxiosRequestConfig): AxiosPromise<Group>;
+    /**
      * Consider that only user can saveNew its groups
      * @summary Create or update the group supplied
      * @param {GroupsApiSaveGroup1Request} requestParameters Request parameters.
@@ -7082,6 +7124,14 @@ export declare const GroupsApiFactory: (configuration?: Configuration, basePath?
      * @throws {RequiredError}
      */
     saveGroup1(requestParameters?: GroupsApiSaveGroup1Request, options?: RawAxiosRequestConfig): AxiosPromise<Group>;
+    /**
+     * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
+     * @summary Return the group with specified id
+     * @param {GroupsApiSearchGroupProperties1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    searchGroupProperties1(requestParameters: GroupsApiSearchGroupProperties1Request, options?: RawAxiosRequestConfig): AxiosPromise<PropertyFilterResult>;
     /**
      * Searches for users within a specific group matching the specified filter criteria
      * @summary Search users within a specified group
@@ -7182,25 +7232,6 @@ export interface GroupsApiFindGroupProperties1Request {
      * @memberof GroupsApiFindGroupProperties1
      */
     readonly groupId: string;
-}
-/**
- * Request parameters for findGroupPropertiesSearch1 operation in GroupsApi.
- * @export
- * @interface GroupsApiFindGroupPropertiesSearch1Request
- */
-export interface GroupsApiFindGroupPropertiesSearch1Request {
-    /**
-     * group id
-     * @type {string}
-     * @memberof GroupsApiFindGroupPropertiesSearch1
-     */
-    readonly groupId: string;
-    /**
-     * filters
-     * @type {PropertyFilterCriteria}
-     * @memberof GroupsApiFindGroupPropertiesSearch1
-     */
-    readonly propertyFilterCriteria?: PropertyFilterCriteria;
 }
 /**
  * Request parameters for findGroupsByUser1 operation in GroupsApi.
@@ -7362,6 +7393,25 @@ export interface GroupsApiGroupRequest1Request {
     readonly groupId: string;
 }
 /**
+ * Request parameters for requestGroupTypeChange1 operation in GroupsApi.
+ * @export
+ * @interface GroupsApiRequestGroupTypeChange1Request
+ */
+export interface GroupsApiRequestGroupTypeChange1Request {
+    /**
+     * Group ID
+     * @type {string}
+     * @memberof GroupsApiRequestGroupTypeChange1
+     */
+    readonly id: string;
+    /**
+     * The type change being requested. Use NONE to cancel existing requests.
+     * @type {'NONE' | 'REQUESTING_ASSOCIATION' | 'REQUESTING_CERTIFICATION'}
+     * @memberof GroupsApiRequestGroupTypeChange1
+     */
+    readonly requestStatus?: RequestGroupTypeChange1RequestStatusEnum;
+}
+/**
  * Request parameters for saveGroup1 operation in GroupsApi.
  * @export
  * @interface GroupsApiSaveGroup1Request
@@ -7373,6 +7423,25 @@ export interface GroupsApiSaveGroup1Request {
      * @memberof GroupsApiSaveGroup1
      */
     readonly group?: Group;
+}
+/**
+ * Request parameters for searchGroupProperties1 operation in GroupsApi.
+ * @export
+ * @interface GroupsApiSearchGroupProperties1Request
+ */
+export interface GroupsApiSearchGroupProperties1Request {
+    /**
+     * group id
+     * @type {string}
+     * @memberof GroupsApiSearchGroupProperties1
+     */
+    readonly groupId: string;
+    /**
+     * filters
+     * @type {PropertyFilterCriteria}
+     * @memberof GroupsApiSearchGroupProperties1
+     */
+    readonly propertyFilterCriteria?: PropertyFilterCriteria;
 }
 /**
  * Request parameters for searchGroupUsers1 operation in GroupsApi.
@@ -7480,15 +7549,6 @@ export declare class GroupsApi extends BaseAPI {
      */
     findGroupProperties1(requestParameters: GroupsApiFindGroupProperties1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property[], any>>;
     /**
-     * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
-     * @summary Return the group with specified id
-     * @param {GroupsApiFindGroupPropertiesSearch1Request} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof GroupsApi
-     */
-    findGroupPropertiesSearch1(requestParameters: GroupsApiFindGroupPropertiesSearch1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PropertyFilterResult, any>>;
-    /**
      * This will return both owned Groups and Groups the user is a member of
      * @summary Return the groups list with specified user id
      * @param {GroupsApiFindGroupsByUser1Request} requestParameters Request parameters.
@@ -7570,6 +7630,15 @@ export declare class GroupsApi extends BaseAPI {
      */
     groupRequest1(requestParameters: GroupsApiGroupRequest1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupMember, any>>;
     /**
+     * Allows group owners to request a change in their group type from GROUP to ASSOCIATION or CERTIFICATION. IMPORTANT: Type changes are only allowed for basic groups (GROUP type). Once a group has been upgraded to ASSOCIATION or CERTIFICATION, no further type changes are possible. Only group owners can make these requests.
+     * @summary Request a change in group type
+     * @param {GroupsApiRequestGroupTypeChange1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    requestGroupTypeChange1(requestParameters: GroupsApiRequestGroupTypeChange1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Group, any>>;
+    /**
      * Consider that only user can saveNew its groups
      * @summary Create or update the group supplied
      * @param {GroupsApiSaveGroup1Request} requestParameters Request parameters.
@@ -7578,6 +7647,15 @@ export declare class GroupsApi extends BaseAPI {
      * @memberof GroupsApi
      */
     saveGroup1(requestParameters?: GroupsApiSaveGroup1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Group, any>>;
+    /**
+     * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
+     * @summary Return the group with specified id
+     * @param {GroupsApiSearchGroupProperties1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    searchGroupProperties1(requestParameters: GroupsApiSearchGroupProperties1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PropertyFilterResult, any>>;
     /**
      * Searches for users within a specific group matching the specified filter criteria
      * @summary Search users within a specified group
@@ -7597,6 +7675,15 @@ export declare class GroupsApi extends BaseAPI {
      */
     updateGroupMembershipStatus1(requestParameters: GroupsApiUpdateGroupMembershipStatus1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupMember[], any>>;
 }
+/**
+ * @export
+ */
+export declare const RequestGroupTypeChange1RequestStatusEnum: {
+    readonly None: "NONE";
+    readonly RequestingAssociation: "REQUESTING_ASSOCIATION";
+    readonly RequestingCertification: "REQUESTING_CERTIFICATION";
+};
+export type RequestGroupTypeChange1RequestStatusEnum = typeof RequestGroupTypeChange1RequestStatusEnum[keyof typeof RequestGroupTypeChange1RequestStatusEnum];
 /**
  * @export
  */

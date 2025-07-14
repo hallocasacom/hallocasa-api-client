@@ -1292,6 +1292,18 @@ export interface Group {
      * @type {string}
      * @memberof Group
      */
+    'groupType'?: GroupGroupTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof Group
+     */
+    'requestStatus'?: GroupRequestStatusEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof Group
+     */
     'backgroundImageBase64'?: string;
     /**
      * 
@@ -1316,6 +1328,20 @@ export const GroupGroupStatusEnum = {
 } as const;
 
 export type GroupGroupStatusEnum = typeof GroupGroupStatusEnum[keyof typeof GroupGroupStatusEnum];
+export const GroupGroupTypeEnum = {
+    Group: 'GROUP',
+    Association: 'ASSOCIATION',
+    Certification: 'CERTIFICATION'
+} as const;
+
+export type GroupGroupTypeEnum = typeof GroupGroupTypeEnum[keyof typeof GroupGroupTypeEnum];
+export const GroupRequestStatusEnum = {
+    None: 'NONE',
+    RequestingAssociation: 'REQUESTING_ASSOCIATION',
+    RequestingCertification: 'REQUESTING_CERTIFICATION'
+} as const;
+
+export type GroupRequestStatusEnum = typeof GroupRequestStatusEnum[keyof typeof GroupRequestStatusEnum];
 
 /**
  * 
@@ -5098,12 +5124,6 @@ export const AlertsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -5142,12 +5162,6 @@ export const AlertsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -5181,12 +5195,6 @@ export const AlertsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -5222,12 +5230,6 @@ export const AlertsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -5261,12 +5263,6 @@ export const AlertsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -5305,12 +5301,6 @@ export const AlertsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -5347,12 +5337,6 @@ export const AlertsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -5794,12 +5778,6 @@ export const AllowancesApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -5836,12 +5814,6 @@ export const AllowancesApiAxiosParamCreator = function (configuration?: Configur
             const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -6022,12 +5994,6 @@ export const AttachmentsApiAxiosParamCreator = function (configuration?: Configu
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -6065,12 +6031,6 @@ export const AttachmentsApiAxiosParamCreator = function (configuration?: Configu
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -6105,12 +6065,6 @@ export const AttachmentsApiAxiosParamCreator = function (configuration?: Configu
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -6339,12 +6293,6 @@ export const BrokeragesApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -6448,12 +6396,6 @@ export const ChatTicketsApiAxiosParamCreator = function (configuration?: Configu
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -6579,12 +6521,6 @@ export const CheckoutSessionsApiAxiosParamCreator = function (configuration?: Co
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -6706,12 +6642,6 @@ export const CountriesApiAxiosParamCreator = function (configuration?: Configura
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -6742,12 +6672,6 @@ export const CountriesApiAxiosParamCreator = function (configuration?: Configura
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -6902,12 +6826,6 @@ export const CurrencyManagementApiAxiosParamCreator = function (configuration?: 
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -7011,12 +6929,6 @@ export const CustomerSessionsApiAxiosParamCreator = function (configuration?: Co
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -7143,12 +7055,6 @@ export const EndorsementsApiAxiosParamCreator = function (configuration?: Config
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
             if (endorser !== undefined) {
                 localVarQueryParameter['endorser'] = endorser;
@@ -7280,12 +7186,6 @@ export const ExchangeRatesApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -7392,12 +7292,6 @@ export const FacebookPropertiesApiAxiosParamCreator = function (configuration?: 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
             if (startDate !== undefined) {
                 localVarQueryParameter['start-date'] = (startDate as any instanceof Date) ?
@@ -7542,12 +7436,6 @@ export const FavoritesApiAxiosParamCreator = function (configuration?: Configura
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
             if (includeResource !== undefined) {
                 localVarQueryParameter['includeResource'] = includeResource;
             }
@@ -7589,12 +7477,6 @@ export const FavoritesApiAxiosParamCreator = function (configuration?: Configura
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -7635,12 +7517,6 @@ export const FavoritesApiAxiosParamCreator = function (configuration?: Configura
             const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -7887,12 +7763,6 @@ export const GeoLocationApiAxiosParamCreator = function (configuration?: Configu
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
             if (latlng !== undefined) {
                 localVarQueryParameter['latlng'] = latlng;
             }
@@ -8067,12 +7937,6 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -8106,12 +7970,6 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -8147,12 +8005,6 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -8184,12 +8036,6 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
             if (pageFrom !== undefined) {
                 localVarQueryParameter['pageFrom'] = pageFrom;
@@ -8233,12 +8079,6 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -8273,61 +8113,11 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
-         * @summary Return the group with specified id
-         * @param {string} groupId group id
-         * @param {PropertyFilterCriteria} [propertyFilterCriteria] filters
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        findGroupPropertiesSearch1: async (groupId: string, propertyFilterCriteria?: PropertyFilterCriteria, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'groupId' is not null or undefined
-            assertParamExists('findGroupPropertiesSearch1', 'groupId', groupId)
-            const localVarPath = `/groups/{groupId}/properties/search`
-                .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(propertyFilterCriteria, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -8354,12 +8144,6 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
             if (pageFrom !== undefined) {
                 localVarQueryParameter['pageFrom'] = pageFrom;
@@ -8401,12 +8185,6 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
             if (pageFrom !== undefined) {
                 localVarQueryParameter['pageFrom'] = pageFrom;
             }
@@ -8447,12 +8225,6 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
             if (pageFrom !== undefined) {
                 localVarQueryParameter['pageFrom'] = pageFrom;
             }
@@ -8492,12 +8264,6 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
             if (pageFrom !== undefined) {
                 localVarQueryParameter['pageFrom'] = pageFrom;
@@ -8543,12 +8309,6 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
             if (pageFrom !== undefined) {
                 localVarQueryParameter['pageFrom'] = pageFrom;
             }
@@ -8592,12 +8352,6 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
             if (userIds) {
                 localVarQueryParameter['userIds'] = userIds;
             }
@@ -8636,12 +8390,6 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -8675,12 +8423,6 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -8716,11 +8458,44 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
 
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Allows group owners to request a change in their group type from GROUP to ASSOCIATION or CERTIFICATION. IMPORTANT: Type changes are only allowed for basic groups (GROUP type). Once a group has been upgraded to ASSOCIATION or CERTIFICATION, no further type changes are possible. Only group owners can make these requests.
+         * @summary Request a change in group type
+         * @param {string} id Group ID
+         * @param {RequestGroupTypeChange1RequestStatusEnum} [requestStatus] The type change being requested. Use NONE to cancel existing requests.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        requestGroupTypeChange1: async (id: string, requestStatus?: RequestGroupTypeChange1RequestStatusEnum, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('requestGroupTypeChange1', 'id', id)
+            const localVarPath = `/groups/{id}/request-type-change`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (requestStatus !== undefined) {
+                localVarQueryParameter['requestStatus'] = requestStatus;
+            }
 
 
     
@@ -8753,12 +8528,6 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -8767,6 +8536,44 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(group, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
+         * @summary Return the group with specified id
+         * @param {string} groupId group id
+         * @param {PropertyFilterCriteria} [propertyFilterCriteria] filters
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        searchGroupProperties1: async (groupId: string, propertyFilterCriteria?: PropertyFilterCriteria, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'groupId' is not null or undefined
+            assertParamExists('searchGroupProperties1', 'groupId', groupId)
+            const localVarPath = `/groups/{groupId}/properties/search`
+                .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(propertyFilterCriteria, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -8840,12 +8647,6 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
             if (userIds) {
                 localVarQueryParameter['userIds'] = userIds;
@@ -8953,20 +8754,6 @@ export const GroupsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.findGroupProperties1(groupId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GroupsApi.findGroupProperties1']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
-         * @summary Return the group with specified id
-         * @param {string} groupId group id
-         * @param {PropertyFilterCriteria} [propertyFilterCriteria] filters
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async findGroupPropertiesSearch1(groupId: string, propertyFilterCriteria?: PropertyFilterCriteria, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PropertyFilterResult>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.findGroupPropertiesSearch1(groupId, propertyFilterCriteria, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GroupsApi.findGroupPropertiesSearch1']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -9094,6 +8881,20 @@ export const GroupsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Allows group owners to request a change in their group type from GROUP to ASSOCIATION or CERTIFICATION. IMPORTANT: Type changes are only allowed for basic groups (GROUP type). Once a group has been upgraded to ASSOCIATION or CERTIFICATION, no further type changes are possible. Only group owners can make these requests.
+         * @summary Request a change in group type
+         * @param {string} id Group ID
+         * @param {RequestGroupTypeChange1RequestStatusEnum} [requestStatus] The type change being requested. Use NONE to cancel existing requests.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async requestGroupTypeChange1(id: string, requestStatus?: RequestGroupTypeChange1RequestStatusEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Group>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.requestGroupTypeChange1(id, requestStatus, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GroupsApi.requestGroupTypeChange1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Consider that only user can saveNew its groups
          * @summary Create or update the group supplied
          * @param {Group} [group] group to persist
@@ -9104,6 +8905,20 @@ export const GroupsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.saveGroup1(group, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GroupsApi.saveGroup1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
+         * @summary Return the group with specified id
+         * @param {string} groupId group id
+         * @param {PropertyFilterCriteria} [propertyFilterCriteria] filters
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async searchGroupProperties1(groupId: string, propertyFilterCriteria?: PropertyFilterCriteria, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PropertyFilterResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.searchGroupProperties1(groupId, propertyFilterCriteria, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GroupsApi.searchGroupProperties1']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -9206,16 +9021,6 @@ export const GroupsApiFactory = function (configuration?: Configuration, basePat
             return localVarFp.findGroupProperties1(requestParameters.groupId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
-         * @summary Return the group with specified id
-         * @param {GroupsApiFindGroupPropertiesSearch1Request} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        findGroupPropertiesSearch1(requestParameters: GroupsApiFindGroupPropertiesSearch1Request, options?: RawAxiosRequestConfig): AxiosPromise<PropertyFilterResult> {
-            return localVarFp.findGroupPropertiesSearch1(requestParameters.groupId, requestParameters.propertyFilterCriteria, options).then((request) => request(axios, basePath));
-        },
-        /**
          * This will return both owned Groups and Groups the user is a member of
          * @summary Return the groups list with specified user id
          * @param {GroupsApiFindGroupsByUser1Request} requestParameters Request parameters.
@@ -9306,6 +9111,16 @@ export const GroupsApiFactory = function (configuration?: Configuration, basePat
             return localVarFp.groupRequest1(requestParameters.groupId, options).then((request) => request(axios, basePath));
         },
         /**
+         * Allows group owners to request a change in their group type from GROUP to ASSOCIATION or CERTIFICATION. IMPORTANT: Type changes are only allowed for basic groups (GROUP type). Once a group has been upgraded to ASSOCIATION or CERTIFICATION, no further type changes are possible. Only group owners can make these requests.
+         * @summary Request a change in group type
+         * @param {GroupsApiRequestGroupTypeChange1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        requestGroupTypeChange1(requestParameters: GroupsApiRequestGroupTypeChange1Request, options?: RawAxiosRequestConfig): AxiosPromise<Group> {
+            return localVarFp.requestGroupTypeChange1(requestParameters.id, requestParameters.requestStatus, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Consider that only user can saveNew its groups
          * @summary Create or update the group supplied
          * @param {GroupsApiSaveGroup1Request} requestParameters Request parameters.
@@ -9314,6 +9129,16 @@ export const GroupsApiFactory = function (configuration?: Configuration, basePat
          */
         saveGroup1(requestParameters: GroupsApiSaveGroup1Request = {}, options?: RawAxiosRequestConfig): AxiosPromise<Group> {
             return localVarFp.saveGroup1(requestParameters.group, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
+         * @summary Return the group with specified id
+         * @param {GroupsApiSearchGroupProperties1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        searchGroupProperties1(requestParameters: GroupsApiSearchGroupProperties1Request, options?: RawAxiosRequestConfig): AxiosPromise<PropertyFilterResult> {
+            return localVarFp.searchGroupProperties1(requestParameters.groupId, requestParameters.propertyFilterCriteria, options).then((request) => request(axios, basePath));
         },
         /**
          * Searches for users within a specific group matching the specified filter criteria
@@ -9427,27 +9252,6 @@ export interface GroupsApiFindGroupProperties1Request {
      * @memberof GroupsApiFindGroupProperties1
      */
     readonly groupId: string
-}
-
-/**
- * Request parameters for findGroupPropertiesSearch1 operation in GroupsApi.
- * @export
- * @interface GroupsApiFindGroupPropertiesSearch1Request
- */
-export interface GroupsApiFindGroupPropertiesSearch1Request {
-    /**
-     * group id
-     * @type {string}
-     * @memberof GroupsApiFindGroupPropertiesSearch1
-     */
-    readonly groupId: string
-
-    /**
-     * filters
-     * @type {PropertyFilterCriteria}
-     * @memberof GroupsApiFindGroupPropertiesSearch1
-     */
-    readonly propertyFilterCriteria?: PropertyFilterCriteria
 }
 
 /**
@@ -9626,6 +9430,27 @@ export interface GroupsApiGroupRequest1Request {
 }
 
 /**
+ * Request parameters for requestGroupTypeChange1 operation in GroupsApi.
+ * @export
+ * @interface GroupsApiRequestGroupTypeChange1Request
+ */
+export interface GroupsApiRequestGroupTypeChange1Request {
+    /**
+     * Group ID
+     * @type {string}
+     * @memberof GroupsApiRequestGroupTypeChange1
+     */
+    readonly id: string
+
+    /**
+     * The type change being requested. Use NONE to cancel existing requests.
+     * @type {'NONE' | 'REQUESTING_ASSOCIATION' | 'REQUESTING_CERTIFICATION'}
+     * @memberof GroupsApiRequestGroupTypeChange1
+     */
+    readonly requestStatus?: RequestGroupTypeChange1RequestStatusEnum
+}
+
+/**
  * Request parameters for saveGroup1 operation in GroupsApi.
  * @export
  * @interface GroupsApiSaveGroup1Request
@@ -9637,6 +9462,27 @@ export interface GroupsApiSaveGroup1Request {
      * @memberof GroupsApiSaveGroup1
      */
     readonly group?: Group
+}
+
+/**
+ * Request parameters for searchGroupProperties1 operation in GroupsApi.
+ * @export
+ * @interface GroupsApiSearchGroupProperties1Request
+ */
+export interface GroupsApiSearchGroupProperties1Request {
+    /**
+     * group id
+     * @type {string}
+     * @memberof GroupsApiSearchGroupProperties1
+     */
+    readonly groupId: string
+
+    /**
+     * filters
+     * @type {PropertyFilterCriteria}
+     * @memberof GroupsApiSearchGroupProperties1
+     */
+    readonly propertyFilterCriteria?: PropertyFilterCriteria
 }
 
 /**
@@ -9768,18 +9614,6 @@ export class GroupsApi extends BaseAPI {
     }
 
     /**
-     * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
-     * @summary Return the group with specified id
-     * @param {GroupsApiFindGroupPropertiesSearch1Request} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof GroupsApi
-     */
-    public findGroupPropertiesSearch1(requestParameters: GroupsApiFindGroupPropertiesSearch1Request, options?: RawAxiosRequestConfig) {
-        return GroupsApiFp(this.configuration).findGroupPropertiesSearch1(requestParameters.groupId, requestParameters.propertyFilterCriteria, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * This will return both owned Groups and Groups the user is a member of
      * @summary Return the groups list with specified user id
      * @param {GroupsApiFindGroupsByUser1Request} requestParameters Request parameters.
@@ -9888,6 +9722,18 @@ export class GroupsApi extends BaseAPI {
     }
 
     /**
+     * Allows group owners to request a change in their group type from GROUP to ASSOCIATION or CERTIFICATION. IMPORTANT: Type changes are only allowed for basic groups (GROUP type). Once a group has been upgraded to ASSOCIATION or CERTIFICATION, no further type changes are possible. Only group owners can make these requests.
+     * @summary Request a change in group type
+     * @param {GroupsApiRequestGroupTypeChange1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    public requestGroupTypeChange1(requestParameters: GroupsApiRequestGroupTypeChange1Request, options?: RawAxiosRequestConfig) {
+        return GroupsApiFp(this.configuration).requestGroupTypeChange1(requestParameters.id, requestParameters.requestStatus, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Consider that only user can saveNew its groups
      * @summary Create or update the group supplied
      * @param {GroupsApiSaveGroup1Request} requestParameters Request parameters.
@@ -9897,6 +9743,18 @@ export class GroupsApi extends BaseAPI {
      */
     public saveGroup1(requestParameters: GroupsApiSaveGroup1Request = {}, options?: RawAxiosRequestConfig) {
         return GroupsApiFp(this.configuration).saveGroup1(requestParameters.group, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
+     * @summary Return the group with specified id
+     * @param {GroupsApiSearchGroupProperties1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    public searchGroupProperties1(requestParameters: GroupsApiSearchGroupProperties1Request, options?: RawAxiosRequestConfig) {
+        return GroupsApiFp(this.configuration).searchGroupProperties1(requestParameters.groupId, requestParameters.propertyFilterCriteria, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -9924,6 +9782,15 @@ export class GroupsApi extends BaseAPI {
     }
 }
 
+/**
+ * @export
+ */
+export const RequestGroupTypeChange1RequestStatusEnum = {
+    None: 'NONE',
+    RequestingAssociation: 'REQUESTING_ASSOCIATION',
+    RequestingCertification: 'REQUESTING_CERTIFICATION'
+} as const;
+export type RequestGroupTypeChange1RequestStatusEnum = typeof RequestGroupTypeChange1RequestStatusEnum[keyof typeof RequestGroupTypeChange1RequestStatusEnum];
 /**
  * @export
  */
@@ -9960,12 +9827,6 @@ export const LanguagesApiAxiosParamCreator = function (configuration?: Configura
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -10093,12 +9954,6 @@ export const LocalesApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             if (securityKey != null) {
@@ -10132,12 +9987,6 @@ export const LocalesApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -10168,12 +10017,6 @@ export const LocalesApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
             if (lang !== undefined) {
                 localVarQueryParameter['lang'] = lang;
@@ -10396,12 +10239,6 @@ export const MessagesApiAxiosParamCreator = function (configuration?: Configurat
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
             if (token !== undefined) {
                 localVarQueryParameter['token'] = token;
             }
@@ -10442,12 +10279,6 @@ export const MessagesApiAxiosParamCreator = function (configuration?: Configurat
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
             if (userAId !== undefined) {
                 localVarQueryParameter['userAId'] = userAId;
@@ -10501,12 +10332,6 @@ export const MessagesApiAxiosParamCreator = function (configuration?: Configurat
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -10541,12 +10366,6 @@ export const MessagesApiAxiosParamCreator = function (configuration?: Configurat
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -10577,12 +10396,6 @@ export const MessagesApiAxiosParamCreator = function (configuration?: Configurat
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -10956,12 +10769,6 @@ export const PasswordRecoveryApiAxiosParamCreator = function (configuration?: Co
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             if (origin != null) {
@@ -10996,12 +10803,6 @@ export const PasswordRecoveryApiAxiosParamCreator = function (configuration?: Co
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -11034,12 +10835,6 @@ export const PasswordRecoveryApiAxiosParamCreator = function (configuration?: Co
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -11240,12 +11035,6 @@ export const PhonePrefixesApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -11354,12 +11143,6 @@ export const PropertiesApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -11397,12 +11180,6 @@ export const PropertiesApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -11437,12 +11214,6 @@ export const PropertiesApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -11472,12 +11243,6 @@ export const PropertiesApiAxiosParamCreator = function (configuration?: Configur
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -11512,12 +11277,6 @@ export const PropertiesApiAxiosParamCreator = function (configuration?: Configur
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
             if (bypassCache !== undefined) {
                 localVarQueryParameter['bypassCache'] = bypassCache;
@@ -11561,12 +11320,6 @@ export const PropertiesApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -11601,12 +11354,6 @@ export const PropertiesApiAxiosParamCreator = function (configuration?: Configur
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
             if (password !== undefined) {
                 localVarQueryParameter['password'] = password;
@@ -11646,12 +11393,6 @@ export const PropertiesApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -11681,12 +11422,6 @@ export const PropertiesApiAxiosParamCreator = function (configuration?: Configur
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -11719,12 +11454,6 @@ export const PropertiesApiAxiosParamCreator = function (configuration?: Configur
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
             if (email !== undefined) {
                 localVarQueryParameter['email'] = email;
@@ -11764,12 +11493,6 @@ export const PropertiesApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -11804,12 +11527,6 @@ export const PropertiesApiAxiosParamCreator = function (configuration?: Configur
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
             if (id !== undefined) {
                 localVarQueryParameter['id'] = id;
@@ -11855,12 +11572,6 @@ export const PropertiesApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -11894,12 +11605,6 @@ export const PropertiesApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -11931,12 +11636,6 @@ export const PropertiesApiAxiosParamCreator = function (configuration?: Configur
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -12719,12 +12418,6 @@ export const PropertyBulkDownloadApiAxiosParamCreator = function (configuration?
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -12762,12 +12455,6 @@ export const PropertyBulkDownloadApiAxiosParamCreator = function (configuration?
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -12807,12 +12494,6 @@ export const PropertyBulkDownloadApiAxiosParamCreator = function (configuration?
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -13032,12 +12713,6 @@ export const PropertyBulkUploadsApiAxiosParamCreator = function (configuration?:
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -13068,12 +12743,6 @@ export const PropertyBulkUploadsApiAxiosParamCreator = function (configuration?:
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -13108,12 +12777,6 @@ export const PropertyBulkUploadsApiAxiosParamCreator = function (configuration?:
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -13153,12 +12816,6 @@ export const PropertyBulkUploadsApiAxiosParamCreator = function (configuration?:
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/xml';
@@ -13196,12 +12853,6 @@ export const PropertyBulkUploadsApiAxiosParamCreator = function (configuration?:
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -13542,12 +13193,6 @@ export const PropertyFieldsApiAxiosParamCreator = function (configuration?: Conf
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -13676,12 +13321,6 @@ export const PropertyFiltersApiAxiosParamCreator = function (configuration?: Con
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -13715,12 +13354,6 @@ export const PropertyFiltersApiAxiosParamCreator = function (configuration?: Con
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
             if (filterNatureId) {
                 localVarQueryParameter['filter_nature_id'] = filterNatureId;
@@ -13901,12 +13534,6 @@ export const PropertyLocationsApiAxiosParamCreator = function (configuration?: C
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -14007,12 +13634,6 @@ export const PropertyProposalsApiAxiosParamCreator = function (configuration?: C
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -14115,12 +13736,6 @@ export const PropertyTypesApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -14222,12 +13837,6 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -14268,12 +13877,6 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
             const localVarFormParams = new URLSearchParams();
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
             if (grantType !== undefined) { 
@@ -14339,12 +13942,6 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
             const localVarQueryParameter = {} as any;
             const localVarFormParams = new URLSearchParams();
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
             if (clientId !== undefined) { 
                 localVarFormParams.set('client_id', clientId as any);
@@ -14409,12 +14006,6 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
             const localVarFormParams = new URLSearchParams();
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
             if (token !== undefined) { 
@@ -14759,12 +14350,6 @@ export const SkillsApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -14867,12 +14452,6 @@ export const StripeWebhooksApiAxiosParamCreator = function (configuration?: Conf
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -14906,12 +14485,6 @@ export const StripeWebhooksApiAxiosParamCreator = function (configuration?: Conf
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -14947,12 +14520,6 @@ export const StripeWebhooksApiAxiosParamCreator = function (configuration?: Conf
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -14986,12 +14553,6 @@ export const StripeWebhooksApiAxiosParamCreator = function (configuration?: Conf
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -15264,12 +14825,6 @@ export const SubscriptionsApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -15303,12 +14858,6 @@ export const SubscriptionsApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -15339,12 +14888,6 @@ export const SubscriptionsApiAxiosParamCreator = function (configuration?: Confi
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
             if (expand) {
                 localVarQueryParameter['expand'] = expand;
@@ -15568,12 +15111,6 @@ export const TestimonialApiAxiosParamCreator = function (configuration?: Configu
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -15605,12 +15142,6 @@ export const TestimonialApiAxiosParamCreator = function (configuration?: Configu
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
             if (pageFrom !== undefined) {
                 localVarQueryParameter['pageFrom'] = pageFrom;
@@ -15651,12 +15182,6 @@ export const TestimonialApiAxiosParamCreator = function (configuration?: Configu
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
             if (pageFrom !== undefined) {
                 localVarQueryParameter['pageFrom'] = pageFrom;
@@ -15700,12 +15225,6 @@ export const TestimonialApiAxiosParamCreator = function (configuration?: Configu
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -15736,12 +15255,6 @@ export const TestimonialApiAxiosParamCreator = function (configuration?: Configu
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -15771,12 +15284,6 @@ export const TestimonialApiAxiosParamCreator = function (configuration?: Configu
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -15810,12 +15317,6 @@ export const TestimonialApiAxiosParamCreator = function (configuration?: Configu
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -16224,12 +15725,6 @@ export const TextTranslationsApiAxiosParamCreator = function (configuration?: Co
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
             if (targetLang !== undefined) {
                 localVarQueryParameter['targetLang'] = targetLang;
             }
@@ -16368,12 +15863,6 @@ export const UserConnectionsApiAxiosParamCreator = function (configuration?: Con
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -16492,12 +15981,6 @@ export const UserContractsApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -16530,12 +16013,6 @@ export const UserContractsApiAxiosParamCreator = function (configuration?: Confi
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -16696,12 +16173,6 @@ export const UserSummaryApiAxiosParamCreator = function (configuration?: Configu
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
             if (limit !== undefined) {
                 localVarQueryParameter['limit'] = limit;
             }
@@ -16846,12 +16317,6 @@ export const UserTypesApiAxiosParamCreator = function (configuration?: Configura
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -16953,12 +16418,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -16995,12 +16454,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -17041,12 +16494,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -17092,12 +16539,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -17133,12 +16574,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -17181,12 +16616,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
             if (pageFrom !== undefined) {
                 localVarQueryParameter['pageFrom'] = pageFrom;
@@ -17243,12 +16672,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
             if (pageFrom !== undefined) {
                 localVarQueryParameter['pageFrom'] = pageFrom;
             }
@@ -17291,12 +16714,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -17327,12 +16744,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
             if (profileName !== undefined) {
                 localVarQueryParameter['profileName'] = profileName;
@@ -17372,12 +16783,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -17411,12 +16816,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -17452,12 +16851,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -17490,12 +16883,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
             if (id !== undefined) {
                 localVarQueryParameter['id'] = id;
@@ -17543,12 +16930,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
             if (skipEmailValidation !== undefined) {
                 localVarQueryParameter['skipEmailValidation'] = skipEmailValidation;
             }
@@ -17592,12 +16973,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
             const localVarFormParams = new URLSearchParams();
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
             if (email !== undefined) { 
@@ -17647,12 +17022,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -17691,12 +17060,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -17731,12 +17094,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -17770,12 +17127,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -17813,12 +17164,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -17855,12 +17200,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
-
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -17892,12 +17231,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
@@ -17935,12 +17268,6 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication oAuthCode required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
-
-            // authentication oAuthClientId required
-            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
 
 
     
