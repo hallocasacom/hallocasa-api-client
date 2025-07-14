@@ -2861,6 +2861,184 @@
         }
       }
     },
+    "/groups/by-type" : {
+      "get" : {
+        "tags" : [ "groups" ],
+        "summary" : "Return groups filtered by group type",
+        "description" : "Retrieve groups of specific types (ASSOCIATION, CERTIFICATION) that the user has access to. This endpoint allows filtering for association groups or certificate groups where the user is either an owner or an accepted member. Only active groups are returned.",
+        "operationId" : "findGroupsByType_1",
+        "parameters" : [ {
+          "name" : "types",
+          "in" : "query",
+          "description" : "Comma-separated list of group types to filter by. Valid values: ASSOCIATION, CERTIFICATION",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "ASSOCIATION,CERTIFICATION"
+        }, {
+          "name" : "pageFrom",
+          "in" : "query",
+          "description" : "Starting page number for pagination (0-based)",
+          "schema" : {
+            "minimum" : 0,
+            "type" : "integer",
+            "format" : "int32",
+            "default" : 0
+          },
+          "example" : 0
+        }, {
+          "name" : "pageTo",
+          "in" : "query",
+          "description" : "Ending page number for pagination (exclusive)",
+          "schema" : {
+            "minimum" : 1,
+            "type" : "integer",
+            "format" : "int32",
+            "default" : 10
+          },
+          "example" : 10
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successfully retrieved groups by type",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GroupFilterResult"
+                },
+                "examples" : {
+                  "Association groups" : {
+                    "description" : "Response with association type groups",
+                    "value" : {
+                      "count" : 2,
+                      "list" : [ {
+                        "id" : "group789",
+                        "name" : "Real Estate Association",
+                        "description" : "Professional real estate association",
+                        "groupType" : "ASSOCIATION",
+                        "owner" : {
+                          "id" : 1004,
+                          "email" : "bob@example.com",
+                          "firstName" : "Bob",
+                          "lastName" : "Smith"
+                        },
+                        "locationLatitude" : 40.7128,
+                        "locationLongitude" : -74.006,
+                        "locationName" : "New York, NY",
+                        "creationDate" : "2023-03-10T09:45:00Z",
+                        "groupStatus" : "ACTIVE",
+                        "noOfMembers" : 15
+                      }, {
+                        "id" : "group456",
+                        "name" : "Property Professionals",
+                        "description" : "Association of certified property professionals",
+                        "groupType" : "ASSOCIATION",
+                        "owner" : {
+                          "id" : 1006,
+                          "email" : "carol@example.com",
+                          "firstName" : "Carol",
+                          "lastName" : "Wilson"
+                        },
+                        "locationLatitude" : 34.0522,
+                        "locationLongitude" : -118.2437,
+                        "locationName" : "Los Angeles, CA",
+                        "creationDate" : "2023-03-15T11:20:00Z",
+                        "groupStatus" : "ACTIVE",
+                        "noOfMembers" : 8
+                      } ]
+                    }
+                  },
+                  "Certification groups" : {
+                    "description" : "Response with certification type groups",
+                    "value" : {
+                      "count" : 1,
+                      "list" : [ {
+                        "id" : "group123",
+                        "name" : "Certified Property Evaluators",
+                        "description" : "Certification body for property evaluation",
+                        "groupType" : "CERTIFICATION",
+                        "owner" : {
+                          "id" : 1001,
+                          "email" : "alice@example.com",
+                          "firstName" : "Alice",
+                          "lastName" : "Johnson"
+                        },
+                        "locationLatitude" : 51.5074,
+                        "locationLongitude" : -0.1278,
+                        "locationName" : "London, UK",
+                        "creationDate" : "2023-01-15T10:30:00Z",
+                        "groupStatus" : "ACTIVE",
+                        "noOfMembers" : 25
+                      } ]
+                    }
+                  },
+                  "Mixed types" : {
+                    "description" : "Response with both association and certification groups",
+                    "value" : {
+                      "count" : 3,
+                      "list" : [ {
+                        "id" : "group789",
+                        "name" : "Real Estate Association",
+                        "description" : "Professional real estate association",
+                        "groupType" : "ASSOCIATION",
+                        "owner" : {
+                          "id" : 1004,
+                          "email" : "bob@example.com",
+                          "firstName" : "Bob",
+                          "lastName" : "Smith"
+                        },
+                        "locationLatitude" : 40.7128,
+                        "locationLongitude" : -74.006,
+                        "locationName" : "New York, NY",
+                        "creationDate" : "2023-03-10T09:45:00Z",
+                        "groupStatus" : "ACTIVE",
+                        "noOfMembers" : 15
+                      }, {
+                        "id" : "group123",
+                        "name" : "Certified Property Evaluators",
+                        "description" : "Certification body for property evaluation",
+                        "groupType" : "CERTIFICATION",
+                        "owner" : {
+                          "id" : 1001,
+                          "email" : "alice@example.com",
+                          "firstName" : "Alice",
+                          "lastName" : "Johnson"
+                        },
+                        "locationLatitude" : 51.5074,
+                        "locationLongitude" : -0.1278,
+                        "locationName" : "London, UK",
+                        "creationDate" : "2023-01-15T10:30:00Z",
+                        "groupStatus" : "ACTIVE",
+                        "noOfMembers" : 25
+                      } ]
+                    }
+                  },
+                  "Empty result" : {
+                    "description" : "Response when no groups of specified types are found",
+                    "value" : {
+                      "count" : 0,
+                      "list" : [ ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Invalid request parameters (e.g., invalid group types, invalid pagination parameters)"
+          },
+          "401" : {
+            "description" : "User is not authenticated"
+          },
+          "403" : {
+            "description" : "User is not authorized to access this resource"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
     "/groups" : {
       "get" : {
         "tags" : [ "groups" ],

@@ -6680,6 +6680,16 @@ export declare const GroupsApiAxiosParamCreator: (configuration?: Configuration)
      */
     findGroupProperties1: (groupId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Retrieve groups of specific types (ASSOCIATION, CERTIFICATION) that the user has access to. This endpoint allows filtering for association groups or certificate groups where the user is either an owner or an accepted member. Only active groups are returned.
+     * @summary Return groups filtered by group type
+     * @param {string} [types] Comma-separated list of group types to filter by. Valid values: ASSOCIATION, CERTIFICATION
+     * @param {number} [pageFrom] Starting page number for pagination (0-based)
+     * @param {number} [pageTo] Ending page number for pagination (exclusive)
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findGroupsByType1: (types?: string, pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * This will return both owned Groups and Groups the user is a member of
      * @summary Return the groups list with specified user id
      * @param {number} [pageFrom] Start page number
@@ -6859,6 +6869,16 @@ export declare const GroupsApiFp: (configuration?: Configuration) => {
      */
     findGroupProperties1(groupId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Property>>>;
     /**
+     * Retrieve groups of specific types (ASSOCIATION, CERTIFICATION) that the user has access to. This endpoint allows filtering for association groups or certificate groups where the user is either an owner or an accepted member. Only active groups are returned.
+     * @summary Return groups filtered by group type
+     * @param {string} [types] Comma-separated list of group types to filter by. Valid values: ASSOCIATION, CERTIFICATION
+     * @param {number} [pageFrom] Starting page number for pagination (0-based)
+     * @param {number} [pageTo] Ending page number for pagination (exclusive)
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findGroupsByType1(types?: string, pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupFilterResult>>;
+    /**
      * This will return both owned Groups and Groups the user is a member of
      * @summary Return the groups list with specified user id
      * @param {number} [pageFrom] Start page number
@@ -7036,6 +7056,14 @@ export declare const GroupsApiFactory: (configuration?: Configuration, basePath?
      * @throws {RequiredError}
      */
     findGroupProperties1(requestParameters: GroupsApiFindGroupProperties1Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<Property>>;
+    /**
+     * Retrieve groups of specific types (ASSOCIATION, CERTIFICATION) that the user has access to. This endpoint allows filtering for association groups or certificate groups where the user is either an owner or an accepted member. Only active groups are returned.
+     * @summary Return groups filtered by group type
+     * @param {GroupsApiFindGroupsByType1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findGroupsByType1(requestParameters?: GroupsApiFindGroupsByType1Request, options?: RawAxiosRequestConfig): AxiosPromise<GroupFilterResult>;
     /**
      * This will return both owned Groups and Groups the user is a member of
      * @summary Return the groups list with specified user id
@@ -7232,6 +7260,31 @@ export interface GroupsApiFindGroupProperties1Request {
      * @memberof GroupsApiFindGroupProperties1
      */
     readonly groupId: string;
+}
+/**
+ * Request parameters for findGroupsByType1 operation in GroupsApi.
+ * @export
+ * @interface GroupsApiFindGroupsByType1Request
+ */
+export interface GroupsApiFindGroupsByType1Request {
+    /**
+     * Comma-separated list of group types to filter by. Valid values: ASSOCIATION, CERTIFICATION
+     * @type {string}
+     * @memberof GroupsApiFindGroupsByType1
+     */
+    readonly types?: string;
+    /**
+     * Starting page number for pagination (0-based)
+     * @type {number}
+     * @memberof GroupsApiFindGroupsByType1
+     */
+    readonly pageFrom?: number;
+    /**
+     * Ending page number for pagination (exclusive)
+     * @type {number}
+     * @memberof GroupsApiFindGroupsByType1
+     */
+    readonly pageTo?: number;
 }
 /**
  * Request parameters for findGroupsByUser1 operation in GroupsApi.
@@ -7548,6 +7601,15 @@ export declare class GroupsApi extends BaseAPI {
      * @memberof GroupsApi
      */
     findGroupProperties1(requestParameters: GroupsApiFindGroupProperties1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property[], any>>;
+    /**
+     * Retrieve groups of specific types (ASSOCIATION, CERTIFICATION) that the user has access to. This endpoint allows filtering for association groups or certificate groups where the user is either an owner or an accepted member. Only active groups are returned.
+     * @summary Return groups filtered by group type
+     * @param {GroupsApiFindGroupsByType1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    findGroupsByType1(requestParameters?: GroupsApiFindGroupsByType1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupFilterResult, any>>;
     /**
      * This will return both owned Groups and Groups the user is a member of
      * @summary Return the groups list with specified user id

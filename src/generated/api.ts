@@ -8125,6 +8125,51 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
+         * Retrieve groups of specific types (ASSOCIATION, CERTIFICATION) that the user has access to. This endpoint allows filtering for association groups or certificate groups where the user is either an owner or an accepted member. Only active groups are returned.
+         * @summary Return groups filtered by group type
+         * @param {string} [types] Comma-separated list of group types to filter by. Valid values: ASSOCIATION, CERTIFICATION
+         * @param {number} [pageFrom] Starting page number for pagination (0-based)
+         * @param {number} [pageTo] Ending page number for pagination (exclusive)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findGroupsByType1: async (types?: string, pageFrom?: number, pageTo?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/groups/by-type`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (types !== undefined) {
+                localVarQueryParameter['types'] = types;
+            }
+
+            if (pageFrom !== undefined) {
+                localVarQueryParameter['pageFrom'] = pageFrom;
+            }
+
+            if (pageTo !== undefined) {
+                localVarQueryParameter['pageTo'] = pageTo;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * This will return both owned Groups and Groups the user is a member of
          * @summary Return the groups list with specified user id
          * @param {number} [pageFrom] Start page number
@@ -8757,6 +8802,21 @@ export const GroupsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Retrieve groups of specific types (ASSOCIATION, CERTIFICATION) that the user has access to. This endpoint allows filtering for association groups or certificate groups where the user is either an owner or an accepted member. Only active groups are returned.
+         * @summary Return groups filtered by group type
+         * @param {string} [types] Comma-separated list of group types to filter by. Valid values: ASSOCIATION, CERTIFICATION
+         * @param {number} [pageFrom] Starting page number for pagination (0-based)
+         * @param {number} [pageTo] Ending page number for pagination (exclusive)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findGroupsByType1(types?: string, pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupFilterResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findGroupsByType1(types, pageFrom, pageTo, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GroupsApi.findGroupsByType1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * This will return both owned Groups and Groups the user is a member of
          * @summary Return the groups list with specified user id
          * @param {number} [pageFrom] Start page number
@@ -9021,6 +9081,16 @@ export const GroupsApiFactory = function (configuration?: Configuration, basePat
             return localVarFp.findGroupProperties1(requestParameters.groupId, options).then((request) => request(axios, basePath));
         },
         /**
+         * Retrieve groups of specific types (ASSOCIATION, CERTIFICATION) that the user has access to. This endpoint allows filtering for association groups or certificate groups where the user is either an owner or an accepted member. Only active groups are returned.
+         * @summary Return groups filtered by group type
+         * @param {GroupsApiFindGroupsByType1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findGroupsByType1(requestParameters: GroupsApiFindGroupsByType1Request = {}, options?: RawAxiosRequestConfig): AxiosPromise<GroupFilterResult> {
+            return localVarFp.findGroupsByType1(requestParameters.types, requestParameters.pageFrom, requestParameters.pageTo, options).then((request) => request(axios, basePath));
+        },
+        /**
          * This will return both owned Groups and Groups the user is a member of
          * @summary Return the groups list with specified user id
          * @param {GroupsApiFindGroupsByUser1Request} requestParameters Request parameters.
@@ -9252,6 +9322,34 @@ export interface GroupsApiFindGroupProperties1Request {
      * @memberof GroupsApiFindGroupProperties1
      */
     readonly groupId: string
+}
+
+/**
+ * Request parameters for findGroupsByType1 operation in GroupsApi.
+ * @export
+ * @interface GroupsApiFindGroupsByType1Request
+ */
+export interface GroupsApiFindGroupsByType1Request {
+    /**
+     * Comma-separated list of group types to filter by. Valid values: ASSOCIATION, CERTIFICATION
+     * @type {string}
+     * @memberof GroupsApiFindGroupsByType1
+     */
+    readonly types?: string
+
+    /**
+     * Starting page number for pagination (0-based)
+     * @type {number}
+     * @memberof GroupsApiFindGroupsByType1
+     */
+    readonly pageFrom?: number
+
+    /**
+     * Ending page number for pagination (exclusive)
+     * @type {number}
+     * @memberof GroupsApiFindGroupsByType1
+     */
+    readonly pageTo?: number
 }
 
 /**
@@ -9611,6 +9709,18 @@ export class GroupsApi extends BaseAPI {
      */
     public findGroupProperties1(requestParameters: GroupsApiFindGroupProperties1Request, options?: RawAxiosRequestConfig) {
         return GroupsApiFp(this.configuration).findGroupProperties1(requestParameters.groupId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Retrieve groups of specific types (ASSOCIATION, CERTIFICATION) that the user has access to. This endpoint allows filtering for association groups or certificate groups where the user is either an owner or an accepted member. Only active groups are returned.
+     * @summary Return groups filtered by group type
+     * @param {GroupsApiFindGroupsByType1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    public findGroupsByType1(requestParameters: GroupsApiFindGroupsByType1Request = {}, options?: RawAxiosRequestConfig) {
+        return GroupsApiFp(this.configuration).findGroupsByType1(requestParameters.types, requestParameters.pageFrom, requestParameters.pageTo, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
