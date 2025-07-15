@@ -2788,6 +2788,7 @@
                       "id" : "group123",
                       "name" : "Luxury Properties",
                       "description" : "A collection of luxury properties",
+                      "groupType" : "GROUP",
                       "owner" : {
                         "id" : 1001,
                         "name" : "John Doe"
@@ -3080,6 +3081,7 @@
                         "id" : "group123",
                         "name" : "Luxury Properties",
                         "description" : "A collection of luxury properties",
+                        "groupType" : "GROUP",
                         "owner" : {
                           "id" : 1001,
                           "name" : "John Doe"
@@ -3147,6 +3149,7 @@
                       "id" : "group987",
                       "name" : "Mountain Properties",
                       "description" : "A collection of mountain properties",
+                      "groupType" : "GROUP",
                       "owner" : {
                         "id" : 1001,
                         "name" : "John Doe"
@@ -7415,7 +7418,14 @@
                       "profileName" : "johndoe",
                       "cellPhone" : "+1234567890",
                       "active" : true,
-                      "skills" : [ "Real Estate", "Marketing" ]
+                      "skills" : [ "Real Estate", "Marketing" ],
+                      "groups" : [ {
+                        "id" : "group123",
+                        "name" : "Real Estate Professionals",
+                        "groupType" : "ASSOCIATION",
+                        "memberStatus" : "ACCEPTED",
+                        "isOwner" : false
+                      } ]
                     }
                   }
                 }
@@ -7571,12 +7581,26 @@
                       "id" : 456,
                       "firstName" : "Jane",
                       "lastName" : "Smith",
-                      "profileName" : "janesmith"
+                      "profileName" : "janesmith",
+                      "groups" : [ {
+                        "id" : "group456",
+                        "name" : "Property Association",
+                        "groupType" : "ASSOCIATION",
+                        "memberStatus" : "ACCEPTED",
+                        "isOwner" : false
+                      } ]
                     }, {
                       "id" : 789,
                       "firstName" : "Bob",
                       "lastName" : "Johnson",
-                      "profileName" : "bjohnson"
+                      "profileName" : "bjohnson",
+                      "groups" : [ {
+                        "id" : "group789",
+                        "name" : "Certified Agents",
+                        "groupType" : "CERTIFICATION",
+                        "memberStatus" : "ACCEPTED",
+                        "isOwner" : false
+                      } ]
                     } ]
                   }
                 }
@@ -7627,12 +7651,26 @@
                       "id" : 123,
                       "email" : "user1@example.com",
                       "firstName" : "John",
-                      "lastName" : "Doe"
+                      "lastName" : "Doe",
+                      "groups" : [ {
+                        "id" : "group123",
+                        "name" : "Property Group",
+                        "groupType" : "GROUP",
+                        "memberStatus" : "ACCEPTED",
+                        "isOwner" : true
+                      } ]
                     }, {
                       "id" : 456,
                       "email" : "user2@example.com",
                       "firstName" : "Jane",
-                      "lastName" : "Smith"
+                      "lastName" : "Smith",
+                      "groups" : [ {
+                        "id" : "group456",
+                        "name" : "Certification Body",
+                        "groupType" : "CERTIFICATION",
+                        "memberStatus" : "ACCEPTED",
+                        "isOwner" : false
+                      } ]
                     } ]
                   }
                 }
@@ -7992,7 +8030,14 @@
                         "id" : 123,
                         "firstName" : "John",
                         "lastName" : "Doe",
-                        "skills" : [ "Real Estate" ]
+                        "skills" : [ "Real Estate" ],
+                        "groups" : [ {
+                          "id" : "group123",
+                          "name" : "Real Estate Group",
+                          "groupType" : "GROUP",
+                          "memberStatus" : "ACCEPTED",
+                          "isOwner" : true
+                        } ]
                       } ],
                       "total" : 1,
                       "page" : 1,
@@ -11110,6 +11155,10 @@
           },
           "ownerName" : {
             "type" : "string"
+          },
+          "groupType" : {
+            "type" : "string",
+            "enum" : [ "GROUP", "ASSOCIATION", "CERTIFICATION" ]
           },
           "owner" : {
             "type" : "boolean"

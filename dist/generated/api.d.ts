@@ -4806,11 +4806,23 @@ export interface UserGroup {
     'ownerName'?: string;
     /**
      *
+     * @type {string}
+     * @memberof UserGroup
+     */
+    'groupType'?: UserGroupGroupTypeEnum;
+    /**
+     *
      * @type {boolean}
      * @memberof UserGroup
      */
     'owner'?: boolean;
 }
+export declare const UserGroupGroupTypeEnum: {
+    readonly Group: "GROUP";
+    readonly Association: "ASSOCIATION";
+    readonly Certification: "CERTIFICATION";
+};
+export type UserGroupGroupTypeEnum = typeof UserGroupGroupTypeEnum[keyof typeof UserGroupGroupTypeEnum];
 /**
  *
  * @export

@@ -4885,11 +4885,26 @@ export interface UserGroup {
     'ownerName'?: string;
     /**
      * 
+     * @type {string}
+     * @memberof UserGroup
+     */
+    'groupType'?: UserGroupGroupTypeEnum;
+    /**
+     * 
      * @type {boolean}
      * @memberof UserGroup
      */
     'owner'?: boolean;
 }
+
+export const UserGroupGroupTypeEnum = {
+    Group: 'GROUP',
+    Association: 'ASSOCIATION',
+    Certification: 'CERTIFICATION'
+} as const;
+
+export type UserGroupGroupTypeEnum = typeof UserGroupGroupTypeEnum[keyof typeof UserGroupGroupTypeEnum];
+
 /**
  * 
  * @export
