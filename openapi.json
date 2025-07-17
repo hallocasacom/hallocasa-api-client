@@ -1484,6 +1484,12 @@
           "500" : {
             "description" : "If server internal error"
           },
+          "408" : {
+            "description" : "Request timeout - operation took too long"
+          },
+          "503" : {
+            "description" : "Service temporarily unavailable"
+          },
           "200" : {
             "description" : "Ok. Generated resource",
             "content" : {
@@ -1510,6 +1516,12 @@
           },
           "500" : {
             "description" : "If server internal error"
+          },
+          "408" : {
+            "description" : "Request timeout - operation took too long"
+          },
+          "503" : {
+            "description" : "Service temporarily unavailable"
           },
           "200" : {
             "description" : "Ok. Generated resource",
@@ -1573,6 +1585,12 @@
           },
           "500" : {
             "description" : "If server internal error"
+          },
+          "408" : {
+            "description" : "Request timeout - operation took too long"
+          },
+          "503" : {
+            "description" : "Service temporarily unavailable"
           },
           "200" : {
             "description" : "Ok. Generated resource",
@@ -9260,6 +9278,9 @@
           "logo" : {
             "type" : "string"
           },
+          "url" : {
+            "type" : "string"
+          },
           "creationDate" : {
             "type" : "string",
             "format" : "date-time"
@@ -9764,15 +9785,19 @@
         "properties" : {
           "count" : {
             "type" : "integer",
-            "format" : "int64"
+            "description" : "Total number of properties matching the filter criteria",
+            "format" : "int64",
+            "example" : 25
           },
           "propertyList" : {
             "type" : "array",
+            "description" : "List of properties matching the filter criteria",
             "items" : {
               "$ref" : "#/components/schemas/Property"
             }
           }
-        }
+        },
+        "description" : "Result of property filtering operation containing count and list of properties"
       },
       "CurrencyAmmount" : {
         "type" : "object",
@@ -11139,6 +11164,9 @@
           "logo" : {
             "type" : "string"
           },
+          "url" : {
+            "type" : "string"
+          },
           "description" : {
             "type" : "string"
           },
@@ -11476,16 +11504,16 @@
       }
     },
     "securitySchemes" : {
-      "oAuthToken" : {
-        "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
-        "in" : "header"
-      },
       "oAuthClientId" : {
         "type" : "apiKey",
         "description" : "OAuth client identifier (default: hallocasa_frontend)",
         "name" : "O-Auth-Client-Id",
+        "in" : "header"
+      },
+      "oAuthToken" : {
+        "type" : "apiKey",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
         "in" : "header"
       },
       "oAuthCode" : {

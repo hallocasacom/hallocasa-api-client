@@ -1280,6 +1280,12 @@ export interface Group {
      * @type {string}
      * @memberof Group
      */
+    'url'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Group
+     */
     'creationDate'?: string;
     /**
      * 
@@ -2962,19 +2968,19 @@ export interface PropertyFilterEntry {
     'propertyField'?: PropertyField;
 }
 /**
- * 
+ * Result of property filtering operation containing count and list of properties
  * @export
  * @interface PropertyFilterResult
  */
 export interface PropertyFilterResult {
     /**
-     * 
+     * Total number of properties matching the filter criteria
      * @type {number}
      * @memberof PropertyFilterResult
      */
     'count'?: number;
     /**
-     * 
+     * List of properties matching the filter criteria
      * @type {Array<Property>}
      * @memberof PropertyFilterResult
      */
@@ -4853,6 +4859,12 @@ export interface UserGroup {
      * @memberof UserGroup
      */
     'logo'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserGroup
+     */
+    'url'?: string;
     /**
      * 
      * @type {string}
