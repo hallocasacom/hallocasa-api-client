@@ -4276,6 +4276,15 @@
             "default" : false
           },
           "example" : true
+        }, {
+          "name" : "includeNotAvailableProperties",
+          "in" : "query",
+          "description" : "Include properties that are not available anymore (e.g., sold, rented, removed)",
+          "schema" : {
+            "type" : "boolean",
+            "default" : false
+          },
+          "example" : false
         } ],
         "requestBody" : {
           "description" : "Property filter criteria",

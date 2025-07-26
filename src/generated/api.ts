@@ -11798,10 +11798,11 @@ export const PropertiesApiAxiosParamCreator = function (configuration?: Configur
          * @summary Search properties with specified filters
          * @param {PropertyFilterCriteria} propertyFilterCriteria Property filter criteria
          * @param {boolean} [bypassCache] Bypass cache and fetch fresh data from database
+         * @param {boolean} [includeNotAvailableProperties] Include properties that are not available anymore (e.g., sold, rented, removed)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findProperties1: async (propertyFilterCriteria: PropertyFilterCriteria, bypassCache?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        findProperties1: async (propertyFilterCriteria: PropertyFilterCriteria, bypassCache?: boolean, includeNotAvailableProperties?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'propertyFilterCriteria' is not null or undefined
             assertParamExists('findProperties1', 'propertyFilterCriteria', propertyFilterCriteria)
             const localVarPath = `/properties/search`;
@@ -11824,6 +11825,10 @@ export const PropertiesApiAxiosParamCreator = function (configuration?: Configur
 
             if (bypassCache !== undefined) {
                 localVarQueryParameter['bypassCache'] = bypassCache;
+            }
+
+            if (includeNotAvailableProperties !== undefined) {
+                localVarQueryParameter['includeNotAvailableProperties'] = includeNotAvailableProperties;
             }
 
 
@@ -12319,11 +12324,12 @@ export const PropertiesApiFp = function(configuration?: Configuration) {
          * @summary Search properties with specified filters
          * @param {PropertyFilterCriteria} propertyFilterCriteria Property filter criteria
          * @param {boolean} [bypassCache] Bypass cache and fetch fresh data from database
+         * @param {boolean} [includeNotAvailableProperties] Include properties that are not available anymore (e.g., sold, rented, removed)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findProperties1(propertyFilterCriteria: PropertyFilterCriteria, bypassCache?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PropertyFilterResult>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.findProperties1(propertyFilterCriteria, bypassCache, options);
+        async findProperties1(propertyFilterCriteria: PropertyFilterCriteria, bypassCache?: boolean, includeNotAvailableProperties?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PropertyFilterResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findProperties1(propertyFilterCriteria, bypassCache, includeNotAvailableProperties, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PropertiesApi.findProperties1']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -12515,7 +12521,7 @@ export const PropertiesApiFactory = function (configuration?: Configuration, bas
          * @throws {RequiredError}
          */
         findProperties1(requestParameters: PropertiesApiFindProperties1Request, options?: RawAxiosRequestConfig): AxiosPromise<PropertyFilterResult> {
-            return localVarFp.findProperties1(requestParameters.propertyFilterCriteria, requestParameters.bypassCache, options).then((request) => request(axios, basePath));
+            return localVarFp.findProperties1(requestParameters.propertyFilterCriteria, requestParameters.bypassCache, requestParameters.includeNotAvailableProperties, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -12684,6 +12690,13 @@ export interface PropertiesApiFindProperties1Request {
      * @memberof PropertiesApiFindProperties1
      */
     readonly bypassCache?: boolean
+
+    /**
+     * Include properties that are not available anymore (e.g., sold, rented, removed)
+     * @type {boolean}
+     * @memberof PropertiesApiFindProperties1
+     */
+    readonly includeNotAvailableProperties?: boolean
 }
 
 /**
@@ -12875,7 +12888,7 @@ export class PropertiesApi extends BaseAPI {
      * @memberof PropertiesApi
      */
     public findProperties1(requestParameters: PropertiesApiFindProperties1Request, options?: RawAxiosRequestConfig) {
-        return PropertiesApiFp(this.configuration).findProperties1(requestParameters.propertyFilterCriteria, requestParameters.bypassCache, options).then((request) => request(this.axios, this.basePath));
+        return PropertiesApiFp(this.configuration).findProperties1(requestParameters.propertyFilterCriteria, requestParameters.bypassCache, requestParameters.includeNotAvailableProperties, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

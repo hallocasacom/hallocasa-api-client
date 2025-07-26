@@ -8580,10 +8580,11 @@ export declare const PropertiesApiAxiosParamCreator: (configuration?: Configurat
      * @summary Search properties with specified filters
      * @param {PropertyFilterCriteria} propertyFilterCriteria Property filter criteria
      * @param {boolean} [bypassCache] Bypass cache and fetch fresh data from database
+     * @param {boolean} [includeNotAvailableProperties] Include properties that are not available anymore (e.g., sold, rented, removed)
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    findProperties1: (propertyFilterCriteria: PropertyFilterCriteria, bypassCache?: boolean, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    findProperties1: (propertyFilterCriteria: PropertyFilterCriteria, bypassCache?: boolean, includeNotAvailableProperties?: boolean, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      *
      * @summary Return the property list with specified user id
@@ -8707,10 +8708,11 @@ export declare const PropertiesApiFp: (configuration?: Configuration) => {
      * @summary Search properties with specified filters
      * @param {PropertyFilterCriteria} propertyFilterCriteria Property filter criteria
      * @param {boolean} [bypassCache] Bypass cache and fetch fresh data from database
+     * @param {boolean} [includeNotAvailableProperties] Include properties that are not available anymore (e.g., sold, rented, removed)
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    findProperties1(propertyFilterCriteria: PropertyFilterCriteria, bypassCache?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PropertyFilterResult>>;
+    findProperties1(propertyFilterCriteria: PropertyFilterCriteria, bypassCache?: boolean, includeNotAvailableProperties?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PropertyFilterResult>>;
     /**
      *
      * @summary Return the property list with specified user id
@@ -8976,6 +8978,12 @@ export interface PropertiesApiFindProperties1Request {
      * @memberof PropertiesApiFindProperties1
      */
     readonly bypassCache?: boolean;
+    /**
+     * Include properties that are not available anymore (e.g., sold, rented, removed)
+     * @type {boolean}
+     * @memberof PropertiesApiFindProperties1
+     */
+    readonly includeNotAvailableProperties?: boolean;
 }
 /**
  * Request parameters for findPropertiesByLocationRange1 operation in PropertiesApi.
