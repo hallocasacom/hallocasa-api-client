@@ -30,6 +30,7 @@ export declare function createHallocasaClient(options: HallocasaClientOptions): 
     geoLocationApi: api.GeoLocationApi;
     languagesApi: api.LanguagesApi;
     alertsApi: api.AlertsApi;
+    propertiesApi: api.PropertiesApi;
     axios: AxiosInstance;
     configuration: Configuration;
 };
