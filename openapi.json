@@ -10,6 +10,14 @@
     },
     "version" : "v1"
   },
+  "servers" : [ {
+    "url" : "/hallocasa-api/api",
+    "description" : "Hallocasa API Server"
+  } ],
+  "security" : [ {
+    "oAuthCode" : [ ],
+    "oAuthClientId" : [ ]
+  } ],
   "tags" : [ {
     "name" : "chat-tickets",
     "description" : "Chat ticket management endpoints"
@@ -4002,12 +4010,11 @@
           "example" : "prop123456"
         } ],
         "requestBody" : {
-          "description" : "Publication state to set",
+          "description" : "Request body containing the publication state to set",
           "content" : {
             "application/json" : {
               "schema" : {
-                "type" : "string",
-                "enum" : [ "DRAFT", "PASSWORD_PROTECTED", "PUBLISHED" ]
+                "$ref" : "#/components/schemas/PropertyPublicationStateRequest"
               }
             }
           },
@@ -4019,6 +4026,9 @@
           },
           "403" : {
             "description" : "If user doesn't have permission"
+          },
+          "400" : {
+            "description" : "If request body is invalid"
           },
           "500" : {
             "description" : "If server internal error"
@@ -4050,7 +4060,7 @@
                       "bathrooms" : 3,
                       "bedrooms" : 4,
                       "area" : 250,
-                      "publicationState" : "PUBLISHED"
+                      "publicationState" : "AVAILABLE"
                     }
                   }
                 }
@@ -4314,7 +4324,7 @@
                         "bathrooms" : 3,
                         "bedrooms" : 4,
                         "area" : 250,
-                        "publicationState" : "PUBLISHED"
+                        "publicationState" : "AVAILABLE"
                       }, {
                         "id" : "prop789012",
                         "title" : "Modern City Apartment",
@@ -4331,7 +4341,7 @@
                         "bathrooms" : 2,
                         "bedrooms" : 3,
                         "area" : 120,
-                        "publicationState" : "PUBLISHED"
+                        "publicationState" : "AVAILABLE"
                       } ]
                     }
                   }
@@ -4436,7 +4446,7 @@
                       "area" : 250,
                       "description" : "Spectacular beachfront property with amazing ocean views",
                       "features" : [ "POOL", "GARDEN", "TERRACE", "OCEAN_VIEW" ],
-                      "publicationState" : "PUBLISHED",
+                      "publicationState" : "AVAILABLE",
                       "user" : {
                         "id" : 12345,
                         "name" : "John Doe",
@@ -4517,7 +4527,7 @@
                       "area" : 250,
                       "description" : "Spectacular beachfront property with amazing ocean views",
                       "features" : [ "POOL", "GARDEN", "TERRACE", "OCEAN_VIEW" ],
-                      "publicationState" : "PUBLISHED",
+                      "publicationState" : "AVAILABLE",
                       "user" : {
                         "id" : 12345,
                         "firstName" : "John",
@@ -4742,7 +4752,7 @@
                       "bedrooms" : 6,
                       "area" : 450,
                       "password" : "securepass123",
-                      "publicationState" : "PASSWORD_PROTECTED"
+                      "publicationState" : "DRAFT"
                     }, {
                       "id" : "prop789012",
                       "title" : "Exclusive Penthouse",
@@ -4760,7 +4770,7 @@
                       "bedrooms" : 4,
                       "area" : 200,
                       "password" : "private321",
-                      "publicationState" : "PASSWORD_PROTECTED"
+                      "publicationState" : "DRAFT"
                     } ]
                   }
                 }
@@ -10302,6 +10312,19 @@
           }
         }
       },
+      "PropertyPublicationStateRequest" : {
+        "required" : [ "status" ],
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "string",
+            "description" : "Publication state to set",
+            "example" : "AVAILABLE",
+            "enum" : [ "AVAILABLE", "RENTED", "SOLD", "DRAFT" ]
+          }
+        },
+        "description" : "Request object for updating property publication state"
+      },
       "WeeklyAlertRange" : {
         "type" : "object",
         "properties" : {
@@ -11504,6 +11527,12 @@
       }
     },
     "securitySchemes" : {
+      "oAuthCode" : {
+        "type" : "apiKey",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
+        "in" : "header"
+      },
       "oAuthClientId" : {
         "type" : "apiKey",
         "description" : "OAuth client identifier (default: hallocasa_frontend)",
@@ -11514,12 +11543,6 @@
         "type" : "apiKey",
         "description" : "OAuth access token for authenticated requests",
         "name" : "O-Auth-Token",
-        "in" : "header"
-      },
-      "oAuthCode" : {
-        "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
         "in" : "header"
       }
     }

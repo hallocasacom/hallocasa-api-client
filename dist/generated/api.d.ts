@@ -3111,6 +3111,26 @@ export interface PropertyProposal {
     'lang'?: string;
 }
 /**
+ * Request object for updating property publication state
+ * @export
+ * @interface PropertyPublicationStateRequest
+ */
+export interface PropertyPublicationStateRequest {
+    /**
+     * Publication state to set
+     * @type {string}
+     * @memberof PropertyPublicationStateRequest
+     */
+    'status': PropertyPublicationStateRequestStatusEnum;
+}
+export declare const PropertyPublicationStateRequestStatusEnum: {
+    readonly Available: "AVAILABLE";
+    readonly Rented: "RENTED";
+    readonly Sold: "SOLD";
+    readonly Draft: "DRAFT";
+};
+export type PropertyPublicationStateRequestStatusEnum = typeof PropertyPublicationStateRequestStatusEnum[keyof typeof PropertyPublicationStateRequestStatusEnum];
+/**
  * Property type information
  * @export
  * @interface PropertyType
@@ -8527,11 +8547,11 @@ export declare const PropertiesApiAxiosParamCreator: (configuration?: Configurat
      *
      * @summary Publication state update
      * @param {string} propertyId Property ID
-     * @param {string} body Publication state to set
+     * @param {PropertyPublicationStateRequest} propertyPublicationStateRequest Request body containing the publication state to set
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    changePublicationStatus2: (propertyId: string, body: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    changePublicationStatus2: (propertyId: string, propertyPublicationStateRequest: PropertyPublicationStateRequest, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * This process is not reversible
      * @summary Delete the property with id supplied
@@ -8654,11 +8674,11 @@ export declare const PropertiesApiFp: (configuration?: Configuration) => {
      *
      * @summary Publication state update
      * @param {string} propertyId Property ID
-     * @param {string} body Publication state to set
+     * @param {PropertyPublicationStateRequest} propertyPublicationStateRequest Request body containing the publication state to set
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    changePublicationStatus2(propertyId: string, body: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Property>>;
+    changePublicationStatus2(propertyId: string, propertyPublicationStateRequest: PropertyPublicationStateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Property>>;
     /**
      * This process is not reversible
      * @summary Delete the property with id supplied
@@ -8906,11 +8926,11 @@ export interface PropertiesApiChangePublicationStatus2Request {
      */
     readonly propertyId: string;
     /**
-     * Publication state to set
-     * @type {string}
+     * Request body containing the publication state to set
+     * @type {PropertyPublicationStateRequest}
      * @memberof PropertiesApiChangePublicationStatus2
      */
-    readonly body: string;
+    readonly propertyPublicationStateRequest: PropertyPublicationStateRequest;
 }
 /**
  * Request parameters for deleteProperty1 operation in PropertiesApi.
