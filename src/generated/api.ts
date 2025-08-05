@@ -8950,10 +8950,11 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
          * @summary Search users within a specified group
          * @param {string} groupId Group ID
          * @param {UserFilterRequest} userFilterRequest User search filters within the group. Supports filtering by user attributes, location, skills, and social preferences. The resultRequest field controls pagination and sorting. Only one sort order can be specified at a time.
+         * @param {boolean} [bypassCache] Bypass cache and fetch fresh data from database
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        searchGroupUsers1: async (groupId: string, userFilterRequest: UserFilterRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        searchGroupUsers1: async (groupId: string, userFilterRequest: UserFilterRequest, bypassCache?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'groupId' is not null or undefined
             assertParamExists('searchGroupUsers1', 'groupId', groupId)
             // verify required parameter 'userFilterRequest' is not null or undefined
@@ -8973,6 +8974,10 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
 
             // authentication oAuthToken required
             await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Token", configuration)
+
+            if (bypassCache !== undefined) {
+                localVarQueryParameter['bypassCache'] = bypassCache;
+            }
 
 
     
@@ -9312,11 +9317,12 @@ export const GroupsApiFp = function(configuration?: Configuration) {
          * @summary Search users within a specified group
          * @param {string} groupId Group ID
          * @param {UserFilterRequest} userFilterRequest User search filters within the group. Supports filtering by user attributes, location, skills, and social preferences. The resultRequest field controls pagination and sorting. Only one sort order can be specified at a time.
+         * @param {boolean} [bypassCache] Bypass cache and fetch fresh data from database
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async searchGroupUsers1(groupId: string, userFilterRequest: UserFilterRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserFilterResult>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.searchGroupUsers1(groupId, userFilterRequest, options);
+        async searchGroupUsers1(groupId: string, userFilterRequest: UserFilterRequest, bypassCache?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserFilterResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.searchGroupUsers1(groupId, userFilterRequest, bypassCache, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GroupsApi.searchGroupUsers1']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -9544,7 +9550,7 @@ export const GroupsApiFactory = function (configuration?: Configuration, basePat
          * @throws {RequiredError}
          */
         searchGroupUsers1(requestParameters: GroupsApiSearchGroupUsers1Request, options?: RawAxiosRequestConfig): AxiosPromise<UserFilterResult> {
-            return localVarFp.searchGroupUsers1(requestParameters.groupId, requestParameters.userFilterRequest, options).then((request) => request(axios, basePath));
+            return localVarFp.searchGroupUsers1(requestParameters.groupId, requestParameters.userFilterRequest, requestParameters.bypassCache, options).then((request) => request(axios, basePath));
         },
         /**
          * Acceptable Status values are:  ACCEPTED, REJECTED, REMOVED
@@ -9928,6 +9934,13 @@ export interface GroupsApiSearchGroupUsers1Request {
      * @memberof GroupsApiSearchGroupUsers1
      */
     readonly userFilterRequest: UserFilterRequest
+
+    /**
+     * Bypass cache and fetch fresh data from database
+     * @type {boolean}
+     * @memberof GroupsApiSearchGroupUsers1
+     */
+    readonly bypassCache?: boolean
 }
 
 /**
@@ -10202,7 +10215,7 @@ export class GroupsApi extends BaseAPI {
      * @memberof GroupsApi
      */
     public searchGroupUsers1(requestParameters: GroupsApiSearchGroupUsers1Request, options?: RawAxiosRequestConfig) {
-        return GroupsApiFp(this.configuration).searchGroupUsers1(requestParameters.groupId, requestParameters.userFilterRequest, options).then((request) => request(this.axios, this.basePath));
+        return GroupsApiFp(this.configuration).searchGroupUsers1(requestParameters.groupId, requestParameters.userFilterRequest, requestParameters.bypassCache, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10659,6 +10672,487 @@ export class LocalesApi extends BaseAPI {
      */
     public getLanguages1(requestParameters: LocalesApiGetLanguages1Request = {}, options?: RawAxiosRequestConfig) {
         return LocalesApiFp(this.configuration).getLanguages1(requestParameters.lang, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * LocationCacheApi - axios parameter creator
+ * @export
+ */
+export const LocationCacheApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Returns detailed statistics about all location caches including hit rates, entry counts, and memory usage
+         * @summary Get location cache statistics
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCacheStatistics1: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/location/cache/statistics`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Invalidates all location caches. Use with caution - this will clear all cached location data.
+         * @summary Invalidate all location caches
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        invalidateAllCaches1: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/location/cache/all`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Invalidates the geocoding cache entry for a specific address and country
+         * @summary Invalidate geocoding cache
+         * @param {string} address The formatted address
+         * @param {string} countryCode The country code
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        invalidateGeocodingCache1: async (address: string, countryCode: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'address' is not null or undefined
+            assertParamExists('invalidateGeocodingCache1', 'address', address)
+            // verify required parameter 'countryCode' is not null or undefined
+            assertParamExists('invalidateGeocodingCache1', 'countryCode', countryCode)
+            const localVarPath = `/location/cache/geocoding`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+            if (address !== undefined) {
+                localVarQueryParameter['address'] = address;
+            }
+
+            if (countryCode !== undefined) {
+                localVarQueryParameter['countryCode'] = countryCode;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Invalidates the places search cache entry for specific search text
+         * @summary Invalidate places search cache
+         * @param {string} text Search text
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        invalidatePlacesSearchCache1: async (text: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'text' is not null or undefined
+            assertParamExists('invalidatePlacesSearchCache1', 'text', text)
+            const localVarPath = `/location/cache/places-search`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+            if (text !== undefined) {
+                localVarQueryParameter['text'] = text;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Invalidates the reverse geocoding cache entry for specific coordinates
+         * @summary Invalidate reverse geocoding cache
+         * @param {number} latitude Latitude
+         * @param {number} longitude Longitude
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        invalidateReverseGeocodingCache1: async (latitude: number, longitude: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'latitude' is not null or undefined
+            assertParamExists('invalidateReverseGeocodingCache1', 'latitude', latitude)
+            // verify required parameter 'longitude' is not null or undefined
+            assertParamExists('invalidateReverseGeocodingCache1', 'longitude', longitude)
+            const localVarPath = `/location/cache/reverse-geocoding`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+            if (latitude !== undefined) {
+                localVarQueryParameter['latitude'] = latitude;
+            }
+
+            if (longitude !== undefined) {
+                localVarQueryParameter['longitude'] = longitude;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * LocationCacheApi - functional programming interface
+ * @export
+ */
+export const LocationCacheApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = LocationCacheApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Returns detailed statistics about all location caches including hit rates, entry counts, and memory usage
+         * @summary Get location cache statistics
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getCacheStatistics1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCacheStatistics1(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['LocationCacheApi.getCacheStatistics1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Invalidates all location caches. Use with caution - this will clear all cached location data.
+         * @summary Invalidate all location caches
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async invalidateAllCaches1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.invalidateAllCaches1(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['LocationCacheApi.invalidateAllCaches1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Invalidates the geocoding cache entry for a specific address and country
+         * @summary Invalidate geocoding cache
+         * @param {string} address The formatted address
+         * @param {string} countryCode The country code
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async invalidateGeocodingCache1(address: string, countryCode: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.invalidateGeocodingCache1(address, countryCode, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['LocationCacheApi.invalidateGeocodingCache1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Invalidates the places search cache entry for specific search text
+         * @summary Invalidate places search cache
+         * @param {string} text Search text
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async invalidatePlacesSearchCache1(text: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.invalidatePlacesSearchCache1(text, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['LocationCacheApi.invalidatePlacesSearchCache1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Invalidates the reverse geocoding cache entry for specific coordinates
+         * @summary Invalidate reverse geocoding cache
+         * @param {number} latitude Latitude
+         * @param {number} longitude Longitude
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async invalidateReverseGeocodingCache1(latitude: number, longitude: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.invalidateReverseGeocodingCache1(latitude, longitude, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['LocationCacheApi.invalidateReverseGeocodingCache1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * LocationCacheApi - factory interface
+ * @export
+ */
+export const LocationCacheApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = LocationCacheApiFp(configuration)
+    return {
+        /**
+         * Returns detailed statistics about all location caches including hit rates, entry counts, and memory usage
+         * @summary Get location cache statistics
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCacheStatistics1(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.getCacheStatistics1(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Invalidates all location caches. Use with caution - this will clear all cached location data.
+         * @summary Invalidate all location caches
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        invalidateAllCaches1(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.invalidateAllCaches1(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Invalidates the geocoding cache entry for a specific address and country
+         * @summary Invalidate geocoding cache
+         * @param {LocationCacheApiInvalidateGeocodingCache1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        invalidateGeocodingCache1(requestParameters: LocationCacheApiInvalidateGeocodingCache1Request, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.invalidateGeocodingCache1(requestParameters.address, requestParameters.countryCode, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Invalidates the places search cache entry for specific search text
+         * @summary Invalidate places search cache
+         * @param {LocationCacheApiInvalidatePlacesSearchCache1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        invalidatePlacesSearchCache1(requestParameters: LocationCacheApiInvalidatePlacesSearchCache1Request, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.invalidatePlacesSearchCache1(requestParameters.text, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Invalidates the reverse geocoding cache entry for specific coordinates
+         * @summary Invalidate reverse geocoding cache
+         * @param {LocationCacheApiInvalidateReverseGeocodingCache1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        invalidateReverseGeocodingCache1(requestParameters: LocationCacheApiInvalidateReverseGeocodingCache1Request, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.invalidateReverseGeocodingCache1(requestParameters.latitude, requestParameters.longitude, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * Request parameters for invalidateGeocodingCache1 operation in LocationCacheApi.
+ * @export
+ * @interface LocationCacheApiInvalidateGeocodingCache1Request
+ */
+export interface LocationCacheApiInvalidateGeocodingCache1Request {
+    /**
+     * The formatted address
+     * @type {string}
+     * @memberof LocationCacheApiInvalidateGeocodingCache1
+     */
+    readonly address: string
+
+    /**
+     * The country code
+     * @type {string}
+     * @memberof LocationCacheApiInvalidateGeocodingCache1
+     */
+    readonly countryCode: string
+}
+
+/**
+ * Request parameters for invalidatePlacesSearchCache1 operation in LocationCacheApi.
+ * @export
+ * @interface LocationCacheApiInvalidatePlacesSearchCache1Request
+ */
+export interface LocationCacheApiInvalidatePlacesSearchCache1Request {
+    /**
+     * Search text
+     * @type {string}
+     * @memberof LocationCacheApiInvalidatePlacesSearchCache1
+     */
+    readonly text: string
+}
+
+/**
+ * Request parameters for invalidateReverseGeocodingCache1 operation in LocationCacheApi.
+ * @export
+ * @interface LocationCacheApiInvalidateReverseGeocodingCache1Request
+ */
+export interface LocationCacheApiInvalidateReverseGeocodingCache1Request {
+    /**
+     * Latitude
+     * @type {number}
+     * @memberof LocationCacheApiInvalidateReverseGeocodingCache1
+     */
+    readonly latitude: number
+
+    /**
+     * Longitude
+     * @type {number}
+     * @memberof LocationCacheApiInvalidateReverseGeocodingCache1
+     */
+    readonly longitude: number
+}
+
+/**
+ * LocationCacheApi - object-oriented interface
+ * @export
+ * @class LocationCacheApi
+ * @extends {BaseAPI}
+ */
+export class LocationCacheApi extends BaseAPI {
+    /**
+     * Returns detailed statistics about all location caches including hit rates, entry counts, and memory usage
+     * @summary Get location cache statistics
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LocationCacheApi
+     */
+    public getCacheStatistics1(options?: RawAxiosRequestConfig) {
+        return LocationCacheApiFp(this.configuration).getCacheStatistics1(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Invalidates all location caches. Use with caution - this will clear all cached location data.
+     * @summary Invalidate all location caches
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LocationCacheApi
+     */
+    public invalidateAllCaches1(options?: RawAxiosRequestConfig) {
+        return LocationCacheApiFp(this.configuration).invalidateAllCaches1(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Invalidates the geocoding cache entry for a specific address and country
+     * @summary Invalidate geocoding cache
+     * @param {LocationCacheApiInvalidateGeocodingCache1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LocationCacheApi
+     */
+    public invalidateGeocodingCache1(requestParameters: LocationCacheApiInvalidateGeocodingCache1Request, options?: RawAxiosRequestConfig) {
+        return LocationCacheApiFp(this.configuration).invalidateGeocodingCache1(requestParameters.address, requestParameters.countryCode, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Invalidates the places search cache entry for specific search text
+     * @summary Invalidate places search cache
+     * @param {LocationCacheApiInvalidatePlacesSearchCache1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LocationCacheApi
+     */
+    public invalidatePlacesSearchCache1(requestParameters: LocationCacheApiInvalidatePlacesSearchCache1Request, options?: RawAxiosRequestConfig) {
+        return LocationCacheApiFp(this.configuration).invalidatePlacesSearchCache1(requestParameters.text, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Invalidates the reverse geocoding cache entry for specific coordinates
+     * @summary Invalidate reverse geocoding cache
+     * @param {LocationCacheApiInvalidateReverseGeocodingCache1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LocationCacheApi
+     */
+    public invalidateReverseGeocodingCache1(requestParameters: LocationCacheApiInvalidateReverseGeocodingCache1Request, options?: RawAxiosRequestConfig) {
+        return LocationCacheApiFp(this.configuration).invalidateReverseGeocodingCache1(requestParameters.latitude, requestParameters.longitude, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

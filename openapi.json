@@ -34,6 +34,9 @@
     "name" : "locales",
     "description" : "Operations related to locale management"
   }, {
+    "name" : "Location Cache",
+    "description" : "Location cache management and statistics"
+  }, {
     "name" : "property-bulk-download",
     "description" : "Operations related to property bulk downloads and exports"
   }, {
@@ -1623,6 +1626,116 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/location/cache/statistics" : {
+      "get" : {
+        "tags" : [ "Location Cache" ],
+        "summary" : "Get location cache statistics",
+        "description" : "Returns detailed statistics about all location caches including hit rates, entry counts, and memory usage",
+        "operationId" : "getCacheStatistics_1",
+        "responses" : {
+          "200" : {
+            "description" : "Cache statistics retrieved successfully"
+          }
+        }
+      }
+    },
+    "/location/cache/all" : {
+      "delete" : {
+        "tags" : [ "Location Cache" ],
+        "summary" : "Invalidate all location caches",
+        "description" : "Invalidates all location caches. Use with caution - this will clear all cached location data.",
+        "operationId" : "invalidateAllCaches_1",
+        "responses" : {
+          "200" : {
+            "description" : "All caches invalidated successfully"
+          }
+        }
+      }
+    },
+    "/location/cache/geocoding" : {
+      "delete" : {
+        "tags" : [ "Location Cache" ],
+        "summary" : "Invalidate geocoding cache",
+        "description" : "Invalidates the geocoding cache entry for a specific address and country",
+        "operationId" : "invalidateGeocodingCache_1",
+        "parameters" : [ {
+          "name" : "address",
+          "in" : "query",
+          "description" : "The formatted address",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "countryCode",
+          "in" : "query",
+          "description" : "The country code",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Cache invalidated successfully"
+          }
+        }
+      }
+    },
+    "/location/cache/places-search" : {
+      "delete" : {
+        "tags" : [ "Location Cache" ],
+        "summary" : "Invalidate places search cache",
+        "description" : "Invalidates the places search cache entry for specific search text",
+        "operationId" : "invalidatePlacesSearchCache_1",
+        "parameters" : [ {
+          "name" : "text",
+          "in" : "query",
+          "description" : "Search text",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Cache invalidated successfully"
+          }
+        }
+      }
+    },
+    "/location/cache/reverse-geocoding" : {
+      "delete" : {
+        "tags" : [ "Location Cache" ],
+        "summary" : "Invalidate reverse geocoding cache",
+        "description" : "Invalidates the reverse geocoding cache entry for specific coordinates",
+        "operationId" : "invalidateReverseGeocodingCache_1",
+        "parameters" : [ {
+          "name" : "latitude",
+          "in" : "query",
+          "description" : "Latitude",
+          "required" : true,
+          "schema" : {
+            "type" : "number",
+            "format" : "double"
+          }
+        }, {
+          "name" : "longitude",
+          "in" : "query",
+          "description" : "Longitude",
+          "required" : true,
+          "schema" : {
+            "type" : "number",
+            "format" : "double"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Cache invalidated successfully"
           }
         }
       }
@@ -7022,6 +7135,15 @@
             "type" : "string"
           },
           "example" : "group123"
+        }, {
+          "name" : "bypassCache",
+          "in" : "query",
+          "description" : "Bypass cache and fetch fresh data from database",
+          "schema" : {
+            "type" : "boolean",
+            "default" : false
+          },
+          "example" : true
         } ],
         "requestBody" : {
           "description" : "User search filters within the group. Supports filtering by user attributes, location, skills, and social preferences. The resultRequest field controls pagination and sorting. Only one sort order can be specified at a time.",
@@ -11536,10 +11658,10 @@
       }
     },
     "securitySchemes" : {
-      "oAuthCode" : {
+      "oAuthToken" : {
         "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
         "in" : "header"
       },
       "oAuthClientId" : {
@@ -11548,10 +11670,10 @@
         "name" : "O-Auth-Client-Id",
         "in" : "header"
       },
-      "oAuthToken" : {
+      "oAuthCode" : {
         "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
         "in" : "header"
       }
     }

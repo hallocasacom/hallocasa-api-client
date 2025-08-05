@@ -18,8 +18,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BrokeragesApiAxiosParamCreator = exports.AttachmentsApi = exports.AttachmentsApiFactory = exports.AttachmentsApiFp = exports.AttachmentsApiAxiosParamCreator = exports.AllowancesApi = exports.AllowancesApiFactory = exports.AllowancesApiFp = exports.AllowancesApiAxiosParamCreator = exports.AlertsApi = exports.AlertsApiFactory = exports.AlertsApiFp = exports.AlertsApiAxiosParamCreator = exports.UserSubscriptionDtoStatusEnum = exports.UserSubscriptionDtoRenewalTypeEnum = exports.UserGroupGroupTypeEnum = exports.UserSubscriptionPlanNameEnum = exports.SubscriptionPriceDtoRenewalTypeEnum = exports.SkilledUserSubscriptionPlanNameEnum = exports.PropertyPublicationStateRequestStatusEnum = exports.PropertyFieldHcListerOptionEnum = exports.PropertyFieldData3TypeEnum = exports.PropertyFieldData2TypeEnum = exports.PropertyFieldData1TypeEnum = exports.PropertyFieldTextTypeEnum = exports.PropertyPublicationStateEnum = exports.NotificationTypeEnum = exports.HcFilterTypeEntryRangeFieldPresentationEnum = exports.HcFilterTypeEntryFilterTypeNatureEnum = exports.HcFilterTypeRangeFieldPresentationEnum = exports.HcFilterTypeFilterTypeNatureEnum = exports.HcFilterEntryFilterWorkerOptionEnum = exports.HcFilterEntryChoiceEnum = exports.HcFilterConditionMaxOperandEnum = exports.HcFilterConditionMinOperandEnum = exports.HcFilterHcListerOptionEnum = exports.HcFilterFilterWorkerOptionEnum = exports.HcFilterChoiceEnum = exports.GroupMemberGroupMemberStatusEnum = exports.GroupRequestStatusEnum = exports.GroupGroupTypeEnum = exports.GroupGroupStatusEnum = exports.FilterShowingStepSequenceAfterEnum = exports.FilterShowingStepSequenceBeforeEnum = exports.FavoriteResourceTypeEnum = exports.DropdownOptionGroupTranslationManagementEnum = exports.ConversationSummaryChatAllowanceTypeEnum = exports.CheckoutSessionDtoStatusEnum = exports.ChatAllowanceChatAllowanceTypeEnum = exports.AlertUserAlertTypeEnum = void 0;
 exports.LanguagesApiAxiosParamCreator = exports.UpdateGroupMembershipStatus1StatusEnum = exports.RequestGroupTypeChange1RequestStatusEnum = exports.GroupsApi = exports.GroupsApiFactory = exports.GroupsApiFp = exports.GroupsApiAxiosParamCreator = exports.GeoLocationApi = exports.GeoLocationApiFactory = exports.GeoLocationApiFp = exports.GeoLocationApiAxiosParamCreator = exports.FavoritesApi = exports.FavoritesApiFactory = exports.FavoritesApiFp = exports.FavoritesApiAxiosParamCreator = exports.FacebookPropertiesApi = exports.FacebookPropertiesApiFactory = exports.FacebookPropertiesApiFp = exports.FacebookPropertiesApiAxiosParamCreator = exports.ExchangeRatesApi = exports.ExchangeRatesApiFactory = exports.ExchangeRatesApiFp = exports.ExchangeRatesApiAxiosParamCreator = exports.EndorsementsApi = exports.EndorsementsApiFactory = exports.EndorsementsApiFp = exports.EndorsementsApiAxiosParamCreator = exports.CustomerSessionsApi = exports.CustomerSessionsApiFactory = exports.CustomerSessionsApiFp = exports.CustomerSessionsApiAxiosParamCreator = exports.CurrencyManagementApi = exports.CurrencyManagementApiFactory = exports.CurrencyManagementApiFp = exports.CurrencyManagementApiAxiosParamCreator = exports.CountriesApi = exports.CountriesApiFactory = exports.CountriesApiFp = exports.CountriesApiAxiosParamCreator = exports.CheckoutSessionsApi = exports.CheckoutSessionsApiFactory = exports.CheckoutSessionsApiFp = exports.CheckoutSessionsApiAxiosParamCreator = exports.ChatTicketsApi = exports.ChatTicketsApiFactory = exports.ChatTicketsApiFp = exports.ChatTicketsApiAxiosParamCreator = exports.BrokeragesApi = exports.BrokeragesApiFactory = exports.BrokeragesApiFp = void 0;
-exports.PropertyProposalsApi = exports.PropertyProposalsApiFactory = exports.PropertyProposalsApiFp = exports.PropertyProposalsApiAxiosParamCreator = exports.PropertyLocationsApi = exports.PropertyLocationsApiFactory = exports.PropertyLocationsApiFp = exports.PropertyLocationsApiAxiosParamCreator = exports.PropertyFiltersApi = exports.PropertyFiltersApiFactory = exports.PropertyFiltersApiFp = exports.PropertyFiltersApiAxiosParamCreator = exports.PropertyFieldsApi = exports.PropertyFieldsApiFactory = exports.PropertyFieldsApiFp = exports.PropertyFieldsApiAxiosParamCreator = exports.UploadPropertiesFromUrl1FormatEnum = exports.UploadProperties1FormatEnum = exports.PropertyBulkUploadsApi = exports.PropertyBulkUploadsApiFactory = exports.PropertyBulkUploadsApiFp = exports.PropertyBulkUploadsApiAxiosParamCreator = exports.PropertyBulkDownloadApi = exports.PropertyBulkDownloadApiFactory = exports.PropertyBulkDownloadApiFp = exports.PropertyBulkDownloadApiAxiosParamCreator = exports.PropertiesApi = exports.PropertiesApiFactory = exports.PropertiesApiFp = exports.PropertiesApiAxiosParamCreator = exports.PhonePrefixesApi = exports.PhonePrefixesApiFactory = exports.PhonePrefixesApiFp = exports.PhonePrefixesApiAxiosParamCreator = exports.PasswordRecoveryApi = exports.PasswordRecoveryApiFactory = exports.PasswordRecoveryApiFp = exports.PasswordRecoveryApiAxiosParamCreator = exports.GetByUserWithResult1TypeEnum = exports.MessagesApi = exports.MessagesApiFactory = exports.MessagesApiFp = exports.MessagesApiAxiosParamCreator = exports.LocalesApi = exports.LocalesApiFactory = exports.LocalesApiFp = exports.LocalesApiAxiosParamCreator = exports.LanguagesApi = exports.LanguagesApiFactory = exports.LanguagesApiFp = void 0;
-exports.GetSubscribedUsers1SubscriptionPlanNameEnum = exports.UsersApi = exports.UsersApiFactory = exports.UsersApiFp = exports.UsersApiAxiosParamCreator = exports.UserTypesApi = exports.UserTypesApiFactory = exports.UserTypesApiFp = exports.UserTypesApiAxiosParamCreator = exports.UserSummaryApi = exports.UserSummaryApiFactory = exports.UserSummaryApiFp = exports.UserSummaryApiAxiosParamCreator = exports.UserContractsApi = exports.UserContractsApiFactory = exports.UserContractsApiFp = exports.UserContractsApiAxiosParamCreator = exports.UserConnectionsApi = exports.UserConnectionsApiFactory = exports.UserConnectionsApiFp = exports.UserConnectionsApiAxiosParamCreator = exports.TextTranslationsApi = exports.TextTranslationsApiFactory = exports.TextTranslationsApiFp = exports.TextTranslationsApiAxiosParamCreator = exports.TestimonialApi = exports.TestimonialApiFactory = exports.TestimonialApiFp = exports.TestimonialApiAxiosParamCreator = exports.SubscriptionsApi = exports.SubscriptionsApiFactory = exports.SubscriptionsApiFp = exports.SubscriptionsApiAxiosParamCreator = exports.StripeWebhooksApi = exports.StripeWebhooksApiFactory = exports.StripeWebhooksApiFp = exports.StripeWebhooksApiAxiosParamCreator = exports.SkillsApi = exports.SkillsApiFactory = exports.SkillsApiFp = exports.SkillsApiAxiosParamCreator = exports.SecurityApi = exports.SecurityApiFactory = exports.SecurityApiFp = exports.SecurityApiAxiosParamCreator = exports.PropertyTypesApi = exports.PropertyTypesApiFactory = exports.PropertyTypesApiFp = exports.PropertyTypesApiAxiosParamCreator = void 0;
+exports.PropertyLocationsApi = exports.PropertyLocationsApiFactory = exports.PropertyLocationsApiFp = exports.PropertyLocationsApiAxiosParamCreator = exports.PropertyFiltersApi = exports.PropertyFiltersApiFactory = exports.PropertyFiltersApiFp = exports.PropertyFiltersApiAxiosParamCreator = exports.PropertyFieldsApi = exports.PropertyFieldsApiFactory = exports.PropertyFieldsApiFp = exports.PropertyFieldsApiAxiosParamCreator = exports.UploadPropertiesFromUrl1FormatEnum = exports.UploadProperties1FormatEnum = exports.PropertyBulkUploadsApi = exports.PropertyBulkUploadsApiFactory = exports.PropertyBulkUploadsApiFp = exports.PropertyBulkUploadsApiAxiosParamCreator = exports.PropertyBulkDownloadApi = exports.PropertyBulkDownloadApiFactory = exports.PropertyBulkDownloadApiFp = exports.PropertyBulkDownloadApiAxiosParamCreator = exports.PropertiesApi = exports.PropertiesApiFactory = exports.PropertiesApiFp = exports.PropertiesApiAxiosParamCreator = exports.PhonePrefixesApi = exports.PhonePrefixesApiFactory = exports.PhonePrefixesApiFp = exports.PhonePrefixesApiAxiosParamCreator = exports.PasswordRecoveryApi = exports.PasswordRecoveryApiFactory = exports.PasswordRecoveryApiFp = exports.PasswordRecoveryApiAxiosParamCreator = exports.GetByUserWithResult1TypeEnum = exports.MessagesApi = exports.MessagesApiFactory = exports.MessagesApiFp = exports.MessagesApiAxiosParamCreator = exports.LocationCacheApi = exports.LocationCacheApiFactory = exports.LocationCacheApiFp = exports.LocationCacheApiAxiosParamCreator = exports.LocalesApi = exports.LocalesApiFactory = exports.LocalesApiFp = exports.LocalesApiAxiosParamCreator = exports.LanguagesApi = exports.LanguagesApiFactory = exports.LanguagesApiFp = void 0;
+exports.UsersApiFp = exports.UsersApiAxiosParamCreator = exports.UserTypesApi = exports.UserTypesApiFactory = exports.UserTypesApiFp = exports.UserTypesApiAxiosParamCreator = exports.UserSummaryApi = exports.UserSummaryApiFactory = exports.UserSummaryApiFp = exports.UserSummaryApiAxiosParamCreator = exports.UserContractsApi = exports.UserContractsApiFactory = exports.UserContractsApiFp = exports.UserContractsApiAxiosParamCreator = exports.UserConnectionsApi = exports.UserConnectionsApiFactory = exports.UserConnectionsApiFp = exports.UserConnectionsApiAxiosParamCreator = exports.TextTranslationsApi = exports.TextTranslationsApiFactory = exports.TextTranslationsApiFp = exports.TextTranslationsApiAxiosParamCreator = exports.TestimonialApi = exports.TestimonialApiFactory = exports.TestimonialApiFp = exports.TestimonialApiAxiosParamCreator = exports.SubscriptionsApi = exports.SubscriptionsApiFactory = exports.SubscriptionsApiFp = exports.SubscriptionsApiAxiosParamCreator = exports.StripeWebhooksApi = exports.StripeWebhooksApiFactory = exports.StripeWebhooksApiFp = exports.StripeWebhooksApiAxiosParamCreator = exports.SkillsApi = exports.SkillsApiFactory = exports.SkillsApiFp = exports.SkillsApiAxiosParamCreator = exports.SecurityApi = exports.SecurityApiFactory = exports.SecurityApiFp = exports.SecurityApiAxiosParamCreator = exports.PropertyTypesApi = exports.PropertyTypesApiFactory = exports.PropertyTypesApiFp = exports.PropertyTypesApiAxiosParamCreator = exports.PropertyProposalsApi = exports.PropertyProposalsApiFactory = exports.PropertyProposalsApiFp = exports.PropertyProposalsApiAxiosParamCreator = void 0;
+exports.GetSubscribedUsers1SubscriptionPlanNameEnum = exports.UsersApi = exports.UsersApiFactory = void 0;
 const axios_1 = __importDefault(require("axios"));
 // Some imports not used depending on template conditions
 // @ts-ignore
@@ -3300,10 +3301,11 @@ const GroupsApiAxiosParamCreator = function (configuration) {
          * @summary Search users within a specified group
          * @param {string} groupId Group ID
          * @param {UserFilterRequest} userFilterRequest User search filters within the group. Supports filtering by user attributes, location, skills, and social preferences. The resultRequest field controls pagination and sorting. Only one sort order can be specified at a time.
+         * @param {boolean} [bypassCache] Bypass cache and fetch fresh data from database
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        searchGroupUsers1: async (groupId, userFilterRequest, options = {}) => {
+        searchGroupUsers1: async (groupId, userFilterRequest, bypassCache, options = {}) => {
             // verify required parameter 'groupId' is not null or undefined
             (0, common_1.assertParamExists)('searchGroupUsers1', 'groupId', groupId);
             // verify required parameter 'userFilterRequest' is not null or undefined
@@ -3321,6 +3323,9 @@ const GroupsApiAxiosParamCreator = function (configuration) {
             const localVarQueryParameter = {};
             // authentication oAuthToken required
             await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Token", configuration);
+            if (bypassCache !== undefined) {
+                localVarQueryParameter['bypassCache'] = bypassCache;
+            }
             localVarHeaderParameter['Content-Type'] = 'application/json';
             (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -3646,11 +3651,12 @@ const GroupsApiFp = function (configuration) {
          * @summary Search users within a specified group
          * @param {string} groupId Group ID
          * @param {UserFilterRequest} userFilterRequest User search filters within the group. Supports filtering by user attributes, location, skills, and social preferences. The resultRequest field controls pagination and sorting. Only one sort order can be specified at a time.
+         * @param {boolean} [bypassCache] Bypass cache and fetch fresh data from database
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async searchGroupUsers1(groupId, userFilterRequest, options) {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.searchGroupUsers1(groupId, userFilterRequest, options);
+        async searchGroupUsers1(groupId, userFilterRequest, bypassCache, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.searchGroupUsers1(groupId, userFilterRequest, bypassCache, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = base_1.operationServerMap['GroupsApi.searchGroupUsers1']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3878,7 +3884,7 @@ const GroupsApiFactory = function (configuration, basePath, axios) {
          * @throws {RequiredError}
          */
         searchGroupUsers1(requestParameters, options) {
-            return localVarFp.searchGroupUsers1(requestParameters.groupId, requestParameters.userFilterRequest, options).then((request) => request(axios, basePath));
+            return localVarFp.searchGroupUsers1(requestParameters.groupId, requestParameters.userFilterRequest, requestParameters.bypassCache, options).then((request) => request(axios, basePath));
         },
         /**
          * Acceptable Status values are:  ACCEPTED, REJECTED, REMOVED
@@ -4118,7 +4124,7 @@ class GroupsApi extends base_1.BaseAPI {
      * @memberof GroupsApi
      */
     searchGroupUsers1(requestParameters, options) {
-        return (0, exports.GroupsApiFp)(this.configuration).searchGroupUsers1(requestParameters.groupId, requestParameters.userFilterRequest, options).then((request) => request(this.axios, this.basePath));
+        return (0, exports.GroupsApiFp)(this.configuration).searchGroupUsers1(requestParameters.groupId, requestParameters.userFilterRequest, requestParameters.bypassCache, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Acceptable Status values are:  ACCEPTED, REJECTED, REMOVED
@@ -4491,6 +4497,385 @@ class LocalesApi extends base_1.BaseAPI {
     }
 }
 exports.LocalesApi = LocalesApi;
+/**
+ * LocationCacheApi - axios parameter creator
+ * @export
+ */
+const LocationCacheApiAxiosParamCreator = function (configuration) {
+    return {
+        /**
+         * Returns detailed statistics about all location caches including hit rates, entry counts, and memory usage
+         * @summary Get location cache statistics
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCacheStatistics1: async (options = {}) => {
+            const localVarPath = `/location/cache/statistics`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Invalidates all location caches. Use with caution - this will clear all cached location data.
+         * @summary Invalidate all location caches
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        invalidateAllCaches1: async (options = {}) => {
+            const localVarPath = `/location/cache/all`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Invalidates the geocoding cache entry for a specific address and country
+         * @summary Invalidate geocoding cache
+         * @param {string} address The formatted address
+         * @param {string} countryCode The country code
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        invalidateGeocodingCache1: async (address, countryCode, options = {}) => {
+            // verify required parameter 'address' is not null or undefined
+            (0, common_1.assertParamExists)('invalidateGeocodingCache1', 'address', address);
+            // verify required parameter 'countryCode' is not null or undefined
+            (0, common_1.assertParamExists)('invalidateGeocodingCache1', 'countryCode', countryCode);
+            const localVarPath = `/location/cache/geocoding`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            if (address !== undefined) {
+                localVarQueryParameter['address'] = address;
+            }
+            if (countryCode !== undefined) {
+                localVarQueryParameter['countryCode'] = countryCode;
+            }
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Invalidates the places search cache entry for specific search text
+         * @summary Invalidate places search cache
+         * @param {string} text Search text
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        invalidatePlacesSearchCache1: async (text, options = {}) => {
+            // verify required parameter 'text' is not null or undefined
+            (0, common_1.assertParamExists)('invalidatePlacesSearchCache1', 'text', text);
+            const localVarPath = `/location/cache/places-search`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            if (text !== undefined) {
+                localVarQueryParameter['text'] = text;
+            }
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Invalidates the reverse geocoding cache entry for specific coordinates
+         * @summary Invalidate reverse geocoding cache
+         * @param {number} latitude Latitude
+         * @param {number} longitude Longitude
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        invalidateReverseGeocodingCache1: async (latitude, longitude, options = {}) => {
+            // verify required parameter 'latitude' is not null or undefined
+            (0, common_1.assertParamExists)('invalidateReverseGeocodingCache1', 'latitude', latitude);
+            // verify required parameter 'longitude' is not null or undefined
+            (0, common_1.assertParamExists)('invalidateReverseGeocodingCache1', 'longitude', longitude);
+            const localVarPath = `/location/cache/reverse-geocoding`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            if (latitude !== undefined) {
+                localVarQueryParameter['latitude'] = latitude;
+            }
+            if (longitude !== undefined) {
+                localVarQueryParameter['longitude'] = longitude;
+            }
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    };
+};
+exports.LocationCacheApiAxiosParamCreator = LocationCacheApiAxiosParamCreator;
+/**
+ * LocationCacheApi - functional programming interface
+ * @export
+ */
+const LocationCacheApiFp = function (configuration) {
+    const localVarAxiosParamCreator = (0, exports.LocationCacheApiAxiosParamCreator)(configuration);
+    return {
+        /**
+         * Returns detailed statistics about all location caches including hit rates, entry counts, and memory usage
+         * @summary Get location cache statistics
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getCacheStatistics1(options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCacheStatistics1(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['LocationCacheApi.getCacheStatistics1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Invalidates all location caches. Use with caution - this will clear all cached location data.
+         * @summary Invalidate all location caches
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async invalidateAllCaches1(options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.invalidateAllCaches1(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['LocationCacheApi.invalidateAllCaches1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Invalidates the geocoding cache entry for a specific address and country
+         * @summary Invalidate geocoding cache
+         * @param {string} address The formatted address
+         * @param {string} countryCode The country code
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async invalidateGeocodingCache1(address, countryCode, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.invalidateGeocodingCache1(address, countryCode, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['LocationCacheApi.invalidateGeocodingCache1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Invalidates the places search cache entry for specific search text
+         * @summary Invalidate places search cache
+         * @param {string} text Search text
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async invalidatePlacesSearchCache1(text, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.invalidatePlacesSearchCache1(text, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['LocationCacheApi.invalidatePlacesSearchCache1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Invalidates the reverse geocoding cache entry for specific coordinates
+         * @summary Invalidate reverse geocoding cache
+         * @param {number} latitude Latitude
+         * @param {number} longitude Longitude
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async invalidateReverseGeocodingCache1(latitude, longitude, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.invalidateReverseGeocodingCache1(latitude, longitude, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['LocationCacheApi.invalidateReverseGeocodingCache1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    };
+};
+exports.LocationCacheApiFp = LocationCacheApiFp;
+/**
+ * LocationCacheApi - factory interface
+ * @export
+ */
+const LocationCacheApiFactory = function (configuration, basePath, axios) {
+    const localVarFp = (0, exports.LocationCacheApiFp)(configuration);
+    return {
+        /**
+         * Returns detailed statistics about all location caches including hit rates, entry counts, and memory usage
+         * @summary Get location cache statistics
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCacheStatistics1(options) {
+            return localVarFp.getCacheStatistics1(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Invalidates all location caches. Use with caution - this will clear all cached location data.
+         * @summary Invalidate all location caches
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        invalidateAllCaches1(options) {
+            return localVarFp.invalidateAllCaches1(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Invalidates the geocoding cache entry for a specific address and country
+         * @summary Invalidate geocoding cache
+         * @param {LocationCacheApiInvalidateGeocodingCache1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        invalidateGeocodingCache1(requestParameters, options) {
+            return localVarFp.invalidateGeocodingCache1(requestParameters.address, requestParameters.countryCode, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Invalidates the places search cache entry for specific search text
+         * @summary Invalidate places search cache
+         * @param {LocationCacheApiInvalidatePlacesSearchCache1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        invalidatePlacesSearchCache1(requestParameters, options) {
+            return localVarFp.invalidatePlacesSearchCache1(requestParameters.text, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Invalidates the reverse geocoding cache entry for specific coordinates
+         * @summary Invalidate reverse geocoding cache
+         * @param {LocationCacheApiInvalidateReverseGeocodingCache1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        invalidateReverseGeocodingCache1(requestParameters, options) {
+            return localVarFp.invalidateReverseGeocodingCache1(requestParameters.latitude, requestParameters.longitude, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+exports.LocationCacheApiFactory = LocationCacheApiFactory;
+/**
+ * LocationCacheApi - object-oriented interface
+ * @export
+ * @class LocationCacheApi
+ * @extends {BaseAPI}
+ */
+class LocationCacheApi extends base_1.BaseAPI {
+    /**
+     * Returns detailed statistics about all location caches including hit rates, entry counts, and memory usage
+     * @summary Get location cache statistics
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LocationCacheApi
+     */
+    getCacheStatistics1(options) {
+        return (0, exports.LocationCacheApiFp)(this.configuration).getCacheStatistics1(options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Invalidates all location caches. Use with caution - this will clear all cached location data.
+     * @summary Invalidate all location caches
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LocationCacheApi
+     */
+    invalidateAllCaches1(options) {
+        return (0, exports.LocationCacheApiFp)(this.configuration).invalidateAllCaches1(options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Invalidates the geocoding cache entry for a specific address and country
+     * @summary Invalidate geocoding cache
+     * @param {LocationCacheApiInvalidateGeocodingCache1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LocationCacheApi
+     */
+    invalidateGeocodingCache1(requestParameters, options) {
+        return (0, exports.LocationCacheApiFp)(this.configuration).invalidateGeocodingCache1(requestParameters.address, requestParameters.countryCode, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Invalidates the places search cache entry for specific search text
+     * @summary Invalidate places search cache
+     * @param {LocationCacheApiInvalidatePlacesSearchCache1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LocationCacheApi
+     */
+    invalidatePlacesSearchCache1(requestParameters, options) {
+        return (0, exports.LocationCacheApiFp)(this.configuration).invalidatePlacesSearchCache1(requestParameters.text, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Invalidates the reverse geocoding cache entry for specific coordinates
+     * @summary Invalidate reverse geocoding cache
+     * @param {LocationCacheApiInvalidateReverseGeocodingCache1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LocationCacheApi
+     */
+    invalidateReverseGeocodingCache1(requestParameters, options) {
+        return (0, exports.LocationCacheApiFp)(this.configuration).invalidateReverseGeocodingCache1(requestParameters.latitude, requestParameters.longitude, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+exports.LocationCacheApi = LocationCacheApi;
 /**
  * MessagesApi - axios parameter creator
  * @export
