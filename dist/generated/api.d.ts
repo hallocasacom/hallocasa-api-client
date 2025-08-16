@@ -3744,6 +3744,12 @@ export interface SkilledUser {
     'groups'?: Array<UserGroup>;
     /**
      *
+     * @type {Array<UserOperatingLocation>}
+     * @memberof SkilledUser
+     */
+    'operatingLocations'?: Array<UserOperatingLocation>;
+    /**
+     *
      * @type {string}
      * @memberof SkilledUser
      */
@@ -4892,6 +4898,25 @@ export interface UserListRequest {
      * @memberof UserListRequest
      */
     'excludeIdList'?: Array<number>;
+}
+/**
+ *
+ * @export
+ * @interface UserOperatingLocation
+ */
+export interface UserOperatingLocation {
+    /**
+     *
+     * @type {number}
+     * @memberof UserOperatingLocation
+     */
+    'locationNumber'?: number;
+    /**
+     *
+     * @type {GeoLocation}
+     * @memberof UserOperatingLocation
+     */
+    'geoLocation': GeoLocation;
 }
 /**
  *
@@ -8865,7 +8890,7 @@ export declare const PropertiesApiAxiosParamCreator: (configuration?: Configurat
      */
     getDraftsProperties1: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     *
+     * Returns recently created properties excluding password-protected and draft properties
      * @summary Get recently created properties within specified minutes (default 60)
      * @param {string} [email] Email to filter properties by user
      * @param {number} [minutes] Minutes to look back (default 60)
@@ -8993,7 +9018,7 @@ export declare const PropertiesApiFp: (configuration?: Configuration) => {
      */
     getDraftsProperties1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Property>>>;
     /**
-     *
+     * Returns recently created properties excluding password-protected and draft properties
      * @summary Get recently created properties within specified minutes (default 60)
      * @param {string} [email] Email to filter properties by user
      * @param {number} [minutes] Minutes to look back (default 60)
@@ -9117,7 +9142,7 @@ export declare const PropertiesApiFactory: (configuration?: Configuration, baseP
      */
     getDraftsProperties1(options?: RawAxiosRequestConfig): AxiosPromise<Array<Property>>;
     /**
-     *
+     * Returns recently created properties excluding password-protected and draft properties
      * @summary Get recently created properties within specified minutes (default 60)
      * @param {PropertiesApiGetRecentProperties1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -9434,7 +9459,7 @@ export declare class PropertiesApi extends BaseAPI {
      */
     getDraftsProperties1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property[], any>>;
     /**
-     *
+     * Returns recently created properties excluding password-protected and draft properties
      * @summary Get recently created properties within specified minutes (default 60)
      * @param {PropertiesApiGetRecentProperties1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

@@ -5935,7 +5935,7 @@ const PropertiesApiAxiosParamCreator = function (configuration) {
             };
         },
         /**
-         *
+         * Returns recently created properties excluding password-protected and draft properties
          * @summary Get recently created properties within specified minutes (default 60)
          * @param {string} [email] Email to filter properties by user
          * @param {number} [minutes] Minutes to look back (default 60)
@@ -6267,7 +6267,7 @@ const PropertiesApiFp = function (configuration) {
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         *
+         * Returns recently created properties excluding password-protected and draft properties
          * @summary Get recently created properties within specified minutes (default 60)
          * @param {string} [email] Email to filter properties by user
          * @param {number} [minutes] Minutes to look back (default 60)
@@ -6443,7 +6443,7 @@ const PropertiesApiFactory = function (configuration, basePath, axios) {
             return localVarFp.getDraftsProperties1(options).then((request) => request(axios, basePath));
         },
         /**
-         *
+         * Returns recently created properties excluding password-protected and draft properties
          * @summary Get recently created properties within specified minutes (default 60)
          * @param {PropertiesApiGetRecentProperties1Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -6607,7 +6607,7 @@ class PropertiesApi extends base_1.BaseAPI {
         return (0, exports.PropertiesApiFp)(this.configuration).getDraftsProperties1(options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     *
+     * Returns recently created properties excluding password-protected and draft properties
      * @summary Get recently created properties within specified minutes (default 60)
      * @param {PropertiesApiGetRecentProperties1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

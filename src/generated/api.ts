@@ -3819,6 +3819,12 @@ export interface SkilledUser {
     'groups'?: Array<UserGroup>;
     /**
      * 
+     * @type {Array<UserOperatingLocation>}
+     * @memberof SkilledUser
+     */
+    'operatingLocations'?: Array<UserOperatingLocation>;
+    /**
+     * 
      * @type {string}
      * @memberof SkilledUser
      */
@@ -4977,6 +4983,25 @@ export interface UserListRequest {
      * @memberof UserListRequest
      */
     'excludeIdList'?: Array<number>;
+}
+/**
+ * 
+ * @export
+ * @interface UserOperatingLocation
+ */
+export interface UserOperatingLocation {
+    /**
+     * 
+     * @type {number}
+     * @memberof UserOperatingLocation
+     */
+    'locationNumber'?: number;
+    /**
+     * 
+     * @type {GeoLocation}
+     * @memberof UserOperatingLocation
+     */
+    'geoLocation': GeoLocation;
 }
 /**
  * 
@@ -12502,7 +12527,7 @@ export const PropertiesApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * 
+         * Returns recently created properties excluding password-protected and draft properties
          * @summary Get recently created properties within specified minutes (default 60)
          * @param {string} [email] Email to filter properties by user
          * @param {number} [minutes] Minutes to look back (default 60)
@@ -12882,7 +12907,7 @@ export const PropertiesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Returns recently created properties excluding password-protected and draft properties
          * @summary Get recently created properties within specified minutes (default 60)
          * @param {string} [email] Email to filter properties by user
          * @param {number} [minutes] Minutes to look back (default 60)
@@ -13058,7 +13083,7 @@ export const PropertiesApiFactory = function (configuration?: Configuration, bas
             return localVarFp.getDraftsProperties1(options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Returns recently created properties excluding password-protected and draft properties
          * @summary Get recently created properties within specified minutes (default 60)
          * @param {PropertiesApiGetRecentProperties1Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -13434,7 +13459,7 @@ export class PropertiesApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Returns recently created properties excluding password-protected and draft properties
      * @summary Get recently created properties within specified minutes (default 60)
      * @param {PropertiesApiGetRecentProperties1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

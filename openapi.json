@@ -4748,6 +4748,7 @@
       "get" : {
         "tags" : [ "properties" ],
         "summary" : "Get recently created properties within specified minutes (default 60)",
+        "description" : "Returns recently created properties excluding password-protected and draft properties",
         "operationId" : "getRecentProperties_1",
         "parameters" : [ {
           "name" : "email",
@@ -4804,6 +4805,9 @@
                       "bathrooms" : 3,
                       "bedrooms" : 4,
                       "area" : 250,
+                      "publicationState" : "AVAILABLE",
+                      "isPasswordProtected" : false,
+                      "isDraft" : false,
                       "createdAt" : "2023-05-15T10:30:45Z"
                     }, {
                       "id" : "prop789012",
@@ -4821,6 +4825,9 @@
                       "bathrooms" : 2,
                       "bedrooms" : 3,
                       "area" : 120,
+                      "publicationState" : "AVAILABLE",
+                      "isPasswordProtected" : false,
+                      "isDraft" : false,
                       "createdAt" : "2023-05-15T11:15:22Z"
                     } ]
                   }
@@ -5737,6 +5744,9 @@
           }
         },
         "responses" : {
+          "400" : {
+            "description" : "If new password is the same as current password"
+          },
           "401" : {
             "description" : "If user is unauthorized or token fails in validation"
           },
@@ -11300,6 +11310,12 @@
               "$ref" : "#/components/schemas/UserGroup"
             }
           },
+          "operatingLocations" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/UserOperatingLocation"
+            }
+          },
           "imprintImageLink" : {
             "type" : "string",
             "writeOnly" : true
@@ -11344,6 +11360,19 @@
           },
           "owner" : {
             "type" : "boolean"
+          }
+        }
+      },
+      "UserOperatingLocation" : {
+        "required" : [ "geoLocation" ],
+        "type" : "object",
+        "properties" : {
+          "locationNumber" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "geoLocation" : {
+            "$ref" : "#/components/schemas/GeoLocation"
           }
         }
       },
@@ -11658,16 +11687,16 @@
       }
     },
     "securitySchemes" : {
-      "oAuthToken" : {
-        "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
-        "in" : "header"
-      },
       "oAuthClientId" : {
         "type" : "apiKey",
         "description" : "OAuth client identifier (default: hallocasa_frontend)",
         "name" : "O-Auth-Client-Id",
+        "in" : "header"
+      },
+      "oAuthToken" : {
+        "type" : "apiKey",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
         "in" : "header"
       },
       "oAuthCode" : {
