@@ -7527,12 +7527,14 @@
                       "id" : 123,
                       "firstName" : "John",
                       "lastName" : "Doe",
-                      "profileName" : "johndoe"
+                      "profileName" : "johndoe",
+                      "confirmedFlag" : true
                     }, {
                       "id" : 456,
                       "firstName" : "Jane",
                       "lastName" : "Smith",
-                      "profileName" : "janesmith"
+                      "profileName" : "janesmith",
+                      "confirmedFlag" : false
                     } ]
                   }
                 }
@@ -7586,6 +7588,7 @@
                       "lastName" : "Doe",
                       "profileName" : "johndoe",
                       "cellPhone" : "+1234567890",
+                      "confirmedFlag" : true,
                       "active" : true,
                       "skills" : [ "Real Estate", "Marketing" ],
                       "groups" : [ {
@@ -7642,7 +7645,8 @@
                       "email" : "johndoe@example.com",
                       "firstName" : "John",
                       "lastName" : "Doe",
-                      "profileName" : "johndoe"
+                      "profileName" : "johndoe",
+                      "confirmedFlag" : true
                     } ]
                   }
                 }
@@ -7821,6 +7825,7 @@
                       "email" : "user1@example.com",
                       "firstName" : "John",
                       "lastName" : "Doe",
+                      "confirmedFlag" : true,
                       "groups" : [ {
                         "id" : "group123",
                         "name" : "Property Group",
@@ -7833,6 +7838,7 @@
                       "email" : "user2@example.com",
                       "firstName" : "Jane",
                       "lastName" : "Smith",
+                      "confirmedFlag" : false,
                       "groups" : [ {
                         "id" : "group456",
                         "name" : "Certification Body",
@@ -8199,6 +8205,7 @@
                         "id" : 123,
                         "firstName" : "John",
                         "lastName" : "Doe",
+                        "confirmedFlag" : true,
                         "skills" : [ "Real Estate" ],
                         "groups" : [ {
                           "id" : "group123",
@@ -8216,6 +8223,32 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/users/send-email-verification" : {
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Send email verification to logged-in user",
+        "description" : "Sends an email verification link to the authenticated user's email address",
+        "operationId" : "sendEmailVerification_1",
+        "parameters" : [ {
+          "name" : "Origin",
+          "in" : "header",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Email verification sent successfully"
+          },
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "400" : {
+            "description" : "User already verified or invalid request"
           }
         }
       }
@@ -11687,6 +11720,12 @@
       }
     },
     "securitySchemes" : {
+      "oAuthCode" : {
+        "type" : "apiKey",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
+        "in" : "header"
+      },
       "oAuthClientId" : {
         "type" : "apiKey",
         "description" : "OAuth client identifier (default: hallocasa_frontend)",
@@ -11697,12 +11736,6 @@
         "type" : "apiKey",
         "description" : "OAuth access token for authenticated requests",
         "name" : "O-Auth-Token",
-        "in" : "header"
-      },
-      "oAuthCode" : {
-        "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
         "in" : "header"
       }
     }

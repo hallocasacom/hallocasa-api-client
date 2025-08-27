@@ -11933,6 +11933,14 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      */
     searchUsers1: (userFilterRequest: UserFilterRequest, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Sends an email verification link to the authenticated user\'s email address
+     * @summary Send email verification to logged-in user
+     * @param {string} [origin]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    sendEmailVerification1: (origin?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      *
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -12139,6 +12147,14 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      */
     searchUsers1(userFilterRequest: UserFilterRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserFilterResult>>;
     /**
+     * Sends an email verification link to the authenticated user\'s email address
+     * @summary Send email verification to logged-in user
+     * @param {string} [origin]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    sendEmailVerification1(origin?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
      *
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -12325,6 +12341,14 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
      * @throws {RequiredError}
      */
     searchUsers1(requestParameters: UsersApiSearchUsers1Request, options?: RawAxiosRequestConfig): AxiosPromise<UserFilterResult>;
+    /**
+     * Sends an email verification link to the authenticated user\'s email address
+     * @summary Send email verification to logged-in user
+     * @param {UsersApiSendEmailVerification1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    sendEmailVerification1(requestParameters?: UsersApiSendEmailVerification1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
     /**
      *
      * @param {*} [options] Override http request option.
@@ -12715,6 +12739,19 @@ export interface UsersApiSearchUsers1Request {
     readonly userFilterRequest: UserFilterRequest;
 }
 /**
+ * Request parameters for sendEmailVerification1 operation in UsersApi.
+ * @export
+ * @interface UsersApiSendEmailVerification1Request
+ */
+export interface UsersApiSendEmailVerification1Request {
+    /**
+     *
+     * @type {string}
+     * @memberof UsersApiSendEmailVerification1
+     */
+    readonly origin?: string;
+}
+/**
  * Request parameters for sendPhoneVerificationCodeCommand1 operation in UsersApi.
  * @export
  * @interface UsersApiSendPhoneVerificationCodeCommand1Request
@@ -12927,6 +12964,15 @@ export declare class UsersApi extends BaseAPI {
      * @memberof UsersApi
      */
     searchUsers1(requestParameters: UsersApiSearchUsers1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserFilterResult, any>>;
+    /**
+     * Sends an email verification link to the authenticated user\'s email address
+     * @summary Send email verification to logged-in user
+     * @param {UsersApiSendEmailVerification1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    sendEmailVerification1(requestParameters?: UsersApiSendEmailVerification1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
     /**
      *
      * @param {*} [options] Override http request option.

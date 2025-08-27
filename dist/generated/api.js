@@ -10776,6 +10776,39 @@ const UsersApiAxiosParamCreator = function (configuration) {
             };
         },
         /**
+         * Sends an email verification link to the authenticated user\'s email address
+         * @summary Send email verification to logged-in user
+         * @param {string} [origin]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        sendEmailVerification1: async (origin, options = {}) => {
+            const localVarPath = `/users/send-email-verification`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            if (origin != null) {
+                localVarHeaderParameter['Origin'] = String(origin);
+            }
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          *
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -11142,6 +11175,19 @@ const UsersApiFp = function (configuration) {
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Sends an email verification link to the authenticated user\'s email address
+         * @summary Send email verification to logged-in user
+         * @param {string} [origin]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async sendEmailVerification1(origin, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.sendEmailVerification1(origin, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['UsersApi.sendEmailVerification1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          *
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -11383,6 +11429,16 @@ const UsersApiFactory = function (configuration, basePath, axios) {
          */
         searchUsers1(requestParameters, options) {
             return localVarFp.searchUsers1(requestParameters.userFilterRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Sends an email verification link to the authenticated user\'s email address
+         * @summary Send email verification to logged-in user
+         * @param {UsersApiSendEmailVerification1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        sendEmailVerification1(requestParameters = {}, options) {
+            return localVarFp.sendEmailVerification1(requestParameters.origin, options).then((request) => request(axios, basePath));
         },
         /**
          *
@@ -11640,6 +11696,17 @@ class UsersApi extends base_1.BaseAPI {
      */
     searchUsers1(requestParameters, options) {
         return (0, exports.UsersApiFp)(this.configuration).searchUsers1(requestParameters.userFilterRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Sends an email verification link to the authenticated user\'s email address
+     * @summary Send email verification to logged-in user
+     * @param {UsersApiSendEmailVerification1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    sendEmailVerification1(requestParameters = {}, options) {
+        return (0, exports.UsersApiFp)(this.configuration).sendEmailVerification1(requestParameters.origin, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      *
