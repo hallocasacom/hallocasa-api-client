@@ -1323,6 +1323,12 @@ export interface Group {
      * @memberof Group
      */
     'noOfMembers'?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Group
+     */
+    'userAdmin'?: boolean;
 }
 
 export const GroupGroupStatusEnum = {
@@ -8358,7 +8364,7 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
+         * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it. Includes \'userAdmin\' field indicating whether the current user is an admin or owner of the group.
          * @summary Return the group with specified id
          * @param {string} groupId group id
          * @param {*} [options] Override http request option.
@@ -8489,7 +8495,7 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * This will return both owned Groups and Groups the user is a member of
+         * This will return both owned Groups and Groups the user is a member of. Each group includes a \'userAdmin\' field indicating whether the current user is an admin or owner of that group.
          * @summary Return the groups list with specified user id
          * @param {number} [pageFrom] Start page number
          * @param {number} [pageTo] End page number
@@ -9237,7 +9243,7 @@ export const GroupsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
+         * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it. Includes \'userAdmin\' field indicating whether the current user is an admin or owner of the group.
          * @summary Return the group with specified id
          * @param {string} groupId group id
          * @param {*} [options] Override http request option.
@@ -9278,7 +9284,7 @@ export const GroupsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * This will return both owned Groups and Groups the user is a member of
+         * This will return both owned Groups and Groups the user is a member of. Each group includes a \'userAdmin\' field indicating whether the current user is an admin or owner of that group.
          * @summary Return the groups list with specified user id
          * @param {number} [pageFrom] Start page number
          * @param {number} [pageTo] End page number
@@ -9547,7 +9553,7 @@ export const GroupsApiFactory = function (configuration?: Configuration, basePat
             return localVarFp.findArchivedGroupsByUser1(requestParameters.pageFrom, requestParameters.pageTo, options).then((request) => request(axios, basePath));
         },
         /**
-         * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
+         * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it. Includes \'userAdmin\' field indicating whether the current user is an admin or owner of the group.
          * @summary Return the group with specified id
          * @param {GroupsApiFindGroup1Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -9577,7 +9583,7 @@ export const GroupsApiFactory = function (configuration?: Configuration, basePat
             return localVarFp.findGroupsByType1(requestParameters.types, requestParameters.pageFrom, requestParameters.pageTo, options).then((request) => request(axios, basePath));
         },
         /**
-         * This will return both owned Groups and Groups the user is a member of
+         * This will return both owned Groups and Groups the user is a member of. Each group includes a \'userAdmin\' field indicating whether the current user is an admin or owner of that group.
          * @summary Return the groups list with specified user id
          * @param {GroupsApiFindGroupsByUser1Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -10245,7 +10251,7 @@ export class GroupsApi extends BaseAPI {
     }
 
     /**
-     * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
+     * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it. Includes \'userAdmin\' field indicating whether the current user is an admin or owner of the group.
      * @summary Return the group with specified id
      * @param {GroupsApiFindGroup1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -10281,7 +10287,7 @@ export class GroupsApi extends BaseAPI {
     }
 
     /**
-     * This will return both owned Groups and Groups the user is a member of
+     * This will return both owned Groups and Groups the user is a member of. Each group includes a \'userAdmin\' field indicating whether the current user is an admin or owner of that group.
      * @summary Return the groups list with specified user id
      * @param {GroupsApiFindGroupsByUser1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

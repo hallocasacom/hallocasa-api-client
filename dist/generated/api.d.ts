@@ -1293,6 +1293,12 @@ export interface Group {
      * @memberof Group
      */
     'noOfMembers'?: number;
+    /**
+     *
+     * @type {boolean}
+     * @memberof Group
+     */
+    'userAdmin'?: boolean;
 }
 export declare const GroupGroupStatusEnum: {
     readonly Pending: "PENDING";
@@ -6743,7 +6749,7 @@ export declare const GroupsApiAxiosParamCreator: (configuration?: Configuration)
      */
     findArchivedGroupsByUser1: (pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
+     * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it. Includes \'userAdmin\' field indicating whether the current user is an admin or owner of the group.
      * @summary Return the group with specified id
      * @param {string} groupId group id
      * @param {*} [options] Override http request option.
@@ -6769,7 +6775,7 @@ export declare const GroupsApiAxiosParamCreator: (configuration?: Configuration)
      */
     findGroupsByType1: (types?: string, pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * This will return both owned Groups and Groups the user is a member of
+     * This will return both owned Groups and Groups the user is a member of. Each group includes a \'userAdmin\' field indicating whether the current user is an admin or owner of that group.
      * @summary Return the groups list with specified user id
      * @param {number} [pageFrom] Start page number
      * @param {number} [pageTo] End page number
@@ -6951,7 +6957,7 @@ export declare const GroupsApiFp: (configuration?: Configuration) => {
      */
     findArchivedGroupsByUser1(pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupFilterResult>>;
     /**
-     * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
+     * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it. Includes \'userAdmin\' field indicating whether the current user is an admin or owner of the group.
      * @summary Return the group with specified id
      * @param {string} groupId group id
      * @param {*} [options] Override http request option.
@@ -6977,7 +6983,7 @@ export declare const GroupsApiFp: (configuration?: Configuration) => {
      */
     findGroupsByType1(types?: string, pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupFilterResult>>;
     /**
-     * This will return both owned Groups and Groups the user is a member of
+     * This will return both owned Groups and Groups the user is a member of. Each group includes a \'userAdmin\' field indicating whether the current user is an admin or owner of that group.
      * @summary Return the groups list with specified user id
      * @param {number} [pageFrom] Start page number
      * @param {number} [pageTo] End page number
@@ -7157,7 +7163,7 @@ export declare const GroupsApiFactory: (configuration?: Configuration, basePath?
      */
     findArchivedGroupsByUser1(requestParameters?: GroupsApiFindArchivedGroupsByUser1Request, options?: RawAxiosRequestConfig): AxiosPromise<GroupFilterResult>;
     /**
-     * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
+     * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it. Includes \'userAdmin\' field indicating whether the current user is an admin or owner of the group.
      * @summary Return the group with specified id
      * @param {GroupsApiFindGroup1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -7181,7 +7187,7 @@ export declare const GroupsApiFactory: (configuration?: Configuration, basePath?
      */
     findGroupsByType1(requestParameters?: GroupsApiFindGroupsByType1Request, options?: RawAxiosRequestConfig): AxiosPromise<GroupFilterResult>;
     /**
-     * This will return both owned Groups and Groups the user is a member of
+     * This will return both owned Groups and Groups the user is a member of. Each group includes a \'userAdmin\' field indicating whether the current user is an admin or owner of that group.
      * @summary Return the groups list with specified user id
      * @param {GroupsApiFindGroupsByUser1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -7761,7 +7767,7 @@ export declare class GroupsApi extends BaseAPI {
      */
     findArchivedGroupsByUser1(requestParameters?: GroupsApiFindArchivedGroupsByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupFilterResult, any>>;
     /**
-     * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
+     * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it. Includes \'userAdmin\' field indicating whether the current user is an admin or owner of the group.
      * @summary Return the group with specified id
      * @param {GroupsApiFindGroup1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -7788,7 +7794,7 @@ export declare class GroupsApi extends BaseAPI {
      */
     findGroupsByType1(requestParameters?: GroupsApiFindGroupsByType1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupFilterResult, any>>;
     /**
-     * This will return both owned Groups and Groups the user is a member of
+     * This will return both owned Groups and Groups the user is a member of. Each group includes a \'userAdmin\' field indicating whether the current user is an admin or owner of that group.
      * @summary Return the groups list with specified user id
      * @param {GroupsApiFindGroupsByUser1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

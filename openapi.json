@@ -3054,7 +3054,7 @@
       "get" : {
         "tags" : [ "groups" ],
         "summary" : "Return the group with specified id",
-        "description" : "Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it",
+        "description" : "Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it. Includes 'userAdmin' field indicating whether the current user is an admin or owner of the group.",
         "operationId" : "findGroup_1",
         "parameters" : [ {
           "name" : "groupId",
@@ -3095,12 +3095,10 @@
                         "id" : 1001,
                         "name" : "John Doe"
                       },
-                      "members" : [ {
-                        "id" : 1002,
-                        "name" : "Jane Smith"
-                      } ],
-                      "active" : true,
-                      "createdDate" : "2023-01-15T10:30:00Z"
+                      "noOfMembers" : 5,
+                      "userAdmin" : true,
+                      "groupStatus" : "ACTIVE",
+                      "creationDate" : "2023-01-15T10:30:00Z"
                     }
                   }
                 }
@@ -3346,7 +3344,7 @@
       "get" : {
         "tags" : [ "groups" ],
         "summary" : "Return the groups list with specified user id",
-        "description" : "This will return both owned Groups and Groups the user is a member of",
+        "description" : "This will return both owned Groups and Groups the user is a member of. Each group includes a 'userAdmin' field indicating whether the current user is an admin or owner of that group.",
         "operationId" : "findGroupsByUser_1",
         "parameters" : [ {
           "name" : "pageFrom",
@@ -3379,7 +3377,8 @@
                   "User's groups" : {
                     "description" : "User's groups",
                     "value" : {
-                      "results" : [ {
+                      "count" : 1,
+                      "list" : [ {
                         "id" : "group123",
                         "name" : "Luxury Properties",
                         "description" : "A collection of luxury properties",
@@ -3388,16 +3387,24 @@
                           "id" : 1001,
                           "name" : "John Doe"
                         },
-                        "members" : [ {
+                        "noOfMembers" : 5,
+                        "userAdmin" : true,
+                        "groupStatus" : "ACTIVE",
+                        "creationDate" : "2023-01-15T10:30:00Z"
+                      }, {
+                        "id" : "group456",
+                        "name" : "Beach Properties",
+                        "description" : "Properties near the beach",
+                        "groupType" : "GROUP",
+                        "owner" : {
                           "id" : 1002,
                           "name" : "Jane Smith"
-                        } ],
-                        "active" : true,
-                        "createdDate" : "2023-01-15T10:30:00Z"
-                      } ],
-                      "total" : 1,
-                      "from" : 0,
-                      "to" : 10
+                        },
+                        "noOfMembers" : 3,
+                        "userAdmin" : false,
+                        "groupStatus" : "ACTIVE",
+                        "creationDate" : "2023-02-20T14:15:00Z"
+                      } ]
                     }
                   }
                 }
@@ -9673,6 +9680,9 @@
           "noOfMembers" : {
             "type" : "integer",
             "format" : "int64"
+          },
+          "userAdmin" : {
+            "type" : "boolean"
           }
         }
       },
@@ -11903,10 +11913,10 @@
       }
     },
     "securitySchemes" : {
-      "oAuthToken" : {
+      "oAuthCode" : {
         "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
         "in" : "header"
       },
       "oAuthClientId" : {
@@ -11915,10 +11925,10 @@
         "name" : "O-Auth-Client-Id",
         "in" : "header"
       },
-      "oAuthCode" : {
+      "oAuthToken" : {
         "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
         "in" : "header"
       }
     }
