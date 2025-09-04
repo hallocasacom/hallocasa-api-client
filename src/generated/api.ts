@@ -1410,6 +1410,7 @@ export const GroupMemberGroupMemberStatusEnum = {
     Invited: 'INVITED',
     Requested: 'REQUESTED',
     Accepted: 'ACCEPTED',
+    Admin: 'ADMIN',
     Rejected: 'REJECTED',
     Removed: 'REMOVED',
     Left: 'LEFT'
@@ -8266,6 +8267,51 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
+         * Only group owners can demote admins. Can only demote ADMIN members.
+         * @summary Demote group admins to regular members
+         * @param {string} groupId groupId
+         * @param {Array<number>} [userIds] List of user IDs to demote from admin
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        demoteFromAdmin1: async (groupId: string, userIds?: Array<number>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'groupId' is not null or undefined
+            assertParamExists('demoteFromAdmin1', 'groupId', groupId)
+            const localVarPath = `/groups/{groupId}/demote-admin`
+                .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+            if (userIds) {
+                localVarQueryParameter['userIds'] = userIds;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * 
          * @summary Return the groups list with specified user id that user has archived
          * @param {number} [pageFrom] 
@@ -8842,6 +8888,51 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
+         * Only group owners can promote members to admin. Can only promote ACCEPTED members.
+         * @summary Promote group members to admin
+         * @param {string} groupId groupId
+         * @param {Array<number>} [userIds] List of user IDs to promote to admin
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        promoteToAdmin1: async (groupId: string, userIds?: Array<number>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'groupId' is not null or undefined
+            assertParamExists('promoteToAdmin1', 'groupId', groupId)
+            const localVarPath = `/groups/{groupId}/promote-admin`
+                .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+            if (userIds) {
+                localVarQueryParameter['userIds'] = userIds;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Allows group owners to request a change in their group type from GROUP to ASSOCIATION or CERTIFICATION. IMPORTANT: Type changes are only allowed for basic groups (GROUP type). Once a group has been upgraded to ASSOCIATION or CERTIFICATION, no further type changes are possible. Only group owners can make these requests.
          * @summary Request a change in group type
          * @param {string} id Group ID
@@ -9019,7 +9110,7 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * Acceptable Status values are:  ACCEPTED, REJECTED, REMOVED
+         * Acceptable Status values are:  ACCEPTED, ADMIN, REJECTED, REMOVED
          * @summary Update the group member status from groupId supplied
          * @param {string} groupId groupId
          * @param {Array<number>} [userIds] List of user IDs to update status
@@ -9111,10 +9202,24 @@ export const GroupsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteGroup1(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async deleteGroup1(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteGroup1(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GroupsApi.deleteGroup1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Only group owners can demote admins. Can only demote ADMIN members.
+         * @summary Demote group admins to regular members
+         * @param {string} groupId groupId
+         * @param {Array<number>} [userIds] List of user IDs to demote from admin
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async demoteFromAdmin1(groupId: string, userIds?: Array<number>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<GroupMember>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.demoteFromAdmin1(groupId, userIds, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GroupsApi.demoteFromAdmin1']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -9297,6 +9402,20 @@ export const GroupsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Only group owners can promote members to admin. Can only promote ACCEPTED members.
+         * @summary Promote group members to admin
+         * @param {string} groupId groupId
+         * @param {Array<number>} [userIds] List of user IDs to promote to admin
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async promoteToAdmin1(groupId: string, userIds?: Array<number>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<GroupMember>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.promoteToAdmin1(groupId, userIds, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GroupsApi.promoteToAdmin1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Allows group owners to request a change in their group type from GROUP to ASSOCIATION or CERTIFICATION. IMPORTANT: Type changes are only allowed for basic groups (GROUP type). Once a group has been upgraded to ASSOCIATION or CERTIFICATION, no further type changes are possible. Only group owners can make these requests.
          * @summary Request a change in group type
          * @param {string} id Group ID
@@ -9353,7 +9472,7 @@ export const GroupsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Acceptable Status values are:  ACCEPTED, REJECTED, REMOVED
+         * Acceptable Status values are:  ACCEPTED, ADMIN, REJECTED, REMOVED
          * @summary Update the group member status from groupId supplied
          * @param {string} groupId groupId
          * @param {Array<number>} [userIds] List of user IDs to update status
@@ -9404,8 +9523,18 @@ export const GroupsApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteGroup1(requestParameters: GroupsApiDeleteGroup1Request, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        deleteGroup1(requestParameters: GroupsApiDeleteGroup1Request, options?: RawAxiosRequestConfig): AxiosPromise<string> {
             return localVarFp.deleteGroup1(requestParameters.id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Only group owners can demote admins. Can only demote ADMIN members.
+         * @summary Demote group admins to regular members
+         * @param {GroupsApiDemoteFromAdmin1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        demoteFromAdmin1(requestParameters: GroupsApiDemoteFromAdmin1Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<GroupMember>> {
+            return localVarFp.demoteFromAdmin1(requestParameters.groupId, requestParameters.userIds, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -9538,6 +9667,16 @@ export const GroupsApiFactory = function (configuration?: Configuration, basePat
             return localVarFp.groupRequest1(requestParameters.groupId, options).then((request) => request(axios, basePath));
         },
         /**
+         * Only group owners can promote members to admin. Can only promote ACCEPTED members.
+         * @summary Promote group members to admin
+         * @param {GroupsApiPromoteToAdmin1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        promoteToAdmin1(requestParameters: GroupsApiPromoteToAdmin1Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<GroupMember>> {
+            return localVarFp.promoteToAdmin1(requestParameters.groupId, requestParameters.userIds, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Allows group owners to request a change in their group type from GROUP to ASSOCIATION or CERTIFICATION. IMPORTANT: Type changes are only allowed for basic groups (GROUP type). Once a group has been upgraded to ASSOCIATION or CERTIFICATION, no further type changes are possible. Only group owners can make these requests.
          * @summary Request a change in group type
          * @param {GroupsApiRequestGroupTypeChange1Request} requestParameters Request parameters.
@@ -9578,7 +9717,7 @@ export const GroupsApiFactory = function (configuration?: Configuration, basePat
             return localVarFp.searchGroupUsers1(requestParameters.groupId, requestParameters.userFilterRequest, requestParameters.bypassCache, options).then((request) => request(axios, basePath));
         },
         /**
-         * Acceptable Status values are:  ACCEPTED, REJECTED, REMOVED
+         * Acceptable Status values are:  ACCEPTED, ADMIN, REJECTED, REMOVED
          * @summary Update the group member status from groupId supplied
          * @param {GroupsApiUpdateGroupMembershipStatus1Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -9630,6 +9769,27 @@ export interface GroupsApiDeleteGroup1Request {
      * @memberof GroupsApiDeleteGroup1
      */
     readonly id: string
+}
+
+/**
+ * Request parameters for demoteFromAdmin1 operation in GroupsApi.
+ * @export
+ * @interface GroupsApiDemoteFromAdmin1Request
+ */
+export interface GroupsApiDemoteFromAdmin1Request {
+    /**
+     * groupId
+     * @type {string}
+     * @memberof GroupsApiDemoteFromAdmin1
+     */
+    readonly groupId: string
+
+    /**
+     * List of user IDs to demote from admin
+     * @type {Array<number>}
+     * @memberof GroupsApiDemoteFromAdmin1
+     */
+    readonly userIds?: Array<number>
 }
 
 /**
@@ -9885,6 +10045,27 @@ export interface GroupsApiGroupRequest1Request {
 }
 
 /**
+ * Request parameters for promoteToAdmin1 operation in GroupsApi.
+ * @export
+ * @interface GroupsApiPromoteToAdmin1Request
+ */
+export interface GroupsApiPromoteToAdmin1Request {
+    /**
+     * groupId
+     * @type {string}
+     * @memberof GroupsApiPromoteToAdmin1
+     */
+    readonly groupId: string
+
+    /**
+     * List of user IDs to promote to admin
+     * @type {Array<number>}
+     * @memberof GroupsApiPromoteToAdmin1
+     */
+    readonly userIds?: Array<number>
+}
+
+/**
  * Request parameters for requestGroupTypeChange1 operation in GroupsApi.
  * @export
  * @interface GroupsApiRequestGroupTypeChange1Request
@@ -9990,7 +10171,7 @@ export interface GroupsApiUpdateGroupMembershipStatus1Request {
 
     /**
      * New status for the members
-     * @type {'ACCEPTED' | 'REJECTED' | 'REMOVED'}
+     * @type {'ACCEPTED' | 'ADMIN' | 'REJECTED' | 'REMOVED'}
      * @memberof GroupsApiUpdateGroupMembershipStatus1
      */
     readonly status?: UpdateGroupMembershipStatus1StatusEnum
@@ -10037,6 +10218,18 @@ export class GroupsApi extends BaseAPI {
      */
     public deleteGroup1(requestParameters: GroupsApiDeleteGroup1Request, options?: RawAxiosRequestConfig) {
         return GroupsApiFp(this.configuration).deleteGroup1(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Only group owners can demote admins. Can only demote ADMIN members.
+     * @summary Demote group admins to regular members
+     * @param {GroupsApiDemoteFromAdmin1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    public demoteFromAdmin1(requestParameters: GroupsApiDemoteFromAdmin1Request, options?: RawAxiosRequestConfig) {
+        return GroupsApiFp(this.configuration).demoteFromAdmin1(requestParameters.groupId, requestParameters.userIds, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10196,6 +10389,18 @@ export class GroupsApi extends BaseAPI {
     }
 
     /**
+     * Only group owners can promote members to admin. Can only promote ACCEPTED members.
+     * @summary Promote group members to admin
+     * @param {GroupsApiPromoteToAdmin1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    public promoteToAdmin1(requestParameters: GroupsApiPromoteToAdmin1Request, options?: RawAxiosRequestConfig) {
+        return GroupsApiFp(this.configuration).promoteToAdmin1(requestParameters.groupId, requestParameters.userIds, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Allows group owners to request a change in their group type from GROUP to ASSOCIATION or CERTIFICATION. IMPORTANT: Type changes are only allowed for basic groups (GROUP type). Once a group has been upgraded to ASSOCIATION or CERTIFICATION, no further type changes are possible. Only group owners can make these requests.
      * @summary Request a change in group type
      * @param {GroupsApiRequestGroupTypeChange1Request} requestParameters Request parameters.
@@ -10244,7 +10449,7 @@ export class GroupsApi extends BaseAPI {
     }
 
     /**
-     * Acceptable Status values are:  ACCEPTED, REJECTED, REMOVED
+     * Acceptable Status values are:  ACCEPTED, ADMIN, REJECTED, REMOVED
      * @summary Update the group member status from groupId supplied
      * @param {GroupsApiUpdateGroupMembershipStatus1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -10270,6 +10475,7 @@ export type RequestGroupTypeChange1RequestStatusEnum = typeof RequestGroupTypeCh
  */
 export const UpdateGroupMembershipStatus1StatusEnum = {
     Accepted: 'ACCEPTED',
+    Admin: 'ADMIN',
     Rejected: 'REJECTED',
     Removed: 'REMOVED'
 } as const;

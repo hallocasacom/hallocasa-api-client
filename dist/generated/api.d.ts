@@ -1374,6 +1374,7 @@ export declare const GroupMemberGroupMemberStatusEnum: {
     readonly Invited: "INVITED";
     readonly Requested: "REQUESTED";
     readonly Accepted: "ACCEPTED";
+    readonly Admin: "ADMIN";
     readonly Rejected: "REJECTED";
     readonly Removed: "REMOVED";
     readonly Left: "LEFT";
@@ -6724,6 +6725,15 @@ export declare const GroupsApiAxiosParamCreator: (configuration?: Configuration)
      */
     deleteGroup1: (id: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Only group owners can demote admins. Can only demote ADMIN members.
+     * @summary Demote group admins to regular members
+     * @param {string} groupId groupId
+     * @param {Array<number>} [userIds] List of user IDs to demote from admin
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    demoteFromAdmin1: (groupId: string, userIds?: Array<number>, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      *
      * @summary Return the groups list with specified user id that user has archived
      * @param {number} [pageFrom]
@@ -6838,6 +6848,15 @@ export declare const GroupsApiAxiosParamCreator: (configuration?: Configuration)
      */
     groupRequest1: (groupId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Only group owners can promote members to admin. Can only promote ACCEPTED members.
+     * @summary Promote group members to admin
+     * @param {string} groupId groupId
+     * @param {Array<number>} [userIds] List of user IDs to promote to admin
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    promoteToAdmin1: (groupId: string, userIds?: Array<number>, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Allows group owners to request a change in their group type from GROUP to ASSOCIATION or CERTIFICATION. IMPORTANT: Type changes are only allowed for basic groups (GROUP type). Once a group has been upgraded to ASSOCIATION or CERTIFICATION, no further type changes are possible. Only group owners can make these requests.
      * @summary Request a change in group type
      * @param {string} id Group ID
@@ -6874,7 +6893,7 @@ export declare const GroupsApiAxiosParamCreator: (configuration?: Configuration)
      */
     searchGroupUsers1: (groupId: string, userFilterRequest: UserFilterRequest, bypassCache?: boolean, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Acceptable Status values are:  ACCEPTED, REJECTED, REMOVED
+     * Acceptable Status values are:  ACCEPTED, ADMIN, REJECTED, REMOVED
      * @summary Update the group member status from groupId supplied
      * @param {string} groupId groupId
      * @param {Array<number>} [userIds] List of user IDs to update status
@@ -6912,7 +6931,16 @@ export declare const GroupsApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    deleteGroup1(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    deleteGroup1(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>>;
+    /**
+     * Only group owners can demote admins. Can only demote ADMIN members.
+     * @summary Demote group admins to regular members
+     * @param {string} groupId groupId
+     * @param {Array<number>} [userIds] List of user IDs to demote from admin
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    demoteFromAdmin1(groupId: string, userIds?: Array<number>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<GroupMember>>>;
     /**
      *
      * @summary Return the groups list with specified user id that user has archived
@@ -7028,6 +7056,15 @@ export declare const GroupsApiFp: (configuration?: Configuration) => {
      */
     groupRequest1(groupId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupMember>>;
     /**
+     * Only group owners can promote members to admin. Can only promote ACCEPTED members.
+     * @summary Promote group members to admin
+     * @param {string} groupId groupId
+     * @param {Array<number>} [userIds] List of user IDs to promote to admin
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    promoteToAdmin1(groupId: string, userIds?: Array<number>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<GroupMember>>>;
+    /**
      * Allows group owners to request a change in their group type from GROUP to ASSOCIATION or CERTIFICATION. IMPORTANT: Type changes are only allowed for basic groups (GROUP type). Once a group has been upgraded to ASSOCIATION or CERTIFICATION, no further type changes are possible. Only group owners can make these requests.
      * @summary Request a change in group type
      * @param {string} id Group ID
@@ -7064,7 +7101,7 @@ export declare const GroupsApiFp: (configuration?: Configuration) => {
      */
     searchGroupUsers1(groupId: string, userFilterRequest: UserFilterRequest, bypassCache?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserFilterResult>>;
     /**
-     * Acceptable Status values are:  ACCEPTED, REJECTED, REMOVED
+     * Acceptable Status values are:  ACCEPTED, ADMIN, REJECTED, REMOVED
      * @summary Update the group member status from groupId supplied
      * @param {string} groupId groupId
      * @param {Array<number>} [userIds] List of user IDs to update status
@@ -7102,7 +7139,15 @@ export declare const GroupsApiFactory: (configuration?: Configuration, basePath?
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    deleteGroup1(requestParameters: GroupsApiDeleteGroup1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    deleteGroup1(requestParameters: GroupsApiDeleteGroup1Request, options?: RawAxiosRequestConfig): AxiosPromise<string>;
+    /**
+     * Only group owners can demote admins. Can only demote ADMIN members.
+     * @summary Demote group admins to regular members
+     * @param {GroupsApiDemoteFromAdmin1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    demoteFromAdmin1(requestParameters: GroupsApiDemoteFromAdmin1Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<GroupMember>>;
     /**
      *
      * @summary Return the groups list with specified user id that user has archived
@@ -7208,6 +7253,14 @@ export declare const GroupsApiFactory: (configuration?: Configuration, basePath?
      */
     groupRequest1(requestParameters: GroupsApiGroupRequest1Request, options?: RawAxiosRequestConfig): AxiosPromise<GroupMember>;
     /**
+     * Only group owners can promote members to admin. Can only promote ACCEPTED members.
+     * @summary Promote group members to admin
+     * @param {GroupsApiPromoteToAdmin1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    promoteToAdmin1(requestParameters: GroupsApiPromoteToAdmin1Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<GroupMember>>;
+    /**
      * Allows group owners to request a change in their group type from GROUP to ASSOCIATION or CERTIFICATION. IMPORTANT: Type changes are only allowed for basic groups (GROUP type). Once a group has been upgraded to ASSOCIATION or CERTIFICATION, no further type changes are possible. Only group owners can make these requests.
      * @summary Request a change in group type
      * @param {GroupsApiRequestGroupTypeChange1Request} requestParameters Request parameters.
@@ -7240,7 +7293,7 @@ export declare const GroupsApiFactory: (configuration?: Configuration, basePath?
      */
     searchGroupUsers1(requestParameters: GroupsApiSearchGroupUsers1Request, options?: RawAxiosRequestConfig): AxiosPromise<UserFilterResult>;
     /**
-     * Acceptable Status values are:  ACCEPTED, REJECTED, REMOVED
+     * Acceptable Status values are:  ACCEPTED, ADMIN, REJECTED, REMOVED
      * @summary Update the group member status from groupId supplied
      * @param {GroupsApiUpdateGroupMembershipStatus1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -7286,6 +7339,25 @@ export interface GroupsApiDeleteGroup1Request {
      * @memberof GroupsApiDeleteGroup1
      */
     readonly id: string;
+}
+/**
+ * Request parameters for demoteFromAdmin1 operation in GroupsApi.
+ * @export
+ * @interface GroupsApiDemoteFromAdmin1Request
+ */
+export interface GroupsApiDemoteFromAdmin1Request {
+    /**
+     * groupId
+     * @type {string}
+     * @memberof GroupsApiDemoteFromAdmin1
+     */
+    readonly groupId: string;
+    /**
+     * List of user IDs to demote from admin
+     * @type {Array<number>}
+     * @memberof GroupsApiDemoteFromAdmin1
+     */
+    readonly userIds?: Array<number>;
 }
 /**
  * Request parameters for findArchivedGroupsByUser1 operation in GroupsApi.
@@ -7517,6 +7589,25 @@ export interface GroupsApiGroupRequest1Request {
     readonly groupId: string;
 }
 /**
+ * Request parameters for promoteToAdmin1 operation in GroupsApi.
+ * @export
+ * @interface GroupsApiPromoteToAdmin1Request
+ */
+export interface GroupsApiPromoteToAdmin1Request {
+    /**
+     * groupId
+     * @type {string}
+     * @memberof GroupsApiPromoteToAdmin1
+     */
+    readonly groupId: string;
+    /**
+     * List of user IDs to promote to admin
+     * @type {Array<number>}
+     * @memberof GroupsApiPromoteToAdmin1
+     */
+    readonly userIds?: Array<number>;
+}
+/**
  * Request parameters for requestGroupTypeChange1 operation in GroupsApi.
  * @export
  * @interface GroupsApiRequestGroupTypeChange1Request
@@ -7612,7 +7703,7 @@ export interface GroupsApiUpdateGroupMembershipStatus1Request {
     readonly userIds?: Array<number>;
     /**
      * New status for the members
-     * @type {'ACCEPTED' | 'REJECTED' | 'REMOVED'}
+     * @type {'ACCEPTED' | 'ADMIN' | 'REJECTED' | 'REMOVED'}
      * @memberof GroupsApiUpdateGroupMembershipStatus1
      */
     readonly status?: UpdateGroupMembershipStatus1StatusEnum;
@@ -7650,7 +7741,16 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    deleteGroup1(requestParameters: GroupsApiDeleteGroup1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    deleteGroup1(requestParameters: GroupsApiDeleteGroup1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any>>;
+    /**
+     * Only group owners can demote admins. Can only demote ADMIN members.
+     * @summary Demote group admins to regular members
+     * @param {GroupsApiDemoteFromAdmin1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    demoteFromAdmin1(requestParameters: GroupsApiDemoteFromAdmin1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupMember[], any>>;
     /**
      *
      * @summary Return the groups list with specified user id that user has archived
@@ -7769,6 +7869,15 @@ export declare class GroupsApi extends BaseAPI {
      */
     groupRequest1(requestParameters: GroupsApiGroupRequest1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupMember, any>>;
     /**
+     * Only group owners can promote members to admin. Can only promote ACCEPTED members.
+     * @summary Promote group members to admin
+     * @param {GroupsApiPromoteToAdmin1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    promoteToAdmin1(requestParameters: GroupsApiPromoteToAdmin1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupMember[], any>>;
+    /**
      * Allows group owners to request a change in their group type from GROUP to ASSOCIATION or CERTIFICATION. IMPORTANT: Type changes are only allowed for basic groups (GROUP type). Once a group has been upgraded to ASSOCIATION or CERTIFICATION, no further type changes are possible. Only group owners can make these requests.
      * @summary Request a change in group type
      * @param {GroupsApiRequestGroupTypeChange1Request} requestParameters Request parameters.
@@ -7805,7 +7914,7 @@ export declare class GroupsApi extends BaseAPI {
      */
     searchGroupUsers1(requestParameters: GroupsApiSearchGroupUsers1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserFilterResult, any>>;
     /**
-     * Acceptable Status values are:  ACCEPTED, REJECTED, REMOVED
+     * Acceptable Status values are:  ACCEPTED, ADMIN, REJECTED, REMOVED
      * @summary Update the group member status from groupId supplied
      * @param {GroupsApiUpdateGroupMembershipStatus1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -7828,6 +7937,7 @@ export type RequestGroupTypeChange1RequestStatusEnum = typeof RequestGroupTypeCh
  */
 export declare const UpdateGroupMembershipStatus1StatusEnum: {
     readonly Accepted: "ACCEPTED";
+    readonly Admin: "ADMIN";
     readonly Rejected: "REJECTED";
     readonly Removed: "REMOVED";
 };

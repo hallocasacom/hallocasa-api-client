@@ -2264,6 +2264,83 @@
         }
       }
     },
+    "/groups/{groupId}/demote-admin" : {
+      "post" : {
+        "tags" : [ "groups" ],
+        "summary" : "Demote group admins to regular members",
+        "description" : "Only group owners can demote admins. Can only demote ADMIN members.",
+        "operationId" : "demoteFromAdmin_1",
+        "parameters" : [ {
+          "name" : "groupId",
+          "in" : "path",
+          "description" : "groupId",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "userIds",
+          "in" : "query",
+          "description" : "List of user IDs to demote from admin",
+          "schema" : {
+            "type" : "array",
+            "example" : [ 109, 110 ],
+            "items" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          }
+        } ],
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "403" : {
+            "description" : "If user is not group owner or trying to demote non-ADMIN members"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Generated resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/GroupMember"
+                  }
+                },
+                "examples" : {
+                  "demotedMembers" : {
+                    "description" : "demotedMembers",
+                    "value" : [ {
+                      "id" : "11",
+                      "userId" : 109,
+                      "groupId" : "group-123",
+                      "status" : "ACCEPTED",
+                      "createdDate" : "2023-05-23T08:30:00Z",
+                      "lastModifiedDate" : "2023-05-23T14:20:00Z",
+                      "userFullName" : "Mark Wilson",
+                      "userEmail" : "mark.wilson@example.com",
+                      "userPhotoUrl" : "https://example.com/photos/mark_wilson.jpg"
+                    } ]
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Group not found or users not members",
+            "content" : {
+              "application/json" : {
+                "example" : "Group Member OR Group not found"
+              }
+            }
+          }
+        }
+      }
+    },
     "/groups/{groupId}/members" : {
       "get" : {
         "tags" : [ "groups" ],
@@ -2606,11 +2683,88 @@
         }
       }
     },
+    "/groups/{groupId}/promote-admin" : {
+      "post" : {
+        "tags" : [ "groups" ],
+        "summary" : "Promote group members to admin",
+        "description" : "Only group owners can promote members to admin. Can only promote ACCEPTED members.",
+        "operationId" : "promoteToAdmin_1",
+        "parameters" : [ {
+          "name" : "groupId",
+          "in" : "path",
+          "description" : "groupId",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "userIds",
+          "in" : "query",
+          "description" : "List of user IDs to promote to admin",
+          "schema" : {
+            "type" : "array",
+            "example" : [ 107, 108 ],
+            "items" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          }
+        } ],
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "403" : {
+            "description" : "If user is not group owner or trying to promote non-ACCEPTED members"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Generated resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/GroupMember"
+                  }
+                },
+                "examples" : {
+                  "promotedAdmins" : {
+                    "description" : "promotedAdmins",
+                    "value" : [ {
+                      "id" : "10",
+                      "userId" : 107,
+                      "groupId" : "group-123",
+                      "status" : "ADMIN",
+                      "createdDate" : "2023-05-22T10:15:00Z",
+                      "lastModifiedDate" : "2023-05-22T16:45:00Z",
+                      "userFullName" : "Lisa Garcia",
+                      "userEmail" : "lisa.garcia@example.com",
+                      "userPhotoUrl" : "https://example.com/photos/lisa_garcia.jpg"
+                    } ]
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Group not found or users not members",
+            "content" : {
+              "application/json" : {
+                "example" : "Group Member OR Group not found"
+              }
+            }
+          }
+        }
+      }
+    },
     "/groups/{groupId}/member-status" : {
       "post" : {
         "tags" : [ "groups" ],
         "summary" : "Update the group member status from groupId supplied",
-        "description" : "Acceptable Status values are:  ACCEPTED, REJECTED, REMOVED",
+        "description" : "Acceptable Status values are:  ACCEPTED, ADMIN, REJECTED, REMOVED",
         "operationId" : "updateGroupMembershipStatus_1",
         "parameters" : [ {
           "name" : "groupId",
@@ -2639,7 +2793,7 @@
           "schema" : {
             "type" : "string",
             "example" : "ACCEPTED",
-            "enum" : [ "ACCEPTED", "REJECTED", "REMOVED" ]
+            "enum" : [ "ACCEPTED", "ADMIN", "REJECTED", "REMOVED" ]
           }
         } ],
         "responses" : {
@@ -2725,14 +2879,16 @@
           "200" : {
             "description" : "Ok. Generated resource",
             "content" : {
-              "text/html" : {
+              "application/json" : {
                 "schema" : {
                   "type" : "string"
                 },
                 "examples" : {
                   "Success response" : {
                     "description" : "Success response",
-                    "value" : "Group archived successfully"
+                    "value" : {
+                      "message" : "Group archived successfully"
+                    }
                   }
                 }
               }
@@ -2767,14 +2923,16 @@
           "200" : {
             "description" : "Ok. Generated resource",
             "content" : {
-              "text/html" : {
+              "application/json" : {
                 "schema" : {
                   "type" : "string"
                 },
                 "examples" : {
                   "Success response" : {
                     "description" : "Success response",
-                    "value" : "Group deactivated successfully"
+                    "value" : {
+                      "message" : "Group deactivated successfully"
+                    }
                   }
                 }
               }
@@ -2809,11 +2967,16 @@
           "200" : {
             "description" : "Ok. Generated resource",
             "content" : {
-              "text/html" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                },
                 "examples" : {
                   "Success response" : {
                     "description" : "Success response",
-                    "value" : "Group deleted successfully"
+                    "value" : {
+                      "message" : "Group deleted successfully"
+                    }
                   }
                 }
               }
@@ -8387,6 +8550,16 @@
                 }
               }
             }
+          },
+          "408" : {
+            "description" : "Request timeout - client disconnected",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
           }
         }
       },
@@ -8499,6 +8672,16 @@
                       "dateTime" : "2023-06-15T14:22:45"
                     } ]
                   }
+                }
+              }
+            }
+          },
+          "408" : {
+            "description" : "Request timeout - client disconnected",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
                 }
               }
             }
@@ -9512,22 +9695,7 @@
           },
           "groupMemberStatus" : {
             "type" : "string",
-            "enum" : [ "INVITED", "REQUESTED", "ACCEPTED", "REJECTED", "REMOVED", "LEFT" ]
-          }
-        }
-      },
-      "GroupMemberFilterResult" : {
-        "type" : "object",
-        "properties" : {
-          "count" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "list" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/GroupMember"
-            }
+            "enum" : [ "INVITED", "REQUESTED", "ACCEPTED", "ADMIN", "REJECTED", "REMOVED", "LEFT" ]
           }
         }
       },
@@ -9571,6 +9739,21 @@
           },
           "manageTooltip" : {
             "type" : "boolean"
+          }
+        }
+      },
+      "GroupMemberFilterResult" : {
+        "type" : "object",
+        "properties" : {
+          "count" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "list" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/GroupMember"
+            }
           }
         }
       },
@@ -11720,10 +11903,10 @@
       }
     },
     "securitySchemes" : {
-      "oAuthCode" : {
+      "oAuthToken" : {
         "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
         "in" : "header"
       },
       "oAuthClientId" : {
@@ -11732,10 +11915,10 @@
         "name" : "O-Auth-Client-Id",
         "in" : "header"
       },
-      "oAuthToken" : {
+      "oAuthCode" : {
         "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
         "in" : "header"
       }
     }
