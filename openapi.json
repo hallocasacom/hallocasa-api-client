@@ -8237,7 +8237,7 @@
       "post" : {
         "tags" : [ "users" ],
         "summary" : "Search users with specified filters",
-        "description" : "Searches for users matching the specified filter criteria",
+        "description" : "Searches for users matching the specified filter criteria and includes connection degrees to other users.",
         "operationId" : "searchUsers_1",
         "requestBody" : {
           "description" : "User search filters",
@@ -8376,6 +8376,7 @@
                         "firstName" : "John",
                         "lastName" : "Doe",
                         "confirmedFlag" : true,
+                        "connectionDegree" : "1st",
                         "skills" : [ "Real Estate" ],
                         "groups" : [ {
                           "id" : "group123",
@@ -11542,6 +11543,12 @@
               "$ref" : "#/components/schemas/UserOperatingLocation"
             }
           },
+          "connectionDegree" : {
+            "type" : "string",
+            "description" : "Connection degree to the logged-in user",
+            "example" : "1st",
+            "enum" : [ "1st", "2nd", "3rd+" ]
+          },
           "imprintImageLink" : {
             "type" : "string",
             "writeOnly" : true
@@ -11913,10 +11920,10 @@
       }
     },
     "securitySchemes" : {
-      "oAuthCode" : {
+      "oAuthToken" : {
         "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
         "in" : "header"
       },
       "oAuthClientId" : {
@@ -11925,10 +11932,10 @@
         "name" : "O-Auth-Client-Id",
         "in" : "header"
       },
-      "oAuthToken" : {
+      "oAuthCode" : {
         "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
         "in" : "header"
       }
     }

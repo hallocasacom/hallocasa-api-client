@@ -3831,6 +3831,12 @@ export interface SkilledUser {
      */
     'operatingLocations'?: Array<UserOperatingLocation>;
     /**
+     * Connection degree to the logged-in user
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'connectionDegree'?: SkilledUserConnectionDegreeEnum;
+    /**
      * 
      * @type {string}
      * @memberof SkilledUser
@@ -3846,6 +3852,13 @@ export const SkilledUserSubscriptionPlanNameEnum = {
 } as const;
 
 export type SkilledUserSubscriptionPlanNameEnum = typeof SkilledUserSubscriptionPlanNameEnum[keyof typeof SkilledUserSubscriptionPlanNameEnum];
+export const SkilledUserConnectionDegreeEnum = {
+    _1st: '1st',
+    _2nd: '2nd',
+    _3rd: '3rd+'
+} as const;
+
+export type SkilledUserConnectionDegreeEnum = typeof SkilledUserConnectionDegreeEnum[keyof typeof SkilledUserConnectionDegreeEnum];
 
 /**
  * 
@@ -18881,7 +18894,7 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Searches for users matching the specified filter criteria
+         * Searches for users matching the specified filter criteria and includes connection degrees to other users.
          * @summary Search users with specified filters
          * @param {UserFilterRequest} userFilterRequest User search filters
          * @param {*} [options] Override http request option.
@@ -19331,7 +19344,7 @@ export const UsersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Searches for users matching the specified filter criteria
+         * Searches for users matching the specified filter criteria and includes connection degrees to other users.
          * @summary Search users with specified filters
          * @param {UserFilterRequest} userFilterRequest User search filters
          * @param {*} [options] Override http request option.
@@ -19590,7 +19603,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.saveLog1(requestParameters.logEntry, options).then((request) => request(axios, basePath));
         },
         /**
-         * Searches for users matching the specified filter criteria
+         * Searches for users matching the specified filter criteria and includes connection degrees to other users.
          * @summary Search users with specified filters
          * @param {UsersApiSearchUsers1Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -20324,7 +20337,7 @@ export class UsersApi extends BaseAPI {
     }
 
     /**
-     * Searches for users matching the specified filter criteria
+     * Searches for users matching the specified filter criteria and includes connection degrees to other users.
      * @summary Search users with specified filters
      * @param {UsersApiSearchUsers1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

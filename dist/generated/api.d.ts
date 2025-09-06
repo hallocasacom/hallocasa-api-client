@@ -3756,6 +3756,12 @@ export interface SkilledUser {
      */
     'operatingLocations'?: Array<UserOperatingLocation>;
     /**
+     * Connection degree to the logged-in user
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'connectionDegree'?: SkilledUserConnectionDegreeEnum;
+    /**
      *
      * @type {string}
      * @memberof SkilledUser
@@ -3769,6 +3775,12 @@ export declare const SkilledUserSubscriptionPlanNameEnum: {
     readonly Brokerage: "Brokerage";
 };
 export type SkilledUserSubscriptionPlanNameEnum = typeof SkilledUserSubscriptionPlanNameEnum[keyof typeof SkilledUserSubscriptionPlanNameEnum];
+export declare const SkilledUserConnectionDegreeEnum: {
+    readonly _1st: "1st";
+    readonly _2nd: "2nd";
+    readonly _3rd: "3rd+";
+};
+export type SkilledUserConnectionDegreeEnum = typeof SkilledUserConnectionDegreeEnum[keyof typeof SkilledUserConnectionDegreeEnum];
 /**
  *
  * @export
@@ -12041,7 +12053,7 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      */
     saveLog1: (logEntry?: LogEntry, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Searches for users matching the specified filter criteria
+     * Searches for users matching the specified filter criteria and includes connection degrees to other users.
      * @summary Search users with specified filters
      * @param {UserFilterRequest} userFilterRequest User search filters
      * @param {*} [options] Override http request option.
@@ -12255,7 +12267,7 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      */
     saveLog1(logEntry?: LogEntry, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
-     * Searches for users matching the specified filter criteria
+     * Searches for users matching the specified filter criteria and includes connection degrees to other users.
      * @summary Search users with specified filters
      * @param {UserFilterRequest} userFilterRequest User search filters
      * @param {*} [options] Override http request option.
@@ -12450,7 +12462,7 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
      */
     saveLog1(requestParameters?: UsersApiSaveLog1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
     /**
-     * Searches for users matching the specified filter criteria
+     * Searches for users matching the specified filter criteria and includes connection degrees to other users.
      * @summary Search users with specified filters
      * @param {UsersApiSearchUsers1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -13072,7 +13084,7 @@ export declare class UsersApi extends BaseAPI {
      */
     saveLog1(requestParameters?: UsersApiSaveLog1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
     /**
-     * Searches for users matching the specified filter criteria
+     * Searches for users matching the specified filter criteria and includes connection degrees to other users.
      * @summary Search users with specified filters
      * @param {UsersApiSearchUsers1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
