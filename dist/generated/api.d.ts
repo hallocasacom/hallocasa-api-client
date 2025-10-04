@@ -5225,7 +5225,7 @@ export declare const AlertsApiAxiosParamCreator: (configuration?: Configuration)
      */
     getAlertResult1: (userId: number, alertId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Returns all alerts from all users in the system. This is typically an admin-level operation.
+     * Returns all alerts from all users in the system. For users with non-Free subscription plans, the response includes their profile name. This is typically an admin-level operation.
      * @summary Get all alerts in the system
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -5297,7 +5297,7 @@ export declare const AlertsApiFp: (configuration?: Configuration) => {
      */
     getAlertResult1(userId: number, alertId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
     /**
-     * Returns all alerts from all users in the system. This is typically an admin-level operation.
+     * Returns all alerts from all users in the system. For users with non-Free subscription plans, the response includes their profile name. This is typically an admin-level operation.
      * @summary Get all alerts in the system
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -5367,7 +5367,7 @@ export declare const AlertsApiFactory: (configuration?: Configuration, basePath?
      */
     getAlertResult1(requestParameters: AlertsApiGetAlertResult1Request, options?: RawAxiosRequestConfig): AxiosPromise<object>;
     /**
-     * Returns all alerts from all users in the system. This is typically an admin-level operation.
+     * Returns all alerts from all users in the system. For users with non-Free subscription plans, the response includes their profile name. This is typically an admin-level operation.
      * @summary Get all alerts in the system
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -5549,7 +5549,7 @@ export declare class AlertsApi extends BaseAPI {
      */
     getAlertResult1(requestParameters: AlertsApiGetAlertResult1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
     /**
-     * Returns all alerts from all users in the system. This is typically an admin-level operation.
+     * Returns all alerts from all users in the system. For users with non-Free subscription plans, the response includes their profile name. This is typically an admin-level operation.
      * @summary Get all alerts in the system
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

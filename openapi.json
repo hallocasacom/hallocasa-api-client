@@ -7626,7 +7626,7 @@
       "get" : {
         "tags" : [ "alerts" ],
         "summary" : "Get all alerts in the system",
-        "description" : "Returns all alerts from all users in the system. This is typically an admin-level operation.",
+        "description" : "Returns all alerts from all users in the system. For users with non-Free subscription plans, the response includes their profile name. This is typically an admin-level operation.",
         "operationId" : "getAllAlerts_1",
         "responses" : {
           "200" : {
@@ -7641,32 +7641,34 @@
                 },
                 "examples" : {
                   "allAlerts" : {
-                    "description" : "allAlerts",
+                    "description" : "Mixed response showing alerts with and without userProfileName. Profile names are only included for users with non-Free subscription plans.",
                     "value" : [ {
                       "id" : 1,
                       "userId" : 100,
-                      "name" : "Price Alert",
-                      "criteria" : {
+                      "userAlertType" : "PROPERTY_SEARCH",
+                      "alertCriteria" : {
                         "priceMin" : 100000,
                         "priceMax" : 300000
                       },
-                      "active" : true
+                      "allowBrokerContact" : true,
+                      "userProfileName" : "john.doe.realtor"
                     }, {
                       "id" : 2,
                       "userId" : 101,
-                      "name" : "New Properties",
-                      "criteria" : {
+                      "userAlertType" : "NEW_LISTINGS",
+                      "alertCriteria" : {
                         "location" : "Miami"
                       },
-                      "active" : true
+                      "allowBrokerContact" : false
                     }, {
                       "id" : 3,
-                      "userId" : 100,
-                      "name" : "Beach Properties",
-                      "criteria" : {
+                      "userId" : 102,
+                      "userAlertType" : "PRICE_DROP",
+                      "alertCriteria" : {
                         "nearBeach" : true
                       },
-                      "active" : false
+                      "allowBrokerContact" : true,
+                      "userProfileName" : "jane.smith.broker"
                     } ]
                   }
                 }

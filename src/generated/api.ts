@@ -5385,7 +5385,7 @@ export const AlertsApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * Returns all alerts from all users in the system. This is typically an admin-level operation.
+         * Returns all alerts from all users in the system. For users with non-Free subscription plans, the response includes their profile name. This is typically an admin-level operation.
          * @summary Get all alerts in the system
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -5665,7 +5665,7 @@ export const AlertsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns all alerts from all users in the system. This is typically an admin-level operation.
+         * Returns all alerts from all users in the system. For users with non-Free subscription plans, the response includes their profile name. This is typically an admin-level operation.
          * @summary Get all alerts in the system
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -5773,7 +5773,7 @@ export const AlertsApiFactory = function (configuration?: Configuration, basePat
             return localVarFp.getAlertResult1(requestParameters.userId, requestParameters.alertId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns all alerts from all users in the system. This is typically an admin-level operation.
+         * Returns all alerts from all users in the system. For users with non-Free subscription plans, the response includes their profile name. This is typically an admin-level operation.
          * @summary Get all alerts in the system
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -5985,7 +5985,7 @@ export class AlertsApi extends BaseAPI {
     }
 
     /**
-     * Returns all alerts from all users in the system. This is typically an admin-level operation.
+     * Returns all alerts from all users in the system. For users with non-Free subscription plans, the response includes their profile name. This is typically an admin-level operation.
      * @summary Get all alerts in the system
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
