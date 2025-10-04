@@ -147,6 +147,79 @@ export declare const AlertUserAlertTypeEnum: {
 };
 export type AlertUserAlertTypeEnum = typeof AlertUserAlertTypeEnum[keyof typeof AlertUserAlertTypeEnum];
 /**
+ * API Key information
+ * @export
+ * @interface ApiKeyDto
+ */
+export interface ApiKeyDto {
+    /**
+     * API Key ID
+     * @type {number}
+     * @memberof ApiKeyDto
+     */
+    'id'?: number;
+    /**
+     * User ID
+     * @type {number}
+     * @memberof ApiKeyDto
+     */
+    'userId'?: number;
+    /**
+     * API Key value (only shown when creating)
+     * @type {string}
+     * @memberof ApiKeyDto
+     */
+    'apiKey'?: string;
+    /**
+     * API Key name
+     * @type {string}
+     * @memberof ApiKeyDto
+     */
+    'name'?: string;
+    /**
+     * API Key description
+     * @type {string}
+     * @memberof ApiKeyDto
+     */
+    'description'?: string;
+    /**
+     * Whether the API key is active
+     * @type {boolean}
+     * @memberof ApiKeyDto
+     */
+    'isActive'?: boolean;
+    /**
+     * Creation timestamp
+     * @type {string}
+     * @memberof ApiKeyDto
+     */
+    'createdAt'?: string;
+    /**
+     * Last update timestamp
+     * @type {string}
+     * @memberof ApiKeyDto
+     */
+    'updatedAt'?: string;
+    /**
+     * Last used timestamp
+     * @type {string}
+     * @memberof ApiKeyDto
+     */
+    'lastUsedAt'?: string;
+    /**
+     * Expiration timestamp
+     * @type {string}
+     * @memberof ApiKeyDto
+     */
+    'expiresAt'?: string;
+    /**
+     * Masked API key for display (shows first and last 4 characters)
+     * @type {string}
+     * @memberof ApiKeyDto
+     */
+    'maskedApiKey'?: string;
+}
+/**
  *
  * @export
  * @interface Attachment
@@ -626,6 +699,31 @@ export interface CountryTelephonePrefix {
     'lang'?: string;
 }
 /**
+ * Request to create a new API key
+ * @export
+ * @interface CreateApiKeyRequestDto
+ */
+export interface CreateApiKeyRequestDto {
+    /**
+     * Name for the API key
+     * @type {string}
+     * @memberof CreateApiKeyRequestDto
+     */
+    'name': string;
+    /**
+     * Description of the API key usage
+     * @type {string}
+     * @memberof CreateApiKeyRequestDto
+     */
+    'description'?: string;
+    /**
+     * Optional expiration date for the API key
+     * @type {string}
+     * @memberof CreateApiKeyRequestDto
+     */
+    'expiresAt'?: string;
+}
+/**
  * Currency information
  * @export
  * @interface Currency
@@ -663,7 +761,7 @@ export interface Currency {
     'prefix'?: string;
 }
 /**
- *
+ * If minCrcyValue is specified, maxCrcyValue must be specified too. If both are specified, they must have the same currency.
  * @export
  * @interface CurrencyAmmount
  */
@@ -1406,17 +1504,11 @@ export interface GroupMemberFilterResult {
     'list'?: Array<GroupMember>;
 }
 /**
- *
+ * The parent filter of the current filter. If the current filter has a parent filter
  * @export
  * @interface HcFilter
  */
 export interface HcFilter {
-    /**
-     *
-     * @type {number}
-     * @memberof HcFilter
-     */
-    'id'?: number;
     /**
      *
      * @type {string}
@@ -1489,6 +1581,12 @@ export interface HcFilter {
      * @memberof HcFilter
      */
     'forceAllFilterOptions'?: boolean;
+    /**
+     * id = 1 requires the appliance of the parent filter with id = 35
+     * @type {number}
+     * @memberof HcFilter
+     */
+    'id'?: number;
 }
 export declare const HcFilterChoiceEnum: {
     readonly Show: "SHOW";
@@ -2567,7 +2665,7 @@ export declare const PropertyPublicationStateEnum: {
 };
 export type PropertyPublicationStateEnum = typeof PropertyPublicationStateEnum[keyof typeof PropertyPublicationStateEnum];
 /**
- *
+ * The property field which is needed for the filterWorkerOption: RANGE, DROPDOWN, BOOLEAN and CURRENCY_RANGE
  * @export
  * @interface PropertyField
  */
@@ -2863,6 +2961,12 @@ export interface PropertyFilter {
      * @memberof PropertyFilter
      */
     'propertyField'?: PropertyField;
+    /**
+     *
+     * @type {boolean}
+     * @memberof PropertyFilter
+     */
+    'validForFiltering'?: boolean;
 }
 /**
  *
@@ -2884,7 +2988,7 @@ export interface PropertyFilterCriteria {
     'resultRequest'?: ResultRequest;
 }
 /**
- *
+ * Must not be null
  * @export
  * @interface PropertyFilterEntry
  */
@@ -2940,25 +3044,25 @@ export interface PropertyFilterSubmission {
      */
     'propertyFilter': PropertyFilterEntry;
     /**
-     *
+     * minValue is being used for the filterWorkerOption RANGE
      * @type {number}
      * @memberof PropertyFilterSubmission
      */
     'minValue'?: number;
     /**
-     *
+     * maxValue is being used for the filterWorkerOption RANGE
      * @type {number}
      * @memberof PropertyFilterSubmission
      */
     'maxValue'?: number;
     /**
-     *
+     * minDateValue is being used for the filterWorkerOption PUBLICATION_DATE
      * @type {string}
      * @memberof PropertyFilterSubmission
      */
     'minDateValue'?: string;
     /**
-     *
+     * maxDateValue is being used for the filterWorkerOption PUBLICATION_DATE
      * @type {string}
      * @memberof PropertyFilterSubmission
      */
@@ -2976,31 +3080,31 @@ export interface PropertyFilterSubmission {
      */
     'maxCrcyValue'?: CurrencyAmmount;
     /**
-     *
+     * minLocalDateTimeValue is being used for the filterWorkerOption PUBLICATION_DATE
      * @type {string}
      * @memberof PropertyFilterSubmission
      */
     'minLocalDateTimeValue'?: string;
     /**
-     *
+     * maxLocalDateTimeValue is being used for the filterWorkerOption PUBLICATION_DATE
      * @type {string}
      * @memberof PropertyFilterSubmission
      */
     'maxLocalDateTimeValue'?: string;
     /**
-     *
+     * latitudeValue is being used for the filterWorkerOption GEOLOCATION_AREA
      * @type {number}
      * @memberof PropertyFilterSubmission
      */
     'latitudeValue'?: number;
     /**
-     *
+     * longitudeValue is being used for the filterWorkerOption GEOLOCATION_AREA
      * @type {number}
      * @memberof PropertyFilterSubmission
      */
     'longitudeValue'?: number;
     /**
-     *
+     * Radius value in meters. Is being used for the filterWorkerOption GEOLOCATION_AREA
      * @type {number}
      * @memberof PropertyFilterSubmission
      */
@@ -3018,7 +3122,7 @@ export interface PropertyFilterSubmission {
      */
     'xmlId'?: string;
     /**
-     *
+     * Make sure freeText is UTF-8 encoded. freeText is being used for the filterWorkerOption FREE_TEXT
      * @type {string}
      * @memberof PropertyFilterSubmission
      */
@@ -3259,12 +3363,6 @@ export interface ResultRequest {
      * @type {number}
      * @memberof ResultRequest
      */
-    'pageFrom'?: number;
-    /**
-     *
-     * @type {number}
-     * @memberof ResultRequest
-     */
     'pageTo'?: number;
     /**
      *
@@ -3296,6 +3394,12 @@ export interface ResultRequest {
      * @memberof ResultRequest
      */
     'orderBy'?: Array<string>;
+    /**
+     * Page number to start from (must be >= 1)
+     * @type {number}
+     * @memberof ResultRequest
+     */
+    'pageFrom'?: number;
 }
 /**
  *
@@ -5121,6 +5225,13 @@ export declare const AlertsApiAxiosParamCreator: (configuration?: Configuration)
      */
     getAlertResult1: (userId: number, alertId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Returns all alerts from all users in the system. This is typically an admin-level operation.
+     * @summary Get all alerts in the system
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getAllAlerts1: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Returns all alerts associated with the specified user ID
      * @summary Get all alerts for a user
      * @param {number} userId ID of the user to retrieve alerts for
@@ -5186,6 +5297,13 @@ export declare const AlertsApiFp: (configuration?: Configuration) => {
      */
     getAlertResult1(userId: number, alertId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
     /**
+     * Returns all alerts from all users in the system. This is typically an admin-level operation.
+     * @summary Get all alerts in the system
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getAllAlerts1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Alert>>>;
+    /**
      * Returns all alerts associated with the specified user ID
      * @summary Get all alerts for a user
      * @param {number} userId ID of the user to retrieve alerts for
@@ -5248,6 +5366,13 @@ export declare const AlertsApiFactory: (configuration?: Configuration, basePath?
      * @throws {RequiredError}
      */
     getAlertResult1(requestParameters: AlertsApiGetAlertResult1Request, options?: RawAxiosRequestConfig): AxiosPromise<object>;
+    /**
+     * Returns all alerts from all users in the system. This is typically an admin-level operation.
+     * @summary Get all alerts in the system
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getAllAlerts1(options?: RawAxiosRequestConfig): AxiosPromise<Array<Alert>>;
     /**
      * Returns all alerts associated with the specified user ID
      * @summary Get all alerts for a user
@@ -5424,6 +5549,14 @@ export declare class AlertsApi extends BaseAPI {
      */
     getAlertResult1(requestParameters: AlertsApiGetAlertResult1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
     /**
+     * Returns all alerts from all users in the system. This is typically an admin-level operation.
+     * @summary Get all alerts in the system
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AlertsApi
+     */
+    getAllAlerts1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Alert[], any>>;
+    /**
      * Returns all alerts associated with the specified user ID
      * @summary Get all alerts for a user
      * @param {AlertsApiGetByUser2Request} requestParameters Request parameters.
@@ -5594,6 +5727,199 @@ export declare class AllowancesApi extends BaseAPI {
      * @memberof AllowancesApi
      */
     updateChatAllowance1(requestParameters: AllowancesApiUpdateChatAllowance1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ChatAllowance, any>>;
+}
+/**
+ * ApiKeysApi - axios parameter creator
+ * @export
+ */
+export declare const ApiKeysApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     * Generate a new API key for the authenticated user
+     * @summary Create new API key
+     * @param {CreateApiKeyRequestDto} [createApiKeyRequestDto]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    createApiKey1: (createApiKeyRequestDto?: CreateApiKeyRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Deactivate an API key belonging to the authenticated user
+     * @summary Deactivate API key
+     * @param {number} apiKeyId API Key ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deactivateApiKey1: (apiKeyId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Delete an API key belonging to the authenticated user
+     * @summary Delete API key
+     * @param {number} apiKeyId API Key ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteApiKey1: (apiKeyId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Retrieve all API keys for the authenticated user
+     * @summary Get user API keys
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getUserApiKeys1: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * ApiKeysApi - functional programming interface
+ * @export
+ */
+export declare const ApiKeysApiFp: (configuration?: Configuration) => {
+    /**
+     * Generate a new API key for the authenticated user
+     * @summary Create new API key
+     * @param {CreateApiKeyRequestDto} [createApiKeyRequestDto]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    createApiKey1(createApiKeyRequestDto?: CreateApiKeyRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ApiKeyDto>>;
+    /**
+     * Deactivate an API key belonging to the authenticated user
+     * @summary Deactivate API key
+     * @param {number} apiKeyId API Key ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deactivateApiKey1(apiKeyId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     * Delete an API key belonging to the authenticated user
+     * @summary Delete API key
+     * @param {number} apiKeyId API Key ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteApiKey1(apiKeyId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     * Retrieve all API keys for the authenticated user
+     * @summary Get user API keys
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getUserApiKeys1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ApiKeyDto>>;
+};
+/**
+ * ApiKeysApi - factory interface
+ * @export
+ */
+export declare const ApiKeysApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     * Generate a new API key for the authenticated user
+     * @summary Create new API key
+     * @param {ApiKeysApiCreateApiKey1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    createApiKey1(requestParameters?: ApiKeysApiCreateApiKey1Request, options?: RawAxiosRequestConfig): AxiosPromise<ApiKeyDto>;
+    /**
+     * Deactivate an API key belonging to the authenticated user
+     * @summary Deactivate API key
+     * @param {ApiKeysApiDeactivateApiKey1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deactivateApiKey1(requestParameters: ApiKeysApiDeactivateApiKey1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     * Delete an API key belonging to the authenticated user
+     * @summary Delete API key
+     * @param {ApiKeysApiDeleteApiKey1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteApiKey1(requestParameters: ApiKeysApiDeleteApiKey1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     * Retrieve all API keys for the authenticated user
+     * @summary Get user API keys
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getUserApiKeys1(options?: RawAxiosRequestConfig): AxiosPromise<ApiKeyDto>;
+};
+/**
+ * Request parameters for createApiKey1 operation in ApiKeysApi.
+ * @export
+ * @interface ApiKeysApiCreateApiKey1Request
+ */
+export interface ApiKeysApiCreateApiKey1Request {
+    /**
+     *
+     * @type {CreateApiKeyRequestDto}
+     * @memberof ApiKeysApiCreateApiKey1
+     */
+    readonly createApiKeyRequestDto?: CreateApiKeyRequestDto;
+}
+/**
+ * Request parameters for deactivateApiKey1 operation in ApiKeysApi.
+ * @export
+ * @interface ApiKeysApiDeactivateApiKey1Request
+ */
+export interface ApiKeysApiDeactivateApiKey1Request {
+    /**
+     * API Key ID
+     * @type {number}
+     * @memberof ApiKeysApiDeactivateApiKey1
+     */
+    readonly apiKeyId: number;
+}
+/**
+ * Request parameters for deleteApiKey1 operation in ApiKeysApi.
+ * @export
+ * @interface ApiKeysApiDeleteApiKey1Request
+ */
+export interface ApiKeysApiDeleteApiKey1Request {
+    /**
+     * API Key ID
+     * @type {number}
+     * @memberof ApiKeysApiDeleteApiKey1
+     */
+    readonly apiKeyId: number;
+}
+/**
+ * ApiKeysApi - object-oriented interface
+ * @export
+ * @class ApiKeysApi
+ * @extends {BaseAPI}
+ */
+export declare class ApiKeysApi extends BaseAPI {
+    /**
+     * Generate a new API key for the authenticated user
+     * @summary Create new API key
+     * @param {ApiKeysApiCreateApiKey1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ApiKeysApi
+     */
+    createApiKey1(requestParameters?: ApiKeysApiCreateApiKey1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ApiKeyDto, any>>;
+    /**
+     * Deactivate an API key belonging to the authenticated user
+     * @summary Deactivate API key
+     * @param {ApiKeysApiDeactivateApiKey1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ApiKeysApi
+     */
+    deactivateApiKey1(requestParameters: ApiKeysApiDeactivateApiKey1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    /**
+     * Delete an API key belonging to the authenticated user
+     * @summary Delete API key
+     * @param {ApiKeysApiDeleteApiKey1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ApiKeysApi
+     */
+    deleteApiKey1(requestParameters: ApiKeysApiDeleteApiKey1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    /**
+     * Retrieve all API keys for the authenticated user
+     * @summary Get user API keys
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ApiKeysApi
+     */
+    getUserApiKeys1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ApiKeyDto, any>>;
 }
 /**
  * AttachmentsApi - axios parameter creator
@@ -6193,6 +6519,57 @@ export declare class CustomerSessionsApi extends BaseAPI {
      * @memberof CustomerSessionsApi
      */
     createCheckoutSession(requestParameters: CustomerSessionsApiCreateCheckoutSessionRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+}
+/**
+ * DefaultApi - axios parameter creator
+ * @export
+ */
+export declare const DefaultApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getMcpOpenApiSpec1: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * DefaultApi - functional programming interface
+ * @export
+ */
+export declare const DefaultApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getMcpOpenApiSpec1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+};
+/**
+ * DefaultApi - factory interface
+ * @export
+ */
+export declare const DefaultApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getMcpOpenApiSpec1(options?: RawAxiosRequestConfig): AxiosPromise<void>;
+};
+/**
+ * DefaultApi - object-oriented interface
+ * @export
+ * @class DefaultApi
+ * @extends {BaseAPI}
+ */
+export declare class DefaultApi extends BaseAPI {
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    getMcpOpenApiSpec1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
 }
 /**
  * EndorsementsApi - axios parameter creator
@@ -8075,7 +8452,7 @@ export declare const LocalesApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    delete1(pnemonic: string, securityKey?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>>;
+    delete1(pnemonic: string, securityKey?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
     /**
      * Retrieves the complete list of available locales in the system
      * @summary Returns all language list locale entries
@@ -8104,7 +8481,7 @@ export declare const LocalesApiFactory: (configuration?: Configuration, basePath
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    delete1(requestParameters: LocalesApiDelete1Request, options?: RawAxiosRequestConfig): AxiosPromise<string>;
+    delete1(requestParameters: LocalesApiDelete1Request, options?: RawAxiosRequestConfig): AxiosPromise<object>;
     /**
      * Retrieves the complete list of available locales in the system
      * @summary Returns all language list locale entries
@@ -8168,7 +8545,7 @@ export declare class LocalesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof LocalesApi
      */
-    delete1(requestParameters: LocalesApiDelete1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any>>;
+    delete1(requestParameters: LocalesApiDelete1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
     /**
      * Retrieves the complete list of available locales in the system
      * @summary Returns all language list locale entries
@@ -8976,7 +9353,7 @@ export declare const PropertiesApiAxiosParamCreator: (configuration?: Configurat
     fetchRandomProperties2: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      *
-     * @summary Search properties with specified filters
+     * @summary Search properties with specified filters. Use the /property_filters endpoint before to get the available filters.
      * @param {PropertyFilterCriteria} propertyFilterCriteria Property filter criteria
      * @param {boolean} [bypassCache] Bypass cache and fetch fresh data from database
      * @param {boolean} [includeNotAvailableProperties] Include properties that are not available anymore (e.g., sold, rented, removed)
@@ -9086,7 +9463,7 @@ export declare const PropertiesApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    deleteProperty1(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>>;
+    deleteProperty1(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
     /**
      *
      * @summary Fetch random list of properties related to a given property
@@ -9104,7 +9481,7 @@ export declare const PropertiesApiFp: (configuration?: Configuration) => {
     fetchRandomProperties2(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Property>>>;
     /**
      *
-     * @summary Search properties with specified filters
+     * @summary Search properties with specified filters. Use the /property_filters endpoint before to get the available filters.
      * @param {PropertyFilterCriteria} propertyFilterCriteria Property filter criteria
      * @param {boolean} [bypassCache] Bypass cache and fetch fresh data from database
      * @param {boolean} [includeNotAvailableProperties] Include properties that are not available anymore (e.g., sold, rented, removed)
@@ -9213,7 +9590,7 @@ export declare const PropertiesApiFactory: (configuration?: Configuration, baseP
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    deleteProperty1(requestParameters: PropertiesApiDeleteProperty1Request, options?: RawAxiosRequestConfig): AxiosPromise<string>;
+    deleteProperty1(requestParameters: PropertiesApiDeleteProperty1Request, options?: RawAxiosRequestConfig): AxiosPromise<object>;
     /**
      *
      * @summary Fetch random list of properties related to a given property
@@ -9231,7 +9608,7 @@ export declare const PropertiesApiFactory: (configuration?: Configuration, baseP
     fetchRandomProperties2(options?: RawAxiosRequestConfig): AxiosPromise<Array<Property>>;
     /**
      *
-     * @summary Search properties with specified filters
+     * @summary Search properties with specified filters. Use the /property_filters endpoint before to get the available filters.
      * @param {PropertiesApiFindProperties1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -9523,7 +9900,7 @@ export declare class PropertiesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertiesApi
      */
-    deleteProperty1(requestParameters: PropertiesApiDeleteProperty1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any>>;
+    deleteProperty1(requestParameters: PropertiesApiDeleteProperty1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
     /**
      *
      * @summary Fetch random list of properties related to a given property
@@ -9543,7 +9920,7 @@ export declare class PropertiesApi extends BaseAPI {
     fetchRandomProperties2(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property[], any>>;
     /**
      *
-     * @summary Search properties with specified filters
+     * @summary Search properties with specified filters. Use the /property_filters endpoint before to get the available filters.
      * @param {PropertiesApiFindProperties1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -12053,13 +12430,14 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      */
     saveLog1: (logEntry?: LogEntry, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Searches for users matching the specified filter criteria and includes connection degrees to other users.
+     * Searches for users matching the specified filter criteria. When authenticated (O-Auth-Token header provided), includes connection degrees (1st, 2nd, 3rd+) to other users.
      * @summary Search users with specified filters
      * @param {UserFilterRequest} userFilterRequest User search filters
+     * @param {string} [oAuthToken]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    searchUsers1: (userFilterRequest: UserFilterRequest, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    searchUsers1: (userFilterRequest: UserFilterRequest, oAuthToken?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Sends an email verification link to the authenticated user\'s email address
      * @summary Send email verification to logged-in user
@@ -12095,7 +12473,7 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    activateUser1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>>;
+    activateUser1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
     /**
      * This endpoint is not supported. Use save user profile to update skills instead.
      * @summary Add user skills
@@ -12214,7 +12592,7 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    register1(skilledUser: SkilledUser, origin?: string, skipEmailValidation?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    register1(skilledUser: SkilledUser, origin?: string, skipEmailValidation?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
     /**
      * Sends an activation link to the user\'s email for account verification
      * @summary Request activation link
@@ -12258,7 +12636,7 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    save(skilledUser: SkilledUser, oAuthToken?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>>;
+    save(skilledUser: SkilledUser, oAuthToken?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
     /**
      *
      * @param {LogEntry} [logEntry]
@@ -12267,13 +12645,14 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      */
     saveLog1(logEntry?: LogEntry, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
-     * Searches for users matching the specified filter criteria and includes connection degrees to other users.
+     * Searches for users matching the specified filter criteria. When authenticated (O-Auth-Token header provided), includes connection degrees (1st, 2nd, 3rd+) to other users.
      * @summary Search users with specified filters
      * @param {UserFilterRequest} userFilterRequest User search filters
+     * @param {string} [oAuthToken]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    searchUsers1(userFilterRequest: UserFilterRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserFilterResult>>;
+    searchUsers1(userFilterRequest: UserFilterRequest, oAuthToken?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserFilterResult>>;
     /**
      * Sends an email verification link to the authenticated user\'s email address
      * @summary Send email verification to logged-in user
@@ -12309,7 +12688,7 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    activateUser1(options?: RawAxiosRequestConfig): AxiosPromise<string>;
+    activateUser1(options?: RawAxiosRequestConfig): AxiosPromise<object>;
     /**
      * This endpoint is not supported. Use save user profile to update skills instead.
      * @summary Add user skills
@@ -12413,7 +12792,7 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    register1(requestParameters: UsersApiRegister1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    register1(requestParameters: UsersApiRegister1Request, options?: RawAxiosRequestConfig): AxiosPromise<object>;
     /**
      * Sends an activation link to the user\'s email for account verification
      * @summary Request activation link
@@ -12453,7 +12832,7 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    save(requestParameters: UsersApiSaveRequest, options?: RawAxiosRequestConfig): AxiosPromise<string>;
+    save(requestParameters: UsersApiSaveRequest, options?: RawAxiosRequestConfig): AxiosPromise<object>;
     /**
      *
      * @param {UsersApiSaveLog1Request} requestParameters Request parameters.
@@ -12462,7 +12841,7 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
      */
     saveLog1(requestParameters?: UsersApiSaveLog1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
     /**
-     * Searches for users matching the specified filter criteria and includes connection degrees to other users.
+     * Searches for users matching the specified filter criteria. When authenticated (O-Auth-Token header provided), includes connection degrees (1st, 2nd, 3rd+) to other users.
      * @summary Search users with specified filters
      * @param {UsersApiSearchUsers1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -12865,6 +13244,12 @@ export interface UsersApiSearchUsers1Request {
      * @memberof UsersApiSearchUsers1
      */
     readonly userFilterRequest: UserFilterRequest;
+    /**
+     *
+     * @type {string}
+     * @memberof UsersApiSearchUsers1
+     */
+    readonly oAuthToken?: string;
 }
 /**
  * Request parameters for sendEmailVerification1 operation in UsersApi.
@@ -12912,7 +13297,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    activateUser1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any>>;
+    activateUser1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
     /**
      * This endpoint is not supported. Use save user profile to update skills instead.
      * @summary Add user skills
@@ -13029,7 +13414,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    register1(requestParameters: UsersApiRegister1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    register1(requestParameters: UsersApiRegister1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
     /**
      * Sends an activation link to the user\'s email for account verification
      * @summary Request activation link
@@ -13074,7 +13459,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    save(requestParameters: UsersApiSaveRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any>>;
+    save(requestParameters: UsersApiSaveRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
     /**
      *
      * @param {UsersApiSaveLog1Request} requestParameters Request parameters.
@@ -13084,7 +13469,7 @@ export declare class UsersApi extends BaseAPI {
      */
     saveLog1(requestParameters?: UsersApiSaveLog1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
     /**
-     * Searches for users matching the specified filter criteria and includes connection degrees to other users.
+     * Searches for users matching the specified filter criteria. When authenticated (O-Auth-Token header provided), includes connection degrees (1st, 2nd, 3rd+) to other users.
      * @summary Search users with specified filters
      * @param {UsersApiSearchUsers1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

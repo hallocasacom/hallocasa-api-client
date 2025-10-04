@@ -11,8 +11,8 @@
     "version" : "v1"
   },
   "servers" : [ {
-    "url" : "/hallocasa-api/api",
-    "description" : "Hallocasa API Server"
+    "url" : "http://localhost:8080/hallocasa-api/api",
+    "description" : "Local Development Server"
   } ],
   "security" : [ {
     "oAuthCode" : [ ],
@@ -57,6 +57,9 @@
   }, {
     "name" : "property types",
     "description" : "Operations for managing property types"
+  }, {
+    "name" : "api-keys",
+    "description" : "API Key management endpoints"
   }, {
     "name" : "Password Recovery",
     "description" : "API endpoints for password recovery process"
@@ -1504,11 +1507,13 @@
           "200" : {
             "description" : "Ok. Generated resource",
             "content" : {
-              "text/html" : {
+              "application/json" : {
                 "schema" : {
-                  "type" : "string"
+                  "type" : "object"
                 },
-                "example" : "Delete operation executed succesfully"
+                "example" : {
+                  "message" : "Delete operation executed successfully"
+                }
               }
             }
           }
@@ -1867,7 +1872,7 @@
           "400" : {
             "description" : "Bad Request - Invalid user ID",
             "content" : {
-              "application/xml;charset=utf-8" : {
+              "application/xml" : {
                 "schema" : {
                   "type" : "string"
                 }
@@ -1877,7 +1882,7 @@
           "404" : {
             "description" : "Not Found - Format not supported",
             "content" : {
-              "application/xml;charset=utf-8" : {
+              "application/xml" : {
                 "schema" : {
                   "type" : "string"
                 }
@@ -4157,25 +4162,7 @@
                         "showingStepList" : [ {
                           "stepId" : 1,
                           "filterShown" : true
-                        } ],
-                        "usePropertyField" : true
-                      },
-                      "propertyField" : {
-                        "id" : 5,
-                        "name" : "Price",
-                        "lang" : "en",
-                        "basic" : true,
-                        "primaryKey" : false,
-                        "multilanguageValue" : false,
-                        "propertyFieldType" : {
-                          "id" : 1,
-                          "name" : "Monetary"
-                        },
-                        "propertyFieldValueType" : {
-                          "id" : 3,
-                          "name" : "Currency Amount"
-                        },
-                        "fieldValueList" : [ ]
+                        } ]
                       }
                     } ]
                   }
@@ -4295,7 +4282,7 @@
         "requestBody" : {
           "description" : "Request body containing the publication state to set",
           "content" : {
-            "application/json" : {
+            "application/json;charset=UTF-8" : {
               "schema" : {
                 "$ref" : "#/components/schemas/PropertyPublicationStateRequest"
               }
@@ -4382,16 +4369,18 @@
           "200" : {
             "description" : "OK. Property deleted successfully",
             "content" : {
-              "text/html" : {
+              "application/json" : {
                 "schema" : {
-                  "type" : "string",
+                  "type" : "object",
                   "description" : "Success message"
                 },
                 "examples" : {
                   "deleteSuccess" : {
                     "summary" : "Successful deletion",
                     "description" : "A success message after deleting a property",
-                    "value" : "Property deleted successfully"
+                    "value" : {
+                      "message" : "Property deleted successfully"
+                    }
                   }
                 }
               }
@@ -4548,7 +4537,7 @@
     "/properties/search" : {
       "post" : {
         "tags" : [ "properties" ],
-        "summary" : "Search properties with specified filters",
+        "summary" : "Search properties with specified filters. Use the /property_filters endpoint before to get the available filters.",
         "operationId" : "findProperties_1",
         "parameters" : [ {
           "name" : "bypassCache",
@@ -5124,7 +5113,7 @@
           "200" : {
             "description" : "OK. HTML preview of the property",
             "content" : {
-              "text/html;charset=utf-8" : {
+              "application/xml" : {
                 "schema" : {
                   "type" : "string",
                   "description" : "HTML content for the property preview"
@@ -5194,7 +5183,7 @@
         "operationId" : "sendAlert_2",
         "requestBody" : {
           "content" : {
-            "application/json" : {
+            "application/json;charset=UTF-8" : {
               "schema" : {
                 "$ref" : "#/components/schemas/WeeklyAlertRange"
               }
@@ -5835,6 +5824,135 @@
           },
           "404" : {
             "description" : "User not found"
+          }
+        }
+      }
+    },
+    "/api-keys" : {
+      "get" : {
+        "tags" : [ "api-keys" ],
+        "summary" : "Get user API keys",
+        "description" : "Retrieve all API keys for the authenticated user",
+        "operationId" : "getUserApiKeys_1",
+        "responses" : {
+          "200" : {
+            "description" : "Successfully retrieved API keys",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiKeyDto"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "api-keys" ],
+        "summary" : "Create new API key",
+        "description" : "Generate a new API key for the authenticated user",
+        "operationId" : "createApiKey_1",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreateApiKeyRequestDto"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "API key created successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiKeyDto"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Invalid request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "409" : {
+            "description" : "API key name already exists"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/api-keys/{apiKeyId}/deactivate" : {
+      "put" : {
+        "tags" : [ "api-keys" ],
+        "summary" : "Deactivate API key",
+        "description" : "Deactivate an API key belonging to the authenticated user",
+        "operationId" : "deactivateApiKey_1",
+        "parameters" : [ {
+          "name" : "apiKeyId",
+          "in" : "path",
+          "description" : "API Key ID",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "API key deactivated successfully"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "404" : {
+            "description" : "API key not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/api-keys/{apiKeyId}" : {
+      "delete" : {
+        "tags" : [ "api-keys" ],
+        "summary" : "Delete API key",
+        "description" : "Delete an API key belonging to the authenticated user",
+        "operationId" : "deleteApiKey_1",
+        "parameters" : [ {
+          "name" : "apiKeyId",
+          "in" : "path",
+          "description" : "API Key ID",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "API key deleted successfully"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "404" : {
+            "description" : "API key not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
           }
         }
       }
@@ -7504,6 +7622,82 @@
         }
       }
     },
+    "/alerts" : {
+      "get" : {
+        "tags" : [ "alerts" ],
+        "summary" : "Get all alerts in the system",
+        "description" : "Returns all alerts from all users in the system. This is typically an admin-level operation.",
+        "operationId" : "getAllAlerts_1",
+        "responses" : {
+          "200" : {
+            "description" : "List of all alerts retrieved successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Alert"
+                  }
+                },
+                "examples" : {
+                  "allAlerts" : {
+                    "description" : "allAlerts",
+                    "value" : [ {
+                      "id" : 1,
+                      "userId" : 100,
+                      "name" : "Price Alert",
+                      "criteria" : {
+                        "priceMin" : 100000,
+                        "priceMax" : 300000
+                      },
+                      "active" : true
+                    }, {
+                      "id" : 2,
+                      "userId" : 101,
+                      "name" : "New Properties",
+                      "criteria" : {
+                        "location" : "Miami"
+                      },
+                      "active" : true
+                    }, {
+                      "id" : 3,
+                      "userId" : 100,
+                      "name" : "Beach Properties",
+                      "criteria" : {
+                        "nearBeach" : true
+                      },
+                      "active" : false
+                    } ]
+                  }
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "{\"message\":\"Authentication is required to access this resource\"}"
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden - insufficient permissions",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "{\"message\":\"You do not have permission to access all alerts\"}"
+              }
+            }
+          }
+        }
+      }
+    },
     "/user-types" : {
       "get" : {
         "tags" : [ "user-types" ],
@@ -7565,11 +7759,13 @@
           "200" : {
             "description" : "Ok. Generated resource",
             "content" : {
-              "text/html" : {
+              "application/json" : {
                 "schema" : {
-                  "type" : "string"
+                  "type" : "object"
                 },
-                "example" : "User activated successfully"
+                "example" : {
+                  "message" : "User activated successfully"
+                }
               }
             }
           }
@@ -7872,11 +8068,13 @@
           "200" : {
             "description" : "Ok. Generated resource",
             "content" : {
-              "text/html" : {
+              "application/json" : {
                 "schema" : {
-                  "type" : "string"
+                  "type" : "object"
                 },
-                "example" : "User saved successfully"
+                "example" : {
+                  "message" : "User saved successfully"
+                }
               }
             }
           }
@@ -8116,7 +8314,7 @@
           "200" : {
             "description" : "HTML preview of user profile",
             "content" : {
-              "text/html" : {
+              "application/xml" : {
                 "schema" : {
                   "type" : "string"
                 },
@@ -8183,8 +8381,13 @@
           "200" : {
             "description" : "Ok. Generated resource",
             "content" : {
-              "text/html" : {
-                "example" : "User registered succesfully"
+              "application/json" : {
+                "schema" : {
+                  "type" : "object"
+                },
+                "example" : {
+                  "message" : "User registered successfully"
+                }
               }
             }
           }
@@ -8237,8 +8440,15 @@
       "post" : {
         "tags" : [ "users" ],
         "summary" : "Search users with specified filters",
-        "description" : "Searches for users matching the specified filter criteria and includes connection degrees to other users.",
+        "description" : "Searches for users matching the specified filter criteria. When authenticated (O-Auth-Token header provided), includes connection degrees (1st, 2nd, 3rd+) to other users.",
         "operationId" : "searchUsers_1",
+        "parameters" : [ {
+          "name" : "O-Auth-Token",
+          "in" : "header",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
         "requestBody" : {
           "description" : "User search filters",
           "content" : {
@@ -8353,9 +8563,6 @@
           "required" : true
         },
         "responses" : {
-          "401" : {
-            "description" : "If user is unauthorized"
-          },
           "500" : {
             "description" : "If server internal error"
           },
@@ -8432,7 +8639,7 @@
           "default" : {
             "description" : "default response",
             "content" : {
-              "*/*" : { }
+              "application/json" : { }
             }
           }
         }
@@ -8779,6 +8986,19 @@
                   }
                 }
               }
+            }
+          }
+        }
+      }
+    },
+    "/openapi-mcp.json" : {
+      "get" : {
+        "operationId" : "getMcpOpenApiSpec_1",
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : { }
             }
           }
         }
@@ -9979,7 +10199,8 @@
             "type" : "string",
             "enum" : [ "PROPERTY_TYPE" ]
           }
-        }
+        },
+        "description" : "The property field which is needed for the filterWorkerOption: RANGE, DROPDOWN, BOOLEAN and CURRENCY_RANGE"
       },
       "PropertyFieldType" : {
         "type" : "object",
@@ -10189,7 +10410,8 @@
           "valid" : {
             "type" : "boolean"
           }
-        }
+        },
+        "description" : "If minCrcyValue is specified, maxCrcyValue must be specified too. If both are specified, they must have the same currency."
       },
       "FilterShowingStep" : {
         "type" : "object",
@@ -10210,10 +10432,6 @@
       "HcFilter" : {
         "type" : "object",
         "properties" : {
-          "id" : {
-            "type" : "integer",
-            "format" : "int32"
-          },
           "name" : {
             "type" : "string"
           },
@@ -10255,8 +10473,14 @@
           },
           "forceAllFilterOptions" : {
             "type" : "boolean"
+          },
+          "id" : {
+            "type" : "integer",
+            "description" : "id = 1 requires the appliance of the parent filter with id = 35",
+            "format" : "int32"
           }
-        }
+        },
+        "description" : "The parent filter of the current filter. If the current filter has a parent filter"
       },
       "HcFilterCondition" : {
         "type" : "object",
@@ -10566,7 +10790,8 @@
           "propertyField" : {
             "$ref" : "#/components/schemas/PropertyField"
           }
-        }
+        },
+        "description" : "Must not be null"
       },
       "PropertyFilterSubmission" : {
         "required" : [ "propertyFilter" ],
@@ -10580,18 +10805,22 @@
           },
           "minValue" : {
             "type" : "number",
+            "description" : "minValue is being used for the filterWorkerOption RANGE",
             "format" : "double"
           },
           "maxValue" : {
             "type" : "number",
+            "description" : "maxValue is being used for the filterWorkerOption RANGE",
             "format" : "double"
           },
           "minDateValue" : {
             "type" : "string",
+            "description" : "minDateValue is being used for the filterWorkerOption PUBLICATION_DATE",
             "format" : "date-time"
           },
           "maxDateValue" : {
             "type" : "string",
+            "description" : "maxDateValue is being used for the filterWorkerOption PUBLICATION_DATE",
             "format" : "date-time"
           },
           "minCrcyValue" : {
@@ -10602,22 +10831,27 @@
           },
           "minLocalDateTimeValue" : {
             "type" : "string",
+            "description" : "minLocalDateTimeValue is being used for the filterWorkerOption PUBLICATION_DATE",
             "format" : "date-time"
           },
           "maxLocalDateTimeValue" : {
             "type" : "string",
+            "description" : "maxLocalDateTimeValue is being used for the filterWorkerOption PUBLICATION_DATE",
             "format" : "date-time"
           },
           "latitudeValue" : {
             "type" : "number",
+            "description" : "latitudeValue is being used for the filterWorkerOption GEOLOCATION_AREA",
             "format" : "double"
           },
           "longitudeValue" : {
             "type" : "number",
+            "description" : "longitudeValue is being used for the filterWorkerOption GEOLOCATION_AREA",
             "format" : "double"
           },
           "radiusValue" : {
             "type" : "integer",
+            "description" : "Radius value in meters. Is being used for the filterWorkerOption GEOLOCATION_AREA",
             "format" : "int32"
           },
           "userId" : {
@@ -10628,7 +10862,8 @@
             "type" : "string"
           },
           "freeText" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Make sure freeText is UTF-8 encoded. freeText is being used for the filterWorkerOption FREE_TEXT"
           },
           "selectedFilterOptions" : {
             "type" : "array",
@@ -10641,10 +10876,6 @@
       "ResultRequest" : {
         "type" : "object",
         "properties" : {
-          "pageFrom" : {
-            "type" : "integer",
-            "format" : "int32"
-          },
           "pageTo" : {
             "type" : "integer",
             "format" : "int32"
@@ -10666,6 +10897,12 @@
             "items" : {
               "type" : "string"
             }
+          },
+          "pageFrom" : {
+            "minimum" : 1,
+            "type" : "integer",
+            "description" : "Page number to start from (must be >= 1)",
+            "format" : "int32"
           }
         }
       },
@@ -10677,6 +10914,9 @@
           },
           "propertyField" : {
             "$ref" : "#/components/schemas/PropertyField"
+          },
+          "validForFiltering" : {
+            "type" : "boolean"
           }
         }
       },
@@ -10770,6 +11010,94 @@
             "type" : "boolean"
           }
         }
+      },
+      "ApiKeyDto" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "description" : "API Key ID",
+            "format" : "int64",
+            "example" : 1
+          },
+          "userId" : {
+            "type" : "integer",
+            "description" : "User ID",
+            "format" : "int64",
+            "example" : 7
+          },
+          "apiKey" : {
+            "type" : "string",
+            "description" : "API Key value (only shown when creating)",
+            "example" : "hc_abcd1234..."
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "API Key name",
+            "example" : "My Integration Key"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "API Key description",
+            "example" : "Used for mobile app integration"
+          },
+          "isActive" : {
+            "type" : "boolean",
+            "description" : "Whether the API key is active",
+            "example" : true
+          },
+          "createdAt" : {
+            "type" : "string",
+            "description" : "Creation timestamp",
+            "format" : "date-time"
+          },
+          "updatedAt" : {
+            "type" : "string",
+            "description" : "Last update timestamp",
+            "format" : "date-time"
+          },
+          "lastUsedAt" : {
+            "type" : "string",
+            "description" : "Last used timestamp",
+            "format" : "date-time"
+          },
+          "expiresAt" : {
+            "type" : "string",
+            "description" : "Expiration timestamp",
+            "format" : "date-time"
+          },
+          "maskedApiKey" : {
+            "type" : "string",
+            "description" : "Masked API key for display (shows first and last 4 characters)"
+          }
+        },
+        "description" : "API Key information"
+      },
+      "CreateApiKeyRequestDto" : {
+        "required" : [ "name" ],
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "maxLength" : 100,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Name for the API key",
+            "example" : "My Integration Key"
+          },
+          "description" : {
+            "maxLength" : 1000,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Description of the API key usage",
+            "example" : "Used for mobile app integration"
+          },
+          "expiresAt" : {
+            "type" : "string",
+            "description" : "Optional expiration date for the API key",
+            "format" : "date-time"
+          }
+        },
+        "description" : "Request to create a new API key"
       },
       "LogEntry" : {
         "type" : "object",
@@ -11920,6 +12248,12 @@
       }
     },
     "securitySchemes" : {
+      "oAuthCode" : {
+        "type" : "apiKey",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
+        "in" : "header"
+      },
       "oAuthToken" : {
         "type" : "apiKey",
         "description" : "OAuth access token for authenticated requests",
@@ -11930,12 +12264,6 @@
         "type" : "apiKey",
         "description" : "OAuth client identifier (default: hallocasa_frontend)",
         "name" : "O-Auth-Client-Id",
-        "in" : "header"
-      },
-      "oAuthCode" : {
-        "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
         "in" : "header"
       }
     }

@@ -160,6 +160,79 @@ export const AlertUserAlertTypeEnum = {
 export type AlertUserAlertTypeEnum = typeof AlertUserAlertTypeEnum[keyof typeof AlertUserAlertTypeEnum];
 
 /**
+ * API Key information
+ * @export
+ * @interface ApiKeyDto
+ */
+export interface ApiKeyDto {
+    /**
+     * API Key ID
+     * @type {number}
+     * @memberof ApiKeyDto
+     */
+    'id'?: number;
+    /**
+     * User ID
+     * @type {number}
+     * @memberof ApiKeyDto
+     */
+    'userId'?: number;
+    /**
+     * API Key value (only shown when creating)
+     * @type {string}
+     * @memberof ApiKeyDto
+     */
+    'apiKey'?: string;
+    /**
+     * API Key name
+     * @type {string}
+     * @memberof ApiKeyDto
+     */
+    'name'?: string;
+    /**
+     * API Key description
+     * @type {string}
+     * @memberof ApiKeyDto
+     */
+    'description'?: string;
+    /**
+     * Whether the API key is active
+     * @type {boolean}
+     * @memberof ApiKeyDto
+     */
+    'isActive'?: boolean;
+    /**
+     * Creation timestamp
+     * @type {string}
+     * @memberof ApiKeyDto
+     */
+    'createdAt'?: string;
+    /**
+     * Last update timestamp
+     * @type {string}
+     * @memberof ApiKeyDto
+     */
+    'updatedAt'?: string;
+    /**
+     * Last used timestamp
+     * @type {string}
+     * @memberof ApiKeyDto
+     */
+    'lastUsedAt'?: string;
+    /**
+     * Expiration timestamp
+     * @type {string}
+     * @memberof ApiKeyDto
+     */
+    'expiresAt'?: string;
+    /**
+     * Masked API key for display (shows first and last 4 characters)
+     * @type {string}
+     * @memberof ApiKeyDto
+     */
+    'maskedApiKey'?: string;
+}
+/**
  * 
  * @export
  * @interface Attachment
@@ -648,6 +721,31 @@ export interface CountryTelephonePrefix {
     'lang'?: string;
 }
 /**
+ * Request to create a new API key
+ * @export
+ * @interface CreateApiKeyRequestDto
+ */
+export interface CreateApiKeyRequestDto {
+    /**
+     * Name for the API key
+     * @type {string}
+     * @memberof CreateApiKeyRequestDto
+     */
+    'name': string;
+    /**
+     * Description of the API key usage
+     * @type {string}
+     * @memberof CreateApiKeyRequestDto
+     */
+    'description'?: string;
+    /**
+     * Optional expiration date for the API key
+     * @type {string}
+     * @memberof CreateApiKeyRequestDto
+     */
+    'expiresAt'?: string;
+}
+/**
  * Currency information
  * @export
  * @interface Currency
@@ -685,7 +783,7 @@ export interface Currency {
     'prefix'?: string;
 }
 /**
- * 
+ * If minCrcyValue is specified, maxCrcyValue must be specified too. If both are specified, they must have the same currency.
  * @export
  * @interface CurrencyAmmount
  */
@@ -1444,17 +1542,11 @@ export interface GroupMemberFilterResult {
     'list'?: Array<GroupMember>;
 }
 /**
- * 
+ * The parent filter of the current filter. If the current filter has a parent filter
  * @export
  * @interface HcFilter
  */
 export interface HcFilter {
-    /**
-     * 
-     * @type {number}
-     * @memberof HcFilter
-     */
-    'id'?: number;
     /**
      * 
      * @type {string}
@@ -1527,6 +1619,12 @@ export interface HcFilter {
      * @memberof HcFilter
      */
     'forceAllFilterOptions'?: boolean;
+    /**
+     * id = 1 requires the appliance of the parent filter with id = 35
+     * @type {number}
+     * @memberof HcFilter
+     */
+    'id'?: number;
 }
 
 export const HcFilterChoiceEnum = {
@@ -2632,7 +2730,7 @@ export const PropertyPublicationStateEnum = {
 export type PropertyPublicationStateEnum = typeof PropertyPublicationStateEnum[keyof typeof PropertyPublicationStateEnum];
 
 /**
- * 
+ * The property field which is needed for the filterWorkerOption: RANGE, DROPDOWN, BOOLEAN and CURRENCY_RANGE
  * @export
  * @interface PropertyField
  */
@@ -2935,6 +3033,12 @@ export interface PropertyFilter {
      * @memberof PropertyFilter
      */
     'propertyField'?: PropertyField;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof PropertyFilter
+     */
+    'validForFiltering'?: boolean;
 }
 /**
  * 
@@ -2956,7 +3060,7 @@ export interface PropertyFilterCriteria {
     'resultRequest'?: ResultRequest;
 }
 /**
- * 
+ * Must not be null
  * @export
  * @interface PropertyFilterEntry
  */
@@ -3012,25 +3116,25 @@ export interface PropertyFilterSubmission {
      */
     'propertyFilter': PropertyFilterEntry;
     /**
-     * 
+     * minValue is being used for the filterWorkerOption RANGE
      * @type {number}
      * @memberof PropertyFilterSubmission
      */
     'minValue'?: number;
     /**
-     * 
+     * maxValue is being used for the filterWorkerOption RANGE
      * @type {number}
      * @memberof PropertyFilterSubmission
      */
     'maxValue'?: number;
     /**
-     * 
+     * minDateValue is being used for the filterWorkerOption PUBLICATION_DATE
      * @type {string}
      * @memberof PropertyFilterSubmission
      */
     'minDateValue'?: string;
     /**
-     * 
+     * maxDateValue is being used for the filterWorkerOption PUBLICATION_DATE
      * @type {string}
      * @memberof PropertyFilterSubmission
      */
@@ -3048,31 +3152,31 @@ export interface PropertyFilterSubmission {
      */
     'maxCrcyValue'?: CurrencyAmmount;
     /**
-     * 
+     * minLocalDateTimeValue is being used for the filterWorkerOption PUBLICATION_DATE
      * @type {string}
      * @memberof PropertyFilterSubmission
      */
     'minLocalDateTimeValue'?: string;
     /**
-     * 
+     * maxLocalDateTimeValue is being used for the filterWorkerOption PUBLICATION_DATE
      * @type {string}
      * @memberof PropertyFilterSubmission
      */
     'maxLocalDateTimeValue'?: string;
     /**
-     * 
+     * latitudeValue is being used for the filterWorkerOption GEOLOCATION_AREA
      * @type {number}
      * @memberof PropertyFilterSubmission
      */
     'latitudeValue'?: number;
     /**
-     * 
+     * longitudeValue is being used for the filterWorkerOption GEOLOCATION_AREA
      * @type {number}
      * @memberof PropertyFilterSubmission
      */
     'longitudeValue'?: number;
     /**
-     * 
+     * Radius value in meters. Is being used for the filterWorkerOption GEOLOCATION_AREA
      * @type {number}
      * @memberof PropertyFilterSubmission
      */
@@ -3090,7 +3194,7 @@ export interface PropertyFilterSubmission {
      */
     'xmlId'?: string;
     /**
-     * 
+     * Make sure freeText is UTF-8 encoded. freeText is being used for the filterWorkerOption FREE_TEXT
      * @type {string}
      * @memberof PropertyFilterSubmission
      */
@@ -3334,12 +3438,6 @@ export interface ResultRequest {
      * @type {number}
      * @memberof ResultRequest
      */
-    'pageFrom'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ResultRequest
-     */
     'pageTo'?: number;
     /**
      * 
@@ -3371,6 +3469,12 @@ export interface ResultRequest {
      * @memberof ResultRequest
      */
     'orderBy'?: Array<string>;
+    /**
+     * Page number to start from (must be >= 1)
+     * @type {number}
+     * @memberof ResultRequest
+     */
+    'pageFrom'?: number;
 }
 /**
  * 
@@ -5281,6 +5385,42 @@ export const AlertsApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
+         * Returns all alerts from all users in the system. This is typically an admin-level operation.
+         * @summary Get all alerts in the system
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAllAlerts1: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/alerts`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns all alerts associated with the specified user ID
          * @summary Get all alerts for a user
          * @param {number} userId ID of the user to retrieve alerts for
@@ -5525,6 +5665,18 @@ export const AlertsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns all alerts from all users in the system. This is typically an admin-level operation.
+         * @summary Get all alerts in the system
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAllAlerts1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Alert>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllAlerts1(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AlertsApi.getAllAlerts1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Returns all alerts associated with the specified user ID
          * @summary Get all alerts for a user
          * @param {number} userId ID of the user to retrieve alerts for
@@ -5619,6 +5771,15 @@ export const AlertsApiFactory = function (configuration?: Configuration, basePat
          */
         getAlertResult1(requestParameters: AlertsApiGetAlertResult1Request, options?: RawAxiosRequestConfig): AxiosPromise<object> {
             return localVarFp.getAlertResult1(requestParameters.userId, requestParameters.alertId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns all alerts from all users in the system. This is typically an admin-level operation.
+         * @summary Get all alerts in the system
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAllAlerts1(options?: RawAxiosRequestConfig): AxiosPromise<Array<Alert>> {
+            return localVarFp.getAllAlerts1(options).then((request) => request(axios, basePath));
         },
         /**
          * Returns all alerts associated with the specified user ID
@@ -5821,6 +5982,17 @@ export class AlertsApi extends BaseAPI {
      */
     public getAlertResult1(requestParameters: AlertsApiGetAlertResult1Request, options?: RawAxiosRequestConfig) {
         return AlertsApiFp(this.configuration).getAlertResult1(requestParameters.userId, requestParameters.alertId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns all alerts from all users in the system. This is typically an admin-level operation.
+     * @summary Get all alerts in the system
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AlertsApi
+     */
+    public getAllAlerts1(options?: RawAxiosRequestConfig) {
+        return AlertsApiFp(this.configuration).getAllAlerts1(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6112,6 +6284,380 @@ export class AllowancesApi extends BaseAPI {
      */
     public updateChatAllowance1(requestParameters: AllowancesApiUpdateChatAllowance1Request, options?: RawAxiosRequestConfig) {
         return AllowancesApiFp(this.configuration).updateChatAllowance1(requestParameters.userPair, requestParameters.chatAllowance, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * ApiKeysApi - axios parameter creator
+ * @export
+ */
+export const ApiKeysApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Generate a new API key for the authenticated user
+         * @summary Create new API key
+         * @param {CreateApiKeyRequestDto} [createApiKeyRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createApiKey1: async (createApiKeyRequestDto?: CreateApiKeyRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api-keys`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createApiKeyRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Deactivate an API key belonging to the authenticated user
+         * @summary Deactivate API key
+         * @param {number} apiKeyId API Key ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deactivateApiKey1: async (apiKeyId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'apiKeyId' is not null or undefined
+            assertParamExists('deactivateApiKey1', 'apiKeyId', apiKeyId)
+            const localVarPath = `/api-keys/{apiKeyId}/deactivate`
+                .replace(`{${"apiKeyId"}}`, encodeURIComponent(String(apiKeyId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Delete an API key belonging to the authenticated user
+         * @summary Delete API key
+         * @param {number} apiKeyId API Key ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteApiKey1: async (apiKeyId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'apiKeyId' is not null or undefined
+            assertParamExists('deleteApiKey1', 'apiKeyId', apiKeyId)
+            const localVarPath = `/api-keys/{apiKeyId}`
+                .replace(`{${"apiKeyId"}}`, encodeURIComponent(String(apiKeyId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Retrieve all API keys for the authenticated user
+         * @summary Get user API keys
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUserApiKeys1: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api-keys`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ApiKeysApi - functional programming interface
+ * @export
+ */
+export const ApiKeysApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ApiKeysApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Generate a new API key for the authenticated user
+         * @summary Create new API key
+         * @param {CreateApiKeyRequestDto} [createApiKeyRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createApiKey1(createApiKeyRequestDto?: CreateApiKeyRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ApiKeyDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createApiKey1(createApiKeyRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ApiKeysApi.createApiKey1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Deactivate an API key belonging to the authenticated user
+         * @summary Deactivate API key
+         * @param {number} apiKeyId API Key ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deactivateApiKey1(apiKeyId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deactivateApiKey1(apiKeyId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ApiKeysApi.deactivateApiKey1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Delete an API key belonging to the authenticated user
+         * @summary Delete API key
+         * @param {number} apiKeyId API Key ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteApiKey1(apiKeyId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteApiKey1(apiKeyId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ApiKeysApi.deleteApiKey1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Retrieve all API keys for the authenticated user
+         * @summary Get user API keys
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUserApiKeys1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ApiKeyDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserApiKeys1(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ApiKeysApi.getUserApiKeys1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * ApiKeysApi - factory interface
+ * @export
+ */
+export const ApiKeysApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ApiKeysApiFp(configuration)
+    return {
+        /**
+         * Generate a new API key for the authenticated user
+         * @summary Create new API key
+         * @param {ApiKeysApiCreateApiKey1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createApiKey1(requestParameters: ApiKeysApiCreateApiKey1Request = {}, options?: RawAxiosRequestConfig): AxiosPromise<ApiKeyDto> {
+            return localVarFp.createApiKey1(requestParameters.createApiKeyRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Deactivate an API key belonging to the authenticated user
+         * @summary Deactivate API key
+         * @param {ApiKeysApiDeactivateApiKey1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deactivateApiKey1(requestParameters: ApiKeysApiDeactivateApiKey1Request, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deactivateApiKey1(requestParameters.apiKeyId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Delete an API key belonging to the authenticated user
+         * @summary Delete API key
+         * @param {ApiKeysApiDeleteApiKey1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteApiKey1(requestParameters: ApiKeysApiDeleteApiKey1Request, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteApiKey1(requestParameters.apiKeyId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Retrieve all API keys for the authenticated user
+         * @summary Get user API keys
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUserApiKeys1(options?: RawAxiosRequestConfig): AxiosPromise<ApiKeyDto> {
+            return localVarFp.getUserApiKeys1(options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * Request parameters for createApiKey1 operation in ApiKeysApi.
+ * @export
+ * @interface ApiKeysApiCreateApiKey1Request
+ */
+export interface ApiKeysApiCreateApiKey1Request {
+    /**
+     * 
+     * @type {CreateApiKeyRequestDto}
+     * @memberof ApiKeysApiCreateApiKey1
+     */
+    readonly createApiKeyRequestDto?: CreateApiKeyRequestDto
+}
+
+/**
+ * Request parameters for deactivateApiKey1 operation in ApiKeysApi.
+ * @export
+ * @interface ApiKeysApiDeactivateApiKey1Request
+ */
+export interface ApiKeysApiDeactivateApiKey1Request {
+    /**
+     * API Key ID
+     * @type {number}
+     * @memberof ApiKeysApiDeactivateApiKey1
+     */
+    readonly apiKeyId: number
+}
+
+/**
+ * Request parameters for deleteApiKey1 operation in ApiKeysApi.
+ * @export
+ * @interface ApiKeysApiDeleteApiKey1Request
+ */
+export interface ApiKeysApiDeleteApiKey1Request {
+    /**
+     * API Key ID
+     * @type {number}
+     * @memberof ApiKeysApiDeleteApiKey1
+     */
+    readonly apiKeyId: number
+}
+
+/**
+ * ApiKeysApi - object-oriented interface
+ * @export
+ * @class ApiKeysApi
+ * @extends {BaseAPI}
+ */
+export class ApiKeysApi extends BaseAPI {
+    /**
+     * Generate a new API key for the authenticated user
+     * @summary Create new API key
+     * @param {ApiKeysApiCreateApiKey1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ApiKeysApi
+     */
+    public createApiKey1(requestParameters: ApiKeysApiCreateApiKey1Request = {}, options?: RawAxiosRequestConfig) {
+        return ApiKeysApiFp(this.configuration).createApiKey1(requestParameters.createApiKeyRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Deactivate an API key belonging to the authenticated user
+     * @summary Deactivate API key
+     * @param {ApiKeysApiDeactivateApiKey1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ApiKeysApi
+     */
+    public deactivateApiKey1(requestParameters: ApiKeysApiDeactivateApiKey1Request, options?: RawAxiosRequestConfig) {
+        return ApiKeysApiFp(this.configuration).deactivateApiKey1(requestParameters.apiKeyId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Delete an API key belonging to the authenticated user
+     * @summary Delete API key
+     * @param {ApiKeysApiDeleteApiKey1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ApiKeysApi
+     */
+    public deleteApiKey1(requestParameters: ApiKeysApiDeleteApiKey1Request, options?: RawAxiosRequestConfig) {
+        return ApiKeysApiFp(this.configuration).deleteApiKey1(requestParameters.apiKeyId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Retrieve all API keys for the authenticated user
+     * @summary Get user API keys
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ApiKeysApi
+     */
+    public getUserApiKeys1(options?: RawAxiosRequestConfig) {
+        return ApiKeysApiFp(this.configuration).getUserApiKeys1(options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -7230,6 +7776,109 @@ export class CustomerSessionsApi extends BaseAPI {
      */
     public createCheckoutSession(requestParameters: CustomerSessionsApiCreateCheckoutSessionRequest, options?: RawAxiosRequestConfig) {
         return CustomerSessionsApiFp(this.configuration).createCheckoutSession(requestParameters.customerSessionDto, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * DefaultApi - axios parameter creator
+ * @export
+ */
+export const DefaultApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMcpOpenApiSpec1: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/openapi-mcp.json`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * DefaultApi - functional programming interface
+ * @export
+ */
+export const DefaultApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = DefaultApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getMcpOpenApiSpec1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getMcpOpenApiSpec1(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DefaultApi.getMcpOpenApiSpec1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * DefaultApi - factory interface
+ * @export
+ */
+export const DefaultApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = DefaultApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMcpOpenApiSpec1(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.getMcpOpenApiSpec1(options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * DefaultApi - object-oriented interface
+ * @export
+ * @class DefaultApi
+ * @extends {BaseAPI}
+ */
+export class DefaultApi extends BaseAPI {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public getMcpOpenApiSpec1(options?: RawAxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).getMcpOpenApiSpec1(options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -10774,7 +11423,7 @@ export const LocalesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async delete1(pnemonic: string, securityKey?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+        async delete1(pnemonic: string, securityKey?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.delete1(pnemonic, securityKey, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['LocalesApi.delete1']?.[localVarOperationServerIndex]?.url;
@@ -10822,7 +11471,7 @@ export const LocalesApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delete1(requestParameters: LocalesApiDelete1Request, options?: RawAxiosRequestConfig): AxiosPromise<string> {
+        delete1(requestParameters: LocalesApiDelete1Request, options?: RawAxiosRequestConfig): AxiosPromise<object> {
             return localVarFp.delete1(requestParameters.pnemonic, requestParameters.securityKey, options).then((request) => request(axios, basePath));
         },
         /**
@@ -12409,7 +13058,7 @@ export const PropertiesApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Content-Type'] = 'application/json;charset=UTF-8';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -12539,7 +13188,7 @@ export const PropertiesApiAxiosParamCreator = function (configuration?: Configur
         },
         /**
          * 
-         * @summary Search properties with specified filters
+         * @summary Search properties with specified filters. Use the /property_filters endpoint before to get the available filters.
          * @param {PropertyFilterCriteria} propertyFilterCriteria Property filter criteria
          * @param {boolean} [bypassCache] Bypass cache and fetch fresh data from database
          * @param {boolean} [includeNotAvailableProperties] Include properties that are not available anymore (e.g., sold, rented, removed)
@@ -12954,7 +13603,7 @@ export const PropertiesApiAxiosParamCreator = function (configuration?: Configur
 
 
     
-            localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Content-Type'] = 'application/json;charset=UTF-8';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -13032,7 +13681,7 @@ export const PropertiesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteProperty1(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+        async deleteProperty1(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteProperty1(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PropertiesApi.deleteProperty1']?.[localVarOperationServerIndex]?.url;
@@ -13065,7 +13714,7 @@ export const PropertiesApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Search properties with specified filters
+         * @summary Search properties with specified filters. Use the /property_filters endpoint before to get the available filters.
          * @param {PropertyFilterCriteria} propertyFilterCriteria Property filter criteria
          * @param {boolean} [bypassCache] Bypass cache and fetch fresh data from database
          * @param {boolean} [includeNotAvailableProperties] Include properties that are not available anymore (e.g., sold, rented, removed)
@@ -13235,7 +13884,7 @@ export const PropertiesApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteProperty1(requestParameters: PropertiesApiDeleteProperty1Request, options?: RawAxiosRequestConfig): AxiosPromise<string> {
+        deleteProperty1(requestParameters: PropertiesApiDeleteProperty1Request, options?: RawAxiosRequestConfig): AxiosPromise<object> {
             return localVarFp.deleteProperty1(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -13259,7 +13908,7 @@ export const PropertiesApiFactory = function (configuration?: Configuration, bas
         },
         /**
          * 
-         * @summary Search properties with specified filters
+         * @summary Search properties with specified filters. Use the /property_filters endpoint before to get the available filters.
          * @param {PropertiesApiFindProperties1Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -13625,7 +14274,7 @@ export class PropertiesApi extends BaseAPI {
 
     /**
      * 
-     * @summary Search properties with specified filters
+     * @summary Search properties with specified filters. Use the /property_filters endpoint before to get the available filters.
      * @param {PropertiesApiFindProperties1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -18894,13 +19543,14 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Searches for users matching the specified filter criteria and includes connection degrees to other users.
+         * Searches for users matching the specified filter criteria. When authenticated (O-Auth-Token header provided), includes connection degrees (1st, 2nd, 3rd+) to other users.
          * @summary Search users with specified filters
          * @param {UserFilterRequest} userFilterRequest User search filters
+         * @param {string} [oAuthToken] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        searchUsers1: async (userFilterRequest: UserFilterRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        searchUsers1: async (userFilterRequest: UserFilterRequest, oAuthToken?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userFilterRequest' is not null or undefined
             assertParamExists('searchUsers1', 'userFilterRequest', userFilterRequest)
             const localVarPath = `/users/search`;
@@ -18925,6 +19575,9 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
+            if (oAuthToken != null) {
+                localVarHeaderParameter['O-Auth-Token'] = String(oAuthToken);
+            }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -19072,7 +19725,7 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async activateUser1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+        async activateUser1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.activateUser1(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UsersApi.activateUser1']?.[localVarOperationServerIndex]?.url;
@@ -19256,7 +19909,7 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async register1(skilledUser: SkilledUser, origin?: string, skipEmailValidation?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async register1(skilledUser: SkilledUser, origin?: string, skipEmailValidation?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.register1(skilledUser, origin, skipEmailValidation, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UsersApi.register1']?.[localVarOperationServerIndex]?.url;
@@ -19325,7 +19978,7 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async save(skilledUser: SkilledUser, oAuthToken?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+        async save(skilledUser: SkilledUser, oAuthToken?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.save(skilledUser, oAuthToken, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UsersApi.save']?.[localVarOperationServerIndex]?.url;
@@ -19344,14 +19997,15 @@ export const UsersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Searches for users matching the specified filter criteria and includes connection degrees to other users.
+         * Searches for users matching the specified filter criteria. When authenticated (O-Auth-Token header provided), includes connection degrees (1st, 2nd, 3rd+) to other users.
          * @summary Search users with specified filters
          * @param {UserFilterRequest} userFilterRequest User search filters
+         * @param {string} [oAuthToken] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async searchUsers1(userFilterRequest: UserFilterRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserFilterResult>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.searchUsers1(userFilterRequest, options);
+        async searchUsers1(userFilterRequest: UserFilterRequest, oAuthToken?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserFilterResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.searchUsers1(userFilterRequest, oAuthToken, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UsersApi.searchUsers1']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -19410,7 +20064,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        activateUser1(options?: RawAxiosRequestConfig): AxiosPromise<string> {
+        activateUser1(options?: RawAxiosRequestConfig): AxiosPromise<object> {
             return localVarFp.activateUser1(options).then((request) => request(axios, basePath));
         },
         /**
@@ -19540,7 +20194,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        register1(requestParameters: UsersApiRegister1Request, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        register1(requestParameters: UsersApiRegister1Request, options?: RawAxiosRequestConfig): AxiosPromise<object> {
             return localVarFp.register1(requestParameters.skilledUser, requestParameters.origin, requestParameters.skipEmailValidation, options).then((request) => request(axios, basePath));
         },
         /**
@@ -19590,7 +20244,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        save(requestParameters: UsersApiSaveRequest, options?: RawAxiosRequestConfig): AxiosPromise<string> {
+        save(requestParameters: UsersApiSaveRequest, options?: RawAxiosRequestConfig): AxiosPromise<object> {
             return localVarFp.save(requestParameters.skilledUser, requestParameters.oAuthToken, options).then((request) => request(axios, basePath));
         },
         /**
@@ -19603,14 +20257,14 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.saveLog1(requestParameters.logEntry, options).then((request) => request(axios, basePath));
         },
         /**
-         * Searches for users matching the specified filter criteria and includes connection degrees to other users.
+         * Searches for users matching the specified filter criteria. When authenticated (O-Auth-Token header provided), includes connection degrees (1st, 2nd, 3rd+) to other users.
          * @summary Search users with specified filters
          * @param {UsersApiSearchUsers1Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         searchUsers1(requestParameters: UsersApiSearchUsers1Request, options?: RawAxiosRequestConfig): AxiosPromise<UserFilterResult> {
-            return localVarFp.searchUsers1(requestParameters.userFilterRequest, options).then((request) => request(axios, basePath));
+            return localVarFp.searchUsers1(requestParameters.userFilterRequest, requestParameters.oAuthToken, options).then((request) => request(axios, basePath));
         },
         /**
          * Sends an email verification link to the authenticated user\'s email address
@@ -20054,6 +20708,13 @@ export interface UsersApiSearchUsers1Request {
      * @memberof UsersApiSearchUsers1
      */
     readonly userFilterRequest: UserFilterRequest
+
+    /**
+     * 
+     * @type {string}
+     * @memberof UsersApiSearchUsers1
+     */
+    readonly oAuthToken?: string
 }
 
 /**
@@ -20337,7 +20998,7 @@ export class UsersApi extends BaseAPI {
     }
 
     /**
-     * Searches for users matching the specified filter criteria and includes connection degrees to other users.
+     * Searches for users matching the specified filter criteria. When authenticated (O-Auth-Token header provided), includes connection degrees (1st, 2nd, 3rd+) to other users.
      * @summary Search users with specified filters
      * @param {UsersApiSearchUsers1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -20345,7 +21006,7 @@ export class UsersApi extends BaseAPI {
      * @memberof UsersApi
      */
     public searchUsers1(requestParameters: UsersApiSearchUsers1Request, options?: RawAxiosRequestConfig) {
-        return UsersApiFp(this.configuration).searchUsers1(requestParameters.userFilterRequest, options).then((request) => request(this.axios, this.basePath));
+        return UsersApiFp(this.configuration).searchUsers1(requestParameters.userFilterRequest, requestParameters.oAuthToken, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
