@@ -160,6 +160,74 @@ export const AlertUserAlertTypeEnum = {
 export type AlertUserAlertTypeEnum = typeof AlertUserAlertTypeEnum[keyof typeof AlertUserAlertTypeEnum];
 
 /**
+ * 
+ * @export
+ * @interface AlertWithUserProfile
+ */
+export interface AlertWithUserProfile {
+    /**
+     * 
+     * @type {number}
+     * @memberof AlertWithUserProfile
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AlertWithUserProfile
+     */
+    'userId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof AlertWithUserProfile
+     */
+    'userAlertType'?: AlertWithUserProfileUserAlertTypeEnum;
+    /**
+     * Alert criteria in JSON format
+     * @type {object}
+     * @memberof AlertWithUserProfile
+     */
+    'alertCriteria'?: object;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AlertWithUserProfile
+     */
+    'allowBrokerContact'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof AlertWithUserProfile
+     */
+    'lastNotification'?: string;
+    /**
+     * Alert result data in JSON format
+     * @type {object}
+     * @memberof AlertWithUserProfile
+     */
+    'result'?: object;
+    /**
+     * Profile name of the user who owns this alert (only included for non-Free subscribers)
+     * @type {string}
+     * @memberof AlertWithUserProfile
+     */
+    'userProfileName'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof AlertWithUserProfile
+     */
+    'newsletterOwnerId'?: number;
+}
+
+export const AlertWithUserProfileUserAlertTypeEnum = {
+    Property: 'PROPERTY'
+} as const;
+
+export type AlertWithUserProfileUserAlertTypeEnum = typeof AlertWithUserProfileUserAlertTypeEnum[keyof typeof AlertWithUserProfileUserAlertTypeEnum];
+
+/**
  * API Key information
  * @export
  * @interface ApiKeyDto
@@ -5670,7 +5738,7 @@ export const AlertsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getAllAlerts1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Alert>>> {
+        async getAllAlerts1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AlertWithUserProfile>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAllAlerts1(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AlertsApi.getAllAlerts1']?.[localVarOperationServerIndex]?.url;
@@ -5778,7 +5846,7 @@ export const AlertsApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAllAlerts1(options?: RawAxiosRequestConfig): AxiosPromise<Array<Alert>> {
+        getAllAlerts1(options?: RawAxiosRequestConfig): AxiosPromise<Array<AlertWithUserProfile>> {
             return localVarFp.getAllAlerts1(options).then((request) => request(axios, basePath));
         },
         /**
