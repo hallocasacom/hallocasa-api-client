@@ -130,6 +130,12 @@ export interface Alert {
      */
     'lastNotification'?: string;
     /**
+     *
+     * @type {string}
+     * @memberof Alert
+     */
+    'createdAt'?: string;
+    /**
      * Alert result data in JSON format
      * @type {object}
      * @memberof Alert
@@ -188,6 +194,12 @@ export interface AlertWithUserProfile {
      * @memberof AlertWithUserProfile
      */
     'lastNotification'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof AlertWithUserProfile
+     */
+    'createdAt'?: string;
     /**
      * Alert result data in JSON format
      * @type {object}
@@ -4889,6 +4901,42 @@ export interface UserFilterRequest {
      * @memberof UserFilterRequest
      */
     'skills'?: Array<Skill>;
+    /**
+     * Include chats count for each user (expensive operation)
+     * @type {boolean}
+     * @memberof UserFilterRequest
+     */
+    'includeChatsCount'?: boolean;
+    /**
+     * Include chat status for each user (expensive operation)
+     * @type {boolean}
+     * @memberof UserFilterRequest
+     */
+    'includeChatStatus'?: boolean;
+    /**
+     * Include groups for each user (expensive operation)
+     * @type {boolean}
+     * @memberof UserFilterRequest
+     */
+    'includeGroups'?: boolean;
+    /**
+     * Include connection degrees when authenticated (expensive operation)
+     * @type {boolean}
+     * @memberof UserFilterRequest
+     */
+    'includeConnectionDegrees'?: boolean;
+    /**
+     * Include Google Place reviews for each user (expensive operation)
+     * @type {boolean}
+     * @memberof UserFilterRequest
+     */
+    'includeGoogleReviews'?: boolean;
+    /**
+     * Include subscription plan names (expensive operation)
+     * @type {boolean}
+     * @memberof UserFilterRequest
+     */
+    'includeSubscriptionPlans'?: boolean;
 }
 /**
  *

@@ -11556,6 +11556,10 @@
             "type" : "string",
             "format" : "date-time"
           },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
           "result" : {
             "type" : "object",
             "description" : "Alert result data in JSON format",
@@ -12137,6 +12141,36 @@
             "items" : {
               "$ref" : "#/components/schemas/Skill"
             }
+          },
+          "includeChatsCount" : {
+            "type" : "boolean",
+            "description" : "Include chats count for each user (expensive operation)",
+            "example" : true
+          },
+          "includeChatStatus" : {
+            "type" : "boolean",
+            "description" : "Include chat status for each user (expensive operation)",
+            "example" : true
+          },
+          "includeGroups" : {
+            "type" : "boolean",
+            "description" : "Include groups for each user (expensive operation)",
+            "example" : true
+          },
+          "includeConnectionDegrees" : {
+            "type" : "boolean",
+            "description" : "Include connection degrees when authenticated (expensive operation)",
+            "example" : true
+          },
+          "includeGoogleReviews" : {
+            "type" : "boolean",
+            "description" : "Include Google Place reviews for each user (expensive operation)",
+            "example" : true
+          },
+          "includeSubscriptionPlans" : {
+            "type" : "boolean",
+            "description" : "Include subscription plan names (expensive operation)",
+            "example" : true
           }
         },
         "description" : "Filter request for searching users with various criteria including location, user types, languages, and business focus areas"
@@ -12211,6 +12245,10 @@
             "type" : "boolean"
           },
           "lastNotification" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "createdAt" : {
             "type" : "string",
             "format" : "date-time"
           },
@@ -12300,10 +12338,10 @@
       }
     },
     "securitySchemes" : {
-      "oAuthCode" : {
+      "oAuthToken" : {
         "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
         "in" : "header"
       },
       "oAuthClientId" : {
@@ -12312,10 +12350,10 @@
         "name" : "O-Auth-Client-Id",
         "in" : "header"
       },
-      "oAuthToken" : {
+      "oAuthCode" : {
         "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
         "in" : "header"
       }
     }
