@@ -7774,6 +7774,68 @@
         }
       }
     },
+    "/users/{userId}/identity-verification-check" : {
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Check identity verification status",
+        "description" : "Checks the status of a Stripe Identity verification session and marks user as verified if successful",
+        "operationId" : "checkIdentityVerification_1",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64",
+            "example" : 123
+          }
+        } ],
+        "requestBody" : {
+          "description" : "Identity verification check details",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/IdentityVerificationCheckRequest"
+              },
+              "examples" : {
+                "identityVerificationCheck" : {
+                  "summary" : "Example identity verification check",
+                  "description" : "identityVerificationCheck",
+                  "value" : {
+                    "verificationSessionId" : "vs_1Nqm6zLkdIwHu7ix5jKfGpI1"
+                  }
+                }
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "400" : {
+            "description" : "Verification not completed, failed, or invalid session ID"
+          },
+          "200" : {
+            "description" : "Ok. Verification successful",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object"
+                },
+                "example" : {
+                  "message" : "Identity verified successfully"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/users/{userId}/phone-code-check" : {
       "post" : {
         "tags" : [ "users" ],
@@ -8712,6 +8774,52 @@
         }
       }
     },
+    "/users/{userId}/identity-verification-start" : {
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Start identity verification for user",
+        "description" : "Initiates Stripe Identity verification and returns a verification URL and session ID",
+        "operationId" : "startIdentityVerification_1",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64",
+            "example" : 123
+          }
+        } ],
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Generated resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/IdentityVerificationStartResponse"
+                },
+                "examples" : {
+                  "identityVerificationStart" : {
+                    "summary" : "Identity verification start response",
+                    "description" : "identityVerificationStart",
+                    "value" : {
+                      "verificationUrl" : "https://verify.stripe.com/start/test_xxxxx",
+                      "verificationSessionId" : "vs_1Nqm6zLkdIwHu7ix5jKfGpI1"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/users/{userId}/skills" : {
       "get" : {
         "tags" : [ "users" ],
@@ -9142,6 +9250,9 @@
             "format" : "int32"
           },
           "phoneVerified" : {
+            "type" : "boolean"
+          },
+          "identityVerified" : {
             "type" : "boolean"
           },
           "geoPlace" : {
@@ -11740,6 +11851,9 @@
           "phoneVerified" : {
             "type" : "boolean"
           },
+          "identityVerified" : {
+            "type" : "boolean"
+          },
           "geoPlace" : {
             "$ref" : "#/components/schemas/GeoPlace"
           },
@@ -12271,6 +12385,17 @@
           }
         }
       },
+      "IdentityVerificationCheckRequest" : {
+        "required" : [ "verificationSessionId" ],
+        "type" : "object",
+        "properties" : {
+          "verificationSessionId" : {
+            "maxLength" : 200,
+            "minLength" : 10,
+            "type" : "string"
+          }
+        }
+      },
       "PhoneCodeCheckResource" : {
         "required" : [ "code" ],
         "type" : "object",
@@ -12335,9 +12460,26 @@
             "type" : "string"
           }
         }
+      },
+      "IdentityVerificationStartResponse" : {
+        "type" : "object",
+        "properties" : {
+          "verificationUrl" : {
+            "type" : "string"
+          },
+          "verificationSessionId" : {
+            "type" : "string"
+          }
+        }
       }
     },
     "securitySchemes" : {
+      "oAuthCode" : {
+        "type" : "apiKey",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
+        "in" : "header"
+      },
       "oAuthToken" : {
         "type" : "apiKey",
         "description" : "OAuth access token for authenticated requests",
@@ -12348,12 +12490,6 @@
         "type" : "apiKey",
         "description" : "OAuth client identifier (default: hallocasa_frontend)",
         "name" : "O-Auth-Client-Id",
-        "in" : "header"
-      },
-      "oAuthCode" : {
-        "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
         "in" : "header"
       }
     }

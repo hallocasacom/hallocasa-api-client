@@ -2337,6 +2337,38 @@ export type HcFilterTypeEntryRangeFieldPresentationEnum = typeof HcFilterTypeEnt
 /**
  * 
  * @export
+ * @interface IdentityVerificationCheckRequest
+ */
+export interface IdentityVerificationCheckRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof IdentityVerificationCheckRequest
+     */
+    'verificationSessionId': string;
+}
+/**
+ * 
+ * @export
+ * @interface IdentityVerificationStartResponse
+ */
+export interface IdentityVerificationStartResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof IdentityVerificationStartResponse
+     */
+    'verificationUrl'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof IdentityVerificationStartResponse
+     */
+    'verificationSessionId'?: string;
+}
+/**
+ * 
+ * @export
  * @interface Language
  */
 export interface Language {
@@ -3794,6 +3826,12 @@ export interface SkilledUser {
     'phoneVerified'?: boolean;
     /**
      * 
+     * @type {boolean}
+     * @memberof SkilledUser
+     */
+    'identityVerified'?: boolean;
+    /**
+     * 
      * @type {GeoPlace}
      * @memberof SkilledUser
      */
@@ -4571,6 +4609,12 @@ export interface User {
      * @memberof User
      */
     'phoneVerified'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof User
+     */
+    'identityVerified'?: boolean;
     /**
      * 
      * @type {GeoPlace}
@@ -18842,6 +18886,52 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
+         * Checks the status of a Stripe Identity verification session and marks user as verified if successful
+         * @summary Check identity verification status
+         * @param {number} userId 
+         * @param {IdentityVerificationCheckRequest} identityVerificationCheckRequest Identity verification check details
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        checkIdentityVerification1: async (userId: number, identityVerificationCheckRequest: IdentityVerificationCheckRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('checkIdentityVerification1', 'userId', userId)
+            // verify required parameter 'identityVerificationCheckRequest' is not null or undefined
+            assertParamExists('checkIdentityVerification1', 'identityVerificationCheckRequest', identityVerificationCheckRequest)
+            const localVarPath = `/users/{userId}/identity-verification-check`
+                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(identityVerificationCheckRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Verifies the code that was sent to the user\'s phone
          * @summary Verify the phone code sent to user
          * @param {number} userId 
@@ -19825,6 +19915,46 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Initiates Stripe Identity verification and returns a verification URL and session ID
+         * @summary Start identity verification for user
+         * @param {number} userId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        startIdentityVerification1: async (userId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('startIdentityVerification1', 'userId', userId)
+            const localVarPath = `/users/{userId}/identity-verification-start`
+                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -19859,6 +19989,20 @@ export const UsersApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.addUserSkills1(userId, userSkill, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UsersApi.addUserSkills1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Checks the status of a Stripe Identity verification session and marks user as verified if successful
+         * @summary Check identity verification status
+         * @param {number} userId 
+         * @param {IdentityVerificationCheckRequest} identityVerificationCheckRequest Identity verification check details
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async checkIdentityVerification1(userId: number, identityVerificationCheckRequest: IdentityVerificationCheckRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.checkIdentityVerification1(userId, identityVerificationCheckRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['UsersApi.checkIdentityVerification1']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -20164,6 +20308,19 @@ export const UsersApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['UsersApi.sendPhoneVerificationCodeCommand1']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * Initiates Stripe Identity verification and returns a verification URL and session ID
+         * @summary Start identity verification for user
+         * @param {number} userId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async startIdentityVerification1(userId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IdentityVerificationStartResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.startIdentityVerification1(userId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['UsersApi.startIdentityVerification1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -20192,6 +20349,16 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          */
         addUserSkills1(requestParameters: UsersApiAddUserSkills1Request, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.addUserSkills1(requestParameters.userId, requestParameters.userSkill, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Checks the status of a Stripe Identity verification session and marks user as verified if successful
+         * @summary Check identity verification status
+         * @param {UsersApiCheckIdentityVerification1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        checkIdentityVerification1(requestParameters: UsersApiCheckIdentityVerification1Request, options?: RawAxiosRequestConfig): AxiosPromise<object> {
+            return localVarFp.checkIdentityVerification1(requestParameters.userId, requestParameters.identityVerificationCheckRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Verifies the code that was sent to the user\'s phone
@@ -20410,6 +20577,16 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
         sendPhoneVerificationCodeCommand1(requestParameters: UsersApiSendPhoneVerificationCodeCommand1Request, options?: RawAxiosRequestConfig): AxiosPromise<PhoneCodeRequestResource> {
             return localVarFp.sendPhoneVerificationCodeCommand1(requestParameters.userId, requestParameters.phoneCodeRequestResource, options).then((request) => request(axios, basePath));
         },
+        /**
+         * Initiates Stripe Identity verification and returns a verification URL and session ID
+         * @summary Start identity verification for user
+         * @param {UsersApiStartIdentityVerification1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        startIdentityVerification1(requestParameters: UsersApiStartIdentityVerification1Request, options?: RawAxiosRequestConfig): AxiosPromise<IdentityVerificationStartResponse> {
+            return localVarFp.startIdentityVerification1(requestParameters.userId, options).then((request) => request(axios, basePath));
+        },
     };
 };
 
@@ -20432,6 +20609,27 @@ export interface UsersApiAddUserSkills1Request {
      * @memberof UsersApiAddUserSkills1
      */
     readonly userSkill: Array<UserSkill>
+}
+
+/**
+ * Request parameters for checkIdentityVerification1 operation in UsersApi.
+ * @export
+ * @interface UsersApiCheckIdentityVerification1Request
+ */
+export interface UsersApiCheckIdentityVerification1Request {
+    /**
+     * 
+     * @type {number}
+     * @memberof UsersApiCheckIdentityVerification1
+     */
+    readonly userId: number
+
+    /**
+     * Identity verification check details
+     * @type {IdentityVerificationCheckRequest}
+     * @memberof UsersApiCheckIdentityVerification1
+     */
+    readonly identityVerificationCheckRequest: IdentityVerificationCheckRequest
 }
 
 /**
@@ -20869,6 +21067,20 @@ export interface UsersApiSendPhoneVerificationCodeCommand1Request {
 }
 
 /**
+ * Request parameters for startIdentityVerification1 operation in UsersApi.
+ * @export
+ * @interface UsersApiStartIdentityVerification1Request
+ */
+export interface UsersApiStartIdentityVerification1Request {
+    /**
+     * 
+     * @type {number}
+     * @memberof UsersApiStartIdentityVerification1
+     */
+    readonly userId: number
+}
+
+/**
  * UsersApi - object-oriented interface
  * @export
  * @class UsersApi
@@ -20896,6 +21108,18 @@ export class UsersApi extends BaseAPI {
      */
     public addUserSkills1(requestParameters: UsersApiAddUserSkills1Request, options?: RawAxiosRequestConfig) {
         return UsersApiFp(this.configuration).addUserSkills1(requestParameters.userId, requestParameters.userSkill, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Checks the status of a Stripe Identity verification session and marks user as verified if successful
+     * @summary Check identity verification status
+     * @param {UsersApiCheckIdentityVerification1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    public checkIdentityVerification1(requestParameters: UsersApiCheckIdentityVerification1Request, options?: RawAxiosRequestConfig) {
+        return UsersApiFp(this.configuration).checkIdentityVerification1(requestParameters.userId, requestParameters.identityVerificationCheckRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -21157,6 +21381,18 @@ export class UsersApi extends BaseAPI {
      */
     public sendPhoneVerificationCodeCommand1(requestParameters: UsersApiSendPhoneVerificationCodeCommand1Request, options?: RawAxiosRequestConfig) {
         return UsersApiFp(this.configuration).sendPhoneVerificationCodeCommand1(requestParameters.userId, requestParameters.phoneCodeRequestResource, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Initiates Stripe Identity verification and returns a verification URL and session ID
+     * @summary Start identity verification for user
+     * @param {UsersApiStartIdentityVerification1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    public startIdentityVerification1(requestParameters: UsersApiStartIdentityVerification1Request, options?: RawAxiosRequestConfig) {
+        return UsersApiFp(this.configuration).startIdentityVerification1(requestParameters.userId, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

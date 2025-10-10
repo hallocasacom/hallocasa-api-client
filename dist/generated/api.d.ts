@@ -2275,6 +2275,38 @@ export type HcFilterTypeEntryRangeFieldPresentationEnum = typeof HcFilterTypeEnt
 /**
  *
  * @export
+ * @interface IdentityVerificationCheckRequest
+ */
+export interface IdentityVerificationCheckRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof IdentityVerificationCheckRequest
+     */
+    'verificationSessionId': string;
+}
+/**
+ *
+ * @export
+ * @interface IdentityVerificationStartResponse
+ */
+export interface IdentityVerificationStartResponse {
+    /**
+     *
+     * @type {string}
+     * @memberof IdentityVerificationStartResponse
+     */
+    'verificationUrl'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof IdentityVerificationStartResponse
+     */
+    'verificationSessionId'?: string;
+}
+/**
+ *
+ * @export
  * @interface Language
  */
 export interface Language {
@@ -3716,6 +3748,12 @@ export interface SkilledUser {
     'phoneVerified'?: boolean;
     /**
      *
+     * @type {boolean}
+     * @memberof SkilledUser
+     */
+    'identityVerified'?: boolean;
+    /**
+     *
      * @type {GeoPlace}
      * @memberof SkilledUser
      */
@@ -4488,6 +4526,12 @@ export interface User {
      * @memberof User
      */
     'phoneVerified'?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof User
+     */
+    'identityVerified'?: boolean;
     /**
      *
      * @type {GeoPlace}
@@ -12382,6 +12426,15 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      */
     addUserSkills1: (userId: number, userSkill: Array<UserSkill>, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Checks the status of a Stripe Identity verification session and marks user as verified if successful
+     * @summary Check identity verification status
+     * @param {number} userId
+     * @param {IdentityVerificationCheckRequest} identityVerificationCheckRequest Identity verification check details
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    checkIdentityVerification1: (userId: number, identityVerificationCheckRequest: IdentityVerificationCheckRequest, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Verifies the code that was sent to the user\'s phone
      * @summary Verify the phone code sent to user
      * @param {number} userId
@@ -12574,6 +12627,14 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      * @throws {RequiredError}
      */
     sendPhoneVerificationCodeCommand1: (userId: number, phoneCodeRequestResource: PhoneCodeRequestResource, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Initiates Stripe Identity verification and returns a verification URL and session ID
+     * @summary Start identity verification for user
+     * @param {number} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    startIdentityVerification1: (userId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * UsersApi - functional programming interface
@@ -12596,6 +12657,15 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      * @throws {RequiredError}
      */
     addUserSkills1(userId: number, userSkill: Array<UserSkill>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     * Checks the status of a Stripe Identity verification session and marks user as verified if successful
+     * @summary Check identity verification status
+     * @param {number} userId
+     * @param {IdentityVerificationCheckRequest} identityVerificationCheckRequest Identity verification check details
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    checkIdentityVerification1(userId: number, identityVerificationCheckRequest: IdentityVerificationCheckRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
     /**
      * Verifies the code that was sent to the user\'s phone
      * @summary Verify the phone code sent to user
@@ -12789,6 +12859,14 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      * @throws {RequiredError}
      */
     sendPhoneVerificationCodeCommand1(userId: number, phoneCodeRequestResource: PhoneCodeRequestResource, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PhoneCodeRequestResource>>;
+    /**
+     * Initiates Stripe Identity verification and returns a verification URL and session ID
+     * @summary Start identity verification for user
+     * @param {number} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    startIdentityVerification1(userId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IdentityVerificationStartResponse>>;
 };
 /**
  * UsersApi - factory interface
@@ -12810,6 +12888,14 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
      * @throws {RequiredError}
      */
     addUserSkills1(requestParameters: UsersApiAddUserSkills1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     * Checks the status of a Stripe Identity verification session and marks user as verified if successful
+     * @summary Check identity verification status
+     * @param {UsersApiCheckIdentityVerification1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    checkIdentityVerification1(requestParameters: UsersApiCheckIdentityVerification1Request, options?: RawAxiosRequestConfig): AxiosPromise<object>;
     /**
      * Verifies the code that was sent to the user\'s phone
      * @summary Verify the phone code sent to user
@@ -12983,6 +13069,14 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
      * @throws {RequiredError}
      */
     sendPhoneVerificationCodeCommand1(requestParameters: UsersApiSendPhoneVerificationCodeCommand1Request, options?: RawAxiosRequestConfig): AxiosPromise<PhoneCodeRequestResource>;
+    /**
+     * Initiates Stripe Identity verification and returns a verification URL and session ID
+     * @summary Start identity verification for user
+     * @param {UsersApiStartIdentityVerification1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    startIdentityVerification1(requestParameters: UsersApiStartIdentityVerification1Request, options?: RawAxiosRequestConfig): AxiosPromise<IdentityVerificationStartResponse>;
 };
 /**
  * Request parameters for addUserSkills1 operation in UsersApi.
@@ -13002,6 +13096,25 @@ export interface UsersApiAddUserSkills1Request {
      * @memberof UsersApiAddUserSkills1
      */
     readonly userSkill: Array<UserSkill>;
+}
+/**
+ * Request parameters for checkIdentityVerification1 operation in UsersApi.
+ * @export
+ * @interface UsersApiCheckIdentityVerification1Request
+ */
+export interface UsersApiCheckIdentityVerification1Request {
+    /**
+     *
+     * @type {number}
+     * @memberof UsersApiCheckIdentityVerification1
+     */
+    readonly userId: number;
+    /**
+     * Identity verification check details
+     * @type {IdentityVerificationCheckRequest}
+     * @memberof UsersApiCheckIdentityVerification1
+     */
+    readonly identityVerificationCheckRequest: IdentityVerificationCheckRequest;
 }
 /**
  * Request parameters for checkPhoneVerificationCodeCommand1 operation in UsersApi.
@@ -13397,6 +13510,19 @@ export interface UsersApiSendPhoneVerificationCodeCommand1Request {
     readonly phoneCodeRequestResource: PhoneCodeRequestResource;
 }
 /**
+ * Request parameters for startIdentityVerification1 operation in UsersApi.
+ * @export
+ * @interface UsersApiStartIdentityVerification1Request
+ */
+export interface UsersApiStartIdentityVerification1Request {
+    /**
+     *
+     * @type {number}
+     * @memberof UsersApiStartIdentityVerification1
+     */
+    readonly userId: number;
+}
+/**
  * UsersApi - object-oriented interface
  * @export
  * @class UsersApi
@@ -13420,6 +13546,15 @@ export declare class UsersApi extends BaseAPI {
      * @memberof UsersApi
      */
     addUserSkills1(requestParameters: UsersApiAddUserSkills1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    /**
+     * Checks the status of a Stripe Identity verification session and marks user as verified if successful
+     * @summary Check identity verification status
+     * @param {UsersApiCheckIdentityVerification1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    checkIdentityVerification1(requestParameters: UsersApiCheckIdentityVerification1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
     /**
      * Verifies the code that was sent to the user\'s phone
      * @summary Verify the phone code sent to user
@@ -13615,6 +13750,15 @@ export declare class UsersApi extends BaseAPI {
      * @memberof UsersApi
      */
     sendPhoneVerificationCodeCommand1(requestParameters: UsersApiSendPhoneVerificationCodeCommand1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PhoneCodeRequestResource, any>>;
+    /**
+     * Initiates Stripe Identity verification and returns a verification URL and session ID
+     * @summary Start identity verification for user
+     * @param {UsersApiStartIdentityVerification1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    startIdentityVerification1(requestParameters: UsersApiStartIdentityVerification1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<IdentityVerificationStartResponse, any>>;
 }
 /**
  * @export
