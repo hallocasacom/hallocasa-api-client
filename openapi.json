@@ -9368,6 +9368,9 @@
             "type" : "string",
             "enum" : [ "Free", "Professional", "Business", "Brokerage" ]
           },
+          "hidePublicProfile" : {
+            "type" : "boolean"
+          },
           "imprintImageLink" : {
             "type" : "string",
             "writeOnly" : true
@@ -11967,6 +11970,9 @@
             "type" : "string",
             "enum" : [ "Free", "Professional", "Business", "Brokerage" ]
           },
+          "hidePublicProfile" : {
+            "type" : "boolean"
+          },
           "skills" : {
             "type" : "array",
             "items" : {
@@ -12474,12 +12480,6 @@
       }
     },
     "securitySchemes" : {
-      "oAuthCode" : {
-        "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
-        "in" : "header"
-      },
       "oAuthToken" : {
         "type" : "apiKey",
         "description" : "OAuth access token for authenticated requests",
@@ -12490,6 +12490,12 @@
         "type" : "apiKey",
         "description" : "OAuth client identifier (default: hallocasa_frontend)",
         "name" : "O-Auth-Client-Id",
+        "in" : "header"
+      },
+      "oAuthCode" : {
+        "type" : "apiKey",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
         "in" : "header"
       }
     }

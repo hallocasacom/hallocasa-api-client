@@ -3946,6 +3946,12 @@ export interface SkilledUser {
     'subscriptionPlanName'?: SkilledUserSubscriptionPlanNameEnum;
     /**
      *
+     * @type {boolean}
+     * @memberof SkilledUser
+     */
+    'hidePublicProfile'?: boolean;
+    /**
+     *
      * @type {Array<UserSkill>}
      * @memberof SkilledUser
      */
@@ -4724,6 +4730,12 @@ export interface User {
      * @memberof User
      */
     'subscriptionPlanName'?: UserSubscriptionPlanNameEnum;
+    /**
+     *
+     * @type {boolean}
+     * @memberof User
+     */
+    'hidePublicProfile'?: boolean;
     /**
      *
      * @type {string}
