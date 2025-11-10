@@ -88,6 +88,142 @@ export interface Address {
     'zipCode'?: string;
 }
 /**
+ *
+ * @export
+ * @interface Alert
+ */
+export interface Alert {
+    /**
+     *
+     * @type {number}
+     * @memberof Alert
+     */
+    'id'?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof Alert
+     */
+    'userId'?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof Alert
+     */
+    'userAlertType'?: AlertUserAlertTypeEnum;
+    /**
+     * Alert criteria in JSON format
+     * @type {object}
+     * @memberof Alert
+     */
+    'alertCriteria'?: object;
+    /**
+     *
+     * @type {boolean}
+     * @memberof Alert
+     */
+    'allowBrokerContact'?: boolean;
+    /**
+     *
+     * @type {string}
+     * @memberof Alert
+     */
+    'lastNotification'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Alert
+     */
+    'createdAt'?: string;
+    /**
+     * Alert result data in JSON format
+     * @type {object}
+     * @memberof Alert
+     */
+    'result'?: object;
+    /**
+     *
+     * @type {number}
+     * @memberof Alert
+     */
+    'newsletterOwnerId'?: number;
+}
+export declare const AlertUserAlertTypeEnum: {
+    readonly Property: "PROPERTY";
+};
+export type AlertUserAlertTypeEnum = typeof AlertUserAlertTypeEnum[keyof typeof AlertUserAlertTypeEnum];
+/**
+ *
+ * @export
+ * @interface AlertWithUserProfile
+ */
+export interface AlertWithUserProfile {
+    /**
+     *
+     * @type {number}
+     * @memberof AlertWithUserProfile
+     */
+    'id'?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof AlertWithUserProfile
+     */
+    'userId'?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof AlertWithUserProfile
+     */
+    'userAlertType'?: AlertWithUserProfileUserAlertTypeEnum;
+    /**
+     * Alert criteria in JSON format
+     * @type {object}
+     * @memberof AlertWithUserProfile
+     */
+    'alertCriteria'?: object;
+    /**
+     *
+     * @type {boolean}
+     * @memberof AlertWithUserProfile
+     */
+    'allowBrokerContact'?: boolean;
+    /**
+     *
+     * @type {string}
+     * @memberof AlertWithUserProfile
+     */
+    'lastNotification'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof AlertWithUserProfile
+     */
+    'createdAt'?: string;
+    /**
+     * Alert result data in JSON format
+     * @type {object}
+     * @memberof AlertWithUserProfile
+     */
+    'result'?: object;
+    /**
+     * Profile name of the user who owns this alert (only included for non-Free subscribers)
+     * @type {string}
+     * @memberof AlertWithUserProfile
+     */
+    'userProfileName'?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof AlertWithUserProfile
+     */
+    'newsletterOwnerId'?: number;
+}
+export declare const AlertWithUserProfileUserAlertTypeEnum: {
+    readonly Property: "PROPERTY";
+};
+export type AlertWithUserProfileUserAlertTypeEnum = typeof AlertWithUserProfileUserAlertTypeEnum[keyof typeof AlertWithUserProfileUserAlertTypeEnum];
+/**
  * API Key information
  * @export
  * @interface ApiKeyDto
@@ -184,6 +320,49 @@ export interface AuthInfoDto {
      * @memberof AuthInfoDto
      */
     'refreshToken'?: RefreshToken;
+}
+/**
+ *
+ * @export
+ * @interface Brokerage
+ */
+export interface Brokerage {
+    /**
+     *
+     * @type {number}
+     * @memberof Brokerage
+     */
+    'id'?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof Brokerage
+     */
+    'name'?: string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof Brokerage
+     */
+    'enabled'?: boolean;
+    /**
+     *
+     * @type {string}
+     * @memberof Brokerage
+     */
+    'createdAt'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Brokerage
+     */
+    'updatedAt'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Brokerage
+     */
+    'deletedAt'?: string;
 }
 /**
  *
@@ -721,6 +900,41 @@ export interface FBPropertyDto {
      */
     'area_unit'?: string;
 }
+/**
+ *
+ * @export
+ * @interface Favorite
+ */
+export interface Favorite {
+    /**
+     *
+     * @type {number}
+     * @memberof Favorite
+     */
+    'id'?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof Favorite
+     */
+    'resourceType': FavoriteResourceTypeEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof Favorite
+     */
+    'resourceId': string;
+    /**
+     * Resource data in JSON format
+     * @type {object}
+     * @memberof Favorite
+     */
+    'resource'?: object;
+}
+export declare const FavoriteResourceTypeEnum: {
+    readonly Property: "PROPERTY";
+};
+export type FavoriteResourceTypeEnum = typeof FavoriteResourceTypeEnum[keyof typeof FavoriteResourceTypeEnum];
 /**
  *
  * @export
@@ -1817,6 +2031,38 @@ export type HcFilterTypeEntryRangeFieldPresentationEnum = typeof HcFilterTypeEnt
 /**
  *
  * @export
+ * @interface IdentityVerificationCheckRequest
+ */
+export interface IdentityVerificationCheckRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof IdentityVerificationCheckRequest
+     */
+    'verificationSessionId': string;
+}
+/**
+ *
+ * @export
+ * @interface IdentityVerificationStartResponse
+ */
+export interface IdentityVerificationStartResponse {
+    /**
+     *
+     * @type {string}
+     * @memberof IdentityVerificationStartResponse
+     */
+    'verificationUrl'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof IdentityVerificationStartResponse
+     */
+    'verificationSessionId'?: string;
+}
+/**
+ *
+ * @export
  * @interface Language
  */
 export interface Language {
@@ -1932,6 +2178,25 @@ export interface LogEntry {
     'description'?: string;
 }
 /**
+ * Newsletter subscriber information
+ * @export
+ * @interface NewsletterSubscriberDto
+ */
+export interface NewsletterSubscriberDto {
+    /**
+     *
+     * @type {Alert}
+     * @memberof NewsletterSubscriberDto
+     */
+    'alert'?: Alert;
+    /**
+     *
+     * @type {SkilledUser}
+     * @memberof NewsletterSubscriberDto
+     */
+    'user'?: SkilledUser;
+}
+/**
  * Request object for password recovery operations
  * @export
  * @interface PasswordRecoveryRequest
@@ -1992,6 +2257,32 @@ export interface PasswordRecoveryToken {
      * @memberof PasswordRecoveryToken
      */
     'expeditionDate'?: string;
+}
+/**
+ *
+ * @export
+ * @interface PhoneCodeCheckResource
+ */
+export interface PhoneCodeCheckResource {
+    /**
+     *
+     * @type {string}
+     * @memberof PhoneCodeCheckResource
+     */
+    'code': string;
+}
+/**
+ *
+ * @export
+ * @interface PhoneCodeRequestResource
+ */
+export interface PhoneCodeRequestResource {
+    /**
+     *
+     * @type {string}
+     * @memberof PhoneCodeRequestResource
+     */
+    'verificationType': string;
 }
 /**
  *
@@ -2849,6 +3140,502 @@ export interface ResultRequest {
 /**
  *
  * @export
+ * @interface Skill
+ */
+export interface Skill {
+    /**
+     *
+     * @type {number}
+     * @memberof Skill
+     */
+    'id'?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof Skill
+     */
+    'label'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Skill
+     */
+    'locale'?: string;
+}
+/**
+ *
+ * @export
+ * @interface SkillEndorsement
+ */
+export interface SkillEndorsement {
+    /**
+     *
+     * @type {number}
+     * @memberof SkillEndorsement
+     */
+    'id'?: number;
+    /**
+     *
+     * @type {SkilledUser}
+     * @memberof SkillEndorsement
+     */
+    'user': SkilledUser;
+    /**
+     *
+     * @type {SkilledUser}
+     * @memberof SkillEndorsement
+     */
+    'endorser': SkilledUser;
+    /**
+     *
+     * @type {Skill}
+     * @memberof SkillEndorsement
+     */
+    'skill': Skill;
+    /**
+     *
+     * @type {string}
+     * @memberof SkillEndorsement
+     */
+    'dateTime'?: string;
+}
+/**
+ *
+ * @export
+ * @interface SkilledUser
+ */
+export interface SkilledUser {
+    /**
+     *
+     * @type {Language}
+     * @memberof SkilledUser
+     */
+    'language'?: Language;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'email'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'firstName'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'lastName'?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof SkilledUser
+     */
+    'id'?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'password'?: string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof SkilledUser
+     */
+    'confirmedFlag'?: boolean;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'registerDate'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'webSite'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'linkedIn'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'skype'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'base64Image'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'imageLink'?: string;
+    /**
+     *
+     * @type {Language}
+     * @memberof SkilledUser
+     */
+    'mainSpokenLanguage'?: Language;
+    /**
+     *
+     * @type {CountryTelephonePrefix}
+     * @memberof SkilledUser
+     */
+    'telephonePrefix'?: CountryTelephonePrefix;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'telephoneNumber'?: string;
+    /**
+     *
+     * @type {Array<UserType>}
+     * @memberof SkilledUser
+     */
+    'userTypes'?: Array<UserType>;
+    /**
+     *
+     * @type {Array<UserLanguage>}
+     * @memberof SkilledUser
+     */
+    'userLanguages'?: Array<UserLanguage>;
+    /**
+     *
+     * @type {Array<UserDescription>}
+     * @memberof SkilledUser
+     */
+    'userDescriptions'?: Array<UserDescription>;
+    /**
+     *
+     * @type {Country}
+     * @memberof SkilledUser
+     */
+    'country'?: Country;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'role'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'backgroundImageBase64'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'backgroundImageLink'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'profileName'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'lastActivity'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'chatStatus'?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof SkilledUser
+     */
+    'chatsCount'?: number;
+    /**
+     *
+     * @type {boolean}
+     * @memberof SkilledUser
+     */
+    'phoneVerified'?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof SkilledUser
+     */
+    'identityVerified'?: boolean;
+    /**
+     *
+     * @type {GeoPlace}
+     * @memberof SkilledUser
+     */
+    'geoPlace'?: GeoPlace;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'chamberOfCommerceUrl'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'facebookUrl'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'instagramUrl'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'twitterUrl'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'wechatUrl'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'vkUrl'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'videoUrl'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'bookAnAppointmentUrl'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'googlePlaceId'?: string;
+    /**
+     *
+     * @type {Array<GooglePlaceReview>}
+     * @memberof SkilledUser
+     */
+    'googlePlaceReviews'?: Array<GooglePlaceReview>;
+    /**
+     *
+     * @type {number}
+     * @memberof SkilledUser
+     */
+    'googleRating'?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof SkilledUser
+     */
+    'googleUserRatingsTotal'?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof SkilledUser
+     */
+    'achievementsYearsOfExperience'?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof SkilledUser
+     */
+    'achievementsDealsClosed'?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof SkilledUser
+     */
+    'achievementsPercentageOfAllAgents'?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'achievementsGooglePlaceId'?: string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof SkilledUser
+     */
+    'focusOnCommercial'?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof SkilledUser
+     */
+    'focusOnResidential'?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof SkilledUser
+     */
+    'focusOnRental'?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof SkilledUser
+     */
+    'focusOnSelling'?: boolean;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'imprintTitle'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'imprintDescription'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'imprintBase64Image'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'imprintLogoLink'?: string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof SkilledUser
+     */
+    'showEmailInProfile'?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof SkilledUser
+     */
+    'showEmailInProperty'?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof SkilledUser
+     */
+    'showPhoneInProperty'?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof SkilledUser
+     */
+    'allowSaveContact'?: boolean;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'city'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'referral'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'subscriptionPlanName'?: SkilledUserSubscriptionPlanNameEnum;
+    /**
+     *
+     * @type {boolean}
+     * @memberof SkilledUser
+     */
+    'hidePublicProfile'?: boolean;
+    /**
+     *
+     * @type {Array<UserSkill>}
+     * @memberof SkilledUser
+     */
+    'skills'?: Array<UserSkill>;
+    /**
+     *
+     * @type {Brokerage}
+     * @memberof SkilledUser
+     */
+    'brokerage'?: Brokerage;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'groupMemberStatus'?: string;
+    /**
+     *
+     * @type {Array<UserGroup>}
+     * @memberof SkilledUser
+     */
+    'groups'?: Array<UserGroup>;
+    /**
+     *
+     * @type {Array<UserOperatingLocation>}
+     * @memberof SkilledUser
+     */
+    'operatingLocations'?: Array<UserOperatingLocation>;
+    /**
+     * Connection degree to the logged-in user
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'connectionDegree'?: SkilledUserConnectionDegreeEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'imprintImageLink'?: string;
+}
+export declare const SkilledUserSubscriptionPlanNameEnum: {
+    readonly Free: "Free";
+    readonly Professional: "Professional";
+    readonly Business: "Business";
+    readonly Brokerage: "Brokerage";
+};
+export type SkilledUserSubscriptionPlanNameEnum = typeof SkilledUserSubscriptionPlanNameEnum[keyof typeof SkilledUserSubscriptionPlanNameEnum];
+export declare const SkilledUserConnectionDegreeEnum: {
+    readonly _1st: "1st";
+    readonly _2nd: "2nd";
+    readonly _3rd: "3rd+";
+};
+export type SkilledUserConnectionDegreeEnum = typeof SkilledUserConnectionDegreeEnum[keyof typeof SkilledUserConnectionDegreeEnum];
+/**
+ *
+ * @export
  * @interface StripeEvent
  */
 export interface StripeEvent {
@@ -2864,12 +3651,6 @@ export interface StripeEvent {
      * @memberof StripeEvent
      */
     'type'?: string;
-    /**
-     *
-     * @type {StripeEventData}
-     * @memberof StripeEvent
-     */
-    'data'?: StripeEventData;
 }
 /**
  *
@@ -2889,6 +3670,55 @@ export interface StripeEventData {
      * @memberof StripeEventData
      */
     'previous_attributes'?: object;
+}
+/**
+ *
+ * @export
+ * @interface SubscribedUser
+ */
+export interface SubscribedUser {
+    /**
+     *
+     * @type {number}
+     * @memberof SubscribedUser
+     */
+    'id'?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof SubscribedUser
+     */
+    'email'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SubscribedUser
+     */
+    'firstName'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SubscribedUser
+     */
+    'lastName'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SubscribedUser
+     */
+    'paymentAppId'?: string;
+    /**
+     *
+     * @type {Address}
+     * @memberof SubscribedUser
+     */
+    'address'?: Address;
+    /**
+     *
+     * @type {string}
+     * @memberof SubscribedUser
+     */
+    'created'?: string;
 }
 /**
  *
@@ -3610,6 +4440,322 @@ export interface UserDto {
     'userPermissions'?: Array<UserPermission>;
 }
 /**
+ * Filter request for searching users with various criteria including location, user types, languages, and business focus areas
+ * @export
+ * @interface UserFilterRequest
+ */
+export interface UserFilterRequest {
+    /**
+     *
+     * @type {UserFilterResultSpec}
+     * @memberof UserFilterRequest
+     */
+    'resultRequest': UserFilterResultSpec;
+    /**
+     * Filter by user name (partial match supported)
+     * @type {string}
+     * @memberof UserFilterRequest
+     */
+    'name'?: string;
+    /**
+     * Filter by countries where users operate
+     * @type {Array<Country>}
+     * @memberof UserFilterRequest
+     */
+    'countries'?: Array<Country>;
+    /**
+     * Latitude for location-based search (must be used with longitude and radius)
+     * @type {number}
+     * @memberof UserFilterRequest
+     */
+    'latitude'?: number;
+    /**
+     * Longitude for location-based search (must be used with latitude and radius)
+     * @type {number}
+     * @memberof UserFilterRequest
+     */
+    'longitude'?: number;
+    /**
+     * Search radius in kilometers for location-based search (must be used with latitude and longitude)
+     * @type {number}
+     * @memberof UserFilterRequest
+     */
+    'radius'?: number;
+    /**
+     * Filter by user types
+     * @type {Array<UserType>}
+     * @memberof UserFilterRequest
+     */
+    'userTypes'?: Array<UserType>;
+    /**
+     * Filter by languages spoken by users
+     * @type {Array<Language>}
+     * @memberof UserFilterRequest
+     */
+    'languages'?: Array<Language>;
+    /**
+     * Filter only users with WhatsApp
+     * @type {boolean}
+     * @memberof UserFilterRequest
+     */
+    'filterWhatsApp'?: boolean;
+    /**
+     * Filter only users with telephone number
+     * @type {boolean}
+     * @memberof UserFilterRequest
+     */
+    'filterTelephoneNumber'?: boolean;
+    /**
+     * Filter only users with Google Place ID
+     * @type {boolean}
+     * @memberof UserFilterRequest
+     */
+    'filterGooglePlaceId'?: boolean;
+    /**
+     * Filter users focused on commercial properties
+     * @type {boolean}
+     * @memberof UserFilterRequest
+     */
+    'filterFocusOnCommercial'?: boolean;
+    /**
+     * Filter users focused on residential properties
+     * @type {boolean}
+     * @memberof UserFilterRequest
+     */
+    'filterFocusOnResidential'?: boolean;
+    /**
+     * Filter users focused on rental properties
+     * @type {boolean}
+     * @memberof UserFilterRequest
+     */
+    'filterFocusOnRental'?: boolean;
+    /**
+     * Filter users focused on selling properties
+     * @type {boolean}
+     * @memberof UserFilterRequest
+     */
+    'filterFocusOnSelling'?: boolean;
+    /**
+     * Filter users with social media presence
+     * @type {boolean}
+     * @memberof UserFilterRequest
+     */
+    'filterSocial'?: boolean;
+    /**
+     * Filter by brokerage IDs
+     * @type {Array<number>}
+     * @memberof UserFilterRequest
+     */
+    'brokerages'?: Array<number>;
+    /**
+     * Filter by specific user IDs
+     * @type {Array<number>}
+     * @memberof UserFilterRequest
+     */
+    'userIds'?: Array<number>;
+    /**
+     * Filter by user skills
+     * @type {Array<Skill>}
+     * @memberof UserFilterRequest
+     */
+    'skills'?: Array<Skill>;
+    /**
+     * Include chats count for each user (expensive operation)
+     * @type {boolean}
+     * @memberof UserFilterRequest
+     */
+    'includeChatsCount'?: boolean;
+    /**
+     * Include chat status for each user (expensive operation)
+     * @type {boolean}
+     * @memberof UserFilterRequest
+     */
+    'includeChatStatus'?: boolean;
+    /**
+     * Include groups for each user (expensive operation)
+     * @type {boolean}
+     * @memberof UserFilterRequest
+     */
+    'includeGroups'?: boolean;
+    /**
+     * Include connection degrees when authenticated (expensive operation)
+     * @type {boolean}
+     * @memberof UserFilterRequest
+     */
+    'includeConnectionDegrees'?: boolean;
+    /**
+     * Include Google Place reviews for each user (expensive operation)
+     * @type {boolean}
+     * @memberof UserFilterRequest
+     */
+    'includeGoogleReviews'?: boolean;
+    /**
+     * Include subscription plan names (expensive operation)
+     * @type {boolean}
+     * @memberof UserFilterRequest
+     */
+    'includeSubscriptionPlans'?: boolean;
+}
+/**
+ *
+ * @export
+ * @interface UserFilterResult
+ */
+export interface UserFilterResult {
+    /**
+     *
+     * @type {number}
+     * @memberof UserFilterResult
+     */
+    'count'?: number;
+    /**
+     *
+     * @type {Array<SkilledUser>}
+     * @memberof UserFilterResult
+     */
+    'userList'?: Array<SkilledUser>;
+}
+/**
+ * Result specification for pagination and sorting of user search results
+ * @export
+ * @interface UserFilterResultSpec
+ */
+export interface UserFilterResultSpec {
+    /**
+     *
+     * @type {number}
+     * @memberof UserFilterResultSpec
+     */
+    'pageFrom'?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof UserFilterResultSpec
+     */
+    'pageTo'?: number;
+    /**
+     *
+     * @type {boolean}
+     * @memberof UserFilterResultSpec
+     */
+    'orderByMostRecent'?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof UserFilterResultSpec
+     */
+    'orderByLessRecent'?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof UserFilterResultSpec
+     */
+    'asc'?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof UserFilterResultSpec
+     */
+    'loadCount'?: boolean;
+    /**
+     *
+     * @type {Array<string>}
+     * @memberof UserFilterResultSpec
+     */
+    'orderBy'?: Array<string>;
+    /**
+     * Sort users by most recent login first
+     * @type {boolean}
+     * @memberof UserFilterResultSpec
+     */
+    'orderByMostRecentLogin'?: boolean;
+    /**
+     * Sort users by least recent login first
+     * @type {boolean}
+     * @memberof UserFilterResultSpec
+     */
+    'orderByLessRecentLogin'?: boolean;
+}
+/**
+ *
+ * @export
+ * @interface UserGroup
+ */
+export interface UserGroup {
+    /**
+     *
+     * @type {string}
+     * @memberof UserGroup
+     */
+    'id'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof UserGroup
+     */
+    'name'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof UserGroup
+     */
+    'logo'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof UserGroup
+     */
+    'url'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof UserGroup
+     */
+    'description'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof UserGroup
+     */
+    'memberStatus'?: string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof UserGroup
+     */
+    'owner'?: boolean;
+    /**
+     *
+     * @type {string}
+     * @memberof UserGroup
+     */
+    'joinedDate'?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof UserGroup
+     */
+    'ownerId'?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof UserGroup
+     */
+    'ownerName'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof UserGroup
+     */
+    'groupType'?: UserGroupGroupTypeEnum;
+}
+export declare const UserGroupGroupTypeEnum: {
+    readonly Group: "GROUP";
+    readonly Association: "ASSOCIATION";
+    readonly Certification: "CERTIFICATION";
+};
+export type UserGroupGroupTypeEnum = typeof UserGroupGroupTypeEnum[keyof typeof UserGroupGroupTypeEnum];
+/**
  *
  * @export
  * @interface UserLanguage
@@ -3631,6 +4777,44 @@ export interface UserLanguage {
 /**
  *
  * @export
+ * @interface UserListRequest
+ */
+export interface UserListRequest {
+    /**
+     *
+     * @type {number}
+     * @memberof UserListRequest
+     */
+    'userNumber'?: number;
+    /**
+     *
+     * @type {Array<number>}
+     * @memberof UserListRequest
+     */
+    'excludeIdList'?: Array<number>;
+}
+/**
+ *
+ * @export
+ * @interface UserOperatingLocation
+ */
+export interface UserOperatingLocation {
+    /**
+     *
+     * @type {number}
+     * @memberof UserOperatingLocation
+     */
+    'locationNumber'?: number;
+    /**
+     *
+     * @type {GeoLocation}
+     * @memberof UserOperatingLocation
+     */
+    'geoLocation': GeoLocation;
+}
+/**
+ *
+ * @export
  * @interface UserPermission
  */
 export interface UserPermission {
@@ -3648,6 +4832,25 @@ export interface UserPermission {
     'metadata'?: {
         [key: string]: object;
     };
+}
+/**
+ *
+ * @export
+ * @interface UserSkill
+ */
+export interface UserSkill {
+    /**
+     *
+     * @type {Skill}
+     * @memberof UserSkill
+     */
+    'skill': Skill;
+    /**
+     *
+     * @type {number}
+     * @memberof UserSkill
+     */
+    'endorsementsCount'?: number;
 }
 /**
  *
@@ -3768,6 +4971,407 @@ export interface XmlUrl {
      * @memberof XmlUrl
      */
     'url': string;
+}
+/**
+ * AlertsApi - axios parameter creator
+ * @export
+ */
+export declare const AlertsApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     * Deletes a specific alert owned by the user
+     * @summary Delete an alert
+     * @param {number} userId ID of the user who owns the alert
+     * @param {number} alertId ID of the alert to delete
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteAlert1: (userId: number, alertId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Retrieves the results for a specific alert
+     * @summary Get alert results
+     * @param {number} userId ID of the user who owns the alert
+     * @param {number} alertId ID of the alert to retrieve results for
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getAlertResult1: (userId: number, alertId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Returns all alerts from all users in the system. For users with non-Free subscription plans, the response includes their profile name. This is typically an admin-level operation.
+     * @summary Get all alerts in the system
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getAllAlerts1: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Returns all alerts associated with the specified user ID
+     * @summary Get all alerts for a user
+     * @param {number} userId ID of the user to retrieve alerts for
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getByUser2: (userId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Retrieves all newsletters that the specified user has subscribed to
+     * @summary Get newsletters subscribed to
+     * @param {number} userId ID of the user who subscribed to newsletters
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    newsletterAlerts1: (userId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Retrieves all subscribers to newsletters owned by the specified user
+     * @summary Get newsletter subscribers
+     * @param {number} userId ID of the user who owns the newsletters
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    newsletterSubscribers1: (userId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Creates a new alert for the specified user
+     * @summary Create a new alert
+     * @param {number} userId ID of the user to create the alert for
+     * @param {Alert} alert Alert to be created
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    saveAlert1: (userId: number, alert: Alert, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Triggers the sending of customized property alerts to users
+     * @summary Send customized property alerts
+     * @param {number} userId ID of the user
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    sendAlert: (userId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * AlertsApi - functional programming interface
+ * @export
+ */
+export declare const AlertsApiFp: (configuration?: Configuration) => {
+    /**
+     * Deletes a specific alert owned by the user
+     * @summary Delete an alert
+     * @param {number} userId ID of the user who owns the alert
+     * @param {number} alertId ID of the alert to delete
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteAlert1(userId: number, alertId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>>;
+    /**
+     * Retrieves the results for a specific alert
+     * @summary Get alert results
+     * @param {number} userId ID of the user who owns the alert
+     * @param {number} alertId ID of the alert to retrieve results for
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getAlertResult1(userId: number, alertId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
+    /**
+     * Returns all alerts from all users in the system. For users with non-Free subscription plans, the response includes their profile name. This is typically an admin-level operation.
+     * @summary Get all alerts in the system
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getAllAlerts1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AlertWithUserProfile>>>;
+    /**
+     * Returns all alerts associated with the specified user ID
+     * @summary Get all alerts for a user
+     * @param {number} userId ID of the user to retrieve alerts for
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getByUser2(userId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Alert>>>;
+    /**
+     * Retrieves all newsletters that the specified user has subscribed to
+     * @summary Get newsletters subscribed to
+     * @param {number} userId ID of the user who subscribed to newsletters
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    newsletterAlerts1(userId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<NewsletterSubscriberDto>>>;
+    /**
+     * Retrieves all subscribers to newsletters owned by the specified user
+     * @summary Get newsletter subscribers
+     * @param {number} userId ID of the user who owns the newsletters
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    newsletterSubscribers1(userId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<NewsletterSubscriberDto>>>;
+    /**
+     * Creates a new alert for the specified user
+     * @summary Create a new alert
+     * @param {number} userId ID of the user to create the alert for
+     * @param {Alert} alert Alert to be created
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    saveAlert1(userId: number, alert: Alert, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Alert>>;
+    /**
+     * Triggers the sending of customized property alerts to users
+     * @summary Send customized property alerts
+     * @param {number} userId ID of the user
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    sendAlert(userId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>>;
+};
+/**
+ * AlertsApi - factory interface
+ * @export
+ */
+export declare const AlertsApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     * Deletes a specific alert owned by the user
+     * @summary Delete an alert
+     * @param {AlertsApiDeleteAlert1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteAlert1(requestParameters: AlertsApiDeleteAlert1Request, options?: RawAxiosRequestConfig): AxiosPromise<string>;
+    /**
+     * Retrieves the results for a specific alert
+     * @summary Get alert results
+     * @param {AlertsApiGetAlertResult1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getAlertResult1(requestParameters: AlertsApiGetAlertResult1Request, options?: RawAxiosRequestConfig): AxiosPromise<object>;
+    /**
+     * Returns all alerts from all users in the system. For users with non-Free subscription plans, the response includes their profile name. This is typically an admin-level operation.
+     * @summary Get all alerts in the system
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getAllAlerts1(options?: RawAxiosRequestConfig): AxiosPromise<Array<AlertWithUserProfile>>;
+    /**
+     * Returns all alerts associated with the specified user ID
+     * @summary Get all alerts for a user
+     * @param {AlertsApiGetByUser2Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getByUser2(requestParameters: AlertsApiGetByUser2Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<Alert>>;
+    /**
+     * Retrieves all newsletters that the specified user has subscribed to
+     * @summary Get newsletters subscribed to
+     * @param {AlertsApiNewsletterAlerts1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    newsletterAlerts1(requestParameters: AlertsApiNewsletterAlerts1Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<NewsletterSubscriberDto>>;
+    /**
+     * Retrieves all subscribers to newsletters owned by the specified user
+     * @summary Get newsletter subscribers
+     * @param {AlertsApiNewsletterSubscribers1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    newsletterSubscribers1(requestParameters: AlertsApiNewsletterSubscribers1Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<NewsletterSubscriberDto>>;
+    /**
+     * Creates a new alert for the specified user
+     * @summary Create a new alert
+     * @param {AlertsApiSaveAlert1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    saveAlert1(requestParameters: AlertsApiSaveAlert1Request, options?: RawAxiosRequestConfig): AxiosPromise<Alert>;
+    /**
+     * Triggers the sending of customized property alerts to users
+     * @summary Send customized property alerts
+     * @param {AlertsApiSendAlertRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    sendAlert(requestParameters: AlertsApiSendAlertRequest, options?: RawAxiosRequestConfig): AxiosPromise<string>;
+};
+/**
+ * Request parameters for deleteAlert1 operation in AlertsApi.
+ * @export
+ * @interface AlertsApiDeleteAlert1Request
+ */
+export interface AlertsApiDeleteAlert1Request {
+    /**
+     * ID of the user who owns the alert
+     * @type {number}
+     * @memberof AlertsApiDeleteAlert1
+     */
+    readonly userId: number;
+    /**
+     * ID of the alert to delete
+     * @type {number}
+     * @memberof AlertsApiDeleteAlert1
+     */
+    readonly alertId: number;
+}
+/**
+ * Request parameters for getAlertResult1 operation in AlertsApi.
+ * @export
+ * @interface AlertsApiGetAlertResult1Request
+ */
+export interface AlertsApiGetAlertResult1Request {
+    /**
+     * ID of the user who owns the alert
+     * @type {number}
+     * @memberof AlertsApiGetAlertResult1
+     */
+    readonly userId: number;
+    /**
+     * ID of the alert to retrieve results for
+     * @type {number}
+     * @memberof AlertsApiGetAlertResult1
+     */
+    readonly alertId: number;
+}
+/**
+ * Request parameters for getByUser2 operation in AlertsApi.
+ * @export
+ * @interface AlertsApiGetByUser2Request
+ */
+export interface AlertsApiGetByUser2Request {
+    /**
+     * ID of the user to retrieve alerts for
+     * @type {number}
+     * @memberof AlertsApiGetByUser2
+     */
+    readonly userId: number;
+}
+/**
+ * Request parameters for newsletterAlerts1 operation in AlertsApi.
+ * @export
+ * @interface AlertsApiNewsletterAlerts1Request
+ */
+export interface AlertsApiNewsletterAlerts1Request {
+    /**
+     * ID of the user who subscribed to newsletters
+     * @type {number}
+     * @memberof AlertsApiNewsletterAlerts1
+     */
+    readonly userId: number;
+}
+/**
+ * Request parameters for newsletterSubscribers1 operation in AlertsApi.
+ * @export
+ * @interface AlertsApiNewsletterSubscribers1Request
+ */
+export interface AlertsApiNewsletterSubscribers1Request {
+    /**
+     * ID of the user who owns the newsletters
+     * @type {number}
+     * @memberof AlertsApiNewsletterSubscribers1
+     */
+    readonly userId: number;
+}
+/**
+ * Request parameters for saveAlert1 operation in AlertsApi.
+ * @export
+ * @interface AlertsApiSaveAlert1Request
+ */
+export interface AlertsApiSaveAlert1Request {
+    /**
+     * ID of the user to create the alert for
+     * @type {number}
+     * @memberof AlertsApiSaveAlert1
+     */
+    readonly userId: number;
+    /**
+     * Alert to be created
+     * @type {Alert}
+     * @memberof AlertsApiSaveAlert1
+     */
+    readonly alert: Alert;
+}
+/**
+ * Request parameters for sendAlert operation in AlertsApi.
+ * @export
+ * @interface AlertsApiSendAlertRequest
+ */
+export interface AlertsApiSendAlertRequest {
+    /**
+     * ID of the user
+     * @type {number}
+     * @memberof AlertsApiSendAlert
+     */
+    readonly userId: number;
+}
+/**
+ * AlertsApi - object-oriented interface
+ * @export
+ * @class AlertsApi
+ * @extends {BaseAPI}
+ */
+export declare class AlertsApi extends BaseAPI {
+    /**
+     * Deletes a specific alert owned by the user
+     * @summary Delete an alert
+     * @param {AlertsApiDeleteAlert1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AlertsApi
+     */
+    deleteAlert1(requestParameters: AlertsApiDeleteAlert1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any>>;
+    /**
+     * Retrieves the results for a specific alert
+     * @summary Get alert results
+     * @param {AlertsApiGetAlertResult1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AlertsApi
+     */
+    getAlertResult1(requestParameters: AlertsApiGetAlertResult1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
+    /**
+     * Returns all alerts from all users in the system. For users with non-Free subscription plans, the response includes their profile name. This is typically an admin-level operation.
+     * @summary Get all alerts in the system
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AlertsApi
+     */
+    getAllAlerts1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<AlertWithUserProfile[], any>>;
+    /**
+     * Returns all alerts associated with the specified user ID
+     * @summary Get all alerts for a user
+     * @param {AlertsApiGetByUser2Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AlertsApi
+     */
+    getByUser2(requestParameters: AlertsApiGetByUser2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Alert[], any>>;
+    /**
+     * Retrieves all newsletters that the specified user has subscribed to
+     * @summary Get newsletters subscribed to
+     * @param {AlertsApiNewsletterAlerts1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AlertsApi
+     */
+    newsletterAlerts1(requestParameters: AlertsApiNewsletterAlerts1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<NewsletterSubscriberDto[], any>>;
+    /**
+     * Retrieves all subscribers to newsletters owned by the specified user
+     * @summary Get newsletter subscribers
+     * @param {AlertsApiNewsletterSubscribers1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AlertsApi
+     */
+    newsletterSubscribers1(requestParameters: AlertsApiNewsletterSubscribers1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<NewsletterSubscriberDto[], any>>;
+    /**
+     * Creates a new alert for the specified user
+     * @summary Create a new alert
+     * @param {AlertsApiSaveAlert1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AlertsApi
+     */
+    saveAlert1(requestParameters: AlertsApiSaveAlert1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Alert, any>>;
+    /**
+     * Triggers the sending of customized property alerts to users
+     * @summary Send customized property alerts
+     * @param {AlertsApiSendAlertRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AlertsApi
+     */
+    sendAlert(requestParameters: AlertsApiSendAlertRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any>>;
 }
 /**
  * ApiKeysApi - axios parameter creator
@@ -3961,6 +5565,61 @@ export declare class ApiKeysApi extends BaseAPI {
      * @memberof ApiKeysApi
      */
     getUserApiKeys1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ApiKeyDto, any>>;
+}
+/**
+ * BrokeragesApi - axios parameter creator
+ * @export
+ */
+export declare const BrokeragesApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     * Returns a list of all available brokerages in the system
+     * @summary Retrieve all brokerages
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    retrieve1: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * BrokeragesApi - functional programming interface
+ * @export
+ */
+export declare const BrokeragesApiFp: (configuration?: Configuration) => {
+    /**
+     * Returns a list of all available brokerages in the system
+     * @summary Retrieve all brokerages
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    retrieve1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Brokerage>>>;
+};
+/**
+ * BrokeragesApi - factory interface
+ * @export
+ */
+export declare const BrokeragesApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     * Returns a list of all available brokerages in the system
+     * @summary Retrieve all brokerages
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    retrieve1(options?: RawAxiosRequestConfig): AxiosPromise<Array<Brokerage>>;
+};
+/**
+ * BrokeragesApi - object-oriented interface
+ * @export
+ * @class BrokeragesApi
+ * @extends {BaseAPI}
+ */
+export declare class BrokeragesApi extends BaseAPI {
+    /**
+     * Returns a list of all available brokerages in the system
+     * @summary Retrieve all brokerages
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BrokeragesApi
+     */
+    retrieve1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Brokerage[], any>>;
 }
 /**
  * CheckoutSessionsApi - axios parameter creator
@@ -4347,6 +6006,86 @@ export declare class DefaultApi extends BaseAPI {
     previewHome1(requestParameters?: DefaultApiPreviewHome1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
 }
 /**
+ * EndorsementsApi - axios parameter creator
+ * @export
+ */
+export declare const EndorsementsApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     * Gets all endorsements for a specified user. Can be filtered by endorser ID.
+     * @summary Retrieve endorsements for a user
+     * @param {number} userId ID of the user to get endorsements for
+     * @param {number} [endorser] Optional endorser ID to filter results
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    retrieveEndorsementsByUser1: (userId: number, endorser?: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * EndorsementsApi - functional programming interface
+ * @export
+ */
+export declare const EndorsementsApiFp: (configuration?: Configuration) => {
+    /**
+     * Gets all endorsements for a specified user. Can be filtered by endorser ID.
+     * @summary Retrieve endorsements for a user
+     * @param {number} userId ID of the user to get endorsements for
+     * @param {number} [endorser] Optional endorser ID to filter results
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    retrieveEndorsementsByUser1(userId: number, endorser?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SkillEndorsement>>>;
+};
+/**
+ * EndorsementsApi - factory interface
+ * @export
+ */
+export declare const EndorsementsApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     * Gets all endorsements for a specified user. Can be filtered by endorser ID.
+     * @summary Retrieve endorsements for a user
+     * @param {EndorsementsApiRetrieveEndorsementsByUser1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    retrieveEndorsementsByUser1(requestParameters: EndorsementsApiRetrieveEndorsementsByUser1Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<SkillEndorsement>>;
+};
+/**
+ * Request parameters for retrieveEndorsementsByUser1 operation in EndorsementsApi.
+ * @export
+ * @interface EndorsementsApiRetrieveEndorsementsByUser1Request
+ */
+export interface EndorsementsApiRetrieveEndorsementsByUser1Request {
+    /**
+     * ID of the user to get endorsements for
+     * @type {number}
+     * @memberof EndorsementsApiRetrieveEndorsementsByUser1
+     */
+    readonly userId: number;
+    /**
+     * Optional endorser ID to filter results
+     * @type {number}
+     * @memberof EndorsementsApiRetrieveEndorsementsByUser1
+     */
+    readonly endorser?: number;
+}
+/**
+ * EndorsementsApi - object-oriented interface
+ * @export
+ * @class EndorsementsApi
+ * @extends {BaseAPI}
+ */
+export declare class EndorsementsApi extends BaseAPI {
+    /**
+     * Gets all endorsements for a specified user. Can be filtered by endorser ID.
+     * @summary Retrieve endorsements for a user
+     * @param {EndorsementsApiRetrieveEndorsementsByUser1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EndorsementsApi
+     */
+    retrieveEndorsementsByUser1(requestParameters: EndorsementsApiRetrieveEndorsementsByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkillEndorsement[], any>>;
+}
+/**
  * ExchangeRatesApi - axios parameter creator
  * @export
  */
@@ -4492,6 +6231,194 @@ export declare class FacebookPropertiesApi extends BaseAPI {
      * @memberof FacebookPropertiesApi
      */
     uploadKyeroProperties(requestParameters: FacebookPropertiesApiUploadKyeroPropertiesRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<FBPropertyDto[], any>>;
+}
+/**
+ * FavoritesApi - axios parameter creator
+ * @export
+ */
+export declare const FavoritesApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     * Retrieves all favorites for a specific user
+     * @summary Get user favorites
+     * @param {number} userId ID of the user
+     * @param {boolean} [includeResource] Whether to include the associated resource details
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getByUser: (userId: number, includeResource?: boolean, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Adds a new favorite item for a specific user
+     * @summary Add a favorite
+     * @param {number} userId ID of the user
+     * @param {Favorite} favorite Favorite to add
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    postUserFavorite1: (userId: number, favorite: Favorite, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Removes a specific favorite from a user\'s favorites list
+     * @summary Remove a favorite
+     * @param {number} userId ID of the user
+     * @param {number} favoriteId ID of the favorite to remove
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    removeUserFavorite1: (userId: number, favoriteId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * FavoritesApi - functional programming interface
+ * @export
+ */
+export declare const FavoritesApiFp: (configuration?: Configuration) => {
+    /**
+     * Retrieves all favorites for a specific user
+     * @summary Get user favorites
+     * @param {number} userId ID of the user
+     * @param {boolean} [includeResource] Whether to include the associated resource details
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getByUser(userId: number, includeResource?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Favorite>>>;
+    /**
+     * Adds a new favorite item for a specific user
+     * @summary Add a favorite
+     * @param {number} userId ID of the user
+     * @param {Favorite} favorite Favorite to add
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    postUserFavorite1(userId: number, favorite: Favorite, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Favorite>>;
+    /**
+     * Removes a specific favorite from a user\'s favorites list
+     * @summary Remove a favorite
+     * @param {number} userId ID of the user
+     * @param {number} favoriteId ID of the favorite to remove
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    removeUserFavorite1(userId: number, favoriteId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+};
+/**
+ * FavoritesApi - factory interface
+ * @export
+ */
+export declare const FavoritesApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     * Retrieves all favorites for a specific user
+     * @summary Get user favorites
+     * @param {FavoritesApiGetByUserRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getByUser(requestParameters: FavoritesApiGetByUserRequest, options?: RawAxiosRequestConfig): AxiosPromise<Array<Favorite>>;
+    /**
+     * Adds a new favorite item for a specific user
+     * @summary Add a favorite
+     * @param {FavoritesApiPostUserFavorite1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    postUserFavorite1(requestParameters: FavoritesApiPostUserFavorite1Request, options?: RawAxiosRequestConfig): AxiosPromise<Favorite>;
+    /**
+     * Removes a specific favorite from a user\'s favorites list
+     * @summary Remove a favorite
+     * @param {FavoritesApiRemoveUserFavorite1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    removeUserFavorite1(requestParameters: FavoritesApiRemoveUserFavorite1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+};
+/**
+ * Request parameters for getByUser operation in FavoritesApi.
+ * @export
+ * @interface FavoritesApiGetByUserRequest
+ */
+export interface FavoritesApiGetByUserRequest {
+    /**
+     * ID of the user
+     * @type {number}
+     * @memberof FavoritesApiGetByUser
+     */
+    readonly userId: number;
+    /**
+     * Whether to include the associated resource details
+     * @type {boolean}
+     * @memberof FavoritesApiGetByUser
+     */
+    readonly includeResource?: boolean;
+}
+/**
+ * Request parameters for postUserFavorite1 operation in FavoritesApi.
+ * @export
+ * @interface FavoritesApiPostUserFavorite1Request
+ */
+export interface FavoritesApiPostUserFavorite1Request {
+    /**
+     * ID of the user
+     * @type {number}
+     * @memberof FavoritesApiPostUserFavorite1
+     */
+    readonly userId: number;
+    /**
+     * Favorite to add
+     * @type {Favorite}
+     * @memberof FavoritesApiPostUserFavorite1
+     */
+    readonly favorite: Favorite;
+}
+/**
+ * Request parameters for removeUserFavorite1 operation in FavoritesApi.
+ * @export
+ * @interface FavoritesApiRemoveUserFavorite1Request
+ */
+export interface FavoritesApiRemoveUserFavorite1Request {
+    /**
+     * ID of the user
+     * @type {number}
+     * @memberof FavoritesApiRemoveUserFavorite1
+     */
+    readonly userId: number;
+    /**
+     * ID of the favorite to remove
+     * @type {number}
+     * @memberof FavoritesApiRemoveUserFavorite1
+     */
+    readonly favoriteId: number;
+}
+/**
+ * FavoritesApi - object-oriented interface
+ * @export
+ * @class FavoritesApi
+ * @extends {BaseAPI}
+ */
+export declare class FavoritesApi extends BaseAPI {
+    /**
+     * Retrieves all favorites for a specific user
+     * @summary Get user favorites
+     * @param {FavoritesApiGetByUserRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FavoritesApi
+     */
+    getByUser(requestParameters: FavoritesApiGetByUserRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Favorite[], any>>;
+    /**
+     * Adds a new favorite item for a specific user
+     * @summary Add a favorite
+     * @param {FavoritesApiPostUserFavorite1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FavoritesApi
+     */
+    postUserFavorite1(requestParameters: FavoritesApiPostUserFavorite1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Favorite, any>>;
+    /**
+     * Removes a specific favorite from a user\'s favorites list
+     * @summary Remove a favorite
+     * @param {FavoritesApiRemoveUserFavorite1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FavoritesApi
+     */
+    removeUserFavorite1(requestParameters: FavoritesApiRemoveUserFavorite1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
 }
 /**
  * GeoLocationApi - axios parameter creator
@@ -4785,6 +6712,16 @@ export declare const GroupsApiAxiosParamCreator: (configuration?: Configuration)
      */
     searchGroupProperties1: (groupId: string, propertyFilterCriteria?: PropertyFilterCriteria, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Searches for users within a specific group matching the specified filter criteria
+     * @summary Search users within a specified group
+     * @param {string} groupId Group ID
+     * @param {UserFilterRequest} userFilterRequest User search filters within the group. Supports filtering by user attributes, location, skills, and social preferences. The resultRequest field controls pagination and sorting. Only one sort order can be specified at a time.
+     * @param {boolean} [bypassCache] Bypass cache and fetch fresh data from database
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    searchGroupUsers1: (groupId: string, userFilterRequest: UserFilterRequest, bypassCache?: boolean, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Acceptable Status values are:  ACCEPTED, ADMIN, REJECTED, REMOVED
      * @summary Update the group member status from groupId supplied
      * @param {string} groupId groupId
@@ -4983,6 +6920,16 @@ export declare const GroupsApiFp: (configuration?: Configuration) => {
      */
     searchGroupProperties1(groupId: string, propertyFilterCriteria?: PropertyFilterCriteria, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PropertyFilterResult>>;
     /**
+     * Searches for users within a specific group matching the specified filter criteria
+     * @summary Search users within a specified group
+     * @param {string} groupId Group ID
+     * @param {UserFilterRequest} userFilterRequest User search filters within the group. Supports filtering by user attributes, location, skills, and social preferences. The resultRequest field controls pagination and sorting. Only one sort order can be specified at a time.
+     * @param {boolean} [bypassCache] Bypass cache and fetch fresh data from database
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    searchGroupUsers1(groupId: string, userFilterRequest: UserFilterRequest, bypassCache?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserFilterResult>>;
+    /**
      * Acceptable Status values are:  ACCEPTED, ADMIN, REJECTED, REMOVED
      * @summary Update the group member status from groupId supplied
      * @param {string} groupId groupId
@@ -5166,6 +7113,14 @@ export declare const GroupsApiFactory: (configuration?: Configuration, basePath?
      * @throws {RequiredError}
      */
     searchGroupProperties1(requestParameters: GroupsApiSearchGroupProperties1Request, options?: RawAxiosRequestConfig): AxiosPromise<PropertyFilterResult>;
+    /**
+     * Searches for users within a specific group matching the specified filter criteria
+     * @summary Search users within a specified group
+     * @param {GroupsApiSearchGroupUsers1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    searchGroupUsers1(requestParameters: GroupsApiSearchGroupUsers1Request, options?: RawAxiosRequestConfig): AxiosPromise<UserFilterResult>;
     /**
      * Acceptable Status values are:  ACCEPTED, ADMIN, REJECTED, REMOVED
      * @summary Update the group member status from groupId supplied
@@ -5533,6 +7488,31 @@ export interface GroupsApiSearchGroupProperties1Request {
     readonly propertyFilterCriteria?: PropertyFilterCriteria;
 }
 /**
+ * Request parameters for searchGroupUsers1 operation in GroupsApi.
+ * @export
+ * @interface GroupsApiSearchGroupUsers1Request
+ */
+export interface GroupsApiSearchGroupUsers1Request {
+    /**
+     * Group ID
+     * @type {string}
+     * @memberof GroupsApiSearchGroupUsers1
+     */
+    readonly groupId: string;
+    /**
+     * User search filters within the group. Supports filtering by user attributes, location, skills, and social preferences. The resultRequest field controls pagination and sorting. Only one sort order can be specified at a time.
+     * @type {UserFilterRequest}
+     * @memberof GroupsApiSearchGroupUsers1
+     */
+    readonly userFilterRequest: UserFilterRequest;
+    /**
+     * Bypass cache and fetch fresh data from database
+     * @type {boolean}
+     * @memberof GroupsApiSearchGroupUsers1
+     */
+    readonly bypassCache?: boolean;
+}
+/**
  * Request parameters for updateGroupMembershipStatus1 operation in GroupsApi.
  * @export
  * @interface GroupsApiUpdateGroupMembershipStatus1Request
@@ -5753,6 +7733,15 @@ export declare class GroupsApi extends BaseAPI {
      * @memberof GroupsApi
      */
     searchGroupProperties1(requestParameters: GroupsApiSearchGroupProperties1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PropertyFilterResult, any>>;
+    /**
+     * Searches for users within a specific group matching the specified filter criteria
+     * @summary Search users within a specified group
+     * @param {GroupsApiSearchGroupUsers1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    searchGroupUsers1(requestParameters: GroupsApiSearchGroupUsers1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserFilterResult, any>>;
     /**
      * Acceptable Status values are:  ACCEPTED, ADMIN, REJECTED, REMOVED
      * @summary Update the group member status from groupId supplied
@@ -6554,7 +8543,7 @@ export declare const PropertiesApiAxiosParamCreator: (configuration?: Configurat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    previewProperty1: (id: string, lang?: string, acceptLanguage?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    previewProperty2: (id: string, lang?: string, acceptLanguage?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Consider that only user can saveNew its properties
      * @summary Create or update the property supplied
@@ -6569,7 +8558,7 @@ export declare const PropertiesApiAxiosParamCreator: (configuration?: Configurat
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    sendAlert1: (weeklyAlertRange?: WeeklyAlertRange, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    sendAlert2: (weeklyAlertRange?: WeeklyAlertRange, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      *
      * @param {*} [options] Override http request option.
@@ -6682,7 +8671,7 @@ export declare const PropertiesApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    previewProperty1(id: string, lang?: string, acceptLanguage?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>>;
+    previewProperty2(id: string, lang?: string, acceptLanguage?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>>;
     /**
      * Consider that only user can saveNew its properties
      * @summary Create or update the property supplied
@@ -6697,7 +8686,7 @@ export declare const PropertiesApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    sendAlert1(weeklyAlertRange?: WeeklyAlertRange, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<number>>;
+    sendAlert2(weeklyAlertRange?: WeeklyAlertRange, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<number>>;
     /**
      *
      * @param {*} [options] Override http request option.
@@ -6799,11 +8788,11 @@ export declare const PropertiesApiFactory: (configuration?: Configuration, baseP
     /**
      * Returns HTML preview for sharing a property on social media or messaging apps
      * @summary Get HTML preview for a property
-     * @param {PropertiesApiPreviewProperty1Request} requestParameters Request parameters.
+     * @param {PropertiesApiPreviewProperty2Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    previewProperty1(requestParameters: PropertiesApiPreviewProperty1Request, options?: RawAxiosRequestConfig): AxiosPromise<string>;
+    previewProperty2(requestParameters: PropertiesApiPreviewProperty2Request, options?: RawAxiosRequestConfig): AxiosPromise<string>;
     /**
      * Consider that only user can saveNew its properties
      * @summary Create or update the property supplied
@@ -6814,11 +8803,11 @@ export declare const PropertiesApiFactory: (configuration?: Configuration, baseP
     saveProperty1(requestParameters: PropertiesApiSaveProperty1Request, options?: RawAxiosRequestConfig): AxiosPromise<Property>;
     /**
      *
-     * @param {PropertiesApiSendAlert1Request} requestParameters Request parameters.
+     * @param {PropertiesApiSendAlert2Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    sendAlert1(requestParameters?: PropertiesApiSendAlert1Request, options?: RawAxiosRequestConfig): AxiosPromise<number>;
+    sendAlert2(requestParameters?: PropertiesApiSendAlert2Request, options?: RawAxiosRequestConfig): AxiosPromise<number>;
     /**
      *
      * @param {*} [options] Override http request option.
@@ -6961,27 +8950,27 @@ export interface PropertiesApiGetRecentProperties1Request {
     readonly minutes?: number;
 }
 /**
- * Request parameters for previewProperty1 operation in PropertiesApi.
+ * Request parameters for previewProperty2 operation in PropertiesApi.
  * @export
- * @interface PropertiesApiPreviewProperty1Request
+ * @interface PropertiesApiPreviewProperty2Request
  */
-export interface PropertiesApiPreviewProperty1Request {
+export interface PropertiesApiPreviewProperty2Request {
     /**
      * Property ID to generate preview for
      * @type {string}
-     * @memberof PropertiesApiPreviewProperty1
+     * @memberof PropertiesApiPreviewProperty2
      */
     readonly id: string;
     /**
      * Language code for the preview (e.g., \&#39;en\&#39;, \&#39;es\&#39;)
      * @type {string}
-     * @memberof PropertiesApiPreviewProperty1
+     * @memberof PropertiesApiPreviewProperty2
      */
     readonly lang?: string;
     /**
      * Browser\&#39;s accepted language header
      * @type {string}
-     * @memberof PropertiesApiPreviewProperty1
+     * @memberof PropertiesApiPreviewProperty2
      */
     readonly acceptLanguage?: string;
 }
@@ -6999,15 +8988,15 @@ export interface PropertiesApiSaveProperty1Request {
     readonly property: Property;
 }
 /**
- * Request parameters for sendAlert1 operation in PropertiesApi.
+ * Request parameters for sendAlert2 operation in PropertiesApi.
  * @export
- * @interface PropertiesApiSendAlert1Request
+ * @interface PropertiesApiSendAlert2Request
  */
-export interface PropertiesApiSendAlert1Request {
+export interface PropertiesApiSendAlert2Request {
     /**
      *
      * @type {WeeklyAlertRange}
-     * @memberof PropertiesApiSendAlert1
+     * @memberof PropertiesApiSendAlert2
      */
     readonly weeklyAlertRange?: WeeklyAlertRange;
 }
@@ -7118,12 +9107,12 @@ export declare class PropertiesApi extends BaseAPI {
     /**
      * Returns HTML preview for sharing a property on social media or messaging apps
      * @summary Get HTML preview for a property
-     * @param {PropertiesApiPreviewProperty1Request} requestParameters Request parameters.
+     * @param {PropertiesApiPreviewProperty2Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PropertiesApi
      */
-    previewProperty1(requestParameters: PropertiesApiPreviewProperty1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any>>;
+    previewProperty2(requestParameters: PropertiesApiPreviewProperty2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any>>;
     /**
      * Consider that only user can saveNew its properties
      * @summary Create or update the property supplied
@@ -7135,12 +9124,12 @@ export declare class PropertiesApi extends BaseAPI {
     saveProperty1(requestParameters: PropertiesApiSaveProperty1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property, any>>;
     /**
      *
-     * @param {PropertiesApiSendAlert1Request} requestParameters Request parameters.
+     * @param {PropertiesApiSendAlert2Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PropertiesApi
      */
-    sendAlert1(requestParameters?: PropertiesApiSendAlert1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<number, any>>;
+    sendAlert2(requestParameters?: PropertiesApiSendAlert2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<number, any>>;
     /**
      *
      * @param {*} [options] Override http request option.
@@ -8228,6 +10217,225 @@ export declare class SecurityApi extends BaseAPI {
     revokeToken1(requestParameters: SecurityApiRevokeToken1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
 }
 /**
+ * SkillsApi - axios parameter creator
+ * @export
+ */
+export declare const SkillsApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     * Returns a list of all available user skills in the system
+     * @summary Retrieve all user skills
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    retrieveUserSkills2: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * SkillsApi - functional programming interface
+ * @export
+ */
+export declare const SkillsApiFp: (configuration?: Configuration) => {
+    /**
+     * Returns a list of all available user skills in the system
+     * @summary Retrieve all user skills
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    retrieveUserSkills2(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Skill>>>;
+};
+/**
+ * SkillsApi - factory interface
+ * @export
+ */
+export declare const SkillsApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     * Returns a list of all available user skills in the system
+     * @summary Retrieve all user skills
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    retrieveUserSkills2(options?: RawAxiosRequestConfig): AxiosPromise<Array<Skill>>;
+};
+/**
+ * SkillsApi - object-oriented interface
+ * @export
+ * @class SkillsApi
+ * @extends {BaseAPI}
+ */
+export declare class SkillsApi extends BaseAPI {
+    /**
+     * Returns a list of all available user skills in the system
+     * @summary Retrieve all user skills
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SkillsApi
+     */
+    retrieveUserSkills2(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Skill[], any>>;
+}
+/**
+ * StripeIdentityWebhooksApi - axios parameter creator
+ * @export
+ */
+export declare const StripeIdentityWebhooksApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     * Called by Stripe when identity verification is canceled or marked as invalid
+     * @summary Handle verification canceled webhook
+     * @param {StripeEvent} [stripeEvent]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    handleVerificationCanceled1: (stripeEvent?: StripeEvent, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Called by Stripe when verification needs additional review or is flagged
+     * @summary Handle verification requires input webhook
+     * @param {StripeEvent} [stripeEvent]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    handleVerificationRequiresInput1: (stripeEvent?: StripeEvent, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Called by Stripe when identity verification is successfully completed
+     * @summary Handle verification verified webhook
+     * @param {StripeEvent} [stripeEvent]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    handleVerificationVerified1: (stripeEvent?: StripeEvent, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * StripeIdentityWebhooksApi - functional programming interface
+ * @export
+ */
+export declare const StripeIdentityWebhooksApiFp: (configuration?: Configuration) => {
+    /**
+     * Called by Stripe when identity verification is canceled or marked as invalid
+     * @summary Handle verification canceled webhook
+     * @param {StripeEvent} [stripeEvent]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    handleVerificationCanceled1(stripeEvent?: StripeEvent, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     * Called by Stripe when verification needs additional review or is flagged
+     * @summary Handle verification requires input webhook
+     * @param {StripeEvent} [stripeEvent]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    handleVerificationRequiresInput1(stripeEvent?: StripeEvent, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     * Called by Stripe when identity verification is successfully completed
+     * @summary Handle verification verified webhook
+     * @param {StripeEvent} [stripeEvent]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    handleVerificationVerified1(stripeEvent?: StripeEvent, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+};
+/**
+ * StripeIdentityWebhooksApi - factory interface
+ * @export
+ */
+export declare const StripeIdentityWebhooksApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     * Called by Stripe when identity verification is canceled or marked as invalid
+     * @summary Handle verification canceled webhook
+     * @param {StripeIdentityWebhooksApiHandleVerificationCanceled1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    handleVerificationCanceled1(requestParameters?: StripeIdentityWebhooksApiHandleVerificationCanceled1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     * Called by Stripe when verification needs additional review or is flagged
+     * @summary Handle verification requires input webhook
+     * @param {StripeIdentityWebhooksApiHandleVerificationRequiresInput1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    handleVerificationRequiresInput1(requestParameters?: StripeIdentityWebhooksApiHandleVerificationRequiresInput1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     * Called by Stripe when identity verification is successfully completed
+     * @summary Handle verification verified webhook
+     * @param {StripeIdentityWebhooksApiHandleVerificationVerified1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    handleVerificationVerified1(requestParameters?: StripeIdentityWebhooksApiHandleVerificationVerified1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+};
+/**
+ * Request parameters for handleVerificationCanceled1 operation in StripeIdentityWebhooksApi.
+ * @export
+ * @interface StripeIdentityWebhooksApiHandleVerificationCanceled1Request
+ */
+export interface StripeIdentityWebhooksApiHandleVerificationCanceled1Request {
+    /**
+     *
+     * @type {StripeEvent}
+     * @memberof StripeIdentityWebhooksApiHandleVerificationCanceled1
+     */
+    readonly stripeEvent?: StripeEvent;
+}
+/**
+ * Request parameters for handleVerificationRequiresInput1 operation in StripeIdentityWebhooksApi.
+ * @export
+ * @interface StripeIdentityWebhooksApiHandleVerificationRequiresInput1Request
+ */
+export interface StripeIdentityWebhooksApiHandleVerificationRequiresInput1Request {
+    /**
+     *
+     * @type {StripeEvent}
+     * @memberof StripeIdentityWebhooksApiHandleVerificationRequiresInput1
+     */
+    readonly stripeEvent?: StripeEvent;
+}
+/**
+ * Request parameters for handleVerificationVerified1 operation in StripeIdentityWebhooksApi.
+ * @export
+ * @interface StripeIdentityWebhooksApiHandleVerificationVerified1Request
+ */
+export interface StripeIdentityWebhooksApiHandleVerificationVerified1Request {
+    /**
+     *
+     * @type {StripeEvent}
+     * @memberof StripeIdentityWebhooksApiHandleVerificationVerified1
+     */
+    readonly stripeEvent?: StripeEvent;
+}
+/**
+ * StripeIdentityWebhooksApi - object-oriented interface
+ * @export
+ * @class StripeIdentityWebhooksApi
+ * @extends {BaseAPI}
+ */
+export declare class StripeIdentityWebhooksApi extends BaseAPI {
+    /**
+     * Called by Stripe when identity verification is canceled or marked as invalid
+     * @summary Handle verification canceled webhook
+     * @param {StripeIdentityWebhooksApiHandleVerificationCanceled1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof StripeIdentityWebhooksApi
+     */
+    handleVerificationCanceled1(requestParameters?: StripeIdentityWebhooksApiHandleVerificationCanceled1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    /**
+     * Called by Stripe when verification needs additional review or is flagged
+     * @summary Handle verification requires input webhook
+     * @param {StripeIdentityWebhooksApiHandleVerificationRequiresInput1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof StripeIdentityWebhooksApi
+     */
+    handleVerificationRequiresInput1(requestParameters?: StripeIdentityWebhooksApiHandleVerificationRequiresInput1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    /**
+     * Called by Stripe when identity verification is successfully completed
+     * @summary Handle verification verified webhook
+     * @param {StripeIdentityWebhooksApiHandleVerificationVerified1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof StripeIdentityWebhooksApi
+     */
+    handleVerificationVerified1(requestParameters?: StripeIdentityWebhooksApiHandleVerificationVerified1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+}
+/**
  * StripeWebhooksApi - axios parameter creator
  * @export
  */
@@ -9012,10 +11220,117 @@ export declare class TextTranslationsApi extends BaseAPI {
     translateText1(requestParameters?: TextTranslationsApiTranslateText1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<TextTranslation, any>>;
 }
 /**
+ * UserTypesApi - axios parameter creator
+ * @export
+ */
+export declare const UserTypesApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     * Returns all available user types in the system
+     * @summary Get user types
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getUserTypes1: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * UserTypesApi - functional programming interface
+ * @export
+ */
+export declare const UserTypesApiFp: (configuration?: Configuration) => {
+    /**
+     * Returns all available user types in the system
+     * @summary Get user types
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getUserTypes1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UserType>>>;
+};
+/**
+ * UserTypesApi - factory interface
+ * @export
+ */
+export declare const UserTypesApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     * Returns all available user types in the system
+     * @summary Get user types
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getUserTypes1(options?: RawAxiosRequestConfig): AxiosPromise<Array<UserType>>;
+};
+/**
+ * UserTypesApi - object-oriented interface
+ * @export
+ * @class UserTypesApi
+ * @extends {BaseAPI}
+ */
+export declare class UserTypesApi extends BaseAPI {
+    /**
+     * Returns all available user types in the system
+     * @summary Get user types
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserTypesApi
+     */
+    getUserTypes1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserType[], any>>;
+}
+/**
  * UsersApi - axios parameter creator
  * @export
  */
 export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     * Activates a user account using the activation key sent to their email
+     * @summary Activate the account of specified user
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    activateUser1: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * This endpoint is not supported. Use save user profile to update skills instead.
+     * @summary Add user skills
+     * @param {number} userId ID of the user to add skills to
+     * @param {Array<UserSkill>} userSkill List of skills to add
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    addUserSkills1: (userId: number, userSkill: Array<UserSkill>, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Checks the status of a Stripe Identity verification session and marks user as verified if successful
+     * @summary Check identity verification status
+     * @param {number} userId
+     * @param {IdentityVerificationCheckRequest} identityVerificationCheckRequest Identity verification check details
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    checkIdentityVerification1: (userId: number, identityVerificationCheckRequest: IdentityVerificationCheckRequest, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Verifies the code that was sent to the user\'s phone
+     * @summary Verify the phone code sent to user
+     * @param {number} userId
+     * @param {PhoneCodeCheckResource} phoneCodeCheckResource Phone code verification details
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    checkPhoneVerificationCodeCommand1: (userId: number, phoneCodeCheckResource: PhoneCodeCheckResource, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Allows a user to endorse another user\'s skill
+     * @summary Endorse a user skill
+     * @param {number} userId ID of the user whose skill is being endorsed
+     * @param {number} skillId ID of the skill being endorsed
+     * @param {SkillEndorsement} skillEndorsement Endorsement details
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    endorseUserSkill1: (userId: number, skillId: number, skillEndorsement: SkillEndorsement, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Retrieves a random selection of users based on specified criteria
+     * @summary Fetch random list of users, with basic data
+     * @param {UserListRequest} userListRequest User list request parameters
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    fetchRandomUsers1: (userListRequest: UserListRequest, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      *
      * @summary Return the property list with specified user id
@@ -9040,6 +11355,76 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      */
     findTestimonialsByUser1: (id: string, pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Gets detailed user information by user ID
+     * @summary Fetch user detail according to its id
+     * @param {number} userId user id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findUserById1: (userId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Gets user information by their unique profile name
+     * @summary Fetch user detail according to its profile name
+     * @param {string} [profileName] User\&#39;s profile name
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findUserByProfileName1: (profileName?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Retrieves the list of connections for a specific user
+     * @summary Get a user connections
+     * @param {number} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findUserConnections1: (userId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Gets detailed information for multiple users by their IDs
+     * @summary Fetch multiple user detail according to its ids
+     * @param {string} userIds Comma-separated list of user IDs
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findUsersByIds1: (userIds: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Retrieves all users who have subscribed to the specified subscription plan
+     * @summary Gets the users subscribed to a subscription plan name like Professional
+     * @param {GetSubscribedUsers1SubscriptionPlanNameEnum} subscriptionPlanName
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getSubscribedUsers1: (subscriptionPlanName: GetSubscribedUsers1SubscriptionPlanNameEnum, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Generates an HTML preview of a user profile for sharing purposes
+     * @summary Get HTML preview of a user profile
+     * @param {number} [id]
+     * @param {string} [lang]
+     * @param {string} [acceptLanguage]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    previewProperty: (id?: number, lang?: string, acceptLanguage?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Creates a new user account in the system
+     * @summary Register new user in the system
+     * @param {SkilledUser} skilledUser User registration data
+     * @param {string} [origin]
+     * @param {boolean} [skipEmailValidation] Skip email validation step
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    register1: (skilledUser: SkilledUser, origin?: string, skipEmailValidation?: boolean, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Sends an activation link to the user\'s email for account verification
+     * @summary Request activation link
+     * @param {string} [origin]
+     * @param {string} [email]
+     * @param {string} [password]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    requestActivationLink1: (origin?: string, email?: string, password?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      *
      * @summary Request testimonial from specified user id
      * @param {string} id user id
@@ -9048,18 +11433,136 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      */
     requestTestimonialFromUser1: (id: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Returns all endorsements for a specific user skill
+     * @summary Retrieve skill endorsements
+     * @param {number} userId ID of the user whose skill endorsements to retrieve
+     * @param {number} skillId ID of the skill to retrieve endorsements for
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    retrieveSkillEndorsements1: (userId: number, skillId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Returns all skills associated with a user
+     * @summary Retrieve user skills
+     * @param {number} userId ID of the user to retrieve skills for
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    retrieveUserSkills: (userId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Updates user profile information in the system
+     * @summary Save the data of user in the system
+     * @param {SkilledUser} skilledUser User data to save
+     * @param {string} [oAuthToken]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    save1: (skilledUser: SkilledUser, oAuthToken?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      *
      * @param {LogEntry} [logEntry]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     saveLog1: (logEntry?: LogEntry, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Searches for users matching the specified filter criteria. When authenticated (O-Auth-Token header provided), includes connection degrees (1st, 2nd, 3rd+) to other users.
+     * @summary Search users with specified filters
+     * @param {UserFilterRequest} userFilterRequest User search filters
+     * @param {string} [oAuthToken]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    searchUsers1: (userFilterRequest: UserFilterRequest, oAuthToken?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Sends an email verification link to the authenticated user\'s email address
+     * @summary Send email verification to logged-in user
+     * @param {string} [origin]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    sendEmailVerification1: (origin?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    sendPayedSusbscribersAlert1: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Sends a verification code to the user\'s phone number for verification purposes
+     * @summary Send a code to the previously saved phone number of the user
+     * @param {number} userId
+     * @param {PhoneCodeRequestResource} phoneCodeRequestResource Phone code request details
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    sendPhoneVerificationCodeCommand1: (userId: number, phoneCodeRequestResource: PhoneCodeRequestResource, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Initiates Stripe Identity verification and returns a verification URL and session ID
+     * @summary Start identity verification for user
+     * @param {number} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    startIdentityVerification1: (userId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * UsersApi - functional programming interface
  * @export
  */
 export declare const UsersApiFp: (configuration?: Configuration) => {
+    /**
+     * Activates a user account using the activation key sent to their email
+     * @summary Activate the account of specified user
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    activateUser1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
+    /**
+     * This endpoint is not supported. Use save user profile to update skills instead.
+     * @summary Add user skills
+     * @param {number} userId ID of the user to add skills to
+     * @param {Array<UserSkill>} userSkill List of skills to add
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    addUserSkills1(userId: number, userSkill: Array<UserSkill>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     * Checks the status of a Stripe Identity verification session and marks user as verified if successful
+     * @summary Check identity verification status
+     * @param {number} userId
+     * @param {IdentityVerificationCheckRequest} identityVerificationCheckRequest Identity verification check details
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    checkIdentityVerification1(userId: number, identityVerificationCheckRequest: IdentityVerificationCheckRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
+    /**
+     * Verifies the code that was sent to the user\'s phone
+     * @summary Verify the phone code sent to user
+     * @param {number} userId
+     * @param {PhoneCodeCheckResource} phoneCodeCheckResource Phone code verification details
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    checkPhoneVerificationCodeCommand1(userId: number, phoneCodeCheckResource: PhoneCodeCheckResource, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PhoneCodeCheckResource>>;
+    /**
+     * Allows a user to endorse another user\'s skill
+     * @summary Endorse a user skill
+     * @param {number} userId ID of the user whose skill is being endorsed
+     * @param {number} skillId ID of the skill being endorsed
+     * @param {SkillEndorsement} skillEndorsement Endorsement details
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    endorseUserSkill1(userId: number, skillId: number, skillEndorsement: SkillEndorsement, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SkillEndorsement>>;
+    /**
+     * Retrieves a random selection of users based on specified criteria
+     * @summary Fetch random list of users, with basic data
+     * @param {UserListRequest} userListRequest User list request parameters
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    fetchRandomUsers1(userListRequest: UserListRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SkilledUser>>>;
     /**
      *
      * @summary Return the property list with specified user id
@@ -9084,6 +11587,76 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      */
     findTestimonialsByUser1(id: string, pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TestimonialFilterResult>>;
     /**
+     * Gets detailed user information by user ID
+     * @summary Fetch user detail according to its id
+     * @param {number} userId user id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findUserById1(userId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SkilledUser>>;
+    /**
+     * Gets user information by their unique profile name
+     * @summary Fetch user detail according to its profile name
+     * @param {string} [profileName] User\&#39;s profile name
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findUserByProfileName1(profileName?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SkilledUser>>;
+    /**
+     * Retrieves the list of connections for a specific user
+     * @summary Get a user connections
+     * @param {number} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findUserConnections1(userId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SkilledUser>>>;
+    /**
+     * Gets detailed information for multiple users by their IDs
+     * @summary Fetch multiple user detail according to its ids
+     * @param {string} userIds Comma-separated list of user IDs
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findUsersByIds1(userIds: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SkilledUser>>>;
+    /**
+     * Retrieves all users who have subscribed to the specified subscription plan
+     * @summary Gets the users subscribed to a subscription plan name like Professional
+     * @param {GetSubscribedUsers1SubscriptionPlanNameEnum} subscriptionPlanName
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getSubscribedUsers1(subscriptionPlanName: GetSubscribedUsers1SubscriptionPlanNameEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SubscribedUser>>>;
+    /**
+     * Generates an HTML preview of a user profile for sharing purposes
+     * @summary Get HTML preview of a user profile
+     * @param {number} [id]
+     * @param {string} [lang]
+     * @param {string} [acceptLanguage]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    previewProperty(id?: number, lang?: string, acceptLanguage?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>>;
+    /**
+     * Creates a new user account in the system
+     * @summary Register new user in the system
+     * @param {SkilledUser} skilledUser User registration data
+     * @param {string} [origin]
+     * @param {boolean} [skipEmailValidation] Skip email validation step
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    register1(skilledUser: SkilledUser, origin?: string, skipEmailValidation?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
+    /**
+     * Sends an activation link to the user\'s email for account verification
+     * @summary Request activation link
+     * @param {string} [origin]
+     * @param {string} [email]
+     * @param {string} [password]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    requestActivationLink1(origin?: string, email?: string, password?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
      *
      * @summary Request testimonial from specified user id
      * @param {string} id user id
@@ -9092,18 +11665,131 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      */
     requestTestimonialFromUser1(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TestimonialRequest>>;
     /**
+     * Returns all endorsements for a specific user skill
+     * @summary Retrieve skill endorsements
+     * @param {number} userId ID of the user whose skill endorsements to retrieve
+     * @param {number} skillId ID of the skill to retrieve endorsements for
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    retrieveSkillEndorsements1(userId: number, skillId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SkillEndorsement>>>;
+    /**
+     * Returns all skills associated with a user
+     * @summary Retrieve user skills
+     * @param {number} userId ID of the user to retrieve skills for
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    retrieveUserSkills(userId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UserSkill>>>;
+    /**
+     * Updates user profile information in the system
+     * @summary Save the data of user in the system
+     * @param {SkilledUser} skilledUser User data to save
+     * @param {string} [oAuthToken]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    save1(skilledUser: SkilledUser, oAuthToken?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
+    /**
      *
      * @param {LogEntry} [logEntry]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     saveLog1(logEntry?: LogEntry, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     * Searches for users matching the specified filter criteria. When authenticated (O-Auth-Token header provided), includes connection degrees (1st, 2nd, 3rd+) to other users.
+     * @summary Search users with specified filters
+     * @param {UserFilterRequest} userFilterRequest User search filters
+     * @param {string} [oAuthToken]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    searchUsers1(userFilterRequest: UserFilterRequest, oAuthToken?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserFilterResult>>;
+    /**
+     * Sends an email verification link to the authenticated user\'s email address
+     * @summary Send email verification to logged-in user
+     * @param {string} [origin]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    sendEmailVerification1(origin?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    sendPayedSusbscribersAlert1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     * Sends a verification code to the user\'s phone number for verification purposes
+     * @summary Send a code to the previously saved phone number of the user
+     * @param {number} userId
+     * @param {PhoneCodeRequestResource} phoneCodeRequestResource Phone code request details
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    sendPhoneVerificationCodeCommand1(userId: number, phoneCodeRequestResource: PhoneCodeRequestResource, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PhoneCodeRequestResource>>;
+    /**
+     * Initiates Stripe Identity verification and returns a verification URL and session ID
+     * @summary Start identity verification for user
+     * @param {number} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    startIdentityVerification1(userId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IdentityVerificationStartResponse>>;
 };
 /**
  * UsersApi - factory interface
  * @export
  */
 export declare const UsersApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     * Activates a user account using the activation key sent to their email
+     * @summary Activate the account of specified user
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    activateUser1(options?: RawAxiosRequestConfig): AxiosPromise<object>;
+    /**
+     * This endpoint is not supported. Use save user profile to update skills instead.
+     * @summary Add user skills
+     * @param {UsersApiAddUserSkills1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    addUserSkills1(requestParameters: UsersApiAddUserSkills1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     * Checks the status of a Stripe Identity verification session and marks user as verified if successful
+     * @summary Check identity verification status
+     * @param {UsersApiCheckIdentityVerification1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    checkIdentityVerification1(requestParameters: UsersApiCheckIdentityVerification1Request, options?: RawAxiosRequestConfig): AxiosPromise<object>;
+    /**
+     * Verifies the code that was sent to the user\'s phone
+     * @summary Verify the phone code sent to user
+     * @param {UsersApiCheckPhoneVerificationCodeCommand1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    checkPhoneVerificationCodeCommand1(requestParameters: UsersApiCheckPhoneVerificationCodeCommand1Request, options?: RawAxiosRequestConfig): AxiosPromise<PhoneCodeCheckResource>;
+    /**
+     * Allows a user to endorse another user\'s skill
+     * @summary Endorse a user skill
+     * @param {UsersApiEndorseUserSkill1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    endorseUserSkill1(requestParameters: UsersApiEndorseUserSkill1Request, options?: RawAxiosRequestConfig): AxiosPromise<SkillEndorsement>;
+    /**
+     * Retrieves a random selection of users based on specified criteria
+     * @summary Fetch random list of users, with basic data
+     * @param {UsersApiFetchRandomUsers1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    fetchRandomUsers1(requestParameters: UsersApiFetchRandomUsers1Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<SkilledUser>>;
     /**
      *
      * @summary Return the property list with specified user id
@@ -9121,6 +11807,70 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
      */
     findTestimonialsByUser1(requestParameters: UsersApiFindTestimonialsByUser1Request, options?: RawAxiosRequestConfig): AxiosPromise<TestimonialFilterResult>;
     /**
+     * Gets detailed user information by user ID
+     * @summary Fetch user detail according to its id
+     * @param {UsersApiFindUserById1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findUserById1(requestParameters: UsersApiFindUserById1Request, options?: RawAxiosRequestConfig): AxiosPromise<SkilledUser>;
+    /**
+     * Gets user information by their unique profile name
+     * @summary Fetch user detail according to its profile name
+     * @param {UsersApiFindUserByProfileName1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findUserByProfileName1(requestParameters?: UsersApiFindUserByProfileName1Request, options?: RawAxiosRequestConfig): AxiosPromise<SkilledUser>;
+    /**
+     * Retrieves the list of connections for a specific user
+     * @summary Get a user connections
+     * @param {UsersApiFindUserConnections1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findUserConnections1(requestParameters: UsersApiFindUserConnections1Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<SkilledUser>>;
+    /**
+     * Gets detailed information for multiple users by their IDs
+     * @summary Fetch multiple user detail according to its ids
+     * @param {UsersApiFindUsersByIds1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findUsersByIds1(requestParameters: UsersApiFindUsersByIds1Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<SkilledUser>>;
+    /**
+     * Retrieves all users who have subscribed to the specified subscription plan
+     * @summary Gets the users subscribed to a subscription plan name like Professional
+     * @param {UsersApiGetSubscribedUsers1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getSubscribedUsers1(requestParameters: UsersApiGetSubscribedUsers1Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<SubscribedUser>>;
+    /**
+     * Generates an HTML preview of a user profile for sharing purposes
+     * @summary Get HTML preview of a user profile
+     * @param {UsersApiPreviewPropertyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    previewProperty(requestParameters?: UsersApiPreviewPropertyRequest, options?: RawAxiosRequestConfig): AxiosPromise<string>;
+    /**
+     * Creates a new user account in the system
+     * @summary Register new user in the system
+     * @param {UsersApiRegister1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    register1(requestParameters: UsersApiRegister1Request, options?: RawAxiosRequestConfig): AxiosPromise<object>;
+    /**
+     * Sends an activation link to the user\'s email for account verification
+     * @summary Request activation link
+     * @param {UsersApiRequestActivationLink1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    requestActivationLink1(requestParameters?: UsersApiRequestActivationLink1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
      *
      * @summary Request testimonial from specified user id
      * @param {UsersApiRequestTestimonialFromUser1Request} requestParameters Request parameters.
@@ -9129,13 +11879,170 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
      */
     requestTestimonialFromUser1(requestParameters: UsersApiRequestTestimonialFromUser1Request, options?: RawAxiosRequestConfig): AxiosPromise<TestimonialRequest>;
     /**
+     * Returns all endorsements for a specific user skill
+     * @summary Retrieve skill endorsements
+     * @param {UsersApiRetrieveSkillEndorsements1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    retrieveSkillEndorsements1(requestParameters: UsersApiRetrieveSkillEndorsements1Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<SkillEndorsement>>;
+    /**
+     * Returns all skills associated with a user
+     * @summary Retrieve user skills
+     * @param {UsersApiRetrieveUserSkillsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    retrieveUserSkills(requestParameters: UsersApiRetrieveUserSkillsRequest, options?: RawAxiosRequestConfig): AxiosPromise<Array<UserSkill>>;
+    /**
+     * Updates user profile information in the system
+     * @summary Save the data of user in the system
+     * @param {UsersApiSave1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    save1(requestParameters: UsersApiSave1Request, options?: RawAxiosRequestConfig): AxiosPromise<object>;
+    /**
      *
      * @param {UsersApiSaveLog1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     saveLog1(requestParameters?: UsersApiSaveLog1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     * Searches for users matching the specified filter criteria. When authenticated (O-Auth-Token header provided), includes connection degrees (1st, 2nd, 3rd+) to other users.
+     * @summary Search users with specified filters
+     * @param {UsersApiSearchUsers1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    searchUsers1(requestParameters: UsersApiSearchUsers1Request, options?: RawAxiosRequestConfig): AxiosPromise<UserFilterResult>;
+    /**
+     * Sends an email verification link to the authenticated user\'s email address
+     * @summary Send email verification to logged-in user
+     * @param {UsersApiSendEmailVerification1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    sendEmailVerification1(requestParameters?: UsersApiSendEmailVerification1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    sendPayedSusbscribersAlert1(options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     * Sends a verification code to the user\'s phone number for verification purposes
+     * @summary Send a code to the previously saved phone number of the user
+     * @param {UsersApiSendPhoneVerificationCodeCommand1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    sendPhoneVerificationCodeCommand1(requestParameters: UsersApiSendPhoneVerificationCodeCommand1Request, options?: RawAxiosRequestConfig): AxiosPromise<PhoneCodeRequestResource>;
+    /**
+     * Initiates Stripe Identity verification and returns a verification URL and session ID
+     * @summary Start identity verification for user
+     * @param {UsersApiStartIdentityVerification1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    startIdentityVerification1(requestParameters: UsersApiStartIdentityVerification1Request, options?: RawAxiosRequestConfig): AxiosPromise<IdentityVerificationStartResponse>;
 };
+/**
+ * Request parameters for addUserSkills1 operation in UsersApi.
+ * @export
+ * @interface UsersApiAddUserSkills1Request
+ */
+export interface UsersApiAddUserSkills1Request {
+    /**
+     * ID of the user to add skills to
+     * @type {number}
+     * @memberof UsersApiAddUserSkills1
+     */
+    readonly userId: number;
+    /**
+     * List of skills to add
+     * @type {Array<UserSkill>}
+     * @memberof UsersApiAddUserSkills1
+     */
+    readonly userSkill: Array<UserSkill>;
+}
+/**
+ * Request parameters for checkIdentityVerification1 operation in UsersApi.
+ * @export
+ * @interface UsersApiCheckIdentityVerification1Request
+ */
+export interface UsersApiCheckIdentityVerification1Request {
+    /**
+     *
+     * @type {number}
+     * @memberof UsersApiCheckIdentityVerification1
+     */
+    readonly userId: number;
+    /**
+     * Identity verification check details
+     * @type {IdentityVerificationCheckRequest}
+     * @memberof UsersApiCheckIdentityVerification1
+     */
+    readonly identityVerificationCheckRequest: IdentityVerificationCheckRequest;
+}
+/**
+ * Request parameters for checkPhoneVerificationCodeCommand1 operation in UsersApi.
+ * @export
+ * @interface UsersApiCheckPhoneVerificationCodeCommand1Request
+ */
+export interface UsersApiCheckPhoneVerificationCodeCommand1Request {
+    /**
+     *
+     * @type {number}
+     * @memberof UsersApiCheckPhoneVerificationCodeCommand1
+     */
+    readonly userId: number;
+    /**
+     * Phone code verification details
+     * @type {PhoneCodeCheckResource}
+     * @memberof UsersApiCheckPhoneVerificationCodeCommand1
+     */
+    readonly phoneCodeCheckResource: PhoneCodeCheckResource;
+}
+/**
+ * Request parameters for endorseUserSkill1 operation in UsersApi.
+ * @export
+ * @interface UsersApiEndorseUserSkill1Request
+ */
+export interface UsersApiEndorseUserSkill1Request {
+    /**
+     * ID of the user whose skill is being endorsed
+     * @type {number}
+     * @memberof UsersApiEndorseUserSkill1
+     */
+    readonly userId: number;
+    /**
+     * ID of the skill being endorsed
+     * @type {number}
+     * @memberof UsersApiEndorseUserSkill1
+     */
+    readonly skillId: number;
+    /**
+     * Endorsement details
+     * @type {SkillEndorsement}
+     * @memberof UsersApiEndorseUserSkill1
+     */
+    readonly skillEndorsement: SkillEndorsement;
+}
+/**
+ * Request parameters for fetchRandomUsers1 operation in UsersApi.
+ * @export
+ * @interface UsersApiFetchRandomUsers1Request
+ */
+export interface UsersApiFetchRandomUsers1Request {
+    /**
+     * User list request parameters
+     * @type {UserListRequest}
+     * @memberof UsersApiFetchRandomUsers1
+     */
+    readonly userListRequest: UserListRequest;
+}
 /**
  * Request parameters for findPropertiesByUser1 operation in UsersApi.
  * @export
@@ -9205,6 +12112,146 @@ export interface UsersApiFindTestimonialsByUser1Request {
     readonly pageTo?: number;
 }
 /**
+ * Request parameters for findUserById1 operation in UsersApi.
+ * @export
+ * @interface UsersApiFindUserById1Request
+ */
+export interface UsersApiFindUserById1Request {
+    /**
+     * user id
+     * @type {number}
+     * @memberof UsersApiFindUserById1
+     */
+    readonly userId: number;
+}
+/**
+ * Request parameters for findUserByProfileName1 operation in UsersApi.
+ * @export
+ * @interface UsersApiFindUserByProfileName1Request
+ */
+export interface UsersApiFindUserByProfileName1Request {
+    /**
+     * User\&#39;s profile name
+     * @type {string}
+     * @memberof UsersApiFindUserByProfileName1
+     */
+    readonly profileName?: string;
+}
+/**
+ * Request parameters for findUserConnections1 operation in UsersApi.
+ * @export
+ * @interface UsersApiFindUserConnections1Request
+ */
+export interface UsersApiFindUserConnections1Request {
+    /**
+     *
+     * @type {number}
+     * @memberof UsersApiFindUserConnections1
+     */
+    readonly userId: number;
+}
+/**
+ * Request parameters for findUsersByIds1 operation in UsersApi.
+ * @export
+ * @interface UsersApiFindUsersByIds1Request
+ */
+export interface UsersApiFindUsersByIds1Request {
+    /**
+     * Comma-separated list of user IDs
+     * @type {string}
+     * @memberof UsersApiFindUsersByIds1
+     */
+    readonly userIds: string;
+}
+/**
+ * Request parameters for getSubscribedUsers1 operation in UsersApi.
+ * @export
+ * @interface UsersApiGetSubscribedUsers1Request
+ */
+export interface UsersApiGetSubscribedUsers1Request {
+    /**
+     *
+     * @type {'Free' | 'Professional' | 'Business' | 'Brokerage'}
+     * @memberof UsersApiGetSubscribedUsers1
+     */
+    readonly subscriptionPlanName: GetSubscribedUsers1SubscriptionPlanNameEnum;
+}
+/**
+ * Request parameters for previewProperty operation in UsersApi.
+ * @export
+ * @interface UsersApiPreviewPropertyRequest
+ */
+export interface UsersApiPreviewPropertyRequest {
+    /**
+     *
+     * @type {number}
+     * @memberof UsersApiPreviewProperty
+     */
+    readonly id?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof UsersApiPreviewProperty
+     */
+    readonly lang?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof UsersApiPreviewProperty
+     */
+    readonly acceptLanguage?: string;
+}
+/**
+ * Request parameters for register1 operation in UsersApi.
+ * @export
+ * @interface UsersApiRegister1Request
+ */
+export interface UsersApiRegister1Request {
+    /**
+     * User registration data
+     * @type {SkilledUser}
+     * @memberof UsersApiRegister1
+     */
+    readonly skilledUser: SkilledUser;
+    /**
+     *
+     * @type {string}
+     * @memberof UsersApiRegister1
+     */
+    readonly origin?: string;
+    /**
+     * Skip email validation step
+     * @type {boolean}
+     * @memberof UsersApiRegister1
+     */
+    readonly skipEmailValidation?: boolean;
+}
+/**
+ * Request parameters for requestActivationLink1 operation in UsersApi.
+ * @export
+ * @interface UsersApiRequestActivationLink1Request
+ */
+export interface UsersApiRequestActivationLink1Request {
+    /**
+     *
+     * @type {string}
+     * @memberof UsersApiRequestActivationLink1
+     */
+    readonly origin?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof UsersApiRequestActivationLink1
+     */
+    readonly email?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof UsersApiRequestActivationLink1
+     */
+    readonly password?: string;
+}
+/**
  * Request parameters for requestTestimonialFromUser1 operation in UsersApi.
  * @export
  * @interface UsersApiRequestTestimonialFromUser1Request
@@ -9216,6 +12263,57 @@ export interface UsersApiRequestTestimonialFromUser1Request {
      * @memberof UsersApiRequestTestimonialFromUser1
      */
     readonly id: string;
+}
+/**
+ * Request parameters for retrieveSkillEndorsements1 operation in UsersApi.
+ * @export
+ * @interface UsersApiRetrieveSkillEndorsements1Request
+ */
+export interface UsersApiRetrieveSkillEndorsements1Request {
+    /**
+     * ID of the user whose skill endorsements to retrieve
+     * @type {number}
+     * @memberof UsersApiRetrieveSkillEndorsements1
+     */
+    readonly userId: number;
+    /**
+     * ID of the skill to retrieve endorsements for
+     * @type {number}
+     * @memberof UsersApiRetrieveSkillEndorsements1
+     */
+    readonly skillId: number;
+}
+/**
+ * Request parameters for retrieveUserSkills operation in UsersApi.
+ * @export
+ * @interface UsersApiRetrieveUserSkillsRequest
+ */
+export interface UsersApiRetrieveUserSkillsRequest {
+    /**
+     * ID of the user to retrieve skills for
+     * @type {number}
+     * @memberof UsersApiRetrieveUserSkills
+     */
+    readonly userId: number;
+}
+/**
+ * Request parameters for save1 operation in UsersApi.
+ * @export
+ * @interface UsersApiSave1Request
+ */
+export interface UsersApiSave1Request {
+    /**
+     * User data to save
+     * @type {SkilledUser}
+     * @memberof UsersApiSave1
+     */
+    readonly skilledUser: SkilledUser;
+    /**
+     *
+     * @type {string}
+     * @memberof UsersApiSave1
+     */
+    readonly oAuthToken?: string;
 }
 /**
  * Request parameters for saveLog1 operation in UsersApi.
@@ -9231,12 +12329,129 @@ export interface UsersApiSaveLog1Request {
     readonly logEntry?: LogEntry;
 }
 /**
+ * Request parameters for searchUsers1 operation in UsersApi.
+ * @export
+ * @interface UsersApiSearchUsers1Request
+ */
+export interface UsersApiSearchUsers1Request {
+    /**
+     * User search filters
+     * @type {UserFilterRequest}
+     * @memberof UsersApiSearchUsers1
+     */
+    readonly userFilterRequest: UserFilterRequest;
+    /**
+     *
+     * @type {string}
+     * @memberof UsersApiSearchUsers1
+     */
+    readonly oAuthToken?: string;
+}
+/**
+ * Request parameters for sendEmailVerification1 operation in UsersApi.
+ * @export
+ * @interface UsersApiSendEmailVerification1Request
+ */
+export interface UsersApiSendEmailVerification1Request {
+    /**
+     *
+     * @type {string}
+     * @memberof UsersApiSendEmailVerification1
+     */
+    readonly origin?: string;
+}
+/**
+ * Request parameters for sendPhoneVerificationCodeCommand1 operation in UsersApi.
+ * @export
+ * @interface UsersApiSendPhoneVerificationCodeCommand1Request
+ */
+export interface UsersApiSendPhoneVerificationCodeCommand1Request {
+    /**
+     *
+     * @type {number}
+     * @memberof UsersApiSendPhoneVerificationCodeCommand1
+     */
+    readonly userId: number;
+    /**
+     * Phone code request details
+     * @type {PhoneCodeRequestResource}
+     * @memberof UsersApiSendPhoneVerificationCodeCommand1
+     */
+    readonly phoneCodeRequestResource: PhoneCodeRequestResource;
+}
+/**
+ * Request parameters for startIdentityVerification1 operation in UsersApi.
+ * @export
+ * @interface UsersApiStartIdentityVerification1Request
+ */
+export interface UsersApiStartIdentityVerification1Request {
+    /**
+     *
+     * @type {number}
+     * @memberof UsersApiStartIdentityVerification1
+     */
+    readonly userId: number;
+}
+/**
  * UsersApi - object-oriented interface
  * @export
  * @class UsersApi
  * @extends {BaseAPI}
  */
 export declare class UsersApi extends BaseAPI {
+    /**
+     * Activates a user account using the activation key sent to their email
+     * @summary Activate the account of specified user
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    activateUser1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
+    /**
+     * This endpoint is not supported. Use save user profile to update skills instead.
+     * @summary Add user skills
+     * @param {UsersApiAddUserSkills1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    addUserSkills1(requestParameters: UsersApiAddUserSkills1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    /**
+     * Checks the status of a Stripe Identity verification session and marks user as verified if successful
+     * @summary Check identity verification status
+     * @param {UsersApiCheckIdentityVerification1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    checkIdentityVerification1(requestParameters: UsersApiCheckIdentityVerification1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
+    /**
+     * Verifies the code that was sent to the user\'s phone
+     * @summary Verify the phone code sent to user
+     * @param {UsersApiCheckPhoneVerificationCodeCommand1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    checkPhoneVerificationCodeCommand1(requestParameters: UsersApiCheckPhoneVerificationCodeCommand1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PhoneCodeCheckResource, any>>;
+    /**
+     * Allows a user to endorse another user\'s skill
+     * @summary Endorse a user skill
+     * @param {UsersApiEndorseUserSkill1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    endorseUserSkill1(requestParameters: UsersApiEndorseUserSkill1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkillEndorsement, any>>;
+    /**
+     * Retrieves a random selection of users based on specified criteria
+     * @summary Fetch random list of users, with basic data
+     * @param {UsersApiFetchRandomUsers1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    fetchRandomUsers1(requestParameters: UsersApiFetchRandomUsers1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkilledUser[], any>>;
     /**
      *
      * @summary Return the property list with specified user id
@@ -9256,6 +12471,78 @@ export declare class UsersApi extends BaseAPI {
      */
     findTestimonialsByUser1(requestParameters: UsersApiFindTestimonialsByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<TestimonialFilterResult, any>>;
     /**
+     * Gets detailed user information by user ID
+     * @summary Fetch user detail according to its id
+     * @param {UsersApiFindUserById1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    findUserById1(requestParameters: UsersApiFindUserById1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkilledUser, any>>;
+    /**
+     * Gets user information by their unique profile name
+     * @summary Fetch user detail according to its profile name
+     * @param {UsersApiFindUserByProfileName1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    findUserByProfileName1(requestParameters?: UsersApiFindUserByProfileName1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkilledUser, any>>;
+    /**
+     * Retrieves the list of connections for a specific user
+     * @summary Get a user connections
+     * @param {UsersApiFindUserConnections1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    findUserConnections1(requestParameters: UsersApiFindUserConnections1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkilledUser[], any>>;
+    /**
+     * Gets detailed information for multiple users by their IDs
+     * @summary Fetch multiple user detail according to its ids
+     * @param {UsersApiFindUsersByIds1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    findUsersByIds1(requestParameters: UsersApiFindUsersByIds1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkilledUser[], any>>;
+    /**
+     * Retrieves all users who have subscribed to the specified subscription plan
+     * @summary Gets the users subscribed to a subscription plan name like Professional
+     * @param {UsersApiGetSubscribedUsers1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    getSubscribedUsers1(requestParameters: UsersApiGetSubscribedUsers1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SubscribedUser[], any>>;
+    /**
+     * Generates an HTML preview of a user profile for sharing purposes
+     * @summary Get HTML preview of a user profile
+     * @param {UsersApiPreviewPropertyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    previewProperty(requestParameters?: UsersApiPreviewPropertyRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any>>;
+    /**
+     * Creates a new user account in the system
+     * @summary Register new user in the system
+     * @param {UsersApiRegister1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    register1(requestParameters: UsersApiRegister1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
+    /**
+     * Sends an activation link to the user\'s email for account verification
+     * @summary Request activation link
+     * @param {UsersApiRequestActivationLink1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    requestActivationLink1(requestParameters?: UsersApiRequestActivationLink1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    /**
      *
      * @summary Request testimonial from specified user id
      * @param {UsersApiRequestTestimonialFromUser1Request} requestParameters Request parameters.
@@ -9265,6 +12552,33 @@ export declare class UsersApi extends BaseAPI {
      */
     requestTestimonialFromUser1(requestParameters: UsersApiRequestTestimonialFromUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<TestimonialRequest, any>>;
     /**
+     * Returns all endorsements for a specific user skill
+     * @summary Retrieve skill endorsements
+     * @param {UsersApiRetrieveSkillEndorsements1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    retrieveSkillEndorsements1(requestParameters: UsersApiRetrieveSkillEndorsements1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkillEndorsement[], any>>;
+    /**
+     * Returns all skills associated with a user
+     * @summary Retrieve user skills
+     * @param {UsersApiRetrieveUserSkillsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    retrieveUserSkills(requestParameters: UsersApiRetrieveUserSkillsRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserSkill[], any>>;
+    /**
+     * Updates user profile information in the system
+     * @summary Save the data of user in the system
+     * @param {UsersApiSave1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    save1(requestParameters: UsersApiSave1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
+    /**
      *
      * @param {UsersApiSaveLog1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -9272,4 +12586,57 @@ export declare class UsersApi extends BaseAPI {
      * @memberof UsersApi
      */
     saveLog1(requestParameters?: UsersApiSaveLog1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    /**
+     * Searches for users matching the specified filter criteria. When authenticated (O-Auth-Token header provided), includes connection degrees (1st, 2nd, 3rd+) to other users.
+     * @summary Search users with specified filters
+     * @param {UsersApiSearchUsers1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    searchUsers1(requestParameters: UsersApiSearchUsers1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserFilterResult, any>>;
+    /**
+     * Sends an email verification link to the authenticated user\'s email address
+     * @summary Send email verification to logged-in user
+     * @param {UsersApiSendEmailVerification1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    sendEmailVerification1(requestParameters?: UsersApiSendEmailVerification1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    sendPayedSusbscribersAlert1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    /**
+     * Sends a verification code to the user\'s phone number for verification purposes
+     * @summary Send a code to the previously saved phone number of the user
+     * @param {UsersApiSendPhoneVerificationCodeCommand1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    sendPhoneVerificationCodeCommand1(requestParameters: UsersApiSendPhoneVerificationCodeCommand1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PhoneCodeRequestResource, any>>;
+    /**
+     * Initiates Stripe Identity verification and returns a verification URL and session ID
+     * @summary Start identity verification for user
+     * @param {UsersApiStartIdentityVerification1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    startIdentityVerification1(requestParameters: UsersApiStartIdentityVerification1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<IdentityVerificationStartResponse, any>>;
 }
+/**
+ * @export
+ */
+export declare const GetSubscribedUsers1SubscriptionPlanNameEnum: {
+    readonly Free: "Free";
+    readonly Professional: "Professional";
+    readonly Business: "Business";
+    readonly Brokerage: "Brokerage";
+};
+export type GetSubscribedUsers1SubscriptionPlanNameEnum = typeof GetSubscribedUsers1SubscriptionPlanNameEnum[keyof typeof GetSubscribedUsers1SubscriptionPlanNameEnum];

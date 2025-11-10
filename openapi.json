@@ -10,6 +10,14 @@
     },
     "version" : "v1"
   },
+  "servers" : [ {
+    "url" : "http://localhost:8080/hallocasa-api/api",
+    "description" : "Local Development Server"
+  } ],
+  "security" : [ {
+    "oAuthCode" : [ ],
+    "oAuthClientId" : [ ]
+  } ],
   "tags" : [ {
     "name" : "geo-location",
     "description" : "Operations related to geographical locations"
@@ -52,6 +60,27 @@
   }, {
     "name" : "security",
     "description" : "Endpoints for authentication and authorization"
+  }, {
+    "name" : "alerts",
+    "description" : "Operations related to user alerts and notifications"
+  }, {
+    "name" : "brokerages",
+    "description" : "Brokerage management APIs"
+  }, {
+    "name" : "endorsements",
+    "description" : "User endorsements management API"
+  }, {
+    "name" : "favorites",
+    "description" : "API to manage user favorites"
+  }, {
+    "name" : "skills",
+    "description" : "Operations related to user skills"
+  }, {
+    "name" : "stripe-identity-webhooks",
+    "description" : "Stripe Identity webhook handlers"
+  }, {
+    "name" : "users",
+    "description" : "User management operations"
   } ],
   "paths" : {
     "/country-phone-prefixes" : {
@@ -4168,7 +4197,7 @@
         "tags" : [ "properties" ],
         "summary" : "Get HTML preview for a property",
         "description" : "Returns HTML preview for sharing a property on social media or messaging apps",
-        "operationId" : "previewProperty_1",
+        "operationId" : "previewProperty_2",
         "parameters" : [ {
           "name" : "id",
           "in" : "query",
@@ -4275,7 +4304,7 @@
     "/properties/weekly-alert" : {
       "post" : {
         "tags" : [ "properties" ],
-        "operationId" : "sendAlert_1",
+        "operationId" : "sendAlert_2",
         "requestBody" : {
           "content" : {
             "application/json;charset=UTF-8" : {
@@ -5684,6 +5713,2594 @@
                   "type" : "array",
                   "items" : {
                     "$ref" : "#/components/schemas/SubscriptionPlanFeatureDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/alerts/{alertId}" : {
+      "delete" : {
+        "tags" : [ "alerts" ],
+        "summary" : "Delete an alert",
+        "description" : "Deletes a specific alert owned by the user",
+        "operationId" : "deleteAlert_1",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "ID of the user who owns the alert",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "alertId",
+          "in" : "path",
+          "description" : "ID of the alert to delete",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Alert deleted successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "{\"message\":\"Alert successfully deleted\"}"
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "{\"message\":\"Authentication is required to access this resource\"}"
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden - user doesn't own the alert",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "{\"message\":\"You do not have permission to delete this alert\"}"
+              }
+            }
+          },
+          "404" : {
+            "description" : "User or alert not found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "{\"message\":\"Alert with ID 456 not found\"}"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/alerts/{alertId}/result" : {
+      "get" : {
+        "tags" : [ "alerts" ],
+        "summary" : "Get alert results",
+        "description" : "Retrieves the results for a specific alert",
+        "operationId" : "getAlertResult_1",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "ID of the user who owns the alert",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "alertId",
+          "in" : "path",
+          "description" : "ID of the alert to retrieve results for",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Alert results retrieved successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object"
+                },
+                "examples" : {
+                  "alertResults" : {
+                    "description" : "alertResults",
+                    "value" : [ {
+                      "id" : 1001,
+                      "title" : "Beachfront Condo",
+                      "price" : 250000,
+                      "location" : "Miami Beach",
+                      "bedrooms" : 2,
+                      "bathrooms" : 2,
+                      "area" : 1200,
+                      "currency" : "USD",
+                      "images" : [ "img1.jpg", "img2.jpg" ]
+                    }, {
+                      "id" : 1002,
+                      "title" : "Downtown Apartment",
+                      "price" : 180000,
+                      "location" : "Miami Downtown",
+                      "bedrooms" : 1,
+                      "bathrooms" : 1,
+                      "area" : 850,
+                      "currency" : "USD",
+                      "images" : [ "img3.jpg" ]
+                    } ]
+                  }
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "{\"message\":\"Authentication is required to access this resource\"}"
+              }
+            }
+          },
+          "404" : {
+            "description" : "User or alert not found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "{\"message\":\"Alert with ID 456 not found for user 123\"}"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/alerts" : {
+      "get" : {
+        "tags" : [ "alerts" ],
+        "summary" : "Get all alerts for a user",
+        "description" : "Returns all alerts associated with the specified user ID",
+        "operationId" : "getByUser_2",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "ID of the user to retrieve alerts for",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "List of user alerts retrieved successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Alert"
+                  }
+                },
+                "examples" : {
+                  "alerts" : {
+                    "description" : "alerts",
+                    "value" : [ {
+                      "id" : 1,
+                      "name" : "Price Alert",
+                      "criteria" : {
+                        "priceMin" : 100000,
+                        "priceMax" : 300000
+                      },
+                      "active" : true
+                    }, {
+                      "id" : 2,
+                      "name" : "New Properties",
+                      "criteria" : {
+                        "location" : "Miami"
+                      },
+                      "active" : true
+                    } ]
+                  }
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "{\"message\":\"Authentication is required to access this resource\"}"
+              }
+            }
+          },
+          "404" : {
+            "description" : "User not found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "{\"message\":\"User with specified ID not found\"}"
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "alerts" ],
+        "summary" : "Create a new alert",
+        "description" : "Creates a new alert for the specified user",
+        "operationId" : "saveAlert_1",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "ID of the user to create the alert for",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "Alert to be created",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Alert"
+              },
+              "examples" : {
+                "alertRequest" : {
+                  "description" : "alertRequest",
+                  "value" : {
+                    "name" : "Beach Properties",
+                    "criteria" : {
+                      "nearBeach" : true,
+                      "priceMax" : 500000
+                    },
+                    "active" : true,
+                    "type" : "PROPERTY"
+                  }
+                }
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Alert created successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Alert"
+                },
+                "examples" : {
+                  "createdAlert" : {
+                    "description" : "createdAlert",
+                    "value" : {
+                      "id" : 3,
+                      "name" : "Beach Properties",
+                      "criteria" : {
+                        "nearBeach" : true,
+                        "priceMax" : 500000
+                      },
+                      "active" : true,
+                      "type" : "PROPERTY",
+                      "createdAt" : "2023-06-15T10:30:00Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Invalid alert data",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "{\"message\":\"Invalid alert data\",\"details\":[\"name is required\",\"criteria must not be empty\"]}"
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "{\"message\":\"Authentication is required to access this resource\"}"
+              }
+            }
+          },
+          "404" : {
+            "description" : "User not found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "{\"message\":\"User with ID 123 not found\"}"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/alerts/newsletter-alerts" : {
+      "get" : {
+        "tags" : [ "alerts" ],
+        "summary" : "Get newsletters subscribed to",
+        "description" : "Retrieves all newsletters that the specified user has subscribed to",
+        "operationId" : "newsletterAlerts_1",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "ID of the user who subscribed to newsletters",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Newsletter alerts retrieved successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/NewsletterSubscriberDto"
+                  }
+                },
+                "examples" : {
+                  "newsletterAlerts" : {
+                    "description" : "newsletterAlerts",
+                    "value" : [ {
+                      "alert" : {
+                        "id" : 7,
+                        "name" : "Market Insights",
+                        "type" : "NEWSLETTER",
+                        "criteria" : {
+                          "topic" : "market-trends"
+                        },
+                        "active" : true,
+                        "createdAt" : "2023-05-10T14:20:00Z"
+                      },
+                      "user" : {
+                        "id" : 201,
+                        "email" : "publisher@example.com",
+                        "name" : "Jane Smith",
+                        "phone" : "+1987654321",
+                        "role" : "PUBLISHER"
+                      }
+                    } ]
+                  }
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "{\"message\":\"Authentication is required to access this resource\"}"
+              }
+            }
+          },
+          "404" : {
+            "description" : "User not found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "{\"message\":\"User with ID 123 not found\"}"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/alerts/newsletter-subscribers" : {
+      "get" : {
+        "tags" : [ "alerts" ],
+        "summary" : "Get newsletter subscribers",
+        "description" : "Retrieves all subscribers to newsletters owned by the specified user",
+        "operationId" : "newsletterSubscribers_1",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "ID of the user who owns the newsletters",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Newsletter subscribers retrieved successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/NewsletterSubscriberDto"
+                  }
+                },
+                "examples" : {
+                  "newsletterSubscribers" : {
+                    "description" : "newsletterSubscribers",
+                    "value" : [ {
+                      "alert" : {
+                        "id" : 5,
+                        "name" : "Weekly Newsletter",
+                        "type" : "NEWSLETTER",
+                        "criteria" : {
+                          "category" : "real-estate"
+                        },
+                        "active" : true
+                      },
+                      "user" : {
+                        "id" : 102,
+                        "email" : "subscriber@example.com",
+                        "name" : "John Doe",
+                        "phone" : "+1234567890"
+                      }
+                    } ]
+                  }
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "{\"message\":\"Authentication is required to access this resource\"}"
+              }
+            }
+          },
+          "404" : {
+            "description" : "User not found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "{\"message\":\"User with ID 123 not found\"}"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/alerts/send-alert" : {
+      "post" : {
+        "tags" : [ "alerts" ],
+        "summary" : "Send customized property alerts",
+        "description" : "Triggers the sending of customized property alerts to users",
+        "operationId" : "sendAlert",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "ID of the user",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Alerts sent successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : {
+                  "success" : {
+                    "description" : "success",
+                    "value" : {
+                      "message" : "Alerts successfully sent to 42 users"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "{\"message\":\"Authentication is required to access this resource\"}"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/brokerages" : {
+      "get" : {
+        "tags" : [ "brokerages" ],
+        "summary" : "Retrieve all brokerages",
+        "description" : "Returns a list of all available brokerages in the system",
+        "operationId" : "retrieve_1",
+        "responses" : {
+          "200" : {
+            "description" : "List of brokerages retrieved successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Brokerage"
+                  }
+                },
+                "examples" : {
+                  "brokerages" : {
+                    "summary" : "Example of brokerages list",
+                    "description" : "brokerages",
+                    "value" : [ {
+                      "id" : 1,
+                      "name" : "Premium Real Estate",
+                      "enabled" : true,
+                      "createdAt" : 1609459200000,
+                      "updatedAt" : 1609545600000,
+                      "deletedAt" : null
+                    }, {
+                      "id" : 2,
+                      "name" : "Global Properties",
+                      "enabled" : true,
+                      "createdAt" : 1609459200000,
+                      "updatedAt" : 1609545600000,
+                      "deletedAt" : null
+                    } ]
+                  }
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal server error",
+            "content" : {
+              "application/json" : {
+                "example" : {
+                  "error" : "Internal server error",
+                  "message" : "An unexpected error occurred"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/endorsements" : {
+      "get" : {
+        "tags" : [ "endorsements" ],
+        "summary" : "Retrieve endorsements for a user",
+        "description" : "Gets all endorsements for a specified user. Can be filtered by endorser ID.",
+        "operationId" : "retrieveEndorsementsByUser_1",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "ID of the user to get endorsements for",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 12345
+        }, {
+          "name" : "endorser",
+          "in" : "query",
+          "description" : "Optional endorser ID to filter results",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 54321
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "List of endorsements",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/SkillEndorsement"
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "User not found"
+          },
+          "401" : {
+            "description" : "Unauthorized access"
+          }
+        }
+      }
+    },
+    "/users/{userId}/favorites" : {
+      "get" : {
+        "tags" : [ "favorites" ],
+        "summary" : "Get user favorites",
+        "description" : "Retrieves all favorites for a specific user",
+        "operationId" : "getByUser",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "ID of the user",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 100
+        }, {
+          "name" : "includeResource",
+          "in" : "query",
+          "description" : "Whether to include the associated resource details",
+          "schema" : {
+            "type" : "boolean"
+          },
+          "example" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "List of user favorites",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Favorite"
+                  }
+                },
+                "examples" : {
+                  "favorites" : {
+                    "description" : "favorites",
+                    "value" : [ {
+                      "id" : 1,
+                      "userId" : 100,
+                      "resourceId" : 500,
+                      "resourceType" : "PROPERTY"
+                    }, {
+                      "id" : 2,
+                      "userId" : 100,
+                      "resourceId" : 501,
+                      "resourceType" : "PROPERTY"
+                    } ]
+                  }
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "404" : {
+            "description" : "User not found"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "favorites" ],
+        "summary" : "Add a favorite",
+        "description" : "Adds a new favorite item for a specific user",
+        "operationId" : "postUserFavorite_1",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "ID of the user",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 100
+        } ],
+        "requestBody" : {
+          "description" : "Favorite to add",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Favorite"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Favorite successfully added",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Favorite"
+                },
+                "examples" : {
+                  "favorite" : {
+                    "description" : "favorite",
+                    "value" : {
+                      "id" : 1,
+                      "userId" : 100,
+                      "resourceId" : 500,
+                      "resourceType" : "PROPERTY"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Invalid favorite data"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "404" : {
+            "description" : "User not found"
+          }
+        }
+      }
+    },
+    "/users/{userId}/favorites/{favoriteId}" : {
+      "delete" : {
+        "tags" : [ "favorites" ],
+        "summary" : "Remove a favorite",
+        "description" : "Removes a specific favorite from a user's favorites list",
+        "operationId" : "removeUserFavorite_1",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "ID of the user",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 100
+        }, {
+          "name" : "favoriteId",
+          "in" : "path",
+          "description" : "ID of the favorite to remove",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "example" : 1
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Favorite successfully removed",
+            "content" : {
+              "application/json" : {
+                "examples" : {
+                  "success" : {
+                    "description" : "success",
+                    "value" : "Favorite removed"
+                  }
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "404" : {
+            "description" : "Favorite not found"
+          }
+        }
+      }
+    },
+    "/groups/{groupId}/users/search" : {
+      "post" : {
+        "tags" : [ "groups" ],
+        "summary" : "Search users within a specified group",
+        "description" : "Searches for users within a specific group matching the specified filter criteria",
+        "operationId" : "searchGroupUsers_1",
+        "parameters" : [ {
+          "name" : "groupId",
+          "in" : "path",
+          "description" : "Group ID",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "group123"
+        }, {
+          "name" : "bypassCache",
+          "in" : "query",
+          "description" : "Bypass cache and fetch fresh data from database",
+          "schema" : {
+            "type" : "boolean",
+            "default" : false
+          },
+          "example" : true
+        } ],
+        "requestBody" : {
+          "description" : "User search filters within the group. Supports filtering by user attributes, location, skills, and social preferences. The resultRequest field controls pagination and sorting. Only one sort order can be specified at a time.",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UserFilterRequest"
+              },
+              "examples" : {
+                "comprehensiveFilter" : {
+                  "summary" : "Comprehensive filter with all options",
+                  "description" : "comprehensiveFilter",
+                  "value" : {
+                    "resultRequest" : {
+                      "pageFrom" : 0,
+                      "pageTo" : 20,
+                      "orderByMostRecentLogin" : true,
+                      "orderByLessRecentLogin" : false,
+                      "orderByMostRecent" : false,
+                      "orderByLessRecent" : false,
+                      "asc" : false,
+                      "loadCount" : true,
+                      "orderBy" : [ "lastName", "firstName" ]
+                    },
+                    "name" : "John",
+                    "countries" : [ "US", "CA" ],
+                    "latitude" : 40.7128,
+                    "longitude" : -74.006,
+                    "radius" : 50,
+                    "userTypes" : [ "BROKER", "AGENT" ],
+                    "languages" : [ "EN", "ES" ],
+                    "filterWhatsApp" : true,
+                    "filterTelephoneNumber" : true,
+                    "filterGooglePlaceId" : false,
+                    "filterFocusOnCommercial" : true,
+                    "filterFocusOnResidential" : false,
+                    "filterFocusOnRental" : true,
+                    "filterFocusOnSelling" : false,
+                    "filterSocial" : true,
+                    "brokerages" : [ 123, 456 ],
+                    "userIds" : [ 789, 1011 ]
+                  }
+                },
+                "simpleNameSearch" : {
+                  "summary" : "Simple search by name",
+                  "description" : "simpleNameSearch",
+                  "value" : {
+                    "resultRequest" : {
+                      "pageFrom" : 0,
+                      "pageTo" : 10,
+                      "loadCount" : true
+                    },
+                    "name" : "Smith"
+                  }
+                },
+                "locationBasedSearch" : {
+                  "summary" : "Location-based search with radius",
+                  "description" : "locationBasedSearch",
+                  "value" : {
+                    "resultRequest" : {
+                      "pageFrom" : 0,
+                      "pageTo" : 50,
+                      "orderByMostRecent" : true,
+                      "loadCount" : true
+                    },
+                    "latitude" : 40.7128,
+                    "longitude" : -74.006,
+                    "radius" : 25,
+                    "userTypes" : [ "BROKER" ],
+                    "filterFocusOnCommercial" : true
+                  }
+                },
+                "specificUsersSearch" : {
+                  "summary" : "Search for specific users by ID",
+                  "description" : "specificUsersSearch",
+                  "value" : {
+                    "resultRequest" : {
+                      "pageFrom" : 0,
+                      "pageTo" : 100
+                    },
+                    "userIds" : [ 123, 456, 789 ]
+                  }
+                }
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "403" : {
+            "description" : "If user is not a member or owner of the group"
+          },
+          "404" : {
+            "description" : "If group is not found"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/UserFilterResult"
+                },
+                "examples" : {
+                  "groupUserSearchResult" : {
+                    "summary" : "Group user search results",
+                    "description" : "groupUserSearchResult",
+                    "value" : {
+                      "users" : [ {
+                        "id" : 123,
+                        "firstName" : "John",
+                        "lastName" : "Doe",
+                        "skills" : [ "Real Estate" ],
+                        "groupMemberStatus" : "ACCEPTED"
+                      } ],
+                      "total" : 1,
+                      "page" : 1,
+                      "pageSize" : 20
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "oAuthToken" : [ ]
+        } ]
+      }
+    },
+    "/skills" : {
+      "get" : {
+        "tags" : [ "skills" ],
+        "summary" : "Retrieve all user skills",
+        "description" : "Returns a list of all available user skills in the system",
+        "operationId" : "retrieveUserSkills_2",
+        "responses" : {
+          "200" : {
+            "description" : "Successfully retrieved the list of skills",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Skill"
+                  }
+                },
+                "examples" : {
+                  "skillsExample" : {
+                    "summary" : "Example of skills list response",
+                    "description" : "skillsExample",
+                    "value" : [ {
+                      "id" : 1,
+                      "label" : "Real Estate Sales",
+                      "locale" : "en"
+                    }, {
+                      "id" : 2,
+                      "label" : "Property Management",
+                      "locale" : "en"
+                    }, {
+                      "id" : 3,
+                      "label" : "Ventas Inmobiliarias",
+                      "locale" : "es"
+                    } ]
+                  }
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/stripe-identity-webhooks/verification-canceled" : {
+      "post" : {
+        "tags" : [ "stripe-identity-webhooks" ],
+        "summary" : "Handle verification canceled webhook",
+        "description" : "Called by Stripe when identity verification is canceled or marked as invalid",
+        "operationId" : "handleVerificationCanceled_1",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/StripeEvent"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Processed",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
+    "/stripe-identity-webhooks/verification-requires-input" : {
+      "post" : {
+        "tags" : [ "stripe-identity-webhooks" ],
+        "summary" : "Handle verification requires input webhook",
+        "description" : "Called by Stripe when verification needs additional review or is flagged",
+        "operationId" : "handleVerificationRequiresInput_1",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/StripeEvent"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Processed",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
+    "/stripe-identity-webhooks/verification-verified" : {
+      "post" : {
+        "tags" : [ "stripe-identity-webhooks" ],
+        "summary" : "Handle verification verified webhook",
+        "description" : "Called by Stripe when identity verification is successfully completed",
+        "operationId" : "handleVerificationVerified_1",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/StripeEvent"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Processed",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
+    "/alerts" : {
+      "get" : {
+        "tags" : [ "alerts" ],
+        "summary" : "Get all alerts in the system",
+        "description" : "Returns all alerts from all users in the system. For users with non-Free subscription plans, the response includes their profile name. This is typically an admin-level operation.",
+        "operationId" : "getAllAlerts_1",
+        "responses" : {
+          "200" : {
+            "description" : "List of all alerts retrieved successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/AlertWithUserProfile"
+                  }
+                },
+                "examples" : {
+                  "allAlerts" : {
+                    "description" : "Mixed response showing alerts with and without userProfileName. Profile names are only included for users with non-Free subscription plans.",
+                    "value" : [ {
+                      "id" : 1,
+                      "userId" : 100,
+                      "userAlertType" : "PROPERTY_SEARCH",
+                      "alertCriteria" : {
+                        "priceMin" : 100000,
+                        "priceMax" : 300000
+                      },
+                      "allowBrokerContact" : true,
+                      "userProfileName" : "john.doe.realtor"
+                    }, {
+                      "id" : 2,
+                      "userId" : 101,
+                      "userAlertType" : "NEW_LISTINGS",
+                      "alertCriteria" : {
+                        "location" : "Miami"
+                      },
+                      "allowBrokerContact" : false
+                    }, {
+                      "id" : 3,
+                      "userId" : 102,
+                      "userAlertType" : "PRICE_DROP",
+                      "alertCriteria" : {
+                        "nearBeach" : true
+                      },
+                      "allowBrokerContact" : true,
+                      "userProfileName" : "jane.smith.broker"
+                    } ]
+                  }
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "{\"message\":\"Authentication is required to access this resource\"}"
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden - insufficient permissions",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "{\"message\":\"You do not have permission to access all alerts\"}"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user-types" : {
+      "get" : {
+        "tags" : [ "user-types" ],
+        "summary" : "Get user types",
+        "description" : "Returns all available user types in the system",
+        "operationId" : "getUserTypes_1",
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/UserType"
+                  }
+                },
+                "examples" : {
+                  "userTypes" : {
+                    "summary" : "List of user types",
+                    "description" : "userTypes",
+                    "value" : [ {
+                      "id" : 1,
+                      "name" : "ADMIN",
+                      "lang" : "en",
+                      "tooltipLang" : "admin.tooltip",
+                      "manageTooltip" : true
+                    }, {
+                      "id" : 2,
+                      "name" : "AGENT",
+                      "lang" : "en",
+                      "tooltipLang" : "agent.tooltip",
+                      "manageTooltip" : true
+                    } ]
+                  }
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/users/activate-user" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "Activate the account of specified user",
+        "description" : "Activates a user account using the activation key sent to their email",
+        "operationId" : "activateUser_1",
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Generated resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object"
+                },
+                "example" : {
+                  "message" : "User activated successfully"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/identity-verification-check" : {
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Check identity verification status",
+        "description" : "Checks the status of a Stripe Identity verification session and marks user as verified if successful",
+        "operationId" : "checkIdentityVerification_1",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64",
+            "example" : 123
+          }
+        } ],
+        "requestBody" : {
+          "description" : "Identity verification check details",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/IdentityVerificationCheckRequest"
+              },
+              "examples" : {
+                "identityVerificationCheck" : {
+                  "summary" : "Example identity verification check",
+                  "description" : "identityVerificationCheck",
+                  "value" : {
+                    "verificationSessionId" : "vs_1Nqm6zLkdIwHu7ix5jKfGpI1"
+                  }
+                }
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "400" : {
+            "description" : "Verification not completed, failed, or invalid session ID"
+          },
+          "200" : {
+            "description" : "Ok. Verification successful",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object"
+                },
+                "example" : {
+                  "message" : "Identity verified successfully"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/phone-code-check" : {
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Verify the phone code sent to user",
+        "description" : "Verifies the code that was sent to the user's phone",
+        "operationId" : "checkPhoneVerificationCodeCommand_1",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64",
+            "example" : 123
+          }
+        } ],
+        "requestBody" : {
+          "description" : "Phone code verification details",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PhoneCodeCheckResource"
+              },
+              "examples" : {
+                "phoneCodeCheckExample" : {
+                  "summary" : "Example phone code verification",
+                  "description" : "phoneCodeCheckExample",
+                  "value" : {
+                    "code" : "123456"
+                  }
+                }
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "400" : {
+            "description" : "Wrong verification code"
+          },
+          "200" : {
+            "description" : "Ok. Generated resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PhoneCodeCheckResource"
+                },
+                "examples" : {
+                  "phoneCodeCheck" : {
+                    "summary" : "Phone code verification response",
+                    "description" : "phoneCodeCheck",
+                    "value" : {
+                      "code" : "123456"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/fetch-random" : {
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Fetch random list of users, with basic data",
+        "description" : "Retrieves a random selection of users based on specified criteria",
+        "operationId" : "fetchRandomUsers_1",
+        "requestBody" : {
+          "description" : "User list request parameters",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UserListRequest"
+              },
+              "examples" : {
+                "userListRequest" : {
+                  "summary" : "Example user list request",
+                  "description" : "userListRequest",
+                  "value" : {
+                    "count" : 10,
+                    "excludeUserIds" : [ 123, 456 ],
+                    "targetLocationCountryCode" : "US"
+                  }
+                }
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Generated resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/SkilledUser"
+                  }
+                },
+                "examples" : {
+                  "randomUsers" : {
+                    "summary" : "List of random users",
+                    "description" : "randomUsers",
+                    "value" : [ {
+                      "id" : 123,
+                      "firstName" : "John",
+                      "lastName" : "Doe",
+                      "profileName" : "johndoe",
+                      "confirmedFlag" : true
+                    }, {
+                      "id" : 456,
+                      "firstName" : "Jane",
+                      "lastName" : "Smith",
+                      "profileName" : "janesmith",
+                      "confirmedFlag" : false
+                    } ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "Fetch user detail according to its id",
+        "description" : "Gets detailed user information by user ID",
+        "operationId" : "findUserById_1",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "user id",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "404" : {
+            "description" : "User not found"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Generated resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SkilledUser"
+                },
+                "examples" : {
+                  "userDetail" : {
+                    "summary" : "User details response",
+                    "description" : "userDetail",
+                    "value" : {
+                      "id" : 123,
+                      "email" : "user@example.com",
+                      "firstName" : "John",
+                      "lastName" : "Doe",
+                      "profileName" : "johndoe",
+                      "cellPhone" : "+1234567890",
+                      "confirmedFlag" : true,
+                      "active" : true,
+                      "skills" : [ "Real Estate", "Marketing" ],
+                      "groups" : [ {
+                        "id" : "group123",
+                        "name" : "Real Estate Professionals",
+                        "groupType" : "ASSOCIATION",
+                        "memberStatus" : "ACCEPTED",
+                        "isOwner" : false
+                      } ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "Fetch user detail according to its profile name",
+        "description" : "Gets user information by their unique profile name",
+        "operationId" : "findUserByProfileName_1",
+        "parameters" : [ {
+          "name" : "profileName",
+          "in" : "query",
+          "description" : "User's profile name",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "johndoe"
+        } ],
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Generated resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SkilledUser"
+                },
+                "examples" : {
+                  "userByProfileName" : {
+                    "summary" : "User details by profile name",
+                    "description" : "userByProfileName",
+                    "value" : [ {
+                      "id" : 123,
+                      "email" : "johndoe@example.com",
+                      "firstName" : "John",
+                      "lastName" : "Doe",
+                      "profileName" : "johndoe",
+                      "confirmedFlag" : true
+                    } ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Save the data of user in the system",
+        "description" : "Updates user profile information in the system",
+        "operationId" : "save_1",
+        "parameters" : [ {
+          "name" : "O-Auth-Token",
+          "in" : "header",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "User data to save",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/SkilledUser"
+              },
+              "examples" : {
+                "userExample" : {
+                  "summary" : "Example user data",
+                  "description" : "userExample",
+                  "value" : {
+                    "id" : 123,
+                    "email" : "user@example.com",
+                    "firstName" : "John",
+                    "lastName" : "Doe",
+                    "profileName" : "johndoe",
+                    "cellPhone" : "+1234567890"
+                  }
+                }
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Generated resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object"
+                },
+                "example" : {
+                  "message" : "User saved successfully"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/connections" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "Get a user connections",
+        "description" : "Retrieves the list of connections for a specific user",
+        "operationId" : "findUserConnections_1",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64",
+            "example" : 123
+          }
+        } ],
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/SkilledUser"
+                  }
+                },
+                "examples" : {
+                  "userConnections" : {
+                    "summary" : "User connections list",
+                    "description" : "userConnections",
+                    "value" : [ {
+                      "id" : 456,
+                      "firstName" : "Jane",
+                      "lastName" : "Smith",
+                      "profileName" : "janesmith",
+                      "groups" : [ {
+                        "id" : "group456",
+                        "name" : "Property Association",
+                        "groupType" : "ASSOCIATION",
+                        "memberStatus" : "ACCEPTED",
+                        "isOwner" : false
+                      } ]
+                    }, {
+                      "id" : 789,
+                      "firstName" : "Bob",
+                      "lastName" : "Johnson",
+                      "profileName" : "bjohnson",
+                      "groups" : [ {
+                        "id" : "group789",
+                        "name" : "Certified Agents",
+                        "groupType" : "CERTIFICATION",
+                        "memberStatus" : "ACCEPTED",
+                        "isOwner" : false
+                      } ]
+                    } ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/list/{userIds}" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "Fetch multiple user detail according to its ids",
+        "description" : "Gets detailed information for multiple users by their IDs",
+        "operationId" : "findUsersByIds_1",
+        "parameters" : [ {
+          "name" : "userIds",
+          "in" : "path",
+          "description" : "Comma-separated list of user IDs",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "123,456,789"
+        } ],
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Generated resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/SkilledUser"
+                  }
+                },
+                "examples" : {
+                  "userList" : {
+                    "summary" : "List of users",
+                    "description" : "userList",
+                    "value" : [ {
+                      "id" : 123,
+                      "email" : "user1@example.com",
+                      "firstName" : "John",
+                      "lastName" : "Doe",
+                      "confirmedFlag" : true,
+                      "groups" : [ {
+                        "id" : "group123",
+                        "name" : "Property Group",
+                        "groupType" : "GROUP",
+                        "memberStatus" : "ACCEPTED",
+                        "isOwner" : true
+                      } ]
+                    }, {
+                      "id" : 456,
+                      "email" : "user2@example.com",
+                      "firstName" : "Jane",
+                      "lastName" : "Smith",
+                      "confirmedFlag" : false,
+                      "groups" : [ {
+                        "id" : "group456",
+                        "name" : "Certification Body",
+                        "groupType" : "CERTIFICATION",
+                        "memberStatus" : "ACCEPTED",
+                        "isOwner" : false
+                      } ]
+                    } ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/subscribed-users/{subscriptionPlanName}" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "Gets the users subscribed to a subscription plan name like Professional",
+        "description" : "Retrieves all users who have subscribed to the specified subscription plan",
+        "operationId" : "getSubscribedUsers_1",
+        "parameters" : [ {
+          "name" : "subscriptionPlanName",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "example" : "Professional",
+            "enum" : [ "Free", "Professional", "Business", "Brokerage" ]
+          }
+        } ],
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "400" : {
+            "description" : "Invalid subscription plan name"
+          },
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/SubscribedUser"
+                  }
+                },
+                "examples" : {
+                  "subscribedUsers" : {
+                    "summary" : "List of subscribed users",
+                    "description" : "subscribedUsers",
+                    "value" : [ {
+                      "id" : 123,
+                      "email" : "user@example.com",
+                      "firstName" : "John",
+                      "lastName" : "Doe",
+                      "subscriptionPlanName" : "Professional",
+                      "subscriptionStartDate" : "2023-01-15"
+                    } ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/previews" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "Get HTML preview of a user profile",
+        "description" : "Generates an HTML preview of a user profile for sharing purposes",
+        "operationId" : "previewProperty",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "example" : 123
+          }
+        }, {
+          "name" : "lang",
+          "in" : "query",
+          "schema" : {
+            "type" : "string",
+            "example" : "en"
+          }
+        }, {
+          "name" : "Accept-Language",
+          "in" : "header",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "HTML preview of user profile",
+            "content" : {
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "HTML preview of user profile"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/register" : {
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Register new user in the system",
+        "description" : "Creates a new user account in the system",
+        "operationId" : "register_1",
+        "parameters" : [ {
+          "name" : "Origin",
+          "in" : "header",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "skipEmailValidation",
+          "in" : "query",
+          "description" : "Skip email validation step",
+          "schema" : {
+            "type" : "boolean"
+          },
+          "example" : false
+        } ],
+        "requestBody" : {
+          "description" : "User registration data",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/SkilledUser"
+              },
+              "examples" : {
+                "userRegistration" : {
+                  "summary" : "Example user registration data",
+                  "description" : "userRegistration",
+                  "value" : {
+                    "email" : "newuser@example.com",
+                    "password" : "Password123",
+                    "firstName" : "Jane",
+                    "lastName" : "Smith",
+                    "profileName" : "janesmith",
+                    "cellPhone" : "+1234567890"
+                  }
+                }
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Generated resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object"
+                },
+                "example" : {
+                  "message" : "User registered successfully"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/activation_link_request" : {
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Request activation link",
+        "description" : "Sends an activation link to the user's email for account verification",
+        "operationId" : "requestActivationLink_1",
+        "parameters" : [ {
+          "name" : "Origin",
+          "in" : "header",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/x-www-form-urlencoded" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "email" : {
+                    "type" : "string",
+                    "example" : "user@example.com"
+                  },
+                  "password" : {
+                    "type" : "string",
+                    "example" : "Password123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Activation link sent successfully"
+          },
+          "400" : {
+            "description" : "Invalid email or password"
+          }
+        }
+      }
+    },
+    "/users/search" : {
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Search users with specified filters",
+        "description" : "Searches for users matching the specified filter criteria. When authenticated (O-Auth-Token header provided), includes connection degrees (1st, 2nd, 3rd+) to other users.",
+        "operationId" : "searchUsers_1",
+        "parameters" : [ {
+          "name" : "O-Auth-Token",
+          "in" : "header",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "User search filters",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UserFilterRequest"
+              },
+              "examples" : {
+                "basicSearch" : {
+                  "summary" : "Basic user search by name and location",
+                  "description" : "basicSearch",
+                  "value" : {
+                    "resultRequest" : {
+                      "pageSize" : 20,
+                      "pageNumber" : 1,
+                      "orderByMostRecent" : true
+                    },
+                    "name" : "John",
+                    "countries" : [ "US", "CA" ]
+                  }
+                },
+                "locationBasedSearch" : {
+                  "summary" : "Search users within 50km radius",
+                  "description" : "locationBasedSearch",
+                  "value" : {
+                    "resultRequest" : {
+                      "pageSize" : 10,
+                      "pageNumber" : 1
+                    },
+                    "latitude" : 40.7128,
+                    "longitude" : -74.006,
+                    "radius" : 50,
+                    "userTypes" : [ "BROKER", "AGENT" ]
+                  }
+                },
+                "advancedSearch" : {
+                  "summary" : "Advanced search with multiple filters",
+                  "description" : "advancedSearch",
+                  "value" : {
+                    "resultRequest" : {
+                      "pageSize" : 25,
+                      "pageNumber" : 1,
+                      "orderByMostRecentLogin" : true
+                    },
+                    "countries" : [ "US" ],
+                    "userTypes" : [ "BROKER" ],
+                    "languages" : [ "EN", "ES" ],
+                    "skills" : [ {
+                      "id" : 1,
+                      "label" : "Real Estate"
+                    }, {
+                      "id" : 2,
+                      "label" : "Marketing"
+                    } ],
+                    "filterWhatsApp" : true,
+                    "filterTelephoneNumber" : true,
+                    "filterFocusOnCommercial" : true,
+                    "filterFocusOnRental" : true,
+                    "filterSocial" : true
+                  }
+                },
+                "brokerageSearch" : {
+                  "summary" : "Search users by specific brokerages",
+                  "description" : "brokerageSearch",
+                  "value" : {
+                    "resultRequest" : {
+                      "pageSize" : 15,
+                      "pageNumber" : 1
+                    },
+                    "brokerages" : [ 123, 456, 789 ],
+                    "filterFocusOnResidential" : true,
+                    "filterFocusOnSelling" : true
+                  }
+                },
+                "specificUsersSearch" : {
+                  "summary" : "Search specific users by IDs",
+                  "description" : "specificUsersSearch",
+                  "value" : {
+                    "resultRequest" : {
+                      "pageSize" : 50,
+                      "pageNumber" : 1
+                    },
+                    "userIds" : [ 100, 200, 300, 400, 500 ]
+                  }
+                },
+                "skillsBasedSearch" : {
+                  "summary" : "Search users by specific skills",
+                  "description" : "skillsBasedSearch",
+                  "value" : {
+                    "resultRequest" : {
+                      "pageSize" : 20,
+                      "pageNumber" : 1,
+                      "orderByMostRecent" : true
+                    },
+                    "skills" : [ {
+                      "id" : 1,
+                      "label" : "Real Estate"
+                    }, {
+                      "id" : 3,
+                      "label" : "Sales"
+                    }, {
+                      "id" : 5,
+                      "label" : "Property Management"
+                    } ],
+                    "countries" : [ "US" ],
+                    "filterFocusOnCommercial" : true
+                  }
+                }
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/UserFilterResult"
+                },
+                "examples" : {
+                  "userSearchResult" : {
+                    "summary" : "User search results",
+                    "description" : "userSearchResult",
+                    "value" : {
+                      "users" : [ {
+                        "id" : 123,
+                        "firstName" : "John",
+                        "lastName" : "Doe",
+                        "confirmedFlag" : true,
+                        "connectionDegree" : "1st",
+                        "skills" : [ "Real Estate" ],
+                        "groups" : [ {
+                          "id" : "group123",
+                          "name" : "Real Estate Group",
+                          "groupType" : "GROUP",
+                          "memberStatus" : "ACCEPTED",
+                          "isOwner" : true
+                        } ]
+                      } ],
+                      "total" : 1,
+                      "page" : 1,
+                      "pageSize" : 20
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/send-email-verification" : {
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Send email verification to logged-in user",
+        "description" : "Sends an email verification link to the authenticated user's email address",
+        "operationId" : "sendEmailVerification_1",
+        "parameters" : [ {
+          "name" : "Origin",
+          "in" : "header",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Email verification sent successfully"
+          },
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "400" : {
+            "description" : "User already verified or invalid request"
+          }
+        }
+      }
+    },
+    "/users/weekly-payed-subscribers-alert" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "operationId" : "sendPayedSusbscribersAlert_1",
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/phone-code-request" : {
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Send a code to the previously saved phone number of the user",
+        "description" : "Sends a verification code to the user's phone number for verification purposes",
+        "operationId" : "sendPhoneVerificationCodeCommand_1",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64",
+            "example" : 123
+          }
+        } ],
+        "requestBody" : {
+          "description" : "Phone code request details",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PhoneCodeRequestResource"
+              },
+              "examples" : {
+                "phoneCodeRequestExample" : {
+                  "summary" : "Example phone code request",
+                  "description" : "phoneCodeRequestExample",
+                  "value" : {
+                    "verificationType" : "SMS"
+                  }
+                }
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Generated resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PhoneCodeRequestResource"
+                },
+                "examples" : {
+                  "phoneCodeRequest" : {
+                    "summary" : "Phone code request response",
+                    "description" : "phoneCodeRequest",
+                    "value" : {
+                      "verificationType" : "SMS"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/identity-verification-start" : {
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Start identity verification for user",
+        "description" : "Initiates Stripe Identity verification and returns a verification URL and session ID",
+        "operationId" : "startIdentityVerification_1",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64",
+            "example" : 123
+          }
+        } ],
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Generated resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/IdentityVerificationStartResponse"
+                },
+                "examples" : {
+                  "identityVerificationStart" : {
+                    "summary" : "Identity verification start response",
+                    "description" : "identityVerificationStart",
+                    "value" : {
+                      "verificationUrl" : "https://verify.stripe.com/start/test_xxxxx",
+                      "verificationSessionId" : "vs_1Nqm6zLkdIwHu7ix5jKfGpI1"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/skills" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "Retrieve user skills",
+        "description" : "Returns all skills associated with a user",
+        "operationId" : "retrieveUserSkills",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "ID of the user to retrieve skills for",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/UserSkill"
+                  }
+                },
+                "examples" : {
+                  "User skills example" : {
+                    "description" : "User skills example",
+                    "value" : [ {
+                      "id" : 1,
+                      "user" : {
+                        "id" : 42
+                      },
+                      "skill" : {
+                        "id" : 5,
+                        "name" : "Java"
+                      },
+                      "level" : 4
+                    }, {
+                      "id" : 2,
+                      "user" : {
+                        "id" : 42
+                      },
+                      "skill" : {
+                        "id" : 8,
+                        "name" : "Spring"
+                      },
+                      "level" : 3
+                    } ]
+                  }
+                }
+              }
+            }
+          },
+          "408" : {
+            "description" : "Request timeout - client disconnected",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Add user skills",
+        "description" : "This endpoint is not supported. Use save user profile to update skills instead.",
+        "operationId" : "addUserSkills_1",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "ID of the user to add skills to",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "List of skills to add",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/UserSkill"
+                }
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "405" : {
+            "description" : "Method not allowed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : {
+                  "Error example" : {
+                    "description" : "Error example",
+                    "value" : {
+                      "message" : "Not supported",
+                      "details" : "Use save user profile to update skills"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/skills/{skillId}/endorsements" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "Retrieve skill endorsements",
+        "description" : "Returns all endorsements for a specific user skill",
+        "operationId" : "retrieveSkillEndorsements_1",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "ID of the user whose skill endorsements to retrieve",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "skillId",
+          "in" : "path",
+          "description" : "ID of the skill to retrieve endorsements for",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/SkillEndorsement"
+                  }
+                },
+                "examples" : {
+                  "Endorsements example" : {
+                    "description" : "Endorsements example",
+                    "value" : [ {
+                      "id" : 123,
+                      "endorser" : {
+                        "id" : 15,
+                        "firstName" : "John",
+                        "lastName" : "Doe"
+                      },
+                      "dateTime" : "2023-06-14T10:15:30"
+                    }, {
+                      "id" : 124,
+                      "endorser" : {
+                        "id" : 18,
+                        "firstName" : "Jane",
+                        "lastName" : "Smith"
+                      },
+                      "dateTime" : "2023-06-15T14:22:45"
+                    } ]
+                  }
+                }
+              }
+            }
+          },
+          "408" : {
+            "description" : "Request timeout - client disconnected",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Endorse a user skill",
+        "description" : "Allows a user to endorse another user's skill",
+        "operationId" : "endorseUserSkill_1",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "ID of the user whose skill is being endorsed",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "skillId",
+          "in" : "path",
+          "description" : "ID of the skill being endorsed",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "Endorsement details",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/SkillEndorsement"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SkillEndorsement"
+                },
+                "examples" : {
+                  "Skill endorsement example" : {
+                    "description" : "Skill endorsement example",
+                    "value" : {
+                      "id" : 123,
+                      "user" : {
+                        "id" : 42
+                      },
+                      "endorser" : {
+                        "id" : 15,
+                        "firstName" : "John",
+                        "lastName" : "Doe"
+                      },
+                      "skill" : {
+                        "id" : 5,
+                        "name" : "Java"
+                      },
+                      "dateTime" : "2023-06-14T10:15:30"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Conflict - cannot endorse the same skill twice",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : {
+                  "Error example" : {
+                    "description" : "Error example",
+                    "value" : {
+                      "message" : "Cannot endorse the same skill twice"
+                    }
                   }
                 }
               }
@@ -7941,9 +10558,6 @@
           },
           "type" : {
             "type" : "string"
-          },
-          "data" : {
-            "$ref" : "#/components/schemas/StripeEventData"
           }
         }
       },
@@ -7991,6 +10605,845 @@
             "enum" : [ "ACTIVE", "INACTIVE" ]
           }
         }
+      },
+      "Alert" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "userId" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "userAlertType" : {
+            "type" : "string",
+            "enum" : [ "PROPERTY" ]
+          },
+          "alertCriteria" : {
+            "type" : "object",
+            "description" : "Alert criteria in JSON format",
+            "example" : {
+              "priceMin" : 100000,
+              "priceMax" : 300000,
+              "location" : "Miami"
+            }
+          },
+          "allowBrokerContact" : {
+            "type" : "boolean"
+          },
+          "lastNotification" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "result" : {
+            "type" : "object",
+            "description" : "Alert result data in JSON format",
+            "example" : {
+              "matchCount" : 5,
+              "properties" : [ ]
+            }
+          },
+          "newsletterOwnerId" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }
+      },
+      "Brokerage" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "enabled" : {
+            "type" : "boolean"
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "updatedAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "deletedAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
+      "NewsletterSubscriberDto" : {
+        "type" : "object",
+        "properties" : {
+          "alert" : {
+            "$ref" : "#/components/schemas/Alert"
+          },
+          "user" : {
+            "$ref" : "#/components/schemas/SkilledUser"
+          }
+        },
+        "description" : "Newsletter subscriber information"
+      },
+      "Skill" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "label" : {
+            "type" : "string"
+          },
+          "locale" : {
+            "type" : "string"
+          }
+        }
+      },
+      "SkilledUser" : {
+        "type" : "object",
+        "properties" : {
+          "language" : {
+            "$ref" : "#/components/schemas/Language"
+          },
+          "email" : {
+            "maxLength" : 160,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "firstName" : {
+            "maxLength" : 45,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "lastName" : {
+            "maxLength" : 45,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "password" : {
+            "type" : "string"
+          },
+          "confirmedFlag" : {
+            "type" : "boolean"
+          },
+          "registerDate" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "webSite" : {
+            "maxLength" : 80,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "linkedIn" : {
+            "maxLength" : 160,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "skype" : {
+            "maxLength" : 45,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "base64Image" : {
+            "type" : "string"
+          },
+          "imageLink" : {
+            "type" : "string"
+          },
+          "mainSpokenLanguage" : {
+            "$ref" : "#/components/schemas/Language"
+          },
+          "telephonePrefix" : {
+            "$ref" : "#/components/schemas/CountryTelephonePrefix"
+          },
+          "telephoneNumber" : {
+            "type" : "string"
+          },
+          "userTypes" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/UserType"
+            }
+          },
+          "userLanguages" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/UserLanguage"
+            }
+          },
+          "userDescriptions" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/UserDescription"
+            }
+          },
+          "country" : {
+            "$ref" : "#/components/schemas/Country"
+          },
+          "role" : {
+            "type" : "string"
+          },
+          "backgroundImageBase64" : {
+            "type" : "string"
+          },
+          "backgroundImageLink" : {
+            "type" : "string"
+          },
+          "profileName" : {
+            "type" : "string"
+          },
+          "lastActivity" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "chatStatus" : {
+            "type" : "string"
+          },
+          "chatsCount" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "phoneVerified" : {
+            "type" : "boolean"
+          },
+          "identityVerified" : {
+            "type" : "boolean"
+          },
+          "geoPlace" : {
+            "$ref" : "#/components/schemas/GeoPlace"
+          },
+          "chamberOfCommerceUrl" : {
+            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "type" : "string"
+          },
+          "facebookUrl" : {
+            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "type" : "string"
+          },
+          "instagramUrl" : {
+            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "type" : "string"
+          },
+          "twitterUrl" : {
+            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "type" : "string"
+          },
+          "wechatUrl" : {
+            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "type" : "string"
+          },
+          "vkUrl" : {
+            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "type" : "string"
+          },
+          "videoUrl" : {
+            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "type" : "string"
+          },
+          "bookAnAppointmentUrl" : {
+            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "type" : "string"
+          },
+          "googlePlaceId" : {
+            "type" : "string"
+          },
+          "googlePlaceReviews" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/GooglePlaceReview"
+            }
+          },
+          "googleRating" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "googleUserRatingsTotal" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "achievementsYearsOfExperience" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "achievementsDealsClosed" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "achievementsPercentageOfAllAgents" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "achievementsGooglePlaceId" : {
+            "type" : "string"
+          },
+          "focusOnCommercial" : {
+            "type" : "boolean"
+          },
+          "focusOnResidential" : {
+            "type" : "boolean"
+          },
+          "focusOnRental" : {
+            "type" : "boolean"
+          },
+          "focusOnSelling" : {
+            "type" : "boolean"
+          },
+          "imprintTitle" : {
+            "type" : "string"
+          },
+          "imprintDescription" : {
+            "type" : "string"
+          },
+          "imprintBase64Image" : {
+            "type" : "string"
+          },
+          "imprintLogoLink" : {
+            "type" : "string"
+          },
+          "showEmailInProfile" : {
+            "type" : "boolean"
+          },
+          "showEmailInProperty" : {
+            "type" : "boolean"
+          },
+          "showPhoneInProperty" : {
+            "type" : "boolean"
+          },
+          "allowSaveContact" : {
+            "type" : "boolean"
+          },
+          "city" : {
+            "type" : "string"
+          },
+          "referral" : {
+            "type" : "string"
+          },
+          "subscriptionPlanName" : {
+            "type" : "string",
+            "enum" : [ "Free", "Professional", "Business", "Brokerage" ]
+          },
+          "hidePublicProfile" : {
+            "type" : "boolean"
+          },
+          "skills" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/UserSkill"
+            }
+          },
+          "brokerage" : {
+            "$ref" : "#/components/schemas/Brokerage"
+          },
+          "groupMemberStatus" : {
+            "type" : "string"
+          },
+          "groups" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/UserGroup"
+            }
+          },
+          "operatingLocations" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/UserOperatingLocation"
+            }
+          },
+          "connectionDegree" : {
+            "type" : "string",
+            "description" : "Connection degree to the logged-in user",
+            "example" : "1st",
+            "enum" : [ "1st", "2nd", "3rd+" ]
+          },
+          "imprintImageLink" : {
+            "type" : "string",
+            "writeOnly" : true
+          }
+        }
+      },
+      "UserGroup" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "logo" : {
+            "type" : "string"
+          },
+          "url" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "memberStatus" : {
+            "type" : "string"
+          },
+          "owner" : {
+            "type" : "boolean"
+          },
+          "joinedDate" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "ownerId" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "ownerName" : {
+            "type" : "string"
+          },
+          "groupType" : {
+            "type" : "string",
+            "enum" : [ "GROUP", "ASSOCIATION", "CERTIFICATION" ]
+          }
+        }
+      },
+      "UserOperatingLocation" : {
+        "required" : [ "geoLocation" ],
+        "type" : "object",
+        "properties" : {
+          "locationNumber" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "geoLocation" : {
+            "$ref" : "#/components/schemas/GeoLocation"
+          }
+        }
+      },
+      "UserSkill" : {
+        "required" : [ "skill" ],
+        "type" : "object",
+        "properties" : {
+          "skill" : {
+            "$ref" : "#/components/schemas/Skill"
+          },
+          "endorsementsCount" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "SkillEndorsement" : {
+        "required" : [ "endorser", "skill", "user" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "user" : {
+            "$ref" : "#/components/schemas/SkilledUser"
+          },
+          "endorser" : {
+            "$ref" : "#/components/schemas/SkilledUser"
+          },
+          "skill" : {
+            "$ref" : "#/components/schemas/Skill"
+          },
+          "dateTime" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
+      "Favorite" : {
+        "required" : [ "resourceId", "resourceType" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "resourceType" : {
+            "type" : "string",
+            "enum" : [ "PROPERTY" ]
+          },
+          "resourceId" : {
+            "type" : "string"
+          },
+          "resource" : {
+            "type" : "object",
+            "description" : "Resource data in JSON format",
+            "example" : {
+              "id" : "123",
+              "title" : "Beautiful Beach House",
+              "price" : 250000
+            }
+          }
+        }
+      },
+      "UserFilterResult" : {
+        "type" : "object",
+        "properties" : {
+          "count" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "userList" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/SkilledUser"
+            }
+          }
+        }
+      },
+      "UserFilterRequest" : {
+        "required" : [ "resultRequest" ],
+        "type" : "object",
+        "properties" : {
+          "resultRequest" : {
+            "$ref" : "#/components/schemas/UserFilterResultSpec"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "Filter by user name (partial match supported)",
+            "example" : "John Doe"
+          },
+          "countries" : {
+            "type" : "array",
+            "description" : "Filter by countries where users operate",
+            "example" : [ "US", "CA" ],
+            "items" : {
+              "$ref" : "#/components/schemas/Country"
+            }
+          },
+          "latitude" : {
+            "type" : "number",
+            "description" : "Latitude for location-based search (must be used with longitude and radius)",
+            "format" : "double",
+            "example" : 40.7128
+          },
+          "longitude" : {
+            "type" : "number",
+            "description" : "Longitude for location-based search (must be used with latitude and radius)",
+            "format" : "double",
+            "example" : -74.006
+          },
+          "radius" : {
+            "type" : "integer",
+            "description" : "Search radius in kilometers for location-based search (must be used with latitude and longitude)",
+            "format" : "int32",
+            "example" : 50
+          },
+          "userTypes" : {
+            "type" : "array",
+            "description" : "Filter by user types",
+            "example" : [ "BROKER", "AGENT" ],
+            "items" : {
+              "$ref" : "#/components/schemas/UserType"
+            }
+          },
+          "languages" : {
+            "type" : "array",
+            "description" : "Filter by languages spoken by users",
+            "example" : [ "EN", "ES" ],
+            "items" : {
+              "$ref" : "#/components/schemas/Language"
+            }
+          },
+          "filterWhatsApp" : {
+            "type" : "boolean",
+            "description" : "Filter only users with WhatsApp",
+            "example" : true
+          },
+          "filterTelephoneNumber" : {
+            "type" : "boolean",
+            "description" : "Filter only users with telephone number",
+            "example" : true
+          },
+          "filterGooglePlaceId" : {
+            "type" : "boolean",
+            "description" : "Filter only users with Google Place ID",
+            "example" : false
+          },
+          "filterFocusOnCommercial" : {
+            "type" : "boolean",
+            "description" : "Filter users focused on commercial properties",
+            "example" : true
+          },
+          "filterFocusOnResidential" : {
+            "type" : "boolean",
+            "description" : "Filter users focused on residential properties",
+            "example" : false
+          },
+          "filterFocusOnRental" : {
+            "type" : "boolean",
+            "description" : "Filter users focused on rental properties",
+            "example" : true
+          },
+          "filterFocusOnSelling" : {
+            "type" : "boolean",
+            "description" : "Filter users focused on selling properties",
+            "example" : false
+          },
+          "filterSocial" : {
+            "type" : "boolean",
+            "description" : "Filter users with social media presence",
+            "example" : true
+          },
+          "brokerages" : {
+            "type" : "array",
+            "description" : "Filter by brokerage IDs",
+            "example" : [ 123, 456 ],
+            "items" : {
+              "type" : "integer",
+              "description" : "Filter by brokerage IDs",
+              "format" : "int64"
+            }
+          },
+          "userIds" : {
+            "type" : "array",
+            "description" : "Filter by specific user IDs",
+            "example" : [ 789, 1011 ],
+            "items" : {
+              "type" : "integer",
+              "description" : "Filter by specific user IDs",
+              "format" : "int64"
+            }
+          },
+          "skills" : {
+            "type" : "array",
+            "description" : "Filter by user skills",
+            "example" : [ "Real Estate", "Marketing", "Sales" ],
+            "items" : {
+              "$ref" : "#/components/schemas/Skill"
+            }
+          },
+          "includeChatsCount" : {
+            "type" : "boolean",
+            "description" : "Include chats count for each user (expensive operation)",
+            "example" : true
+          },
+          "includeChatStatus" : {
+            "type" : "boolean",
+            "description" : "Include chat status for each user (expensive operation)",
+            "example" : true
+          },
+          "includeGroups" : {
+            "type" : "boolean",
+            "description" : "Include groups for each user (expensive operation)",
+            "example" : true
+          },
+          "includeConnectionDegrees" : {
+            "type" : "boolean",
+            "description" : "Include connection degrees when authenticated (expensive operation)",
+            "example" : true
+          },
+          "includeGoogleReviews" : {
+            "type" : "boolean",
+            "description" : "Include Google Place reviews for each user (expensive operation)",
+            "example" : true
+          },
+          "includeSubscriptionPlans" : {
+            "type" : "boolean",
+            "description" : "Include subscription plan names (expensive operation)",
+            "example" : true
+          }
+        },
+        "description" : "Filter request for searching users with various criteria including location, user types, languages, and business focus areas"
+      },
+      "UserFilterResultSpec" : {
+        "type" : "object",
+        "properties" : {
+          "pageFrom" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "pageTo" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "orderByMostRecent" : {
+            "type" : "boolean"
+          },
+          "orderByLessRecent" : {
+            "type" : "boolean"
+          },
+          "asc" : {
+            "type" : "boolean"
+          },
+          "loadCount" : {
+            "type" : "boolean"
+          },
+          "orderBy" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "orderByMostRecentLogin" : {
+            "type" : "boolean",
+            "description" : "Sort users by most recent login first",
+            "example" : true
+          },
+          "orderByLessRecentLogin" : {
+            "type" : "boolean",
+            "description" : "Sort users by least recent login first",
+            "example" : false
+          }
+        },
+        "description" : "Result specification for pagination and sorting of user search results"
+      },
+      "AlertWithUserProfile" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "userId" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "userAlertType" : {
+            "type" : "string",
+            "enum" : [ "PROPERTY" ]
+          },
+          "alertCriteria" : {
+            "type" : "object",
+            "description" : "Alert criteria in JSON format",
+            "example" : {
+              "priceMin" : 100000,
+              "priceMax" : 300000,
+              "location" : "Miami"
+            }
+          },
+          "allowBrokerContact" : {
+            "type" : "boolean"
+          },
+          "lastNotification" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "result" : {
+            "type" : "object",
+            "description" : "Alert result data in JSON format",
+            "example" : {
+              "matchCount" : 5,
+              "properties" : [ ]
+            }
+          },
+          "userProfileName" : {
+            "type" : "string",
+            "description" : "Profile name of the user who owns this alert (only included for non-Free subscribers)",
+            "example" : "john.doe.realtor"
+          },
+          "newsletterOwnerId" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }
+      },
+      "IdentityVerificationCheckRequest" : {
+        "required" : [ "verificationSessionId" ],
+        "type" : "object",
+        "properties" : {
+          "verificationSessionId" : {
+            "maxLength" : 200,
+            "minLength" : 10,
+            "type" : "string"
+          }
+        }
+      },
+      "PhoneCodeCheckResource" : {
+        "required" : [ "code" ],
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "maxLength" : 6,
+            "minLength" : 2,
+            "type" : "string"
+          }
+        }
+      },
+      "UserListRequest" : {
+        "type" : "object",
+        "properties" : {
+          "userNumber" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "excludeIdList" : {
+            "type" : "array",
+            "items" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          }
+        }
+      },
+      "SubscribedUser" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "email" : {
+            "type" : "string"
+          },
+          "firstName" : {
+            "type" : "string"
+          },
+          "lastName" : {
+            "type" : "string"
+          },
+          "paymentAppId" : {
+            "type" : "string"
+          },
+          "address" : {
+            "$ref" : "#/components/schemas/Address"
+          },
+          "created" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
+      "PhoneCodeRequestResource" : {
+        "required" : [ "verificationType" ],
+        "type" : "object",
+        "properties" : {
+          "verificationType" : {
+            "pattern" : "^(sms|call)$",
+            "type" : "string"
+          }
+        }
+      },
+      "IdentityVerificationStartResponse" : {
+        "type" : "object",
+        "properties" : {
+          "verificationUrl" : {
+            "type" : "string"
+          },
+          "verificationSessionId" : {
+            "type" : "string"
+          }
+        }
       }
     },
     "securitySchemes" : {
@@ -8000,16 +11453,16 @@
         "name" : "O-Auth-Code",
         "in" : "header"
       },
-      "oAuthClientId" : {
-        "type" : "apiKey",
-        "description" : "OAuth client identifier (default: hallocasa_frontend)",
-        "name" : "O-Auth-Client-Id",
-        "in" : "header"
-      },
       "oAuthToken" : {
         "type" : "apiKey",
         "description" : "OAuth access token for authenticated requests",
         "name" : "O-Auth-Token",
+        "in" : "header"
+      },
+      "oAuthClientId" : {
+        "type" : "apiKey",
+        "description" : "OAuth client identifier (default: hallocasa_frontend)",
+        "name" : "O-Auth-Client-Id",
         "in" : "header"
       }
     }
