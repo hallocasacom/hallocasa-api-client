@@ -79,7 +79,6 @@ export function createHallocasaClient(options: HallocasaClientOptions) {
     countriesApi: new api.CountriesApi(configuration, options.baseURL, axiosInstance),
     geoLocationApi: new api.GeoLocationApi(configuration, options.baseURL, axiosInstance),
     languagesApi: new api.LanguagesApi(configuration, options.baseURL, axiosInstance),
-    alertsApi: new api.AlertsApi(configuration, options.baseURL, axiosInstance),
     propertiesApi: new api.PropertiesApi(configuration, options.baseURL, axiosInstance),
     
     // Include the base axios instance for custom requests

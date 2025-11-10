@@ -29,7 +29,6 @@ export declare function createHallocasaClient(options: HallocasaClientOptions): 
     countriesApi: api.CountriesApi;
     geoLocationApi: api.GeoLocationApi;
     languagesApi: api.LanguagesApi;
-    alertsApi: api.AlertsApi;
     propertiesApi: api.PropertiesApi;
     axios: AxiosInstance;
     configuration: Configuration;
