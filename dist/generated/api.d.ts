@@ -3321,6 +3321,12 @@ export interface SkilledUser {
     'userDescriptions'?: Array<UserDescription>;
     /**
      *
+     * @type {Array<UserFaq>}
+     * @memberof SkilledUser
+     */
+    'userFaqs'?: Array<UserFaq>;
+    /**
+     *
      * @type {Country}
      * @memberof SkilledUser
      */
@@ -4101,6 +4107,12 @@ export interface User {
     'userDescriptions'?: Array<UserDescription>;
     /**
      *
+     * @type {Array<UserFaq>}
+     * @memberof User
+     */
+    'userFaqs'?: Array<UserFaq>;
+    /**
+     *
      * @type {Country}
      * @memberof User
      */
@@ -4438,6 +4450,56 @@ export interface UserDto {
      * @memberof UserDto
      */
     'userPermissions'?: Array<UserPermission>;
+}
+/**
+ *
+ * @export
+ * @interface UserFaq
+ */
+export interface UserFaq {
+    /**
+     *
+     * @type {number}
+     * @memberof UserFaq
+     */
+    'id'?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof UserFaq
+     */
+    'position'?: number;
+    /**
+     *
+     * @type {Array<UserFaqTranslation>}
+     * @memberof UserFaq
+     */
+    'translations'?: Array<UserFaqTranslation>;
+}
+/**
+ *
+ * @export
+ * @interface UserFaqTranslation
+ */
+export interface UserFaqTranslation {
+    /**
+     *
+     * @type {Language}
+     * @memberof UserFaqTranslation
+     */
+    'language'?: Language;
+    /**
+     *
+     * @type {string}
+     * @memberof UserFaqTranslation
+     */
+    'question'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof UserFaqTranslation
+     */
+    'answer'?: string;
 }
 /**
  * Filter request for searching users with various criteria including location, user types, languages, and business focus areas

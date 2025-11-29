@@ -8862,6 +8862,12 @@
               "$ref" : "#/components/schemas/UserDescription"
             }
           },
+          "userFaqs" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/UserFaq"
+            }
+          },
           "country" : {
             "$ref" : "#/components/schemas/Country"
           },
@@ -9023,6 +9029,39 @@
             "$ref" : "#/components/schemas/Language"
           },
           "value" : {
+            "type" : "string"
+          }
+        }
+      },
+      "UserFaq" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "position" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "translations" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/UserFaqTranslation"
+            }
+          }
+        }
+      },
+      "UserFaqTranslation" : {
+        "type" : "object",
+        "properties" : {
+          "language" : {
+            "$ref" : "#/components/schemas/Language"
+          },
+          "question" : {
+            "type" : "string"
+          },
+          "answer" : {
             "type" : "string"
           }
         }
@@ -10792,6 +10831,12 @@
               "$ref" : "#/components/schemas/UserDescription"
             }
           },
+          "userFaqs" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/UserFaq"
+            }
+          },
           "country" : {
             "$ref" : "#/components/schemas/Country"
           },
@@ -11453,16 +11498,16 @@
         "name" : "O-Auth-Code",
         "in" : "header"
       },
-      "oAuthToken" : {
-        "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
-        "in" : "header"
-      },
       "oAuthClientId" : {
         "type" : "apiKey",
         "description" : "OAuth client identifier (default: hallocasa_frontend)",
         "name" : "O-Auth-Client-Id",
+        "in" : "header"
+      },
+      "oAuthToken" : {
+        "type" : "apiKey",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
         "in" : "header"
       }
     }
