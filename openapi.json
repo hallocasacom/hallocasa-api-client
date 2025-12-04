@@ -2205,6 +2205,62 @@
         }
       }
     },
+    "/groups/slug/{slug}" : {
+      "get" : {
+        "tags" : [ "groups" ],
+        "summary" : "Return the group with specified slug",
+        "description" : "Returns the group with the specified slug. This endpoint is publicly accessible without authentication. If the user is authenticated and is a member or owner of the group, member count information will be included in the response. Otherwise, member count information will be excluded. Slug lookup is case-insensitive.",
+        "operationId" : "findGroupBySlug_1",
+        "parameters" : [ {
+          "name" : "slug",
+          "in" : "path",
+          "description" : "group slug",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "isivi"
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "404" : {
+            "description" : "Group not found"
+          },
+          "200" : {
+            "description" : "Ok. Generated resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Group"
+                },
+                "examples" : {
+                  "Group details by slug" : {
+                    "description" : "Group details by slug",
+                    "value" : {
+                      "id" : "group123",
+                      "name" : "ISIVI Test Group",
+                      "slug" : "isivi-test-group",
+                      "description" : "A collection of luxury properties",
+                      "groupType" : "GROUP",
+                      "owner" : {
+                        "id" : 1001,
+                        "name" : "John Doe"
+                      },
+                      "noOfMembers" : 5,
+                      "userAdmin" : true,
+                      "groupStatus" : "ACTIVE",
+                      "creationDate" : "2023-01-15T10:30:00Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/groups/{groupId}/properties" : {
       "get" : {
         "tags" : [ "groups" ],
@@ -8725,6 +8781,9 @@
           "url" : {
             "type" : "string"
           },
+          "slug" : {
+            "type" : "string"
+          },
           "creationDate" : {
             "type" : "string",
             "format" : "date-time"
@@ -11492,10 +11551,10 @@
       }
     },
     "securitySchemes" : {
-      "oAuthCode" : {
+      "oAuthToken" : {
         "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
         "in" : "header"
       },
       "oAuthClientId" : {
@@ -11504,10 +11563,10 @@
         "name" : "O-Auth-Client-Id",
         "in" : "header"
       },
-      "oAuthToken" : {
+      "oAuthCode" : {
         "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
         "in" : "header"
       }
     }

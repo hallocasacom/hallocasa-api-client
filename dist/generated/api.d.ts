@@ -1187,6 +1187,12 @@ export interface Group {
      * @type {string}
      * @memberof Group
      */
+    'slug'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Group
+     */
     'creationDate'?: string;
     /**
      *
@@ -6642,6 +6648,14 @@ export declare const GroupsApiAxiosParamCreator: (configuration?: Configuration)
      */
     findGroup1: (groupId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Returns the group with the specified slug. This endpoint is publicly accessible without authentication. If the user is authenticated and is a member or owner of the group, member count information will be included in the response. Otherwise, member count information will be excluded. Slug lookup is case-insensitive.
+     * @summary Return the group with specified slug
+     * @param {string} slug group slug
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findGroupBySlug1: (slug: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
      * @summary Return the group with specified id
      * @param {string} groupId group id
@@ -6850,6 +6864,14 @@ export declare const GroupsApiFp: (configuration?: Configuration) => {
      */
     findGroup1(groupId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Group>>;
     /**
+     * Returns the group with the specified slug. This endpoint is publicly accessible without authentication. If the user is authenticated and is a member or owner of the group, member count information will be included in the response. Otherwise, member count information will be excluded. Slug lookup is case-insensitive.
+     * @summary Return the group with specified slug
+     * @param {string} slug group slug
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findGroupBySlug1(slug: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Group>>;
+    /**
      * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
      * @summary Return the group with specified id
      * @param {string} groupId group id
@@ -7055,6 +7077,14 @@ export declare const GroupsApiFactory: (configuration?: Configuration, basePath?
      * @throws {RequiredError}
      */
     findGroup1(requestParameters: GroupsApiFindGroup1Request, options?: RawAxiosRequestConfig): AxiosPromise<Group>;
+    /**
+     * Returns the group with the specified slug. This endpoint is publicly accessible without authentication. If the user is authenticated and is a member or owner of the group, member count information will be included in the response. Otherwise, member count information will be excluded. Slug lookup is case-insensitive.
+     * @summary Return the group with specified slug
+     * @param {GroupsApiFindGroupBySlug1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findGroupBySlug1(requestParameters: GroupsApiFindGroupBySlug1Request, options?: RawAxiosRequestConfig): AxiosPromise<Group>;
     /**
      * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
      * @summary Return the group with specified id
@@ -7281,6 +7311,19 @@ export interface GroupsApiFindGroup1Request {
      * @memberof GroupsApiFindGroup1
      */
     readonly groupId: string;
+}
+/**
+ * Request parameters for findGroupBySlug1 operation in GroupsApi.
+ * @export
+ * @interface GroupsApiFindGroupBySlug1Request
+ */
+export interface GroupsApiFindGroupBySlug1Request {
+    /**
+     * group slug
+     * @type {string}
+     * @memberof GroupsApiFindGroupBySlug1
+     */
+    readonly slug: string;
 }
 /**
  * Request parameters for findGroupProperties1 operation in GroupsApi.
@@ -7660,6 +7703,15 @@ export declare class GroupsApi extends BaseAPI {
      * @memberof GroupsApi
      */
     findGroup1(requestParameters: GroupsApiFindGroup1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Group, any>>;
+    /**
+     * Returns the group with the specified slug. This endpoint is publicly accessible without authentication. If the user is authenticated and is a member or owner of the group, member count information will be included in the response. Otherwise, member count information will be excluded. Slug lookup is case-insensitive.
+     * @summary Return the group with specified slug
+     * @param {GroupsApiFindGroupBySlug1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    findGroupBySlug1(requestParameters: GroupsApiFindGroupBySlug1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Group, any>>;
     /**
      * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
      * @summary Return the group with specified id

@@ -1214,6 +1214,12 @@ export interface Group {
      * @type {string}
      * @memberof Group
      */
+    'slug'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Group
+     */
     'creationDate'?: string;
     /**
      * 
@@ -8261,6 +8267,46 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
+         * Returns the group with the specified slug. This endpoint is publicly accessible without authentication. If the user is authenticated and is a member or owner of the group, member count information will be included in the response. Otherwise, member count information will be excluded. Slug lookup is case-insensitive.
+         * @summary Return the group with specified slug
+         * @param {string} slug group slug
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findGroupBySlug1: async (slug: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'slug' is not null or undefined
+            assertParamExists('findGroupBySlug1', 'slug', slug)
+            const localVarPath = `/groups/slug/{slug}`
+                .replace(`{${"slug"}}`, encodeURIComponent(String(slug)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
          * @summary Return the group with specified id
          * @param {string} groupId group id
@@ -9113,6 +9159,19 @@ export const GroupsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns the group with the specified slug. This endpoint is publicly accessible without authentication. If the user is authenticated and is a member or owner of the group, member count information will be included in the response. Otherwise, member count information will be excluded. Slug lookup is case-insensitive.
+         * @summary Return the group with specified slug
+         * @param {string} slug group slug
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findGroupBySlug1(slug: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Group>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findGroupBySlug1(slug, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GroupsApi.findGroupBySlug1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
          * @summary Return the group with specified id
          * @param {string} groupId group id
@@ -9420,6 +9479,16 @@ export const GroupsApiFactory = function (configuration?: Configuration, basePat
             return localVarFp.findGroup1(requestParameters.groupId, options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns the group with the specified slug. This endpoint is publicly accessible without authentication. If the user is authenticated and is a member or owner of the group, member count information will be included in the response. Otherwise, member count information will be excluded. Slug lookup is case-insensitive.
+         * @summary Return the group with specified slug
+         * @param {GroupsApiFindGroupBySlug1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findGroupBySlug1(requestParameters: GroupsApiFindGroupBySlug1Request, options?: RawAxiosRequestConfig): AxiosPromise<Group> {
+            return localVarFp.findGroupBySlug1(requestParameters.slug, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
          * @summary Return the group with specified id
          * @param {GroupsApiFindGroupProperties1Request} requestParameters Request parameters.
@@ -9688,6 +9757,20 @@ export interface GroupsApiFindGroup1Request {
      * @memberof GroupsApiFindGroup1
      */
     readonly groupId: string
+}
+
+/**
+ * Request parameters for findGroupBySlug1 operation in GroupsApi.
+ * @export
+ * @interface GroupsApiFindGroupBySlug1Request
+ */
+export interface GroupsApiFindGroupBySlug1Request {
+    /**
+     * group slug
+     * @type {string}
+     * @memberof GroupsApiFindGroupBySlug1
+     */
+    readonly slug: string
 }
 
 /**
@@ -10117,6 +10200,18 @@ export class GroupsApi extends BaseAPI {
      */
     public findGroup1(requestParameters: GroupsApiFindGroup1Request, options?: RawAxiosRequestConfig) {
         return GroupsApiFp(this.configuration).findGroup1(requestParameters.groupId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the group with the specified slug. This endpoint is publicly accessible without authentication. If the user is authenticated and is a member or owner of the group, member count information will be included in the response. Otherwise, member count information will be excluded. Slug lookup is case-insensitive.
+     * @summary Return the group with specified slug
+     * @param {GroupsApiFindGroupBySlug1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    public findGroupBySlug1(requestParameters: GroupsApiFindGroupBySlug1Request, options?: RawAxiosRequestConfig) {
+        return GroupsApiFp(this.configuration).findGroupBySlug1(requestParameters.slug, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
