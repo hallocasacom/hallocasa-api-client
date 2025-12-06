@@ -1190,6 +1190,12 @@ export interface Group {
     'slug'?: string;
     /**
      *
+     * @type {number}
+     * @memberof Group
+     */
+    'zoom'?: number;
+    /**
+     *
      * @type {string}
      * @memberof Group
      */
@@ -6648,7 +6654,7 @@ export declare const GroupsApiAxiosParamCreator: (configuration?: Configuration)
      */
     findGroup1: (groupId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Returns the group with the specified slug. This endpoint is publicly accessible without authentication. If the user is authenticated and is a member or owner of the group, member count information will be included in the response. Otherwise, member count information will be excluded. Slug lookup is case-insensitive.
+     * Returns the group with the specified slug. This endpoint is publicly accessible without authentication. Member count is always included in the response. If the user is authenticated and is a member or owner of the group, admin status information will be included. Slug lookup is case-insensitive.
      * @summary Return the group with specified slug
      * @param {string} slug group slug
      * @param {*} [options] Override http request option.
@@ -6664,7 +6670,7 @@ export declare const GroupsApiAxiosParamCreator: (configuration?: Configuration)
      */
     findGroupProperties1: (groupId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Retrieve groups of specific types (ASSOCIATION, CERTIFICATION) that the user has access to. This endpoint allows filtering for association groups or certificate groups where the user is either an owner or an accepted member. Only active groups are returned.
+     * Retrieve groups of specific types (ASSOCIATION, CERTIFICATION). This endpoint is publicly accessible and allows filtering for association groups or certificate groups. Only active groups are returned.
      * @summary Return groups filtered by group type
      * @param {string} [types] Comma-separated list of group types to filter by. Valid values: ASSOCIATION, CERTIFICATION
      * @param {number} [pageFrom] Starting page number for pagination (0-based)
@@ -6864,7 +6870,7 @@ export declare const GroupsApiFp: (configuration?: Configuration) => {
      */
     findGroup1(groupId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Group>>;
     /**
-     * Returns the group with the specified slug. This endpoint is publicly accessible without authentication. If the user is authenticated and is a member or owner of the group, member count information will be included in the response. Otherwise, member count information will be excluded. Slug lookup is case-insensitive.
+     * Returns the group with the specified slug. This endpoint is publicly accessible without authentication. Member count is always included in the response. If the user is authenticated and is a member or owner of the group, admin status information will be included. Slug lookup is case-insensitive.
      * @summary Return the group with specified slug
      * @param {string} slug group slug
      * @param {*} [options] Override http request option.
@@ -6880,7 +6886,7 @@ export declare const GroupsApiFp: (configuration?: Configuration) => {
      */
     findGroupProperties1(groupId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Property>>>;
     /**
-     * Retrieve groups of specific types (ASSOCIATION, CERTIFICATION) that the user has access to. This endpoint allows filtering for association groups or certificate groups where the user is either an owner or an accepted member. Only active groups are returned.
+     * Retrieve groups of specific types (ASSOCIATION, CERTIFICATION). This endpoint is publicly accessible and allows filtering for association groups or certificate groups. Only active groups are returned.
      * @summary Return groups filtered by group type
      * @param {string} [types] Comma-separated list of group types to filter by. Valid values: ASSOCIATION, CERTIFICATION
      * @param {number} [pageFrom] Starting page number for pagination (0-based)
@@ -7078,7 +7084,7 @@ export declare const GroupsApiFactory: (configuration?: Configuration, basePath?
      */
     findGroup1(requestParameters: GroupsApiFindGroup1Request, options?: RawAxiosRequestConfig): AxiosPromise<Group>;
     /**
-     * Returns the group with the specified slug. This endpoint is publicly accessible without authentication. If the user is authenticated and is a member or owner of the group, member count information will be included in the response. Otherwise, member count information will be excluded. Slug lookup is case-insensitive.
+     * Returns the group with the specified slug. This endpoint is publicly accessible without authentication. Member count is always included in the response. If the user is authenticated and is a member or owner of the group, admin status information will be included. Slug lookup is case-insensitive.
      * @summary Return the group with specified slug
      * @param {GroupsApiFindGroupBySlug1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -7094,7 +7100,7 @@ export declare const GroupsApiFactory: (configuration?: Configuration, basePath?
      */
     findGroupProperties1(requestParameters: GroupsApiFindGroupProperties1Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<Property>>;
     /**
-     * Retrieve groups of specific types (ASSOCIATION, CERTIFICATION) that the user has access to. This endpoint allows filtering for association groups or certificate groups where the user is either an owner or an accepted member. Only active groups are returned.
+     * Retrieve groups of specific types (ASSOCIATION, CERTIFICATION). This endpoint is publicly accessible and allows filtering for association groups or certificate groups. Only active groups are returned.
      * @summary Return groups filtered by group type
      * @param {GroupsApiFindGroupsByType1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -7704,7 +7710,7 @@ export declare class GroupsApi extends BaseAPI {
      */
     findGroup1(requestParameters: GroupsApiFindGroup1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Group, any>>;
     /**
-     * Returns the group with the specified slug. This endpoint is publicly accessible without authentication. If the user is authenticated and is a member or owner of the group, member count information will be included in the response. Otherwise, member count information will be excluded. Slug lookup is case-insensitive.
+     * Returns the group with the specified slug. This endpoint is publicly accessible without authentication. Member count is always included in the response. If the user is authenticated and is a member or owner of the group, admin status information will be included. Slug lookup is case-insensitive.
      * @summary Return the group with specified slug
      * @param {GroupsApiFindGroupBySlug1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -7722,7 +7728,7 @@ export declare class GroupsApi extends BaseAPI {
      */
     findGroupProperties1(requestParameters: GroupsApiFindGroupProperties1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property[], any>>;
     /**
-     * Retrieve groups of specific types (ASSOCIATION, CERTIFICATION) that the user has access to. This endpoint allows filtering for association groups or certificate groups where the user is either an owner or an accepted member. Only active groups are returned.
+     * Retrieve groups of specific types (ASSOCIATION, CERTIFICATION). This endpoint is publicly accessible and allows filtering for association groups or certificate groups. Only active groups are returned.
      * @summary Return groups filtered by group type
      * @param {GroupsApiFindGroupsByType1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

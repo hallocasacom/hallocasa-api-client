@@ -2756,7 +2756,7 @@ const GroupsApiAxiosParamCreator = function (configuration) {
             };
         },
         /**
-         * Returns the group with the specified slug. This endpoint is publicly accessible without authentication. If the user is authenticated and is a member or owner of the group, member count information will be included in the response. Otherwise, member count information will be excluded. Slug lookup is case-insensitive.
+         * Returns the group with the specified slug. This endpoint is publicly accessible without authentication. Member count is always included in the response. If the user is authenticated and is a member or owner of the group, admin status information will be included. Slug lookup is case-insensitive.
          * @summary Return the group with specified slug
          * @param {string} slug group slug
          * @param {*} [options] Override http request option.
@@ -2822,7 +2822,7 @@ const GroupsApiAxiosParamCreator = function (configuration) {
             };
         },
         /**
-         * Retrieve groups of specific types (ASSOCIATION, CERTIFICATION) that the user has access to. This endpoint allows filtering for association groups or certificate groups where the user is either an owner or an accepted member. Only active groups are returned.
+         * Retrieve groups of specific types (ASSOCIATION, CERTIFICATION). This endpoint is publicly accessible and allows filtering for association groups or certificate groups. Only active groups are returned.
          * @summary Return groups filtered by group type
          * @param {string} [types] Comma-separated list of group types to filter by. Valid values: ASSOCIATION, CERTIFICATION
          * @param {number} [pageFrom] Starting page number for pagination (0-based)
@@ -3501,7 +3501,7 @@ const GroupsApiFp = function (configuration) {
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the group with the specified slug. This endpoint is publicly accessible without authentication. If the user is authenticated and is a member or owner of the group, member count information will be included in the response. Otherwise, member count information will be excluded. Slug lookup is case-insensitive.
+         * Returns the group with the specified slug. This endpoint is publicly accessible without authentication. Member count is always included in the response. If the user is authenticated and is a member or owner of the group, admin status information will be included. Slug lookup is case-insensitive.
          * @summary Return the group with specified slug
          * @param {string} slug group slug
          * @param {*} [options] Override http request option.
@@ -3527,7 +3527,7 @@ const GroupsApiFp = function (configuration) {
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Retrieve groups of specific types (ASSOCIATION, CERTIFICATION) that the user has access to. This endpoint allows filtering for association groups or certificate groups where the user is either an owner or an accepted member. Only active groups are returned.
+         * Retrieve groups of specific types (ASSOCIATION, CERTIFICATION). This endpoint is publicly accessible and allows filtering for association groups or certificate groups. Only active groups are returned.
          * @summary Return groups filtered by group type
          * @param {string} [types] Comma-separated list of group types to filter by. Valid values: ASSOCIATION, CERTIFICATION
          * @param {number} [pageFrom] Starting page number for pagination (0-based)
@@ -3821,7 +3821,7 @@ const GroupsApiFactory = function (configuration, basePath, axios) {
             return localVarFp.findGroup1(requestParameters.groupId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the group with the specified slug. This endpoint is publicly accessible without authentication. If the user is authenticated and is a member or owner of the group, member count information will be included in the response. Otherwise, member count information will be excluded. Slug lookup is case-insensitive.
+         * Returns the group with the specified slug. This endpoint is publicly accessible without authentication. Member count is always included in the response. If the user is authenticated and is a member or owner of the group, admin status information will be included. Slug lookup is case-insensitive.
          * @summary Return the group with specified slug
          * @param {GroupsApiFindGroupBySlug1Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -3841,7 +3841,7 @@ const GroupsApiFactory = function (configuration, basePath, axios) {
             return localVarFp.findGroupProperties1(requestParameters.groupId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Retrieve groups of specific types (ASSOCIATION, CERTIFICATION) that the user has access to. This endpoint allows filtering for association groups or certificate groups where the user is either an owner or an accepted member. Only active groups are returned.
+         * Retrieve groups of specific types (ASSOCIATION, CERTIFICATION). This endpoint is publicly accessible and allows filtering for association groups or certificate groups. Only active groups are returned.
          * @summary Return groups filtered by group type
          * @param {GroupsApiFindGroupsByType1Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -4077,7 +4077,7 @@ class GroupsApi extends base_1.BaseAPI {
         return (0, exports.GroupsApiFp)(this.configuration).findGroup1(requestParameters.groupId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Returns the group with the specified slug. This endpoint is publicly accessible without authentication. If the user is authenticated and is a member or owner of the group, member count information will be included in the response. Otherwise, member count information will be excluded. Slug lookup is case-insensitive.
+     * Returns the group with the specified slug. This endpoint is publicly accessible without authentication. Member count is always included in the response. If the user is authenticated and is a member or owner of the group, admin status information will be included. Slug lookup is case-insensitive.
      * @summary Return the group with specified slug
      * @param {GroupsApiFindGroupBySlug1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -4099,7 +4099,7 @@ class GroupsApi extends base_1.BaseAPI {
         return (0, exports.GroupsApiFp)(this.configuration).findGroupProperties1(requestParameters.groupId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
-     * Retrieve groups of specific types (ASSOCIATION, CERTIFICATION) that the user has access to. This endpoint allows filtering for association groups or certificate groups where the user is either an owner or an accepted member. Only active groups are returned.
+     * Retrieve groups of specific types (ASSOCIATION, CERTIFICATION). This endpoint is publicly accessible and allows filtering for association groups or certificate groups. Only active groups are returned.
      * @summary Return groups filtered by group type
      * @param {GroupsApiFindGroupsByType1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

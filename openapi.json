@@ -2209,7 +2209,7 @@
       "get" : {
         "tags" : [ "groups" ],
         "summary" : "Return the group with specified slug",
-        "description" : "Returns the group with the specified slug. This endpoint is publicly accessible without authentication. If the user is authenticated and is a member or owner of the group, member count information will be included in the response. Otherwise, member count information will be excluded. Slug lookup is case-insensitive.",
+        "description" : "Returns the group with the specified slug. This endpoint is publicly accessible without authentication. Member count is always included in the response. If the user is authenticated and is a member or owner of the group, admin status information will be included. Slug lookup is case-insensitive.",
         "operationId" : "findGroupBySlug_1",
         "parameters" : [ {
           "name" : "slug",
@@ -2319,7 +2319,7 @@
       "get" : {
         "tags" : [ "groups" ],
         "summary" : "Return groups filtered by group type",
-        "description" : "Retrieve groups of specific types (ASSOCIATION, CERTIFICATION) that the user has access to. This endpoint allows filtering for association groups or certificate groups where the user is either an owner or an accepted member. Only active groups are returned.",
+        "description" : "Retrieve groups of specific types (ASSOCIATION, CERTIFICATION). This endpoint is publicly accessible and allows filtering for association groups or certificate groups. Only active groups are returned.",
         "operationId" : "findGroupsByType_1",
         "parameters" : [ {
           "name" : "types",
@@ -2480,12 +2480,6 @@
           },
           "400" : {
             "description" : "Invalid request parameters (e.g., invalid group types, invalid pagination parameters)"
-          },
-          "401" : {
-            "description" : "User is not authenticated"
-          },
-          "403" : {
-            "description" : "User is not authorized to access this resource"
           },
           "500" : {
             "description" : "Internal server error"
@@ -8783,6 +8777,10 @@
           },
           "slug" : {
             "type" : "string"
+          },
+          "zoom" : {
+            "type" : "integer",
+            "format" : "int32"
           },
           "creationDate" : {
             "type" : "string",
