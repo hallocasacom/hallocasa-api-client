@@ -8871,6 +8871,10 @@
             "type" : "string",
             "format" : "date-time"
           },
+          "basicProfileCompletedAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
           "webSite" : {
             "maxLength" : 80,
             "minLength" : 0,
@@ -9073,6 +9077,10 @@
           "hidePublicProfile" : {
             "type" : "boolean"
           },
+          "publicProfileDesign" : {
+            "type" : "string",
+            "enum" : [ "classic", "luxury" ]
+          },
           "imprintImageLink" : {
             "type" : "string",
             "writeOnly" : true
@@ -9106,6 +9114,14 @@
             "items" : {
               "$ref" : "#/components/schemas/UserFaqTranslation"
             }
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "updatedAt" : {
+            "type" : "string",
+            "format" : "date-time"
           }
         }
       },
@@ -9120,6 +9136,14 @@
           },
           "answer" : {
             "type" : "string"
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "updatedAt" : {
+            "type" : "string",
+            "format" : "date-time"
           }
         }
       },
@@ -10527,6 +10551,9 @@
           },
           "cancelUrl" : {
             "type" : "string"
+          },
+          "locale" : {
+            "type" : "string"
           }
         }
       },
@@ -10840,6 +10867,10 @@
             "type" : "string",
             "format" : "date-time"
           },
+          "basicProfileCompletedAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
           "webSite" : {
             "maxLength" : 80,
             "minLength" : 0,
@@ -11041,6 +11072,10 @@
           },
           "hidePublicProfile" : {
             "type" : "boolean"
+          },
+          "publicProfileDesign" : {
+            "type" : "string",
+            "enum" : [ "classic", "luxury" ]
           },
           "skills" : {
             "type" : "array",
@@ -11549,12 +11584,6 @@
       }
     },
     "securitySchemes" : {
-      "oAuthToken" : {
-        "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
-        "in" : "header"
-      },
       "oAuthClientId" : {
         "type" : "apiKey",
         "description" : "OAuth client identifier (default: hallocasa_frontend)",
@@ -11565,6 +11594,12 @@
         "type" : "apiKey",
         "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
         "name" : "O-Auth-Code",
+        "in" : "header"
+      },
+      "oAuthToken" : {
+        "type" : "apiKey",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
         "in" : "header"
       }
     }

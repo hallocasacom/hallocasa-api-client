@@ -434,6 +434,12 @@ export interface CheckoutSessionDto {
      * @memberof CheckoutSessionDto
      */
     'cancelUrl'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CheckoutSessionDto
+     */
+    'locale'?: string;
 }
 
 export const CheckoutSessionDtoStatusEnum = {
@@ -3339,6 +3345,12 @@ export interface SkilledUser {
      * @type {string}
      * @memberof SkilledUser
      */
+    'basicProfileCompletedAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SkilledUser
+     */
     'webSite'?: string;
     /**
      * 
@@ -3666,6 +3678,12 @@ export interface SkilledUser {
     'hidePublicProfile'?: boolean;
     /**
      * 
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'publicProfileDesign'?: SkilledUserPublicProfileDesignEnum;
+    /**
+     * 
      * @type {Array<UserSkill>}
      * @memberof SkilledUser
      */
@@ -3716,6 +3734,12 @@ export const SkilledUserSubscriptionPlanNameEnum = {
 } as const;
 
 export type SkilledUserSubscriptionPlanNameEnum = typeof SkilledUserSubscriptionPlanNameEnum[keyof typeof SkilledUserSubscriptionPlanNameEnum];
+export const SkilledUserPublicProfileDesignEnum = {
+    Classic: 'classic',
+    Luxury: 'luxury'
+} as const;
+
+export type SkilledUserPublicProfileDesignEnum = typeof SkilledUserPublicProfileDesignEnum[keyof typeof SkilledUserPublicProfileDesignEnum];
 export const SkilledUserConnectionDegreeEnum = {
     _1st: '1st',
     _2nd: '2nd',
@@ -4130,6 +4154,12 @@ export interface User {
      * @type {string}
      * @memberof User
      */
+    'basicProfileCompletedAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
     'webSite'?: string;
     /**
      * 
@@ -4460,6 +4490,12 @@ export interface User {
      * @type {string}
      * @memberof User
      */
+    'publicProfileDesign'?: UserPublicProfileDesignEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
     'imprintImageLink'?: string;
 }
 
@@ -4471,6 +4507,12 @@ export const UserSubscriptionPlanNameEnum = {
 } as const;
 
 export type UserSubscriptionPlanNameEnum = typeof UserSubscriptionPlanNameEnum[keyof typeof UserSubscriptionPlanNameEnum];
+export const UserPublicProfileDesignEnum = {
+    Classic: 'classic',
+    Luxury: 'luxury'
+} as const;
+
+export type UserPublicProfileDesignEnum = typeof UserPublicProfileDesignEnum[keyof typeof UserPublicProfileDesignEnum];
 
 /**
  * 
@@ -4564,6 +4606,18 @@ export interface UserFaq {
      * @memberof UserFaq
      */
     'translations'?: Array<UserFaqTranslation>;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserFaq
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserFaq
+     */
+    'updatedAt'?: string;
 }
 /**
  * 
@@ -4589,6 +4643,18 @@ export interface UserFaqTranslation {
      * @memberof UserFaqTranslation
      */
     'answer'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserFaqTranslation
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserFaqTranslation
+     */
+    'updatedAt'?: string;
 }
 /**
  * Filter request for searching users with various criteria including location, user types, languages, and business focus areas

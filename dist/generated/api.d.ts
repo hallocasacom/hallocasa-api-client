@@ -418,6 +418,12 @@ export interface CheckoutSessionDto {
      * @memberof CheckoutSessionDto
      */
     'cancelUrl'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CheckoutSessionDto
+     */
+    'locale'?: string;
 }
 export declare const CheckoutSessionDtoStatusEnum: {
     readonly InProcess: "IN_PROCESS";
@@ -3270,6 +3276,12 @@ export interface SkilledUser {
      * @type {string}
      * @memberof SkilledUser
      */
+    'basicProfileCompletedAt'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
     'webSite'?: string;
     /**
      *
@@ -3597,6 +3609,12 @@ export interface SkilledUser {
     'hidePublicProfile'?: boolean;
     /**
      *
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'publicProfileDesign'?: SkilledUserPublicProfileDesignEnum;
+    /**
+     *
      * @type {Array<UserSkill>}
      * @memberof SkilledUser
      */
@@ -3645,6 +3663,11 @@ export declare const SkilledUserSubscriptionPlanNameEnum: {
     readonly Brokerage: "Brokerage";
 };
 export type SkilledUserSubscriptionPlanNameEnum = typeof SkilledUserSubscriptionPlanNameEnum[keyof typeof SkilledUserSubscriptionPlanNameEnum];
+export declare const SkilledUserPublicProfileDesignEnum: {
+    readonly Classic: "classic";
+    readonly Luxury: "luxury";
+};
+export type SkilledUserPublicProfileDesignEnum = typeof SkilledUserPublicProfileDesignEnum[keyof typeof SkilledUserPublicProfileDesignEnum];
 export declare const SkilledUserConnectionDegreeEnum: {
     readonly _1st: "1st";
     readonly _2nd: "2nd";
@@ -4056,6 +4079,12 @@ export interface User {
      * @type {string}
      * @memberof User
      */
+    'basicProfileCompletedAt'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof User
+     */
     'webSite'?: string;
     /**
      *
@@ -4386,6 +4415,12 @@ export interface User {
      * @type {string}
      * @memberof User
      */
+    'publicProfileDesign'?: UserPublicProfileDesignEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof User
+     */
     'imprintImageLink'?: string;
 }
 export declare const UserSubscriptionPlanNameEnum: {
@@ -4395,6 +4430,11 @@ export declare const UserSubscriptionPlanNameEnum: {
     readonly Brokerage: "Brokerage";
 };
 export type UserSubscriptionPlanNameEnum = typeof UserSubscriptionPlanNameEnum[keyof typeof UserSubscriptionPlanNameEnum];
+export declare const UserPublicProfileDesignEnum: {
+    readonly Classic: "classic";
+    readonly Luxury: "luxury";
+};
+export type UserPublicProfileDesignEnum = typeof UserPublicProfileDesignEnum[keyof typeof UserPublicProfileDesignEnum];
 /**
  *
  * @export
@@ -4487,6 +4527,18 @@ export interface UserFaq {
      * @memberof UserFaq
      */
     'translations'?: Array<UserFaqTranslation>;
+    /**
+     *
+     * @type {string}
+     * @memberof UserFaq
+     */
+    'createdAt'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof UserFaq
+     */
+    'updatedAt'?: string;
 }
 /**
  *
@@ -4512,6 +4564,18 @@ export interface UserFaqTranslation {
      * @memberof UserFaqTranslation
      */
     'answer'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof UserFaqTranslation
+     */
+    'createdAt'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof UserFaqTranslation
+     */
+    'updatedAt'?: string;
 }
 /**
  * Filter request for searching users with various criteria including location, user types, languages, and business focus areas
