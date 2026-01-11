@@ -4813,6 +4813,12 @@ export interface UserFilterResultSpec {
      * @memberof UserFilterResultSpec
      */
     'orderByLessRecentLogin'?: boolean;
+    /**
+     * Sort users by subscription priority (Brokerage > Business > Professional > Free)
+     * @type {boolean}
+     * @memberof UserFilterResultSpec
+     */
+    'orderBySubscriptionPriority'?: boolean;
 }
 /**
  *

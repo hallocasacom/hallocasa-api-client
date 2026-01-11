@@ -11437,6 +11437,11 @@
             "type" : "boolean",
             "description" : "Sort users by least recent login first",
             "example" : false
+          },
+          "orderBySubscriptionPriority" : {
+            "type" : "boolean",
+            "description" : "Sort users by subscription priority (Brokerage > Business > Professional > Free)",
+            "example" : true
           }
         },
         "description" : "Result specification for pagination and sorting of user search results"
@@ -11584,6 +11589,12 @@
       }
     },
     "securitySchemes" : {
+      "oAuthToken" : {
+        "type" : "apiKey",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
+        "in" : "header"
+      },
       "oAuthClientId" : {
         "type" : "apiKey",
         "description" : "OAuth client identifier (default: hallocasa_frontend)",
@@ -11594,12 +11605,6 @@
         "type" : "apiKey",
         "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
         "name" : "O-Auth-Code",
-        "in" : "header"
-      },
-      "oAuthToken" : {
-        "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
         "in" : "header"
       }
     }
