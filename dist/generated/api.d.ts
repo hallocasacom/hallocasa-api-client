@@ -4819,6 +4819,12 @@ export interface UserFilterResultSpec {
      * @memberof UserFilterResultSpec
      */
     'orderBySubscriptionPriority'?: boolean;
+    /**
+     * Skip sorting for performance (e.g., sitemap queries)
+     * @type {boolean}
+     * @memberof UserFilterResultSpec
+     */
+    'skipSorting'?: boolean;
 }
 /**
  *

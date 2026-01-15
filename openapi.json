@@ -11442,6 +11442,11 @@
             "type" : "boolean",
             "description" : "Sort users by subscription priority (Brokerage > Business > Professional > Free)",
             "example" : true
+          },
+          "skipSorting" : {
+            "type" : "boolean",
+            "description" : "Skip sorting for performance (e.g., sitemap queries)",
+            "example" : true
           }
         },
         "description" : "Result specification for pagination and sorting of user search results"
