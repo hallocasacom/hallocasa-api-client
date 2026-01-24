@@ -3519,6 +3519,12 @@ export interface SkilledUser {
      * @type {string}
      * @memberof SkilledUser
      */
+    'wechatQr'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SkilledUser
+     */
     'vkUrl'?: string;
     /**
      * 
@@ -4323,6 +4329,12 @@ export interface User {
      * @memberof User
      */
     'wechatUrl'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
+    'wechatQr'?: string;
     /**
      * 
      * @type {string}
@@ -17355,6 +17367,42 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
+         * Updates subscription_tier column for all users based on their current subscription. Should be called once after migration.
+         * @summary Backfill subscription tiers
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        backfillSubscriptionTiers1: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/users/backfill-subscription-tiers`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Checks the status of a Stripe Identity verification session and marks user as verified if successful
          * @summary Check identity verification status
          * @param {number} userId 
@@ -18461,6 +18509,18 @@ export const UsersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Updates subscription_tier column for all users based on their current subscription. Should be called once after migration.
+         * @summary Backfill subscription tiers
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async backfillSubscriptionTiers1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.backfillSubscriptionTiers1(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['UsersApi.backfillSubscriptionTiers1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Checks the status of a Stripe Identity verification session and marks user as verified if successful
          * @summary Check identity verification status
          * @param {number} userId 
@@ -18818,6 +18878,15 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          */
         addUserSkills1(requestParameters: UsersApiAddUserSkills1Request, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.addUserSkills1(requestParameters.userId, requestParameters.userSkill, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Updates subscription_tier column for all users based on their current subscription. Should be called once after migration.
+         * @summary Backfill subscription tiers
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        backfillSubscriptionTiers1(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.backfillSubscriptionTiers1(options).then((request) => request(axios, basePath));
         },
         /**
          * Checks the status of a Stripe Identity verification session and marks user as verified if successful
@@ -19577,6 +19646,17 @@ export class UsersApi extends BaseAPI {
      */
     public addUserSkills1(requestParameters: UsersApiAddUserSkills1Request, options?: RawAxiosRequestConfig) {
         return UsersApiFp(this.configuration).addUserSkills1(requestParameters.userId, requestParameters.userSkill, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Updates subscription_tier column for all users based on their current subscription. Should be called once after migration.
+     * @summary Backfill subscription tiers
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    public backfillSubscriptionTiers1(options?: RawAxiosRequestConfig) {
+        return UsersApiFp(this.configuration).backfillSubscriptionTiers1(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

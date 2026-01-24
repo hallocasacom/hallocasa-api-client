@@ -7032,6 +7032,22 @@
         }
       }
     },
+    "/users/backfill-subscription-tiers" : {
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Backfill subscription tiers",
+        "description" : "Updates subscription_tier column for all users based on their current subscription. Should be called once after migration.",
+        "operationId" : "backfillSubscriptionTiers_1",
+        "responses" : {
+          "200" : {
+            "description" : "Backfill completed",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
     "/users/{userId}/identity-verification-check" : {
       "post" : {
         "tags" : [ "users" ],
@@ -8982,6 +8998,10 @@
           },
           "wechatUrl" : {
             "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "type" : "string"
+          },
+          "wechatQr" : {
+            "pattern" : "data:image\\/(png|jpeg|jpg|gif|webp);base64,[A-Za-z0-9+/=]+",
             "type" : "string"
           },
           "vkUrl" : {
@@ -10980,6 +11000,10 @@
             "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string"
           },
+          "wechatQr" : {
+            "pattern" : "data:image\\/(png|jpeg|jpg|gif|webp);base64,[A-Za-z0-9+/=]+",
+            "type" : "string"
+          },
           "vkUrl" : {
             "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string"
@@ -11594,10 +11618,10 @@
       }
     },
     "securitySchemes" : {
-      "oAuthToken" : {
+      "oAuthCode" : {
         "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
         "in" : "header"
       },
       "oAuthClientId" : {
@@ -11606,10 +11630,10 @@
         "name" : "O-Auth-Client-Id",
         "in" : "header"
       },
-      "oAuthCode" : {
+      "oAuthToken" : {
         "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
         "in" : "header"
       }
     }

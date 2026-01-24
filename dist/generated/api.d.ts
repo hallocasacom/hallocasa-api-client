@@ -3450,6 +3450,12 @@ export interface SkilledUser {
      * @type {string}
      * @memberof SkilledUser
      */
+    'wechatQr'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
     'vkUrl'?: string;
     /**
      *
@@ -4248,6 +4254,12 @@ export interface User {
      * @memberof User
      */
     'wechatUrl'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof User
+     */
+    'wechatQr'?: string;
     /**
      *
      * @type {string}
@@ -11492,6 +11504,13 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      */
     addUserSkills1: (userId: number, userSkill: Array<UserSkill>, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Updates subscription_tier column for all users based on their current subscription. Should be called once after migration.
+     * @summary Backfill subscription tiers
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    backfillSubscriptionTiers1: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Checks the status of a Stripe Identity verification session and marks user as verified if successful
      * @summary Check identity verification status
      * @param {number} userId
@@ -11724,6 +11743,13 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      */
     addUserSkills1(userId: number, userSkill: Array<UserSkill>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
+     * Updates subscription_tier column for all users based on their current subscription. Should be called once after migration.
+     * @summary Backfill subscription tiers
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    backfillSubscriptionTiers1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
      * Checks the status of a Stripe Identity verification session and marks user as verified if successful
      * @summary Check identity verification status
      * @param {number} userId
@@ -11954,6 +11980,13 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
      * @throws {RequiredError}
      */
     addUserSkills1(requestParameters: UsersApiAddUserSkills1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     * Updates subscription_tier column for all users based on their current subscription. Should be called once after migration.
+     * @summary Backfill subscription tiers
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    backfillSubscriptionTiers1(options?: RawAxiosRequestConfig): AxiosPromise<void>;
     /**
      * Checks the status of a Stripe Identity verification session and marks user as verified if successful
      * @summary Check identity verification status
@@ -12612,6 +12645,14 @@ export declare class UsersApi extends BaseAPI {
      * @memberof UsersApi
      */
     addUserSkills1(requestParameters: UsersApiAddUserSkills1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    /**
+     * Updates subscription_tier column for all users based on their current subscription. Should be called once after migration.
+     * @summary Backfill subscription tiers
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    backfillSubscriptionTiers1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
     /**
      * Checks the status of a Stripe Identity verification session and marks user as verified if successful
      * @summary Check identity verification status
