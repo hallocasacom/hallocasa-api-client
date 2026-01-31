@@ -367,6 +367,73 @@ export interface Brokerage {
 /**
  *
  * @export
+ * @interface BulkUploadJobStatusDto
+ */
+export interface BulkUploadJobStatusDto {
+    /**
+     *
+     * @type {string}
+     * @memberof BulkUploadJobStatusDto
+     */
+    'id'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof BulkUploadJobStatusDto
+     */
+    'format'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof BulkUploadJobStatusDto
+     */
+    'status'?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof BulkUploadJobStatusDto
+     */
+    'totalProperties'?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof BulkUploadJobStatusDto
+     */
+    'processedCount'?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof BulkUploadJobStatusDto
+     */
+    'successfulCount'?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof BulkUploadJobStatusDto
+     */
+    'failedCount'?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof BulkUploadJobStatusDto
+     */
+    'startedAt'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof BulkUploadJobStatusDto
+     */
+    'completedAt'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof BulkUploadJobStatusDto
+     */
+    'errorMessage'?: string;
+}
+/**
+ *
+ * @export
  * @interface CheckoutSessionDto
  */
 export interface CheckoutSessionDto {
@@ -9526,6 +9593,28 @@ export declare const PropertyBulkUploadsApiAxiosParamCreator: (configuration?: C
      */
     getFormats1: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Get the history of all bulk upload jobs for the current user
+     * @summary Get import job history
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getJobHistory1: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Get the status of a specific bulk upload job by its ID
+     * @summary Get import job status by ID
+     * @param {string} jobId Job ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getJobStatus1: (jobId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Get the status of the most recent bulk upload job for the current user
+     * @summary Get latest import job status
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getLatestJobStatus1: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Upload properties using Kyero format with XML content in the request body
      * @summary Upload Kyero properties with XML in request body
      * @param {string} [body] Properties XML content in Kyero format
@@ -9572,6 +9661,28 @@ export declare const PropertyBulkUploadsApiFp: (configuration?: Configuration) =
      * @throws {RequiredError}
      */
     getFormats1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>>;
+    /**
+     * Get the history of all bulk upload jobs for the current user
+     * @summary Get import job history
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getJobHistory1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BulkUploadJobStatusDto>>>;
+    /**
+     * Get the status of a specific bulk upload job by its ID
+     * @summary Get import job status by ID
+     * @param {string} jobId Job ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getJobStatus1(jobId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BulkUploadJobStatusDto>>;
+    /**
+     * Get the status of the most recent bulk upload job for the current user
+     * @summary Get latest import job status
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getLatestJobStatus1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BulkUploadJobStatusDto>>;
     /**
      * Upload properties using Kyero format with XML content in the request body
      * @summary Upload Kyero properties with XML in request body
@@ -9620,6 +9731,28 @@ export declare const PropertyBulkUploadsApiFactory: (configuration?: Configurati
      */
     getFormats1(options?: RawAxiosRequestConfig): AxiosPromise<Array<string>>;
     /**
+     * Get the history of all bulk upload jobs for the current user
+     * @summary Get import job history
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getJobHistory1(options?: RawAxiosRequestConfig): AxiosPromise<Array<BulkUploadJobStatusDto>>;
+    /**
+     * Get the status of a specific bulk upload job by its ID
+     * @summary Get import job status by ID
+     * @param {PropertyBulkUploadsApiGetJobStatus1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getJobStatus1(requestParameters: PropertyBulkUploadsApiGetJobStatus1Request, options?: RawAxiosRequestConfig): AxiosPromise<BulkUploadJobStatusDto>;
+    /**
+     * Get the status of the most recent bulk upload job for the current user
+     * @summary Get latest import job status
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getLatestJobStatus1(options?: RawAxiosRequestConfig): AxiosPromise<BulkUploadJobStatusDto>;
+    /**
      * Upload properties using Kyero format with XML content in the request body
      * @summary Upload Kyero properties with XML in request body
      * @param {PropertyBulkUploadsApiUploadKyeroProperties2Request} requestParameters Request parameters.
@@ -9652,6 +9785,19 @@ export declare const PropertyBulkUploadsApiFactory: (configuration?: Configurati
      */
     uploadPropertiesFromUrl1(requestParameters: PropertyBulkUploadsApiUploadPropertiesFromUrl1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
 };
+/**
+ * Request parameters for getJobStatus1 operation in PropertyBulkUploadsApi.
+ * @export
+ * @interface PropertyBulkUploadsApiGetJobStatus1Request
+ */
+export interface PropertyBulkUploadsApiGetJobStatus1Request {
+    /**
+     * Job ID
+     * @type {string}
+     * @memberof PropertyBulkUploadsApiGetJobStatus1
+     */
+    readonly jobId: string;
+}
 /**
  * Request parameters for uploadKyeroProperties2 operation in PropertyBulkUploadsApi.
  * @export
@@ -9731,6 +9877,31 @@ export declare class PropertyBulkUploadsApi extends BaseAPI {
      * @memberof PropertyBulkUploadsApi
      */
     getFormats1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string[], any>>;
+    /**
+     * Get the history of all bulk upload jobs for the current user
+     * @summary Get import job history
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertyBulkUploadsApi
+     */
+    getJobHistory1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BulkUploadJobStatusDto[], any>>;
+    /**
+     * Get the status of a specific bulk upload job by its ID
+     * @summary Get import job status by ID
+     * @param {PropertyBulkUploadsApiGetJobStatus1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertyBulkUploadsApi
+     */
+    getJobStatus1(requestParameters: PropertyBulkUploadsApiGetJobStatus1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BulkUploadJobStatusDto, any>>;
+    /**
+     * Get the status of the most recent bulk upload job for the current user
+     * @summary Get latest import job status
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertyBulkUploadsApi
+     */
+    getLatestJobStatus1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BulkUploadJobStatusDto, any>>;
     /**
      * Upload properties using Kyero format with XML content in the request body
      * @summary Upload Kyero properties with XML in request body

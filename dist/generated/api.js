@@ -6683,6 +6683,97 @@ const PropertyBulkUploadsApiAxiosParamCreator = function (configuration) {
             };
         },
         /**
+         * Get the history of all bulk upload jobs for the current user
+         * @summary Get import job history
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getJobHistory1: async (options = {}) => {
+            const localVarPath = `/property-bulk-uploads/status/history`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get the status of a specific bulk upload job by its ID
+         * @summary Get import job status by ID
+         * @param {string} jobId Job ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getJobStatus1: async (jobId, options = {}) => {
+            // verify required parameter 'jobId' is not null or undefined
+            (0, common_1.assertParamExists)('getJobStatus1', 'jobId', jobId);
+            const localVarPath = `/property-bulk-uploads/status/{jobId}`
+                .replace(`{${"jobId"}}`, encodeURIComponent(String(jobId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get the status of the most recent bulk upload job for the current user
+         * @summary Get latest import job status
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getLatestJobStatus1: async (options = {}) => {
+            const localVarPath = `/property-bulk-uploads/status`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Upload properties using Kyero format with XML content in the request body
          * @summary Upload Kyero properties with XML in request body
          * @param {string} [body] Properties XML content in Kyero format
@@ -6841,6 +6932,43 @@ const PropertyBulkUploadsApiFp = function (configuration) {
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Get the history of all bulk upload jobs for the current user
+         * @summary Get import job history
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getJobHistory1(options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getJobHistory1(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['PropertyBulkUploadsApi.getJobHistory1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Get the status of a specific bulk upload job by its ID
+         * @summary Get import job status by ID
+         * @param {string} jobId Job ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getJobStatus1(jobId, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getJobStatus1(jobId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['PropertyBulkUploadsApi.getJobStatus1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Get the status of the most recent bulk upload job for the current user
+         * @summary Get latest import job status
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getLatestJobStatus1(options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getLatestJobStatus1(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['PropertyBulkUploadsApi.getLatestJobStatus1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Upload properties using Kyero format with XML content in the request body
          * @summary Upload Kyero properties with XML in request body
          * @param {string} [body] Properties XML content in Kyero format
@@ -6914,6 +7042,34 @@ const PropertyBulkUploadsApiFactory = function (configuration, basePath, axios) 
             return localVarFp.getFormats1(options).then((request) => request(axios, basePath));
         },
         /**
+         * Get the history of all bulk upload jobs for the current user
+         * @summary Get import job history
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getJobHistory1(options) {
+            return localVarFp.getJobHistory1(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get the status of a specific bulk upload job by its ID
+         * @summary Get import job status by ID
+         * @param {PropertyBulkUploadsApiGetJobStatus1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getJobStatus1(requestParameters, options) {
+            return localVarFp.getJobStatus1(requestParameters.jobId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get the status of the most recent bulk upload job for the current user
+         * @summary Get latest import job status
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getLatestJobStatus1(options) {
+            return localVarFp.getLatestJobStatus1(options).then((request) => request(axios, basePath));
+        },
+        /**
          * Upload properties using Kyero format with XML content in the request body
          * @summary Upload Kyero properties with XML in request body
          * @param {PropertyBulkUploadsApiUploadKyeroProperties2Request} requestParameters Request parameters.
@@ -6972,6 +7128,37 @@ class PropertyBulkUploadsApi extends base_1.BaseAPI {
      */
     getFormats1(options) {
         return (0, exports.PropertyBulkUploadsApiFp)(this.configuration).getFormats1(options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Get the history of all bulk upload jobs for the current user
+     * @summary Get import job history
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertyBulkUploadsApi
+     */
+    getJobHistory1(options) {
+        return (0, exports.PropertyBulkUploadsApiFp)(this.configuration).getJobHistory1(options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Get the status of a specific bulk upload job by its ID
+     * @summary Get import job status by ID
+     * @param {PropertyBulkUploadsApiGetJobStatus1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertyBulkUploadsApi
+     */
+    getJobStatus1(requestParameters, options) {
+        return (0, exports.PropertyBulkUploadsApiFp)(this.configuration).getJobStatus1(requestParameters.jobId, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Get the status of the most recent bulk upload job for the current user
+     * @summary Get latest import job status
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertyBulkUploadsApi
+     */
+    getLatestJobStatus1(options) {
+        return (0, exports.PropertyBulkUploadsApiFp)(this.configuration).getLatestJobStatus1(options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Upload properties using Kyero format with XML content in the request body

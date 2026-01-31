@@ -1050,6 +1050,108 @@
         }
       }
     },
+    "/property-bulk-uploads/status/history" : {
+      "get" : {
+        "tags" : [ "property-bulk-uploads" ],
+        "summary" : "Get import job history",
+        "description" : "Get the history of all bulk upload jobs for the current user",
+        "operationId" : "getJobHistory_1",
+        "responses" : {
+          "200" : {
+            "description" : "List of job statuses",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/BulkUploadJobStatusDto"
+                  }
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized - Authentication required",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
+    "/property-bulk-uploads/status/{jobId}" : {
+      "get" : {
+        "tags" : [ "property-bulk-uploads" ],
+        "summary" : "Get import job status by ID",
+        "description" : "Get the status of a specific bulk upload job by its ID",
+        "operationId" : "getJobStatus_1",
+        "parameters" : [ {
+          "name" : "jobId",
+          "in" : "path",
+          "description" : "Job ID",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Job status",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BulkUploadJobStatusDto"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Job not found",
+            "content" : {
+              "application/json" : { }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized - Authentication required",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
+    "/property-bulk-uploads/status" : {
+      "get" : {
+        "tags" : [ "property-bulk-uploads" ],
+        "summary" : "Get latest import job status",
+        "description" : "Get the status of the most recent bulk upload job for the current user",
+        "operationId" : "getLatestJobStatus_1",
+        "responses" : {
+          "200" : {
+            "description" : "Job status",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BulkUploadJobStatusDto"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "No job found",
+            "content" : {
+              "application/json" : { }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized - Authentication required",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
     "/property-bulk-uploads/in-body" : {
       "post" : {
         "tags" : [ "property-bulk-uploads" ],
@@ -1082,6 +1184,12 @@
           },
           "403" : {
             "description" : "Forbidden - Subscription required or insufficient permissions",
+            "content" : {
+              "application/json" : { }
+            }
+          },
+          "409" : {
+            "description" : "Conflict - A bulk upload job is already running for this user",
             "content" : {
               "application/json" : { }
             }
@@ -8616,6 +8724,47 @@
           }
         }
       },
+      "BulkUploadJobStatusDto" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "format" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "totalProperties" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "processedCount" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "successfulCount" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "failedCount" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "startedAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "completedAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "errorMessage" : {
+            "type" : "string"
+          }
+        }
+      },
       "XmlUrl" : {
         "required" : [ "url" ],
         "type" : "object",
@@ -9001,7 +9150,7 @@
             "type" : "string"
           },
           "wechatQr" : {
-            "pattern" : "data:image\\/(png|jpeg|jpg|gif|webp);base64,[A-Za-z0-9+/=]+",
+            "pattern" : "^$|data:image\\/(png|jpeg|jpg|gif|webp);base64,[A-Za-z0-9+/=]+",
             "type" : "string"
           },
           "vkUrl" : {
@@ -11001,7 +11150,7 @@
             "type" : "string"
           },
           "wechatQr" : {
-            "pattern" : "data:image\\/(png|jpeg|jpg|gif|webp);base64,[A-Za-z0-9+/=]+",
+            "pattern" : "^$|data:image\\/(png|jpeg|jpg|gif|webp);base64,[A-Za-z0-9+/=]+",
             "type" : "string"
           },
           "vkUrl" : {
@@ -11618,10 +11767,10 @@
       }
     },
     "securitySchemes" : {
-      "oAuthCode" : {
+      "oAuthToken" : {
         "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
         "in" : "header"
       },
       "oAuthClientId" : {
@@ -11630,10 +11779,10 @@
         "name" : "O-Auth-Client-Id",
         "in" : "header"
       },
-      "oAuthToken" : {
+      "oAuthCode" : {
         "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
         "in" : "header"
       }
     }
