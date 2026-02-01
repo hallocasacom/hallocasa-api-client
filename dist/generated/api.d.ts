@@ -414,6 +414,12 @@ export interface BulkUploadJobStatusDto {
     'failedCount'?: number;
     /**
      *
+     * @type {number}
+     * @memberof BulkUploadJobStatusDto
+     */
+    'skippedCount'?: number;
+    /**
+     *
      * @type {string}
      * @memberof BulkUploadJobStatusDto
      */
@@ -430,6 +436,12 @@ export interface BulkUploadJobStatusDto {
      * @memberof BulkUploadJobStatusDto
      */
     'errorMessage'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof BulkUploadJobStatusDto
+     */
+    'errorDetails'?: string;
 }
 /**
  *

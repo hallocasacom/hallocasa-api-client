@@ -8752,6 +8752,10 @@
             "type" : "integer",
             "format" : "int32"
           },
+          "skippedCount" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
           "startedAt" : {
             "type" : "string",
             "format" : "date-time"
@@ -8761,6 +8765,9 @@
             "format" : "date-time"
           },
           "errorMessage" : {
+            "type" : "string"
+          },
+          "errorDetails" : {
             "type" : "string"
           }
         }
@@ -11767,10 +11774,10 @@
       }
     },
     "securitySchemes" : {
-      "oAuthToken" : {
+      "oAuthCode" : {
         "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
         "in" : "header"
       },
       "oAuthClientId" : {
@@ -11779,10 +11786,10 @@
         "name" : "O-Auth-Client-Id",
         "in" : "header"
       },
-      "oAuthCode" : {
+      "oAuthToken" : {
         "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
         "in" : "header"
       }
     }
