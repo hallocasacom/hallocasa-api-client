@@ -2887,7 +2887,7 @@
                         "noOfMembers" : 5
                       }, {
                         "id" : "group456",
-                        "name" : "City Apartments",
+                        "name" : "City Apartment",
                         "description" : "Urban apartment listings",
                         "owner" : {
                           "id" : 1006,
@@ -11527,6 +11527,11 @@
               "description" : "Filter by brokerage IDs",
               "format" : "int64"
             }
+          },
+          "includeIncompleteProfiles" : {
+            "type" : "boolean",
+            "description" : "Include users without completed basic profile (group search only). When true, returns all group members including those with basic_profile_completed_at = NULL",
+            "example" : false
           },
           "userIds" : {
             "type" : "array",

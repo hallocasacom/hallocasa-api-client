@@ -4856,6 +4856,12 @@ export interface UserFilterRequest {
      */
     'brokerages'?: Array<number>;
     /**
+     * Include users without completed basic profile (group search only). When true, returns all group members including those with basic_profile_completed_at = NULL
+     * @type {boolean}
+     * @memberof UserFilterRequest
+     */
+    'includeIncompleteProfiles'?: boolean;
+    /**
      * Filter by specific user IDs
      * @type {Array<number>}
      * @memberof UserFilterRequest
