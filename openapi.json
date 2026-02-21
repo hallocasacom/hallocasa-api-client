@@ -7140,6 +7140,22 @@
         }
       }
     },
+    "/users/backfill-profile-to-ortto" : {
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Backfill profile to Ortto",
+        "description" : "One-time: publishes UserChangeEvent for each user to push main language and service category to Ortto/Autopilot. Remove after execution.",
+        "operationId" : "backfillProfileToOrtto_1",
+        "responses" : {
+          "200" : {
+            "description" : "Backfill completed",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
     "/users/backfill-subscription-tiers" : {
       "post" : {
         "tags" : [ "users" ],
@@ -9216,6 +9232,18 @@
           "focusOnSelling" : {
             "type" : "boolean"
           },
+          "focusOnValuation" : {
+            "type" : "boolean"
+          },
+          "focusOnDueDiligence" : {
+            "type" : "boolean"
+          },
+          "focusOnConsulting" : {
+            "type" : "boolean"
+          },
+          "focusOnPortfolioValuation" : {
+            "type" : "boolean"
+          },
           "imprintTitle" : {
             "type" : "string"
           },
@@ -11216,6 +11244,18 @@
           "focusOnSelling" : {
             "type" : "boolean"
           },
+          "focusOnValuation" : {
+            "type" : "boolean"
+          },
+          "focusOnDueDiligence" : {
+            "type" : "boolean"
+          },
+          "focusOnConsulting" : {
+            "type" : "boolean"
+          },
+          "focusOnPortfolioValuation" : {
+            "type" : "boolean"
+          },
           "imprintTitle" : {
             "type" : "string"
           },
@@ -11511,6 +11551,26 @@
           "filterFocusOnSelling" : {
             "type" : "boolean",
             "description" : "Filter users focused on selling properties",
+            "example" : false
+          },
+          "filterFocusOnValuation" : {
+            "type" : "boolean",
+            "description" : "Filter users focused on valuation",
+            "example" : false
+          },
+          "filterFocusOnDueDiligence" : {
+            "type" : "boolean",
+            "description" : "Filter users focused on due diligence",
+            "example" : false
+          },
+          "filterFocusOnConsulting" : {
+            "type" : "boolean",
+            "description" : "Filter users focused on consulting",
+            "example" : false
+          },
+          "filterFocusOnPortfolioValuation" : {
+            "type" : "boolean",
+            "description" : "Filter users focused on real estate portfolio valuation",
             "example" : false
           },
           "filterSocial" : {

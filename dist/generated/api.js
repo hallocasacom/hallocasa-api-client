@@ -9836,6 +9836,35 @@ const UsersApiAxiosParamCreator = function (configuration) {
             };
         },
         /**
+         * One-time: publishes UserChangeEvent for each user to push main language and service category to Ortto/Autopilot. Remove after execution.
+         * @summary Backfill profile to Ortto
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        backfillProfileToOrtto1: async (options = {}) => {
+            const localVarPath = `/users/backfill-profile-to-ortto`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Updates subscription_tier column for all users based on their current subscription. Should be called once after migration.
          * @summary Backfill subscription tiers
          * @param {*} [options] Override http request option.
@@ -10781,6 +10810,18 @@ const UsersApiFp = function (configuration) {
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * One-time: publishes UserChangeEvent for each user to push main language and service category to Ortto/Autopilot. Remove after execution.
+         * @summary Backfill profile to Ortto
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async backfillProfileToOrtto1(options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.backfillProfileToOrtto1(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['UsersApi.backfillProfileToOrtto1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Updates subscription_tier column for all users based on their current subscription. Should be called once after migration.
          * @summary Backfill subscription tiers
          * @param {*} [options] Override http request option.
@@ -11152,6 +11193,15 @@ const UsersApiFactory = function (configuration, basePath, axios) {
             return localVarFp.addUserSkills1(requestParameters.userId, requestParameters.userSkill, options).then((request) => request(axios, basePath));
         },
         /**
+         * One-time: publishes UserChangeEvent for each user to push main language and service category to Ortto/Autopilot. Remove after execution.
+         * @summary Backfill profile to Ortto
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        backfillProfileToOrtto1(options) {
+            return localVarFp.backfillProfileToOrtto1(options).then((request) => request(axios, basePath));
+        },
+        /**
          * Updates subscription_tier column for all users based on their current subscription. Should be called once after migration.
          * @summary Backfill subscription tiers
          * @param {*} [options] Override http request option.
@@ -11427,6 +11477,16 @@ class UsersApi extends base_1.BaseAPI {
      */
     addUserSkills1(requestParameters, options) {
         return (0, exports.UsersApiFp)(this.configuration).addUserSkills1(requestParameters.userId, requestParameters.userSkill, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * One-time: publishes UserChangeEvent for each user to push main language and service category to Ortto/Autopilot. Remove after execution.
+     * @summary Backfill profile to Ortto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    backfillProfileToOrtto1(options) {
+        return (0, exports.UsersApiFp)(this.configuration).backfillProfileToOrtto1(options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Updates subscription_tier column for all users based on their current subscription. Should be called once after migration.

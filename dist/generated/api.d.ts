@@ -3622,6 +3622,30 @@ export interface SkilledUser {
     'focusOnSelling'?: boolean;
     /**
      *
+     * @type {boolean}
+     * @memberof SkilledUser
+     */
+    'focusOnValuation'?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof SkilledUser
+     */
+    'focusOnDueDiligence'?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof SkilledUser
+     */
+    'focusOnConsulting'?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof SkilledUser
+     */
+    'focusOnPortfolioValuation'?: boolean;
+    /**
+     *
      * @type {string}
      * @memberof SkilledUser
      */
@@ -4431,6 +4455,30 @@ export interface User {
     'focusOnSelling'?: boolean;
     /**
      *
+     * @type {boolean}
+     * @memberof User
+     */
+    'focusOnValuation'?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof User
+     */
+    'focusOnDueDiligence'?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof User
+     */
+    'focusOnConsulting'?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof User
+     */
+    'focusOnPortfolioValuation'?: boolean;
+    /**
+     *
      * @type {string}
      * @memberof User
      */
@@ -4764,6 +4812,30 @@ export interface UserFilterRequest {
      * @memberof UserFilterRequest
      */
     'filterFocusOnSelling'?: boolean;
+    /**
+     * Filter users focused on valuation
+     * @type {boolean}
+     * @memberof UserFilterRequest
+     */
+    'filterFocusOnValuation'?: boolean;
+    /**
+     * Filter users focused on due diligence
+     * @type {boolean}
+     * @memberof UserFilterRequest
+     */
+    'filterFocusOnDueDiligence'?: boolean;
+    /**
+     * Filter users focused on consulting
+     * @type {boolean}
+     * @memberof UserFilterRequest
+     */
+    'filterFocusOnConsulting'?: boolean;
+    /**
+     * Filter users focused on real estate portfolio valuation
+     * @type {boolean}
+     * @memberof UserFilterRequest
+     */
+    'filterFocusOnPortfolioValuation'?: boolean;
     /**
      * Filter users with social media presence
      * @type {boolean}
@@ -11693,6 +11765,13 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      */
     addUserSkills1: (userId: number, userSkill: Array<UserSkill>, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * One-time: publishes UserChangeEvent for each user to push main language and service category to Ortto/Autopilot. Remove after execution.
+     * @summary Backfill profile to Ortto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    backfillProfileToOrtto1: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Updates subscription_tier column for all users based on their current subscription. Should be called once after migration.
      * @summary Backfill subscription tiers
      * @param {*} [options] Override http request option.
@@ -11932,6 +12011,13 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      */
     addUserSkills1(userId: number, userSkill: Array<UserSkill>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
+     * One-time: publishes UserChangeEvent for each user to push main language and service category to Ortto/Autopilot. Remove after execution.
+     * @summary Backfill profile to Ortto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    backfillProfileToOrtto1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
      * Updates subscription_tier column for all users based on their current subscription. Should be called once after migration.
      * @summary Backfill subscription tiers
      * @param {*} [options] Override http request option.
@@ -12169,6 +12255,13 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
      * @throws {RequiredError}
      */
     addUserSkills1(requestParameters: UsersApiAddUserSkills1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     * One-time: publishes UserChangeEvent for each user to push main language and service category to Ortto/Autopilot. Remove after execution.
+     * @summary Backfill profile to Ortto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    backfillProfileToOrtto1(options?: RawAxiosRequestConfig): AxiosPromise<void>;
     /**
      * Updates subscription_tier column for all users based on their current subscription. Should be called once after migration.
      * @summary Backfill subscription tiers
@@ -12834,6 +12927,14 @@ export declare class UsersApi extends BaseAPI {
      * @memberof UsersApi
      */
     addUserSkills1(requestParameters: UsersApiAddUserSkills1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    /**
+     * One-time: publishes UserChangeEvent for each user to push main language and service category to Ortto/Autopilot. Remove after execution.
+     * @summary Backfill profile to Ortto
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    backfillProfileToOrtto1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
     /**
      * Updates subscription_tier column for all users based on their current subscription. Should be called once after migration.
      * @summary Backfill subscription tiers
