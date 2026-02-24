@@ -3196,6 +3196,47 @@ const GroupsApiAxiosParamCreator = function (configuration) {
             };
         },
         /**
+         * Returns recent notifications for the group.
+         * @summary List group notifications
+         * @param {string} groupId
+         * @param {number} [limit]
+         * @param {string} [before]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listNotifications1: async (groupId, limit, before, options = {}) => {
+            // verify required parameter 'groupId' is not null or undefined
+            (0, common_1.assertParamExists)('listNotifications1', 'groupId', groupId);
+            const localVarPath = `/groups/{groupId}/notifications`
+                .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+            if (before !== undefined) {
+                localVarQueryParameter['before'] = before;
+            }
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Only group owners can promote members to admin. Can only promote ACCEPTED members.
          * @summary Promote group members to admin
          * @param {string} groupId groupId
@@ -3372,6 +3413,42 @@ const GroupsApiAxiosParamCreator = function (configuration) {
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
             localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(userFilterRequest, localVarRequestOptions, configuration);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Owner or admin sends a one-way notification to all members. Rate limit: 1 per minute.
+         * @summary Send group notification
+         * @param {string} groupId
+         * @param {SendGroupNotificationRequest} [sendGroupNotificationRequest]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        sendNotification1: async (groupId, sendGroupNotificationRequest, options = {}) => {
+            // verify required parameter 'groupId' is not null or undefined
+            (0, common_1.assertParamExists)('sendNotification1', 'groupId', groupId);
+            const localVarPath = `/groups/{groupId}/notifications`
+                .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(sendGroupNotificationRequest, localVarRequestOptions, configuration);
             return {
                 url: (0, common_1.toPathString)(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -3674,6 +3751,21 @@ const GroupsApiFp = function (configuration) {
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns recent notifications for the group.
+         * @summary List group notifications
+         * @param {string} groupId
+         * @param {number} [limit]
+         * @param {string} [before]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listNotifications1(groupId, limit, before, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listNotifications1(groupId, limit, before, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['GroupsApi.listNotifications1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Only group owners can promote members to admin. Can only promote ACCEPTED members.
          * @summary Promote group members to admin
          * @param {string} groupId groupId
@@ -3741,6 +3833,20 @@ const GroupsApiFp = function (configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.searchGroupUsers1(groupId, userFilterRequest, bypassCache, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = base_1.operationServerMap['GroupsApi.searchGroupUsers1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Owner or admin sends a one-way notification to all members. Rate limit: 1 per minute.
+         * @summary Send group notification
+         * @param {string} groupId
+         * @param {SendGroupNotificationRequest} [sendGroupNotificationRequest]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async sendNotification1(groupId, sendGroupNotificationRequest, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.sendNotification1(groupId, sendGroupNotificationRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['GroupsApi.sendNotification1']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -3949,6 +4055,16 @@ const GroupsApiFactory = function (configuration, basePath, axios) {
             return localVarFp.groupRequest1(requestParameters.groupId, options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns recent notifications for the group.
+         * @summary List group notifications
+         * @param {GroupsApiListNotifications1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listNotifications1(requestParameters, options) {
+            return localVarFp.listNotifications1(requestParameters.groupId, requestParameters.limit, requestParameters.before, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Only group owners can promote members to admin. Can only promote ACCEPTED members.
          * @summary Promote group members to admin
          * @param {GroupsApiPromoteToAdmin1Request} requestParameters Request parameters.
@@ -3997,6 +4113,16 @@ const GroupsApiFactory = function (configuration, basePath, axios) {
          */
         searchGroupUsers1(requestParameters, options) {
             return localVarFp.searchGroupUsers1(requestParameters.groupId, requestParameters.userFilterRequest, requestParameters.bypassCache, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Owner or admin sends a one-way notification to all members. Rate limit: 1 per minute.
+         * @summary Send group notification
+         * @param {GroupsApiSendNotification1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        sendNotification1(requestParameters, options) {
+            return localVarFp.sendNotification1(requestParameters.groupId, requestParameters.sendGroupNotificationRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Acceptable Status values are:  ACCEPTED, ADMIN, REJECTED, REMOVED
@@ -4217,6 +4343,17 @@ class GroupsApi extends base_1.BaseAPI {
         return (0, exports.GroupsApiFp)(this.configuration).groupRequest1(requestParameters.groupId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
+     * Returns recent notifications for the group.
+     * @summary List group notifications
+     * @param {GroupsApiListNotifications1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    listNotifications1(requestParameters, options) {
+        return (0, exports.GroupsApiFp)(this.configuration).listNotifications1(requestParameters.groupId, requestParameters.limit, requestParameters.before, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
      * Only group owners can promote members to admin. Can only promote ACCEPTED members.
      * @summary Promote group members to admin
      * @param {GroupsApiPromoteToAdmin1Request} requestParameters Request parameters.
@@ -4270,6 +4407,17 @@ class GroupsApi extends base_1.BaseAPI {
      */
     searchGroupUsers1(requestParameters, options) {
         return (0, exports.GroupsApiFp)(this.configuration).searchGroupUsers1(requestParameters.groupId, requestParameters.userFilterRequest, requestParameters.bypassCache, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Owner or admin sends a one-way notification to all members. Rate limit: 1 per minute.
+     * @summary Send group notification
+     * @param {GroupsApiSendNotification1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    sendNotification1(requestParameters, options) {
+        return (0, exports.GroupsApiFp)(this.configuration).sendNotification1(requestParameters.groupId, requestParameters.sendGroupNotificationRequest, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Acceptable Status values are:  ACCEPTED, ADMIN, REJECTED, REMOVED

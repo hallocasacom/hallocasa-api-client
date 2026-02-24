@@ -1434,6 +1434,43 @@ export interface GroupMemberFilterResult {
     'list'?: Array<GroupMember>;
 }
 /**
+ *
+ * @export
+ * @interface GroupNotification
+ */
+export interface GroupNotification {
+    /**
+     *
+     * @type {number}
+     * @memberof GroupNotification
+     */
+    'id'?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof GroupNotification
+     */
+    'groupId'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GroupNotification
+     */
+    'messageBody'?: string;
+    /**
+     *
+     * @type {User}
+     * @memberof GroupNotification
+     */
+    'createdBy'?: User;
+    /**
+     *
+     * @type {string}
+     * @memberof GroupNotification
+     */
+    'createdAt'?: string;
+}
+/**
  * The parent filter of the current filter. If the current filter has a parent filter
  * @export
  * @interface HcFilter
@@ -3233,6 +3270,19 @@ export interface ResultRequest {
      * @memberof ResultRequest
      */
     'pageFrom'?: number;
+}
+/**
+ *
+ * @export
+ * @interface SendGroupNotificationRequest
+ */
+export interface SendGroupNotificationRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof SendGroupNotificationRequest
+     */
+    'messageBody': string;
 }
 /**
  *
@@ -7004,6 +7054,16 @@ export declare const GroupsApiAxiosParamCreator: (configuration?: Configuration)
      */
     groupRequest1: (groupId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Returns recent notifications for the group.
+     * @summary List group notifications
+     * @param {string} groupId
+     * @param {number} [limit]
+     * @param {string} [before]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    listNotifications1: (groupId: string, limit?: number, before?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Only group owners can promote members to admin. Can only promote ACCEPTED members.
      * @summary Promote group members to admin
      * @param {string} groupId groupId
@@ -7048,6 +7108,15 @@ export declare const GroupsApiAxiosParamCreator: (configuration?: Configuration)
      * @throws {RequiredError}
      */
     searchGroupUsers1: (groupId: string, userFilterRequest: UserFilterRequest, bypassCache?: boolean, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Owner or admin sends a one-way notification to all members. Rate limit: 1 per minute.
+     * @summary Send group notification
+     * @param {string} groupId
+     * @param {SendGroupNotificationRequest} [sendGroupNotificationRequest]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    sendNotification1: (groupId: string, sendGroupNotificationRequest?: SendGroupNotificationRequest, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Acceptable Status values are:  ACCEPTED, ADMIN, REJECTED, REMOVED
      * @summary Update the group member status from groupId supplied
@@ -7220,6 +7289,16 @@ export declare const GroupsApiFp: (configuration?: Configuration) => {
      */
     groupRequest1(groupId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupMember>>;
     /**
+     * Returns recent notifications for the group.
+     * @summary List group notifications
+     * @param {string} groupId
+     * @param {number} [limit]
+     * @param {string} [before]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    listNotifications1(groupId: string, limit?: number, before?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupNotification>>;
+    /**
      * Only group owners can promote members to admin. Can only promote ACCEPTED members.
      * @summary Promote group members to admin
      * @param {string} groupId groupId
@@ -7264,6 +7343,15 @@ export declare const GroupsApiFp: (configuration?: Configuration) => {
      * @throws {RequiredError}
      */
     searchGroupUsers1(groupId: string, userFilterRequest: UserFilterRequest, bypassCache?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserFilterResult>>;
+    /**
+     * Owner or admin sends a one-way notification to all members. Rate limit: 1 per minute.
+     * @summary Send group notification
+     * @param {string} groupId
+     * @param {SendGroupNotificationRequest} [sendGroupNotificationRequest]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    sendNotification1(groupId: string, sendGroupNotificationRequest?: SendGroupNotificationRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
      * Acceptable Status values are:  ACCEPTED, ADMIN, REJECTED, REMOVED
      * @summary Update the group member status from groupId supplied
@@ -7425,6 +7513,14 @@ export declare const GroupsApiFactory: (configuration?: Configuration, basePath?
      */
     groupRequest1(requestParameters: GroupsApiGroupRequest1Request, options?: RawAxiosRequestConfig): AxiosPromise<GroupMember>;
     /**
+     * Returns recent notifications for the group.
+     * @summary List group notifications
+     * @param {GroupsApiListNotifications1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    listNotifications1(requestParameters: GroupsApiListNotifications1Request, options?: RawAxiosRequestConfig): AxiosPromise<GroupNotification>;
+    /**
      * Only group owners can promote members to admin. Can only promote ACCEPTED members.
      * @summary Promote group members to admin
      * @param {GroupsApiPromoteToAdmin1Request} requestParameters Request parameters.
@@ -7464,6 +7560,14 @@ export declare const GroupsApiFactory: (configuration?: Configuration, basePath?
      * @throws {RequiredError}
      */
     searchGroupUsers1(requestParameters: GroupsApiSearchGroupUsers1Request, options?: RawAxiosRequestConfig): AxiosPromise<UserFilterResult>;
+    /**
+     * Owner or admin sends a one-way notification to all members. Rate limit: 1 per minute.
+     * @summary Send group notification
+     * @param {GroupsApiSendNotification1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    sendNotification1(requestParameters: GroupsApiSendNotification1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
     /**
      * Acceptable Status values are:  ACCEPTED, ADMIN, REJECTED, REMOVED
      * @summary Update the group member status from groupId supplied
@@ -7774,6 +7878,31 @@ export interface GroupsApiGroupRequest1Request {
     readonly groupId: string;
 }
 /**
+ * Request parameters for listNotifications1 operation in GroupsApi.
+ * @export
+ * @interface GroupsApiListNotifications1Request
+ */
+export interface GroupsApiListNotifications1Request {
+    /**
+     *
+     * @type {string}
+     * @memberof GroupsApiListNotifications1
+     */
+    readonly groupId: string;
+    /**
+     *
+     * @type {number}
+     * @memberof GroupsApiListNotifications1
+     */
+    readonly limit?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof GroupsApiListNotifications1
+     */
+    readonly before?: string;
+}
+/**
  * Request parameters for promoteToAdmin1 operation in GroupsApi.
  * @export
  * @interface GroupsApiPromoteToAdmin1Request
@@ -7867,6 +7996,25 @@ export interface GroupsApiSearchGroupUsers1Request {
      * @memberof GroupsApiSearchGroupUsers1
      */
     readonly bypassCache?: boolean;
+}
+/**
+ * Request parameters for sendNotification1 operation in GroupsApi.
+ * @export
+ * @interface GroupsApiSendNotification1Request
+ */
+export interface GroupsApiSendNotification1Request {
+    /**
+     *
+     * @type {string}
+     * @memberof GroupsApiSendNotification1
+     */
+    readonly groupId: string;
+    /**
+     *
+     * @type {SendGroupNotificationRequest}
+     * @memberof GroupsApiSendNotification1
+     */
+    readonly sendGroupNotificationRequest?: SendGroupNotificationRequest;
 }
 /**
  * Request parameters for updateGroupMembershipStatus1 operation in GroupsApi.
@@ -8063,6 +8211,15 @@ export declare class GroupsApi extends BaseAPI {
      */
     groupRequest1(requestParameters: GroupsApiGroupRequest1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupMember, any>>;
     /**
+     * Returns recent notifications for the group.
+     * @summary List group notifications
+     * @param {GroupsApiListNotifications1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    listNotifications1(requestParameters: GroupsApiListNotifications1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupNotification, any>>;
+    /**
      * Only group owners can promote members to admin. Can only promote ACCEPTED members.
      * @summary Promote group members to admin
      * @param {GroupsApiPromoteToAdmin1Request} requestParameters Request parameters.
@@ -8107,6 +8264,15 @@ export declare class GroupsApi extends BaseAPI {
      * @memberof GroupsApi
      */
     searchGroupUsers1(requestParameters: GroupsApiSearchGroupUsers1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserFilterResult, any>>;
+    /**
+     * Owner or admin sends a one-way notification to all members. Rate limit: 1 per minute.
+     * @summary Send group notification
+     * @param {GroupsApiSendNotification1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    sendNotification1(requestParameters: GroupsApiSendNotification1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
     /**
      * Acceptable Status values are:  ACCEPTED, ADMIN, REJECTED, REMOVED
      * @summary Update the group member status from groupId supplied
