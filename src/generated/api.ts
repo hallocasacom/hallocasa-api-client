@@ -340,6 +340,44 @@ export interface AuthInfoDto {
 /**
  * 
  * @export
+ * @interface BackfillImageOrientationRequest
+ */
+export interface BackfillImageOrientationRequest {
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof BackfillImageOrientationRequest
+     */
+    'userIds'?: Array<number>;
+    /**
+     * 
+     * @type {number}
+     * @memberof BackfillImageOrientationRequest
+     */
+    'rotationDegrees'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface BackfillPropertyImageOrientationRequest
+ */
+export interface BackfillPropertyImageOrientationRequest {
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof BackfillPropertyImageOrientationRequest
+     */
+    'propertyIds'?: Array<string>;
+    /**
+     * 
+     * @type {number}
+     * @memberof BackfillPropertyImageOrientationRequest
+     */
+    'rotationDegrees'?: number;
+}
+/**
+ * 
+ * @export
  * @interface Brokerage
  */
 export interface Brokerage {
@@ -3624,6 +3662,12 @@ export interface SkilledUser {
      * @type {string}
      * @memberof SkilledUser
      */
+    'licenseId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SkilledUser
+     */
     'facebookUrl'?: string;
     /**
      * 
@@ -4458,6 +4502,12 @@ export interface User {
      * @memberof User
      */
     'chamberOfCommerceUrl'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
+    'licenseId'?: string;
     /**
      * 
      * @type {string}
@@ -7009,7 +7059,7 @@ export const CurrencyManagementApiAxiosParamCreator = function (configuration?: 
     return {
         /**
          * 
-         * @summary Retrieves the list of all exchange available in application
+         * @summary Retrieves the list of all exchange available in application (public; no OAuth client headers required)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7055,7 +7105,7 @@ export const CurrencyManagementApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary Retrieves the list of all exchange available in application
+         * @summary Retrieves the list of all exchange available in application (public; no OAuth client headers required)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7077,7 +7127,7 @@ export const CurrencyManagementApiFactory = function (configuration?: Configurat
     return {
         /**
          * 
-         * @summary Retrieves the list of all exchange available in application
+         * @summary Retrieves the list of all exchange available in application (public; no OAuth client headers required)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7096,7 +7146,7 @@ export const CurrencyManagementApiFactory = function (configuration?: Configurat
 export class CurrencyManagementApi extends BaseAPI {
     /**
      * 
-     * @summary Retrieves the list of all exchange available in application
+     * @summary Retrieves the list of all exchange available in application (public; no OAuth client headers required)
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CurrencyManagementApi
@@ -12265,6 +12315,46 @@ export class PhonePrefixesApi extends BaseAPI {
 export const PropertiesApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
+         * Re-download fullsize from S3, rotate, overwrite all sizes for each image filename on the property.
+         * @summary Backfill property image orientation
+         * @param {BackfillPropertyImageOrientationRequest} [backfillPropertyImageOrientationRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        backfillPropertyImageOrientation1: async (backfillPropertyImageOrientationRequest?: BackfillPropertyImageOrientationRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/properties/backfill-image-orientation`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(backfillPropertyImageOrientationRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * 
          * @summary Publication state update
          * @param {string} propertyId Property ID
@@ -12901,6 +12991,19 @@ export const PropertiesApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = PropertiesApiAxiosParamCreator(configuration)
     return {
         /**
+         * Re-download fullsize from S3, rotate, overwrite all sizes for each image filename on the property.
+         * @summary Backfill property image orientation
+         * @param {BackfillPropertyImageOrientationRequest} [backfillPropertyImageOrientationRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async backfillPropertyImageOrientation1(backfillPropertyImageOrientationRequest?: BackfillPropertyImageOrientationRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.backfillPropertyImageOrientation1(backfillPropertyImageOrientationRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PropertiesApi.backfillPropertyImageOrientation1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * 
          * @summary Publication state update
          * @param {string} propertyId Property ID
@@ -13108,6 +13211,16 @@ export const PropertiesApiFactory = function (configuration?: Configuration, bas
     const localVarFp = PropertiesApiFp(configuration)
     return {
         /**
+         * Re-download fullsize from S3, rotate, overwrite all sizes for each image filename on the property.
+         * @summary Backfill property image orientation
+         * @param {PropertiesApiBackfillPropertyImageOrientation1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        backfillPropertyImageOrientation1(requestParameters: PropertiesApiBackfillPropertyImageOrientation1Request = {}, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.backfillPropertyImageOrientation1(requestParameters.backfillPropertyImageOrientationRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
          * 
          * @summary Publication state update
          * @param {PropertiesApiChangePublicationStatus2Request} requestParameters Request parameters.
@@ -13254,6 +13367,20 @@ export const PropertiesApiFactory = function (configuration?: Configuration, bas
         },
     };
 };
+
+/**
+ * Request parameters for backfillPropertyImageOrientation1 operation in PropertiesApi.
+ * @export
+ * @interface PropertiesApiBackfillPropertyImageOrientation1Request
+ */
+export interface PropertiesApiBackfillPropertyImageOrientation1Request {
+    /**
+     * 
+     * @type {BackfillPropertyImageOrientationRequest}
+     * @memberof PropertiesApiBackfillPropertyImageOrientation1
+     */
+    readonly backfillPropertyImageOrientationRequest?: BackfillPropertyImageOrientationRequest
+}
 
 /**
  * Request parameters for changePublicationStatus2 operation in PropertiesApi.
@@ -13465,6 +13592,18 @@ export interface PropertiesApiSendAlert2Request {
  * @extends {BaseAPI}
  */
 export class PropertiesApi extends BaseAPI {
+    /**
+     * Re-download fullsize from S3, rotate, overwrite all sizes for each image filename on the property.
+     * @summary Backfill property image orientation
+     * @param {PropertiesApiBackfillPropertyImageOrientation1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertiesApi
+     */
+    public backfillPropertyImageOrientation1(requestParameters: PropertiesApiBackfillPropertyImageOrientation1Request = {}, options?: RawAxiosRequestConfig) {
+        return PropertiesApiFp(this.configuration).backfillPropertyImageOrientation1(requestParameters.backfillPropertyImageOrientationRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @summary Publication state update
@@ -18015,6 +18154,46 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
+         * Re-download fullsize from S3, rotate, overwrite all sizes. Use when EXIF was stripped from stored images.
+         * @summary Backfill profile image orientation
+         * @param {BackfillImageOrientationRequest} [backfillImageOrientationRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        backfillImageOrientation1: async (backfillImageOrientationRequest?: BackfillImageOrientationRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/users/backfill-image-orientation`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(backfillImageOrientationRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * One-time: publishes UserChangeEvent for each user to push main language and service category to Ortto/Autopilot. Remove after execution.
          * @summary Backfill profile to Ortto
          * @param {*} [options] Override http request option.
@@ -18272,7 +18451,7 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @summary Return the property list with specified user id
+         * @summary Return the property list with specified user id (public; no OAuth client headers required)
          * @param {string} id user id
          * @param {number} [pageFrom] 
          * @param {number} [pageTo] 
@@ -19193,6 +19372,19 @@ export const UsersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Re-download fullsize from S3, rotate, overwrite all sizes. Use when EXIF was stripped from stored images.
+         * @summary Backfill profile image orientation
+         * @param {BackfillImageOrientationRequest} [backfillImageOrientationRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async backfillImageOrientation1(backfillImageOrientationRequest?: BackfillImageOrientationRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.backfillImageOrientation1(backfillImageOrientationRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['UsersApi.backfillImageOrientation1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * One-time: publishes UserChangeEvent for each user to push main language and service category to Ortto/Autopilot. Remove after execution.
          * @summary Backfill profile to Ortto
          * @param {*} [options] Override http request option.
@@ -19274,7 +19466,7 @@ export const UsersApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Return the property list with specified user id
+         * @summary Return the property list with specified user id (public; no OAuth client headers required)
          * @param {string} id user id
          * @param {number} [pageFrom] 
          * @param {number} [pageTo] 
@@ -19576,6 +19768,16 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.addUserSkills1(requestParameters.userId, requestParameters.userSkill, options).then((request) => request(axios, basePath));
         },
         /**
+         * Re-download fullsize from S3, rotate, overwrite all sizes. Use when EXIF was stripped from stored images.
+         * @summary Backfill profile image orientation
+         * @param {UsersApiBackfillImageOrientation1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        backfillImageOrientation1(requestParameters: UsersApiBackfillImageOrientation1Request = {}, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.backfillImageOrientation1(requestParameters.backfillImageOrientationRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
          * One-time: publishes UserChangeEvent for each user to push main language and service category to Ortto/Autopilot. Remove after execution.
          * @summary Backfill profile to Ortto
          * @param {*} [options] Override http request option.
@@ -19635,7 +19837,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
-         * @summary Return the property list with specified user id
+         * @summary Return the property list with specified user id (public; no OAuth client headers required)
          * @param {UsersApiFindPropertiesByUser1Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -19852,6 +20054,20 @@ export interface UsersApiAddUserSkills1Request {
      * @memberof UsersApiAddUserSkills1
      */
     readonly userSkill: Array<UserSkill>
+}
+
+/**
+ * Request parameters for backfillImageOrientation1 operation in UsersApi.
+ * @export
+ * @interface UsersApiBackfillImageOrientation1Request
+ */
+export interface UsersApiBackfillImageOrientation1Request {
+    /**
+     * 
+     * @type {BackfillImageOrientationRequest}
+     * @memberof UsersApiBackfillImageOrientation1
+     */
+    readonly backfillImageOrientationRequest?: BackfillImageOrientationRequest
 }
 
 /**
@@ -20354,6 +20570,18 @@ export class UsersApi extends BaseAPI {
     }
 
     /**
+     * Re-download fullsize from S3, rotate, overwrite all sizes. Use when EXIF was stripped from stored images.
+     * @summary Backfill profile image orientation
+     * @param {UsersApiBackfillImageOrientation1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    public backfillImageOrientation1(requestParameters: UsersApiBackfillImageOrientation1Request = {}, options?: RawAxiosRequestConfig) {
+        return UsersApiFp(this.configuration).backfillImageOrientation1(requestParameters.backfillImageOrientationRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * One-time: publishes UserChangeEvent for each user to push main language and service category to Ortto/Autopilot. Remove after execution.
      * @summary Backfill profile to Ortto
      * @param {*} [options] Override http request option.
@@ -20425,7 +20653,7 @@ export class UsersApi extends BaseAPI {
 
     /**
      * 
-     * @summary Return the property list with specified user id
+     * @summary Return the property list with specified user id (public; no OAuth client headers required)
      * @param {UsersApiFindPropertiesByUser1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

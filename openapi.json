@@ -256,12 +256,9 @@
     "/currencies" : {
       "get" : {
         "tags" : [ "currency management" ],
-        "summary" : "Retrieves the list of all exchange available in application",
+        "summary" : "Retrieves the list of all exchange available in application (public; no OAuth client headers required)",
         "operationId" : "getCurrencies_1",
         "responses" : {
-          "401" : {
-            "description" : "If user is unauthorized"
-          },
           "500" : {
             "description" : "If server internal error"
           },
@@ -3634,6 +3631,31 @@
         }
       }
     },
+    "/properties/backfill-image-orientation" : {
+      "post" : {
+        "tags" : [ "properties" ],
+        "summary" : "Backfill property image orientation",
+        "description" : "Re-download fullsize from S3, rotate, overwrite all sizes for each image filename on the property.",
+        "operationId" : "backfillPropertyImageOrientation_1",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/BackfillPropertyImageOrientationRequest"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Backfill completed",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
     "/properties/{propertyId}/publication-state" : {
       "post" : {
         "tags" : [ "properties" ],
@@ -5047,7 +5069,7 @@
     "/users/{id}/properties" : {
       "get" : {
         "tags" : [ "users" ],
-        "summary" : "Return the property list with specified user id",
+        "summary" : "Return the property list with specified user id (public; no OAuth client headers required)",
         "operationId" : "findPropertiesByUser_1",
         "parameters" : [ {
           "name" : "id",
@@ -5103,9 +5125,6 @@
           },
           "400" : {
             "description" : "UserId is invalid"
-          },
-          "401" : {
-            "description" : "If user is unauthorized"
           },
           "404" : {
             "description" : "User not found"
@@ -7228,6 +7247,31 @@
         }
       }
     },
+    "/users/backfill-image-orientation" : {
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Backfill profile image orientation",
+        "description" : "Re-download fullsize from S3, rotate, overwrite all sizes. Use when EXIF was stripped from stored images.",
+        "operationId" : "backfillImageOrientation_1",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/BackfillImageOrientationRequest"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Backfill completed",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
     "/users/backfill-profile-to-ortto" : {
       "post" : {
         "tags" : [ "users" ],
@@ -9244,6 +9288,9 @@
             "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string"
           },
+          "licenseId" : {
+            "type" : "string"
+          },
           "facebookUrl" : {
             "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string"
@@ -10449,6 +10496,21 @@
           }
         }
       },
+      "BackfillPropertyImageOrientationRequest" : {
+        "type" : "object",
+        "properties" : {
+          "propertyIds" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "rotationDegrees" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
       "PropertyPublicationStateRequest" : {
         "required" : [ "status" ],
         "type" : "object",
@@ -11287,6 +11349,9 @@
             "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string"
           },
+          "licenseId" : {
+            "type" : "string"
+          },
           "facebookUrl" : {
             "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string"
@@ -11869,6 +11934,22 @@
           }
         }
       },
+      "BackfillImageOrientationRequest" : {
+        "type" : "object",
+        "properties" : {
+          "userIds" : {
+            "type" : "array",
+            "items" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          },
+          "rotationDegrees" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
       "IdentityVerificationCheckRequest" : {
         "required" : [ "verificationSessionId" ],
         "type" : "object",
@@ -11964,16 +12045,16 @@
         "name" : "O-Auth-Code",
         "in" : "header"
       },
-      "oAuthToken" : {
-        "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
-        "in" : "header"
-      },
       "oAuthClientId" : {
         "type" : "apiKey",
         "description" : "OAuth client identifier (default: hallocasa_frontend)",
         "name" : "O-Auth-Client-Id",
+        "in" : "header"
+      },
+      "oAuthToken" : {
+        "type" : "apiKey",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
         "in" : "header"
       }
     }
