@@ -2350,6 +2350,69 @@ export interface LogEntry {
     'description'?: string;
 }
 /**
+ *
+ * @export
+ * @interface NetworkSuggestionDto
+ */
+export interface NetworkSuggestionDto {
+    /**
+     *
+     * @type {SkilledUser}
+     * @memberof NetworkSuggestionDto
+     */
+    'user'?: SkilledUser;
+    /**
+     *
+     * @type {number}
+     * @memberof NetworkSuggestionDto
+     */
+    'score'?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof NetworkSuggestionDto
+     */
+    'boost'?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof NetworkSuggestionDto
+     */
+    'reasonKey'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof NetworkSuggestionDto
+     */
+    'reasonParam'?: string;
+}
+/**
+ *
+ * @export
+ * @interface NetworkSuggestionEventRequest
+ */
+export interface NetworkSuggestionEventRequest {
+    /**
+     * Event type
+     * @type {string}
+     * @memberof NetworkSuggestionEventRequest
+     */
+    'eventType': NetworkSuggestionEventRequestEventTypeEnum;
+    /**
+     * Suggested profile ids (for POPUP_SHOWN / CONNECT_CLICKED)
+     * @type {Array<number>}
+     * @memberof NetworkSuggestionEventRequest
+     */
+    'suggestedUserIds'?: Array<number>;
+}
+export declare const NetworkSuggestionEventRequestEventTypeEnum: {
+    readonly PopupShown: "POPUP_SHOWN";
+    readonly PopupDismissed: "POPUP_DISMISSED";
+    readonly ProfileShown: "PROFILE_SHOWN";
+    readonly ConnectClicked: "CONNECT_CLICKED";
+};
+export type NetworkSuggestionEventRequestEventTypeEnum = typeof NetworkSuggestionEventRequestEventTypeEnum[keyof typeof NetworkSuggestionEventRequestEventTypeEnum];
+/**
  * Newsletter subscriber information
  * @export
  * @interface NewsletterSubscriberDto
@@ -12148,6 +12211,21 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      */
     getSubscribedUsers1: (subscriptionPlanName: GetSubscribedUsers1SubscriptionPlanNameEnum, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Returns up to 5 ranked suggestions (12h cooldown, excludes seen/pending/connected).
+     * @summary Suggested profiles to connect with
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getSuggestions1: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @summary Record network suggestion analytics events
+     * @param {NetworkSuggestionEventRequest} [networkSuggestionEventRequest]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    postEvent1: (networkSuggestionEventRequest?: NetworkSuggestionEventRequest, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Generates an HTML preview of a user profile for sharing purposes
      * @summary Get HTML preview of a user profile
      * @param {number} [id]
@@ -12402,6 +12480,21 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      */
     getSubscribedUsers1(subscriptionPlanName: GetSubscribedUsers1SubscriptionPlanNameEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SubscribedUser>>>;
     /**
+     * Returns up to 5 ranked suggestions (12h cooldown, excludes seen/pending/connected).
+     * @summary Suggested profiles to connect with
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getSuggestions1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworkSuggestionDto>>;
+    /**
+     *
+     * @summary Record network suggestion analytics events
+     * @param {NetworkSuggestionEventRequest} [networkSuggestionEventRequest]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    postEvent1(networkSuggestionEventRequest?: NetworkSuggestionEventRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
      * Generates an HTML preview of a user profile for sharing purposes
      * @summary Get HTML preview of a user profile
      * @param {number} [id]
@@ -12643,6 +12736,21 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
      * @throws {RequiredError}
      */
     getSubscribedUsers1(requestParameters: UsersApiGetSubscribedUsers1Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<SubscribedUser>>;
+    /**
+     * Returns up to 5 ranked suggestions (12h cooldown, excludes seen/pending/connected).
+     * @summary Suggested profiles to connect with
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getSuggestions1(options?: RawAxiosRequestConfig): AxiosPromise<NetworkSuggestionDto>;
+    /**
+     *
+     * @summary Record network suggestion analytics events
+     * @param {UsersApiPostEvent1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    postEvent1(requestParameters?: UsersApiPostEvent1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
     /**
      * Generates an HTML preview of a user profile for sharing purposes
      * @summary Get HTML preview of a user profile
@@ -12985,6 +13093,19 @@ export interface UsersApiGetSubscribedUsers1Request {
      * @memberof UsersApiGetSubscribedUsers1
      */
     readonly subscriptionPlanName: GetSubscribedUsers1SubscriptionPlanNameEnum;
+}
+/**
+ * Request parameters for postEvent1 operation in UsersApi.
+ * @export
+ * @interface UsersApiPostEvent1Request
+ */
+export interface UsersApiPostEvent1Request {
+    /**
+     *
+     * @type {NetworkSuggestionEventRequest}
+     * @memberof UsersApiPostEvent1
+     */
+    readonly networkSuggestionEventRequest?: NetworkSuggestionEventRequest;
 }
 /**
  * Request parameters for previewProperty operation in UsersApi.
@@ -13350,6 +13471,23 @@ export declare class UsersApi extends BaseAPI {
      * @memberof UsersApi
      */
     getSubscribedUsers1(requestParameters: UsersApiGetSubscribedUsers1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SubscribedUser[], any>>;
+    /**
+     * Returns up to 5 ranked suggestions (12h cooldown, excludes seen/pending/connected).
+     * @summary Suggested profiles to connect with
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    getSuggestions1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<NetworkSuggestionDto, any>>;
+    /**
+     *
+     * @summary Record network suggestion analytics events
+     * @param {UsersApiPostEvent1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    postEvent1(requestParameters?: UsersApiPostEvent1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
     /**
      * Generates an HTML preview of a user profile for sharing purposes
      * @summary Get HTML preview of a user profile

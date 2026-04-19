@@ -73,14 +73,14 @@
     "name" : "favorites",
     "description" : "API to manage user favorites"
   }, {
+    "name" : "users",
+    "description" : "Network growth suggestions"
+  }, {
     "name" : "skills",
     "description" : "Operations related to user skills"
   }, {
     "name" : "stripe-identity-webhooks",
     "description" : "Stripe Identity webhook handlers"
-  }, {
-    "name" : "users",
-    "description" : "User management operations"
   } ],
   "paths" : {
     "/country-phone-prefixes" : {
@@ -6966,6 +6966,50 @@
         } ]
       }
     },
+    "/users/me/network-suggestions" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "Suggested profiles to connect with",
+        "description" : "Returns up to 5 ranked suggestions (12h cooldown, excludes seen/pending/connected).",
+        "operationId" : "getSuggestions_1",
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/NetworkSuggestionDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/me/network-suggestions/events" : {
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Record network suggestion analytics events",
+        "operationId" : "postEvent_1",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/NetworkSuggestionEventRequest"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
     "/skills" : {
       "get" : {
         "tags" : [ "skills" ],
@@ -11880,6 +11924,48 @@
         },
         "description" : "Result specification for pagination and sorting of user search results"
       },
+      "NetworkSuggestionDto" : {
+        "type" : "object",
+        "properties" : {
+          "user" : {
+            "$ref" : "#/components/schemas/SkilledUser"
+          },
+          "score" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "boost" : {
+            "type" : "number",
+            "format" : "double"
+          },
+          "reasonKey" : {
+            "type" : "string"
+          },
+          "reasonParam" : {
+            "type" : "string"
+          }
+        }
+      },
+      "NetworkSuggestionEventRequest" : {
+        "required" : [ "eventType" ],
+        "type" : "object",
+        "properties" : {
+          "eventType" : {
+            "type" : "string",
+            "description" : "Event type",
+            "enum" : [ "POPUP_SHOWN", "POPUP_DISMISSED", "PROFILE_SHOWN", "CONNECT_CLICKED" ]
+          },
+          "suggestedUserIds" : {
+            "type" : "array",
+            "description" : "Suggested profile ids (for POPUP_SHOWN / CONNECT_CLICKED)",
+            "items" : {
+              "type" : "integer",
+              "description" : "Suggested profile ids (for POPUP_SHOWN / CONNECT_CLICKED)",
+              "format" : "int64"
+            }
+          }
+        }
+      },
       "AlertWithUserProfile" : {
         "type" : "object",
         "properties" : {
@@ -12039,16 +12125,16 @@
       }
     },
     "securitySchemes" : {
-      "oAuthCode" : {
-        "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
-        "in" : "header"
-      },
       "oAuthClientId" : {
         "type" : "apiKey",
         "description" : "OAuth client identifier (default: hallocasa_frontend)",
         "name" : "O-Auth-Client-Id",
+        "in" : "header"
+      },
+      "oAuthCode" : {
+        "type" : "apiKey",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
         "in" : "header"
       },
       "oAuthToken" : {

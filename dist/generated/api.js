@@ -16,10 +16,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BrokeragesApi = exports.BrokeragesApiFactory = exports.BrokeragesApiFp = exports.BrokeragesApiAxiosParamCreator = exports.ApiKeysApi = exports.ApiKeysApiFactory = exports.ApiKeysApiFp = exports.ApiKeysApiAxiosParamCreator = exports.AlertsApi = exports.AlertsApiFactory = exports.AlertsApiFp = exports.AlertsApiAxiosParamCreator = exports.UserSubscriptionDtoStatusEnum = exports.UserSubscriptionDtoRenewalTypeEnum = exports.UserGroupGroupTypeEnum = exports.UserPublicProfileDesignEnum = exports.UserSubscriptionPlanNameEnum = exports.SubscriptionPriceDtoRenewalTypeEnum = exports.SkilledUserConnectionDegreeEnum = exports.SkilledUserPublicProfileDesignEnum = exports.SkilledUserSubscriptionPlanNameEnum = exports.PropertyPublicationStateRequestStatusEnum = exports.PropertyFieldHcListerOptionEnum = exports.PropertyFieldData3TypeEnum = exports.PropertyFieldData2TypeEnum = exports.PropertyFieldData1TypeEnum = exports.PropertyFieldTextTypeEnum = exports.PropertyPublicationStateEnum = exports.HcFilterTypeEntryRangeFieldPresentationEnum = exports.HcFilterTypeEntryFilterTypeNatureEnum = exports.HcFilterTypeRangeFieldPresentationEnum = exports.HcFilterTypeFilterTypeNatureEnum = exports.HcFilterEntryFilterWorkerOptionEnum = exports.HcFilterEntryChoiceEnum = exports.HcFilterConditionMaxOperandEnum = exports.HcFilterConditionMinOperandEnum = exports.HcFilterHcListerOptionEnum = exports.HcFilterFilterWorkerOptionEnum = exports.HcFilterChoiceEnum = exports.GroupMemberGroupMemberStatusEnum = exports.GroupRequestStatusEnum = exports.GroupGroupTypeEnum = exports.GroupGroupStatusEnum = exports.FilterShowingStepSequenceAfterEnum = exports.FilterShowingStepSequenceBeforeEnum = exports.FavoriteResourceTypeEnum = exports.DropdownOptionGroupTranslationManagementEnum = exports.CheckoutSessionDtoStatusEnum = exports.AlertWithUserProfileUserAlertTypeEnum = exports.AlertUserAlertTypeEnum = void 0;
-exports.LanguagesApi = exports.LanguagesApiFactory = exports.LanguagesApiFp = exports.LanguagesApiAxiosParamCreator = exports.UpdateGroupMembershipStatus1StatusEnum = exports.RequestGroupTypeChange1RequestStatusEnum = exports.GroupsApi = exports.GroupsApiFactory = exports.GroupsApiFp = exports.GroupsApiAxiosParamCreator = exports.GeoLocationApi = exports.GeoLocationApiFactory = exports.GeoLocationApiFp = exports.GeoLocationApiAxiosParamCreator = exports.FavoritesApi = exports.FavoritesApiFactory = exports.FavoritesApiFp = exports.FavoritesApiAxiosParamCreator = exports.FacebookPropertiesApi = exports.FacebookPropertiesApiFactory = exports.FacebookPropertiesApiFp = exports.FacebookPropertiesApiAxiosParamCreator = exports.ExchangeRatesApi = exports.ExchangeRatesApiFactory = exports.ExchangeRatesApiFp = exports.ExchangeRatesApiAxiosParamCreator = exports.EndorsementsApi = exports.EndorsementsApiFactory = exports.EndorsementsApiFp = exports.EndorsementsApiAxiosParamCreator = exports.DefaultApi = exports.DefaultApiFactory = exports.DefaultApiFp = exports.DefaultApiAxiosParamCreator = exports.CustomerSessionsApi = exports.CustomerSessionsApiFactory = exports.CustomerSessionsApiFp = exports.CustomerSessionsApiAxiosParamCreator = exports.CurrencyManagementApi = exports.CurrencyManagementApiFactory = exports.CurrencyManagementApiFp = exports.CurrencyManagementApiAxiosParamCreator = exports.CountriesApi = exports.CountriesApiFactory = exports.CountriesApiFp = exports.CountriesApiAxiosParamCreator = exports.CheckoutSessionsApi = exports.CheckoutSessionsApiFactory = exports.CheckoutSessionsApiFp = exports.CheckoutSessionsApiAxiosParamCreator = void 0;
-exports.PropertyTypesApi = exports.PropertyTypesApiFactory = exports.PropertyTypesApiFp = exports.PropertyTypesApiAxiosParamCreator = exports.PropertyProposalsApi = exports.PropertyProposalsApiFactory = exports.PropertyProposalsApiFp = exports.PropertyProposalsApiAxiosParamCreator = exports.PropertyLocationsApi = exports.PropertyLocationsApiFactory = exports.PropertyLocationsApiFp = exports.PropertyLocationsApiAxiosParamCreator = exports.PropertyFiltersApi = exports.PropertyFiltersApiFactory = exports.PropertyFiltersApiFp = exports.PropertyFiltersApiAxiosParamCreator = exports.PropertyFieldsApi = exports.PropertyFieldsApiFactory = exports.PropertyFieldsApiFp = exports.PropertyFieldsApiAxiosParamCreator = exports.UploadPropertiesFromUrl1FormatEnum = exports.UploadProperties1FormatEnum = exports.PropertyBulkUploadsApi = exports.PropertyBulkUploadsApiFactory = exports.PropertyBulkUploadsApiFp = exports.PropertyBulkUploadsApiAxiosParamCreator = exports.PropertyBulkDownloadApi = exports.PropertyBulkDownloadApiFactory = exports.PropertyBulkDownloadApiFp = exports.PropertyBulkDownloadApiAxiosParamCreator = exports.PropertiesApi = exports.PropertiesApiFactory = exports.PropertiesApiFp = exports.PropertiesApiAxiosParamCreator = exports.PhonePrefixesApi = exports.PhonePrefixesApiFactory = exports.PhonePrefixesApiFp = exports.PhonePrefixesApiAxiosParamCreator = exports.PasswordRecoveryApi = exports.PasswordRecoveryApiFactory = exports.PasswordRecoveryApiFp = exports.PasswordRecoveryApiAxiosParamCreator = exports.LocationCacheApi = exports.LocationCacheApiFactory = exports.LocationCacheApiFp = exports.LocationCacheApiAxiosParamCreator = exports.LocalesApi = exports.LocalesApiFactory = exports.LocalesApiFp = exports.LocalesApiAxiosParamCreator = void 0;
-exports.GetSubscribedUsers1SubscriptionPlanNameEnum = exports.UsersApi = exports.UsersApiFactory = exports.UsersApiFp = exports.UsersApiAxiosParamCreator = exports.UserTypesApi = exports.UserTypesApiFactory = exports.UserTypesApiFp = exports.UserTypesApiAxiosParamCreator = exports.TextTranslationsApi = exports.TextTranslationsApiFactory = exports.TextTranslationsApiFp = exports.TextTranslationsApiAxiosParamCreator = exports.TestimonialApi = exports.TestimonialApiFactory = exports.TestimonialApiFp = exports.TestimonialApiAxiosParamCreator = exports.SubscriptionsApi = exports.SubscriptionsApiFactory = exports.SubscriptionsApiFp = exports.SubscriptionsApiAxiosParamCreator = exports.StripeWebhooksApi = exports.StripeWebhooksApiFactory = exports.StripeWebhooksApiFp = exports.StripeWebhooksApiAxiosParamCreator = exports.StripeIdentityWebhooksApi = exports.StripeIdentityWebhooksApiFactory = exports.StripeIdentityWebhooksApiFp = exports.StripeIdentityWebhooksApiAxiosParamCreator = exports.SkillsApi = exports.SkillsApiFactory = exports.SkillsApiFp = exports.SkillsApiAxiosParamCreator = exports.SecurityApi = exports.SecurityApiFactory = exports.SecurityApiFp = exports.SecurityApiAxiosParamCreator = void 0;
+exports.BrokeragesApiFactory = exports.BrokeragesApiFp = exports.BrokeragesApiAxiosParamCreator = exports.ApiKeysApi = exports.ApiKeysApiFactory = exports.ApiKeysApiFp = exports.ApiKeysApiAxiosParamCreator = exports.AlertsApi = exports.AlertsApiFactory = exports.AlertsApiFp = exports.AlertsApiAxiosParamCreator = exports.UserSubscriptionDtoStatusEnum = exports.UserSubscriptionDtoRenewalTypeEnum = exports.UserGroupGroupTypeEnum = exports.UserPublicProfileDesignEnum = exports.UserSubscriptionPlanNameEnum = exports.SubscriptionPriceDtoRenewalTypeEnum = exports.SkilledUserConnectionDegreeEnum = exports.SkilledUserPublicProfileDesignEnum = exports.SkilledUserSubscriptionPlanNameEnum = exports.PropertyPublicationStateRequestStatusEnum = exports.PropertyFieldHcListerOptionEnum = exports.PropertyFieldData3TypeEnum = exports.PropertyFieldData2TypeEnum = exports.PropertyFieldData1TypeEnum = exports.PropertyFieldTextTypeEnum = exports.PropertyPublicationStateEnum = exports.NetworkSuggestionEventRequestEventTypeEnum = exports.HcFilterTypeEntryRangeFieldPresentationEnum = exports.HcFilterTypeEntryFilterTypeNatureEnum = exports.HcFilterTypeRangeFieldPresentationEnum = exports.HcFilterTypeFilterTypeNatureEnum = exports.HcFilterEntryFilterWorkerOptionEnum = exports.HcFilterEntryChoiceEnum = exports.HcFilterConditionMaxOperandEnum = exports.HcFilterConditionMinOperandEnum = exports.HcFilterHcListerOptionEnum = exports.HcFilterFilterWorkerOptionEnum = exports.HcFilterChoiceEnum = exports.GroupMemberGroupMemberStatusEnum = exports.GroupRequestStatusEnum = exports.GroupGroupTypeEnum = exports.GroupGroupStatusEnum = exports.FilterShowingStepSequenceAfterEnum = exports.FilterShowingStepSequenceBeforeEnum = exports.FavoriteResourceTypeEnum = exports.DropdownOptionGroupTranslationManagementEnum = exports.CheckoutSessionDtoStatusEnum = exports.AlertWithUserProfileUserAlertTypeEnum = exports.AlertUserAlertTypeEnum = void 0;
+exports.LanguagesApiFactory = exports.LanguagesApiFp = exports.LanguagesApiAxiosParamCreator = exports.UpdateGroupMembershipStatus1StatusEnum = exports.RequestGroupTypeChange1RequestStatusEnum = exports.GroupsApi = exports.GroupsApiFactory = exports.GroupsApiFp = exports.GroupsApiAxiosParamCreator = exports.GeoLocationApi = exports.GeoLocationApiFactory = exports.GeoLocationApiFp = exports.GeoLocationApiAxiosParamCreator = exports.FavoritesApi = exports.FavoritesApiFactory = exports.FavoritesApiFp = exports.FavoritesApiAxiosParamCreator = exports.FacebookPropertiesApi = exports.FacebookPropertiesApiFactory = exports.FacebookPropertiesApiFp = exports.FacebookPropertiesApiAxiosParamCreator = exports.ExchangeRatesApi = exports.ExchangeRatesApiFactory = exports.ExchangeRatesApiFp = exports.ExchangeRatesApiAxiosParamCreator = exports.EndorsementsApi = exports.EndorsementsApiFactory = exports.EndorsementsApiFp = exports.EndorsementsApiAxiosParamCreator = exports.DefaultApi = exports.DefaultApiFactory = exports.DefaultApiFp = exports.DefaultApiAxiosParamCreator = exports.CustomerSessionsApi = exports.CustomerSessionsApiFactory = exports.CustomerSessionsApiFp = exports.CustomerSessionsApiAxiosParamCreator = exports.CurrencyManagementApi = exports.CurrencyManagementApiFactory = exports.CurrencyManagementApiFp = exports.CurrencyManagementApiAxiosParamCreator = exports.CountriesApi = exports.CountriesApiFactory = exports.CountriesApiFp = exports.CountriesApiAxiosParamCreator = exports.CheckoutSessionsApi = exports.CheckoutSessionsApiFactory = exports.CheckoutSessionsApiFp = exports.CheckoutSessionsApiAxiosParamCreator = exports.BrokeragesApi = void 0;
+exports.PropertyTypesApiFactory = exports.PropertyTypesApiFp = exports.PropertyTypesApiAxiosParamCreator = exports.PropertyProposalsApi = exports.PropertyProposalsApiFactory = exports.PropertyProposalsApiFp = exports.PropertyProposalsApiAxiosParamCreator = exports.PropertyLocationsApi = exports.PropertyLocationsApiFactory = exports.PropertyLocationsApiFp = exports.PropertyLocationsApiAxiosParamCreator = exports.PropertyFiltersApi = exports.PropertyFiltersApiFactory = exports.PropertyFiltersApiFp = exports.PropertyFiltersApiAxiosParamCreator = exports.PropertyFieldsApi = exports.PropertyFieldsApiFactory = exports.PropertyFieldsApiFp = exports.PropertyFieldsApiAxiosParamCreator = exports.UploadPropertiesFromUrl1FormatEnum = exports.UploadProperties1FormatEnum = exports.PropertyBulkUploadsApi = exports.PropertyBulkUploadsApiFactory = exports.PropertyBulkUploadsApiFp = exports.PropertyBulkUploadsApiAxiosParamCreator = exports.PropertyBulkDownloadApi = exports.PropertyBulkDownloadApiFactory = exports.PropertyBulkDownloadApiFp = exports.PropertyBulkDownloadApiAxiosParamCreator = exports.PropertiesApi = exports.PropertiesApiFactory = exports.PropertiesApiFp = exports.PropertiesApiAxiosParamCreator = exports.PhonePrefixesApi = exports.PhonePrefixesApiFactory = exports.PhonePrefixesApiFp = exports.PhonePrefixesApiAxiosParamCreator = exports.PasswordRecoveryApi = exports.PasswordRecoveryApiFactory = exports.PasswordRecoveryApiFp = exports.PasswordRecoveryApiAxiosParamCreator = exports.LocationCacheApi = exports.LocationCacheApiFactory = exports.LocationCacheApiFp = exports.LocationCacheApiAxiosParamCreator = exports.LocalesApi = exports.LocalesApiFactory = exports.LocalesApiFp = exports.LocalesApiAxiosParamCreator = exports.LanguagesApi = void 0;
+exports.GetSubscribedUsers1SubscriptionPlanNameEnum = exports.UsersApi = exports.UsersApiFactory = exports.UsersApiFp = exports.UsersApiAxiosParamCreator = exports.UserTypesApi = exports.UserTypesApiFactory = exports.UserTypesApiFp = exports.UserTypesApiAxiosParamCreator = exports.TextTranslationsApi = exports.TextTranslationsApiFactory = exports.TextTranslationsApiFp = exports.TextTranslationsApiAxiosParamCreator = exports.TestimonialApi = exports.TestimonialApiFactory = exports.TestimonialApiFp = exports.TestimonialApiAxiosParamCreator = exports.SubscriptionsApi = exports.SubscriptionsApiFactory = exports.SubscriptionsApiFp = exports.SubscriptionsApiAxiosParamCreator = exports.StripeWebhooksApi = exports.StripeWebhooksApiFactory = exports.StripeWebhooksApiFp = exports.StripeWebhooksApiAxiosParamCreator = exports.StripeIdentityWebhooksApi = exports.StripeIdentityWebhooksApiFactory = exports.StripeIdentityWebhooksApiFp = exports.StripeIdentityWebhooksApiAxiosParamCreator = exports.SkillsApi = exports.SkillsApiFactory = exports.SkillsApiFp = exports.SkillsApiAxiosParamCreator = exports.SecurityApi = exports.SecurityApiFactory = exports.SecurityApiFp = exports.SecurityApiAxiosParamCreator = exports.PropertyTypesApi = void 0;
 const axios_1 = __importDefault(require("axios"));
 // Some imports not used depending on template conditions
 // @ts-ignore
@@ -170,6 +170,12 @@ exports.HcFilterTypeEntryRangeFieldPresentationEnum = {
     Double: 'DOUBLE',
     Currency: 'CURRENCY',
     Date: 'DATE'
+};
+exports.NetworkSuggestionEventRequestEventTypeEnum = {
+    PopupShown: 'POPUP_SHOWN',
+    PopupDismissed: 'POPUP_DISMISSED',
+    ProfileShown: 'PROFILE_SHOWN',
+    ConnectClicked: 'CONNECT_CLICKED'
 };
 exports.PropertyPublicationStateEnum = {
     Available: 'AVAILABLE',
@@ -10551,6 +10557,67 @@ const UsersApiAxiosParamCreator = function (configuration) {
             };
         },
         /**
+         * Returns up to 5 ranked suggestions (12h cooldown, excludes seen/pending/connected).
+         * @summary Suggested profiles to connect with
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSuggestions1: async (options = {}) => {
+            const localVarPath = `/users/me/network-suggestions`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Record network suggestion analytics events
+         * @param {NetworkSuggestionEventRequest} [networkSuggestionEventRequest]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postEvent1: async (networkSuggestionEventRequest, options = {}) => {
+            const localVarPath = `/users/me/network-suggestions/events`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(networkSuggestionEventRequest, localVarRequestOptions, configuration);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Generates an HTML preview of a user profile for sharing purposes
          * @summary Get HTML preview of a user profile
          * @param {number} [id]
@@ -11247,6 +11314,31 @@ const UsersApiFp = function (configuration) {
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns up to 5 ranked suggestions (12h cooldown, excludes seen/pending/connected).
+         * @summary Suggested profiles to connect with
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getSuggestions1(options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSuggestions1(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['UsersApi.getSuggestions1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         *
+         * @summary Record network suggestion analytics events
+         * @param {NetworkSuggestionEventRequest} [networkSuggestionEventRequest]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async postEvent1(networkSuggestionEventRequest, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.postEvent1(networkSuggestionEventRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['UsersApi.postEvent1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Generates an HTML preview of a user profile for sharing purposes
          * @summary Get HTML preview of a user profile
          * @param {number} [id]
@@ -11590,6 +11682,25 @@ const UsersApiFactory = function (configuration, basePath, axios) {
             return localVarFp.getSubscribedUsers1(requestParameters.subscriptionPlanName, options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns up to 5 ranked suggestions (12h cooldown, excludes seen/pending/connected).
+         * @summary Suggested profiles to connect with
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSuggestions1(options) {
+            return localVarFp.getSuggestions1(options).then((request) => request(axios, basePath));
+        },
+        /**
+         *
+         * @summary Record network suggestion analytics events
+         * @param {UsersApiPostEvent1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postEvent1(requestParameters = {}, options) {
+            return localVarFp.postEvent1(requestParameters.networkSuggestionEventRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Generates an HTML preview of a user profile for sharing purposes
          * @summary Get HTML preview of a user profile
          * @param {UsersApiPreviewPropertyRequest} requestParameters Request parameters.
@@ -11898,6 +12009,27 @@ class UsersApi extends base_1.BaseAPI {
      */
     getSubscribedUsers1(requestParameters, options) {
         return (0, exports.UsersApiFp)(this.configuration).getSubscribedUsers1(requestParameters.subscriptionPlanName, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Returns up to 5 ranked suggestions (12h cooldown, excludes seen/pending/connected).
+     * @summary Suggested profiles to connect with
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    getSuggestions1(options) {
+        return (0, exports.UsersApiFp)(this.configuration).getSuggestions1(options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary Record network suggestion analytics events
+     * @param {UsersApiPostEvent1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    postEvent1(requestParameters = {}, options) {
+        return (0, exports.UsersApiFp)(this.configuration).postEvent1(requestParameters.networkSuggestionEventRequest, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Generates an HTML preview of a user profile for sharing purposes
