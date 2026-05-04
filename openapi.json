@@ -9453,6 +9453,16 @@
           "referral" : {
             "type" : "string"
           },
+          "commissionPaidBy" : {
+            "type" : "string"
+          },
+          "offersReferralCommission" : {
+            "type" : "boolean"
+          },
+          "defaultReferralPercent" : {
+            "type" : "number",
+            "format" : "double"
+          },
           "subscriptionPlanName" : {
             "type" : "string",
             "enum" : [ "Free", "Professional", "Business", "Brokerage" ]
@@ -9462,7 +9472,7 @@
           },
           "publicProfileDesign" : {
             "type" : "string",
-            "enum" : [ "classic", "luxury" ]
+            "enum" : [ "classic", "luxury", "redWhiteGray" ]
           },
           "imprintImageLink" : {
             "type" : "string",
@@ -10972,6 +10982,9 @@
           "affiliateRefNumber" : {
             "type" : "string"
           },
+          "source" : {
+            "type" : "string"
+          },
           "user" : {
             "$ref" : "#/components/schemas/SubscribedUserDto"
           },
@@ -11514,6 +11527,16 @@
           "referral" : {
             "type" : "string"
           },
+          "commissionPaidBy" : {
+            "type" : "string"
+          },
+          "offersReferralCommission" : {
+            "type" : "boolean"
+          },
+          "defaultReferralPercent" : {
+            "type" : "number",
+            "format" : "double"
+          },
           "subscriptionPlanName" : {
             "type" : "string",
             "enum" : [ "Free", "Professional", "Business", "Brokerage" ]
@@ -11523,7 +11546,7 @@
           },
           "publicProfileDesign" : {
             "type" : "string",
-            "enum" : [ "classic", "luxury" ]
+            "enum" : [ "classic", "luxury", "redWhiteGray" ]
           },
           "skills" : {
             "type" : "array",
@@ -11943,6 +11966,12 @@
           },
           "reasonParam" : {
             "type" : "string"
+          },
+          "reasonParams" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
           }
         }
       },
@@ -12125,16 +12154,16 @@
       }
     },
     "securitySchemes" : {
-      "oAuthClientId" : {
-        "type" : "apiKey",
-        "description" : "OAuth client identifier (default: hallocasa_frontend)",
-        "name" : "O-Auth-Client-Id",
-        "in" : "header"
-      },
       "oAuthCode" : {
         "type" : "apiKey",
         "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
         "name" : "O-Auth-Code",
+        "in" : "header"
+      },
+      "oAuthClientId" : {
+        "type" : "apiKey",
+        "description" : "OAuth client identifier (default: hallocasa_frontend)",
+        "name" : "O-Auth-Client-Id",
         "in" : "header"
       },
       "oAuthToken" : {

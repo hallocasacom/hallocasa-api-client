@@ -535,6 +535,12 @@ export interface CheckoutSessionDto {
     'affiliateRefNumber'?: string;
     /**
      * 
+     * @type {string}
+     * @memberof CheckoutSessionDto
+     */
+    'source'?: string;
+    /**
+     * 
      * @type {SubscribedUserDto}
      * @memberof CheckoutSessionDto
      */
@@ -2441,6 +2447,12 @@ export interface NetworkSuggestionDto {
      * @memberof NetworkSuggestionDto
      */
     'reasonParam'?: string;
+    /**
+     * 
+     * @type {{ [key: string]: string; }}
+     * @memberof NetworkSuggestionDto
+     */
+    'reasonParams'?: { [key: string]: string; };
 }
 /**
  * 
@@ -3938,6 +3950,24 @@ export interface SkilledUser {
      * @type {string}
      * @memberof SkilledUser
      */
+    'commissionPaidBy'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof SkilledUser
+     */
+    'offersReferralCommission'?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof SkilledUser
+     */
+    'defaultReferralPercent'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof SkilledUser
+     */
     'subscriptionPlanName'?: SkilledUserSubscriptionPlanNameEnum;
     /**
      * 
@@ -4005,7 +4035,8 @@ export const SkilledUserSubscriptionPlanNameEnum = {
 export type SkilledUserSubscriptionPlanNameEnum = typeof SkilledUserSubscriptionPlanNameEnum[keyof typeof SkilledUserSubscriptionPlanNameEnum];
 export const SkilledUserPublicProfileDesignEnum = {
     Classic: 'classic',
-    Luxury: 'luxury'
+    Luxury: 'luxury',
+    RedWhiteGray: 'redWhiteGray'
 } as const;
 
 export type SkilledUserPublicProfileDesignEnum = typeof SkilledUserPublicProfileDesignEnum[keyof typeof SkilledUserPublicProfileDesignEnum];
@@ -4783,6 +4814,24 @@ export interface User {
      * @type {string}
      * @memberof User
      */
+    'commissionPaidBy'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof User
+     */
+    'offersReferralCommission'?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof User
+     */
+    'defaultReferralPercent'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
     'subscriptionPlanName'?: UserSubscriptionPlanNameEnum;
     /**
      * 
@@ -4814,7 +4863,8 @@ export const UserSubscriptionPlanNameEnum = {
 export type UserSubscriptionPlanNameEnum = typeof UserSubscriptionPlanNameEnum[keyof typeof UserSubscriptionPlanNameEnum];
 export const UserPublicProfileDesignEnum = {
     Classic: 'classic',
-    Luxury: 'luxury'
+    Luxury: 'luxury',
+    RedWhiteGray: 'redWhiteGray'
 } as const;
 
 export type UserPublicProfileDesignEnum = typeof UserPublicProfileDesignEnum[keyof typeof UserPublicProfileDesignEnum];

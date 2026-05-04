@@ -519,6 +519,12 @@ export interface CheckoutSessionDto {
     'affiliateRefNumber'?: string;
     /**
      *
+     * @type {string}
+     * @memberof CheckoutSessionDto
+     */
+    'source'?: string;
+    /**
+     *
      * @type {SubscribedUserDto}
      * @memberof CheckoutSessionDto
      */
@@ -2385,6 +2391,14 @@ export interface NetworkSuggestionDto {
      * @memberof NetworkSuggestionDto
      */
     'reasonParam'?: string;
+    /**
+     *
+     * @type {{ [key: string]: string; }}
+     * @memberof NetworkSuggestionDto
+     */
+    'reasonParams'?: {
+        [key: string]: string;
+    };
 }
 /**
  *
@@ -3866,6 +3880,24 @@ export interface SkilledUser {
      * @type {string}
      * @memberof SkilledUser
      */
+    'commissionPaidBy'?: string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof SkilledUser
+     */
+    'offersReferralCommission'?: boolean;
+    /**
+     *
+     * @type {number}
+     * @memberof SkilledUser
+     */
+    'defaultReferralPercent'?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof SkilledUser
+     */
     'subscriptionPlanName'?: SkilledUserSubscriptionPlanNameEnum;
     /**
      *
@@ -3932,6 +3964,7 @@ export type SkilledUserSubscriptionPlanNameEnum = typeof SkilledUserSubscription
 export declare const SkilledUserPublicProfileDesignEnum: {
     readonly Classic: "classic";
     readonly Luxury: "luxury";
+    readonly RedWhiteGray: "redWhiteGray";
 };
 export type SkilledUserPublicProfileDesignEnum = typeof SkilledUserPublicProfileDesignEnum[keyof typeof SkilledUserPublicProfileDesignEnum];
 export declare const SkilledUserConnectionDegreeEnum: {
@@ -4705,6 +4738,24 @@ export interface User {
      * @type {string}
      * @memberof User
      */
+    'commissionPaidBy'?: string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof User
+     */
+    'offersReferralCommission'?: boolean;
+    /**
+     *
+     * @type {number}
+     * @memberof User
+     */
+    'defaultReferralPercent'?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof User
+     */
     'subscriptionPlanName'?: UserSubscriptionPlanNameEnum;
     /**
      *
@@ -4735,6 +4786,7 @@ export type UserSubscriptionPlanNameEnum = typeof UserSubscriptionPlanNameEnum[k
 export declare const UserPublicProfileDesignEnum: {
     readonly Classic: "classic";
     readonly Luxury: "luxury";
+    readonly RedWhiteGray: "redWhiteGray";
 };
 export type UserPublicProfileDesignEnum = typeof UserPublicProfileDesignEnum[keyof typeof UserPublicProfileDesignEnum];
 /**

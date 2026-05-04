@@ -244,7 +244,8 @@ exports.SkilledUserSubscriptionPlanNameEnum = {
 };
 exports.SkilledUserPublicProfileDesignEnum = {
     Classic: 'classic',
-    Luxury: 'luxury'
+    Luxury: 'luxury',
+    RedWhiteGray: 'redWhiteGray'
 };
 exports.SkilledUserConnectionDegreeEnum = {
     _1st: '1st',
@@ -267,7 +268,8 @@ exports.UserSubscriptionPlanNameEnum = {
 };
 exports.UserPublicProfileDesignEnum = {
     Classic: 'classic',
-    Luxury: 'luxury'
+    Luxury: 'luxury',
+    RedWhiteGray: 'redWhiteGray'
 };
 exports.UserGroupGroupTypeEnum = {
     Group: 'GROUP',
