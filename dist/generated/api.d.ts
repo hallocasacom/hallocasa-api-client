@@ -661,6 +661,287 @@ export interface CountryTelephonePrefix {
     'lang'?: string;
 }
 /**
+ *
+ * @export
+ * @interface Course
+ */
+export interface Course {
+    /**
+     *
+     * @type {number}
+     * @memberof Course
+     */
+    'id'?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof Course
+     */
+    'instructorUserId'?: number;
+    /**
+     * Host full name for listings
+     * @type {string}
+     * @memberof Course
+     */
+    'hostDisplayName'?: string;
+    /**
+     * Public profile slug when available
+     * @type {string}
+     * @memberof Course
+     */
+    'hostProfileName'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Course
+     */
+    'title'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Course
+     */
+    'description'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Course
+     */
+    'summary'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Course
+     */
+    'courseDateTime'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Course
+     */
+    'format'?: CourseFormatEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof Course
+     */
+    'location'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Course
+     */
+    'languageLocale'?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof Course
+     */
+    'priceAmount'?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof Course
+     */
+    'priceCurrency'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Course
+     */
+    'imageUrl'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Course
+     */
+    'designation'?: CourseDesignationEnum;
+    /**
+     *
+     * @type {boolean}
+     * @memberof Course
+     */
+    'stateApprovedCeCredits'?: boolean;
+    /**
+     *
+     * @type {string}
+     * @memberof Course
+     */
+    'externalRegistrationUrl'?: string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof Course
+     */
+    'active'?: boolean;
+    /**
+     *
+     * @type {string}
+     * @memberof Course
+     */
+    'createdAt'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Course
+     */
+    'updatedAt'?: string;
+}
+export declare const CourseFormatEnum: {
+    readonly Online: "ONLINE";
+    readonly InPerson: "IN_PERSON";
+    readonly Hybrid: "HYBRID";
+};
+export type CourseFormatEnum = typeof CourseFormatEnum[keyof typeof CourseFormatEnum];
+export declare const CourseDesignationEnum: {
+    readonly Abr: "ABR";
+    readonly Cips: "CIPS";
+    readonly Cpm: "CPM";
+    readonly Crb: "CRB";
+    readonly Crs: "CRS";
+    readonly Green: "GREEN";
+    readonly Gri: "GRI";
+    readonly Mrp: "MRP";
+    readonly Psa: "PSA";
+    readonly Rsps: "RSPS";
+    readonly Sres: "SRES";
+    readonly Srs: "SRS";
+    readonly SkillTrainingNonDesignation: "SKILL_TRAINING_NON_DESIGNATION";
+};
+export type CourseDesignationEnum = typeof CourseDesignationEnum[keyof typeof CourseDesignationEnum];
+/**
+ *
+ * @export
+ * @interface CourseListResult
+ */
+export interface CourseListResult {
+    /**
+     *
+     * @type {number}
+     * @memberof CourseListResult
+     */
+    'count'?: number;
+    /**
+     *
+     * @type {Array<Course>}
+     * @memberof CourseListResult
+     */
+    'courses'?: Array<Course>;
+}
+/**
+ *
+ * @export
+ * @interface CourseWriteDto
+ */
+export interface CourseWriteDto {
+    /**
+     *
+     * @type {string}
+     * @memberof CourseWriteDto
+     */
+    'title': string;
+    /**
+     *
+     * @type {string}
+     * @memberof CourseWriteDto
+     */
+    'description': string;
+    /**
+     *
+     * @type {string}
+     * @memberof CourseWriteDto
+     */
+    'summary'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CourseWriteDto
+     */
+    'courseDateTime': string;
+    /**
+     *
+     * @type {string}
+     * @memberof CourseWriteDto
+     */
+    'format': CourseWriteDtoFormatEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof CourseWriteDto
+     */
+    'location'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CourseWriteDto
+     */
+    'languageLocale': string;
+    /**
+     *
+     * @type {number}
+     * @memberof CourseWriteDto
+     */
+    'priceAmount'?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof CourseWriteDto
+     */
+    'priceCurrency'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CourseWriteDto
+     */
+    'imageUrl': string;
+    /**
+     *
+     * @type {string}
+     * @memberof CourseWriteDto
+     */
+    'designation': CourseWriteDtoDesignationEnum;
+    /**
+     *
+     * @type {boolean}
+     * @memberof CourseWriteDto
+     */
+    'stateApprovedCeCredits'?: boolean;
+    /**
+     *
+     * @type {string}
+     * @memberof CourseWriteDto
+     */
+    'externalRegistrationUrl': string;
+    /**
+     * Ignored on write; courses are always active globally.
+     * @type {boolean}
+     * @memberof CourseWriteDto
+     */
+    'active'?: boolean;
+}
+export declare const CourseWriteDtoFormatEnum: {
+    readonly Online: "ONLINE";
+    readonly InPerson: "IN_PERSON";
+    readonly Hybrid: "HYBRID";
+};
+export type CourseWriteDtoFormatEnum = typeof CourseWriteDtoFormatEnum[keyof typeof CourseWriteDtoFormatEnum];
+export declare const CourseWriteDtoDesignationEnum: {
+    readonly Abr: "ABR";
+    readonly Cips: "CIPS";
+    readonly Cpm: "CPM";
+    readonly Crb: "CRB";
+    readonly Crs: "CRS";
+    readonly Green: "GREEN";
+    readonly Gri: "GRI";
+    readonly Mrp: "MRP";
+    readonly Psa: "PSA";
+    readonly Rsps: "RSPS";
+    readonly Sres: "SRES";
+    readonly Srs: "SRS";
+    readonly SkillTrainingNonDesignation: "SKILL_TRAINING_NON_DESIGNATION";
+};
+export type CourseWriteDtoDesignationEnum = typeof CourseWriteDtoDesignationEnum[keyof typeof CourseWriteDtoDesignationEnum];
+/**
  * Request to create a new API key
  * @export
  * @interface CreateApiKeyRequestDto
@@ -6329,6 +6610,408 @@ export declare class CountriesApi extends BaseAPI {
     getCountryByIp1(requestParameters?: CountriesApiGetCountryByIp1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Country, any>>;
 }
 /**
+ * CoursesApi - axios parameter creator
+ * @export
+ */
+export declare const CoursesApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     *
+     * @summary Delete course
+     * @param {number} courseId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    _delete: (courseId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @summary Create a global course listing
+     * @param {number} userId
+     * @param {CourseWriteDto} [courseWriteDto]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    create1: (userId: number, courseWriteDto?: CourseWriteDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @summary Get course by id
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    get1: (id: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Globally visible active courses
+     * @summary List published courses
+     * @param {number} [pageFrom] Pagination start (1-based)
+     * @param {number} [pageTo] Pagination end (inclusive)
+     * @param {string} [language]
+     * @param {List1FormatEnum} [format]
+     * @param {List1DesignationEnum} [designation]
+     * @param {boolean} [ceCreditsOnly] Only state-approved CE courses
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    list1: (pageFrom?: number, pageTo?: number, language?: string, format?: List1FormatEnum, designation?: List1DesignationEnum, ceCreditsOnly?: boolean, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @summary List courses owned by user
+     * @param {number} userId Owner user id
+     * @param {number} [pageFrom]
+     * @param {number} [pageTo]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    listForUser1: (userId: number, pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @summary Update course
+     * @param {number} courseId
+     * @param {CourseWriteDto} [courseWriteDto]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    update1: (courseId: number, courseWriteDto?: CourseWriteDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * CoursesApi - functional programming interface
+ * @export
+ */
+export declare const CoursesApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @summary Delete course
+     * @param {number} courseId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    _delete(courseId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     *
+     * @summary Create a global course listing
+     * @param {number} userId
+     * @param {CourseWriteDto} [courseWriteDto]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    create1(userId: number, courseWriteDto?: CourseWriteDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     *
+     * @summary Get course by id
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    get1(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Course>>;
+    /**
+     * Globally visible active courses
+     * @summary List published courses
+     * @param {number} [pageFrom] Pagination start (1-based)
+     * @param {number} [pageTo] Pagination end (inclusive)
+     * @param {string} [language]
+     * @param {List1FormatEnum} [format]
+     * @param {List1DesignationEnum} [designation]
+     * @param {boolean} [ceCreditsOnly] Only state-approved CE courses
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    list1(pageFrom?: number, pageTo?: number, language?: string, format?: List1FormatEnum, designation?: List1DesignationEnum, ceCreditsOnly?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CourseListResult>>;
+    /**
+     *
+     * @summary List courses owned by user
+     * @param {number} userId Owner user id
+     * @param {number} [pageFrom]
+     * @param {number} [pageTo]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    listForUser1(userId: number, pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CourseListResult>>;
+    /**
+     *
+     * @summary Update course
+     * @param {number} courseId
+     * @param {CourseWriteDto} [courseWriteDto]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    update1(courseId: number, courseWriteDto?: CourseWriteDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+};
+/**
+ * CoursesApi - factory interface
+ * @export
+ */
+export declare const CoursesApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     *
+     * @summary Delete course
+     * @param {CoursesApiDeleteRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    _delete(requestParameters: CoursesApiDeleteRequest, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     *
+     * @summary Create a global course listing
+     * @param {CoursesApiCreate1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    create1(requestParameters: CoursesApiCreate1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     *
+     * @summary Get course by id
+     * @param {CoursesApiGet1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    get1(requestParameters: CoursesApiGet1Request, options?: RawAxiosRequestConfig): AxiosPromise<Course>;
+    /**
+     * Globally visible active courses
+     * @summary List published courses
+     * @param {CoursesApiList1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    list1(requestParameters?: CoursesApiList1Request, options?: RawAxiosRequestConfig): AxiosPromise<CourseListResult>;
+    /**
+     *
+     * @summary List courses owned by user
+     * @param {CoursesApiListForUser1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    listForUser1(requestParameters: CoursesApiListForUser1Request, options?: RawAxiosRequestConfig): AxiosPromise<CourseListResult>;
+    /**
+     *
+     * @summary Update course
+     * @param {CoursesApiUpdate1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    update1(requestParameters: CoursesApiUpdate1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+};
+/**
+ * Request parameters for _delete operation in CoursesApi.
+ * @export
+ * @interface CoursesApiDeleteRequest
+ */
+export interface CoursesApiDeleteRequest {
+    /**
+     *
+     * @type {number}
+     * @memberof CoursesApiDelete
+     */
+    readonly courseId: number;
+}
+/**
+ * Request parameters for create1 operation in CoursesApi.
+ * @export
+ * @interface CoursesApiCreate1Request
+ */
+export interface CoursesApiCreate1Request {
+    /**
+     *
+     * @type {number}
+     * @memberof CoursesApiCreate1
+     */
+    readonly userId: number;
+    /**
+     *
+     * @type {CourseWriteDto}
+     * @memberof CoursesApiCreate1
+     */
+    readonly courseWriteDto?: CourseWriteDto;
+}
+/**
+ * Request parameters for get1 operation in CoursesApi.
+ * @export
+ * @interface CoursesApiGet1Request
+ */
+export interface CoursesApiGet1Request {
+    /**
+     *
+     * @type {number}
+     * @memberof CoursesApiGet1
+     */
+    readonly id: number;
+}
+/**
+ * Request parameters for list1 operation in CoursesApi.
+ * @export
+ * @interface CoursesApiList1Request
+ */
+export interface CoursesApiList1Request {
+    /**
+     * Pagination start (1-based)
+     * @type {number}
+     * @memberof CoursesApiList1
+     */
+    readonly pageFrom?: number;
+    /**
+     * Pagination end (inclusive)
+     * @type {number}
+     * @memberof CoursesApiList1
+     */
+    readonly pageTo?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof CoursesApiList1
+     */
+    readonly language?: string;
+    /**
+     *
+     * @type {'ONLINE' | 'IN_PERSON' | 'HYBRID'}
+     * @memberof CoursesApiList1
+     */
+    readonly format?: List1FormatEnum;
+    /**
+     *
+     * @type {'ABR' | 'CIPS' | 'CPM' | 'CRB' | 'CRS' | 'GREEN' | 'GRI' | 'MRP' | 'PSA' | 'RSPS' | 'SRES' | 'SRS' | 'SKILL_TRAINING_NON_DESIGNATION'}
+     * @memberof CoursesApiList1
+     */
+    readonly designation?: List1DesignationEnum;
+    /**
+     * Only state-approved CE courses
+     * @type {boolean}
+     * @memberof CoursesApiList1
+     */
+    readonly ceCreditsOnly?: boolean;
+}
+/**
+ * Request parameters for listForUser1 operation in CoursesApi.
+ * @export
+ * @interface CoursesApiListForUser1Request
+ */
+export interface CoursesApiListForUser1Request {
+    /**
+     * Owner user id
+     * @type {number}
+     * @memberof CoursesApiListForUser1
+     */
+    readonly userId: number;
+    /**
+     *
+     * @type {number}
+     * @memberof CoursesApiListForUser1
+     */
+    readonly pageFrom?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof CoursesApiListForUser1
+     */
+    readonly pageTo?: number;
+}
+/**
+ * Request parameters for update1 operation in CoursesApi.
+ * @export
+ * @interface CoursesApiUpdate1Request
+ */
+export interface CoursesApiUpdate1Request {
+    /**
+     *
+     * @type {number}
+     * @memberof CoursesApiUpdate1
+     */
+    readonly courseId: number;
+    /**
+     *
+     * @type {CourseWriteDto}
+     * @memberof CoursesApiUpdate1
+     */
+    readonly courseWriteDto?: CourseWriteDto;
+}
+/**
+ * CoursesApi - object-oriented interface
+ * @export
+ * @class CoursesApi
+ * @extends {BaseAPI}
+ */
+export declare class CoursesApi extends BaseAPI {
+    /**
+     *
+     * @summary Delete course
+     * @param {CoursesApiDeleteRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoursesApi
+     */
+    _delete(requestParameters: CoursesApiDeleteRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    /**
+     *
+     * @summary Create a global course listing
+     * @param {CoursesApiCreate1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoursesApi
+     */
+    create1(requestParameters: CoursesApiCreate1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    /**
+     *
+     * @summary Get course by id
+     * @param {CoursesApiGet1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoursesApi
+     */
+    get1(requestParameters: CoursesApiGet1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Course, any>>;
+    /**
+     * Globally visible active courses
+     * @summary List published courses
+     * @param {CoursesApiList1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoursesApi
+     */
+    list1(requestParameters?: CoursesApiList1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CourseListResult, any>>;
+    /**
+     *
+     * @summary List courses owned by user
+     * @param {CoursesApiListForUser1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoursesApi
+     */
+    listForUser1(requestParameters: CoursesApiListForUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CourseListResult, any>>;
+    /**
+     *
+     * @summary Update course
+     * @param {CoursesApiUpdate1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoursesApi
+     */
+    update1(requestParameters: CoursesApiUpdate1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+}
+/**
+ * @export
+ */
+export declare const List1FormatEnum: {
+    readonly Online: "ONLINE";
+    readonly InPerson: "IN_PERSON";
+    readonly Hybrid: "HYBRID";
+};
+export type List1FormatEnum = typeof List1FormatEnum[keyof typeof List1FormatEnum];
+/**
+ * @export
+ */
+export declare const List1DesignationEnum: {
+    readonly Abr: "ABR";
+    readonly Cips: "CIPS";
+    readonly Cpm: "CPM";
+    readonly Crb: "CRB";
+    readonly Crs: "CRS";
+    readonly Green: "GREEN";
+    readonly Gri: "GRI";
+    readonly Mrp: "MRP";
+    readonly Psa: "PSA";
+    readonly Rsps: "RSPS";
+    readonly Sres: "SRES";
+    readonly Srs: "SRS";
+    readonly SkillTrainingNonDesignation: "SKILL_TRAINING_NON_DESIGNATION";
+};
+export type List1DesignationEnum = typeof List1DesignationEnum[keyof typeof List1DesignationEnum];
+/**
  * CurrencyManagementApi - axios parameter creator
  * @export
  */
@@ -8552,7 +9235,7 @@ export declare const LocalesApiAxiosParamCreator: (configuration?: Configuration
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    delete1: (pnemonic: string, securityKey?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    delete2: (pnemonic: string, securityKey?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Retrieves the complete list of available locales in the system
      * @summary Returns all language list locale entries
@@ -8582,7 +9265,7 @@ export declare const LocalesApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    delete1(pnemonic: string, securityKey?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
+    delete2(pnemonic: string, securityKey?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
     /**
      * Retrieves the complete list of available locales in the system
      * @summary Returns all language list locale entries
@@ -8607,11 +9290,11 @@ export declare const LocalesApiFactory: (configuration?: Configuration, basePath
     /**
      * Removes a locale entry identified by its pnemonic code along with all its translations
      * @summary Delete a locale entry with all translations related
-     * @param {LocalesApiDelete1Request} requestParameters Request parameters.
+     * @param {LocalesApiDelete2Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    delete1(requestParameters: LocalesApiDelete1Request, options?: RawAxiosRequestConfig): AxiosPromise<object>;
+    delete2(requestParameters: LocalesApiDelete2Request, options?: RawAxiosRequestConfig): AxiosPromise<object>;
     /**
      * Retrieves the complete list of available locales in the system
      * @summary Returns all language list locale entries
@@ -8629,21 +9312,21 @@ export declare const LocalesApiFactory: (configuration?: Configuration, basePath
     getLanguages1(requestParameters?: LocalesApiGetLanguages1Request, options?: RawAxiosRequestConfig): AxiosPromise<object>;
 };
 /**
- * Request parameters for delete1 operation in LocalesApi.
+ * Request parameters for delete2 operation in LocalesApi.
  * @export
- * @interface LocalesApiDelete1Request
+ * @interface LocalesApiDelete2Request
  */
-export interface LocalesApiDelete1Request {
+export interface LocalesApiDelete2Request {
     /**
      *
      * @type {string}
-     * @memberof LocalesApiDelete1
+     * @memberof LocalesApiDelete2
      */
     readonly pnemonic: string;
     /**
      *
      * @type {string}
-     * @memberof LocalesApiDelete1
+     * @memberof LocalesApiDelete2
      */
     readonly securityKey?: string;
 }
@@ -8670,12 +9353,12 @@ export declare class LocalesApi extends BaseAPI {
     /**
      * Removes a locale entry identified by its pnemonic code along with all its translations
      * @summary Delete a locale entry with all translations related
-     * @param {LocalesApiDelete1Request} requestParameters Request parameters.
+     * @param {LocalesApiDelete2Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof LocalesApi
      */
-    delete1(requestParameters: LocalesApiDelete1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
+    delete2(requestParameters: LocalesApiDelete2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
     /**
      * Retrieves the complete list of available locales in the system
      * @summary Returns all language list locale entries
@@ -9090,7 +9773,7 @@ export declare const PhonePrefixesApiAxiosParamCreator: (configuration?: Configu
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    get2: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    get3: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * PhonePrefixesApi - functional programming interface
@@ -9103,7 +9786,7 @@ export declare const PhonePrefixesApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    get2(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CountryPhonePrefix>>>;
+    get3(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CountryPhonePrefix>>>;
 };
 /**
  * PhonePrefixesApi - factory interface
@@ -9116,7 +9799,7 @@ export declare const PhonePrefixesApiFactory: (configuration?: Configuration, ba
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    get2(options?: RawAxiosRequestConfig): AxiosPromise<Array<CountryPhonePrefix>>;
+    get3(options?: RawAxiosRequestConfig): AxiosPromise<Array<CountryPhonePrefix>>;
 };
 /**
  * PhonePrefixesApi - object-oriented interface
@@ -9132,7 +9815,7 @@ export declare class PhonePrefixesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PhonePrefixesApi
      */
-    get2(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CountryPhonePrefix[], any>>;
+    get3(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CountryPhonePrefix[], any>>;
 }
 /**
  * PropertiesApi - axios parameter creator

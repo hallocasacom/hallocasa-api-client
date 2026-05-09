@@ -16,10 +16,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BrokeragesApiFactory = exports.BrokeragesApiFp = exports.BrokeragesApiAxiosParamCreator = exports.ApiKeysApi = exports.ApiKeysApiFactory = exports.ApiKeysApiFp = exports.ApiKeysApiAxiosParamCreator = exports.AlertsApi = exports.AlertsApiFactory = exports.AlertsApiFp = exports.AlertsApiAxiosParamCreator = exports.UserSubscriptionDtoStatusEnum = exports.UserSubscriptionDtoRenewalTypeEnum = exports.UserGroupGroupTypeEnum = exports.UserPublicProfileDesignEnum = exports.UserSubscriptionPlanNameEnum = exports.SubscriptionPriceDtoRenewalTypeEnum = exports.SkilledUserConnectionDegreeEnum = exports.SkilledUserPublicProfileDesignEnum = exports.SkilledUserSubscriptionPlanNameEnum = exports.PropertyPublicationStateRequestStatusEnum = exports.PropertyFieldHcListerOptionEnum = exports.PropertyFieldData3TypeEnum = exports.PropertyFieldData2TypeEnum = exports.PropertyFieldData1TypeEnum = exports.PropertyFieldTextTypeEnum = exports.PropertyPublicationStateEnum = exports.NetworkSuggestionEventRequestEventTypeEnum = exports.HcFilterTypeEntryRangeFieldPresentationEnum = exports.HcFilterTypeEntryFilterTypeNatureEnum = exports.HcFilterTypeRangeFieldPresentationEnum = exports.HcFilterTypeFilterTypeNatureEnum = exports.HcFilterEntryFilterWorkerOptionEnum = exports.HcFilterEntryChoiceEnum = exports.HcFilterConditionMaxOperandEnum = exports.HcFilterConditionMinOperandEnum = exports.HcFilterHcListerOptionEnum = exports.HcFilterFilterWorkerOptionEnum = exports.HcFilterChoiceEnum = exports.GroupMemberGroupMemberStatusEnum = exports.GroupRequestStatusEnum = exports.GroupGroupTypeEnum = exports.GroupGroupStatusEnum = exports.FilterShowingStepSequenceAfterEnum = exports.FilterShowingStepSequenceBeforeEnum = exports.FavoriteResourceTypeEnum = exports.DropdownOptionGroupTranslationManagementEnum = exports.CheckoutSessionDtoStatusEnum = exports.AlertWithUserProfileUserAlertTypeEnum = exports.AlertUserAlertTypeEnum = void 0;
-exports.LanguagesApiFactory = exports.LanguagesApiFp = exports.LanguagesApiAxiosParamCreator = exports.UpdateGroupMembershipStatus1StatusEnum = exports.RequestGroupTypeChange1RequestStatusEnum = exports.GroupsApi = exports.GroupsApiFactory = exports.GroupsApiFp = exports.GroupsApiAxiosParamCreator = exports.GeoLocationApi = exports.GeoLocationApiFactory = exports.GeoLocationApiFp = exports.GeoLocationApiAxiosParamCreator = exports.FavoritesApi = exports.FavoritesApiFactory = exports.FavoritesApiFp = exports.FavoritesApiAxiosParamCreator = exports.FacebookPropertiesApi = exports.FacebookPropertiesApiFactory = exports.FacebookPropertiesApiFp = exports.FacebookPropertiesApiAxiosParamCreator = exports.ExchangeRatesApi = exports.ExchangeRatesApiFactory = exports.ExchangeRatesApiFp = exports.ExchangeRatesApiAxiosParamCreator = exports.EndorsementsApi = exports.EndorsementsApiFactory = exports.EndorsementsApiFp = exports.EndorsementsApiAxiosParamCreator = exports.DefaultApi = exports.DefaultApiFactory = exports.DefaultApiFp = exports.DefaultApiAxiosParamCreator = exports.CustomerSessionsApi = exports.CustomerSessionsApiFactory = exports.CustomerSessionsApiFp = exports.CustomerSessionsApiAxiosParamCreator = exports.CurrencyManagementApi = exports.CurrencyManagementApiFactory = exports.CurrencyManagementApiFp = exports.CurrencyManagementApiAxiosParamCreator = exports.CountriesApi = exports.CountriesApiFactory = exports.CountriesApiFp = exports.CountriesApiAxiosParamCreator = exports.CheckoutSessionsApi = exports.CheckoutSessionsApiFactory = exports.CheckoutSessionsApiFp = exports.CheckoutSessionsApiAxiosParamCreator = exports.BrokeragesApi = void 0;
-exports.PropertyTypesApiFactory = exports.PropertyTypesApiFp = exports.PropertyTypesApiAxiosParamCreator = exports.PropertyProposalsApi = exports.PropertyProposalsApiFactory = exports.PropertyProposalsApiFp = exports.PropertyProposalsApiAxiosParamCreator = exports.PropertyLocationsApi = exports.PropertyLocationsApiFactory = exports.PropertyLocationsApiFp = exports.PropertyLocationsApiAxiosParamCreator = exports.PropertyFiltersApi = exports.PropertyFiltersApiFactory = exports.PropertyFiltersApiFp = exports.PropertyFiltersApiAxiosParamCreator = exports.PropertyFieldsApi = exports.PropertyFieldsApiFactory = exports.PropertyFieldsApiFp = exports.PropertyFieldsApiAxiosParamCreator = exports.UploadPropertiesFromUrl1FormatEnum = exports.UploadProperties1FormatEnum = exports.PropertyBulkUploadsApi = exports.PropertyBulkUploadsApiFactory = exports.PropertyBulkUploadsApiFp = exports.PropertyBulkUploadsApiAxiosParamCreator = exports.PropertyBulkDownloadApi = exports.PropertyBulkDownloadApiFactory = exports.PropertyBulkDownloadApiFp = exports.PropertyBulkDownloadApiAxiosParamCreator = exports.PropertiesApi = exports.PropertiesApiFactory = exports.PropertiesApiFp = exports.PropertiesApiAxiosParamCreator = exports.PhonePrefixesApi = exports.PhonePrefixesApiFactory = exports.PhonePrefixesApiFp = exports.PhonePrefixesApiAxiosParamCreator = exports.PasswordRecoveryApi = exports.PasswordRecoveryApiFactory = exports.PasswordRecoveryApiFp = exports.PasswordRecoveryApiAxiosParamCreator = exports.LocationCacheApi = exports.LocationCacheApiFactory = exports.LocationCacheApiFp = exports.LocationCacheApiAxiosParamCreator = exports.LocalesApi = exports.LocalesApiFactory = exports.LocalesApiFp = exports.LocalesApiAxiosParamCreator = exports.LanguagesApi = void 0;
-exports.GetSubscribedUsers1SubscriptionPlanNameEnum = exports.UsersApi = exports.UsersApiFactory = exports.UsersApiFp = exports.UsersApiAxiosParamCreator = exports.UserTypesApi = exports.UserTypesApiFactory = exports.UserTypesApiFp = exports.UserTypesApiAxiosParamCreator = exports.TextTranslationsApi = exports.TextTranslationsApiFactory = exports.TextTranslationsApiFp = exports.TextTranslationsApiAxiosParamCreator = exports.TestimonialApi = exports.TestimonialApiFactory = exports.TestimonialApiFp = exports.TestimonialApiAxiosParamCreator = exports.SubscriptionsApi = exports.SubscriptionsApiFactory = exports.SubscriptionsApiFp = exports.SubscriptionsApiAxiosParamCreator = exports.StripeWebhooksApi = exports.StripeWebhooksApiFactory = exports.StripeWebhooksApiFp = exports.StripeWebhooksApiAxiosParamCreator = exports.StripeIdentityWebhooksApi = exports.StripeIdentityWebhooksApiFactory = exports.StripeIdentityWebhooksApiFp = exports.StripeIdentityWebhooksApiAxiosParamCreator = exports.SkillsApi = exports.SkillsApiFactory = exports.SkillsApiFp = exports.SkillsApiAxiosParamCreator = exports.SecurityApi = exports.SecurityApiFactory = exports.SecurityApiFp = exports.SecurityApiAxiosParamCreator = exports.PropertyTypesApi = void 0;
+exports.ApiKeysApiFactory = exports.ApiKeysApiFp = exports.ApiKeysApiAxiosParamCreator = exports.AlertsApi = exports.AlertsApiFactory = exports.AlertsApiFp = exports.AlertsApiAxiosParamCreator = exports.UserSubscriptionDtoStatusEnum = exports.UserSubscriptionDtoRenewalTypeEnum = exports.UserGroupGroupTypeEnum = exports.UserPublicProfileDesignEnum = exports.UserSubscriptionPlanNameEnum = exports.SubscriptionPriceDtoRenewalTypeEnum = exports.SkilledUserConnectionDegreeEnum = exports.SkilledUserPublicProfileDesignEnum = exports.SkilledUserSubscriptionPlanNameEnum = exports.PropertyPublicationStateRequestStatusEnum = exports.PropertyFieldHcListerOptionEnum = exports.PropertyFieldData3TypeEnum = exports.PropertyFieldData2TypeEnum = exports.PropertyFieldData1TypeEnum = exports.PropertyFieldTextTypeEnum = exports.PropertyPublicationStateEnum = exports.NetworkSuggestionEventRequestEventTypeEnum = exports.HcFilterTypeEntryRangeFieldPresentationEnum = exports.HcFilterTypeEntryFilterTypeNatureEnum = exports.HcFilterTypeRangeFieldPresentationEnum = exports.HcFilterTypeFilterTypeNatureEnum = exports.HcFilterEntryFilterWorkerOptionEnum = exports.HcFilterEntryChoiceEnum = exports.HcFilterConditionMaxOperandEnum = exports.HcFilterConditionMinOperandEnum = exports.HcFilterHcListerOptionEnum = exports.HcFilterFilterWorkerOptionEnum = exports.HcFilterChoiceEnum = exports.GroupMemberGroupMemberStatusEnum = exports.GroupRequestStatusEnum = exports.GroupGroupTypeEnum = exports.GroupGroupStatusEnum = exports.FilterShowingStepSequenceAfterEnum = exports.FilterShowingStepSequenceBeforeEnum = exports.FavoriteResourceTypeEnum = exports.DropdownOptionGroupTranslationManagementEnum = exports.CourseWriteDtoDesignationEnum = exports.CourseWriteDtoFormatEnum = exports.CourseDesignationEnum = exports.CourseFormatEnum = exports.CheckoutSessionDtoStatusEnum = exports.AlertWithUserProfileUserAlertTypeEnum = exports.AlertUserAlertTypeEnum = void 0;
+exports.GeoLocationApiFactory = exports.GeoLocationApiFp = exports.GeoLocationApiAxiosParamCreator = exports.FavoritesApi = exports.FavoritesApiFactory = exports.FavoritesApiFp = exports.FavoritesApiAxiosParamCreator = exports.FacebookPropertiesApi = exports.FacebookPropertiesApiFactory = exports.FacebookPropertiesApiFp = exports.FacebookPropertiesApiAxiosParamCreator = exports.ExchangeRatesApi = exports.ExchangeRatesApiFactory = exports.ExchangeRatesApiFp = exports.ExchangeRatesApiAxiosParamCreator = exports.EndorsementsApi = exports.EndorsementsApiFactory = exports.EndorsementsApiFp = exports.EndorsementsApiAxiosParamCreator = exports.DefaultApi = exports.DefaultApiFactory = exports.DefaultApiFp = exports.DefaultApiAxiosParamCreator = exports.CustomerSessionsApi = exports.CustomerSessionsApiFactory = exports.CustomerSessionsApiFp = exports.CustomerSessionsApiAxiosParamCreator = exports.CurrencyManagementApi = exports.CurrencyManagementApiFactory = exports.CurrencyManagementApiFp = exports.CurrencyManagementApiAxiosParamCreator = exports.List1DesignationEnum = exports.List1FormatEnum = exports.CoursesApi = exports.CoursesApiFactory = exports.CoursesApiFp = exports.CoursesApiAxiosParamCreator = exports.CountriesApi = exports.CountriesApiFactory = exports.CountriesApiFp = exports.CountriesApiAxiosParamCreator = exports.CheckoutSessionsApi = exports.CheckoutSessionsApiFactory = exports.CheckoutSessionsApiFp = exports.CheckoutSessionsApiAxiosParamCreator = exports.BrokeragesApi = exports.BrokeragesApiFactory = exports.BrokeragesApiFp = exports.BrokeragesApiAxiosParamCreator = exports.ApiKeysApi = void 0;
+exports.PropertyLocationsApiAxiosParamCreator = exports.PropertyFiltersApi = exports.PropertyFiltersApiFactory = exports.PropertyFiltersApiFp = exports.PropertyFiltersApiAxiosParamCreator = exports.PropertyFieldsApi = exports.PropertyFieldsApiFactory = exports.PropertyFieldsApiFp = exports.PropertyFieldsApiAxiosParamCreator = exports.UploadPropertiesFromUrl1FormatEnum = exports.UploadProperties1FormatEnum = exports.PropertyBulkUploadsApi = exports.PropertyBulkUploadsApiFactory = exports.PropertyBulkUploadsApiFp = exports.PropertyBulkUploadsApiAxiosParamCreator = exports.PropertyBulkDownloadApi = exports.PropertyBulkDownloadApiFactory = exports.PropertyBulkDownloadApiFp = exports.PropertyBulkDownloadApiAxiosParamCreator = exports.PropertiesApi = exports.PropertiesApiFactory = exports.PropertiesApiFp = exports.PropertiesApiAxiosParamCreator = exports.PhonePrefixesApi = exports.PhonePrefixesApiFactory = exports.PhonePrefixesApiFp = exports.PhonePrefixesApiAxiosParamCreator = exports.PasswordRecoveryApi = exports.PasswordRecoveryApiFactory = exports.PasswordRecoveryApiFp = exports.PasswordRecoveryApiAxiosParamCreator = exports.LocationCacheApi = exports.LocationCacheApiFactory = exports.LocationCacheApiFp = exports.LocationCacheApiAxiosParamCreator = exports.LocalesApi = exports.LocalesApiFactory = exports.LocalesApiFp = exports.LocalesApiAxiosParamCreator = exports.LanguagesApi = exports.LanguagesApiFactory = exports.LanguagesApiFp = exports.LanguagesApiAxiosParamCreator = exports.UpdateGroupMembershipStatus1StatusEnum = exports.RequestGroupTypeChange1RequestStatusEnum = exports.GroupsApi = exports.GroupsApiFactory = exports.GroupsApiFp = exports.GroupsApiAxiosParamCreator = exports.GeoLocationApi = void 0;
+exports.GetSubscribedUsers1SubscriptionPlanNameEnum = exports.UsersApi = exports.UsersApiFactory = exports.UsersApiFp = exports.UsersApiAxiosParamCreator = exports.UserTypesApi = exports.UserTypesApiFactory = exports.UserTypesApiFp = exports.UserTypesApiAxiosParamCreator = exports.TextTranslationsApi = exports.TextTranslationsApiFactory = exports.TextTranslationsApiFp = exports.TextTranslationsApiAxiosParamCreator = exports.TestimonialApi = exports.TestimonialApiFactory = exports.TestimonialApiFp = exports.TestimonialApiAxiosParamCreator = exports.SubscriptionsApi = exports.SubscriptionsApiFactory = exports.SubscriptionsApiFp = exports.SubscriptionsApiAxiosParamCreator = exports.StripeWebhooksApi = exports.StripeWebhooksApiFactory = exports.StripeWebhooksApiFp = exports.StripeWebhooksApiAxiosParamCreator = exports.StripeIdentityWebhooksApi = exports.StripeIdentityWebhooksApiFactory = exports.StripeIdentityWebhooksApiFp = exports.StripeIdentityWebhooksApiAxiosParamCreator = exports.SkillsApi = exports.SkillsApiFactory = exports.SkillsApiFp = exports.SkillsApiAxiosParamCreator = exports.SecurityApi = exports.SecurityApiFactory = exports.SecurityApiFp = exports.SecurityApiAxiosParamCreator = exports.PropertyTypesApi = exports.PropertyTypesApiFactory = exports.PropertyTypesApiFp = exports.PropertyTypesApiAxiosParamCreator = exports.PropertyProposalsApi = exports.PropertyProposalsApiFactory = exports.PropertyProposalsApiFp = exports.PropertyProposalsApiAxiosParamCreator = exports.PropertyLocationsApi = exports.PropertyLocationsApiFactory = exports.PropertyLocationsApiFp = void 0;
 const axios_1 = __importDefault(require("axios"));
 // Some imports not used depending on template conditions
 // @ts-ignore
@@ -37,6 +37,46 @@ exports.CheckoutSessionDtoStatusEnum = {
     Success: 'SUCCESS',
     Canceled: 'CANCELED',
     Failed: 'FAILED'
+};
+exports.CourseFormatEnum = {
+    Online: 'ONLINE',
+    InPerson: 'IN_PERSON',
+    Hybrid: 'HYBRID'
+};
+exports.CourseDesignationEnum = {
+    Abr: 'ABR',
+    Cips: 'CIPS',
+    Cpm: 'CPM',
+    Crb: 'CRB',
+    Crs: 'CRS',
+    Green: 'GREEN',
+    Gri: 'GRI',
+    Mrp: 'MRP',
+    Psa: 'PSA',
+    Rsps: 'RSPS',
+    Sres: 'SRES',
+    Srs: 'SRS',
+    SkillTrainingNonDesignation: 'SKILL_TRAINING_NON_DESIGNATION'
+};
+exports.CourseWriteDtoFormatEnum = {
+    Online: 'ONLINE',
+    InPerson: 'IN_PERSON',
+    Hybrid: 'HYBRID'
+};
+exports.CourseWriteDtoDesignationEnum = {
+    Abr: 'ABR',
+    Cips: 'CIPS',
+    Cpm: 'CPM',
+    Crb: 'CRB',
+    Crs: 'CRS',
+    Green: 'GREEN',
+    Gri: 'GRI',
+    Mrp: 'MRP',
+    Psa: 'PSA',
+    Rsps: 'RSPS',
+    Sres: 'SRES',
+    Srs: 'SRS',
+    SkillTrainingNonDesignation: 'SKILL_TRAINING_NON_DESIGNATION'
 };
 exports.DropdownOptionGroupTranslationManagementEnum = {
     Total: 'TOTAL',
@@ -1538,6 +1578,515 @@ class CountriesApi extends base_1.BaseAPI {
     }
 }
 exports.CountriesApi = CountriesApi;
+/**
+ * CoursesApi - axios parameter creator
+ * @export
+ */
+const CoursesApiAxiosParamCreator = function (configuration) {
+    return {
+        /**
+         *
+         * @summary Delete course
+         * @param {number} courseId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        _delete: async (courseId, options = {}) => {
+            // verify required parameter 'courseId' is not null or undefined
+            (0, common_1.assertParamExists)('_delete', 'courseId', courseId);
+            const localVarPath = `/courses/{courseId}`
+                .replace(`{${"courseId"}}`, encodeURIComponent(String(courseId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Create a global course listing
+         * @param {number} userId
+         * @param {CourseWriteDto} [courseWriteDto]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        create1: async (userId, courseWriteDto, options = {}) => {
+            // verify required parameter 'userId' is not null or undefined
+            (0, common_1.assertParamExists)('create1', 'userId', userId);
+            const localVarPath = `/users/{userId}/courses`
+                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(courseWriteDto, localVarRequestOptions, configuration);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Get course by id
+         * @param {number} id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        get1: async (id, options = {}) => {
+            // verify required parameter 'id' is not null or undefined
+            (0, common_1.assertParamExists)('get1', 'id', id);
+            const localVarPath = `/courses/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Globally visible active courses
+         * @summary List published courses
+         * @param {number} [pageFrom] Pagination start (1-based)
+         * @param {number} [pageTo] Pagination end (inclusive)
+         * @param {string} [language]
+         * @param {List1FormatEnum} [format]
+         * @param {List1DesignationEnum} [designation]
+         * @param {boolean} [ceCreditsOnly] Only state-approved CE courses
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        list1: async (pageFrom, pageTo, language, format, designation, ceCreditsOnly, options = {}) => {
+            const localVarPath = `/courses`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            if (pageFrom !== undefined) {
+                localVarQueryParameter['pageFrom'] = pageFrom;
+            }
+            if (pageTo !== undefined) {
+                localVarQueryParameter['pageTo'] = pageTo;
+            }
+            if (language !== undefined) {
+                localVarQueryParameter['language'] = language;
+            }
+            if (format !== undefined) {
+                localVarQueryParameter['format'] = format;
+            }
+            if (designation !== undefined) {
+                localVarQueryParameter['designation'] = designation;
+            }
+            if (ceCreditsOnly !== undefined) {
+                localVarQueryParameter['ceCreditsOnly'] = ceCreditsOnly;
+            }
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary List courses owned by user
+         * @param {number} userId Owner user id
+         * @param {number} [pageFrom]
+         * @param {number} [pageTo]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listForUser1: async (userId, pageFrom, pageTo, options = {}) => {
+            // verify required parameter 'userId' is not null or undefined
+            (0, common_1.assertParamExists)('listForUser1', 'userId', userId);
+            const localVarPath = `/users/{userId}/courses`
+                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            if (pageFrom !== undefined) {
+                localVarQueryParameter['pageFrom'] = pageFrom;
+            }
+            if (pageTo !== undefined) {
+                localVarQueryParameter['pageTo'] = pageTo;
+            }
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Update course
+         * @param {number} courseId
+         * @param {CourseWriteDto} [courseWriteDto]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        update1: async (courseId, courseWriteDto, options = {}) => {
+            // verify required parameter 'courseId' is not null or undefined
+            (0, common_1.assertParamExists)('update1', 'courseId', courseId);
+            const localVarPath = `/courses/{courseId}`
+                .replace(`{${"courseId"}}`, encodeURIComponent(String(courseId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(courseWriteDto, localVarRequestOptions, configuration);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    };
+};
+exports.CoursesApiAxiosParamCreator = CoursesApiAxiosParamCreator;
+/**
+ * CoursesApi - functional programming interface
+ * @export
+ */
+const CoursesApiFp = function (configuration) {
+    const localVarAxiosParamCreator = (0, exports.CoursesApiAxiosParamCreator)(configuration);
+    return {
+        /**
+         *
+         * @summary Delete course
+         * @param {number} courseId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async _delete(courseId, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator._delete(courseId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['CoursesApi._delete']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         *
+         * @summary Create a global course listing
+         * @param {number} userId
+         * @param {CourseWriteDto} [courseWriteDto]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async create1(userId, courseWriteDto, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.create1(userId, courseWriteDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['CoursesApi.create1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         *
+         * @summary Get course by id
+         * @param {number} id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async get1(id, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.get1(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['CoursesApi.get1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Globally visible active courses
+         * @summary List published courses
+         * @param {number} [pageFrom] Pagination start (1-based)
+         * @param {number} [pageTo] Pagination end (inclusive)
+         * @param {string} [language]
+         * @param {List1FormatEnum} [format]
+         * @param {List1DesignationEnum} [designation]
+         * @param {boolean} [ceCreditsOnly] Only state-approved CE courses
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async list1(pageFrom, pageTo, language, format, designation, ceCreditsOnly, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.list1(pageFrom, pageTo, language, format, designation, ceCreditsOnly, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['CoursesApi.list1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         *
+         * @summary List courses owned by user
+         * @param {number} userId Owner user id
+         * @param {number} [pageFrom]
+         * @param {number} [pageTo]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listForUser1(userId, pageFrom, pageTo, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listForUser1(userId, pageFrom, pageTo, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['CoursesApi.listForUser1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         *
+         * @summary Update course
+         * @param {number} courseId
+         * @param {CourseWriteDto} [courseWriteDto]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async update1(courseId, courseWriteDto, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.update1(courseId, courseWriteDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['CoursesApi.update1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    };
+};
+exports.CoursesApiFp = CoursesApiFp;
+/**
+ * CoursesApi - factory interface
+ * @export
+ */
+const CoursesApiFactory = function (configuration, basePath, axios) {
+    const localVarFp = (0, exports.CoursesApiFp)(configuration);
+    return {
+        /**
+         *
+         * @summary Delete course
+         * @param {CoursesApiDeleteRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        _delete(requestParameters, options) {
+            return localVarFp._delete(requestParameters.courseId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         *
+         * @summary Create a global course listing
+         * @param {CoursesApiCreate1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        create1(requestParameters, options) {
+            return localVarFp.create1(requestParameters.userId, requestParameters.courseWriteDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         *
+         * @summary Get course by id
+         * @param {CoursesApiGet1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        get1(requestParameters, options) {
+            return localVarFp.get1(requestParameters.id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Globally visible active courses
+         * @summary List published courses
+         * @param {CoursesApiList1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        list1(requestParameters = {}, options) {
+            return localVarFp.list1(requestParameters.pageFrom, requestParameters.pageTo, requestParameters.language, requestParameters.format, requestParameters.designation, requestParameters.ceCreditsOnly, options).then((request) => request(axios, basePath));
+        },
+        /**
+         *
+         * @summary List courses owned by user
+         * @param {CoursesApiListForUser1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listForUser1(requestParameters, options) {
+            return localVarFp.listForUser1(requestParameters.userId, requestParameters.pageFrom, requestParameters.pageTo, options).then((request) => request(axios, basePath));
+        },
+        /**
+         *
+         * @summary Update course
+         * @param {CoursesApiUpdate1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        update1(requestParameters, options) {
+            return localVarFp.update1(requestParameters.courseId, requestParameters.courseWriteDto, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+exports.CoursesApiFactory = CoursesApiFactory;
+/**
+ * CoursesApi - object-oriented interface
+ * @export
+ * @class CoursesApi
+ * @extends {BaseAPI}
+ */
+class CoursesApi extends base_1.BaseAPI {
+    /**
+     *
+     * @summary Delete course
+     * @param {CoursesApiDeleteRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoursesApi
+     */
+    _delete(requestParameters, options) {
+        return (0, exports.CoursesApiFp)(this.configuration)._delete(requestParameters.courseId, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary Create a global course listing
+     * @param {CoursesApiCreate1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoursesApi
+     */
+    create1(requestParameters, options) {
+        return (0, exports.CoursesApiFp)(this.configuration).create1(requestParameters.userId, requestParameters.courseWriteDto, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary Get course by id
+     * @param {CoursesApiGet1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoursesApi
+     */
+    get1(requestParameters, options) {
+        return (0, exports.CoursesApiFp)(this.configuration).get1(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Globally visible active courses
+     * @summary List published courses
+     * @param {CoursesApiList1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoursesApi
+     */
+    list1(requestParameters = {}, options) {
+        return (0, exports.CoursesApiFp)(this.configuration).list1(requestParameters.pageFrom, requestParameters.pageTo, requestParameters.language, requestParameters.format, requestParameters.designation, requestParameters.ceCreditsOnly, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary List courses owned by user
+     * @param {CoursesApiListForUser1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoursesApi
+     */
+    listForUser1(requestParameters, options) {
+        return (0, exports.CoursesApiFp)(this.configuration).listForUser1(requestParameters.userId, requestParameters.pageFrom, requestParameters.pageTo, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary Update course
+     * @param {CoursesApiUpdate1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoursesApi
+     */
+    update1(requestParameters, options) {
+        return (0, exports.CoursesApiFp)(this.configuration).update1(requestParameters.courseId, requestParameters.courseWriteDto, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+exports.CoursesApi = CoursesApi;
+/**
+ * @export
+ */
+exports.List1FormatEnum = {
+    Online: 'ONLINE',
+    InPerson: 'IN_PERSON',
+    Hybrid: 'HYBRID'
+};
+/**
+ * @export
+ */
+exports.List1DesignationEnum = {
+    Abr: 'ABR',
+    Cips: 'CIPS',
+    Cpm: 'CPM',
+    Crb: 'CRB',
+    Crs: 'CRS',
+    Green: 'GREEN',
+    Gri: 'GRI',
+    Mrp: 'MRP',
+    Psa: 'PSA',
+    Rsps: 'RSPS',
+    Sres: 'SRES',
+    Srs: 'SRS',
+    SkillTrainingNonDesignation: 'SKILL_TRAINING_NON_DESIGNATION'
+};
 /**
  * CurrencyManagementApi - axios parameter creator
  * @export
@@ -4576,9 +5125,9 @@ const LocalesApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delete1: async (pnemonic, securityKey, options = {}) => {
+        delete2: async (pnemonic, securityKey, options = {}) => {
             // verify required parameter 'pnemonic' is not null or undefined
-            (0, common_1.assertParamExists)('delete1', 'pnemonic', pnemonic);
+            (0, common_1.assertParamExists)('delete2', 'pnemonic', pnemonic);
             const localVarPath = `/locales/{pnemonic}`
                 .replace(`{${"pnemonic"}}`, encodeURIComponent(String(pnemonic)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -4685,10 +5234,10 @@ const LocalesApiFp = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async delete1(pnemonic, securityKey, options) {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.delete1(pnemonic, securityKey, options);
+        async delete2(pnemonic, securityKey, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.delete2(pnemonic, securityKey, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = base_1.operationServerMap['LocalesApi.delete1']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = base_1.operationServerMap['LocalesApi.delete2']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -4729,12 +5278,12 @@ const LocalesApiFactory = function (configuration, basePath, axios) {
         /**
          * Removes a locale entry identified by its pnemonic code along with all its translations
          * @summary Delete a locale entry with all translations related
-         * @param {LocalesApiDelete1Request} requestParameters Request parameters.
+         * @param {LocalesApiDelete2Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delete1(requestParameters, options) {
-            return localVarFp.delete1(requestParameters.pnemonic, requestParameters.securityKey, options).then((request) => request(axios, basePath));
+        delete2(requestParameters, options) {
+            return localVarFp.delete2(requestParameters.pnemonic, requestParameters.securityKey, options).then((request) => request(axios, basePath));
         },
         /**
          * Retrieves the complete list of available locales in the system
@@ -4768,13 +5317,13 @@ class LocalesApi extends base_1.BaseAPI {
     /**
      * Removes a locale entry identified by its pnemonic code along with all its translations
      * @summary Delete a locale entry with all translations related
-     * @param {LocalesApiDelete1Request} requestParameters Request parameters.
+     * @param {LocalesApiDelete2Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof LocalesApi
      */
-    delete1(requestParameters, options) {
-        return (0, exports.LocalesApiFp)(this.configuration).delete1(requestParameters.pnemonic, requestParameters.securityKey, options).then((request) => request(this.axios, this.basePath));
+    delete2(requestParameters, options) {
+        return (0, exports.LocalesApiFp)(this.configuration).delete2(requestParameters.pnemonic, requestParameters.securityKey, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Retrieves the complete list of available locales in the system
@@ -5421,7 +5970,7 @@ const PhonePrefixesApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        get2: async (options = {}) => {
+        get3: async (options = {}) => {
             const localVarPath = `/country-phone-prefixes`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
@@ -5460,10 +6009,10 @@ const PhonePrefixesApiFp = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async get2(options) {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.get2(options);
+        async get3(options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.get3(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = base_1.operationServerMap['PhonePrefixesApi.get2']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = base_1.operationServerMap['PhonePrefixesApi.get3']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     };
@@ -5482,8 +6031,8 @@ const PhonePrefixesApiFactory = function (configuration, basePath, axios) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        get2(options) {
-            return localVarFp.get2(options).then((request) => request(axios, basePath));
+        get3(options) {
+            return localVarFp.get3(options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -5502,8 +6051,8 @@ class PhonePrefixesApi extends base_1.BaseAPI {
      * @throws {RequiredError}
      * @memberof PhonePrefixesApi
      */
-    get2(options) {
-        return (0, exports.PhonePrefixesApiFp)(this.configuration).get2(options).then((request) => request(this.axios, this.basePath));
+    get3(options) {
+        return (0, exports.PhonePrefixesApiFp)(this.configuration).get3(options).then((request) => request(this.axios, this.basePath));
     }
 }
 exports.PhonePrefixesApi = PhonePrefixesApi;

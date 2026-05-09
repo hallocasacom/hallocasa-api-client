@@ -680,6 +680,295 @@ export interface CountryTelephonePrefix {
     'lang'?: string;
 }
 /**
+ * 
+ * @export
+ * @interface Course
+ */
+export interface Course {
+    /**
+     * 
+     * @type {number}
+     * @memberof Course
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Course
+     */
+    'instructorUserId'?: number;
+    /**
+     * Host full name for listings
+     * @type {string}
+     * @memberof Course
+     */
+    'hostDisplayName'?: string;
+    /**
+     * Public profile slug when available
+     * @type {string}
+     * @memberof Course
+     */
+    'hostProfileName'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Course
+     */
+    'title'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Course
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Course
+     */
+    'summary'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Course
+     */
+    'courseDateTime'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Course
+     */
+    'format'?: CourseFormatEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof Course
+     */
+    'location'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Course
+     */
+    'languageLocale'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Course
+     */
+    'priceAmount'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Course
+     */
+    'priceCurrency'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Course
+     */
+    'imageUrl'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Course
+     */
+    'designation'?: CourseDesignationEnum;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Course
+     */
+    'stateApprovedCeCredits'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof Course
+     */
+    'externalRegistrationUrl'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Course
+     */
+    'active'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof Course
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Course
+     */
+    'updatedAt'?: string;
+}
+
+export const CourseFormatEnum = {
+    Online: 'ONLINE',
+    InPerson: 'IN_PERSON',
+    Hybrid: 'HYBRID'
+} as const;
+
+export type CourseFormatEnum = typeof CourseFormatEnum[keyof typeof CourseFormatEnum];
+export const CourseDesignationEnum = {
+    Abr: 'ABR',
+    Cips: 'CIPS',
+    Cpm: 'CPM',
+    Crb: 'CRB',
+    Crs: 'CRS',
+    Green: 'GREEN',
+    Gri: 'GRI',
+    Mrp: 'MRP',
+    Psa: 'PSA',
+    Rsps: 'RSPS',
+    Sres: 'SRES',
+    Srs: 'SRS',
+    SkillTrainingNonDesignation: 'SKILL_TRAINING_NON_DESIGNATION'
+} as const;
+
+export type CourseDesignationEnum = typeof CourseDesignationEnum[keyof typeof CourseDesignationEnum];
+
+/**
+ * 
+ * @export
+ * @interface CourseListResult
+ */
+export interface CourseListResult {
+    /**
+     * 
+     * @type {number}
+     * @memberof CourseListResult
+     */
+    'count'?: number;
+    /**
+     * 
+     * @type {Array<Course>}
+     * @memberof CourseListResult
+     */
+    'courses'?: Array<Course>;
+}
+/**
+ * 
+ * @export
+ * @interface CourseWriteDto
+ */
+export interface CourseWriteDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof CourseWriteDto
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CourseWriteDto
+     */
+    'description': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CourseWriteDto
+     */
+    'summary'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CourseWriteDto
+     */
+    'courseDateTime': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CourseWriteDto
+     */
+    'format': CourseWriteDtoFormatEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof CourseWriteDto
+     */
+    'location'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CourseWriteDto
+     */
+    'languageLocale': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof CourseWriteDto
+     */
+    'priceAmount'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CourseWriteDto
+     */
+    'priceCurrency'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CourseWriteDto
+     */
+    'imageUrl': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CourseWriteDto
+     */
+    'designation': CourseWriteDtoDesignationEnum;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CourseWriteDto
+     */
+    'stateApprovedCeCredits'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof CourseWriteDto
+     */
+    'externalRegistrationUrl': string;
+    /**
+     * Ignored on write; courses are always active globally.
+     * @type {boolean}
+     * @memberof CourseWriteDto
+     */
+    'active'?: boolean;
+}
+
+export const CourseWriteDtoFormatEnum = {
+    Online: 'ONLINE',
+    InPerson: 'IN_PERSON',
+    Hybrid: 'HYBRID'
+} as const;
+
+export type CourseWriteDtoFormatEnum = typeof CourseWriteDtoFormatEnum[keyof typeof CourseWriteDtoFormatEnum];
+export const CourseWriteDtoDesignationEnum = {
+    Abr: 'ABR',
+    Cips: 'CIPS',
+    Cpm: 'CPM',
+    Crb: 'CRB',
+    Crs: 'CRS',
+    Green: 'GREEN',
+    Gri: 'GRI',
+    Mrp: 'MRP',
+    Psa: 'PSA',
+    Rsps: 'RSPS',
+    Sres: 'SRES',
+    Srs: 'SRS',
+    SkillTrainingNonDesignation: 'SKILL_TRAINING_NON_DESIGNATION'
+} as const;
+
+export type CourseWriteDtoDesignationEnum = typeof CourseWriteDtoDesignationEnum[keyof typeof CourseWriteDtoDesignationEnum];
+
+/**
  * Request to create a new API key
  * @export
  * @interface CreateApiKeyRequestDto
@@ -7168,6 +7457,723 @@ export class CountriesApi extends BaseAPI {
 
 
 /**
+ * CoursesApi - axios parameter creator
+ * @export
+ */
+export const CoursesApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Delete course
+         * @param {number} courseId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        _delete: async (courseId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'courseId' is not null or undefined
+            assertParamExists('_delete', 'courseId', courseId)
+            const localVarPath = `/courses/{courseId}`
+                .replace(`{${"courseId"}}`, encodeURIComponent(String(courseId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Create a global course listing
+         * @param {number} userId 
+         * @param {CourseWriteDto} [courseWriteDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        create1: async (userId: number, courseWriteDto?: CourseWriteDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('create1', 'userId', userId)
+            const localVarPath = `/users/{userId}/courses`
+                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(courseWriteDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get course by id
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        get1: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('get1', 'id', id)
+            const localVarPath = `/courses/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Globally visible active courses
+         * @summary List published courses
+         * @param {number} [pageFrom] Pagination start (1-based)
+         * @param {number} [pageTo] Pagination end (inclusive)
+         * @param {string} [language] 
+         * @param {List1FormatEnum} [format] 
+         * @param {List1DesignationEnum} [designation] 
+         * @param {boolean} [ceCreditsOnly] Only state-approved CE courses
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        list1: async (pageFrom?: number, pageTo?: number, language?: string, format?: List1FormatEnum, designation?: List1DesignationEnum, ceCreditsOnly?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/courses`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+            if (pageFrom !== undefined) {
+                localVarQueryParameter['pageFrom'] = pageFrom;
+            }
+
+            if (pageTo !== undefined) {
+                localVarQueryParameter['pageTo'] = pageTo;
+            }
+
+            if (language !== undefined) {
+                localVarQueryParameter['language'] = language;
+            }
+
+            if (format !== undefined) {
+                localVarQueryParameter['format'] = format;
+            }
+
+            if (designation !== undefined) {
+                localVarQueryParameter['designation'] = designation;
+            }
+
+            if (ceCreditsOnly !== undefined) {
+                localVarQueryParameter['ceCreditsOnly'] = ceCreditsOnly;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary List courses owned by user
+         * @param {number} userId Owner user id
+         * @param {number} [pageFrom] 
+         * @param {number} [pageTo] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listForUser1: async (userId: number, pageFrom?: number, pageTo?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('listForUser1', 'userId', userId)
+            const localVarPath = `/users/{userId}/courses`
+                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+            if (pageFrom !== undefined) {
+                localVarQueryParameter['pageFrom'] = pageFrom;
+            }
+
+            if (pageTo !== undefined) {
+                localVarQueryParameter['pageTo'] = pageTo;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Update course
+         * @param {number} courseId 
+         * @param {CourseWriteDto} [courseWriteDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        update1: async (courseId: number, courseWriteDto?: CourseWriteDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'courseId' is not null or undefined
+            assertParamExists('update1', 'courseId', courseId)
+            const localVarPath = `/courses/{courseId}`
+                .replace(`{${"courseId"}}`, encodeURIComponent(String(courseId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(courseWriteDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * CoursesApi - functional programming interface
+ * @export
+ */
+export const CoursesApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = CoursesApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary Delete course
+         * @param {number} courseId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async _delete(courseId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator._delete(courseId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CoursesApi._delete']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Create a global course listing
+         * @param {number} userId 
+         * @param {CourseWriteDto} [courseWriteDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async create1(userId: number, courseWriteDto?: CourseWriteDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.create1(userId, courseWriteDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CoursesApi.create1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Get course by id
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async get1(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Course>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.get1(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CoursesApi.get1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Globally visible active courses
+         * @summary List published courses
+         * @param {number} [pageFrom] Pagination start (1-based)
+         * @param {number} [pageTo] Pagination end (inclusive)
+         * @param {string} [language] 
+         * @param {List1FormatEnum} [format] 
+         * @param {List1DesignationEnum} [designation] 
+         * @param {boolean} [ceCreditsOnly] Only state-approved CE courses
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async list1(pageFrom?: number, pageTo?: number, language?: string, format?: List1FormatEnum, designation?: List1DesignationEnum, ceCreditsOnly?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CourseListResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.list1(pageFrom, pageTo, language, format, designation, ceCreditsOnly, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CoursesApi.list1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary List courses owned by user
+         * @param {number} userId Owner user id
+         * @param {number} [pageFrom] 
+         * @param {number} [pageTo] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listForUser1(userId: number, pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CourseListResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listForUser1(userId, pageFrom, pageTo, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CoursesApi.listForUser1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Update course
+         * @param {number} courseId 
+         * @param {CourseWriteDto} [courseWriteDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async update1(courseId: number, courseWriteDto?: CourseWriteDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.update1(courseId, courseWriteDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CoursesApi.update1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * CoursesApi - factory interface
+ * @export
+ */
+export const CoursesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = CoursesApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary Delete course
+         * @param {CoursesApiDeleteRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        _delete(requestParameters: CoursesApiDeleteRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp._delete(requestParameters.courseId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Create a global course listing
+         * @param {CoursesApiCreate1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        create1(requestParameters: CoursesApiCreate1Request, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.create1(requestParameters.userId, requestParameters.courseWriteDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get course by id
+         * @param {CoursesApiGet1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        get1(requestParameters: CoursesApiGet1Request, options?: RawAxiosRequestConfig): AxiosPromise<Course> {
+            return localVarFp.get1(requestParameters.id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Globally visible active courses
+         * @summary List published courses
+         * @param {CoursesApiList1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        list1(requestParameters: CoursesApiList1Request = {}, options?: RawAxiosRequestConfig): AxiosPromise<CourseListResult> {
+            return localVarFp.list1(requestParameters.pageFrom, requestParameters.pageTo, requestParameters.language, requestParameters.format, requestParameters.designation, requestParameters.ceCreditsOnly, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary List courses owned by user
+         * @param {CoursesApiListForUser1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listForUser1(requestParameters: CoursesApiListForUser1Request, options?: RawAxiosRequestConfig): AxiosPromise<CourseListResult> {
+            return localVarFp.listForUser1(requestParameters.userId, requestParameters.pageFrom, requestParameters.pageTo, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Update course
+         * @param {CoursesApiUpdate1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        update1(requestParameters: CoursesApiUpdate1Request, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.update1(requestParameters.courseId, requestParameters.courseWriteDto, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * Request parameters for _delete operation in CoursesApi.
+ * @export
+ * @interface CoursesApiDeleteRequest
+ */
+export interface CoursesApiDeleteRequest {
+    /**
+     * 
+     * @type {number}
+     * @memberof CoursesApiDelete
+     */
+    readonly courseId: number
+}
+
+/**
+ * Request parameters for create1 operation in CoursesApi.
+ * @export
+ * @interface CoursesApiCreate1Request
+ */
+export interface CoursesApiCreate1Request {
+    /**
+     * 
+     * @type {number}
+     * @memberof CoursesApiCreate1
+     */
+    readonly userId: number
+
+    /**
+     * 
+     * @type {CourseWriteDto}
+     * @memberof CoursesApiCreate1
+     */
+    readonly courseWriteDto?: CourseWriteDto
+}
+
+/**
+ * Request parameters for get1 operation in CoursesApi.
+ * @export
+ * @interface CoursesApiGet1Request
+ */
+export interface CoursesApiGet1Request {
+    /**
+     * 
+     * @type {number}
+     * @memberof CoursesApiGet1
+     */
+    readonly id: number
+}
+
+/**
+ * Request parameters for list1 operation in CoursesApi.
+ * @export
+ * @interface CoursesApiList1Request
+ */
+export interface CoursesApiList1Request {
+    /**
+     * Pagination start (1-based)
+     * @type {number}
+     * @memberof CoursesApiList1
+     */
+    readonly pageFrom?: number
+
+    /**
+     * Pagination end (inclusive)
+     * @type {number}
+     * @memberof CoursesApiList1
+     */
+    readonly pageTo?: number
+
+    /**
+     * 
+     * @type {string}
+     * @memberof CoursesApiList1
+     */
+    readonly language?: string
+
+    /**
+     * 
+     * @type {'ONLINE' | 'IN_PERSON' | 'HYBRID'}
+     * @memberof CoursesApiList1
+     */
+    readonly format?: List1FormatEnum
+
+    /**
+     * 
+     * @type {'ABR' | 'CIPS' | 'CPM' | 'CRB' | 'CRS' | 'GREEN' | 'GRI' | 'MRP' | 'PSA' | 'RSPS' | 'SRES' | 'SRS' | 'SKILL_TRAINING_NON_DESIGNATION'}
+     * @memberof CoursesApiList1
+     */
+    readonly designation?: List1DesignationEnum
+
+    /**
+     * Only state-approved CE courses
+     * @type {boolean}
+     * @memberof CoursesApiList1
+     */
+    readonly ceCreditsOnly?: boolean
+}
+
+/**
+ * Request parameters for listForUser1 operation in CoursesApi.
+ * @export
+ * @interface CoursesApiListForUser1Request
+ */
+export interface CoursesApiListForUser1Request {
+    /**
+     * Owner user id
+     * @type {number}
+     * @memberof CoursesApiListForUser1
+     */
+    readonly userId: number
+
+    /**
+     * 
+     * @type {number}
+     * @memberof CoursesApiListForUser1
+     */
+    readonly pageFrom?: number
+
+    /**
+     * 
+     * @type {number}
+     * @memberof CoursesApiListForUser1
+     */
+    readonly pageTo?: number
+}
+
+/**
+ * Request parameters for update1 operation in CoursesApi.
+ * @export
+ * @interface CoursesApiUpdate1Request
+ */
+export interface CoursesApiUpdate1Request {
+    /**
+     * 
+     * @type {number}
+     * @memberof CoursesApiUpdate1
+     */
+    readonly courseId: number
+
+    /**
+     * 
+     * @type {CourseWriteDto}
+     * @memberof CoursesApiUpdate1
+     */
+    readonly courseWriteDto?: CourseWriteDto
+}
+
+/**
+ * CoursesApi - object-oriented interface
+ * @export
+ * @class CoursesApi
+ * @extends {BaseAPI}
+ */
+export class CoursesApi extends BaseAPI {
+    /**
+     * 
+     * @summary Delete course
+     * @param {CoursesApiDeleteRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoursesApi
+     */
+    public _delete(requestParameters: CoursesApiDeleteRequest, options?: RawAxiosRequestConfig) {
+        return CoursesApiFp(this.configuration)._delete(requestParameters.courseId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Create a global course listing
+     * @param {CoursesApiCreate1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoursesApi
+     */
+    public create1(requestParameters: CoursesApiCreate1Request, options?: RawAxiosRequestConfig) {
+        return CoursesApiFp(this.configuration).create1(requestParameters.userId, requestParameters.courseWriteDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get course by id
+     * @param {CoursesApiGet1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoursesApi
+     */
+    public get1(requestParameters: CoursesApiGet1Request, options?: RawAxiosRequestConfig) {
+        return CoursesApiFp(this.configuration).get1(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Globally visible active courses
+     * @summary List published courses
+     * @param {CoursesApiList1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoursesApi
+     */
+    public list1(requestParameters: CoursesApiList1Request = {}, options?: RawAxiosRequestConfig) {
+        return CoursesApiFp(this.configuration).list1(requestParameters.pageFrom, requestParameters.pageTo, requestParameters.language, requestParameters.format, requestParameters.designation, requestParameters.ceCreditsOnly, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary List courses owned by user
+     * @param {CoursesApiListForUser1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoursesApi
+     */
+    public listForUser1(requestParameters: CoursesApiListForUser1Request, options?: RawAxiosRequestConfig) {
+        return CoursesApiFp(this.configuration).listForUser1(requestParameters.userId, requestParameters.pageFrom, requestParameters.pageTo, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Update course
+     * @param {CoursesApiUpdate1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoursesApi
+     */
+    public update1(requestParameters: CoursesApiUpdate1Request, options?: RawAxiosRequestConfig) {
+        return CoursesApiFp(this.configuration).update1(requestParameters.courseId, requestParameters.courseWriteDto, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+/**
+ * @export
+ */
+export const List1FormatEnum = {
+    Online: 'ONLINE',
+    InPerson: 'IN_PERSON',
+    Hybrid: 'HYBRID'
+} as const;
+export type List1FormatEnum = typeof List1FormatEnum[keyof typeof List1FormatEnum];
+/**
+ * @export
+ */
+export const List1DesignationEnum = {
+    Abr: 'ABR',
+    Cips: 'CIPS',
+    Cpm: 'CPM',
+    Crb: 'CRB',
+    Crs: 'CRS',
+    Green: 'GREEN',
+    Gri: 'GRI',
+    Mrp: 'MRP',
+    Psa: 'PSA',
+    Rsps: 'RSPS',
+    Sres: 'SRES',
+    Srs: 'SRS',
+    SkillTrainingNonDesignation: 'SKILL_TRAINING_NON_DESIGNATION'
+} as const;
+export type List1DesignationEnum = typeof List1DesignationEnum[keyof typeof List1DesignationEnum];
+
+
+/**
  * CurrencyManagementApi - axios parameter creator
  * @export
  */
@@ -11267,9 +12273,9 @@ export const LocalesApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delete1: async (pnemonic: string, securityKey?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        delete2: async (pnemonic: string, securityKey?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'pnemonic' is not null or undefined
-            assertParamExists('delete1', 'pnemonic', pnemonic)
+            assertParamExists('delete2', 'pnemonic', pnemonic)
             const localVarPath = `/locales/{pnemonic}`
                 .replace(`{${"pnemonic"}}`, encodeURIComponent(String(pnemonic)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -11398,10 +12404,10 @@ export const LocalesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async delete1(pnemonic: string, securityKey?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.delete1(pnemonic, securityKey, options);
+        async delete2(pnemonic: string, securityKey?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.delete2(pnemonic, securityKey, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['LocalesApi.delete1']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['LocalesApi.delete2']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -11442,12 +12448,12 @@ export const LocalesApiFactory = function (configuration?: Configuration, basePa
         /**
          * Removes a locale entry identified by its pnemonic code along with all its translations
          * @summary Delete a locale entry with all translations related
-         * @param {LocalesApiDelete1Request} requestParameters Request parameters.
+         * @param {LocalesApiDelete2Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        delete1(requestParameters: LocalesApiDelete1Request, options?: RawAxiosRequestConfig): AxiosPromise<object> {
-            return localVarFp.delete1(requestParameters.pnemonic, requestParameters.securityKey, options).then((request) => request(axios, basePath));
+        delete2(requestParameters: LocalesApiDelete2Request, options?: RawAxiosRequestConfig): AxiosPromise<object> {
+            return localVarFp.delete2(requestParameters.pnemonic, requestParameters.securityKey, options).then((request) => request(axios, basePath));
         },
         /**
          * Retrieves the complete list of available locales in the system
@@ -11472,22 +12478,22 @@ export const LocalesApiFactory = function (configuration?: Configuration, basePa
 };
 
 /**
- * Request parameters for delete1 operation in LocalesApi.
+ * Request parameters for delete2 operation in LocalesApi.
  * @export
- * @interface LocalesApiDelete1Request
+ * @interface LocalesApiDelete2Request
  */
-export interface LocalesApiDelete1Request {
+export interface LocalesApiDelete2Request {
     /**
      * 
      * @type {string}
-     * @memberof LocalesApiDelete1
+     * @memberof LocalesApiDelete2
      */
     readonly pnemonic: string
 
     /**
      * 
      * @type {string}
-     * @memberof LocalesApiDelete1
+     * @memberof LocalesApiDelete2
      */
     readonly securityKey?: string
 }
@@ -11516,13 +12522,13 @@ export class LocalesApi extends BaseAPI {
     /**
      * Removes a locale entry identified by its pnemonic code along with all its translations
      * @summary Delete a locale entry with all translations related
-     * @param {LocalesApiDelete1Request} requestParameters Request parameters.
+     * @param {LocalesApiDelete2Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof LocalesApi
      */
-    public delete1(requestParameters: LocalesApiDelete1Request, options?: RawAxiosRequestConfig) {
-        return LocalesApiFp(this.configuration).delete1(requestParameters.pnemonic, requestParameters.securityKey, options).then((request) => request(this.axios, this.basePath));
+    public delete2(requestParameters: LocalesApiDelete2Request, options?: RawAxiosRequestConfig) {
+        return LocalesApiFp(this.configuration).delete2(requestParameters.pnemonic, requestParameters.securityKey, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -12329,7 +13335,7 @@ export const PhonePrefixesApiAxiosParamCreator = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        get2: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        get3: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/country-phone-prefixes`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -12375,10 +13381,10 @@ export const PhonePrefixesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async get2(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CountryPhonePrefix>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.get2(options);
+        async get3(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CountryPhonePrefix>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.get3(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PhonePrefixesApi.get2']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['PhonePrefixesApi.get3']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -12397,8 +13403,8 @@ export const PhonePrefixesApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        get2(options?: RawAxiosRequestConfig): AxiosPromise<Array<CountryPhonePrefix>> {
-            return localVarFp.get2(options).then((request) => request(axios, basePath));
+        get3(options?: RawAxiosRequestConfig): AxiosPromise<Array<CountryPhonePrefix>> {
+            return localVarFp.get3(options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -12417,8 +13423,8 @@ export class PhonePrefixesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PhonePrefixesApi
      */
-    public get2(options?: RawAxiosRequestConfig) {
-        return PhonePrefixesApiFp(this.configuration).get2(options).then((request) => request(this.axios, this.basePath));
+    public get3(options?: RawAxiosRequestConfig) {
+        return PhonePrefixesApiFp(this.configuration).get3(options).then((request) => request(this.axios, this.basePath));
     }
 }
 

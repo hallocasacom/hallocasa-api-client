@@ -67,6 +67,9 @@
     "name" : "brokerages",
     "description" : "Brokerage management APIs"
   }, {
+    "name" : "courses",
+    "description" : "Global instructor course directory"
+  }, {
     "name" : "endorsements",
     "description" : "User endorsements management API"
   }, {
@@ -88,7 +91,7 @@
         "tags" : [ "phone-prefixes" ],
         "summary" : "Returns all country-phone-prefixes list",
         "description" : "Retrieves a list of all available country phone prefixes with their details",
-        "operationId" : "get_2",
+        "operationId" : "get_3",
         "responses" : {
           "200" : {
             "description" : "Ok. Successfully retrieved country phone prefixes",
@@ -561,7 +564,7 @@
         "tags" : [ "locales" ],
         "summary" : "Delete a locale entry with all translations related",
         "description" : "Removes a locale entry identified by its pnemonic code along with all its translations",
-        "operationId" : "delete_1",
+        "operationId" : "delete_2",
         "parameters" : [ {
           "name" : "security-key",
           "in" : "header",
@@ -6584,6 +6587,158 @@
         }
       }
     },
+    "/courses/{id}" : {
+      "get" : {
+        "tags" : [ "courses" ],
+        "summary" : "Get course by id",
+        "operationId" : "get_1",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Course"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found"
+          }
+        }
+      }
+    },
+    "/courses" : {
+      "get" : {
+        "tags" : [ "courses" ],
+        "summary" : "List published courses",
+        "description" : "Globally visible active courses",
+        "operationId" : "list_1",
+        "parameters" : [ {
+          "name" : "pageFrom",
+          "in" : "query",
+          "description" : "Pagination start (1-based)",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "default" : 1
+          }
+        }, {
+          "name" : "pageTo",
+          "in" : "query",
+          "description" : "Pagination end (inclusive)",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "default" : 20
+          }
+        }, {
+          "name" : "language",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "format",
+          "in" : "query",
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "ONLINE", "IN_PERSON", "HYBRID" ]
+          }
+        }, {
+          "name" : "designation",
+          "in" : "query",
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "ABR", "CIPS", "CPM", "CRB", "CRS", "GREEN", "GRI", "MRP", "PSA", "RSPS", "SRES", "SRS", "SKILL_TRAINING_NON_DESIGNATION" ]
+          }
+        }, {
+          "name" : "ceCreditsOnly",
+          "in" : "query",
+          "description" : "Only state-approved CE courses",
+          "schema" : {
+            "type" : "boolean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CourseListResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/courses/{courseId}" : {
+      "put" : {
+        "tags" : [ "courses" ],
+        "summary" : "Update course",
+        "operationId" : "update_1",
+        "parameters" : [ {
+          "name" : "courseId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CourseWriteDto"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "courses" ],
+        "summary" : "Delete course",
+        "operationId" : "delete",
+        "parameters" : [ {
+          "name" : "courseId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
     "/users/{userId}/endorsements" : {
       "get" : {
         "tags" : [ "endorsements" ],
@@ -7213,6 +7368,79 @@
                 "example" : "{\"message\":\"You do not have permission to access all alerts\"}"
               }
             }
+          }
+        }
+      }
+    },
+    "/users/{userId}/courses" : {
+      "get" : {
+        "tags" : [ "courses" ],
+        "summary" : "List courses owned by user",
+        "operationId" : "listForUser_1",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "Owner user id",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "pageFrom",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "default" : 1
+          }
+        }, {
+          "name" : "pageTo",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "default" : 50
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CourseListResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "courses" ],
+        "summary" : "Create a global course listing",
+        "operationId" : "create_1",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CourseWriteDto"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Created"
           }
         }
       }
@@ -11651,6 +11879,163 @@
           }
         }
       },
+      "Course" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "instructorUserId" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "hostDisplayName" : {
+            "type" : "string",
+            "description" : "Host full name for listings"
+          },
+          "hostProfileName" : {
+            "type" : "string",
+            "description" : "Public profile slug when available"
+          },
+          "title" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "summary" : {
+            "type" : "string"
+          },
+          "courseDateTime" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "format" : {
+            "type" : "string",
+            "enum" : [ "ONLINE", "IN_PERSON", "HYBRID" ]
+          },
+          "location" : {
+            "type" : "string"
+          },
+          "languageLocale" : {
+            "type" : "string"
+          },
+          "priceAmount" : {
+            "type" : "number"
+          },
+          "priceCurrency" : {
+            "type" : "string"
+          },
+          "imageUrl" : {
+            "type" : "string"
+          },
+          "designation" : {
+            "type" : "string",
+            "enum" : [ "ABR", "CIPS", "CPM", "CRB", "CRS", "GREEN", "GRI", "MRP", "PSA", "RSPS", "SRES", "SRS", "SKILL_TRAINING_NON_DESIGNATION" ]
+          },
+          "stateApprovedCeCredits" : {
+            "type" : "boolean"
+          },
+          "externalRegistrationUrl" : {
+            "type" : "string"
+          },
+          "active" : {
+            "type" : "boolean"
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "updatedAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
+      "CourseListResult" : {
+        "type" : "object",
+        "properties" : {
+          "count" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "courses" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Course"
+            }
+          }
+        }
+      },
+      "CourseWriteDto" : {
+        "required" : [ "courseDateTime", "description", "designation", "externalRegistrationUrl", "format", "imageUrl", "languageLocale", "title" ],
+        "type" : "object",
+        "properties" : {
+          "title" : {
+            "maxLength" : 255,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "summary" : {
+            "maxLength" : 600,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "courseDateTime" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "format" : {
+            "type" : "string",
+            "enum" : [ "ONLINE", "IN_PERSON", "HYBRID" ]
+          },
+          "location" : {
+            "maxLength" : 512,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "languageLocale" : {
+            "maxLength" : 16,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "priceAmount" : {
+            "type" : "number"
+          },
+          "priceCurrency" : {
+            "maxLength" : 8,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "imageUrl" : {
+            "maxLength" : 2048,
+            "minLength" : 0,
+            "pattern" : "^(https?://).+",
+            "type" : "string"
+          },
+          "designation" : {
+            "type" : "string",
+            "enum" : [ "ABR", "CIPS", "CPM", "CRB", "CRS", "GREEN", "GRI", "MRP", "PSA", "RSPS", "SRES", "SRS", "SKILL_TRAINING_NON_DESIGNATION" ]
+          },
+          "stateApprovedCeCredits" : {
+            "type" : "boolean"
+          },
+          "externalRegistrationUrl" : {
+            "maxLength" : 2048,
+            "minLength" : 0,
+            "pattern" : "^(https?://).+",
+            "type" : "string"
+          },
+          "active" : {
+            "type" : "boolean",
+            "description" : "Ignored on write; courses are always active globally."
+          }
+        }
+      },
       "SkillEndorsement" : {
         "required" : [ "endorser", "skill", "user" ],
         "type" : "object",
@@ -12154,10 +12539,10 @@
       }
     },
     "securitySchemes" : {
-      "oAuthCode" : {
+      "oAuthToken" : {
         "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
         "in" : "header"
       },
       "oAuthClientId" : {
@@ -12166,10 +12551,10 @@
         "name" : "O-Auth-Client-Id",
         "in" : "header"
       },
-      "oAuthToken" : {
+      "oAuthCode" : {
         "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
         "in" : "header"
       }
     }
