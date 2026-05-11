@@ -16,10 +16,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ApiKeysApiFactory = exports.ApiKeysApiFp = exports.ApiKeysApiAxiosParamCreator = exports.AlertsApi = exports.AlertsApiFactory = exports.AlertsApiFp = exports.AlertsApiAxiosParamCreator = exports.UserSubscriptionDtoStatusEnum = exports.UserSubscriptionDtoRenewalTypeEnum = exports.UserGroupGroupTypeEnum = exports.UserPublicProfileDesignEnum = exports.UserSubscriptionPlanNameEnum = exports.SubscriptionPriceDtoRenewalTypeEnum = exports.SkilledUserConnectionDegreeEnum = exports.SkilledUserPublicProfileDesignEnum = exports.SkilledUserSubscriptionPlanNameEnum = exports.PropertyPublicationStateRequestStatusEnum = exports.PropertyFieldHcListerOptionEnum = exports.PropertyFieldData3TypeEnum = exports.PropertyFieldData2TypeEnum = exports.PropertyFieldData1TypeEnum = exports.PropertyFieldTextTypeEnum = exports.PropertyPublicationStateEnum = exports.NetworkSuggestionEventRequestEventTypeEnum = exports.HcFilterTypeEntryRangeFieldPresentationEnum = exports.HcFilterTypeEntryFilterTypeNatureEnum = exports.HcFilterTypeRangeFieldPresentationEnum = exports.HcFilterTypeFilterTypeNatureEnum = exports.HcFilterEntryFilterWorkerOptionEnum = exports.HcFilterEntryChoiceEnum = exports.HcFilterConditionMaxOperandEnum = exports.HcFilterConditionMinOperandEnum = exports.HcFilterHcListerOptionEnum = exports.HcFilterFilterWorkerOptionEnum = exports.HcFilterChoiceEnum = exports.GroupMemberGroupMemberStatusEnum = exports.GroupRequestStatusEnum = exports.GroupGroupTypeEnum = exports.GroupGroupStatusEnum = exports.FilterShowingStepSequenceAfterEnum = exports.FilterShowingStepSequenceBeforeEnum = exports.FavoriteResourceTypeEnum = exports.DropdownOptionGroupTranslationManagementEnum = exports.CourseWriteDtoDesignationEnum = exports.CourseWriteDtoFormatEnum = exports.CourseDesignationEnum = exports.CourseFormatEnum = exports.CheckoutSessionDtoStatusEnum = exports.AlertWithUserProfileUserAlertTypeEnum = exports.AlertUserAlertTypeEnum = void 0;
-exports.GeoLocationApiFactory = exports.GeoLocationApiFp = exports.GeoLocationApiAxiosParamCreator = exports.FavoritesApi = exports.FavoritesApiFactory = exports.FavoritesApiFp = exports.FavoritesApiAxiosParamCreator = exports.FacebookPropertiesApi = exports.FacebookPropertiesApiFactory = exports.FacebookPropertiesApiFp = exports.FacebookPropertiesApiAxiosParamCreator = exports.ExchangeRatesApi = exports.ExchangeRatesApiFactory = exports.ExchangeRatesApiFp = exports.ExchangeRatesApiAxiosParamCreator = exports.EndorsementsApi = exports.EndorsementsApiFactory = exports.EndorsementsApiFp = exports.EndorsementsApiAxiosParamCreator = exports.DefaultApi = exports.DefaultApiFactory = exports.DefaultApiFp = exports.DefaultApiAxiosParamCreator = exports.CustomerSessionsApi = exports.CustomerSessionsApiFactory = exports.CustomerSessionsApiFp = exports.CustomerSessionsApiAxiosParamCreator = exports.CurrencyManagementApi = exports.CurrencyManagementApiFactory = exports.CurrencyManagementApiFp = exports.CurrencyManagementApiAxiosParamCreator = exports.List1DesignationEnum = exports.List1FormatEnum = exports.CoursesApi = exports.CoursesApiFactory = exports.CoursesApiFp = exports.CoursesApiAxiosParamCreator = exports.CountriesApi = exports.CountriesApiFactory = exports.CountriesApiFp = exports.CountriesApiAxiosParamCreator = exports.CheckoutSessionsApi = exports.CheckoutSessionsApiFactory = exports.CheckoutSessionsApiFp = exports.CheckoutSessionsApiAxiosParamCreator = exports.BrokeragesApi = exports.BrokeragesApiFactory = exports.BrokeragesApiFp = exports.BrokeragesApiAxiosParamCreator = exports.ApiKeysApi = void 0;
-exports.PropertyLocationsApiAxiosParamCreator = exports.PropertyFiltersApi = exports.PropertyFiltersApiFactory = exports.PropertyFiltersApiFp = exports.PropertyFiltersApiAxiosParamCreator = exports.PropertyFieldsApi = exports.PropertyFieldsApiFactory = exports.PropertyFieldsApiFp = exports.PropertyFieldsApiAxiosParamCreator = exports.UploadPropertiesFromUrl1FormatEnum = exports.UploadProperties1FormatEnum = exports.PropertyBulkUploadsApi = exports.PropertyBulkUploadsApiFactory = exports.PropertyBulkUploadsApiFp = exports.PropertyBulkUploadsApiAxiosParamCreator = exports.PropertyBulkDownloadApi = exports.PropertyBulkDownloadApiFactory = exports.PropertyBulkDownloadApiFp = exports.PropertyBulkDownloadApiAxiosParamCreator = exports.PropertiesApi = exports.PropertiesApiFactory = exports.PropertiesApiFp = exports.PropertiesApiAxiosParamCreator = exports.PhonePrefixesApi = exports.PhonePrefixesApiFactory = exports.PhonePrefixesApiFp = exports.PhonePrefixesApiAxiosParamCreator = exports.PasswordRecoveryApi = exports.PasswordRecoveryApiFactory = exports.PasswordRecoveryApiFp = exports.PasswordRecoveryApiAxiosParamCreator = exports.LocationCacheApi = exports.LocationCacheApiFactory = exports.LocationCacheApiFp = exports.LocationCacheApiAxiosParamCreator = exports.LocalesApi = exports.LocalesApiFactory = exports.LocalesApiFp = exports.LocalesApiAxiosParamCreator = exports.LanguagesApi = exports.LanguagesApiFactory = exports.LanguagesApiFp = exports.LanguagesApiAxiosParamCreator = exports.UpdateGroupMembershipStatus1StatusEnum = exports.RequestGroupTypeChange1RequestStatusEnum = exports.GroupsApi = exports.GroupsApiFactory = exports.GroupsApiFp = exports.GroupsApiAxiosParamCreator = exports.GeoLocationApi = void 0;
-exports.GetSubscribedUsers1SubscriptionPlanNameEnum = exports.UsersApi = exports.UsersApiFactory = exports.UsersApiFp = exports.UsersApiAxiosParamCreator = exports.UserTypesApi = exports.UserTypesApiFactory = exports.UserTypesApiFp = exports.UserTypesApiAxiosParamCreator = exports.TextTranslationsApi = exports.TextTranslationsApiFactory = exports.TextTranslationsApiFp = exports.TextTranslationsApiAxiosParamCreator = exports.TestimonialApi = exports.TestimonialApiFactory = exports.TestimonialApiFp = exports.TestimonialApiAxiosParamCreator = exports.SubscriptionsApi = exports.SubscriptionsApiFactory = exports.SubscriptionsApiFp = exports.SubscriptionsApiAxiosParamCreator = exports.StripeWebhooksApi = exports.StripeWebhooksApiFactory = exports.StripeWebhooksApiFp = exports.StripeWebhooksApiAxiosParamCreator = exports.StripeIdentityWebhooksApi = exports.StripeIdentityWebhooksApiFactory = exports.StripeIdentityWebhooksApiFp = exports.StripeIdentityWebhooksApiAxiosParamCreator = exports.SkillsApi = exports.SkillsApiFactory = exports.SkillsApiFp = exports.SkillsApiAxiosParamCreator = exports.SecurityApi = exports.SecurityApiFactory = exports.SecurityApiFp = exports.SecurityApiAxiosParamCreator = exports.PropertyTypesApi = exports.PropertyTypesApiFactory = exports.PropertyTypesApiFp = exports.PropertyTypesApiAxiosParamCreator = exports.PropertyProposalsApi = exports.PropertyProposalsApiFactory = exports.PropertyProposalsApiFp = exports.PropertyProposalsApiAxiosParamCreator = exports.PropertyLocationsApi = exports.PropertyLocationsApiFactory = exports.PropertyLocationsApiFp = void 0;
+exports.AlertsApi = exports.AlertsApiFactory = exports.AlertsApiFp = exports.AlertsApiAxiosParamCreator = exports.UserSubscriptionDtoStatusEnum = exports.UserSubscriptionDtoRenewalTypeEnum = exports.UserGroupGroupTypeEnum = exports.UserPublicProfileDesignEnum = exports.UserSubscriptionPlanNameEnum = exports.SubscriptionPriceDtoRenewalTypeEnum = exports.SkilledUserConnectionDegreeEnum = exports.SkilledUserPublicProfileDesignEnum = exports.SkilledUserSubscriptionPlanNameEnum = exports.PropertyPublicationStateRequestStatusEnum = exports.PropertyFieldHcListerOptionEnum = exports.PropertyFieldData3TypeEnum = exports.PropertyFieldData2TypeEnum = exports.PropertyFieldData1TypeEnum = exports.PropertyFieldTextTypeEnum = exports.PropertyPublicationStateEnum = exports.NotificationTypeEnum = exports.NetworkSuggestionEventRequestEventTypeEnum = exports.HcFilterTypeEntryRangeFieldPresentationEnum = exports.HcFilterTypeEntryFilterTypeNatureEnum = exports.HcFilterTypeRangeFieldPresentationEnum = exports.HcFilterTypeFilterTypeNatureEnum = exports.HcFilterEntryFilterWorkerOptionEnum = exports.HcFilterEntryChoiceEnum = exports.HcFilterConditionMaxOperandEnum = exports.HcFilterConditionMinOperandEnum = exports.HcFilterHcListerOptionEnum = exports.HcFilterFilterWorkerOptionEnum = exports.HcFilterChoiceEnum = exports.GroupMemberGroupMemberStatusEnum = exports.GroupRequestStatusEnum = exports.GroupGroupTypeEnum = exports.GroupGroupStatusEnum = exports.FilterShowingStepSequenceAfterEnum = exports.FilterShowingStepSequenceBeforeEnum = exports.FavoriteResourceTypeEnum = exports.DropdownOptionGroupTranslationManagementEnum = exports.CourseWriteDtoDesignationEnum = exports.CourseWriteDtoFormatEnum = exports.CourseDesignationEnum = exports.CourseFormatEnum = exports.ConversationSummaryChatAllowanceTypeEnum = exports.CheckoutSessionDtoStatusEnum = exports.ChatAllowanceChatAllowanceTypeEnum = exports.AlertWithUserProfileUserAlertTypeEnum = exports.AlertUserAlertTypeEnum = void 0;
+exports.ExchangeRatesApi = exports.ExchangeRatesApiFactory = exports.ExchangeRatesApiFp = exports.ExchangeRatesApiAxiosParamCreator = exports.EndorsementsApi = exports.EndorsementsApiFactory = exports.EndorsementsApiFp = exports.EndorsementsApiAxiosParamCreator = exports.CustomerSessionsApi = exports.CustomerSessionsApiFactory = exports.CustomerSessionsApiFp = exports.CustomerSessionsApiAxiosParamCreator = exports.CurrencyManagementApi = exports.CurrencyManagementApiFactory = exports.CurrencyManagementApiFp = exports.CurrencyManagementApiAxiosParamCreator = exports.List1DesignationEnum = exports.List1FormatEnum = exports.CoursesApi = exports.CoursesApiFactory = exports.CoursesApiFp = exports.CoursesApiAxiosParamCreator = exports.CountriesApi = exports.CountriesApiFactory = exports.CountriesApiFp = exports.CountriesApiAxiosParamCreator = exports.CheckoutSessionsApi = exports.CheckoutSessionsApiFactory = exports.CheckoutSessionsApiFp = exports.CheckoutSessionsApiAxiosParamCreator = exports.ChatTicketsApi = exports.ChatTicketsApiFactory = exports.ChatTicketsApiFp = exports.ChatTicketsApiAxiosParamCreator = exports.BrokeragesApi = exports.BrokeragesApiFactory = exports.BrokeragesApiFp = exports.BrokeragesApiAxiosParamCreator = exports.AttachmentsApi = exports.AttachmentsApiFactory = exports.AttachmentsApiFp = exports.AttachmentsApiAxiosParamCreator = exports.ApiKeysApi = exports.ApiKeysApiFactory = exports.ApiKeysApiFp = exports.ApiKeysApiAxiosParamCreator = exports.AllowancesApi = exports.AllowancesApiFactory = exports.AllowancesApiFp = exports.AllowancesApiAxiosParamCreator = void 0;
+exports.PhonePrefixesApiFactory = exports.PhonePrefixesApiFp = exports.PhonePrefixesApiAxiosParamCreator = exports.PasswordRecoveryApi = exports.PasswordRecoveryApiFactory = exports.PasswordRecoveryApiFp = exports.PasswordRecoveryApiAxiosParamCreator = exports.GetByUserWithResult1TypeEnum = exports.MessagesApi = exports.MessagesApiFactory = exports.MessagesApiFp = exports.MessagesApiAxiosParamCreator = exports.LocationCacheApi = exports.LocationCacheApiFactory = exports.LocationCacheApiFp = exports.LocationCacheApiAxiosParamCreator = exports.LocalesApi = exports.LocalesApiFactory = exports.LocalesApiFp = exports.LocalesApiAxiosParamCreator = exports.LanguagesApi = exports.LanguagesApiFactory = exports.LanguagesApiFp = exports.LanguagesApiAxiosParamCreator = exports.HomePreviewApi = exports.HomePreviewApiFactory = exports.HomePreviewApiFp = exports.HomePreviewApiAxiosParamCreator = exports.UpdateGroupMembershipStatus1StatusEnum = exports.RequestGroupTypeChange1RequestStatusEnum = exports.GroupsApi = exports.GroupsApiFactory = exports.GroupsApiFp = exports.GroupsApiAxiosParamCreator = exports.GroupNotificationsApi = exports.GroupNotificationsApiFactory = exports.GroupNotificationsApiFp = exports.GroupNotificationsApiAxiosParamCreator = exports.GeoLocationApi = exports.GeoLocationApiFactory = exports.GeoLocationApiFp = exports.GeoLocationApiAxiosParamCreator = exports.FavoritesApi = exports.FavoritesApiFactory = exports.FavoritesApiFp = exports.FavoritesApiAxiosParamCreator = exports.FacebookPropertiesApi = exports.FacebookPropertiesApiFactory = exports.FacebookPropertiesApiFp = exports.FacebookPropertiesApiAxiosParamCreator = void 0;
+exports.StripeWebhooksApiFactory = exports.StripeWebhooksApiFp = exports.StripeWebhooksApiAxiosParamCreator = exports.StripeIdentityWebhooksApi = exports.StripeIdentityWebhooksApiFactory = exports.StripeIdentityWebhooksApiFp = exports.StripeIdentityWebhooksApiAxiosParamCreator = exports.SkillsApi = exports.SkillsApiFactory = exports.SkillsApiFp = exports.SkillsApiAxiosParamCreator = exports.SecurityApi = exports.SecurityApiFactory = exports.SecurityApiFp = exports.SecurityApiAxiosParamCreator = exports.PropertyTypesApi = exports.PropertyTypesApiFactory = exports.PropertyTypesApiFp = exports.PropertyTypesApiAxiosParamCreator = exports.PropertyProposalsApi = exports.PropertyProposalsApiFactory = exports.PropertyProposalsApiFp = exports.PropertyProposalsApiAxiosParamCreator = exports.PropertyLocationsApi = exports.PropertyLocationsApiFactory = exports.PropertyLocationsApiFp = exports.PropertyLocationsApiAxiosParamCreator = exports.PropertyFiltersApi = exports.PropertyFiltersApiFactory = exports.PropertyFiltersApiFp = exports.PropertyFiltersApiAxiosParamCreator = exports.PropertyFieldsApi = exports.PropertyFieldsApiFactory = exports.PropertyFieldsApiFp = exports.PropertyFieldsApiAxiosParamCreator = exports.UploadPropertiesFromUrl1FormatEnum = exports.UploadProperties1FormatEnum = exports.PropertyBulkUploadsApi = exports.PropertyBulkUploadsApiFactory = exports.PropertyBulkUploadsApiFp = exports.PropertyBulkUploadsApiAxiosParamCreator = exports.PropertyBulkDownloadApi = exports.PropertyBulkDownloadApiFactory = exports.PropertyBulkDownloadApiFp = exports.PropertyBulkDownloadApiAxiosParamCreator = exports.PropertiesApi = exports.PropertiesApiFactory = exports.PropertiesApiFp = exports.PropertiesApiAxiosParamCreator = exports.PhonePrefixesApi = void 0;
+exports.GetSubscribedUsers1SubscriptionPlanNameEnum = exports.UsersApi = exports.UsersApiFactory = exports.UsersApiFp = exports.UsersApiAxiosParamCreator = exports.UserTypesApi = exports.UserTypesApiFactory = exports.UserTypesApiFp = exports.UserTypesApiAxiosParamCreator = exports.UserSummaryApi = exports.UserSummaryApiFactory = exports.UserSummaryApiFp = exports.UserSummaryApiAxiosParamCreator = exports.UserContractsApi = exports.UserContractsApiFactory = exports.UserContractsApiFp = exports.UserContractsApiAxiosParamCreator = exports.UserConnectionsApi = exports.UserConnectionsApiFactory = exports.UserConnectionsApiFp = exports.UserConnectionsApiAxiosParamCreator = exports.TextTranslationsApi = exports.TextTranslationsApiFactory = exports.TextTranslationsApiFp = exports.TextTranslationsApiAxiosParamCreator = exports.TestimonialApi = exports.TestimonialApiFactory = exports.TestimonialApiFp = exports.TestimonialApiAxiosParamCreator = exports.SubscriptionsApi = exports.SubscriptionsApiFactory = exports.SubscriptionsApiFp = exports.SubscriptionsApiAxiosParamCreator = exports.StripeWebhooksApi = void 0;
 const axios_1 = __importDefault(require("axios"));
 // Some imports not used depending on template conditions
 // @ts-ignore
@@ -32,11 +33,25 @@ exports.AlertUserAlertTypeEnum = {
 exports.AlertWithUserProfileUserAlertTypeEnum = {
     Property: 'PROPERTY'
 };
+exports.ChatAllowanceChatAllowanceTypeEnum = {
+    Rejected: 'REJECTED',
+    Accepted: 'ACCEPTED',
+    Pending: 'PENDING',
+    Blocked: 'BLOCKED',
+    Silenced: 'SILENCED'
+};
 exports.CheckoutSessionDtoStatusEnum = {
     InProcess: 'IN_PROCESS',
     Success: 'SUCCESS',
     Canceled: 'CANCELED',
     Failed: 'FAILED'
+};
+exports.ConversationSummaryChatAllowanceTypeEnum = {
+    Rejected: 'REJECTED',
+    Accepted: 'ACCEPTED',
+    Pending: 'PENDING',
+    Blocked: 'BLOCKED',
+    Silenced: 'SILENCED'
 };
 exports.CourseFormatEnum = {
     Online: 'ONLINE',
@@ -216,6 +231,16 @@ exports.NetworkSuggestionEventRequestEventTypeEnum = {
     PopupDismissed: 'POPUP_DISMISSED',
     ProfileShown: 'PROFILE_SHOWN',
     ConnectClicked: 'CONNECT_CLICKED'
+};
+exports.NotificationTypeEnum = {
+    ToBrokerAlertCreated: 'TO_BROKER__ALERT_CREATED',
+    ToUserWeeklyProperties: 'TO_USER__WEEKLY_PROPERTIES',
+    ToUserWeeklyPayedSubscribers: 'TO_USER__WEEKLY_PAYED_SUBSCRIBERS',
+    ToUserCustomizedAlert: 'TO_USER__CUSTOMIZED_ALERT',
+    ToUserWeeklyGroupProperties: 'TO_USER__WEEKLY_GROUP_PROPERTIES',
+    ToUserNewsletterNewSubscriber: 'TO_USER__NEWSLETTER_NEW_SUBSCRIBER',
+    ToUserNewsletterConfirmation: 'TO_USER__NEWSLETTER_CONFIRMATION',
+    ToUserNewsletterListing: 'TO_USER__NEWSLETTER_LISTING'
 };
 exports.PropertyPublicationStateEnum = {
     Available: 'AVAILABLE',
@@ -912,6 +937,184 @@ class AlertsApi extends base_1.BaseAPI {
 }
 exports.AlertsApi = AlertsApi;
 /**
+ * AllowancesApi - axios parameter creator
+ * @export
+ */
+const AllowancesApiAxiosParamCreator = function (configuration) {
+    return {
+        /**
+         * Retrieves the chat allowance settings between two users. User must be one of the involved parties.
+         * @summary Get chat allowance for a user pair
+         * @param {string} userPair User pair in the form userFrom-userTo
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getChatAllowance1: async (userPair, options = {}) => {
+            // verify required parameter 'userPair' is not null or undefined
+            (0, common_1.assertParamExists)('getChatAllowance1', 'userPair', userPair);
+            const localVarPath = `/chat/allowance/{userPair}`
+                .replace(`{${"userPair"}}`, encodeURIComponent(String(userPair)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Updates the chat allowance settings between two users
+         * @summary Update chat allowance for a user pair
+         * @param {string} userPair User pair in the form userFrom-userTo
+         * @param {ChatAllowance} chatAllowance Chat allowance information to update
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateChatAllowance1: async (userPair, chatAllowance, options = {}) => {
+            // verify required parameter 'userPair' is not null or undefined
+            (0, common_1.assertParamExists)('updateChatAllowance1', 'userPair', userPair);
+            // verify required parameter 'chatAllowance' is not null or undefined
+            (0, common_1.assertParamExists)('updateChatAllowance1', 'chatAllowance', chatAllowance);
+            const localVarPath = `/chat/allowance/{userPair}`
+                .replace(`{${"userPair"}}`, encodeURIComponent(String(userPair)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(chatAllowance, localVarRequestOptions, configuration);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    };
+};
+exports.AllowancesApiAxiosParamCreator = AllowancesApiAxiosParamCreator;
+/**
+ * AllowancesApi - functional programming interface
+ * @export
+ */
+const AllowancesApiFp = function (configuration) {
+    const localVarAxiosParamCreator = (0, exports.AllowancesApiAxiosParamCreator)(configuration);
+    return {
+        /**
+         * Retrieves the chat allowance settings between two users. User must be one of the involved parties.
+         * @summary Get chat allowance for a user pair
+         * @param {string} userPair User pair in the form userFrom-userTo
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getChatAllowance1(userPair, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getChatAllowance1(userPair, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['AllowancesApi.getChatAllowance1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Updates the chat allowance settings between two users
+         * @summary Update chat allowance for a user pair
+         * @param {string} userPair User pair in the form userFrom-userTo
+         * @param {ChatAllowance} chatAllowance Chat allowance information to update
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateChatAllowance1(userPair, chatAllowance, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateChatAllowance1(userPair, chatAllowance, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['AllowancesApi.updateChatAllowance1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    };
+};
+exports.AllowancesApiFp = AllowancesApiFp;
+/**
+ * AllowancesApi - factory interface
+ * @export
+ */
+const AllowancesApiFactory = function (configuration, basePath, axios) {
+    const localVarFp = (0, exports.AllowancesApiFp)(configuration);
+    return {
+        /**
+         * Retrieves the chat allowance settings between two users. User must be one of the involved parties.
+         * @summary Get chat allowance for a user pair
+         * @param {AllowancesApiGetChatAllowance1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getChatAllowance1(requestParameters, options) {
+            return localVarFp.getChatAllowance1(requestParameters.userPair, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Updates the chat allowance settings between two users
+         * @summary Update chat allowance for a user pair
+         * @param {AllowancesApiUpdateChatAllowance1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateChatAllowance1(requestParameters, options) {
+            return localVarFp.updateChatAllowance1(requestParameters.userPair, requestParameters.chatAllowance, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+exports.AllowancesApiFactory = AllowancesApiFactory;
+/**
+ * AllowancesApi - object-oriented interface
+ * @export
+ * @class AllowancesApi
+ * @extends {BaseAPI}
+ */
+class AllowancesApi extends base_1.BaseAPI {
+    /**
+     * Retrieves the chat allowance settings between two users. User must be one of the involved parties.
+     * @summary Get chat allowance for a user pair
+     * @param {AllowancesApiGetChatAllowance1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AllowancesApi
+     */
+    getChatAllowance1(requestParameters, options) {
+        return (0, exports.AllowancesApiFp)(this.configuration).getChatAllowance1(requestParameters.userPair, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Updates the chat allowance settings between two users
+     * @summary Update chat allowance for a user pair
+     * @param {AllowancesApiUpdateChatAllowance1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AllowancesApi
+     */
+    updateChatAllowance1(requestParameters, options) {
+        return (0, exports.AllowancesApiFp)(this.configuration).updateChatAllowance1(requestParameters.userPair, requestParameters.chatAllowance, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+exports.AllowancesApi = AllowancesApi;
+/**
  * ApiKeysApi - axios parameter creator
  * @export
  */
@@ -1210,6 +1413,248 @@ class ApiKeysApi extends base_1.BaseAPI {
 }
 exports.ApiKeysApi = ApiKeysApi;
 /**
+ * AttachmentsApi - axios parameter creator
+ * @export
+ */
+const AttachmentsApiAxiosParamCreator = function (configuration) {
+    return {
+        /**
+         *
+         * @summary Post a attachment request
+         * @param {Attachment} [attachment]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createAttachment1: async (attachment, options = {}) => {
+            const localVarPath = `/chat/attachments`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(attachment, localVarRequestOptions, configuration);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Get details to download a file
+         * @param {string} fileId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        retrieveAttachment1: async (fileId, options = {}) => {
+            // verify required parameter 'fileId' is not null or undefined
+            (0, common_1.assertParamExists)('retrieveAttachment1', 'fileId', fileId);
+            const localVarPath = `/chat/attachments/{fileId}`
+                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Notify a new file has been loaded in S3
+         * @param {string} fileId
+         * @param {NotifyUploadRequest} [notifyUploadRequest]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateAttachment1: async (fileId, notifyUploadRequest, options = {}) => {
+            // verify required parameter 'fileId' is not null or undefined
+            (0, common_1.assertParamExists)('updateAttachment1', 'fileId', fileId);
+            const localVarPath = `/chat/attachments/{fileId}/notify-upload`
+                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(notifyUploadRequest, localVarRequestOptions, configuration);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    };
+};
+exports.AttachmentsApiAxiosParamCreator = AttachmentsApiAxiosParamCreator;
+/**
+ * AttachmentsApi - functional programming interface
+ * @export
+ */
+const AttachmentsApiFp = function (configuration) {
+    const localVarAxiosParamCreator = (0, exports.AttachmentsApiAxiosParamCreator)(configuration);
+    return {
+        /**
+         *
+         * @summary Post a attachment request
+         * @param {Attachment} [attachment]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createAttachment1(attachment, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createAttachment1(attachment, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['AttachmentsApi.createAttachment1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         *
+         * @summary Get details to download a file
+         * @param {string} fileId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async retrieveAttachment1(fileId, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.retrieveAttachment1(fileId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['AttachmentsApi.retrieveAttachment1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         *
+         * @summary Notify a new file has been loaded in S3
+         * @param {string} fileId
+         * @param {NotifyUploadRequest} [notifyUploadRequest]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateAttachment1(fileId, notifyUploadRequest, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateAttachment1(fileId, notifyUploadRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['AttachmentsApi.updateAttachment1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    };
+};
+exports.AttachmentsApiFp = AttachmentsApiFp;
+/**
+ * AttachmentsApi - factory interface
+ * @export
+ */
+const AttachmentsApiFactory = function (configuration, basePath, axios) {
+    const localVarFp = (0, exports.AttachmentsApiFp)(configuration);
+    return {
+        /**
+         *
+         * @summary Post a attachment request
+         * @param {AttachmentsApiCreateAttachment1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createAttachment1(requestParameters = {}, options) {
+            return localVarFp.createAttachment1(requestParameters.attachment, options).then((request) => request(axios, basePath));
+        },
+        /**
+         *
+         * @summary Get details to download a file
+         * @param {AttachmentsApiRetrieveAttachment1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        retrieveAttachment1(requestParameters, options) {
+            return localVarFp.retrieveAttachment1(requestParameters.fileId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         *
+         * @summary Notify a new file has been loaded in S3
+         * @param {AttachmentsApiUpdateAttachment1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateAttachment1(requestParameters, options) {
+            return localVarFp.updateAttachment1(requestParameters.fileId, requestParameters.notifyUploadRequest, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+exports.AttachmentsApiFactory = AttachmentsApiFactory;
+/**
+ * AttachmentsApi - object-oriented interface
+ * @export
+ * @class AttachmentsApi
+ * @extends {BaseAPI}
+ */
+class AttachmentsApi extends base_1.BaseAPI {
+    /**
+     *
+     * @summary Post a attachment request
+     * @param {AttachmentsApiCreateAttachment1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AttachmentsApi
+     */
+    createAttachment1(requestParameters = {}, options) {
+        return (0, exports.AttachmentsApiFp)(this.configuration).createAttachment1(requestParameters.attachment, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary Get details to download a file
+     * @param {AttachmentsApiRetrieveAttachment1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AttachmentsApi
+     */
+    retrieveAttachment1(requestParameters, options) {
+        return (0, exports.AttachmentsApiFp)(this.configuration).retrieveAttachment1(requestParameters.fileId, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary Notify a new file has been loaded in S3
+     * @param {AttachmentsApiUpdateAttachment1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AttachmentsApi
+     */
+    updateAttachment1(requestParameters, options) {
+        return (0, exports.AttachmentsApiFp)(this.configuration).updateAttachment1(requestParameters.fileId, requestParameters.notifyUploadRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+exports.AttachmentsApi = AttachmentsApi;
+/**
  * BrokeragesApi - axios parameter creator
  * @export
  */
@@ -1307,6 +1752,113 @@ class BrokeragesApi extends base_1.BaseAPI {
     }
 }
 exports.BrokeragesApi = BrokeragesApi;
+/**
+ * ChatTicketsApi - axios parameter creator
+ * @export
+ */
+const ChatTicketsApiAxiosParamCreator = function (configuration) {
+    return {
+        /**
+         * Creates and returns a chat ticket that can be used to establish a chat connection
+         * @summary Retrieve a chat ticket for the authenticated user
+         * @param {string} userAgent User agent string of the client
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        retrieveUserTicket1: async (userAgent, options = {}) => {
+            // verify required parameter 'userAgent' is not null or undefined
+            (0, common_1.assertParamExists)('retrieveUserTicket1', 'userAgent', userAgent);
+            const localVarPath = `/chat/ticket`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            if (userAgent != null) {
+                localVarHeaderParameter['user-agent'] = String(userAgent);
+            }
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    };
+};
+exports.ChatTicketsApiAxiosParamCreator = ChatTicketsApiAxiosParamCreator;
+/**
+ * ChatTicketsApi - functional programming interface
+ * @export
+ */
+const ChatTicketsApiFp = function (configuration) {
+    const localVarAxiosParamCreator = (0, exports.ChatTicketsApiAxiosParamCreator)(configuration);
+    return {
+        /**
+         * Creates and returns a chat ticket that can be used to establish a chat connection
+         * @summary Retrieve a chat ticket for the authenticated user
+         * @param {string} userAgent User agent string of the client
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async retrieveUserTicket1(userAgent, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.retrieveUserTicket1(userAgent, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['ChatTicketsApi.retrieveUserTicket1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    };
+};
+exports.ChatTicketsApiFp = ChatTicketsApiFp;
+/**
+ * ChatTicketsApi - factory interface
+ * @export
+ */
+const ChatTicketsApiFactory = function (configuration, basePath, axios) {
+    const localVarFp = (0, exports.ChatTicketsApiFp)(configuration);
+    return {
+        /**
+         * Creates and returns a chat ticket that can be used to establish a chat connection
+         * @summary Retrieve a chat ticket for the authenticated user
+         * @param {ChatTicketsApiRetrieveUserTicket1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        retrieveUserTicket1(requestParameters, options) {
+            return localVarFp.retrieveUserTicket1(requestParameters.userAgent, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+exports.ChatTicketsApiFactory = ChatTicketsApiFactory;
+/**
+ * ChatTicketsApi - object-oriented interface
+ * @export
+ * @class ChatTicketsApi
+ * @extends {BaseAPI}
+ */
+class ChatTicketsApi extends base_1.BaseAPI {
+    /**
+     * Creates and returns a chat ticket that can be used to establish a chat connection
+     * @summary Retrieve a chat ticket for the authenticated user
+     * @param {ChatTicketsApiRetrieveUserTicket1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ChatTicketsApi
+     */
+    retrieveUserTicket1(requestParameters, options) {
+        return (0, exports.ChatTicketsApiFp)(this.configuration).retrieveUserTicket1(requestParameters.userAgent, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+exports.ChatTicketsApi = ChatTicketsApi;
 /**
  * CheckoutSessionsApi - axios parameter creator
  * @export
@@ -1587,7 +2139,7 @@ const CoursesApiAxiosParamCreator = function (configuration) {
         /**
          *
          * @summary Delete course
-         * @param {number} courseId
+         * @param {number} courseId Course id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1605,10 +2157,8 @@ const CoursesApiAxiosParamCreator = function (configuration) {
             const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options };
             const localVarHeaderParameter = {};
             const localVarQueryParameter = {};
-            // authentication oAuthCode required
-            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
-            // authentication oAuthClientId required
-            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            // authentication oAuthToken required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Token", configuration);
             (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
@@ -1620,8 +2170,8 @@ const CoursesApiAxiosParamCreator = function (configuration) {
         /**
          *
          * @summary Track attend click and redirect to external registration URL
-         * @param {number} courseId
-         * @param {string} [source]
+         * @param {number} courseId Course id
+         * @param {string} [source] Analytics source tag
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1639,10 +2189,8 @@ const CoursesApiAxiosParamCreator = function (configuration) {
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
             const localVarHeaderParameter = {};
             const localVarQueryParameter = {};
-            // authentication oAuthCode required
-            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
-            // authentication oAuthClientId required
-            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            // authentication oAuthToken required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Token", configuration);
             if (source !== undefined) {
                 localVarQueryParameter['source'] = source;
             }
@@ -1657,14 +2205,16 @@ const CoursesApiAxiosParamCreator = function (configuration) {
         /**
          *
          * @summary Create a global course listing
-         * @param {number} userId
-         * @param {CourseWriteDto} [courseWriteDto]
+         * @param {number} userId Instructor user id
+         * @param {CourseWriteDto} courseWriteDto Course definition including timezone-local start time
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         create1: async (userId, courseWriteDto, options = {}) => {
             // verify required parameter 'userId' is not null or undefined
             (0, common_1.assertParamExists)('create1', 'userId', userId);
+            // verify required parameter 'courseWriteDto' is not null or undefined
+            (0, common_1.assertParamExists)('create1', 'courseWriteDto', courseWriteDto);
             const localVarPath = `/users/{userId}/courses`
                 .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1676,10 +2226,8 @@ const CoursesApiAxiosParamCreator = function (configuration) {
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
             const localVarHeaderParameter = {};
             const localVarQueryParameter = {};
-            // authentication oAuthCode required
-            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
-            // authentication oAuthClientId required
-            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            // authentication oAuthToken required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Token", configuration);
             localVarHeaderParameter['Content-Type'] = 'application/json';
             (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -1692,8 +2240,8 @@ const CoursesApiAxiosParamCreator = function (configuration) {
         },
         /**
          *
-         * @summary Get course by id
-         * @param {number} courseId
+         * @summary Get published course by id
+         * @param {number} courseId Course id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1728,9 +2276,9 @@ const CoursesApiAxiosParamCreator = function (configuration) {
          * @summary List published courses
          * @param {number} [pageFrom] Pagination start (1-based)
          * @param {number} [pageTo] Pagination end (inclusive)
-         * @param {string} [language]
-         * @param {List1FormatEnum} [format]
-         * @param {List1DesignationEnum} [designation]
+         * @param {string} [language] BCP47 locale filter
+         * @param {List1FormatEnum} [format] Delivery mode filter
+         * @param {List1DesignationEnum} [designation] Designation filter
          * @param {boolean} [ceCreditsOnly] Only state-approved CE courses
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1780,8 +2328,8 @@ const CoursesApiAxiosParamCreator = function (configuration) {
          *
          * @summary List courses owned by user
          * @param {number} userId Owner user id
-         * @param {number} [pageFrom]
-         * @param {number} [pageTo]
+         * @param {number} [pageFrom] Inclusive page start (1-based)
+         * @param {number} [pageTo] Inclusive page end
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1799,10 +2347,8 @@ const CoursesApiAxiosParamCreator = function (configuration) {
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
             const localVarHeaderParameter = {};
             const localVarQueryParameter = {};
-            // authentication oAuthCode required
-            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
-            // authentication oAuthClientId required
-            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            // authentication oAuthToken required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Token", configuration);
             if (pageFrom !== undefined) {
                 localVarQueryParameter['pageFrom'] = pageFrom;
             }
@@ -1820,15 +2366,17 @@ const CoursesApiAxiosParamCreator = function (configuration) {
         /**
          *
          * @summary Record anonymous course interaction (e.g. gated attend)
-         * @param {number} courseId
-         * @param {string} [source]
-         * @param {string} [eventType]
+         * @param {number} courseId Course id
+         * @param {string} eventType Known anonymous events
+         * @param {string} [source] Analytics funnel tag
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        recordAnonymousClick1: async (courseId, source, eventType, options = {}) => {
+        recordAnonymousClick1: async (courseId, eventType, source, options = {}) => {
             // verify required parameter 'courseId' is not null or undefined
             (0, common_1.assertParamExists)('recordAnonymousClick1', 'courseId', courseId);
+            // verify required parameter 'eventType' is not null or undefined
+            (0, common_1.assertParamExists)('recordAnonymousClick1', 'eventType', eventType);
             const localVarPath = `/courses/{courseId}/clicks`
                 .replace(`{${"courseId"}}`, encodeURIComponent(String(courseId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1861,14 +2409,16 @@ const CoursesApiAxiosParamCreator = function (configuration) {
         /**
          *
          * @summary Update course
-         * @param {number} courseId
-         * @param {CourseWriteDto} [courseWriteDto]
+         * @param {number} courseId Course id
+         * @param {CourseWriteDto} courseWriteDto
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         update1: async (courseId, courseWriteDto, options = {}) => {
             // verify required parameter 'courseId' is not null or undefined
             (0, common_1.assertParamExists)('update1', 'courseId', courseId);
+            // verify required parameter 'courseWriteDto' is not null or undefined
+            (0, common_1.assertParamExists)('update1', 'courseWriteDto', courseWriteDto);
             const localVarPath = `/courses/{courseId}`
                 .replace(`{${"courseId"}}`, encodeURIComponent(String(courseId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1880,10 +2430,8 @@ const CoursesApiAxiosParamCreator = function (configuration) {
             const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options };
             const localVarHeaderParameter = {};
             const localVarQueryParameter = {};
-            // authentication oAuthCode required
-            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
-            // authentication oAuthClientId required
-            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            // authentication oAuthToken required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Token", configuration);
             localVarHeaderParameter['Content-Type'] = 'application/json';
             (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -1907,7 +2455,7 @@ const CoursesApiFp = function (configuration) {
         /**
          *
          * @summary Delete course
-         * @param {number} courseId
+         * @param {number} courseId Course id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1920,8 +2468,8 @@ const CoursesApiFp = function (configuration) {
         /**
          *
          * @summary Track attend click and redirect to external registration URL
-         * @param {number} courseId
-         * @param {string} [source]
+         * @param {number} courseId Course id
+         * @param {string} [source] Analytics source tag
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1934,8 +2482,8 @@ const CoursesApiFp = function (configuration) {
         /**
          *
          * @summary Create a global course listing
-         * @param {number} userId
-         * @param {CourseWriteDto} [courseWriteDto]
+         * @param {number} userId Instructor user id
+         * @param {CourseWriteDto} courseWriteDto Course definition including timezone-local start time
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1947,8 +2495,8 @@ const CoursesApiFp = function (configuration) {
         },
         /**
          *
-         * @summary Get course by id
-         * @param {number} courseId
+         * @summary Get published course by id
+         * @param {number} courseId Course id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1963,9 +2511,9 @@ const CoursesApiFp = function (configuration) {
          * @summary List published courses
          * @param {number} [pageFrom] Pagination start (1-based)
          * @param {number} [pageTo] Pagination end (inclusive)
-         * @param {string} [language]
-         * @param {List1FormatEnum} [format]
-         * @param {List1DesignationEnum} [designation]
+         * @param {string} [language] BCP47 locale filter
+         * @param {List1FormatEnum} [format] Delivery mode filter
+         * @param {List1DesignationEnum} [designation] Designation filter
          * @param {boolean} [ceCreditsOnly] Only state-approved CE courses
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1980,8 +2528,8 @@ const CoursesApiFp = function (configuration) {
          *
          * @summary List courses owned by user
          * @param {number} userId Owner user id
-         * @param {number} [pageFrom]
-         * @param {number} [pageTo]
+         * @param {number} [pageFrom] Inclusive page start (1-based)
+         * @param {number} [pageTo] Inclusive page end
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -1994,14 +2542,14 @@ const CoursesApiFp = function (configuration) {
         /**
          *
          * @summary Record anonymous course interaction (e.g. gated attend)
-         * @param {number} courseId
-         * @param {string} [source]
-         * @param {string} [eventType]
+         * @param {number} courseId Course id
+         * @param {string} eventType Known anonymous events
+         * @param {string} [source] Analytics funnel tag
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async recordAnonymousClick1(courseId, source, eventType, options) {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.recordAnonymousClick1(courseId, source, eventType, options);
+        async recordAnonymousClick1(courseId, eventType, source, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.recordAnonymousClick1(courseId, eventType, source, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = base_1.operationServerMap['CoursesApi.recordAnonymousClick1']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -2009,8 +2557,8 @@ const CoursesApiFp = function (configuration) {
         /**
          *
          * @summary Update course
-         * @param {number} courseId
-         * @param {CourseWriteDto} [courseWriteDto]
+         * @param {number} courseId Course id
+         * @param {CourseWriteDto} courseWriteDto
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -2062,7 +2610,7 @@ const CoursesApiFactory = function (configuration, basePath, axios) {
         },
         /**
          *
-         * @summary Get course by id
+         * @summary Get published course by id
          * @param {CoursesApiGet1Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2098,7 +2646,7 @@ const CoursesApiFactory = function (configuration, basePath, axios) {
          * @throws {RequiredError}
          */
         recordAnonymousClick1(requestParameters, options) {
-            return localVarFp.recordAnonymousClick1(requestParameters.courseId, requestParameters.source, requestParameters.eventType, options).then((request) => request(axios, basePath));
+            return localVarFp.recordAnonymousClick1(requestParameters.courseId, requestParameters.eventType, requestParameters.source, options).then((request) => request(axios, basePath));
         },
         /**
          *
@@ -2155,7 +2703,7 @@ class CoursesApi extends base_1.BaseAPI {
     }
     /**
      *
-     * @summary Get course by id
+     * @summary Get published course by id
      * @param {CoursesApiGet1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2195,7 +2743,7 @@ class CoursesApi extends base_1.BaseAPI {
      * @memberof CoursesApi
      */
     recordAnonymousClick1(requestParameters, options) {
-        return (0, exports.CoursesApiFp)(this.configuration).recordAnonymousClick1(requestParameters.courseId, requestParameters.source, requestParameters.eventType, options).then((request) => request(this.axios, this.basePath));
+        return (0, exports.CoursesApiFp)(this.configuration).recordAnonymousClick1(requestParameters.courseId, requestParameters.eventType, requestParameters.source, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      *
@@ -2440,117 +2988,6 @@ class CustomerSessionsApi extends base_1.BaseAPI {
     }
 }
 exports.CustomerSessionsApi = CustomerSessionsApi;
-/**
- * DefaultApi - axios parameter creator
- * @export
- */
-const DefaultApiAxiosParamCreator = function (configuration) {
-    return {
-        /**
-         *
-         * @param {string} [id]
-         * @param {string} [lang]
-         * @param {string} [acceptLanguage]
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        previewHome1: async (id, lang, acceptLanguage, options = {}) => {
-            const localVarPath = `/home/preview`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
-            const localVarHeaderParameter = {};
-            const localVarQueryParameter = {};
-            // authentication oAuthCode required
-            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
-            // authentication oAuthClientId required
-            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
-            if (id !== undefined) {
-                localVarQueryParameter['id'] = id;
-            }
-            if (lang !== undefined) {
-                localVarQueryParameter['lang'] = lang;
-            }
-            if (acceptLanguage != null) {
-                localVarHeaderParameter['Accept-Language'] = String(acceptLanguage);
-            }
-            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
-            return {
-                url: (0, common_1.toPathString)(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    };
-};
-exports.DefaultApiAxiosParamCreator = DefaultApiAxiosParamCreator;
-/**
- * DefaultApi - functional programming interface
- * @export
- */
-const DefaultApiFp = function (configuration) {
-    const localVarAxiosParamCreator = (0, exports.DefaultApiAxiosParamCreator)(configuration);
-    return {
-        /**
-         *
-         * @param {string} [id]
-         * @param {string} [lang]
-         * @param {string} [acceptLanguage]
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async previewHome1(id, lang, acceptLanguage, options) {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.previewHome1(id, lang, acceptLanguage, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = base_1.operationServerMap['DefaultApi.previewHome1']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    };
-};
-exports.DefaultApiFp = DefaultApiFp;
-/**
- * DefaultApi - factory interface
- * @export
- */
-const DefaultApiFactory = function (configuration, basePath, axios) {
-    const localVarFp = (0, exports.DefaultApiFp)(configuration);
-    return {
-        /**
-         *
-         * @param {DefaultApiPreviewHome1Request} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        previewHome1(requestParameters = {}, options) {
-            return localVarFp.previewHome1(requestParameters.id, requestParameters.lang, requestParameters.acceptLanguage, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-exports.DefaultApiFactory = DefaultApiFactory;
-/**
- * DefaultApi - object-oriented interface
- * @export
- * @class DefaultApi
- * @extends {BaseAPI}
- */
-class DefaultApi extends base_1.BaseAPI {
-    /**
-     *
-     * @param {DefaultApiPreviewHome1Request} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    previewHome1(requestParameters = {}, options) {
-        return (0, exports.DefaultApiFp)(this.configuration).previewHome1(requestParameters.id, requestParameters.lang, requestParameters.acceptLanguage, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-exports.DefaultApi = DefaultApi;
 /**
  * EndorsementsApi - axios parameter creator
  * @export
@@ -3257,6 +3694,128 @@ class GeoLocationApi extends base_1.BaseAPI {
     }
 }
 exports.GeoLocationApi = GeoLocationApi;
+/**
+ * GroupNotificationsApi - axios parameter creator
+ * @export
+ */
+const GroupNotificationsApiAxiosParamCreator = function (configuration) {
+    return {
+        /**
+         *
+         * @summary Get group notification messages for a user and group
+         * @param {number} [userId] User ID
+         * @param {string} [groupId] Group ID
+         * @param {number} [limit] Limit results
+         * @param {LocalDateTimeQueryString} [beforeDatetime] Before datetime (epoch millis)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getGroupNotifications1: async (userId, groupId, limit, beforeDatetime, options = {}) => {
+            const localVarPath = `/chat/group_notifications`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+            if (groupId !== undefined) {
+                localVarQueryParameter['groupId'] = groupId;
+            }
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+            if (beforeDatetime !== undefined) {
+                for (const [key, value] of Object.entries(beforeDatetime)) {
+                    localVarQueryParameter[key] = value;
+                }
+            }
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    };
+};
+exports.GroupNotificationsApiAxiosParamCreator = GroupNotificationsApiAxiosParamCreator;
+/**
+ * GroupNotificationsApi - functional programming interface
+ * @export
+ */
+const GroupNotificationsApiFp = function (configuration) {
+    const localVarAxiosParamCreator = (0, exports.GroupNotificationsApiAxiosParamCreator)(configuration);
+    return {
+        /**
+         *
+         * @summary Get group notification messages for a user and group
+         * @param {number} [userId] User ID
+         * @param {string} [groupId] Group ID
+         * @param {number} [limit] Limit results
+         * @param {LocalDateTimeQueryString} [beforeDatetime] Before datetime (epoch millis)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getGroupNotifications1(userId, groupId, limit, beforeDatetime, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getGroupNotifications1(userId, groupId, limit, beforeDatetime, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['GroupNotificationsApi.getGroupNotifications1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    };
+};
+exports.GroupNotificationsApiFp = GroupNotificationsApiFp;
+/**
+ * GroupNotificationsApi - factory interface
+ * @export
+ */
+const GroupNotificationsApiFactory = function (configuration, basePath, axios) {
+    const localVarFp = (0, exports.GroupNotificationsApiFp)(configuration);
+    return {
+        /**
+         *
+         * @summary Get group notification messages for a user and group
+         * @param {GroupNotificationsApiGetGroupNotifications1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getGroupNotifications1(requestParameters = {}, options) {
+            return localVarFp.getGroupNotifications1(requestParameters.userId, requestParameters.groupId, requestParameters.limit, requestParameters.beforeDatetime, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+exports.GroupNotificationsApiFactory = GroupNotificationsApiFactory;
+/**
+ * GroupNotificationsApi - object-oriented interface
+ * @export
+ * @class GroupNotificationsApi
+ * @extends {BaseAPI}
+ */
+class GroupNotificationsApi extends base_1.BaseAPI {
+    /**
+     *
+     * @summary Get group notification messages for a user and group
+     * @param {GroupNotificationsApiGetGroupNotifications1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupNotificationsApi
+     */
+    getGroupNotifications1(requestParameters = {}, options) {
+        return (0, exports.GroupNotificationsApiFp)(this.configuration).getGroupNotifications1(requestParameters.userId, requestParameters.groupId, requestParameters.limit, requestParameters.beforeDatetime, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+exports.GroupNotificationsApi = GroupNotificationsApi;
 /**
  * GroupsApi - axios parameter creator
  * @export
@@ -5156,6 +5715,121 @@ exports.UpdateGroupMembershipStatus1StatusEnum = {
     Removed: 'REMOVED'
 };
 /**
+ * HomePreviewApi - axios parameter creator
+ * @export
+ */
+const HomePreviewApiAxiosParamCreator = function (configuration) {
+    return {
+        /**
+         *
+         * @summary Localized marketing home preview HTML
+         * @param {string} [id] Optional CMS/content anchor id
+         * @param {string} [lang] Explicit locale override (e.g. en, es)
+         * @param {string} [acceptLanguage] Browser Accept-Language fallback chain
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        previewHome1: async (id, lang, acceptLanguage, options = {}) => {
+            const localVarPath = `/home/preview`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            if (id !== undefined) {
+                localVarQueryParameter['id'] = id;
+            }
+            if (lang !== undefined) {
+                localVarQueryParameter['lang'] = lang;
+            }
+            if (acceptLanguage != null) {
+                localVarHeaderParameter['Accept-Language'] = String(acceptLanguage);
+            }
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    };
+};
+exports.HomePreviewApiAxiosParamCreator = HomePreviewApiAxiosParamCreator;
+/**
+ * HomePreviewApi - functional programming interface
+ * @export
+ */
+const HomePreviewApiFp = function (configuration) {
+    const localVarAxiosParamCreator = (0, exports.HomePreviewApiAxiosParamCreator)(configuration);
+    return {
+        /**
+         *
+         * @summary Localized marketing home preview HTML
+         * @param {string} [id] Optional CMS/content anchor id
+         * @param {string} [lang] Explicit locale override (e.g. en, es)
+         * @param {string} [acceptLanguage] Browser Accept-Language fallback chain
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async previewHome1(id, lang, acceptLanguage, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.previewHome1(id, lang, acceptLanguage, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['HomePreviewApi.previewHome1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    };
+};
+exports.HomePreviewApiFp = HomePreviewApiFp;
+/**
+ * HomePreviewApi - factory interface
+ * @export
+ */
+const HomePreviewApiFactory = function (configuration, basePath, axios) {
+    const localVarFp = (0, exports.HomePreviewApiFp)(configuration);
+    return {
+        /**
+         *
+         * @summary Localized marketing home preview HTML
+         * @param {HomePreviewApiPreviewHome1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        previewHome1(requestParameters = {}, options) {
+            return localVarFp.previewHome1(requestParameters.id, requestParameters.lang, requestParameters.acceptLanguage, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+exports.HomePreviewApiFactory = HomePreviewApiFactory;
+/**
+ * HomePreviewApi - object-oriented interface
+ * @export
+ * @class HomePreviewApi
+ * @extends {BaseAPI}
+ */
+class HomePreviewApi extends base_1.BaseAPI {
+    /**
+     *
+     * @summary Localized marketing home preview HTML
+     * @param {HomePreviewApiPreviewHome1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof HomePreviewApi
+     */
+    previewHome1(requestParameters = {}, options) {
+        return (0, exports.HomePreviewApiFp)(this.configuration).previewHome1(requestParameters.id, requestParameters.lang, requestParameters.acceptLanguage, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+exports.HomePreviewApi = HomePreviewApi;
+/**
  * LanguagesApi - axios parameter creator
  * @export
  */
@@ -5876,6 +6550,421 @@ class LocationCacheApi extends base_1.BaseAPI {
     }
 }
 exports.LocationCacheApi = LocationCacheApi;
+/**
+ * MessagesApi - axios parameter creator
+ * @export
+ */
+const MessagesApiAxiosParamCreator = function (configuration) {
+    return {
+        /**
+         * Retrieves notifications for a specific user and notification type. Designed for autopilot integration.
+         * @summary Get user notifications by type
+         * @param {string} token Authentication token
+         * @param {GetByUserWithResult1TypeEnum} type Notification type
+         * @param {AutopilotUser} autopilotUser User information
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getByUserWithResult1: async (token, type, autopilotUser, options = {}) => {
+            // verify required parameter 'token' is not null or undefined
+            (0, common_1.assertParamExists)('getByUserWithResult1', 'token', token);
+            // verify required parameter 'type' is not null or undefined
+            (0, common_1.assertParamExists)('getByUserWithResult1', 'type', type);
+            // verify required parameter 'autopilotUser' is not null or undefined
+            (0, common_1.assertParamExists)('getByUserWithResult1', 'autopilotUser', autopilotUser);
+            const localVarPath = `/notifications/{type}`
+                .replace(`{${"type"}}`, encodeURIComponent(String(type)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            if (token !== undefined) {
+                localVarQueryParameter['token'] = token;
+            }
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(autopilotUser, localVarRequestOptions, configuration);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Get a message by conversation
+         * @param {number} [userAId] User A Id
+         * @param {number} [userBId] User B Id
+         * @param {number} [limit] limit results
+         * @param {LocalDateTimeQueryString} [beforeDatetime] return results before date time
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getConversation1: async (userAId, userBId, limit, beforeDatetime, options = {}) => {
+            const localVarPath = `/chat/messages`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            if (userAId !== undefined) {
+                localVarQueryParameter['userAId'] = userAId;
+            }
+            if (userBId !== undefined) {
+                localVarQueryParameter['userBId'] = userBId;
+            }
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+            if (beforeDatetime !== undefined) {
+                for (const [key, value] of Object.entries(beforeDatetime)) {
+                    localVarQueryParameter[key] = value;
+                }
+            }
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Retrieve a user chat
+         * @param {number} id user id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        retrieveChatUser1: async (id, options = {}) => {
+            // verify required parameter 'id' is not null or undefined
+            (0, common_1.assertParamExists)('retrieveChatUser1', 'id', id);
+            const localVarPath = `/chat/user/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Retrieve a user chat status
+         * @param {number} id user id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        retrieveChatUserStatus1: async (id, options = {}) => {
+            // verify required parameter 'id' is not null or undefined
+            (0, common_1.assertParamExists)('retrieveChatUserStatus1', 'id', id);
+            const localVarPath = `/chat/user/{id}/status`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Post a message
+         * @param {Message} [message] message
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        sendMessage1: async (message, options = {}) => {
+            const localVarPath = `/chat/messages`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(message, localVarRequestOptions, configuration);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    };
+};
+exports.MessagesApiAxiosParamCreator = MessagesApiAxiosParamCreator;
+/**
+ * MessagesApi - functional programming interface
+ * @export
+ */
+const MessagesApiFp = function (configuration) {
+    const localVarAxiosParamCreator = (0, exports.MessagesApiAxiosParamCreator)(configuration);
+    return {
+        /**
+         * Retrieves notifications for a specific user and notification type. Designed for autopilot integration.
+         * @summary Get user notifications by type
+         * @param {string} token Authentication token
+         * @param {GetByUserWithResult1TypeEnum} type Notification type
+         * @param {AutopilotUser} autopilotUser User information
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getByUserWithResult1(token, type, autopilotUser, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getByUserWithResult1(token, type, autopilotUser, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['MessagesApi.getByUserWithResult1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         *
+         * @summary Get a message by conversation
+         * @param {number} [userAId] User A Id
+         * @param {number} [userBId] User B Id
+         * @param {number} [limit] limit results
+         * @param {LocalDateTimeQueryString} [beforeDatetime] return results before date time
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getConversation1(userAId, userBId, limit, beforeDatetime, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getConversation1(userAId, userBId, limit, beforeDatetime, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['MessagesApi.getConversation1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         *
+         * @summary Retrieve a user chat
+         * @param {number} id user id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async retrieveChatUser1(id, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.retrieveChatUser1(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['MessagesApi.retrieveChatUser1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         *
+         * @summary Retrieve a user chat status
+         * @param {number} id user id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async retrieveChatUserStatus1(id, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.retrieveChatUserStatus1(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['MessagesApi.retrieveChatUserStatus1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         *
+         * @summary Post a message
+         * @param {Message} [message] message
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async sendMessage1(message, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.sendMessage1(message, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['MessagesApi.sendMessage1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    };
+};
+exports.MessagesApiFp = MessagesApiFp;
+/**
+ * MessagesApi - factory interface
+ * @export
+ */
+const MessagesApiFactory = function (configuration, basePath, axios) {
+    const localVarFp = (0, exports.MessagesApiFp)(configuration);
+    return {
+        /**
+         * Retrieves notifications for a specific user and notification type. Designed for autopilot integration.
+         * @summary Get user notifications by type
+         * @param {MessagesApiGetByUserWithResult1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getByUserWithResult1(requestParameters, options) {
+            return localVarFp.getByUserWithResult1(requestParameters.token, requestParameters.type, requestParameters.autopilotUser, options).then((request) => request(axios, basePath));
+        },
+        /**
+         *
+         * @summary Get a message by conversation
+         * @param {MessagesApiGetConversation1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getConversation1(requestParameters = {}, options) {
+            return localVarFp.getConversation1(requestParameters.userAId, requestParameters.userBId, requestParameters.limit, requestParameters.beforeDatetime, options).then((request) => request(axios, basePath));
+        },
+        /**
+         *
+         * @summary Retrieve a user chat
+         * @param {MessagesApiRetrieveChatUser1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        retrieveChatUser1(requestParameters, options) {
+            return localVarFp.retrieveChatUser1(requestParameters.id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         *
+         * @summary Retrieve a user chat status
+         * @param {MessagesApiRetrieveChatUserStatus1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        retrieveChatUserStatus1(requestParameters, options) {
+            return localVarFp.retrieveChatUserStatus1(requestParameters.id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         *
+         * @summary Post a message
+         * @param {MessagesApiSendMessage1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        sendMessage1(requestParameters = {}, options) {
+            return localVarFp.sendMessage1(requestParameters.message, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+exports.MessagesApiFactory = MessagesApiFactory;
+/**
+ * MessagesApi - object-oriented interface
+ * @export
+ * @class MessagesApi
+ * @extends {BaseAPI}
+ */
+class MessagesApi extends base_1.BaseAPI {
+    /**
+     * Retrieves notifications for a specific user and notification type. Designed for autopilot integration.
+     * @summary Get user notifications by type
+     * @param {MessagesApiGetByUserWithResult1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessagesApi
+     */
+    getByUserWithResult1(requestParameters, options) {
+        return (0, exports.MessagesApiFp)(this.configuration).getByUserWithResult1(requestParameters.token, requestParameters.type, requestParameters.autopilotUser, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary Get a message by conversation
+     * @param {MessagesApiGetConversation1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessagesApi
+     */
+    getConversation1(requestParameters = {}, options) {
+        return (0, exports.MessagesApiFp)(this.configuration).getConversation1(requestParameters.userAId, requestParameters.userBId, requestParameters.limit, requestParameters.beforeDatetime, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary Retrieve a user chat
+     * @param {MessagesApiRetrieveChatUser1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessagesApi
+     */
+    retrieveChatUser1(requestParameters, options) {
+        return (0, exports.MessagesApiFp)(this.configuration).retrieveChatUser1(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary Retrieve a user chat status
+     * @param {MessagesApiRetrieveChatUserStatus1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessagesApi
+     */
+    retrieveChatUserStatus1(requestParameters, options) {
+        return (0, exports.MessagesApiFp)(this.configuration).retrieveChatUserStatus1(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary Post a message
+     * @param {MessagesApiSendMessage1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessagesApi
+     */
+    sendMessage1(requestParameters = {}, options) {
+        return (0, exports.MessagesApiFp)(this.configuration).sendMessage1(requestParameters.message, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+exports.MessagesApi = MessagesApi;
+/**
+ * @export
+ */
+exports.GetByUserWithResult1TypeEnum = {
+    ToBrokerAlertCreated: 'TO_BROKER__ALERT_CREATED',
+    ToUserWeeklyProperties: 'TO_USER__WEEKLY_PROPERTIES',
+    ToUserWeeklyPayedSubscribers: 'TO_USER__WEEKLY_PAYED_SUBSCRIBERS',
+    ToUserCustomizedAlert: 'TO_USER__CUSTOMIZED_ALERT',
+    ToUserWeeklyGroupProperties: 'TO_USER__WEEKLY_GROUP_PROPERTIES',
+    ToUserNewsletterNewSubscriber: 'TO_USER__NEWSLETTER_NEW_SUBSCRIBER',
+    ToUserNewsletterConfirmation: 'TO_USER__NEWSLETTER_CONFIRMATION',
+    ToUserNewsletterListing: 'TO_USER__NEWSLETTER_LISTING'
+};
 /**
  * PasswordRecoveryApi - axios parameter creator
  * @export
@@ -10585,6 +11674,394 @@ class TextTranslationsApi extends base_1.BaseAPI {
 }
 exports.TextTranslationsApi = TextTranslationsApi;
 /**
+ * UserConnectionsApi - axios parameter creator
+ * @export
+ */
+const UserConnectionsApiAxiosParamCreator = function (configuration) {
+    return {
+        /**
+         *
+         * @summary Get a user connections
+         * @param {number} userId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findUserConnections2: async (userId, options = {}) => {
+            // verify required parameter 'userId' is not null or undefined
+            (0, common_1.assertParamExists)('findUserConnections2', 'userId', userId);
+            const localVarPath = `/chat/users/{userId}/connections`
+                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    };
+};
+exports.UserConnectionsApiAxiosParamCreator = UserConnectionsApiAxiosParamCreator;
+/**
+ * UserConnectionsApi - functional programming interface
+ * @export
+ */
+const UserConnectionsApiFp = function (configuration) {
+    const localVarAxiosParamCreator = (0, exports.UserConnectionsApiAxiosParamCreator)(configuration);
+    return {
+        /**
+         *
+         * @summary Get a user connections
+         * @param {number} userId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findUserConnections2(userId, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findUserConnections2(userId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['UserConnectionsApi.findUserConnections2']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    };
+};
+exports.UserConnectionsApiFp = UserConnectionsApiFp;
+/**
+ * UserConnectionsApi - factory interface
+ * @export
+ */
+const UserConnectionsApiFactory = function (configuration, basePath, axios) {
+    const localVarFp = (0, exports.UserConnectionsApiFp)(configuration);
+    return {
+        /**
+         *
+         * @summary Get a user connections
+         * @param {UserConnectionsApiFindUserConnections2Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findUserConnections2(requestParameters, options) {
+            return localVarFp.findUserConnections2(requestParameters.userId, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+exports.UserConnectionsApiFactory = UserConnectionsApiFactory;
+/**
+ * UserConnectionsApi - object-oriented interface
+ * @export
+ * @class UserConnectionsApi
+ * @extends {BaseAPI}
+ */
+class UserConnectionsApi extends base_1.BaseAPI {
+    /**
+     *
+     * @summary Get a user connections
+     * @param {UserConnectionsApiFindUserConnections2Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserConnectionsApi
+     */
+    findUserConnections2(requestParameters, options) {
+        return (0, exports.UserConnectionsApiFp)(this.configuration).findUserConnections2(requestParameters.userId, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+exports.UserConnectionsApi = UserConnectionsApi;
+/**
+ * UserContractsApi - axios parameter creator
+ * @export
+ */
+const UserContractsApiAxiosParamCreator = function (configuration) {
+    return {
+        /**
+         *
+         * @summary Get a user Contracts
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findUserContracts1: async (options = {}) => {
+            const localVarPath = `/contract`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Save a user Contract
+         * @param {Contract} contract Contract to save
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        save2: async (contract, options = {}) => {
+            // verify required parameter 'contract' is not null or undefined
+            (0, common_1.assertParamExists)('save2', 'contract', contract);
+            const localVarPath = `/contract`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(contract, localVarRequestOptions, configuration);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    };
+};
+exports.UserContractsApiAxiosParamCreator = UserContractsApiAxiosParamCreator;
+/**
+ * UserContractsApi - functional programming interface
+ * @export
+ */
+const UserContractsApiFp = function (configuration) {
+    const localVarAxiosParamCreator = (0, exports.UserContractsApiAxiosParamCreator)(configuration);
+    return {
+        /**
+         *
+         * @summary Get a user Contracts
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findUserContracts1(options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findUserContracts1(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['UserContractsApi.findUserContracts1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         *
+         * @summary Save a user Contract
+         * @param {Contract} contract Contract to save
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async save2(contract, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.save2(contract, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['UserContractsApi.save2']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    };
+};
+exports.UserContractsApiFp = UserContractsApiFp;
+/**
+ * UserContractsApi - factory interface
+ * @export
+ */
+const UserContractsApiFactory = function (configuration, basePath, axios) {
+    const localVarFp = (0, exports.UserContractsApiFp)(configuration);
+    return {
+        /**
+         *
+         * @summary Get a user Contracts
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findUserContracts1(options) {
+            return localVarFp.findUserContracts1(options).then((request) => request(axios, basePath));
+        },
+        /**
+         *
+         * @summary Save a user Contract
+         * @param {UserContractsApiSave2Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        save2(requestParameters, options) {
+            return localVarFp.save2(requestParameters.contract, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+exports.UserContractsApiFactory = UserContractsApiFactory;
+/**
+ * UserContractsApi - object-oriented interface
+ * @export
+ * @class UserContractsApi
+ * @extends {BaseAPI}
+ */
+class UserContractsApi extends base_1.BaseAPI {
+    /**
+     *
+     * @summary Get a user Contracts
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserContractsApi
+     */
+    findUserContracts1(options) {
+        return (0, exports.UserContractsApiFp)(this.configuration).findUserContracts1(options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary Save a user Contract
+     * @param {UserContractsApiSave2Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserContractsApi
+     */
+    save2(requestParameters, options) {
+        return (0, exports.UserContractsApiFp)(this.configuration).save2(requestParameters.contract, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+exports.UserContractsApi = UserContractsApi;
+/**
+ * UserSummaryApi - axios parameter creator
+ * @export
+ */
+const UserSummaryApiAxiosParamCreator = function (configuration) {
+    return {
+        /**
+         * Retrieves summaries of all chat conversations for a user
+         * @summary Get the user chat summaries
+         * @param {number} userId User ID to fetch chat summaries for
+         * @param {number} [limit] Limit the number of chat summaries returned
+         * @param {LocalDateTimeQueryString} [beforeDatetime] Only return chat summaries before this datetime (UTC timestamp)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getChatSummaryByUser1: async (userId, limit, beforeDatetime, options = {}) => {
+            // verify required parameter 'userId' is not null or undefined
+            (0, common_1.assertParamExists)('getChatSummaryByUser1', 'userId', userId);
+            const localVarPath = `/chat/user_summary/{userId}`
+                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+            if (beforeDatetime !== undefined) {
+                for (const [key, value] of Object.entries(beforeDatetime)) {
+                    localVarQueryParameter[key] = value;
+                }
+            }
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    };
+};
+exports.UserSummaryApiAxiosParamCreator = UserSummaryApiAxiosParamCreator;
+/**
+ * UserSummaryApi - functional programming interface
+ * @export
+ */
+const UserSummaryApiFp = function (configuration) {
+    const localVarAxiosParamCreator = (0, exports.UserSummaryApiAxiosParamCreator)(configuration);
+    return {
+        /**
+         * Retrieves summaries of all chat conversations for a user
+         * @summary Get the user chat summaries
+         * @param {number} userId User ID to fetch chat summaries for
+         * @param {number} [limit] Limit the number of chat summaries returned
+         * @param {LocalDateTimeQueryString} [beforeDatetime] Only return chat summaries before this datetime (UTC timestamp)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getChatSummaryByUser1(userId, limit, beforeDatetime, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getChatSummaryByUser1(userId, limit, beforeDatetime, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['UserSummaryApi.getChatSummaryByUser1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    };
+};
+exports.UserSummaryApiFp = UserSummaryApiFp;
+/**
+ * UserSummaryApi - factory interface
+ * @export
+ */
+const UserSummaryApiFactory = function (configuration, basePath, axios) {
+    const localVarFp = (0, exports.UserSummaryApiFp)(configuration);
+    return {
+        /**
+         * Retrieves summaries of all chat conversations for a user
+         * @summary Get the user chat summaries
+         * @param {UserSummaryApiGetChatSummaryByUser1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getChatSummaryByUser1(requestParameters, options) {
+            return localVarFp.getChatSummaryByUser1(requestParameters.userId, requestParameters.limit, requestParameters.beforeDatetime, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+exports.UserSummaryApiFactory = UserSummaryApiFactory;
+/**
+ * UserSummaryApi - object-oriented interface
+ * @export
+ * @class UserSummaryApi
+ * @extends {BaseAPI}
+ */
+class UserSummaryApi extends base_1.BaseAPI {
+    /**
+     * Retrieves summaries of all chat conversations for a user
+     * @summary Get the user chat summaries
+     * @param {UserSummaryApiGetChatSummaryByUser1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserSummaryApi
+     */
+    getChatSummaryByUser1(requestParameters, options) {
+        return (0, exports.UserSummaryApiFp)(this.configuration).getChatSummaryByUser1(requestParameters.userId, requestParameters.limit, requestParameters.beforeDatetime, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+exports.UserSummaryApi = UserSummaryApi;
+/**
  * UserTypesApi - axios parameter creator
  * @export
  */
@@ -11164,9 +12641,9 @@ const UsersApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findUserConnections1: async (userId, options = {}) => {
+        findUserConnections: async (userId, options = {}) => {
             // verify required parameter 'userId' is not null or undefined
-            (0, common_1.assertParamExists)('findUserConnections1', 'userId', userId);
+            (0, common_1.assertParamExists)('findUserConnections', 'userId', userId);
             const localVarPath = `/users/{userId}/connections`
                 .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -11555,9 +13032,9 @@ const UsersApiAxiosParamCreator = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        save1: async (skilledUser, oAuthToken, options = {}) => {
+        save: async (skilledUser, oAuthToken, options = {}) => {
             // verify required parameter 'skilledUser' is not null or undefined
-            (0, common_1.assertParamExists)('save1', 'skilledUser', skilledUser);
+            (0, common_1.assertParamExists)('save', 'skilledUser', skilledUser);
             const localVarPath = `/users`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
@@ -11981,10 +13458,10 @@ const UsersApiFp = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findUserConnections1(userId, options) {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.findUserConnections1(userId, options);
+        async findUserConnections(userId, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findUserConnections(userId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = base_1.operationServerMap['UsersApi.findUserConnections1']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = base_1.operationServerMap['UsersApi.findUserConnections']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -12131,10 +13608,10 @@ const UsersApiFp = function (configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async save1(skilledUser, oAuthToken, options) {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.save1(skilledUser, oAuthToken, options);
+        async save(skilledUser, oAuthToken, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.save(skilledUser, oAuthToken, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = base_1.operationServerMap['UsersApi.save1']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = base_1.operationServerMap['UsersApi.save']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -12354,12 +13831,12 @@ const UsersApiFactory = function (configuration, basePath, axios) {
         /**
          * Retrieves the list of connections for a specific user
          * @summary Get a user connections
-         * @param {UsersApiFindUserConnections1Request} requestParameters Request parameters.
+         * @param {UsersApiFindUserConnectionsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findUserConnections1(requestParameters, options) {
-            return localVarFp.findUserConnections1(requestParameters.userId, options).then((request) => request(axios, basePath));
+        findUserConnections(requestParameters, options) {
+            return localVarFp.findUserConnections(requestParameters.userId, options).then((request) => request(axios, basePath));
         },
         /**
          * Gets detailed information for multiple users by their IDs
@@ -12463,12 +13940,12 @@ const UsersApiFactory = function (configuration, basePath, axios) {
         /**
          * Updates user profile information in the system
          * @summary Save the data of user in the system
-         * @param {UsersApiSave1Request} requestParameters Request parameters.
+         * @param {UsersApiSaveRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        save1(requestParameters, options) {
-            return localVarFp.save1(requestParameters.skilledUser, requestParameters.oAuthToken, options).then((request) => request(axios, basePath));
+        save(requestParameters, options) {
+            return localVarFp.save(requestParameters.skilledUser, requestParameters.oAuthToken, options).then((request) => request(axios, basePath));
         },
         /**
          *
@@ -12680,13 +14157,13 @@ class UsersApi extends base_1.BaseAPI {
     /**
      * Retrieves the list of connections for a specific user
      * @summary Get a user connections
-     * @param {UsersApiFindUserConnections1Request} requestParameters Request parameters.
+     * @param {UsersApiFindUserConnectionsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    findUserConnections1(requestParameters, options) {
-        return (0, exports.UsersApiFp)(this.configuration).findUserConnections1(requestParameters.userId, options).then((request) => request(this.axios, this.basePath));
+    findUserConnections(requestParameters, options) {
+        return (0, exports.UsersApiFp)(this.configuration).findUserConnections(requestParameters.userId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Gets detailed information for multiple users by their IDs
@@ -12800,13 +14277,13 @@ class UsersApi extends base_1.BaseAPI {
     /**
      * Updates user profile information in the system
      * @summary Save the data of user in the system
-     * @param {UsersApiSave1Request} requestParameters Request parameters.
+     * @param {UsersApiSaveRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    save1(requestParameters, options) {
-        return (0, exports.UsersApiFp)(this.configuration).save1(requestParameters.skilledUser, requestParameters.oAuthToken, options).then((request) => request(this.axios, this.basePath));
+    save(requestParameters, options) {
+        return (0, exports.UsersApiFp)(this.configuration).save(requestParameters.skilledUser, requestParameters.oAuthToken, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      *

@@ -299,6 +299,49 @@ export interface ApiKeyDto {
 /**
  *
  * @export
+ * @interface Attachment
+ */
+export interface Attachment {
+    /**
+     *
+     * @type {User}
+     * @memberof Attachment
+     */
+    'userFrom'?: User;
+    /**
+     *
+     * @type {User}
+     * @memberof Attachment
+     */
+    'userTo'?: User;
+    /**
+     *
+     * @type {string}
+     * @memberof Attachment
+     */
+    'fileId'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Attachment
+     */
+    'uploadUrl'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Attachment
+     */
+    'downloadUrl'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Attachment
+     */
+    'originalName'?: string;
+}
+/**
+ *
+ * @export
  * @interface AuthInfoDto
  */
 export interface AuthInfoDto {
@@ -320,6 +363,25 @@ export interface AuthInfoDto {
      * @memberof AuthInfoDto
      */
     'refreshToken'?: RefreshToken;
+}
+/**
+ *
+ * @export
+ * @interface AutopilotUser
+ */
+export interface AutopilotUser {
+    /**
+     *
+     * @type {string}
+     * @memberof AutopilotUser
+     */
+    'contactId': string;
+    /**
+     *
+     * @type {string}
+     * @memberof AutopilotUser
+     */
+    'email': string;
 }
 /**
  *
@@ -484,6 +546,100 @@ export interface BulkUploadJobStatusDto {
 /**
  *
  * @export
+ * @interface ChatAllowance
+ */
+export interface ChatAllowance {
+    /**
+     *
+     * @type {User}
+     * @memberof ChatAllowance
+     */
+    'userFrom'?: User;
+    /**
+     *
+     * @type {User}
+     * @memberof ChatAllowance
+     */
+    'userTo'?: User;
+    /**
+     *
+     * @type {string}
+     * @memberof ChatAllowance
+     */
+    'currentDateTime'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof ChatAllowance
+     */
+    'chatAllowanceType'?: ChatAllowanceChatAllowanceTypeEnum;
+    /**
+     *
+     * @type {boolean}
+     * @memberof ChatAllowance
+     */
+    'incomingPendingRequest'?: boolean;
+}
+export declare const ChatAllowanceChatAllowanceTypeEnum: {
+    readonly Rejected: "REJECTED";
+    readonly Accepted: "ACCEPTED";
+    readonly Pending: "PENDING";
+    readonly Blocked: "BLOCKED";
+    readonly Silenced: "SILENCED";
+};
+export type ChatAllowanceChatAllowanceTypeEnum = typeof ChatAllowanceChatAllowanceTypeEnum[keyof typeof ChatAllowanceChatAllowanceTypeEnum];
+/**
+ *
+ * @export
+ * @interface ChatTicket
+ */
+export interface ChatTicket {
+    /**
+     *
+     * @type {string}
+     * @memberof ChatTicket
+     */
+    'id'?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof ChatTicket
+     */
+    'userId'?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof ChatTicket
+     */
+    'ip'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof ChatTicket
+     */
+    'creationTime'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof ChatTicket
+     */
+    'expirationTime'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof ChatTicket
+     */
+    'browser'?: string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof ChatTicket
+     */
+    'expired'?: boolean;
+}
+/**
+ *
+ * @export
  * @interface CheckoutSessionDto
  */
 export interface CheckoutSessionDto {
@@ -555,6 +711,100 @@ export declare const CheckoutSessionDtoStatusEnum: {
     readonly Failed: "FAILED";
 };
 export type CheckoutSessionDtoStatusEnum = typeof CheckoutSessionDtoStatusEnum[keyof typeof CheckoutSessionDtoStatusEnum];
+/**
+ *
+ * @export
+ * @interface Contract
+ */
+export interface Contract {
+    /**
+     *
+     * @type {User}
+     * @memberof Contract
+     */
+    'legalOwner'?: User;
+    /**
+     *
+     * @type {User}
+     * @memberof Contract
+     */
+    'counterParty'?: User;
+    /**
+     *
+     * @type {string}
+     * @memberof Contract
+     */
+    'creationDateTime'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Contract
+     */
+    'contractUrl'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Contract
+     */
+    'ndaUrl'?: string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof Contract
+     */
+    'legalOwnerSigned'?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof Contract
+     */
+    'counterPartySigned'?: boolean;
+}
+/**
+ *
+ * @export
+ * @interface ConversationSummary
+ */
+export interface ConversationSummary {
+    /**
+     *
+     * @type {User}
+     * @memberof ConversationSummary
+     */
+    'user'?: User;
+    /**
+     *
+     * @type {string}
+     * @memberof ConversationSummary
+     */
+    'lastMessage'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof ConversationSummary
+     */
+    'lastMessageDateTime'?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof ConversationSummary
+     */
+    'newMessagesCount'?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof ConversationSummary
+     */
+    'chatAllowanceType'?: ConversationSummaryChatAllowanceTypeEnum;
+}
+export declare const ConversationSummaryChatAllowanceTypeEnum: {
+    readonly Rejected: "REJECTED";
+    readonly Accepted: "ACCEPTED";
+    readonly Pending: "PENDING";
+    readonly Blocked: "BLOCKED";
+    readonly Silenced: "SILENCED";
+};
+export type ConversationSummaryChatAllowanceTypeEnum = typeof ConversationSummaryChatAllowanceTypeEnum[keyof typeof ConversationSummaryChatAllowanceTypeEnum];
 /**
  * Country information
  * @export
@@ -630,7 +880,7 @@ export interface CountryPhonePrefix {
     'lang'?: string;
 }
 /**
- *
+ * International dialing prefix metadata
  * @export
  * @interface CountryTelephonePrefix
  */
@@ -661,19 +911,19 @@ export interface CountryTelephonePrefix {
     'lang'?: string;
 }
 /**
- *
+ * Instructor course exposed to directory + detail APIs
  * @export
  * @interface Course
  */
 export interface Course {
     /**
-     *
+     * Primary key
      * @type {number}
      * @memberof Course
      */
     'id'?: number;
     /**
-     *
+     * Owning instructor user id
      * @type {number}
      * @memberof Course
      */
@@ -691,109 +941,109 @@ export interface Course {
      */
     'hostProfileName'?: string;
     /**
-     *
+     * Marketing title
      * @type {string}
      * @memberof Course
      */
     'title'?: string;
     /**
-     *
+     * Full HTML / markdown description body
      * @type {string}
      * @memberof Course
      */
     'description'?: string;
     /**
-     *
+     * Short teaser for cards
      * @type {string}
      * @memberof Course
      */
     'summary'?: string;
     /**
-     *
+     * Local wall-clock start (interpret with courseTimezone)
      * @type {string}
      * @memberof Course
      */
     'courseDateTime'?: string;
     /**
-     * IANA timezone for courseDateTime wall-clock (e.g. America/New_York)
+     * IANA timezone for courseDateTime
      * @type {string}
      * @memberof Course
      */
     'courseTimezone'?: string;
     /**
-     *
+     * Course delivery mode
      * @type {string}
      * @memberof Course
      */
     'format'?: CourseFormatEnum;
     /**
-     *
+     * Venue address or meeting instructions
      * @type {string}
      * @memberof Course
      */
     'location'?: string;
     /**
-     *
+     * Content locale BCP47 tag
      * @type {string}
      * @memberof Course
      */
     'languageLocale'?: string;
     /**
-     *
+     * Ticket price amount
      * @type {number}
      * @memberof Course
      */
     'priceAmount'?: number;
     /**
-     *
+     * ISO currency code
      * @type {string}
      * @memberof Course
      */
     'priceCurrency'?: string;
     /**
-     *
+     * Cover image HTTPS URL
      * @type {string}
      * @memberof Course
      */
     'imageUrl'?: string;
     /**
-     *
+     * Credential track / designation label
      * @type {string}
      * @memberof Course
      */
     'designation'?: CourseDesignationEnum;
     /**
-     *
+     * Eligible for state CE credits
      * @type {boolean}
      * @memberof Course
      */
     'stateApprovedCeCredits'?: boolean;
     /**
-     *
+     * External checkout / registration URL
      * @type {string}
      * @memberof Course
      */
     'externalRegistrationUrl'?: string;
     /**
-     * Approximate instruction hours
+     * Approximate instructional hours
      * @type {number}
      * @memberof Course
      */
     'hours'?: number;
     /**
-     *
+     * Inactive courses hidden from directory
      * @type {boolean}
      * @memberof Course
      */
     'active'?: boolean;
     /**
-     *
+     * Row creation time
      * @type {string}
      * @memberof Course
      */
     'createdAt'?: string;
     /**
-     *
+     * Last update time
      * @type {string}
      * @memberof Course
      */
@@ -822,128 +1072,128 @@ export declare const CourseDesignationEnum: {
 };
 export type CourseDesignationEnum = typeof CourseDesignationEnum[keyof typeof CourseDesignationEnum];
 /**
- *
+ * Paginated slice of courses for an instructor or directory query
  * @export
  * @interface CourseListResult
  */
 export interface CourseListResult {
     /**
-     *
+     * Total matching rows
      * @type {number}
      * @memberof CourseListResult
      */
     'count'?: number;
     /**
-     *
+     * Courses in this page
      * @type {Array<Course>}
      * @memberof CourseListResult
      */
     'courses'?: Array<Course>;
 }
 /**
- *
+ * Create/update payload for instructor-maintained courses
  * @export
  * @interface CourseWriteDto
  */
 export interface CourseWriteDto {
     /**
-     *
+     * Marketing title
      * @type {string}
      * @memberof CourseWriteDto
      */
     'title': string;
     /**
-     *
+     * Long description body
      * @type {string}
      * @memberof CourseWriteDto
      */
     'description': string;
     /**
-     *
+     * Short summary for cards
      * @type {string}
      * @memberof CourseWriteDto
      */
     'summary'?: string;
     /**
-     *
+     * Wall-clock start in timezone below
      * @type {string}
      * @memberof CourseWriteDto
      */
     'courseDateTime': string;
     /**
-     *
+     * IANA timezone id
      * @type {string}
      * @memberof CourseWriteDto
      */
     'courseTimezone': string;
     /**
-     *
+     * Course delivery mode
      * @type {string}
      * @memberof CourseWriteDto
      */
     'format': CourseWriteDtoFormatEnum;
     /**
-     *
+     * Venue or virtual dial-in details
      * @type {string}
      * @memberof CourseWriteDto
      */
     'location'?: string;
     /**
-     *
+     * Locale tag
      * @type {string}
      * @memberof CourseWriteDto
      */
     'languageLocale': string;
     /**
-     *
+     * Price if paid course
      * @type {number}
      * @memberof CourseWriteDto
      */
     'priceAmount'?: number;
     /**
-     *
+     * ISO currency
      * @type {string}
      * @memberof CourseWriteDto
      */
     'priceCurrency'?: string;
     /**
-     *
+     * Existing cover URL when not uploading a new image
      * @type {string}
      * @memberof CourseWriteDto
      */
     'imageUrl'?: string;
     /**
-     * Write-only: course cover image as data:image/...;base64,... or raw base64
+     * Write-only cover upload (data:image/png;base64,...)
      * @type {string}
      * @memberof CourseWriteDto
      */
     'coverImageBase64'?: string;
     /**
-     *
+     * Credential track / designation label
      * @type {string}
      * @memberof CourseWriteDto
      */
     'designation': CourseWriteDtoDesignationEnum;
     /**
-     *
+     * Marks CE eligibility
      * @type {boolean}
      * @memberof CourseWriteDto
      */
     'stateApprovedCeCredits'?: boolean;
     /**
-     *
+     * External registration URL
      * @type {string}
      * @memberof CourseWriteDto
      */
     'externalRegistrationUrl': string;
     /**
-     *
+     * Credit hours
      * @type {number}
      * @memberof CourseWriteDto
      */
     'hours'?: number;
     /**
-     * Ignored on write; courses are always active globally.
+     * Ignored on write (courses remain globally visible flag managed server-side)
      * @type {boolean}
      * @memberof CourseWriteDto
      */
@@ -1171,7 +1421,7 @@ export interface DropdownOption {
     };
 }
 /**
- *
+ * Dropdown options when applicable
  * @export
  * @interface DropdownOptionGroup
  */
@@ -1465,7 +1715,7 @@ export interface GeoLocation {
     'longitude'?: number;
 }
 /**
- *
+ * Google Places-backed office location
  * @export
  * @interface GeoPlace
  */
@@ -1484,7 +1734,7 @@ export interface GeoPlace {
     'address'?: Address;
 }
 /**
- *
+ * Pinned Google reviews
  * @export
  * @interface GooglePlaceReview
  */
@@ -1824,6 +2074,55 @@ export interface GroupNotification {
      * @memberof GroupNotification
      */
     'createdAt'?: string;
+}
+/**
+ *
+ * @export
+ * @interface GroupNotificationSummary
+ */
+export interface GroupNotificationSummary {
+    /**
+     *
+     * @type {string}
+     * @memberof GroupNotificationSummary
+     */
+    'groupId'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GroupNotificationSummary
+     */
+    'groupName'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GroupNotificationSummary
+     */
+    'groupLogo'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GroupNotificationSummary
+     */
+    'lastMessage'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GroupNotificationSummary
+     */
+    'lastMessageDateTime'?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof GroupNotificationSummary
+     */
+    'newMessagesCount'?: number;
+    /**
+     *
+     * @type {boolean}
+     * @memberof GroupNotificationSummary
+     */
+    'groupNotification'?: boolean;
 }
 /**
  * The parent filter of the current filter. If the current filter has a parent filter
@@ -2577,6 +2876,25 @@ export interface Language {
 /**
  *
  * @export
+ * @interface LocalDateTimeQueryString
+ */
+export interface LocalDateTimeQueryString {
+    /**
+     *
+     * @type {string}
+     * @memberof LocalDateTimeQueryString
+     */
+    'utcValue'?: string;
+    /**
+     *
+     * @type {number}
+     * @memberof LocalDateTimeQueryString
+     */
+    'millsFromEpoch'?: number;
+}
+/**
+ *
+ * @export
  * @interface LocaleSet
  */
 export interface LocaleSet {
@@ -2669,6 +2987,55 @@ export interface LogEntry {
 /**
  *
  * @export
+ * @interface Message
+ */
+export interface Message {
+    /**
+     *
+     * @type {User}
+     * @memberof Message
+     */
+    'userFrom'?: User;
+    /**
+     *
+     * @type {User}
+     * @memberof Message
+     */
+    'userTo'?: User;
+    /**
+     *
+     * @type {string}
+     * @memberof Message
+     */
+    'text'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Message
+     */
+    'fileName'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Message
+     */
+    'fileId'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Message
+     */
+    'dateTime'?: string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof Message
+     */
+    'notifiedByChat'?: boolean;
+}
+/**
+ *
+ * @export
  * @interface NetworkSuggestionDto
  */
 export interface NetworkSuggestionDto {
@@ -2755,6 +3122,67 @@ export interface NewsletterSubscriberDto {
      * @memberof NewsletterSubscriberDto
      */
     'user'?: SkilledUser;
+}
+/**
+ * Queued outbound notification payload
+ * @export
+ * @interface Notification
+ */
+export interface Notification {
+    /**
+     * Notification primary key
+     * @type {number}
+     * @memberof Notification
+     */
+    'id'?: number;
+    /**
+     * Recipient email
+     * @type {string}
+     * @memberof Notification
+     */
+    'email': string;
+    /**
+     * Channel/template discriminator
+     * @type {string}
+     * @memberof Notification
+     */
+    'type': NotificationTypeEnum;
+    /**
+     * Server timestamp when queued
+     * @type {string}
+     * @memberof Notification
+     */
+    'currentDateTime'?: string;
+    /**
+     * Notification body data in JSON format
+     * @type {object}
+     * @memberof Notification
+     */
+    'body'?: object;
+}
+export declare const NotificationTypeEnum: {
+    readonly ToBrokerAlertCreated: "TO_BROKER__ALERT_CREATED";
+    readonly ToUserWeeklyProperties: "TO_USER__WEEKLY_PROPERTIES";
+    readonly ToUserWeeklyPayedSubscribers: "TO_USER__WEEKLY_PAYED_SUBSCRIBERS";
+    readonly ToUserCustomizedAlert: "TO_USER__CUSTOMIZED_ALERT";
+    readonly ToUserWeeklyGroupProperties: "TO_USER__WEEKLY_GROUP_PROPERTIES";
+    readonly ToUserNewsletterNewSubscriber: "TO_USER__NEWSLETTER_NEW_SUBSCRIBER";
+    readonly ToUserNewsletterConfirmation: "TO_USER__NEWSLETTER_CONFIRMATION";
+    readonly ToUserNewsletterListing: "TO_USER__NEWSLETTER_LISTING";
+};
+export type NotificationTypeEnum = typeof NotificationTypeEnum[keyof typeof NotificationTypeEnum];
+/**
+ *
+ * @export
+ * @interface NotifyUploadRequest
+ */
+export interface NotifyUploadRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof NotifyUploadRequest
+     */
+    'fileName'?: string;
 }
 /**
  * Request object for password recovery operations
@@ -2845,13 +3273,13 @@ export interface PhoneCodeRequestResource {
     'verificationType': string;
 }
 /**
- *
+ * Property listing; dynamic attributes live in fieldList (typed PropertyField entries)
  * @export
  * @interface Property
  */
 export interface Property {
     /**
-     *
+     * Listing id (server-generated)
      * @type {string}
      * @memberof Property
      */
@@ -2893,25 +3321,25 @@ export interface Property {
      */
     'propertyKey'?: PropertyKey;
     /**
-     *
+     * All listing fields (title, price, images, etc.) as typed rows
      * @type {Array<PropertyField>}
      * @memberof Property
      */
     'fieldList'?: Array<PropertyField>;
     /**
-     *
+     * First publication instant
      * @type {string}
      * @memberof Property
      */
     'publishDate'?: string;
     /**
-     *
+     * Last modification instant
      * @type {string}
      * @memberof Property
      */
     'modifiedDate'?: string;
     /**
-     *
+     * Lifecycle state
      * @type {string}
      * @memberof Property
      */
@@ -2923,31 +3351,31 @@ export interface Property {
      */
     'isPrivate'?: boolean;
     /**
-     *
+     * Drafts omit public SEO surfaces
      * @type {boolean}
      * @memberof Property
      */
     'isDraft'?: boolean;
     /**
-     *
+     * Property group ids sharing this listing
      * @type {Array<string>}
      * @memberof Property
      */
     'groupIds'?: Array<string>;
     /**
-     *
+     * Email member groups when listing changes
      * @type {boolean}
      * @memberof Property
      */
     'shouldPublishEmailsToGroups'?: boolean;
     /**
-     *
+     * Password for password-protected detail views
      * @type {string}
      * @memberof Property
      */
     'password'?: string;
     /**
-     *
+     * Whether a gate password is active
      * @type {boolean}
      * @memberof Property
      */
@@ -2961,43 +3389,43 @@ export declare const PropertyPublicationStateEnum: {
 };
 export type PropertyPublicationStateEnum = typeof PropertyPublicationStateEnum[keyof typeof PropertyPublicationStateEnum];
 /**
- * The property field which is needed for the filterWorkerOption: RANGE, DROPDOWN, BOOLEAN and CURRENCY_RANGE
+ * Property field definition and values (filter/worker types: RANGE, DROPDOWN, BOOLEAN, CURRENCY_RANGE, …)
  * @export
  * @interface PropertyField
  */
 export interface PropertyField {
     /**
-     *
+     * Field catalog id (e.g. 2=title, 3=description, 10=location)
      * @type {number}
      * @memberof PropertyField
      */
     'id': number;
     /**
-     *
+     * Human label when present
      * @type {string}
      * @memberof PropertyField
      */
     'name'?: string;
     /**
-     *
+     * Locale code for label/tooltip
      * @type {string}
      * @memberof PropertyField
      */
     'lang'?: string;
     /**
-     *
+     * Core listing attribute flag
      * @type {boolean}
      * @memberof PropertyField
      */
     'basic'?: boolean;
     /**
-     *
+     * Marks uniqueness constraint field
      * @type {boolean}
      * @memberof PropertyField
      */
     'primaryKey'?: boolean;
     /**
-     *
+     * Supports per-language value rows
      * @type {boolean}
      * @memberof PropertyField
      */
@@ -3015,7 +3443,7 @@ export interface PropertyField {
      */
     'propertyFieldValueType'?: PropertyFieldValueType;
     /**
-     *
+     * Concrete values for this field instance
      * @type {Array<PropertyFieldValue>}
      * @memberof PropertyField
      */
@@ -3027,37 +3455,37 @@ export interface PropertyField {
      */
     'dropdownOptionGroup'?: DropdownOptionGroup;
     /**
-     *
+     * Tooltip locale
      * @type {string}
      * @memberof PropertyField
      */
     'tooltipLang'?: string;
     /**
-     *
+     * Declared datatype for free-text slot
      * @type {string}
      * @memberof PropertyField
      */
     'textType'?: PropertyFieldTextTypeEnum;
     /**
-     *
+     * Declared datatype for data1 slot
      * @type {string}
      * @memberof PropertyField
      */
     'data1Type'?: PropertyFieldData1TypeEnum;
     /**
-     *
+     * Declared datatype for data2 slot
      * @type {string}
      * @memberof PropertyField
      */
     'data2Type'?: PropertyFieldData2TypeEnum;
     /**
-     *
+     * Declared datatype for data3 slot
      * @type {string}
      * @memberof PropertyField
      */
     'data3Type'?: PropertyFieldData3TypeEnum;
     /**
-     *
+     * Lister UI hint
      * @type {string}
      * @memberof PropertyField
      */
@@ -3116,7 +3544,7 @@ export declare const PropertyFieldHcListerOptionEnum: {
 };
 export type PropertyFieldHcListerOptionEnum = typeof PropertyFieldHcListerOptionEnum[keyof typeof PropertyFieldHcListerOptionEnum];
 /**
- *
+ * Presentation widget
  * @export
  * @interface PropertyFieldType
  */
@@ -3135,19 +3563,19 @@ export interface PropertyFieldType {
     'name'?: string;
 }
 /**
- *
+ * Single logical cell inside a PropertyField (text/data slots)
  * @export
  * @interface PropertyFieldValue
  */
 export interface PropertyFieldValue {
     /**
-     *
+     * Broker dropdown backing id when applicable
      * @type {number}
      * @memberof PropertyFieldValue
      */
     'bdid'?: number;
     /**
-     *
+     * Row discriminator inside repeatable fields
      * @type {number}
      * @memberof PropertyFieldValue
      */
@@ -3178,50 +3606,50 @@ export interface PropertyFieldValue {
     'data3'?: PropertyFieldValueSpec;
 }
 /**
- *
+ * Primitive holder matching PropertyDatatype slots
  * @export
  * @interface PropertyFieldValueSpec
  */
 export interface PropertyFieldValueSpec {
     /**
-     *
+     * String payload (titles, urls, longer copy)
      * @type {string}
      * @memberof PropertyFieldValueSpec
      */
     'strVal'?: string;
     /**
-     *
+     * Boolean payload
      * @type {boolean}
      * @memberof PropertyFieldValueSpec
      */
     'boolVal'?: boolean;
     /**
-     *
+     * Date/time payload
      * @type {string}
      * @memberof PropertyFieldValueSpec
      */
     'dateVal'?: string;
     /**
-     *
+     * Floating numeric payload
      * @type {number}
      * @memberof PropertyFieldValueSpec
      */
     'doubleVal'?: number;
     /**
-     *
+     * Integer numeric payload
      * @type {number}
      * @memberof PropertyFieldValueSpec
      */
     'intVal'?: number;
     /**
-     *
+     * Large integer payload
      * @type {number}
      * @memberof PropertyFieldValueSpec
      */
     'bigIntVal'?: number;
 }
 /**
- *
+ * Value cardinality / structure
  * @export
  * @interface PropertyFieldValueType
  */
@@ -3431,7 +3859,7 @@ export interface PropertyFilterSubmission {
     'selectedFilterOptions'?: Array<DropdownOption>;
 }
 /**
- *
+ * Write-only duplicate guard key
  * @export
  * @interface PropertyKey
  */
@@ -3785,79 +4213,73 @@ export interface SkilledUser {
      */
     'language'?: Language;
     /**
-     *
+     * Email address
      * @type {string}
      * @memberof SkilledUser
      */
     'email'?: string;
     /**
-     *
+     * Given name
      * @type {string}
      * @memberof SkilledUser
      */
     'firstName'?: string;
     /**
-     *
+     * Family name
      * @type {string}
      * @memberof SkilledUser
      */
     'lastName'?: string;
     /**
-     *
+     * Numeric user id
      * @type {number}
      * @memberof SkilledUser
      */
     'id'?: number;
     /**
-     *
-     * @type {string}
-     * @memberof SkilledUser
-     */
-    'password'?: string;
-    /**
-     *
+     * Whether email has been verified
      * @type {boolean}
      * @memberof SkilledUser
      */
     'confirmedFlag'?: boolean;
     /**
-     *
+     * Registration timestamp (epoch millis in JSON)
      * @type {string}
      * @memberof SkilledUser
      */
     'registerDate'?: string;
     /**
-     *
+     * When basic profile was completed
      * @type {string}
      * @memberof SkilledUser
      */
     'basicProfileCompletedAt'?: string;
     /**
-     *
+     * Public website URL
      * @type {string}
      * @memberof SkilledUser
      */
     'webSite'?: string;
     /**
-     *
+     * LinkedIn profile URL
      * @type {string}
      * @memberof SkilledUser
      */
     'linkedIn'?: string;
     /**
-     *
+     * Skype handle
      * @type {string}
      * @memberof SkilledUser
      */
     'skype'?: string;
     /**
-     *
+     * Profile image as base64 data URL or raw base64 (large)
      * @type {string}
      * @memberof SkilledUser
      */
     'base64Image'?: string;
     /**
-     *
+     * CDN URL for profile image
      * @type {string}
      * @memberof SkilledUser
      */
@@ -3875,31 +4297,31 @@ export interface SkilledUser {
      */
     'telephonePrefix'?: CountryTelephonePrefix;
     /**
-     *
+     * Phone number without prefix
      * @type {string}
      * @memberof SkilledUser
      */
     'telephoneNumber'?: string;
     /**
-     *
+     * Professional roles (broker, agent, …)
      * @type {Array<UserType>}
      * @memberof SkilledUser
      */
     'userTypes'?: Array<UserType>;
     /**
-     *
+     * Languages spoken with proficiency
      * @type {Array<UserLanguage>}
      * @memberof SkilledUser
      */
     'userLanguages'?: Array<UserLanguage>;
     /**
-     *
+     * Localized biography snippets
      * @type {Array<UserDescription>}
      * @memberof SkilledUser
      */
     'userDescriptions'?: Array<UserDescription>;
     /**
-     *
+     * FAQ entries shown on profile
      * @type {Array<UserFaq>}
      * @memberof SkilledUser
      */
@@ -3911,55 +4333,55 @@ export interface SkilledUser {
      */
     'country'?: Country;
     /**
-     *
+     * Legacy role label when present
      * @type {string}
      * @memberof SkilledUser
      */
     'role'?: string;
     /**
-     *
+     * Background hero image as base64
      * @type {string}
      * @memberof SkilledUser
      */
     'backgroundImageBase64'?: string;
     /**
-     *
+     * Background hero image URL
      * @type {string}
      * @memberof SkilledUser
      */
     'backgroundImageLink'?: string;
     /**
-     *
+     * Public profile slug
      * @type {string}
      * @memberof SkilledUser
      */
     'profileName'?: string;
     /**
-     *
+     * Last activity timestamp (epoch millis in JSON)
      * @type {string}
      * @memberof SkilledUser
      */
     'lastActivity'?: string;
     /**
-     *
+     * Chat availability flag
      * @type {string}
      * @memberof SkilledUser
      */
     'chatStatus'?: string;
     /**
-     *
+     * Open conversation count for summaries
      * @type {number}
      * @memberof SkilledUser
      */
     'chatsCount'?: number;
     /**
-     *
+     * SMS verification completed
      * @type {boolean}
      * @memberof SkilledUser
      */
     'phoneVerified'?: boolean;
     /**
-     *
+     * Stripe Identity verification completed
      * @type {boolean}
      * @memberof SkilledUser
      */
@@ -3971,253 +4393,253 @@ export interface SkilledUser {
      */
     'geoPlace'?: GeoPlace;
     /**
-     *
+     * Chamber of commerce registry URL
      * @type {string}
      * @memberof SkilledUser
      */
     'chamberOfCommerceUrl'?: string;
     /**
-     *
+     * Official license or registry id
      * @type {string}
      * @memberof SkilledUser
      */
     'licenseId'?: string;
     /**
-     *
+     * Facebook profile URL
      * @type {string}
      * @memberof SkilledUser
      */
     'facebookUrl'?: string;
     /**
-     *
+     * Instagram profile URL
      * @type {string}
      * @memberof SkilledUser
      */
     'instagramUrl'?: string;
     /**
-     *
+     * X/Twitter profile URL
      * @type {string}
      * @memberof SkilledUser
      */
     'twitterUrl'?: string;
     /**
-     *
+     * WeChat profile URL
      * @type {string}
      * @memberof SkilledUser
      */
     'wechatUrl'?: string;
     /**
-     *
+     * WeChat QR image data URL
      * @type {string}
      * @memberof SkilledUser
      */
     'wechatQr'?: string;
     /**
-     *
+     * VK profile URL
      * @type {string}
      * @memberof SkilledUser
      */
     'vkUrl'?: string;
     /**
-     *
+     * Introduction video URL
      * @type {string}
      * @memberof SkilledUser
      */
     'videoUrl'?: string;
     /**
-     *
+     * Calendar booking link
      * @type {string}
      * @memberof SkilledUser
      */
     'bookAnAppointmentUrl'?: string;
     /**
-     *
+     * Google Place id for office
      * @type {string}
      * @memberof SkilledUser
      */
     'googlePlaceId'?: string;
     /**
-     *
+     * Pinned Google reviews
      * @type {Array<GooglePlaceReview>}
      * @memberof SkilledUser
      */
     'googlePlaceReviews'?: Array<GooglePlaceReview>;
     /**
-     *
+     * Aggregate Google rating
      * @type {number}
      * @memberof SkilledUser
      */
     'googleRating'?: number;
     /**
-     *
+     * Total Google ratings count
      * @type {number}
      * @memberof SkilledUser
      */
     'googleUserRatingsTotal'?: number;
     /**
-     *
+     * Years of experience badge
      * @type {number}
      * @memberof SkilledUser
      */
     'achievementsYearsOfExperience'?: number;
     /**
-     *
+     * Closed deals badge
      * @type {number}
      * @memberof SkilledUser
      */
     'achievementsDealsClosed'?: number;
     /**
-     *
+     * Percentile vs peers
      * @type {number}
      * @memberof SkilledUser
      */
     'achievementsPercentageOfAllAgents'?: number;
     /**
-     *
+     * Alternate Place id for achievements widget
      * @type {string}
      * @memberof SkilledUser
      */
     'achievementsGooglePlaceId'?: string;
     /**
-     *
+     * Focus: commercial
      * @type {boolean}
      * @memberof SkilledUser
      */
     'focusOnCommercial'?: boolean;
     /**
-     *
+     * Focus: residential
      * @type {boolean}
      * @memberof SkilledUser
      */
     'focusOnResidential'?: boolean;
     /**
-     *
+     * Focus: rentals
      * @type {boolean}
      * @memberof SkilledUser
      */
     'focusOnRental'?: boolean;
     /**
-     *
+     * Focus: selling/listings
      * @type {boolean}
      * @memberof SkilledUser
      */
     'focusOnSelling'?: boolean;
     /**
-     *
+     * Focus: valuation
      * @type {boolean}
      * @memberof SkilledUser
      */
     'focusOnValuation'?: boolean;
     /**
-     *
+     * Focus: due diligence
      * @type {boolean}
      * @memberof SkilledUser
      */
     'focusOnDueDiligence'?: boolean;
     /**
-     *
+     * Focus: consulting
      * @type {boolean}
      * @memberof SkilledUser
      */
     'focusOnConsulting'?: boolean;
     /**
-     *
+     * Focus: portfolio valuation
      * @type {boolean}
      * @memberof SkilledUser
      */
     'focusOnPortfolioValuation'?: boolean;
     /**
-     *
+     * Imprint/legal headline
      * @type {string}
      * @memberof SkilledUser
      */
     'imprintTitle'?: string;
     /**
-     *
+     * Imprint/legal body HTML or text
      * @type {string}
      * @memberof SkilledUser
      */
     'imprintDescription'?: string;
     /**
-     *
+     * Imprint logo image base64
      * @type {string}
      * @memberof SkilledUser
      */
     'imprintBase64Image'?: string;
     /**
-     *
+     * Imprint logo CDN URL
      * @type {string}
      * @memberof SkilledUser
      */
     'imprintLogoLink'?: string;
     /**
-     *
+     * Expose email on public profile
      * @type {boolean}
      * @memberof SkilledUser
      */
     'showEmailInProfile'?: boolean;
     /**
-     *
+     * Expose email on property detail
      * @type {boolean}
      * @memberof SkilledUser
      */
     'showEmailInProperty'?: boolean;
     /**
-     *
+     * Expose phone on property detail
      * @type {boolean}
      * @memberof SkilledUser
      */
     'showPhoneInProperty'?: boolean;
     /**
-     *
+     * Allow visitors to save vCard/contact
      * @type {boolean}
      * @memberof SkilledUser
      */
     'allowSaveContact'?: boolean;
     /**
-     *
+     * Primary city label
      * @type {string}
      * @memberof SkilledUser
      */
     'city'?: string;
     /**
-     *
+     * Referral source tag
      * @type {string}
      * @memberof SkilledUser
      */
     'referral'?: string;
     /**
-     *
+     * Who pays referral commission by convention
      * @type {string}
      * @memberof SkilledUser
      */
     'commissionPaidBy'?: string;
     /**
-     *
+     * Broker offers referral commission by default
      * @type {boolean}
      * @memberof SkilledUser
      */
     'offersReferralCommission'?: boolean;
     /**
-     *
+     * Default referral percentage for listings
      * @type {number}
      * @memberof SkilledUser
      */
     'defaultReferralPercent'?: number;
     /**
-     *
+     * Active subscription tier name
      * @type {string}
      * @memberof SkilledUser
      */
     'subscriptionPlanName'?: SkilledUserSubscriptionPlanNameEnum;
     /**
-     *
+     * Hide profile from directory search
      * @type {boolean}
      * @memberof SkilledUser
      */
     'hidePublicProfile'?: boolean;
     /**
-     *
+     * Public profile theme
      * @type {string}
      * @memberof SkilledUser
      */
@@ -4501,7 +4923,7 @@ export declare const SubscriptionPriceDtoRenewalTypeEnum: {
 };
 export type SubscriptionPriceDtoRenewalTypeEnum = typeof SubscriptionPriceDtoRenewalTypeEnum[keyof typeof SubscriptionPriceDtoRenewalTypeEnum];
 /**
- *
+ * Testimonials for current slice
  * @export
  * @interface Testimonial
  */
@@ -4550,19 +4972,19 @@ export interface Testimonial {
     'published'?: boolean;
 }
 /**
- *
+ * Testimonial filter result with total count and rows
  * @export
  * @interface TestimonialFilterResult
  */
 export interface TestimonialFilterResult {
     /**
-     *
+     * Total matching testimonials
      * @type {number}
      * @memberof TestimonialFilterResult
      */
     'count'?: number;
     /**
-     *
+     * Testimonials for current slice
      * @type {Array<Testimonial>}
      * @memberof TestimonialFilterResult
      */
@@ -4631,7 +5053,7 @@ export interface TextTranslation {
     'originalText'?: string;
 }
 /**
- *
+ * HalloCasa user profile (extends contact)
  * @export
  * @interface User
  */
@@ -4643,79 +5065,73 @@ export interface User {
      */
     'language'?: Language;
     /**
-     *
+     * Email address
      * @type {string}
      * @memberof User
      */
     'email'?: string;
     /**
-     *
+     * Given name
      * @type {string}
      * @memberof User
      */
     'firstName'?: string;
     /**
-     *
+     * Family name
      * @type {string}
      * @memberof User
      */
     'lastName'?: string;
     /**
-     *
+     * Numeric user id
      * @type {number}
      * @memberof User
      */
     'id'?: number;
     /**
-     *
-     * @type {string}
-     * @memberof User
-     */
-    'password'?: string;
-    /**
-     *
+     * Whether email has been verified
      * @type {boolean}
      * @memberof User
      */
     'confirmedFlag'?: boolean;
     /**
-     *
+     * Registration timestamp (epoch millis in JSON)
      * @type {string}
      * @memberof User
      */
     'registerDate'?: string;
     /**
-     *
+     * When basic profile was completed
      * @type {string}
      * @memberof User
      */
     'basicProfileCompletedAt'?: string;
     /**
-     *
+     * Public website URL
      * @type {string}
      * @memberof User
      */
     'webSite'?: string;
     /**
-     *
+     * LinkedIn profile URL
      * @type {string}
      * @memberof User
      */
     'linkedIn'?: string;
     /**
-     *
+     * Skype handle
      * @type {string}
      * @memberof User
      */
     'skype'?: string;
     /**
-     *
+     * Profile image as base64 data URL or raw base64 (large)
      * @type {string}
      * @memberof User
      */
     'base64Image'?: string;
     /**
-     *
+     * CDN URL for profile image
      * @type {string}
      * @memberof User
      */
@@ -4733,31 +5149,31 @@ export interface User {
      */
     'telephonePrefix'?: CountryTelephonePrefix;
     /**
-     *
+     * Phone number without prefix
      * @type {string}
      * @memberof User
      */
     'telephoneNumber'?: string;
     /**
-     *
+     * Professional roles (broker, agent, …)
      * @type {Array<UserType>}
      * @memberof User
      */
     'userTypes'?: Array<UserType>;
     /**
-     *
+     * Languages spoken with proficiency
      * @type {Array<UserLanguage>}
      * @memberof User
      */
     'userLanguages'?: Array<UserLanguage>;
     /**
-     *
+     * Localized biography snippets
      * @type {Array<UserDescription>}
      * @memberof User
      */
     'userDescriptions'?: Array<UserDescription>;
     /**
-     *
+     * FAQ entries shown on profile
      * @type {Array<UserFaq>}
      * @memberof User
      */
@@ -4769,55 +5185,55 @@ export interface User {
      */
     'country'?: Country;
     /**
-     *
+     * Legacy role label when present
      * @type {string}
      * @memberof User
      */
     'role'?: string;
     /**
-     *
+     * Background hero image as base64
      * @type {string}
      * @memberof User
      */
     'backgroundImageBase64'?: string;
     /**
-     *
+     * Background hero image URL
      * @type {string}
      * @memberof User
      */
     'backgroundImageLink'?: string;
     /**
-     *
+     * Public profile slug
      * @type {string}
      * @memberof User
      */
     'profileName'?: string;
     /**
-     *
+     * Last activity timestamp (epoch millis in JSON)
      * @type {string}
      * @memberof User
      */
     'lastActivity'?: string;
     /**
-     *
+     * Chat availability flag
      * @type {string}
      * @memberof User
      */
     'chatStatus'?: string;
     /**
-     *
+     * Open conversation count for summaries
      * @type {number}
      * @memberof User
      */
     'chatsCount'?: number;
     /**
-     *
+     * SMS verification completed
      * @type {boolean}
      * @memberof User
      */
     'phoneVerified'?: boolean;
     /**
-     *
+     * Stripe Identity verification completed
      * @type {boolean}
      * @memberof User
      */
@@ -4829,253 +5245,253 @@ export interface User {
      */
     'geoPlace'?: GeoPlace;
     /**
-     *
+     * Chamber of commerce registry URL
      * @type {string}
      * @memberof User
      */
     'chamberOfCommerceUrl'?: string;
     /**
-     *
+     * Official license or registry id
      * @type {string}
      * @memberof User
      */
     'licenseId'?: string;
     /**
-     *
+     * Facebook profile URL
      * @type {string}
      * @memberof User
      */
     'facebookUrl'?: string;
     /**
-     *
+     * Instagram profile URL
      * @type {string}
      * @memberof User
      */
     'instagramUrl'?: string;
     /**
-     *
+     * X/Twitter profile URL
      * @type {string}
      * @memberof User
      */
     'twitterUrl'?: string;
     /**
-     *
+     * WeChat profile URL
      * @type {string}
      * @memberof User
      */
     'wechatUrl'?: string;
     /**
-     *
+     * WeChat QR image data URL
      * @type {string}
      * @memberof User
      */
     'wechatQr'?: string;
     /**
-     *
+     * VK profile URL
      * @type {string}
      * @memberof User
      */
     'vkUrl'?: string;
     /**
-     *
+     * Introduction video URL
      * @type {string}
      * @memberof User
      */
     'videoUrl'?: string;
     /**
-     *
+     * Calendar booking link
      * @type {string}
      * @memberof User
      */
     'bookAnAppointmentUrl'?: string;
     /**
-     *
+     * Google Place id for office
      * @type {string}
      * @memberof User
      */
     'googlePlaceId'?: string;
     /**
-     *
+     * Pinned Google reviews
      * @type {Array<GooglePlaceReview>}
      * @memberof User
      */
     'googlePlaceReviews'?: Array<GooglePlaceReview>;
     /**
-     *
+     * Aggregate Google rating
      * @type {number}
      * @memberof User
      */
     'googleRating'?: number;
     /**
-     *
+     * Total Google ratings count
      * @type {number}
      * @memberof User
      */
     'googleUserRatingsTotal'?: number;
     /**
-     *
+     * Years of experience badge
      * @type {number}
      * @memberof User
      */
     'achievementsYearsOfExperience'?: number;
     /**
-     *
+     * Closed deals badge
      * @type {number}
      * @memberof User
      */
     'achievementsDealsClosed'?: number;
     /**
-     *
+     * Percentile vs peers
      * @type {number}
      * @memberof User
      */
     'achievementsPercentageOfAllAgents'?: number;
     /**
-     *
+     * Alternate Place id for achievements widget
      * @type {string}
      * @memberof User
      */
     'achievementsGooglePlaceId'?: string;
     /**
-     *
+     * Focus: commercial
      * @type {boolean}
      * @memberof User
      */
     'focusOnCommercial'?: boolean;
     /**
-     *
+     * Focus: residential
      * @type {boolean}
      * @memberof User
      */
     'focusOnResidential'?: boolean;
     /**
-     *
+     * Focus: rentals
      * @type {boolean}
      * @memberof User
      */
     'focusOnRental'?: boolean;
     /**
-     *
+     * Focus: selling/listings
      * @type {boolean}
      * @memberof User
      */
     'focusOnSelling'?: boolean;
     /**
-     *
+     * Focus: valuation
      * @type {boolean}
      * @memberof User
      */
     'focusOnValuation'?: boolean;
     /**
-     *
+     * Focus: due diligence
      * @type {boolean}
      * @memberof User
      */
     'focusOnDueDiligence'?: boolean;
     /**
-     *
+     * Focus: consulting
      * @type {boolean}
      * @memberof User
      */
     'focusOnConsulting'?: boolean;
     /**
-     *
+     * Focus: portfolio valuation
      * @type {boolean}
      * @memberof User
      */
     'focusOnPortfolioValuation'?: boolean;
     /**
-     *
+     * Imprint/legal headline
      * @type {string}
      * @memberof User
      */
     'imprintTitle'?: string;
     /**
-     *
+     * Imprint/legal body HTML or text
      * @type {string}
      * @memberof User
      */
     'imprintDescription'?: string;
     /**
-     *
+     * Imprint logo image base64
      * @type {string}
      * @memberof User
      */
     'imprintBase64Image'?: string;
     /**
-     *
+     * Imprint logo CDN URL
      * @type {string}
      * @memberof User
      */
     'imprintLogoLink'?: string;
     /**
-     *
+     * Expose email on public profile
      * @type {boolean}
      * @memberof User
      */
     'showEmailInProfile'?: boolean;
     /**
-     *
+     * Expose email on property detail
      * @type {boolean}
      * @memberof User
      */
     'showEmailInProperty'?: boolean;
     /**
-     *
+     * Expose phone on property detail
      * @type {boolean}
      * @memberof User
      */
     'showPhoneInProperty'?: boolean;
     /**
-     *
+     * Allow visitors to save vCard/contact
      * @type {boolean}
      * @memberof User
      */
     'allowSaveContact'?: boolean;
     /**
-     *
+     * Primary city label
      * @type {string}
      * @memberof User
      */
     'city'?: string;
     /**
-     *
+     * Referral source tag
      * @type {string}
      * @memberof User
      */
     'referral'?: string;
     /**
-     *
+     * Who pays referral commission by convention
      * @type {string}
      * @memberof User
      */
     'commissionPaidBy'?: string;
     /**
-     *
+     * Broker offers referral commission by default
      * @type {boolean}
      * @memberof User
      */
     'offersReferralCommission'?: boolean;
     /**
-     *
+     * Default referral percentage for listings
      * @type {number}
      * @memberof User
      */
     'defaultReferralPercent'?: number;
     /**
-     *
+     * Active subscription tier name
      * @type {string}
      * @memberof User
      */
     'subscriptionPlanName'?: UserSubscriptionPlanNameEnum;
     /**
-     *
+     * Hide profile from directory search
      * @type {boolean}
      * @memberof User
      */
     'hidePublicProfile'?: boolean;
     /**
-     *
+     * Public profile theme
      * @type {string}
      * @memberof User
      */
@@ -5102,6 +5518,31 @@ export declare const UserPublicProfileDesignEnum: {
 export type UserPublicProfileDesignEnum = typeof UserPublicProfileDesignEnum[keyof typeof UserPublicProfileDesignEnum];
 /**
  *
+ * @export
+ * @interface UserChatsSummary
+ */
+export interface UserChatsSummary {
+    /**
+     *
+     * @type {User}
+     * @memberof UserChatsSummary
+     */
+    'user'?: User;
+    /**
+     *
+     * @type {Array<ConversationSummary>}
+     * @memberof UserChatsSummary
+     */
+    'conversationSummaries'?: Array<ConversationSummary>;
+    /**
+     *
+     * @type {Array<GroupNotificationSummary>}
+     * @memberof UserChatsSummary
+     */
+    'groupNotificationSummaries'?: Array<GroupNotificationSummary>;
+}
+/**
+ * Localized biography snippets
  * @export
  * @interface UserDescription
  */
@@ -5169,7 +5610,7 @@ export interface UserDto {
     'userPermissions'?: Array<UserPermission>;
 }
 /**
- *
+ * FAQ entries shown on profile
  * @export
  * @interface UserFaq
  */
@@ -5601,7 +6042,7 @@ export declare const UserGroupGroupTypeEnum: {
 };
 export type UserGroupGroupTypeEnum = typeof UserGroupGroupTypeEnum[keyof typeof UserGroupGroupTypeEnum];
 /**
- *
+ * Languages spoken with proficiency
  * @export
  * @interface UserLanguage
  */
@@ -5749,7 +6190,7 @@ export declare const UserSubscriptionDtoStatusEnum: {
 };
 export type UserSubscriptionDtoStatusEnum = typeof UserSubscriptionDtoStatusEnum[keyof typeof UserSubscriptionDtoStatusEnum];
 /**
- *
+ * Professional roles (broker, agent, …)
  * @export
  * @interface UserType
  */
@@ -6219,6 +6660,132 @@ export declare class AlertsApi extends BaseAPI {
     sendAlert(requestParameters: AlertsApiSendAlertRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any>>;
 }
 /**
+ * AllowancesApi - axios parameter creator
+ * @export
+ */
+export declare const AllowancesApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     * Retrieves the chat allowance settings between two users. User must be one of the involved parties.
+     * @summary Get chat allowance for a user pair
+     * @param {string} userPair User pair in the form userFrom-userTo
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getChatAllowance1: (userPair: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Updates the chat allowance settings between two users
+     * @summary Update chat allowance for a user pair
+     * @param {string} userPair User pair in the form userFrom-userTo
+     * @param {ChatAllowance} chatAllowance Chat allowance information to update
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    updateChatAllowance1: (userPair: string, chatAllowance: ChatAllowance, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * AllowancesApi - functional programming interface
+ * @export
+ */
+export declare const AllowancesApiFp: (configuration?: Configuration) => {
+    /**
+     * Retrieves the chat allowance settings between two users. User must be one of the involved parties.
+     * @summary Get chat allowance for a user pair
+     * @param {string} userPair User pair in the form userFrom-userTo
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getChatAllowance1(userPair: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChatAllowance>>;
+    /**
+     * Updates the chat allowance settings between two users
+     * @summary Update chat allowance for a user pair
+     * @param {string} userPair User pair in the form userFrom-userTo
+     * @param {ChatAllowance} chatAllowance Chat allowance information to update
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    updateChatAllowance1(userPair: string, chatAllowance: ChatAllowance, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChatAllowance>>;
+};
+/**
+ * AllowancesApi - factory interface
+ * @export
+ */
+export declare const AllowancesApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     * Retrieves the chat allowance settings between two users. User must be one of the involved parties.
+     * @summary Get chat allowance for a user pair
+     * @param {AllowancesApiGetChatAllowance1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getChatAllowance1(requestParameters: AllowancesApiGetChatAllowance1Request, options?: RawAxiosRequestConfig): AxiosPromise<ChatAllowance>;
+    /**
+     * Updates the chat allowance settings between two users
+     * @summary Update chat allowance for a user pair
+     * @param {AllowancesApiUpdateChatAllowance1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    updateChatAllowance1(requestParameters: AllowancesApiUpdateChatAllowance1Request, options?: RawAxiosRequestConfig): AxiosPromise<ChatAllowance>;
+};
+/**
+ * Request parameters for getChatAllowance1 operation in AllowancesApi.
+ * @export
+ * @interface AllowancesApiGetChatAllowance1Request
+ */
+export interface AllowancesApiGetChatAllowance1Request {
+    /**
+     * User pair in the form userFrom-userTo
+     * @type {string}
+     * @memberof AllowancesApiGetChatAllowance1
+     */
+    readonly userPair: string;
+}
+/**
+ * Request parameters for updateChatAllowance1 operation in AllowancesApi.
+ * @export
+ * @interface AllowancesApiUpdateChatAllowance1Request
+ */
+export interface AllowancesApiUpdateChatAllowance1Request {
+    /**
+     * User pair in the form userFrom-userTo
+     * @type {string}
+     * @memberof AllowancesApiUpdateChatAllowance1
+     */
+    readonly userPair: string;
+    /**
+     * Chat allowance information to update
+     * @type {ChatAllowance}
+     * @memberof AllowancesApiUpdateChatAllowance1
+     */
+    readonly chatAllowance: ChatAllowance;
+}
+/**
+ * AllowancesApi - object-oriented interface
+ * @export
+ * @class AllowancesApi
+ * @extends {BaseAPI}
+ */
+export declare class AllowancesApi extends BaseAPI {
+    /**
+     * Retrieves the chat allowance settings between two users. User must be one of the involved parties.
+     * @summary Get chat allowance for a user pair
+     * @param {AllowancesApiGetChatAllowance1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AllowancesApi
+     */
+    getChatAllowance1(requestParameters: AllowancesApiGetChatAllowance1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ChatAllowance, any>>;
+    /**
+     * Updates the chat allowance settings between two users
+     * @summary Update chat allowance for a user pair
+     * @param {AllowancesApiUpdateChatAllowance1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AllowancesApi
+     */
+    updateChatAllowance1(requestParameters: AllowancesApiUpdateChatAllowance1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ChatAllowance, any>>;
+}
+/**
  * ApiKeysApi - axios parameter creator
  * @export
  */
@@ -6412,6 +6979,178 @@ export declare class ApiKeysApi extends BaseAPI {
     getUserApiKeys1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ApiKeyDto, any>>;
 }
 /**
+ * AttachmentsApi - axios parameter creator
+ * @export
+ */
+export declare const AttachmentsApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     *
+     * @summary Post a attachment request
+     * @param {Attachment} [attachment]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    createAttachment1: (attachment?: Attachment, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @summary Get details to download a file
+     * @param {string} fileId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    retrieveAttachment1: (fileId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @summary Notify a new file has been loaded in S3
+     * @param {string} fileId
+     * @param {NotifyUploadRequest} [notifyUploadRequest]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    updateAttachment1: (fileId: string, notifyUploadRequest?: NotifyUploadRequest, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * AttachmentsApi - functional programming interface
+ * @export
+ */
+export declare const AttachmentsApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @summary Post a attachment request
+     * @param {Attachment} [attachment]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    createAttachment1(attachment?: Attachment, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Attachment>>;
+    /**
+     *
+     * @summary Get details to download a file
+     * @param {string} fileId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    retrieveAttachment1(fileId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Attachment>>;
+    /**
+     *
+     * @summary Notify a new file has been loaded in S3
+     * @param {string} fileId
+     * @param {NotifyUploadRequest} [notifyUploadRequest]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    updateAttachment1(fileId: string, notifyUploadRequest?: NotifyUploadRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+};
+/**
+ * AttachmentsApi - factory interface
+ * @export
+ */
+export declare const AttachmentsApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     *
+     * @summary Post a attachment request
+     * @param {AttachmentsApiCreateAttachment1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    createAttachment1(requestParameters?: AttachmentsApiCreateAttachment1Request, options?: RawAxiosRequestConfig): AxiosPromise<Attachment>;
+    /**
+     *
+     * @summary Get details to download a file
+     * @param {AttachmentsApiRetrieveAttachment1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    retrieveAttachment1(requestParameters: AttachmentsApiRetrieveAttachment1Request, options?: RawAxiosRequestConfig): AxiosPromise<Attachment>;
+    /**
+     *
+     * @summary Notify a new file has been loaded in S3
+     * @param {AttachmentsApiUpdateAttachment1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    updateAttachment1(requestParameters: AttachmentsApiUpdateAttachment1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+};
+/**
+ * Request parameters for createAttachment1 operation in AttachmentsApi.
+ * @export
+ * @interface AttachmentsApiCreateAttachment1Request
+ */
+export interface AttachmentsApiCreateAttachment1Request {
+    /**
+     *
+     * @type {Attachment}
+     * @memberof AttachmentsApiCreateAttachment1
+     */
+    readonly attachment?: Attachment;
+}
+/**
+ * Request parameters for retrieveAttachment1 operation in AttachmentsApi.
+ * @export
+ * @interface AttachmentsApiRetrieveAttachment1Request
+ */
+export interface AttachmentsApiRetrieveAttachment1Request {
+    /**
+     *
+     * @type {string}
+     * @memberof AttachmentsApiRetrieveAttachment1
+     */
+    readonly fileId: string;
+}
+/**
+ * Request parameters for updateAttachment1 operation in AttachmentsApi.
+ * @export
+ * @interface AttachmentsApiUpdateAttachment1Request
+ */
+export interface AttachmentsApiUpdateAttachment1Request {
+    /**
+     *
+     * @type {string}
+     * @memberof AttachmentsApiUpdateAttachment1
+     */
+    readonly fileId: string;
+    /**
+     *
+     * @type {NotifyUploadRequest}
+     * @memberof AttachmentsApiUpdateAttachment1
+     */
+    readonly notifyUploadRequest?: NotifyUploadRequest;
+}
+/**
+ * AttachmentsApi - object-oriented interface
+ * @export
+ * @class AttachmentsApi
+ * @extends {BaseAPI}
+ */
+export declare class AttachmentsApi extends BaseAPI {
+    /**
+     *
+     * @summary Post a attachment request
+     * @param {AttachmentsApiCreateAttachment1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AttachmentsApi
+     */
+    createAttachment1(requestParameters?: AttachmentsApiCreateAttachment1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Attachment, any>>;
+    /**
+     *
+     * @summary Get details to download a file
+     * @param {AttachmentsApiRetrieveAttachment1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AttachmentsApi
+     */
+    retrieveAttachment1(requestParameters: AttachmentsApiRetrieveAttachment1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Attachment, any>>;
+    /**
+     *
+     * @summary Notify a new file has been loaded in S3
+     * @param {AttachmentsApiUpdateAttachment1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AttachmentsApi
+     */
+    updateAttachment1(requestParameters: AttachmentsApiUpdateAttachment1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+}
+/**
  * BrokeragesApi - axios parameter creator
  * @export
  */
@@ -6465,6 +7204,78 @@ export declare class BrokeragesApi extends BaseAPI {
      * @memberof BrokeragesApi
      */
     retrieve1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Brokerage[], any>>;
+}
+/**
+ * ChatTicketsApi - axios parameter creator
+ * @export
+ */
+export declare const ChatTicketsApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     * Creates and returns a chat ticket that can be used to establish a chat connection
+     * @summary Retrieve a chat ticket for the authenticated user
+     * @param {string} userAgent User agent string of the client
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    retrieveUserTicket1: (userAgent: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * ChatTicketsApi - functional programming interface
+ * @export
+ */
+export declare const ChatTicketsApiFp: (configuration?: Configuration) => {
+    /**
+     * Creates and returns a chat ticket that can be used to establish a chat connection
+     * @summary Retrieve a chat ticket for the authenticated user
+     * @param {string} userAgent User agent string of the client
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    retrieveUserTicket1(userAgent: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChatTicket>>;
+};
+/**
+ * ChatTicketsApi - factory interface
+ * @export
+ */
+export declare const ChatTicketsApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     * Creates and returns a chat ticket that can be used to establish a chat connection
+     * @summary Retrieve a chat ticket for the authenticated user
+     * @param {ChatTicketsApiRetrieveUserTicket1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    retrieveUserTicket1(requestParameters: ChatTicketsApiRetrieveUserTicket1Request, options?: RawAxiosRequestConfig): AxiosPromise<ChatTicket>;
+};
+/**
+ * Request parameters for retrieveUserTicket1 operation in ChatTicketsApi.
+ * @export
+ * @interface ChatTicketsApiRetrieveUserTicket1Request
+ */
+export interface ChatTicketsApiRetrieveUserTicket1Request {
+    /**
+     * User agent string of the client
+     * @type {string}
+     * @memberof ChatTicketsApiRetrieveUserTicket1
+     */
+    readonly userAgent: string;
+}
+/**
+ * ChatTicketsApi - object-oriented interface
+ * @export
+ * @class ChatTicketsApi
+ * @extends {BaseAPI}
+ */
+export declare class ChatTicketsApi extends BaseAPI {
+    /**
+     * Creates and returns a chat ticket that can be used to establish a chat connection
+     * @summary Retrieve a chat ticket for the authenticated user
+     * @param {ChatTicketsApiRetrieveUserTicket1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ChatTicketsApi
+     */
+    retrieveUserTicket1(requestParameters: ChatTicketsApiRetrieveUserTicket1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ChatTicket, any>>;
 }
 /**
  * CheckoutSessionsApi - axios parameter creator
@@ -6647,7 +7458,7 @@ export declare const CoursesApiAxiosParamCreator: (configuration?: Configuration
     /**
      *
      * @summary Delete course
-     * @param {number} courseId
+     * @param {number} courseId Course id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -6655,8 +7466,8 @@ export declare const CoursesApiAxiosParamCreator: (configuration?: Configuration
     /**
      *
      * @summary Track attend click and redirect to external registration URL
-     * @param {number} courseId
-     * @param {string} [source]
+     * @param {number} courseId Course id
+     * @param {string} [source] Analytics source tag
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -6664,16 +7475,16 @@ export declare const CoursesApiAxiosParamCreator: (configuration?: Configuration
     /**
      *
      * @summary Create a global course listing
-     * @param {number} userId
-     * @param {CourseWriteDto} [courseWriteDto]
+     * @param {number} userId Instructor user id
+     * @param {CourseWriteDto} courseWriteDto Course definition including timezone-local start time
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    create1: (userId: number, courseWriteDto?: CourseWriteDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    create1: (userId: number, courseWriteDto: CourseWriteDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      *
-     * @summary Get course by id
-     * @param {number} courseId
+     * @summary Get published course by id
+     * @param {number} courseId Course id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -6683,9 +7494,9 @@ export declare const CoursesApiAxiosParamCreator: (configuration?: Configuration
      * @summary List published courses
      * @param {number} [pageFrom] Pagination start (1-based)
      * @param {number} [pageTo] Pagination end (inclusive)
-     * @param {string} [language]
-     * @param {List1FormatEnum} [format]
-     * @param {List1DesignationEnum} [designation]
+     * @param {string} [language] BCP47 locale filter
+     * @param {List1FormatEnum} [format] Delivery mode filter
+     * @param {List1DesignationEnum} [designation] Designation filter
      * @param {boolean} [ceCreditsOnly] Only state-approved CE courses
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -6695,8 +7506,8 @@ export declare const CoursesApiAxiosParamCreator: (configuration?: Configuration
      *
      * @summary List courses owned by user
      * @param {number} userId Owner user id
-     * @param {number} [pageFrom]
-     * @param {number} [pageTo]
+     * @param {number} [pageFrom] Inclusive page start (1-based)
+     * @param {number} [pageTo] Inclusive page end
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -6704,22 +7515,22 @@ export declare const CoursesApiAxiosParamCreator: (configuration?: Configuration
     /**
      *
      * @summary Record anonymous course interaction (e.g. gated attend)
-     * @param {number} courseId
-     * @param {string} [source]
-     * @param {string} [eventType]
+     * @param {number} courseId Course id
+     * @param {string} eventType Known anonymous events
+     * @param {string} [source] Analytics funnel tag
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    recordAnonymousClick1: (courseId: number, source?: string, eventType?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    recordAnonymousClick1: (courseId: number, eventType: string, source?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      *
      * @summary Update course
-     * @param {number} courseId
-     * @param {CourseWriteDto} [courseWriteDto]
+     * @param {number} courseId Course id
+     * @param {CourseWriteDto} courseWriteDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    update1: (courseId: number, courseWriteDto?: CourseWriteDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    update1: (courseId: number, courseWriteDto: CourseWriteDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * CoursesApi - functional programming interface
@@ -6729,7 +7540,7 @@ export declare const CoursesApiFp: (configuration?: Configuration) => {
     /**
      *
      * @summary Delete course
-     * @param {number} courseId
+     * @param {number} courseId Course id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -6737,8 +7548,8 @@ export declare const CoursesApiFp: (configuration?: Configuration) => {
     /**
      *
      * @summary Track attend click and redirect to external registration URL
-     * @param {number} courseId
-     * @param {string} [source]
+     * @param {number} courseId Course id
+     * @param {string} [source] Analytics source tag
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -6746,16 +7557,16 @@ export declare const CoursesApiFp: (configuration?: Configuration) => {
     /**
      *
      * @summary Create a global course listing
-     * @param {number} userId
-     * @param {CourseWriteDto} [courseWriteDto]
+     * @param {number} userId Instructor user id
+     * @param {CourseWriteDto} courseWriteDto Course definition including timezone-local start time
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    create1(userId: number, courseWriteDto?: CourseWriteDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    create1(userId: number, courseWriteDto: CourseWriteDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Course>>;
     /**
      *
-     * @summary Get course by id
-     * @param {number} courseId
+     * @summary Get published course by id
+     * @param {number} courseId Course id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -6765,9 +7576,9 @@ export declare const CoursesApiFp: (configuration?: Configuration) => {
      * @summary List published courses
      * @param {number} [pageFrom] Pagination start (1-based)
      * @param {number} [pageTo] Pagination end (inclusive)
-     * @param {string} [language]
-     * @param {List1FormatEnum} [format]
-     * @param {List1DesignationEnum} [designation]
+     * @param {string} [language] BCP47 locale filter
+     * @param {List1FormatEnum} [format] Delivery mode filter
+     * @param {List1DesignationEnum} [designation] Designation filter
      * @param {boolean} [ceCreditsOnly] Only state-approved CE courses
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -6777,8 +7588,8 @@ export declare const CoursesApiFp: (configuration?: Configuration) => {
      *
      * @summary List courses owned by user
      * @param {number} userId Owner user id
-     * @param {number} [pageFrom]
-     * @param {number} [pageTo]
+     * @param {number} [pageFrom] Inclusive page start (1-based)
+     * @param {number} [pageTo] Inclusive page end
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -6786,22 +7597,22 @@ export declare const CoursesApiFp: (configuration?: Configuration) => {
     /**
      *
      * @summary Record anonymous course interaction (e.g. gated attend)
-     * @param {number} courseId
-     * @param {string} [source]
-     * @param {string} [eventType]
+     * @param {number} courseId Course id
+     * @param {string} eventType Known anonymous events
+     * @param {string} [source] Analytics funnel tag
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    recordAnonymousClick1(courseId: number, source?: string, eventType?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    recordAnonymousClick1(courseId: number, eventType: string, source?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
      *
      * @summary Update course
-     * @param {number} courseId
-     * @param {CourseWriteDto} [courseWriteDto]
+     * @param {number} courseId Course id
+     * @param {CourseWriteDto} courseWriteDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    update1(courseId: number, courseWriteDto?: CourseWriteDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    update1(courseId: number, courseWriteDto: CourseWriteDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Course>>;
 };
 /**
  * CoursesApi - factory interface
@@ -6831,10 +7642,10 @@ export declare const CoursesApiFactory: (configuration?: Configuration, basePath
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    create1(requestParameters: CoursesApiCreate1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    create1(requestParameters: CoursesApiCreate1Request, options?: RawAxiosRequestConfig): AxiosPromise<Course>;
     /**
      *
-     * @summary Get course by id
+     * @summary Get published course by id
      * @param {CoursesApiGet1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -6871,7 +7682,7 @@ export declare const CoursesApiFactory: (configuration?: Configuration, basePath
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    update1(requestParameters: CoursesApiUpdate1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    update1(requestParameters: CoursesApiUpdate1Request, options?: RawAxiosRequestConfig): AxiosPromise<Course>;
 };
 /**
  * Request parameters for _delete operation in CoursesApi.
@@ -6880,7 +7691,7 @@ export declare const CoursesApiFactory: (configuration?: Configuration, basePath
  */
 export interface CoursesApiDeleteRequest {
     /**
-     *
+     * Course id
      * @type {number}
      * @memberof CoursesApiDelete
      */
@@ -6893,13 +7704,13 @@ export interface CoursesApiDeleteRequest {
  */
 export interface CoursesApiAttendGo1Request {
     /**
-     *
+     * Course id
      * @type {number}
      * @memberof CoursesApiAttendGo1
      */
     readonly courseId: number;
     /**
-     *
+     * Analytics source tag
      * @type {string}
      * @memberof CoursesApiAttendGo1
      */
@@ -6912,17 +7723,17 @@ export interface CoursesApiAttendGo1Request {
  */
 export interface CoursesApiCreate1Request {
     /**
-     *
+     * Instructor user id
      * @type {number}
      * @memberof CoursesApiCreate1
      */
     readonly userId: number;
     /**
-     *
+     * Course definition including timezone-local start time
      * @type {CourseWriteDto}
      * @memberof CoursesApiCreate1
      */
-    readonly courseWriteDto?: CourseWriteDto;
+    readonly courseWriteDto: CourseWriteDto;
 }
 /**
  * Request parameters for get1 operation in CoursesApi.
@@ -6931,7 +7742,7 @@ export interface CoursesApiCreate1Request {
  */
 export interface CoursesApiGet1Request {
     /**
-     *
+     * Course id
      * @type {number}
      * @memberof CoursesApiGet1
      */
@@ -6956,19 +7767,19 @@ export interface CoursesApiList1Request {
      */
     readonly pageTo?: number;
     /**
-     *
+     * BCP47 locale filter
      * @type {string}
      * @memberof CoursesApiList1
      */
     readonly language?: string;
     /**
-     *
+     * Delivery mode filter
      * @type {'ONLINE' | 'IN_PERSON' | 'HYBRID'}
      * @memberof CoursesApiList1
      */
     readonly format?: List1FormatEnum;
     /**
-     *
+     * Designation filter
      * @type {'ABR' | 'CIPS' | 'CPM' | 'CRB' | 'CRS' | 'GREEN' | 'GRI' | 'MRP' | 'PSA' | 'RSPS' | 'SRES' | 'SRS' | 'SKILL_TRAINING_NON_DESIGNATION'}
      * @memberof CoursesApiList1
      */
@@ -6993,13 +7804,13 @@ export interface CoursesApiListForUser1Request {
      */
     readonly userId: number;
     /**
-     *
+     * Inclusive page start (1-based)
      * @type {number}
      * @memberof CoursesApiListForUser1
      */
     readonly pageFrom?: number;
     /**
-     *
+     * Inclusive page end
      * @type {number}
      * @memberof CoursesApiListForUser1
      */
@@ -7012,23 +7823,23 @@ export interface CoursesApiListForUser1Request {
  */
 export interface CoursesApiRecordAnonymousClick1Request {
     /**
-     *
+     * Course id
      * @type {number}
      * @memberof CoursesApiRecordAnonymousClick1
      */
     readonly courseId: number;
     /**
-     *
+     * Known anonymous events
+     * @type {string}
+     * @memberof CoursesApiRecordAnonymousClick1
+     */
+    readonly eventType: string;
+    /**
+     * Analytics funnel tag
      * @type {string}
      * @memberof CoursesApiRecordAnonymousClick1
      */
     readonly source?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof CoursesApiRecordAnonymousClick1
-     */
-    readonly eventType?: string;
 }
 /**
  * Request parameters for update1 operation in CoursesApi.
@@ -7037,7 +7848,7 @@ export interface CoursesApiRecordAnonymousClick1Request {
  */
 export interface CoursesApiUpdate1Request {
     /**
-     *
+     * Course id
      * @type {number}
      * @memberof CoursesApiUpdate1
      */
@@ -7047,7 +7858,7 @@ export interface CoursesApiUpdate1Request {
      * @type {CourseWriteDto}
      * @memberof CoursesApiUpdate1
      */
-    readonly courseWriteDto?: CourseWriteDto;
+    readonly courseWriteDto: CourseWriteDto;
 }
 /**
  * CoursesApi - object-oriented interface
@@ -7082,10 +7893,10 @@ export declare class CoursesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof CoursesApi
      */
-    create1(requestParameters: CoursesApiCreate1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    create1(requestParameters: CoursesApiCreate1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Course, any>>;
     /**
      *
-     * @summary Get course by id
+     * @summary Get published course by id
      * @param {CoursesApiGet1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -7127,7 +7938,7 @@ export declare class CoursesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof CoursesApi
      */
-    update1(requestParameters: CoursesApiUpdate1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    update1(requestParameters: CoursesApiUpdate1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Course, any>>;
 }
 /**
  * @export
@@ -7283,90 +8094,6 @@ export declare class CustomerSessionsApi extends BaseAPI {
      * @memberof CustomerSessionsApi
      */
     createCheckoutSession(requestParameters: CustomerSessionsApiCreateCheckoutSessionRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
-}
-/**
- * DefaultApi - axios parameter creator
- * @export
- */
-export declare const DefaultApiAxiosParamCreator: (configuration?: Configuration) => {
-    /**
-     *
-     * @param {string} [id]
-     * @param {string} [lang]
-     * @param {string} [acceptLanguage]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    previewHome1: (id?: string, lang?: string, acceptLanguage?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
-};
-/**
- * DefaultApi - functional programming interface
- * @export
- */
-export declare const DefaultApiFp: (configuration?: Configuration) => {
-    /**
-     *
-     * @param {string} [id]
-     * @param {string} [lang]
-     * @param {string} [acceptLanguage]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    previewHome1(id?: string, lang?: string, acceptLanguage?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
-};
-/**
- * DefaultApi - factory interface
- * @export
- */
-export declare const DefaultApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
-    /**
-     *
-     * @param {DefaultApiPreviewHome1Request} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    previewHome1(requestParameters?: DefaultApiPreviewHome1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
-};
-/**
- * Request parameters for previewHome1 operation in DefaultApi.
- * @export
- * @interface DefaultApiPreviewHome1Request
- */
-export interface DefaultApiPreviewHome1Request {
-    /**
-     *
-     * @type {string}
-     * @memberof DefaultApiPreviewHome1
-     */
-    readonly id?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof DefaultApiPreviewHome1
-     */
-    readonly lang?: string;
-    /**
-     *
-     * @type {string}
-     * @memberof DefaultApiPreviewHome1
-     */
-    readonly acceptLanguage?: string;
-}
-/**
- * DefaultApi - object-oriented interface
- * @export
- * @class DefaultApi
- * @extends {BaseAPI}
- */
-export declare class DefaultApi extends BaseAPI {
-    /**
-     *
-     * @param {DefaultApiPreviewHome1Request} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    previewHome1(requestParameters?: DefaultApiPreviewHome1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
 }
 /**
  * EndorsementsApi - axios parameter creator
@@ -7886,6 +8613,102 @@ export declare class GeoLocationApi extends BaseAPI {
      * @memberof GeoLocationApi
      */
     getGeoLocationsByLatLng1(requestParameters?: GeoLocationApiGetGeoLocationsByLatLng1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GeoPlace, any>>;
+}
+/**
+ * GroupNotificationsApi - axios parameter creator
+ * @export
+ */
+export declare const GroupNotificationsApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     *
+     * @summary Get group notification messages for a user and group
+     * @param {number} [userId] User ID
+     * @param {string} [groupId] Group ID
+     * @param {number} [limit] Limit results
+     * @param {LocalDateTimeQueryString} [beforeDatetime] Before datetime (epoch millis)
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getGroupNotifications1: (userId?: number, groupId?: string, limit?: number, beforeDatetime?: LocalDateTimeQueryString, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * GroupNotificationsApi - functional programming interface
+ * @export
+ */
+export declare const GroupNotificationsApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @summary Get group notification messages for a user and group
+     * @param {number} [userId] User ID
+     * @param {string} [groupId] Group ID
+     * @param {number} [limit] Limit results
+     * @param {LocalDateTimeQueryString} [beforeDatetime] Before datetime (epoch millis)
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getGroupNotifications1(userId?: number, groupId?: string, limit?: number, beforeDatetime?: LocalDateTimeQueryString, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+};
+/**
+ * GroupNotificationsApi - factory interface
+ * @export
+ */
+export declare const GroupNotificationsApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     *
+     * @summary Get group notification messages for a user and group
+     * @param {GroupNotificationsApiGetGroupNotifications1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getGroupNotifications1(requestParameters?: GroupNotificationsApiGetGroupNotifications1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+};
+/**
+ * Request parameters for getGroupNotifications1 operation in GroupNotificationsApi.
+ * @export
+ * @interface GroupNotificationsApiGetGroupNotifications1Request
+ */
+export interface GroupNotificationsApiGetGroupNotifications1Request {
+    /**
+     * User ID
+     * @type {number}
+     * @memberof GroupNotificationsApiGetGroupNotifications1
+     */
+    readonly userId?: number;
+    /**
+     * Group ID
+     * @type {string}
+     * @memberof GroupNotificationsApiGetGroupNotifications1
+     */
+    readonly groupId?: string;
+    /**
+     * Limit results
+     * @type {number}
+     * @memberof GroupNotificationsApiGetGroupNotifications1
+     */
+    readonly limit?: number;
+    /**
+     * Before datetime (epoch millis)
+     * @type {LocalDateTimeQueryString}
+     * @memberof GroupNotificationsApiGetGroupNotifications1
+     */
+    readonly beforeDatetime?: LocalDateTimeQueryString;
+}
+/**
+ * GroupNotificationsApi - object-oriented interface
+ * @export
+ * @class GroupNotificationsApi
+ * @extends {BaseAPI}
+ */
+export declare class GroupNotificationsApi extends BaseAPI {
+    /**
+     *
+     * @summary Get group notification messages for a user and group
+     * @param {GroupNotificationsApiGetGroupNotifications1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupNotificationsApi
+     */
+    getGroupNotifications1(requestParameters?: GroupNotificationsApiGetGroupNotifications1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
 }
 /**
  * GroupsApi - axios parameter creator
@@ -9297,6 +10120,94 @@ export declare const UpdateGroupMembershipStatus1StatusEnum: {
 };
 export type UpdateGroupMembershipStatus1StatusEnum = typeof UpdateGroupMembershipStatus1StatusEnum[keyof typeof UpdateGroupMembershipStatus1StatusEnum];
 /**
+ * HomePreviewApi - axios parameter creator
+ * @export
+ */
+export declare const HomePreviewApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     *
+     * @summary Localized marketing home preview HTML
+     * @param {string} [id] Optional CMS/content anchor id
+     * @param {string} [lang] Explicit locale override (e.g. en, es)
+     * @param {string} [acceptLanguage] Browser Accept-Language fallback chain
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    previewHome1: (id?: string, lang?: string, acceptLanguage?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * HomePreviewApi - functional programming interface
+ * @export
+ */
+export declare const HomePreviewApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @summary Localized marketing home preview HTML
+     * @param {string} [id] Optional CMS/content anchor id
+     * @param {string} [lang] Explicit locale override (e.g. en, es)
+     * @param {string} [acceptLanguage] Browser Accept-Language fallback chain
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    previewHome1(id?: string, lang?: string, acceptLanguage?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+};
+/**
+ * HomePreviewApi - factory interface
+ * @export
+ */
+export declare const HomePreviewApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     *
+     * @summary Localized marketing home preview HTML
+     * @param {HomePreviewApiPreviewHome1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    previewHome1(requestParameters?: HomePreviewApiPreviewHome1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+};
+/**
+ * Request parameters for previewHome1 operation in HomePreviewApi.
+ * @export
+ * @interface HomePreviewApiPreviewHome1Request
+ */
+export interface HomePreviewApiPreviewHome1Request {
+    /**
+     * Optional CMS/content anchor id
+     * @type {string}
+     * @memberof HomePreviewApiPreviewHome1
+     */
+    readonly id?: string;
+    /**
+     * Explicit locale override (e.g. en, es)
+     * @type {string}
+     * @memberof HomePreviewApiPreviewHome1
+     */
+    readonly lang?: string;
+    /**
+     * Browser Accept-Language fallback chain
+     * @type {string}
+     * @memberof HomePreviewApiPreviewHome1
+     */
+    readonly acceptLanguage?: string;
+}
+/**
+ * HomePreviewApi - object-oriented interface
+ * @export
+ * @class HomePreviewApi
+ * @extends {BaseAPI}
+ */
+export declare class HomePreviewApi extends BaseAPI {
+    /**
+     *
+     * @summary Localized marketing home preview HTML
+     * @param {HomePreviewApiPreviewHome1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof HomePreviewApi
+     */
+    previewHome1(requestParameters?: HomePreviewApiPreviewHome1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+}
+/**
  * LanguagesApi - axios parameter creator
  * @export
  */
@@ -9761,6 +10672,316 @@ export declare class LocationCacheApi extends BaseAPI {
      */
     invalidateReverseGeocodingCache1(requestParameters: LocationCacheApiInvalidateReverseGeocodingCache1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
 }
+/**
+ * MessagesApi - axios parameter creator
+ * @export
+ */
+export declare const MessagesApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     * Retrieves notifications for a specific user and notification type. Designed for autopilot integration.
+     * @summary Get user notifications by type
+     * @param {string} token Authentication token
+     * @param {GetByUserWithResult1TypeEnum} type Notification type
+     * @param {AutopilotUser} autopilotUser User information
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getByUserWithResult1: (token: string, type: GetByUserWithResult1TypeEnum, autopilotUser: AutopilotUser, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @summary Get a message by conversation
+     * @param {number} [userAId] User A Id
+     * @param {number} [userBId] User B Id
+     * @param {number} [limit] limit results
+     * @param {LocalDateTimeQueryString} [beforeDatetime] return results before date time
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getConversation1: (userAId?: number, userBId?: number, limit?: number, beforeDatetime?: LocalDateTimeQueryString, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @summary Retrieve a user chat
+     * @param {number} id user id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    retrieveChatUser1: (id: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @summary Retrieve a user chat status
+     * @param {number} id user id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    retrieveChatUserStatus1: (id: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @summary Post a message
+     * @param {Message} [message] message
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    sendMessage1: (message?: Message, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * MessagesApi - functional programming interface
+ * @export
+ */
+export declare const MessagesApiFp: (configuration?: Configuration) => {
+    /**
+     * Retrieves notifications for a specific user and notification type. Designed for autopilot integration.
+     * @summary Get user notifications by type
+     * @param {string} token Authentication token
+     * @param {GetByUserWithResult1TypeEnum} type Notification type
+     * @param {AutopilotUser} autopilotUser User information
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getByUserWithResult1(token: string, type: GetByUserWithResult1TypeEnum, autopilotUser: AutopilotUser, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Notification>>;
+    /**
+     *
+     * @summary Get a message by conversation
+     * @param {number} [userAId] User A Id
+     * @param {number} [userBId] User B Id
+     * @param {number} [limit] limit results
+     * @param {LocalDateTimeQueryString} [beforeDatetime] return results before date time
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getConversation1(userAId?: number, userBId?: number, limit?: number, beforeDatetime?: LocalDateTimeQueryString, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Message>>>;
+    /**
+     *
+     * @summary Retrieve a user chat
+     * @param {number} id user id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    retrieveChatUser1(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>>;
+    /**
+     *
+     * @summary Retrieve a user chat status
+     * @param {number} id user id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    retrieveChatUserStatus1(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>>;
+    /**
+     *
+     * @summary Post a message
+     * @param {Message} [message] message
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    sendMessage1(message?: Message, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Message>>;
+};
+/**
+ * MessagesApi - factory interface
+ * @export
+ */
+export declare const MessagesApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     * Retrieves notifications for a specific user and notification type. Designed for autopilot integration.
+     * @summary Get user notifications by type
+     * @param {MessagesApiGetByUserWithResult1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getByUserWithResult1(requestParameters: MessagesApiGetByUserWithResult1Request, options?: RawAxiosRequestConfig): AxiosPromise<Notification>;
+    /**
+     *
+     * @summary Get a message by conversation
+     * @param {MessagesApiGetConversation1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getConversation1(requestParameters?: MessagesApiGetConversation1Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<Message>>;
+    /**
+     *
+     * @summary Retrieve a user chat
+     * @param {MessagesApiRetrieveChatUser1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    retrieveChatUser1(requestParameters: MessagesApiRetrieveChatUser1Request, options?: RawAxiosRequestConfig): AxiosPromise<User>;
+    /**
+     *
+     * @summary Retrieve a user chat status
+     * @param {MessagesApiRetrieveChatUserStatus1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    retrieveChatUserStatus1(requestParameters: MessagesApiRetrieveChatUserStatus1Request, options?: RawAxiosRequestConfig): AxiosPromise<string>;
+    /**
+     *
+     * @summary Post a message
+     * @param {MessagesApiSendMessage1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    sendMessage1(requestParameters?: MessagesApiSendMessage1Request, options?: RawAxiosRequestConfig): AxiosPromise<Message>;
+};
+/**
+ * Request parameters for getByUserWithResult1 operation in MessagesApi.
+ * @export
+ * @interface MessagesApiGetByUserWithResult1Request
+ */
+export interface MessagesApiGetByUserWithResult1Request {
+    /**
+     * Authentication token
+     * @type {string}
+     * @memberof MessagesApiGetByUserWithResult1
+     */
+    readonly token: string;
+    /**
+     * Notification type
+     * @type {'TO_BROKER__ALERT_CREATED' | 'TO_USER__WEEKLY_PROPERTIES' | 'TO_USER__WEEKLY_PAYED_SUBSCRIBERS' | 'TO_USER__CUSTOMIZED_ALERT' | 'TO_USER__WEEKLY_GROUP_PROPERTIES' | 'TO_USER__NEWSLETTER_NEW_SUBSCRIBER' | 'TO_USER__NEWSLETTER_CONFIRMATION' | 'TO_USER__NEWSLETTER_LISTING'}
+     * @memberof MessagesApiGetByUserWithResult1
+     */
+    readonly type: GetByUserWithResult1TypeEnum;
+    /**
+     * User information
+     * @type {AutopilotUser}
+     * @memberof MessagesApiGetByUserWithResult1
+     */
+    readonly autopilotUser: AutopilotUser;
+}
+/**
+ * Request parameters for getConversation1 operation in MessagesApi.
+ * @export
+ * @interface MessagesApiGetConversation1Request
+ */
+export interface MessagesApiGetConversation1Request {
+    /**
+     * User A Id
+     * @type {number}
+     * @memberof MessagesApiGetConversation1
+     */
+    readonly userAId?: number;
+    /**
+     * User B Id
+     * @type {number}
+     * @memberof MessagesApiGetConversation1
+     */
+    readonly userBId?: number;
+    /**
+     * limit results
+     * @type {number}
+     * @memberof MessagesApiGetConversation1
+     */
+    readonly limit?: number;
+    /**
+     * return results before date time
+     * @type {LocalDateTimeQueryString}
+     * @memberof MessagesApiGetConversation1
+     */
+    readonly beforeDatetime?: LocalDateTimeQueryString;
+}
+/**
+ * Request parameters for retrieveChatUser1 operation in MessagesApi.
+ * @export
+ * @interface MessagesApiRetrieveChatUser1Request
+ */
+export interface MessagesApiRetrieveChatUser1Request {
+    /**
+     * user id
+     * @type {number}
+     * @memberof MessagesApiRetrieveChatUser1
+     */
+    readonly id: number;
+}
+/**
+ * Request parameters for retrieveChatUserStatus1 operation in MessagesApi.
+ * @export
+ * @interface MessagesApiRetrieveChatUserStatus1Request
+ */
+export interface MessagesApiRetrieveChatUserStatus1Request {
+    /**
+     * user id
+     * @type {number}
+     * @memberof MessagesApiRetrieveChatUserStatus1
+     */
+    readonly id: number;
+}
+/**
+ * Request parameters for sendMessage1 operation in MessagesApi.
+ * @export
+ * @interface MessagesApiSendMessage1Request
+ */
+export interface MessagesApiSendMessage1Request {
+    /**
+     * message
+     * @type {Message}
+     * @memberof MessagesApiSendMessage1
+     */
+    readonly message?: Message;
+}
+/**
+ * MessagesApi - object-oriented interface
+ * @export
+ * @class MessagesApi
+ * @extends {BaseAPI}
+ */
+export declare class MessagesApi extends BaseAPI {
+    /**
+     * Retrieves notifications for a specific user and notification type. Designed for autopilot integration.
+     * @summary Get user notifications by type
+     * @param {MessagesApiGetByUserWithResult1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessagesApi
+     */
+    getByUserWithResult1(requestParameters: MessagesApiGetByUserWithResult1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Notification, any>>;
+    /**
+     *
+     * @summary Get a message by conversation
+     * @param {MessagesApiGetConversation1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessagesApi
+     */
+    getConversation1(requestParameters?: MessagesApiGetConversation1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Message[], any>>;
+    /**
+     *
+     * @summary Retrieve a user chat
+     * @param {MessagesApiRetrieveChatUser1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessagesApi
+     */
+    retrieveChatUser1(requestParameters: MessagesApiRetrieveChatUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<User, any>>;
+    /**
+     *
+     * @summary Retrieve a user chat status
+     * @param {MessagesApiRetrieveChatUserStatus1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessagesApi
+     */
+    retrieveChatUserStatus1(requestParameters: MessagesApiRetrieveChatUserStatus1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any>>;
+    /**
+     *
+     * @summary Post a message
+     * @param {MessagesApiSendMessage1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessagesApi
+     */
+    sendMessage1(requestParameters?: MessagesApiSendMessage1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Message, any>>;
+}
+/**
+ * @export
+ */
+export declare const GetByUserWithResult1TypeEnum: {
+    readonly ToBrokerAlertCreated: "TO_BROKER__ALERT_CREATED";
+    readonly ToUserWeeklyProperties: "TO_USER__WEEKLY_PROPERTIES";
+    readonly ToUserWeeklyPayedSubscribers: "TO_USER__WEEKLY_PAYED_SUBSCRIBERS";
+    readonly ToUserCustomizedAlert: "TO_USER__CUSTOMIZED_ALERT";
+    readonly ToUserWeeklyGroupProperties: "TO_USER__WEEKLY_GROUP_PROPERTIES";
+    readonly ToUserNewsletterNewSubscriber: "TO_USER__NEWSLETTER_NEW_SUBSCRIBER";
+    readonly ToUserNewsletterConfirmation: "TO_USER__NEWSLETTER_CONFIRMATION";
+    readonly ToUserNewsletterListing: "TO_USER__NEWSLETTER_LISTING";
+};
+export type GetByUserWithResult1TypeEnum = typeof GetByUserWithResult1TypeEnum[keyof typeof GetByUserWithResult1TypeEnum];
 /**
  * PasswordRecoveryApi - axios parameter creator
  * @export
@@ -12895,6 +14116,267 @@ export declare class TextTranslationsApi extends BaseAPI {
     translateText1(requestParameters?: TextTranslationsApiTranslateText1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<TextTranslation, any>>;
 }
 /**
+ * UserConnectionsApi - axios parameter creator
+ * @export
+ */
+export declare const UserConnectionsApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     *
+     * @summary Get a user connections
+     * @param {number} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findUserConnections2: (userId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * UserConnectionsApi - functional programming interface
+ * @export
+ */
+export declare const UserConnectionsApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @summary Get a user connections
+     * @param {number} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findUserConnections2(userId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<User>>>;
+};
+/**
+ * UserConnectionsApi - factory interface
+ * @export
+ */
+export declare const UserConnectionsApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     *
+     * @summary Get a user connections
+     * @param {UserConnectionsApiFindUserConnections2Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findUserConnections2(requestParameters: UserConnectionsApiFindUserConnections2Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<User>>;
+};
+/**
+ * Request parameters for findUserConnections2 operation in UserConnectionsApi.
+ * @export
+ * @interface UserConnectionsApiFindUserConnections2Request
+ */
+export interface UserConnectionsApiFindUserConnections2Request {
+    /**
+     *
+     * @type {number}
+     * @memberof UserConnectionsApiFindUserConnections2
+     */
+    readonly userId: number;
+}
+/**
+ * UserConnectionsApi - object-oriented interface
+ * @export
+ * @class UserConnectionsApi
+ * @extends {BaseAPI}
+ */
+export declare class UserConnectionsApi extends BaseAPI {
+    /**
+     *
+     * @summary Get a user connections
+     * @param {UserConnectionsApiFindUserConnections2Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserConnectionsApi
+     */
+    findUserConnections2(requestParameters: UserConnectionsApiFindUserConnections2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<User[], any>>;
+}
+/**
+ * UserContractsApi - axios parameter creator
+ * @export
+ */
+export declare const UserContractsApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     *
+     * @summary Get a user Contracts
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findUserContracts1: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @summary Save a user Contract
+     * @param {Contract} contract Contract to save
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    save2: (contract: Contract, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * UserContractsApi - functional programming interface
+ * @export
+ */
+export declare const UserContractsApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @summary Get a user Contracts
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findUserContracts1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Contract>>>;
+    /**
+     *
+     * @summary Save a user Contract
+     * @param {Contract} contract Contract to save
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    save2(contract: Contract, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Contract>>;
+};
+/**
+ * UserContractsApi - factory interface
+ * @export
+ */
+export declare const UserContractsApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     *
+     * @summary Get a user Contracts
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findUserContracts1(options?: RawAxiosRequestConfig): AxiosPromise<Array<Contract>>;
+    /**
+     *
+     * @summary Save a user Contract
+     * @param {UserContractsApiSave2Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    save2(requestParameters: UserContractsApiSave2Request, options?: RawAxiosRequestConfig): AxiosPromise<Contract>;
+};
+/**
+ * Request parameters for save2 operation in UserContractsApi.
+ * @export
+ * @interface UserContractsApiSave2Request
+ */
+export interface UserContractsApiSave2Request {
+    /**
+     * Contract to save
+     * @type {Contract}
+     * @memberof UserContractsApiSave2
+     */
+    readonly contract: Contract;
+}
+/**
+ * UserContractsApi - object-oriented interface
+ * @export
+ * @class UserContractsApi
+ * @extends {BaseAPI}
+ */
+export declare class UserContractsApi extends BaseAPI {
+    /**
+     *
+     * @summary Get a user Contracts
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserContractsApi
+     */
+    findUserContracts1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Contract[], any>>;
+    /**
+     *
+     * @summary Save a user Contract
+     * @param {UserContractsApiSave2Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserContractsApi
+     */
+    save2(requestParameters: UserContractsApiSave2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Contract, any>>;
+}
+/**
+ * UserSummaryApi - axios parameter creator
+ * @export
+ */
+export declare const UserSummaryApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     * Retrieves summaries of all chat conversations for a user
+     * @summary Get the user chat summaries
+     * @param {number} userId User ID to fetch chat summaries for
+     * @param {number} [limit] Limit the number of chat summaries returned
+     * @param {LocalDateTimeQueryString} [beforeDatetime] Only return chat summaries before this datetime (UTC timestamp)
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getChatSummaryByUser1: (userId: number, limit?: number, beforeDatetime?: LocalDateTimeQueryString, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * UserSummaryApi - functional programming interface
+ * @export
+ */
+export declare const UserSummaryApiFp: (configuration?: Configuration) => {
+    /**
+     * Retrieves summaries of all chat conversations for a user
+     * @summary Get the user chat summaries
+     * @param {number} userId User ID to fetch chat summaries for
+     * @param {number} [limit] Limit the number of chat summaries returned
+     * @param {LocalDateTimeQueryString} [beforeDatetime] Only return chat summaries before this datetime (UTC timestamp)
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getChatSummaryByUser1(userId: number, limit?: number, beforeDatetime?: LocalDateTimeQueryString, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserChatsSummary>>;
+};
+/**
+ * UserSummaryApi - factory interface
+ * @export
+ */
+export declare const UserSummaryApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     * Retrieves summaries of all chat conversations for a user
+     * @summary Get the user chat summaries
+     * @param {UserSummaryApiGetChatSummaryByUser1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getChatSummaryByUser1(requestParameters: UserSummaryApiGetChatSummaryByUser1Request, options?: RawAxiosRequestConfig): AxiosPromise<UserChatsSummary>;
+};
+/**
+ * Request parameters for getChatSummaryByUser1 operation in UserSummaryApi.
+ * @export
+ * @interface UserSummaryApiGetChatSummaryByUser1Request
+ */
+export interface UserSummaryApiGetChatSummaryByUser1Request {
+    /**
+     * User ID to fetch chat summaries for
+     * @type {number}
+     * @memberof UserSummaryApiGetChatSummaryByUser1
+     */
+    readonly userId: number;
+    /**
+     * Limit the number of chat summaries returned
+     * @type {number}
+     * @memberof UserSummaryApiGetChatSummaryByUser1
+     */
+    readonly limit?: number;
+    /**
+     * Only return chat summaries before this datetime (UTC timestamp)
+     * @type {LocalDateTimeQueryString}
+     * @memberof UserSummaryApiGetChatSummaryByUser1
+     */
+    readonly beforeDatetime?: LocalDateTimeQueryString;
+}
+/**
+ * UserSummaryApi - object-oriented interface
+ * @export
+ * @class UserSummaryApi
+ * @extends {BaseAPI}
+ */
+export declare class UserSummaryApi extends BaseAPI {
+    /**
+     * Retrieves summaries of all chat conversations for a user
+     * @summary Get the user chat summaries
+     * @param {UserSummaryApiGetChatSummaryByUser1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserSummaryApi
+     */
+    getChatSummaryByUser1(requestParameters: UserSummaryApiGetChatSummaryByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserChatsSummary, any>>;
+}
+/**
  * UserTypesApi - axios parameter creator
  * @export
  */
@@ -13074,7 +14556,7 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    findUserConnections1: (userId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    findUserConnections: (userId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Gets detailed information for multiple users by their IDs
      * @summary Fetch multiple user detail according to its ids
@@ -13169,7 +14651,7 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    save1: (skilledUser: SkilledUser, oAuthToken?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    save: (skilledUser: SkilledUser, oAuthToken?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      *
      * @param {LogEntry} [logEntry]
@@ -13343,7 +14825,7 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    findUserConnections1(userId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SkilledUser>>>;
+    findUserConnections(userId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SkilledUser>>>;
     /**
      * Gets detailed information for multiple users by their IDs
      * @summary Fetch multiple user detail according to its ids
@@ -13438,7 +14920,7 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    save1(skilledUser: SkilledUser, oAuthToken?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
+    save(skilledUser: SkilledUser, oAuthToken?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
     /**
      *
      * @param {LogEntry} [logEntry]
@@ -13596,11 +15078,11 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
     /**
      * Retrieves the list of connections for a specific user
      * @summary Get a user connections
-     * @param {UsersApiFindUserConnections1Request} requestParameters Request parameters.
+     * @param {UsersApiFindUserConnectionsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    findUserConnections1(requestParameters: UsersApiFindUserConnections1Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<SkilledUser>>;
+    findUserConnections(requestParameters: UsersApiFindUserConnectionsRequest, options?: RawAxiosRequestConfig): AxiosPromise<Array<SkilledUser>>;
     /**
      * Gets detailed information for multiple users by their IDs
      * @summary Fetch multiple user detail according to its ids
@@ -13683,11 +15165,11 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
     /**
      * Updates user profile information in the system
      * @summary Save the data of user in the system
-     * @param {UsersApiSave1Request} requestParameters Request parameters.
+     * @param {UsersApiSaveRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    save1(requestParameters: UsersApiSave1Request, options?: RawAxiosRequestConfig): AxiosPromise<object>;
+    save(requestParameters: UsersApiSaveRequest, options?: RawAxiosRequestConfig): AxiosPromise<object>;
     /**
      *
      * @param {UsersApiSaveLog1Request} requestParameters Request parameters.
@@ -13937,15 +15419,15 @@ export interface UsersApiFindUserByProfileName1Request {
     readonly profileName?: string;
 }
 /**
- * Request parameters for findUserConnections1 operation in UsersApi.
+ * Request parameters for findUserConnections operation in UsersApi.
  * @export
- * @interface UsersApiFindUserConnections1Request
+ * @interface UsersApiFindUserConnectionsRequest
  */
-export interface UsersApiFindUserConnections1Request {
+export interface UsersApiFindUserConnectionsRequest {
     /**
      *
      * @type {number}
-     * @memberof UsersApiFindUserConnections1
+     * @memberof UsersApiFindUserConnections
      */
     readonly userId: number;
 }
@@ -14109,21 +15591,21 @@ export interface UsersApiRetrieveUserSkillsRequest {
     readonly userId: number;
 }
 /**
- * Request parameters for save1 operation in UsersApi.
+ * Request parameters for save operation in UsersApi.
  * @export
- * @interface UsersApiSave1Request
+ * @interface UsersApiSaveRequest
  */
-export interface UsersApiSave1Request {
+export interface UsersApiSaveRequest {
     /**
      * User data to save
      * @type {SkilledUser}
-     * @memberof UsersApiSave1
+     * @memberof UsersApiSave
      */
     readonly skilledUser: SkilledUser;
     /**
      *
      * @type {string}
-     * @memberof UsersApiSave1
+     * @memberof UsersApiSave
      */
     readonly oAuthToken?: string;
 }
@@ -14328,12 +15810,12 @@ export declare class UsersApi extends BaseAPI {
     /**
      * Retrieves the list of connections for a specific user
      * @summary Get a user connections
-     * @param {UsersApiFindUserConnections1Request} requestParameters Request parameters.
+     * @param {UsersApiFindUserConnectionsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    findUserConnections1(requestParameters: UsersApiFindUserConnections1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkilledUser[], any>>;
+    findUserConnections(requestParameters: UsersApiFindUserConnectionsRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkilledUser[], any>>;
     /**
      * Gets detailed information for multiple users by their IDs
      * @summary Fetch multiple user detail according to its ids
@@ -14426,12 +15908,12 @@ export declare class UsersApi extends BaseAPI {
     /**
      * Updates user profile information in the system
      * @summary Save the data of user in the system
-     * @param {UsersApiSave1Request} requestParameters Request parameters.
+     * @param {UsersApiSaveRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    save1(requestParameters: UsersApiSave1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
+    save(requestParameters: UsersApiSaveRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
     /**
      *
      * @param {UsersApiSaveLog1Request} requestParameters Request parameters.

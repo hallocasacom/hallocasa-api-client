@@ -19,6 +19,12 @@
     "oAuthClientId" : [ ]
   } ],
   "tags" : [ {
+    "name" : "chat-tickets",
+    "description" : "Chat ticket management endpoints"
+  }, {
+    "name" : "messages",
+    "description" : "Notification management endpoints"
+  }, {
     "name" : "geo-location",
     "description" : "Operations related to geographical locations"
   }, {
@@ -42,6 +48,9 @@
   }, {
     "name" : "groups",
     "description" : "Group notifications"
+  }, {
+    "name" : "home-preview",
+    "description" : "SSR HTML snippets for landing previews"
   }, {
     "name" : "Property Fields",
     "description" : "Operations for managing and retrieving property fields based on various criteria such as type, proposal, location, and country"
@@ -86,6 +95,957 @@
     "description" : "Stripe Identity webhook handlers"
   } ],
   "paths" : {
+    "/chat/attachments" : {
+      "post" : {
+        "tags" : [ "attachments" ],
+        "summary" : "Post a attachment request",
+        "operationId" : "createAttachment_1",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Attachment"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Attachment"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/attachments/{fileId}" : {
+      "get" : {
+        "tags" : [ "attachments" ],
+        "summary" : "Get details to download a file",
+        "operationId" : "retrieveAttachment_1",
+        "parameters" : [ {
+          "name" : "fileId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Attachment"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/attachments/{fileId}/notify-upload" : {
+      "post" : {
+        "tags" : [ "attachments" ],
+        "summary" : "Notify a new file has been loaded in S3",
+        "operationId" : "updateAttachment_1",
+        "parameters" : [ {
+          "name" : "fileId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/NotifyUploadRequest"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
+    "/chat/allowance/{userPair}" : {
+      "get" : {
+        "tags" : [ "allowances" ],
+        "summary" : "Get chat allowance for a user pair",
+        "description" : "Retrieves the chat allowance settings between two users. User must be one of the involved parties.",
+        "operationId" : "getChatAllowance_1",
+        "parameters" : [ {
+          "name" : "userPair",
+          "in" : "path",
+          "description" : "User pair in the form userFrom-userTo",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "user-id-user-id",
+            "example" : "123-456"
+          },
+          "examples" : {
+            "User pair example" : {
+              "summary" : "Format is userFromId-userToId",
+              "description" : "User pair example",
+              "value" : "123-456"
+            }
+          }
+        } ],
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "403" : {
+            "description" : "If user is trying to access other users' chat allowances"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Chat allowance retrieved successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ChatAllowance"
+                },
+                "examples" : {
+                  "Allowed conversation" : {
+                    "summary" : "Users can exchange messages",
+                    "description" : "Allowed conversation",
+                    "value" : {
+                      "userFrom" : {
+                        "id" : 123,
+                        "firstName" : "John",
+                        "lastName" : "Doe",
+                        "email" : "john@example.com",
+                        "imageLink" : "https://example.com/profiles/john.jpg",
+                        "userStatus" : "ACTIVE"
+                      },
+                      "userTo" : {
+                        "id" : 456,
+                        "firstName" : "Jane",
+                        "lastName" : "Smith",
+                        "email" : "jane@example.com",
+                        "imageLink" : "https://example.com/profiles/jane.jpg",
+                        "userStatus" : "ACTIVE"
+                      },
+                      "currentDateTime" : "2023-08-15T10:30:00Z",
+                      "chatAllowanceType" : "ACCEPTED"
+                    }
+                  },
+                  "Blocked conversation" : {
+                    "summary" : "Users cannot exchange messages",
+                    "description" : "Blocked conversation",
+                    "value" : {
+                      "userFrom" : {
+                        "id" : 123,
+                        "firstName" : "John",
+                        "lastName" : "Doe",
+                        "email" : "john@example.com",
+                        "imageLink" : "https://example.com/profiles/john.jpg",
+                        "userStatus" : "ACTIVE"
+                      },
+                      "userTo" : {
+                        "id" : 456,
+                        "firstName" : "Jane",
+                        "lastName" : "Smith",
+                        "email" : "jane@example.com",
+                        "imageLink" : "https://example.com/profiles/jane.jpg",
+                        "userStatus" : "ACTIVE"
+                      },
+                      "currentDateTime" : "2023-08-15T10:30:00Z",
+                      "chatAllowanceType" : "BLOCKED"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "allowances" ],
+        "summary" : "Update chat allowance for a user pair",
+        "description" : "Updates the chat allowance settings between two users",
+        "operationId" : "updateChatAllowance_1",
+        "parameters" : [ {
+          "name" : "userPair",
+          "in" : "path",
+          "description" : "User pair in the form userFrom-userTo",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "user-id-user-id",
+            "example" : "123-456"
+          },
+          "examples" : {
+            "User pair example" : {
+              "summary" : "Format is userFromId-userToId",
+              "description" : "User pair example",
+              "value" : "123-456"
+            }
+          }
+        } ],
+        "requestBody" : {
+          "description" : "Chat allowance information to update",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ChatAllowance"
+              },
+              "examples" : {
+                "Allow messages" : {
+                  "summary" : "Setting to allow messages",
+                  "description" : "Allow messages",
+                  "value" : {
+                    "userFrom" : {
+                      "id" : 123,
+                      "firstName" : "John",
+                      "lastName" : "Doe",
+                      "email" : "john@example.com",
+                      "imageLink" : "https://example.com/profiles/john.jpg",
+                      "userStatus" : "ACTIVE"
+                    },
+                    "userTo" : {
+                      "id" : 456,
+                      "firstName" : "Jane",
+                      "lastName" : "Smith",
+                      "email" : "jane@example.com",
+                      "imageLink" : "https://example.com/profiles/jane.jpg",
+                      "userStatus" : "ACTIVE"
+                    },
+                    "currentDateTime" : "2023-08-15T10:30:00Z",
+                    "chatAllowanceType" : "ACCEPTED"
+                  }
+                },
+                "Block messages" : {
+                  "summary" : "Setting to block messages",
+                  "description" : "Block messages",
+                  "value" : {
+                    "userFrom" : {
+                      "id" : 123,
+                      "firstName" : "John",
+                      "lastName" : "Doe",
+                      "email" : "john@example.com",
+                      "imageLink" : "https://example.com/profiles/john.jpg",
+                      "userStatus" : "ACTIVE"
+                    },
+                    "userTo" : {
+                      "id" : 456,
+                      "firstName" : "Jane",
+                      "lastName" : "Smith",
+                      "email" : "jane@example.com",
+                      "imageLink" : "https://example.com/profiles/jane.jpg",
+                      "userStatus" : "ACTIVE"
+                    },
+                    "currentDateTime" : "2023-08-15T10:30:00Z",
+                    "chatAllowanceType" : "BLOCKED"
+                  }
+                }
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Chat allowance updated successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ChatAllowance"
+                },
+                "examples" : {
+                  "Updated allowance" : {
+                    "summary" : "Result of allowance update",
+                    "description" : "Updated allowance",
+                    "value" : {
+                      "userFrom" : {
+                        "id" : 123,
+                        "firstName" : "John",
+                        "lastName" : "Doe",
+                        "email" : "john@example.com",
+                        "imageLink" : "https://example.com/profiles/john.jpg",
+                        "userStatus" : "ACTIVE"
+                      },
+                      "userTo" : {
+                        "id" : 456,
+                        "firstName" : "Jane",
+                        "lastName" : "Smith",
+                        "email" : "jane@example.com",
+                        "imageLink" : "https://example.com/profiles/jane.jpg",
+                        "userStatus" : "ACTIVE"
+                      },
+                      "currentDateTime" : "2023-08-15T10:30:00Z",
+                      "chatAllowanceType" : "ACCEPTED"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/user_summary/{userId}" : {
+      "get" : {
+        "tags" : [ "user_summary" ],
+        "summary" : "Get the user chat summaries",
+        "description" : "Retrieves summaries of all chat conversations for a user",
+        "operationId" : "getChatSummaryByUser_1",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "description" : "User ID to fetch chat summaries for",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "example" : 1001
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "Limit the number of chat summaries returned",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "example" : 10
+        }, {
+          "name" : "before_datetime",
+          "in" : "query",
+          "description" : "Only return chat summaries before this datetime (UTC timestamp)",
+          "schema" : {
+            "$ref" : "#/components/schemas/LocalDateTimeQueryString"
+          },
+          "example" : "2023-08-15T14:30:00Z"
+        } ],
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Generated resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/UserChatsSummary"
+                },
+                "examples" : {
+                  "User chat summaries example" : {
+                    "description" : "User chat summaries example",
+                    "value" : {
+                      "user" : {
+                        "id" : 1001,
+                        "email" : "user@example.com",
+                        "firstName" : "John",
+                        "lastName" : "Doe",
+                        "imageLink" : "https://example.com/profile/1001.jpg",
+                        "userStatus" : "ONLINE"
+                      },
+                      "conversationSummaries" : [ {
+                        "user" : {
+                          "id" : 1002,
+                          "email" : "contact1@example.com",
+                          "firstName" : "Jane",
+                          "lastName" : "Smith",
+                          "imageLink" : "https://example.com/profile/1002.jpg",
+                          "userStatus" : "OFFLINE"
+                        },
+                        "lastMessage" : "When can we meet?",
+                        "lastMessageDateTime" : 1630000000000,
+                        "newMessagesCount" : 2,
+                        "chatAllowanceType" : "ACCEPTED"
+                      }, {
+                        "user" : {
+                          "id" : 1003,
+                          "email" : "contact2@example.com",
+                          "firstName" : "Bob",
+                          "lastName" : "Johnson",
+                          "imageLink" : "https://example.com/profile/1003.jpg",
+                          "userStatus" : "ONLINE"
+                        },
+                        "lastMessage" : "Let me know if you're interested",
+                        "lastMessageDateTime" : 1629900000000,
+                        "newMessagesCount" : 0,
+                        "chatAllowanceType" : "PENDING"
+                      } ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/ticket" : {
+      "get" : {
+        "tags" : [ "chat-tickets" ],
+        "summary" : "Retrieve a chat ticket for the authenticated user",
+        "description" : "Creates and returns a chat ticket that can be used to establish a chat connection",
+        "operationId" : "retrieveUserTicket_1",
+        "parameters" : [ {
+          "name" : "user-agent",
+          "in" : "header",
+          "description" : "User agent string of the client",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Returns the generated chat ticket",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ChatTicket"
+                },
+                "examples" : {
+                  "Valid Chat Ticket" : {
+                    "summary" : "Example of a valid chat ticket",
+                    "description" : "Valid Chat Ticket",
+                    "value" : {
+                      "id" : "123e4567-e89b-12d3-a456-426614174000",
+                      "userId" : 1001,
+                      "ip" : "192.168.1.100",
+                      "creationTime" : 1625097600000,
+                      "expirationTime" : 1625184000000,
+                      "browser" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/users/{userId}/connections" : {
+      "get" : {
+        "tags" : [ "user connections" ],
+        "summary" : "Get a user connections",
+        "operationId" : "findUserConnections_2",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Returns a list of user connections",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/User"
+                  }
+                },
+                "examples" : {
+                  "User connections example" : {
+                    "summary" : "A list of user connections with their details",
+                    "description" : "User connections example",
+                    "value" : [ {
+                      "id" : 123,
+                      "email" : "john.doe@example.com",
+                      "firstName" : "John",
+                      "lastName" : "Doe",
+                      "imageLink" : "https://example.com/images/users/123.jpg",
+                      "userStatus" : "ONLINE"
+                    }, {
+                      "id" : 456,
+                      "email" : "jane.smith@example.com",
+                      "firstName" : "Jane",
+                      "lastName" : "Smith",
+                      "imageLink" : "https://example.com/images/users/456.jpg",
+                      "userStatus" : "OFFLINE"
+                    } ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contract" : {
+      "get" : {
+        "tags" : [ "user contracts" ],
+        "summary" : "Get a user Contracts",
+        "operationId" : "findUserContracts_1",
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Returns the user's contracts",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Contract"
+                  }
+                },
+                "examples" : {
+                  "userContracts" : {
+                    "summary" : "Example of user contracts",
+                    "description" : "userContracts",
+                    "value" : [ {
+                      "legalOwner" : {
+                        "id" : 1001,
+                        "name" : "John Doe",
+                        "email" : "john.doe@example.com"
+                      },
+                      "counterParty" : {
+                        "id" : 1002,
+                        "name" : "Jane Smith",
+                        "email" : "jane.smith@example.com"
+                      },
+                      "creationDateTime" : "2023-10-15T10:30:00Z",
+                      "contractUrl" : "https://hallocasa.com/contracts/abc123.pdf",
+                      "ndaUrl" : "https://hallocasa.com/ndas/abc123.pdf",
+                      "legalOwnerSigned" : true,
+                      "counterPartySigned" : false
+                    }, {
+                      "legalOwner" : {
+                        "id" : 1001,
+                        "name" : "John Doe",
+                        "email" : "john.doe@example.com"
+                      },
+                      "counterParty" : {
+                        "id" : 1003,
+                        "name" : "Robert Johnson",
+                        "email" : "robert.johnson@example.com"
+                      },
+                      "creationDateTime" : "2023-11-20T14:45:00Z",
+                      "contractUrl" : "https://hallocasa.com/contracts/def456.pdf",
+                      "ndaUrl" : "https://hallocasa.com/ndas/def456.pdf",
+                      "legalOwnerSigned" : true,
+                      "counterPartySigned" : true
+                    } ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "user contracts" ],
+        "summary" : "Save a user Contract",
+        "operationId" : "save_2",
+        "requestBody" : {
+          "description" : "Contract to save",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Contract"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Returns the saved contract",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Contract"
+                },
+                "examples" : {
+                  "savedContract" : {
+                    "summary" : "Example of saved contract",
+                    "description" : "savedContract",
+                    "value" : {
+                      "legalOwner" : {
+                        "id" : 1001,
+                        "name" : "John Doe",
+                        "email" : "john.doe@example.com"
+                      },
+                      "counterParty" : {
+                        "id" : 1004,
+                        "name" : "Maria Garcia",
+                        "email" : "maria.garcia@example.com"
+                      },
+                      "creationDateTime" : "2023-12-05T09:15:00Z",
+                      "contractUrl" : "https://hallocasa.com/contracts/ghi789.pdf",
+                      "ndaUrl" : "https://hallocasa.com/ndas/ghi789.pdf",
+                      "legalOwnerSigned" : true,
+                      "counterPartySigned" : false
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/group_notifications" : {
+      "get" : {
+        "tags" : [ "group_notifications" ],
+        "summary" : "Get group notification messages for a user and group",
+        "operationId" : "getGroupNotifications_1",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "query",
+          "description" : "User ID",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "groupId",
+          "in" : "query",
+          "description" : "Group ID",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "Limit results",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "before_datetime",
+          "in" : "query",
+          "description" : "Before datetime (epoch millis)",
+          "schema" : {
+            "$ref" : "#/components/schemas/LocalDateTimeQueryString"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
+    "/chat/messages" : {
+      "get" : {
+        "tags" : [ "messages" ],
+        "summary" : "Get a message by conversation",
+        "operationId" : "getConversation_1",
+        "parameters" : [ {
+          "name" : "userAId",
+          "in" : "query",
+          "description" : "User A Id",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "userBId",
+          "in" : "query",
+          "description" : "User B Id",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "limit results",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "before_datetime",
+          "in" : "query",
+          "description" : "return results before date time",
+          "schema" : {
+            "$ref" : "#/components/schemas/LocalDateTimeQueryString"
+          }
+        } ],
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Generated resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Message"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "messages" ],
+        "summary" : "Post a message",
+        "operationId" : "sendMessage_1",
+        "requestBody" : {
+          "description" : "message",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Message"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Generated resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications/{type}" : {
+      "post" : {
+        "tags" : [ "messages" ],
+        "summary" : "Get user notifications by type",
+        "description" : "Retrieves notifications for a specific user and notification type. Designed for autopilot integration.",
+        "operationId" : "getByUserWithResult_1",
+        "parameters" : [ {
+          "name" : "token",
+          "in" : "query",
+          "description" : "Authentication token",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "xZKgWREasfv8r3eT98jRYFUTMaScqCfU"
+        }, {
+          "name" : "type",
+          "in" : "path",
+          "description" : "Notification type",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "TO_BROKER__ALERT_CREATED", "TO_USER__WEEKLY_PROPERTIES", "TO_USER__WEEKLY_PAYED_SUBSCRIBERS", "TO_USER__CUSTOMIZED_ALERT", "TO_USER__WEEKLY_GROUP_PROPERTIES", "TO_USER__NEWSLETTER_NEW_SUBSCRIBER", "TO_USER__NEWSLETTER_CONFIRMATION", "TO_USER__NEWSLETTER_LISTING" ]
+          },
+          "example" : "MESSAGE"
+        } ],
+        "requestBody" : {
+          "description" : "User information",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AutopilotUser"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Notification found and returned successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Notification"
+                },
+                "examples" : {
+                  "sample_notification" : {
+                    "description" : "sample_notification",
+                    "value" : {
+                      "id" : "123e4567-e89b-12d3-a456-426614174000",
+                      "userId" : "user123",
+                      "type" : "MESSAGE",
+                      "content" : "You have a new message",
+                      "isRead" : false,
+                      "timestamp" : "2023-06-15T14:30:00Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "No notification found for the user",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "There's not notification for the user example@email.com"
+              }
+            }
+          },
+          "403" : {
+            "description" : "Invalid authentication token or request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "Invalid Autopilot request"
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "token" : [ ]
+        } ]
+      }
+    },
+    "/chat/user/{id}" : {
+      "get" : {
+        "tags" : [ "messages" ],
+        "summary" : "Retrieve a user chat",
+        "operationId" : "retrieveChatUser_1",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "user id",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Generated resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chat/user/{id}/status" : {
+      "get" : {
+        "tags" : [ "messages" ],
+        "summary" : "Retrieve a user chat status",
+        "operationId" : "retrieveChatUserStatus_1",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "user id",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Generated resource",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string",
+                  "enum" : [ "OFFLINE", "ONLINE" ]
+                },
+                "examples" : {
+                  "onlineUser" : {
+                    "summary" : "Online user status",
+                    "description" : "onlineUser",
+                    "value" : "ONLINE"
+                  },
+                  "offlineUser" : {
+                    "summary" : "Offline user status",
+                    "description" : "offlineUser",
+                    "value" : "OFFLINE"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/country-phone-prefixes" : {
       "get" : {
         "tags" : [ "phone-prefixes" ],
@@ -3272,25 +4232,33 @@
     },
     "/home/preview" : {
       "get" : {
+        "tags" : [ "home-preview" ],
+        "summary" : "Localized marketing home preview HTML",
         "operationId" : "previewHome_1",
         "parameters" : [ {
           "name" : "id",
           "in" : "query",
+          "description" : "Optional CMS/content anchor id",
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "hero-v2"
         }, {
           "name" : "lang",
           "in" : "query",
+          "description" : "Explicit locale override (e.g. en, es)",
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "en"
         }, {
           "name" : "Accept-Language",
           "in" : "header",
+          "description" : "Browser Accept-Language fallback chain",
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "en-US,en;q=0.9"
         } ],
         "responses" : {
           "default" : {
@@ -6601,7 +7569,8 @@
             "type" : "integer",
             "format" : "int32",
             "default" : 1
-          }
+          },
+          "example" : 1
         }, {
           "name" : "pageTo",
           "in" : "query",
@@ -6610,34 +7579,44 @@
             "type" : "integer",
             "format" : "int32",
             "default" : 20
-          }
+          },
+          "example" : 20
         }, {
           "name" : "language",
           "in" : "query",
+          "description" : "BCP47 locale filter",
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "en-US"
         }, {
           "name" : "format",
           "in" : "query",
+          "description" : "Delivery mode filter",
           "schema" : {
             "type" : "string",
+            "description" : "Course delivery mode",
             "enum" : [ "ONLINE", "IN_PERSON", "HYBRID" ]
-          }
+          },
+          "example" : "ONLINE"
         }, {
           "name" : "designation",
           "in" : "query",
+          "description" : "Designation filter",
           "schema" : {
             "type" : "string",
+            "description" : "Credential track / designation label",
             "enum" : [ "ABR", "CIPS", "CPM", "CRB", "CRS", "GREEN", "GRI", "MRP", "PSA", "RSPS", "SRES", "SRS", "SKILL_TRAINING_NON_DESIGNATION" ]
-          }
+          },
+          "example" : "CRS"
         }, {
           "name" : "ceCreditsOnly",
           "in" : "query",
           "description" : "Only state-approved CE courses",
           "schema" : {
             "type" : "boolean"
-          }
+          },
+          "example" : false
         } ],
         "responses" : {
           "200" : {
@@ -6661,46 +7640,55 @@
         "parameters" : [ {
           "name" : "courseId",
           "in" : "path",
+          "description" : "Course id",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 501
         }, {
           "name" : "source",
           "in" : "query",
+          "description" : "Analytics source tag",
           "schema" : {
             "type" : "string",
             "default" : "detail"
-          }
+          },
+          "example" : "detail"
         } ],
         "responses" : {
           "302" : {
-            "description" : "Redirect"
+            "description" : "Temporary redirect to vendor URL"
           },
           "404" : {
-            "description" : "Not found"
+            "description" : "Course not found"
           }
-        }
+        },
+        "security" : [ {
+          "oAuthToken" : [ ]
+        } ]
       }
     },
     "/courses/{courseId}" : {
       "get" : {
         "tags" : [ "courses" ],
-        "summary" : "Get course by id",
+        "summary" : "Get published course by id",
         "operationId" : "get_1",
         "parameters" : [ {
           "name" : "courseId",
           "in" : "path",
+          "description" : "Course id",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 501
         } ],
         "responses" : {
           "200" : {
-            "description" : "Ok",
+            "description" : "Course payload",
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -6710,7 +7698,7 @@
             }
           },
           "404" : {
-            "description" : "Not found"
+            "description" : "Unknown or unpublished id"
           }
         }
       },
@@ -6721,11 +7709,13 @@
         "parameters" : [ {
           "name" : "courseId",
           "in" : "path",
+          "description" : "Course id",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 501
         } ],
         "requestBody" : {
           "content" : {
@@ -6734,16 +7724,36 @@
                 "$ref" : "#/components/schemas/CourseWriteDto"
               }
             }
-          }
+          },
+          "required" : true
         },
         "responses" : {
-          "default" : {
-            "description" : "default response",
+          "200" : {
+            "description" : "Updated course",
             "content" : {
-              "application/json" : { }
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Course"
+                }
+              }
             }
+          },
+          "400" : {
+            "description" : "Validation failure"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Caller is not instructor"
+          },
+          "404" : {
+            "description" : "Course missing"
           }
-        }
+        },
+        "security" : [ {
+          "oAuthToken" : [ ]
+        } ]
       },
       "delete" : {
         "tags" : [ "courses" ],
@@ -6752,20 +7762,31 @@
         "parameters" : [ {
           "name" : "courseId",
           "in" : "path",
+          "description" : "Course id",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 501
         } ],
         "responses" : {
-          "default" : {
-            "description" : "default response",
-            "content" : {
-              "application/json" : { }
-            }
+          "200" : {
+            "description" : "Removed"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Caller is not instructor"
+          },
+          "404" : {
+            "description" : "Course missing"
           }
-        }
+        },
+        "security" : [ {
+          "oAuthToken" : [ ]
+        } ]
       }
     },
     "/courses/{courseId}/clicks" : {
@@ -6776,31 +7797,41 @@
         "parameters" : [ {
           "name" : "courseId",
           "in" : "path",
+          "description" : "Course id",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 501
         }, {
           "name" : "source",
           "in" : "query",
+          "description" : "Analytics funnel tag",
           "schema" : {
             "type" : "string",
             "default" : "detail"
-          }
+          },
+          "example" : "detail"
         }, {
           "name" : "eventType",
           "in" : "query",
+          "description" : "Known anonymous events",
+          "required" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "ATTEND_LOGIN_GATE"
         } ],
         "responses" : {
-          "default" : {
-            "description" : "default response",
-            "content" : {
-              "application/json" : { }
-            }
+          "204" : {
+            "description" : "Recorded"
+          },
+          "400" : {
+            "description" : "Missing/invalid eventType"
+          },
+          "404" : {
+            "description" : "Unknown course"
           }
         }
       }
@@ -7451,27 +8482,32 @@
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 102938
         }, {
           "name" : "pageFrom",
           "in" : "query",
+          "description" : "Inclusive page start (1-based)",
           "schema" : {
             "type" : "integer",
             "format" : "int32",
             "default" : 1
-          }
+          },
+          "example" : 1
         }, {
           "name" : "pageTo",
           "in" : "query",
+          "description" : "Inclusive page end",
           "schema" : {
             "type" : "integer",
             "format" : "int32",
             "default" : 50
-          }
+          },
+          "example" : 50
         } ],
         "responses" : {
           "200" : {
-            "description" : "Ok",
+            "description" : "Paged instructor courses",
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -7479,8 +8515,17 @@
                 }
               }
             }
+          },
+          "401" : {
+            "description" : "Missing or invalid OAuth token"
+          },
+          "403" : {
+            "description" : "Path userId does not match principal"
           }
-        }
+        },
+        "security" : [ {
+          "oAuthToken" : [ ]
+        } ]
       },
       "post" : {
         "tags" : [ "courses" ],
@@ -7489,26 +8534,71 @@
         "parameters" : [ {
           "name" : "userId",
           "in" : "path",
+          "description" : "Instructor user id",
           "required" : true,
           "schema" : {
             "type" : "integer",
             "format" : "int64"
-          }
+          },
+          "example" : 102938
         } ],
         "requestBody" : {
+          "description" : "Course definition including timezone-local start time",
           "content" : {
             "application/json" : {
               "schema" : {
                 "$ref" : "#/components/schemas/CourseWriteDto"
+              },
+              "examples" : {
+                "sampleCourse" : {
+                  "summary" : "Hybrid CRS workshop",
+                  "description" : "sampleCourse",
+                  "value" : {
+                    "title" : "CRS Intensive — Miami",
+                    "description" : "<p>Two-day CRS credits.</p>",
+                    "summary" : "Hybrid workshop.",
+                    "courseDateTime" : "2025-11-02T09:00:00",
+                    "courseTimezone" : "America/New_York",
+                    "format" : "HYBRID",
+                    "location" : "Brickell Training Center + Zoom",
+                    "languageLocale" : "en-US",
+                    "priceAmount" : 199.0,
+                    "priceCurrency" : "USD",
+                    "designation" : "CRS",
+                    "stateApprovedCeCredits" : true,
+                    "externalRegistrationUrl" : "https://learn.example.com/register/crs-mia",
+                    "hours" : 14.5
+                  }
+                }
               }
             }
-          }
+          },
+          "required" : true
         },
         "responses" : {
           "200" : {
-            "description" : "Created"
+            "description" : "Persisted course snapshot",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Course"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Validation failure"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Caller cannot publish for this user"
           }
-        }
+        },
+        "security" : [ {
+          "oAuthToken" : [ ]
+        } ]
       }
     },
     "/user-types" : {
@@ -7957,7 +9047,7 @@
         "tags" : [ "users" ],
         "summary" : "Save the data of user in the system",
         "description" : "Updates user profile information in the system",
-        "operationId" : "save_1",
+        "operationId" : "save",
         "parameters" : [ {
           "name" : "O-Auth-Token",
           "in" : "header",
@@ -8018,7 +9108,7 @@
         "tags" : [ "users" ],
         "summary" : "Get a user connections",
         "description" : "Retrieves the list of connections for a specific user",
-        "operationId" : "findUserConnections_1",
+        "operationId" : "findUserConnections",
         "parameters" : [ {
           "name" : "userId",
           "in" : "path",
@@ -8972,6 +10062,652 @@
   },
   "components" : {
     "schemas" : {
+      "Attachment" : {
+        "type" : "object",
+        "properties" : {
+          "userFrom" : {
+            "$ref" : "#/components/schemas/User"
+          },
+          "userTo" : {
+            "$ref" : "#/components/schemas/User"
+          },
+          "fileId" : {
+            "type" : "string"
+          },
+          "uploadUrl" : {
+            "type" : "string"
+          },
+          "downloadUrl" : {
+            "type" : "string"
+          },
+          "originalName" : {
+            "type" : "string"
+          }
+        }
+      },
+      "User" : {
+        "type" : "object",
+        "properties" : {
+          "language" : {
+            "$ref" : "#/components/schemas/Language"
+          },
+          "email" : {
+            "maxLength" : 160,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Email address",
+            "example" : "agent@example.com"
+          },
+          "firstName" : {
+            "maxLength" : 45,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Given name",
+            "example" : "Jane"
+          },
+          "lastName" : {
+            "maxLength" : 45,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Family name",
+            "example" : "Doe"
+          },
+          "id" : {
+            "type" : "integer",
+            "description" : "Numeric user id",
+            "format" : "int64",
+            "example" : 102938
+          },
+          "confirmedFlag" : {
+            "type" : "boolean",
+            "description" : "Whether email has been verified",
+            "example" : true
+          },
+          "registerDate" : {
+            "type" : "string",
+            "description" : "Registration timestamp (epoch millis in JSON)",
+            "format" : "date-time"
+          },
+          "basicProfileCompletedAt" : {
+            "type" : "string",
+            "description" : "When basic profile was completed",
+            "format" : "date-time"
+          },
+          "webSite" : {
+            "maxLength" : 80,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Public website URL",
+            "example" : "https://agency.example.com"
+          },
+          "linkedIn" : {
+            "maxLength" : 160,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "LinkedIn profile URL"
+          },
+          "skype" : {
+            "maxLength" : 45,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Skype handle"
+          },
+          "base64Image" : {
+            "maxLength" : 12000000,
+            "type" : "string",
+            "description" : "Profile image as base64 data URL or raw base64 (large)"
+          },
+          "imageLink" : {
+            "type" : "string",
+            "description" : "CDN URL for profile image",
+            "example" : "https://cdn.example.com/u/avatar.jpg"
+          },
+          "mainSpokenLanguage" : {
+            "$ref" : "#/components/schemas/Language"
+          },
+          "telephonePrefix" : {
+            "$ref" : "#/components/schemas/CountryTelephonePrefix"
+          },
+          "telephoneNumber" : {
+            "type" : "string",
+            "description" : "Phone number without prefix",
+            "example" : "5550199"
+          },
+          "userTypes" : {
+            "type" : "array",
+            "description" : "Professional roles (broker, agent, …)",
+            "items" : {
+              "$ref" : "#/components/schemas/UserType"
+            }
+          },
+          "userLanguages" : {
+            "type" : "array",
+            "description" : "Languages spoken with proficiency",
+            "items" : {
+              "$ref" : "#/components/schemas/UserLanguage"
+            }
+          },
+          "userDescriptions" : {
+            "type" : "array",
+            "description" : "Localized biography snippets",
+            "items" : {
+              "$ref" : "#/components/schemas/UserDescription"
+            }
+          },
+          "userFaqs" : {
+            "type" : "array",
+            "description" : "FAQ entries shown on profile",
+            "items" : {
+              "$ref" : "#/components/schemas/UserFaq"
+            }
+          },
+          "country" : {
+            "$ref" : "#/components/schemas/Country"
+          },
+          "role" : {
+            "type" : "string",
+            "description" : "Legacy role label when present"
+          },
+          "backgroundImageBase64" : {
+            "maxLength" : 12000000,
+            "type" : "string",
+            "description" : "Background hero image as base64"
+          },
+          "backgroundImageLink" : {
+            "type" : "string",
+            "description" : "Background hero image URL"
+          },
+          "profileName" : {
+            "type" : "string",
+            "description" : "Public profile slug",
+            "example" : "jane-doe-miami"
+          },
+          "lastActivity" : {
+            "type" : "string",
+            "description" : "Last activity timestamp (epoch millis in JSON)",
+            "format" : "date-time"
+          },
+          "chatStatus" : {
+            "type" : "string",
+            "description" : "Chat availability flag",
+            "example" : "ONLINE"
+          },
+          "chatsCount" : {
+            "type" : "integer",
+            "description" : "Open conversation count for summaries",
+            "format" : "int32",
+            "example" : 3
+          },
+          "phoneVerified" : {
+            "type" : "boolean",
+            "description" : "SMS verification completed",
+            "example" : true
+          },
+          "identityVerified" : {
+            "type" : "boolean",
+            "description" : "Stripe Identity verification completed",
+            "example" : false
+          },
+          "geoPlace" : {
+            "$ref" : "#/components/schemas/GeoPlace"
+          },
+          "chamberOfCommerceUrl" : {
+            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "type" : "string",
+            "description" : "Chamber of commerce registry URL"
+          },
+          "licenseId" : {
+            "type" : "string",
+            "description" : "Official license or registry id",
+            "example" : "00009-PJ-MVCS"
+          },
+          "facebookUrl" : {
+            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "type" : "string",
+            "description" : "Facebook profile URL"
+          },
+          "instagramUrl" : {
+            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "type" : "string",
+            "description" : "Instagram profile URL"
+          },
+          "twitterUrl" : {
+            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "type" : "string",
+            "description" : "X/Twitter profile URL"
+          },
+          "wechatUrl" : {
+            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "type" : "string",
+            "description" : "WeChat profile URL"
+          },
+          "wechatQr" : {
+            "pattern" : "^$|data:image\\/(png|jpeg|jpg|gif|webp);base64,[A-Za-z0-9+/=]+",
+            "type" : "string",
+            "description" : "WeChat QR image data URL"
+          },
+          "vkUrl" : {
+            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "type" : "string",
+            "description" : "VK profile URL"
+          },
+          "videoUrl" : {
+            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "type" : "string",
+            "description" : "Introduction video URL"
+          },
+          "bookAnAppointmentUrl" : {
+            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "type" : "string",
+            "description" : "Calendar booking link"
+          },
+          "googlePlaceId" : {
+            "type" : "string",
+            "description" : "Google Place id for office"
+          },
+          "googlePlaceReviews" : {
+            "type" : "array",
+            "description" : "Pinned Google reviews",
+            "items" : {
+              "$ref" : "#/components/schemas/GooglePlaceReview"
+            }
+          },
+          "googleRating" : {
+            "type" : "number",
+            "description" : "Aggregate Google rating",
+            "format" : "double",
+            "example" : 4.2
+          },
+          "googleUserRatingsTotal" : {
+            "type" : "integer",
+            "description" : "Total Google ratings count",
+            "format" : "int32",
+            "example" : 426
+          },
+          "achievementsYearsOfExperience" : {
+            "type" : "integer",
+            "description" : "Years of experience badge",
+            "format" : "int32"
+          },
+          "achievementsDealsClosed" : {
+            "type" : "integer",
+            "description" : "Closed deals badge",
+            "format" : "int32"
+          },
+          "achievementsPercentageOfAllAgents" : {
+            "type" : "number",
+            "description" : "Percentile vs peers",
+            "format" : "double"
+          },
+          "achievementsGooglePlaceId" : {
+            "type" : "string",
+            "description" : "Alternate Place id for achievements widget"
+          },
+          "focusOnCommercial" : {
+            "type" : "boolean",
+            "description" : "Focus: commercial",
+            "example" : true
+          },
+          "focusOnResidential" : {
+            "type" : "boolean",
+            "description" : "Focus: residential",
+            "example" : true
+          },
+          "focusOnRental" : {
+            "type" : "boolean",
+            "description" : "Focus: rentals",
+            "example" : false
+          },
+          "focusOnSelling" : {
+            "type" : "boolean",
+            "description" : "Focus: selling/listings",
+            "example" : true
+          },
+          "focusOnValuation" : {
+            "type" : "boolean",
+            "description" : "Focus: valuation",
+            "example" : false
+          },
+          "focusOnDueDiligence" : {
+            "type" : "boolean",
+            "description" : "Focus: due diligence",
+            "example" : false
+          },
+          "focusOnConsulting" : {
+            "type" : "boolean",
+            "description" : "Focus: consulting",
+            "example" : false
+          },
+          "focusOnPortfolioValuation" : {
+            "type" : "boolean",
+            "description" : "Focus: portfolio valuation",
+            "example" : false
+          },
+          "imprintTitle" : {
+            "type" : "string",
+            "description" : "Imprint/legal headline"
+          },
+          "imprintDescription" : {
+            "type" : "string",
+            "description" : "Imprint/legal body HTML or text"
+          },
+          "imprintBase64Image" : {
+            "type" : "string",
+            "description" : "Imprint logo image base64"
+          },
+          "imprintLogoLink" : {
+            "type" : "string",
+            "description" : "Imprint logo CDN URL"
+          },
+          "showEmailInProfile" : {
+            "type" : "boolean",
+            "description" : "Expose email on public profile"
+          },
+          "showEmailInProperty" : {
+            "type" : "boolean",
+            "description" : "Expose email on property detail"
+          },
+          "showPhoneInProperty" : {
+            "type" : "boolean",
+            "description" : "Expose phone on property detail"
+          },
+          "allowSaveContact" : {
+            "type" : "boolean",
+            "description" : "Allow visitors to save vCard/contact"
+          },
+          "city" : {
+            "type" : "string",
+            "description" : "Primary city label",
+            "example" : "Miami"
+          },
+          "referral" : {
+            "type" : "string",
+            "description" : "Referral source tag"
+          },
+          "commissionPaidBy" : {
+            "type" : "string",
+            "description" : "Who pays referral commission by convention"
+          },
+          "offersReferralCommission" : {
+            "type" : "boolean",
+            "description" : "Broker offers referral commission by default",
+            "example" : true
+          },
+          "defaultReferralPercent" : {
+            "type" : "number",
+            "description" : "Default referral percentage for listings",
+            "format" : "double",
+            "example" : 25.0
+          },
+          "subscriptionPlanName" : {
+            "type" : "string",
+            "description" : "Active subscription tier name",
+            "enum" : [ "Free", "Professional", "Business", "Brokerage" ]
+          },
+          "hidePublicProfile" : {
+            "type" : "boolean",
+            "description" : "Hide profile from directory search",
+            "example" : false
+          },
+          "publicProfileDesign" : {
+            "type" : "string",
+            "description" : "Public profile theme",
+            "example" : "classic",
+            "enum" : [ "classic", "luxury", "redWhiteGray" ]
+          },
+          "imprintImageLink" : {
+            "type" : "string",
+            "writeOnly" : true
+          }
+        },
+        "description" : "HalloCasa user profile (extends contact)"
+      },
+      "NotifyUploadRequest" : {
+        "type" : "object",
+        "properties" : {
+          "fileName" : {
+            "type" : "string"
+          }
+        }
+      },
+      "ChatAllowance" : {
+        "type" : "object",
+        "properties" : {
+          "userFrom" : {
+            "$ref" : "#/components/schemas/User"
+          },
+          "userTo" : {
+            "$ref" : "#/components/schemas/User"
+          },
+          "currentDateTime" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "chatAllowanceType" : {
+            "type" : "string",
+            "enum" : [ "REJECTED", "ACCEPTED", "PENDING", "BLOCKED", "SILENCED" ]
+          },
+          "incomingPendingRequest" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "ConversationSummary" : {
+        "type" : "object",
+        "properties" : {
+          "user" : {
+            "$ref" : "#/components/schemas/User"
+          },
+          "lastMessage" : {
+            "type" : "string"
+          },
+          "lastMessageDateTime" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "newMessagesCount" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "chatAllowanceType" : {
+            "type" : "string",
+            "enum" : [ "REJECTED", "ACCEPTED", "PENDING", "BLOCKED", "SILENCED" ]
+          }
+        }
+      },
+      "GroupNotificationSummary" : {
+        "type" : "object",
+        "properties" : {
+          "groupId" : {
+            "type" : "string"
+          },
+          "groupName" : {
+            "type" : "string"
+          },
+          "groupLogo" : {
+            "type" : "string"
+          },
+          "lastMessage" : {
+            "type" : "string"
+          },
+          "lastMessageDateTime" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "newMessagesCount" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "groupNotification" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "UserChatsSummary" : {
+        "type" : "object",
+        "properties" : {
+          "user" : {
+            "$ref" : "#/components/schemas/User"
+          },
+          "conversationSummaries" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ConversationSummary"
+            }
+          },
+          "groupNotificationSummaries" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/GroupNotificationSummary"
+            }
+          }
+        }
+      },
+      "LocalDateTimeQueryString" : {
+        "type" : "object",
+        "properties" : {
+          "utcValue" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "millsFromEpoch" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }
+      },
+      "ChatTicket" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "userId" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "ip" : {
+            "type" : "string"
+          },
+          "creationTime" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "expirationTime" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "browser" : {
+            "type" : "string"
+          },
+          "expired" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "Contract" : {
+        "type" : "object",
+        "properties" : {
+          "legalOwner" : {
+            "$ref" : "#/components/schemas/User"
+          },
+          "counterParty" : {
+            "$ref" : "#/components/schemas/User"
+          },
+          "creationDateTime" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "contractUrl" : {
+            "type" : "string"
+          },
+          "ndaUrl" : {
+            "type" : "string"
+          },
+          "legalOwnerSigned" : {
+            "type" : "boolean"
+          },
+          "counterPartySigned" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "Message" : {
+        "type" : "object",
+        "properties" : {
+          "userFrom" : {
+            "$ref" : "#/components/schemas/User"
+          },
+          "userTo" : {
+            "$ref" : "#/components/schemas/User"
+          },
+          "text" : {
+            "type" : "string"
+          },
+          "fileName" : {
+            "type" : "string"
+          },
+          "fileId" : {
+            "type" : "string"
+          },
+          "dateTime" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "notifiedByChat" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "Notification" : {
+        "required" : [ "email", "type" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "description" : "Notification primary key",
+            "format" : "int64",
+            "example" : 9001
+          },
+          "email" : {
+            "type" : "string",
+            "description" : "Recipient email",
+            "example" : "agent@example.com"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "Channel/template discriminator",
+            "enum" : [ "TO_BROKER__ALERT_CREATED", "TO_USER__WEEKLY_PROPERTIES", "TO_USER__WEEKLY_PAYED_SUBSCRIBERS", "TO_USER__CUSTOMIZED_ALERT", "TO_USER__WEEKLY_GROUP_PROPERTIES", "TO_USER__NEWSLETTER_NEW_SUBSCRIBER", "TO_USER__NEWSLETTER_CONFIRMATION", "TO_USER__NEWSLETTER_LISTING" ]
+          },
+          "currentDateTime" : {
+            "type" : "string",
+            "description" : "Server timestamp when queued",
+            "format" : "date-time"
+          },
+          "body" : {
+            "type" : "object",
+            "description" : "Notification body data in JSON format",
+            "example" : {
+              "message" : "You have a new alert",
+              "count" : 5
+            }
+          }
+        },
+        "description" : "Queued outbound notification payload"
+      },
+      "AutopilotUser" : {
+        "required" : [ "contactId", "email" ],
+        "type" : "object",
+        "properties" : {
+          "contactId" : {
+            "type" : "string"
+          },
+          "email" : {
+            "type" : "string"
+          }
+        }
+      },
       "CountryPhonePrefix" : {
         "type" : "object",
         "properties" : {
@@ -9141,7 +10877,8 @@
           "address" : {
             "$ref" : "#/components/schemas/Address"
           }
-        }
+        },
+        "description" : "Google Places-backed office location"
       },
       "Language" : {
         "type" : "object",
@@ -9356,7 +11093,8 @@
           "lang" : {
             "type" : "string"
           }
-        }
+        },
+        "description" : "International dialing prefix metadata"
       },
       "GooglePlaceReview" : {
         "type" : "object",
@@ -9393,7 +11131,8 @@
           "translated" : {
             "type" : "boolean"
           }
-        }
+        },
+        "description" : "Pinned Google reviews"
       },
       "Group" : {
         "type" : "object",
@@ -9494,286 +11233,6 @@
           }
         }
       },
-      "User" : {
-        "type" : "object",
-        "properties" : {
-          "language" : {
-            "$ref" : "#/components/schemas/Language"
-          },
-          "email" : {
-            "maxLength" : 160,
-            "minLength" : 0,
-            "type" : "string"
-          },
-          "firstName" : {
-            "maxLength" : 45,
-            "minLength" : 0,
-            "type" : "string"
-          },
-          "lastName" : {
-            "maxLength" : 45,
-            "minLength" : 0,
-            "type" : "string"
-          },
-          "id" : {
-            "type" : "integer",
-            "format" : "int64"
-          },
-          "password" : {
-            "type" : "string"
-          },
-          "confirmedFlag" : {
-            "type" : "boolean"
-          },
-          "registerDate" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "basicProfileCompletedAt" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "webSite" : {
-            "maxLength" : 80,
-            "minLength" : 0,
-            "type" : "string"
-          },
-          "linkedIn" : {
-            "maxLength" : 160,
-            "minLength" : 0,
-            "type" : "string"
-          },
-          "skype" : {
-            "maxLength" : 45,
-            "minLength" : 0,
-            "type" : "string"
-          },
-          "base64Image" : {
-            "type" : "string"
-          },
-          "imageLink" : {
-            "type" : "string"
-          },
-          "mainSpokenLanguage" : {
-            "$ref" : "#/components/schemas/Language"
-          },
-          "telephonePrefix" : {
-            "$ref" : "#/components/schemas/CountryTelephonePrefix"
-          },
-          "telephoneNumber" : {
-            "type" : "string"
-          },
-          "userTypes" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/UserType"
-            }
-          },
-          "userLanguages" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/UserLanguage"
-            }
-          },
-          "userDescriptions" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/UserDescription"
-            }
-          },
-          "userFaqs" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/UserFaq"
-            }
-          },
-          "country" : {
-            "$ref" : "#/components/schemas/Country"
-          },
-          "role" : {
-            "type" : "string"
-          },
-          "backgroundImageBase64" : {
-            "type" : "string"
-          },
-          "backgroundImageLink" : {
-            "type" : "string"
-          },
-          "profileName" : {
-            "type" : "string"
-          },
-          "lastActivity" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "chatStatus" : {
-            "type" : "string"
-          },
-          "chatsCount" : {
-            "type" : "integer",
-            "format" : "int32"
-          },
-          "phoneVerified" : {
-            "type" : "boolean"
-          },
-          "identityVerified" : {
-            "type" : "boolean"
-          },
-          "geoPlace" : {
-            "$ref" : "#/components/schemas/GeoPlace"
-          },
-          "chamberOfCommerceUrl" : {
-            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
-            "type" : "string"
-          },
-          "licenseId" : {
-            "type" : "string"
-          },
-          "facebookUrl" : {
-            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
-            "type" : "string"
-          },
-          "instagramUrl" : {
-            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
-            "type" : "string"
-          },
-          "twitterUrl" : {
-            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
-            "type" : "string"
-          },
-          "wechatUrl" : {
-            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
-            "type" : "string"
-          },
-          "wechatQr" : {
-            "pattern" : "^$|data:image\\/(png|jpeg|jpg|gif|webp);base64,[A-Za-z0-9+/=]+",
-            "type" : "string"
-          },
-          "vkUrl" : {
-            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
-            "type" : "string"
-          },
-          "videoUrl" : {
-            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
-            "type" : "string"
-          },
-          "bookAnAppointmentUrl" : {
-            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
-            "type" : "string"
-          },
-          "googlePlaceId" : {
-            "type" : "string"
-          },
-          "googlePlaceReviews" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/GooglePlaceReview"
-            }
-          },
-          "googleRating" : {
-            "type" : "number",
-            "format" : "double"
-          },
-          "googleUserRatingsTotal" : {
-            "type" : "integer",
-            "format" : "int32"
-          },
-          "achievementsYearsOfExperience" : {
-            "type" : "integer",
-            "format" : "int32"
-          },
-          "achievementsDealsClosed" : {
-            "type" : "integer",
-            "format" : "int32"
-          },
-          "achievementsPercentageOfAllAgents" : {
-            "type" : "number",
-            "format" : "double"
-          },
-          "achievementsGooglePlaceId" : {
-            "type" : "string"
-          },
-          "focusOnCommercial" : {
-            "type" : "boolean"
-          },
-          "focusOnResidential" : {
-            "type" : "boolean"
-          },
-          "focusOnRental" : {
-            "type" : "boolean"
-          },
-          "focusOnSelling" : {
-            "type" : "boolean"
-          },
-          "focusOnValuation" : {
-            "type" : "boolean"
-          },
-          "focusOnDueDiligence" : {
-            "type" : "boolean"
-          },
-          "focusOnConsulting" : {
-            "type" : "boolean"
-          },
-          "focusOnPortfolioValuation" : {
-            "type" : "boolean"
-          },
-          "imprintTitle" : {
-            "type" : "string"
-          },
-          "imprintDescription" : {
-            "type" : "string"
-          },
-          "imprintBase64Image" : {
-            "type" : "string"
-          },
-          "imprintLogoLink" : {
-            "type" : "string"
-          },
-          "showEmailInProfile" : {
-            "type" : "boolean"
-          },
-          "showEmailInProperty" : {
-            "type" : "boolean"
-          },
-          "showPhoneInProperty" : {
-            "type" : "boolean"
-          },
-          "allowSaveContact" : {
-            "type" : "boolean"
-          },
-          "city" : {
-            "type" : "string"
-          },
-          "referral" : {
-            "type" : "string"
-          },
-          "commissionPaidBy" : {
-            "type" : "string"
-          },
-          "offersReferralCommission" : {
-            "type" : "boolean"
-          },
-          "defaultReferralPercent" : {
-            "type" : "number",
-            "format" : "double"
-          },
-          "subscriptionPlanName" : {
-            "type" : "string",
-            "enum" : [ "Free", "Professional", "Business", "Brokerage" ]
-          },
-          "hidePublicProfile" : {
-            "type" : "boolean"
-          },
-          "publicProfileDesign" : {
-            "type" : "string",
-            "enum" : [ "classic", "luxury", "redWhiteGray" ]
-          },
-          "imprintImageLink" : {
-            "type" : "string",
-            "writeOnly" : true
-          }
-        }
-      },
       "UserDescription" : {
         "type" : "object",
         "properties" : {
@@ -9783,7 +11242,8 @@
           "value" : {
             "type" : "string"
           }
-        }
+        },
+        "description" : "Localized biography snippets"
       },
       "UserFaq" : {
         "type" : "object",
@@ -9810,7 +11270,8 @@
             "type" : "string",
             "format" : "date-time"
           }
-        }
+        },
+        "description" : "FAQ entries shown on profile"
       },
       "UserFaqTranslation" : {
         "type" : "object",
@@ -9843,7 +11304,8 @@
           "isMainLanguage" : {
             "type" : "boolean"
           }
-        }
+        },
+        "description" : "Languages spoken with proficiency"
       },
       "UserType" : {
         "type" : "object",
@@ -9864,7 +11326,8 @@
           "manageTooltip" : {
             "type" : "boolean"
           }
-        }
+        },
+        "description" : "Professional roles (broker, agent, …)"
       },
       "GroupMemberFilterResult" : {
         "type" : "object",
@@ -9993,14 +11456,17 @@
               "$ref" : "#/components/schemas/DropdownOption"
             }
           }
-        }
+        },
+        "description" : "Dropdown options when applicable"
       },
       "Property" : {
         "required" : [ "user" ],
         "type" : "object",
         "properties" : {
           "id" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Listing id (server-generated)",
+            "example" : "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
           },
           "user" : {
             "$ref" : "#/components/schemas/User"
@@ -10022,45 +11488,63 @@
           },
           "fieldList" : {
             "type" : "array",
+            "description" : "All listing fields (title, price, images, etc.) as typed rows",
             "items" : {
               "$ref" : "#/components/schemas/PropertyField"
             }
           },
           "publishDate" : {
             "type" : "string",
+            "description" : "First publication instant",
             "format" : "date-time"
           },
           "modifiedDate" : {
             "type" : "string",
+            "description" : "Last modification instant",
             "format" : "date-time"
           },
           "publicationState" : {
             "type" : "string",
+            "description" : "Lifecycle state",
+            "example" : "AVAILABLE",
             "enum" : [ "AVAILABLE", "RENTED", "SOLD", "DRAFT" ]
           },
           "isPrivate" : {
             "type" : "boolean"
           },
           "isDraft" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "description" : "Drafts omit public SEO surfaces",
+            "example" : false
           },
           "groupIds" : {
             "type" : "array",
+            "description" : "Property group ids sharing this listing",
+            "example" : [ "grp_01HZXYZ" ],
             "items" : {
-              "type" : "string"
+              "type" : "string",
+              "description" : "Property group ids sharing this listing",
+              "example" : "[\"grp_01HZXYZ\"]"
             }
           },
           "shouldPublishEmailsToGroups" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "description" : "Email member groups when listing changes",
+            "example" : true
           },
           "password" : {
             "type" : "string",
-            "writeOnly" : true
+            "description" : "Password for password-protected detail views",
+            "writeOnly" : true,
+            "example" : "listings-secret-42"
           },
           "isPasswordProtected" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "description" : "Whether a gate password is active",
+            "example" : false
           }
-        }
+        },
+        "description" : "Property listing; dynamic attributes live in fieldList (typed PropertyField entries)"
       },
       "PropertyField" : {
         "required" : [ "id" ],
@@ -10068,22 +11552,30 @@
         "properties" : {
           "id" : {
             "type" : "integer",
-            "format" : "int32"
+            "description" : "Field catalog id (e.g. 2=title, 3=description, 10=location)",
+            "format" : "int32",
+            "example" : 2
           },
           "name" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Human label when present"
           },
           "lang" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Locale code for label/tooltip",
+            "example" : "en"
           },
           "basic" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "description" : "Core listing attribute flag"
           },
           "primaryKey" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "description" : "Marks uniqueness constraint field"
           },
           "multilanguageValue" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "description" : "Supports per-language value rows"
           },
           "propertyFieldType" : {
             "$ref" : "#/components/schemas/PropertyFieldType"
@@ -10093,6 +11585,7 @@
           },
           "fieldValueList" : {
             "type" : "array",
+            "description" : "Concrete values for this field instance",
             "items" : {
               "$ref" : "#/components/schemas/PropertyFieldValue"
             }
@@ -10101,30 +11594,36 @@
             "$ref" : "#/components/schemas/DropdownOptionGroup"
           },
           "tooltipLang" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Tooltip locale"
           },
           "textType" : {
             "type" : "string",
+            "description" : "Declared datatype for free-text slot",
             "enum" : [ "SAME", "INT", "DOUBLE", "BOOLEAN", "TEXT", "DATE", "DATETIME", "FILE", "BIGINT" ]
           },
           "data1Type" : {
             "type" : "string",
+            "description" : "Declared datatype for data1 slot",
             "enum" : [ "SAME", "INT", "DOUBLE", "BOOLEAN", "TEXT", "DATE", "DATETIME", "FILE", "BIGINT" ]
           },
           "data2Type" : {
             "type" : "string",
+            "description" : "Declared datatype for data2 slot",
             "enum" : [ "SAME", "INT", "DOUBLE", "BOOLEAN", "TEXT", "DATE", "DATETIME", "FILE", "BIGINT" ]
           },
           "data3Type" : {
             "type" : "string",
+            "description" : "Declared datatype for data3 slot",
             "enum" : [ "SAME", "INT", "DOUBLE", "BOOLEAN", "TEXT", "DATE", "DATETIME", "FILE", "BIGINT" ]
           },
           "hcListerOption" : {
             "type" : "string",
+            "description" : "Lister UI hint",
             "enum" : [ "PROPERTY_TYPE" ]
           }
         },
-        "description" : "The property field which is needed for the filterWorkerOption: RANGE, DROPDOWN, BOOLEAN and CURRENCY_RANGE"
+        "description" : "Property field definition and values (filter/worker types: RANGE, DROPDOWN, BOOLEAN, CURRENCY_RANGE, …)"
       },
       "PropertyFieldType" : {
         "type" : "object",
@@ -10136,17 +11635,20 @@
           "name" : {
             "type" : "string"
           }
-        }
+        },
+        "description" : "Presentation widget"
       },
       "PropertyFieldValue" : {
         "type" : "object",
         "properties" : {
           "bdid" : {
             "type" : "integer",
+            "description" : "Broker dropdown backing id when applicable",
             "format" : "int32"
           },
           "identifier" : {
             "type" : "integer",
+            "description" : "Row discriminator inside repeatable fields",
             "format" : "int32"
           },
           "text" : {
@@ -10161,7 +11663,8 @@
           "data3" : {
             "$ref" : "#/components/schemas/PropertyFieldValueSpec"
           }
-        }
+        },
+        "description" : "Single logical cell inside a PropertyField (text/data slots)"
       },
       "PropertyFieldValueSpec" : {
         "type" : "object",
@@ -10169,27 +11672,38 @@
           "strVal" : {
             "maxLength" : 5000,
             "minLength" : 0,
-            "type" : "string"
+            "type" : "string",
+            "description" : "String payload (titles, urls, longer copy)",
+            "example" : "Oceanfront condo"
           },
           "boolVal" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "description" : "Boolean payload",
+            "example" : true
           },
           "dateVal" : {
             "type" : "string",
+            "description" : "Date/time payload",
             "format" : "date-time"
           },
           "doubleVal" : {
             "type" : "number",
-            "format" : "double"
+            "description" : "Floating numeric payload",
+            "format" : "double",
+            "example" : -74.006
           },
           "intVal" : {
             "type" : "integer",
-            "format" : "int32"
+            "description" : "Integer numeric payload",
+            "format" : "int32",
+            "example" : 3
           },
           "bigIntVal" : {
-            "type" : "integer"
+            "type" : "integer",
+            "description" : "Large integer payload"
           }
-        }
+        },
+        "description" : "Primitive holder matching PropertyDatatype slots"
       },
       "PropertyFieldValueType" : {
         "type" : "object",
@@ -10201,7 +11715,8 @@
           "name" : {
             "type" : "string"
           }
-        }
+        },
+        "description" : "Value cardinality / structure"
       },
       "PropertyKey" : {
         "required" : [ "country", "propertyLocation", "propertyProposal", "propertyType" ],
@@ -10222,7 +11737,9 @@
           "name" : {
             "type" : "string"
           }
-        }
+        },
+        "description" : "Write-only duplicate guard key",
+        "writeOnly" : true
       },
       "PropertyLocation" : {
         "required" : [ "id" ],
@@ -10911,22 +12428,27 @@
           "published" : {
             "type" : "boolean"
           }
-        }
+        },
+        "description" : "Testimonials for current slice"
       },
       "TestimonialFilterResult" : {
         "type" : "object",
         "properties" : {
           "count" : {
             "type" : "integer",
-            "format" : "int64"
+            "description" : "Total matching testimonials",
+            "format" : "int64",
+            "example" : 10
           },
           "testimonialList" : {
             "type" : "array",
+            "description" : "Testimonials for current slice",
             "items" : {
               "$ref" : "#/components/schemas/Testimonial"
             }
           }
-        }
+        },
+        "description" : "Testimonial filter result with total count and rows"
       },
       "TestimonialRequest" : {
         "type" : "object",
@@ -11577,56 +13099,73 @@
           "email" : {
             "maxLength" : 160,
             "minLength" : 0,
-            "type" : "string"
+            "type" : "string",
+            "description" : "Email address",
+            "example" : "agent@example.com"
           },
           "firstName" : {
             "maxLength" : 45,
             "minLength" : 0,
-            "type" : "string"
+            "type" : "string",
+            "description" : "Given name",
+            "example" : "Jane"
           },
           "lastName" : {
             "maxLength" : 45,
             "minLength" : 0,
-            "type" : "string"
+            "type" : "string",
+            "description" : "Family name",
+            "example" : "Doe"
           },
           "id" : {
             "type" : "integer",
-            "format" : "int64"
-          },
-          "password" : {
-            "type" : "string"
+            "description" : "Numeric user id",
+            "format" : "int64",
+            "example" : 102938
           },
           "confirmedFlag" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "description" : "Whether email has been verified",
+            "example" : true
           },
           "registerDate" : {
             "type" : "string",
+            "description" : "Registration timestamp (epoch millis in JSON)",
             "format" : "date-time"
           },
           "basicProfileCompletedAt" : {
             "type" : "string",
+            "description" : "When basic profile was completed",
             "format" : "date-time"
           },
           "webSite" : {
             "maxLength" : 80,
             "minLength" : 0,
-            "type" : "string"
+            "type" : "string",
+            "description" : "Public website URL",
+            "example" : "https://agency.example.com"
           },
           "linkedIn" : {
             "maxLength" : 160,
             "minLength" : 0,
-            "type" : "string"
+            "type" : "string",
+            "description" : "LinkedIn profile URL"
           },
           "skype" : {
             "maxLength" : 45,
             "minLength" : 0,
-            "type" : "string"
+            "type" : "string",
+            "description" : "Skype handle"
           },
           "base64Image" : {
-            "type" : "string"
+            "maxLength" : 12000000,
+            "type" : "string",
+            "description" : "Profile image as base64 data URL or raw base64 (large)"
           },
           "imageLink" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "CDN URL for profile image",
+            "example" : "https://cdn.example.com/u/avatar.jpg"
           },
           "mainSpokenLanguage" : {
             "$ref" : "#/components/schemas/Language"
@@ -11635,28 +13174,34 @@
             "$ref" : "#/components/schemas/CountryTelephonePrefix"
           },
           "telephoneNumber" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Phone number without prefix",
+            "example" : "5550199"
           },
           "userTypes" : {
             "type" : "array",
+            "description" : "Professional roles (broker, agent, …)",
             "items" : {
               "$ref" : "#/components/schemas/UserType"
             }
           },
           "userLanguages" : {
             "type" : "array",
+            "description" : "Languages spoken with proficiency",
             "items" : {
               "$ref" : "#/components/schemas/UserLanguage"
             }
           },
           "userDescriptions" : {
             "type" : "array",
+            "description" : "Localized biography snippets",
             "items" : {
               "$ref" : "#/components/schemas/UserDescription"
             }
           },
           "userFaqs" : {
             "type" : "array",
+            "description" : "FAQ entries shown on profile",
             "items" : {
               "$ref" : "#/components/schemas/UserFaq"
             }
@@ -11665,181 +13210,254 @@
             "$ref" : "#/components/schemas/Country"
           },
           "role" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Legacy role label when present"
           },
           "backgroundImageBase64" : {
-            "type" : "string"
+            "maxLength" : 12000000,
+            "type" : "string",
+            "description" : "Background hero image as base64"
           },
           "backgroundImageLink" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Background hero image URL"
           },
           "profileName" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Public profile slug",
+            "example" : "jane-doe-miami"
           },
           "lastActivity" : {
             "type" : "string",
+            "description" : "Last activity timestamp (epoch millis in JSON)",
             "format" : "date-time"
           },
           "chatStatus" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Chat availability flag",
+            "example" : "ONLINE"
           },
           "chatsCount" : {
             "type" : "integer",
-            "format" : "int32"
+            "description" : "Open conversation count for summaries",
+            "format" : "int32",
+            "example" : 3
           },
           "phoneVerified" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "description" : "SMS verification completed",
+            "example" : true
           },
           "identityVerified" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "description" : "Stripe Identity verification completed",
+            "example" : false
           },
           "geoPlace" : {
             "$ref" : "#/components/schemas/GeoPlace"
           },
           "chamberOfCommerceUrl" : {
             "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
-            "type" : "string"
+            "type" : "string",
+            "description" : "Chamber of commerce registry URL"
           },
           "licenseId" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Official license or registry id",
+            "example" : "00009-PJ-MVCS"
           },
           "facebookUrl" : {
             "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
-            "type" : "string"
+            "type" : "string",
+            "description" : "Facebook profile URL"
           },
           "instagramUrl" : {
             "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
-            "type" : "string"
+            "type" : "string",
+            "description" : "Instagram profile URL"
           },
           "twitterUrl" : {
             "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
-            "type" : "string"
+            "type" : "string",
+            "description" : "X/Twitter profile URL"
           },
           "wechatUrl" : {
             "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
-            "type" : "string"
+            "type" : "string",
+            "description" : "WeChat profile URL"
           },
           "wechatQr" : {
             "pattern" : "^$|data:image\\/(png|jpeg|jpg|gif|webp);base64,[A-Za-z0-9+/=]+",
-            "type" : "string"
+            "type" : "string",
+            "description" : "WeChat QR image data URL"
           },
           "vkUrl" : {
             "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
-            "type" : "string"
+            "type" : "string",
+            "description" : "VK profile URL"
           },
           "videoUrl" : {
             "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
-            "type" : "string"
+            "type" : "string",
+            "description" : "Introduction video URL"
           },
           "bookAnAppointmentUrl" : {
             "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
-            "type" : "string"
+            "type" : "string",
+            "description" : "Calendar booking link"
           },
           "googlePlaceId" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Google Place id for office"
           },
           "googlePlaceReviews" : {
             "type" : "array",
+            "description" : "Pinned Google reviews",
             "items" : {
               "$ref" : "#/components/schemas/GooglePlaceReview"
             }
           },
           "googleRating" : {
             "type" : "number",
-            "format" : "double"
+            "description" : "Aggregate Google rating",
+            "format" : "double",
+            "example" : 4.2
           },
           "googleUserRatingsTotal" : {
             "type" : "integer",
-            "format" : "int32"
+            "description" : "Total Google ratings count",
+            "format" : "int32",
+            "example" : 426
           },
           "achievementsYearsOfExperience" : {
             "type" : "integer",
+            "description" : "Years of experience badge",
             "format" : "int32"
           },
           "achievementsDealsClosed" : {
             "type" : "integer",
+            "description" : "Closed deals badge",
             "format" : "int32"
           },
           "achievementsPercentageOfAllAgents" : {
             "type" : "number",
+            "description" : "Percentile vs peers",
             "format" : "double"
           },
           "achievementsGooglePlaceId" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Alternate Place id for achievements widget"
           },
           "focusOnCommercial" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "description" : "Focus: commercial",
+            "example" : true
           },
           "focusOnResidential" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "description" : "Focus: residential",
+            "example" : true
           },
           "focusOnRental" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "description" : "Focus: rentals",
+            "example" : false
           },
           "focusOnSelling" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "description" : "Focus: selling/listings",
+            "example" : true
           },
           "focusOnValuation" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "description" : "Focus: valuation",
+            "example" : false
           },
           "focusOnDueDiligence" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "description" : "Focus: due diligence",
+            "example" : false
           },
           "focusOnConsulting" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "description" : "Focus: consulting",
+            "example" : false
           },
           "focusOnPortfolioValuation" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "description" : "Focus: portfolio valuation",
+            "example" : false
           },
           "imprintTitle" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Imprint/legal headline"
           },
           "imprintDescription" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Imprint/legal body HTML or text"
           },
           "imprintBase64Image" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Imprint logo image base64"
           },
           "imprintLogoLink" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Imprint logo CDN URL"
           },
           "showEmailInProfile" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "description" : "Expose email on public profile"
           },
           "showEmailInProperty" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "description" : "Expose email on property detail"
           },
           "showPhoneInProperty" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "description" : "Expose phone on property detail"
           },
           "allowSaveContact" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "description" : "Allow visitors to save vCard/contact"
           },
           "city" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Primary city label",
+            "example" : "Miami"
           },
           "referral" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Referral source tag"
           },
           "commissionPaidBy" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Who pays referral commission by convention"
           },
           "offersReferralCommission" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "description" : "Broker offers referral commission by default",
+            "example" : true
           },
           "defaultReferralPercent" : {
             "type" : "number",
-            "format" : "double"
+            "description" : "Default referral percentage for listings",
+            "format" : "double",
+            "example" : 25.0
           },
           "subscriptionPlanName" : {
             "type" : "string",
+            "description" : "Active subscription tier name",
             "enum" : [ "Free", "Professional", "Business", "Brokerage" ]
           },
           "hidePublicProfile" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "description" : "Hide profile from directory search",
+            "example" : false
           },
           "publicProfileDesign" : {
             "type" : "string",
+            "description" : "Public profile theme",
+            "example" : "classic",
             "enum" : [ "classic", "luxury", "redWhiteGray" ]
           },
           "skills" : {
@@ -11950,97 +13568,134 @@
         "properties" : {
           "id" : {
             "type" : "integer",
-            "format" : "int64"
+            "description" : "Primary key",
+            "format" : "int64",
+            "example" : 501
           },
           "instructorUserId" : {
             "type" : "integer",
-            "format" : "int64"
+            "description" : "Owning instructor user id",
+            "format" : "int64",
+            "example" : 2048
           },
           "hostDisplayName" : {
             "type" : "string",
-            "description" : "Host full name for listings"
+            "description" : "Host full name for listings",
+            "example" : "Jane Instructor"
           },
           "hostProfileName" : {
             "type" : "string",
-            "description" : "Public profile slug when available"
+            "description" : "Public profile slug when available",
+            "example" : "jane-instructor"
           },
           "title" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Marketing title",
+            "example" : "CRS Prep Intensive"
           },
           "description" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Full HTML / markdown description body"
           },
           "summary" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Short teaser for cards",
+            "example" : "Earn CRS credits in two days."
           },
           "courseDateTime" : {
             "type" : "string",
+            "description" : "Local wall-clock start (interpret with courseTimezone)",
             "format" : "date-time"
           },
           "courseTimezone" : {
             "type" : "string",
-            "description" : "IANA timezone for courseDateTime wall-clock (e.g. America/New_York)"
+            "description" : "IANA timezone for courseDateTime",
+            "example" : "America/New_York"
           },
           "format" : {
             "type" : "string",
+            "description" : "Course delivery mode",
             "enum" : [ "ONLINE", "IN_PERSON", "HYBRID" ]
           },
           "location" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Venue address or meeting instructions"
           },
           "languageLocale" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Content locale BCP47 tag",
+            "example" : "en-US"
           },
           "priceAmount" : {
-            "type" : "number"
+            "type" : "number",
+            "description" : "Ticket price amount",
+            "example" : 199.0
           },
           "priceCurrency" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "ISO currency code",
+            "example" : "USD"
           },
           "imageUrl" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Cover image HTTPS URL"
           },
           "designation" : {
             "type" : "string",
+            "description" : "Credential track / designation label",
             "enum" : [ "ABR", "CIPS", "CPM", "CRB", "CRS", "GREEN", "GRI", "MRP", "PSA", "RSPS", "SRES", "SRS", "SKILL_TRAINING_NON_DESIGNATION" ]
           },
           "stateApprovedCeCredits" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "description" : "Eligible for state CE credits",
+            "example" : true
           },
           "externalRegistrationUrl" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "External checkout / registration URL",
+            "example" : "https://learn.example.com/register/abc"
           },
           "hours" : {
             "type" : "number",
-            "description" : "Approximate instruction hours"
+            "description" : "Approximate instructional hours",
+            "example" : 8.0
           },
           "active" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "description" : "Inactive courses hidden from directory",
+            "example" : true
           },
           "createdAt" : {
             "type" : "string",
+            "description" : "Row creation time",
             "format" : "date-time"
           },
           "updatedAt" : {
             "type" : "string",
+            "description" : "Last update time",
             "format" : "date-time"
           }
-        }
+        },
+        "description" : "Instructor course exposed to directory + detail APIs"
       },
       "CourseListResult" : {
         "type" : "object",
         "properties" : {
           "count" : {
             "type" : "integer",
-            "format" : "int64"
+            "description" : "Total matching rows",
+            "format" : "int64",
+            "example" : 42
           },
           "courses" : {
             "type" : "array",
+            "description" : "Courses in this page",
             "items" : {
               "$ref" : "#/components/schemas/Course"
             }
           }
-        }
+        },
+        "description" : "Paginated slice of courses for an instructor or directory query"
       },
       "CourseWriteDto" : {
         "required" : [ "courseDateTime", "courseTimezone", "description", "designation", "externalRegistrationUrl", "format", "languageLocale", "title" ],
@@ -12049,81 +13704,106 @@
           "title" : {
             "maxLength" : 255,
             "minLength" : 0,
-            "type" : "string"
+            "type" : "string",
+            "description" : "Marketing title",
+            "example" : "ABR Crash Course"
           },
           "description" : {
-            "type" : "string"
+            "type" : "string",
+            "description" : "Long description body"
           },
           "summary" : {
             "maxLength" : 600,
             "minLength" : 0,
-            "type" : "string"
+            "type" : "string",
+            "description" : "Short summary for cards",
+            "example" : "Two-day immersion."
           },
           "courseDateTime" : {
             "type" : "string",
+            "description" : "Wall-clock start in timezone below",
             "format" : "date-time"
           },
           "courseTimezone" : {
             "maxLength" : 64,
             "minLength" : 0,
-            "type" : "string"
+            "type" : "string",
+            "description" : "IANA timezone id",
+            "example" : "America/Chicago"
           },
           "format" : {
             "type" : "string",
+            "description" : "Course delivery mode",
             "enum" : [ "ONLINE", "IN_PERSON", "HYBRID" ]
           },
           "location" : {
             "maxLength" : 512,
             "minLength" : 0,
-            "type" : "string"
+            "type" : "string",
+            "description" : "Venue or virtual dial-in details"
           },
           "languageLocale" : {
             "maxLength" : 16,
             "minLength" : 0,
-            "type" : "string"
+            "type" : "string",
+            "description" : "Locale tag",
+            "example" : "en-US"
           },
           "priceAmount" : {
-            "type" : "number"
+            "type" : "number",
+            "description" : "Price if paid course",
+            "example" : 149.99
           },
           "priceCurrency" : {
             "maxLength" : 8,
             "minLength" : 0,
-            "type" : "string"
+            "type" : "string",
+            "description" : "ISO currency",
+            "example" : "USD"
           },
           "imageUrl" : {
             "maxLength" : 2048,
             "minLength" : 0,
-            "type" : "string"
+            "type" : "string",
+            "description" : "Existing cover URL when not uploading a new image"
           },
           "coverImageBase64" : {
             "maxLength" : 12000000,
             "minLength" : 0,
             "type" : "string",
-            "description" : "Write-only: course cover image as data:image/...;base64,... or raw base64"
+            "description" : "Write-only cover upload (data:image/png;base64,...)",
+            "writeOnly" : true
           },
           "designation" : {
             "type" : "string",
+            "description" : "Credential track / designation label",
             "enum" : [ "ABR", "CIPS", "CPM", "CRB", "CRS", "GREEN", "GRI", "MRP", "PSA", "RSPS", "SRES", "SRS", "SKILL_TRAINING_NON_DESIGNATION" ]
           },
           "stateApprovedCeCredits" : {
-            "type" : "boolean"
+            "type" : "boolean",
+            "description" : "Marks CE eligibility",
+            "example" : true
           },
           "externalRegistrationUrl" : {
             "maxLength" : 2048,
             "minLength" : 0,
             "pattern" : "^(https?://).+",
-            "type" : "string"
+            "type" : "string",
+            "description" : "External registration URL",
+            "example" : "https://stripe.example.com/b/acct_xxx"
           },
           "hours" : {
-            "minimum" : 0.0,
-            "exclusiveMinimum" : false,
-            "type" : "number"
+            "minimum" : 0,
+            "type" : "number",
+            "description" : "Credit hours",
+            "example" : 7.5
           },
           "active" : {
             "type" : "boolean",
-            "description" : "Ignored on write; courses are always active globally."
+            "description" : "Ignored on write (courses remain globally visible flag managed server-side)"
           }
-        }
+        },
+        "description" : "Create/update payload for instructor-maintained courses"
       },
       "SkillEndorsement" : {
         "required" : [ "endorser", "skill", "user" ],
@@ -12628,16 +14308,22 @@
       }
     },
     "securitySchemes" : {
-      "oAuthToken" : {
-        "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
-        "in" : "header"
-      },
       "oAuthClientId" : {
         "type" : "apiKey",
         "description" : "OAuth client identifier (default: hallocasa_frontend)",
         "name" : "O-Auth-Client-Id",
+        "in" : "header"
+      },
+      "xApiKey" : {
+        "type" : "apiKey",
+        "description" : "Integration API key (prefix hc_)",
+        "name" : "X-API-Key",
+        "in" : "header"
+      },
+      "oAuthToken" : {
+        "type" : "apiKey",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
         "in" : "header"
       },
       "oAuthCode" : {
