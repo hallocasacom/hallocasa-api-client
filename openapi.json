@@ -14314,10 +14314,10 @@
         "name" : "O-Auth-Client-Id",
         "in" : "header"
       },
-      "xApiKey" : {
+      "oAuthCode" : {
         "type" : "apiKey",
-        "description" : "Integration API key (prefix hc_)",
-        "name" : "X-API-Key",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
         "in" : "header"
       },
       "oAuthToken" : {
@@ -14326,10 +14326,10 @@
         "name" : "O-Auth-Token",
         "in" : "header"
       },
-      "oAuthCode" : {
+      "xApiKey" : {
         "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
+        "description" : "Integration API key (prefix hc_)",
+        "name" : "X-API-Key",
         "in" : "header"
       }
     }
