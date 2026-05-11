@@ -1619,6 +1619,43 @@ const CoursesApiAxiosParamCreator = function (configuration) {
         },
         /**
          *
+         * @summary Track attend click and redirect to external registration URL
+         * @param {number} courseId
+         * @param {string} [source]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        attendGo1: async (courseId, source, options = {}) => {
+            // verify required parameter 'courseId' is not null or undefined
+            (0, common_1.assertParamExists)('attendGo1', 'courseId', courseId);
+            const localVarPath = `/courses/{courseId}/go`
+                .replace(`{${"courseId"}}`, encodeURIComponent(String(courseId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            if (source !== undefined) {
+                localVarQueryParameter['source'] = source;
+            }
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
          * @summary Create a global course listing
          * @param {number} userId
          * @param {CourseWriteDto} [courseWriteDto]
@@ -1656,15 +1693,15 @@ const CoursesApiAxiosParamCreator = function (configuration) {
         /**
          *
          * @summary Get course by id
-         * @param {number} id
+         * @param {number} courseId
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        get1: async (id, options = {}) => {
-            // verify required parameter 'id' is not null or undefined
-            (0, common_1.assertParamExists)('get1', 'id', id);
-            const localVarPath = `/courses/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+        get1: async (courseId, options = {}) => {
+            // verify required parameter 'courseId' is not null or undefined
+            (0, common_1.assertParamExists)('get1', 'courseId', courseId);
+            const localVarPath = `/courses/{courseId}`
+                .replace(`{${"courseId"}}`, encodeURIComponent(String(courseId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
             let baseOptions;
@@ -1782,6 +1819,47 @@ const CoursesApiAxiosParamCreator = function (configuration) {
         },
         /**
          *
+         * @summary Record anonymous course interaction (e.g. gated attend)
+         * @param {number} courseId
+         * @param {string} [source]
+         * @param {string} [eventType]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        recordAnonymousClick1: async (courseId, source, eventType, options = {}) => {
+            // verify required parameter 'courseId' is not null or undefined
+            (0, common_1.assertParamExists)('recordAnonymousClick1', 'courseId', courseId);
+            const localVarPath = `/courses/{courseId}/clicks`
+                .replace(`{${"courseId"}}`, encodeURIComponent(String(courseId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            if (source !== undefined) {
+                localVarQueryParameter['source'] = source;
+            }
+            if (eventType !== undefined) {
+                localVarQueryParameter['eventType'] = eventType;
+            }
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
          * @summary Update course
          * @param {number} courseId
          * @param {CourseWriteDto} [courseWriteDto]
@@ -1841,6 +1919,20 @@ const CoursesApiFp = function (configuration) {
         },
         /**
          *
+         * @summary Track attend click and redirect to external registration URL
+         * @param {number} courseId
+         * @param {string} [source]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async attendGo1(courseId, source, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.attendGo1(courseId, source, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['CoursesApi.attendGo1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         *
          * @summary Create a global course listing
          * @param {number} userId
          * @param {CourseWriteDto} [courseWriteDto]
@@ -1856,12 +1948,12 @@ const CoursesApiFp = function (configuration) {
         /**
          *
          * @summary Get course by id
-         * @param {number} id
+         * @param {number} courseId
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async get1(id, options) {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.get1(id, options);
+        async get1(courseId, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.get1(courseId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = base_1.operationServerMap['CoursesApi.get1']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1901,6 +1993,21 @@ const CoursesApiFp = function (configuration) {
         },
         /**
          *
+         * @summary Record anonymous course interaction (e.g. gated attend)
+         * @param {number} courseId
+         * @param {string} [source]
+         * @param {string} [eventType]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async recordAnonymousClick1(courseId, source, eventType, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.recordAnonymousClick1(courseId, source, eventType, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['CoursesApi.recordAnonymousClick1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         *
          * @summary Update course
          * @param {number} courseId
          * @param {CourseWriteDto} [courseWriteDto]
@@ -1935,6 +2042,16 @@ const CoursesApiFactory = function (configuration, basePath, axios) {
         },
         /**
          *
+         * @summary Track attend click and redirect to external registration URL
+         * @param {CoursesApiAttendGo1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        attendGo1(requestParameters, options) {
+            return localVarFp.attendGo1(requestParameters.courseId, requestParameters.source, options).then((request) => request(axios, basePath));
+        },
+        /**
+         *
          * @summary Create a global course listing
          * @param {CoursesApiCreate1Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1951,7 +2068,7 @@ const CoursesApiFactory = function (configuration, basePath, axios) {
          * @throws {RequiredError}
          */
         get1(requestParameters, options) {
-            return localVarFp.get1(requestParameters.id, options).then((request) => request(axios, basePath));
+            return localVarFp.get1(requestParameters.courseId, options).then((request) => request(axios, basePath));
         },
         /**
          * Globally visible active courses
@@ -1972,6 +2089,16 @@ const CoursesApiFactory = function (configuration, basePath, axios) {
          */
         listForUser1(requestParameters, options) {
             return localVarFp.listForUser1(requestParameters.userId, requestParameters.pageFrom, requestParameters.pageTo, options).then((request) => request(axios, basePath));
+        },
+        /**
+         *
+         * @summary Record anonymous course interaction (e.g. gated attend)
+         * @param {CoursesApiRecordAnonymousClick1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        recordAnonymousClick1(requestParameters, options) {
+            return localVarFp.recordAnonymousClick1(requestParameters.courseId, requestParameters.source, requestParameters.eventType, options).then((request) => request(axios, basePath));
         },
         /**
          *
@@ -2006,6 +2133,17 @@ class CoursesApi extends base_1.BaseAPI {
     }
     /**
      *
+     * @summary Track attend click and redirect to external registration URL
+     * @param {CoursesApiAttendGo1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoursesApi
+     */
+    attendGo1(requestParameters, options) {
+        return (0, exports.CoursesApiFp)(this.configuration).attendGo1(requestParameters.courseId, requestParameters.source, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
      * @summary Create a global course listing
      * @param {CoursesApiCreate1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -2024,7 +2162,7 @@ class CoursesApi extends base_1.BaseAPI {
      * @memberof CoursesApi
      */
     get1(requestParameters, options) {
-        return (0, exports.CoursesApiFp)(this.configuration).get1(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+        return (0, exports.CoursesApiFp)(this.configuration).get1(requestParameters.courseId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Globally visible active courses
@@ -2047,6 +2185,17 @@ class CoursesApi extends base_1.BaseAPI {
      */
     listForUser1(requestParameters, options) {
         return (0, exports.CoursesApiFp)(this.configuration).listForUser1(requestParameters.userId, requestParameters.pageFrom, requestParameters.pageTo, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary Record anonymous course interaction (e.g. gated attend)
+     * @param {CoursesApiRecordAnonymousClick1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoursesApi
+     */
+    recordAnonymousClick1(requestParameters, options) {
+        return (0, exports.CoursesApiFp)(this.configuration).recordAnonymousClick1(requestParameters.courseId, requestParameters.source, requestParameters.eventType, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      *

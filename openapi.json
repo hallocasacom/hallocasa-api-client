@@ -6587,37 +6587,6 @@
         }
       }
     },
-    "/courses/{id}" : {
-      "get" : {
-        "tags" : [ "courses" ],
-        "summary" : "Get course by id",
-        "operationId" : "get_1",
-        "parameters" : [ {
-          "name" : "id",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Ok",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/Course"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "Not found"
-          }
-        }
-      }
-    },
     "/courses" : {
       "get" : {
         "tags" : [ "courses" ],
@@ -6684,7 +6653,67 @@
         }
       }
     },
+    "/courses/{courseId}/go" : {
+      "get" : {
+        "tags" : [ "courses" ],
+        "summary" : "Track attend click and redirect to external registration URL",
+        "operationId" : "attendGo_1",
+        "parameters" : [ {
+          "name" : "courseId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "source",
+          "in" : "query",
+          "schema" : {
+            "type" : "string",
+            "default" : "detail"
+          }
+        } ],
+        "responses" : {
+          "302" : {
+            "description" : "Redirect"
+          },
+          "404" : {
+            "description" : "Not found"
+          }
+        }
+      }
+    },
     "/courses/{courseId}" : {
+      "get" : {
+        "tags" : [ "courses" ],
+        "summary" : "Get course by id",
+        "operationId" : "get_1",
+        "parameters" : [ {
+          "name" : "courseId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Course"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found"
+          }
+        }
+      },
       "put" : {
         "tags" : [ "courses" ],
         "summary" : "Update course",
@@ -6727,6 +6756,43 @@
           "schema" : {
             "type" : "integer",
             "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
+    "/courses/{courseId}/clicks" : {
+      "post" : {
+        "tags" : [ "courses" ],
+        "summary" : "Record anonymous course interaction (e.g. gated attend)",
+        "operationId" : "recordAnonymousClick_1",
+        "parameters" : [ {
+          "name" : "courseId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "source",
+          "in" : "query",
+          "schema" : {
+            "type" : "string",
+            "default" : "detail"
+          }
+        }, {
+          "name" : "eventType",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
           }
         } ],
         "responses" : {
@@ -11911,6 +11977,10 @@
             "type" : "string",
             "format" : "date-time"
           },
+          "courseTimezone" : {
+            "type" : "string",
+            "description" : "IANA timezone for courseDateTime wall-clock (e.g. America/New_York)"
+          },
           "format" : {
             "type" : "string",
             "enum" : [ "ONLINE", "IN_PERSON", "HYBRID" ]
@@ -11939,6 +12009,10 @@
           },
           "externalRegistrationUrl" : {
             "type" : "string"
+          },
+          "hours" : {
+            "type" : "number",
+            "description" : "Approximate instruction hours"
           },
           "active" : {
             "type" : "boolean"
@@ -11969,7 +12043,7 @@
         }
       },
       "CourseWriteDto" : {
-        "required" : [ "courseDateTime", "description", "designation", "externalRegistrationUrl", "format", "imageUrl", "languageLocale", "title" ],
+        "required" : [ "courseDateTime", "courseTimezone", "description", "designation", "externalRegistrationUrl", "format", "languageLocale", "title" ],
         "type" : "object",
         "properties" : {
           "title" : {
@@ -11988,6 +12062,11 @@
           "courseDateTime" : {
             "type" : "string",
             "format" : "date-time"
+          },
+          "courseTimezone" : {
+            "maxLength" : 64,
+            "minLength" : 0,
+            "type" : "string"
           },
           "format" : {
             "type" : "string",
@@ -12014,8 +12093,13 @@
           "imageUrl" : {
             "maxLength" : 2048,
             "minLength" : 0,
-            "pattern" : "^(https?://).+",
             "type" : "string"
+          },
+          "coverImageBase64" : {
+            "maxLength" : 12000000,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Write-only: course cover image as data:image/...;base64,... or raw base64"
           },
           "designation" : {
             "type" : "string",
@@ -12029,6 +12113,11 @@
             "minLength" : 0,
             "pattern" : "^(https?://).+",
             "type" : "string"
+          },
+          "hours" : {
+            "minimum" : 0.0,
+            "exclusiveMinimum" : false,
+            "type" : "number"
           },
           "active" : {
             "type" : "boolean",

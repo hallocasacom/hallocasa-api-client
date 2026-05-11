@@ -715,6 +715,12 @@ export interface Course {
      */
     'courseDateTime'?: string;
     /**
+     * IANA timezone for courseDateTime wall-clock (e.g. America/New_York)
+     * @type {string}
+     * @memberof Course
+     */
+    'courseTimezone'?: string;
+    /**
      *
      * @type {string}
      * @memberof Course
@@ -768,6 +774,12 @@ export interface Course {
      * @memberof Course
      */
     'externalRegistrationUrl'?: string;
+    /**
+     * Approximate instruction hours
+     * @type {number}
+     * @memberof Course
+     */
+    'hours'?: number;
     /**
      *
      * @type {boolean}
@@ -863,6 +875,12 @@ export interface CourseWriteDto {
      * @type {string}
      * @memberof CourseWriteDto
      */
+    'courseTimezone': string;
+    /**
+     *
+     * @type {string}
+     * @memberof CourseWriteDto
+     */
     'format': CourseWriteDtoFormatEnum;
     /**
      *
@@ -893,7 +911,13 @@ export interface CourseWriteDto {
      * @type {string}
      * @memberof CourseWriteDto
      */
-    'imageUrl': string;
+    'imageUrl'?: string;
+    /**
+     * Write-only: course cover image as data:image/...;base64,... or raw base64
+     * @type {string}
+     * @memberof CourseWriteDto
+     */
+    'coverImageBase64'?: string;
     /**
      *
      * @type {string}
@@ -912,6 +936,12 @@ export interface CourseWriteDto {
      * @memberof CourseWriteDto
      */
     'externalRegistrationUrl': string;
+    /**
+     *
+     * @type {number}
+     * @memberof CourseWriteDto
+     */
+    'hours'?: number;
     /**
      * Ignored on write; courses are always active globally.
      * @type {boolean}
@@ -6624,6 +6654,15 @@ export declare const CoursesApiAxiosParamCreator: (configuration?: Configuration
     _delete: (courseId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      *
+     * @summary Track attend click and redirect to external registration URL
+     * @param {number} courseId
+     * @param {string} [source]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    attendGo1: (courseId: number, source?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
      * @summary Create a global course listing
      * @param {number} userId
      * @param {CourseWriteDto} [courseWriteDto]
@@ -6634,11 +6673,11 @@ export declare const CoursesApiAxiosParamCreator: (configuration?: Configuration
     /**
      *
      * @summary Get course by id
-     * @param {number} id
+     * @param {number} courseId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    get1: (id: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    get1: (courseId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Globally visible active courses
      * @summary List published courses
@@ -6664,6 +6703,16 @@ export declare const CoursesApiAxiosParamCreator: (configuration?: Configuration
     listForUser1: (userId: number, pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      *
+     * @summary Record anonymous course interaction (e.g. gated attend)
+     * @param {number} courseId
+     * @param {string} [source]
+     * @param {string} [eventType]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    recordAnonymousClick1: (courseId: number, source?: string, eventType?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
      * @summary Update course
      * @param {number} courseId
      * @param {CourseWriteDto} [courseWriteDto]
@@ -6687,6 +6736,15 @@ export declare const CoursesApiFp: (configuration?: Configuration) => {
     _delete(courseId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
      *
+     * @summary Track attend click and redirect to external registration URL
+     * @param {number} courseId
+     * @param {string} [source]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    attendGo1(courseId: number, source?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     *
      * @summary Create a global course listing
      * @param {number} userId
      * @param {CourseWriteDto} [courseWriteDto]
@@ -6697,11 +6755,11 @@ export declare const CoursesApiFp: (configuration?: Configuration) => {
     /**
      *
      * @summary Get course by id
-     * @param {number} id
+     * @param {number} courseId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    get1(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Course>>;
+    get1(courseId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Course>>;
     /**
      * Globally visible active courses
      * @summary List published courses
@@ -6727,6 +6785,16 @@ export declare const CoursesApiFp: (configuration?: Configuration) => {
     listForUser1(userId: number, pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CourseListResult>>;
     /**
      *
+     * @summary Record anonymous course interaction (e.g. gated attend)
+     * @param {number} courseId
+     * @param {string} [source]
+     * @param {string} [eventType]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    recordAnonymousClick1(courseId: number, source?: string, eventType?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     *
      * @summary Update course
      * @param {number} courseId
      * @param {CourseWriteDto} [courseWriteDto]
@@ -6748,6 +6816,14 @@ export declare const CoursesApiFactory: (configuration?: Configuration, basePath
      * @throws {RequiredError}
      */
     _delete(requestParameters: CoursesApiDeleteRequest, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     *
+     * @summary Track attend click and redirect to external registration URL
+     * @param {CoursesApiAttendGo1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    attendGo1(requestParameters: CoursesApiAttendGo1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
     /**
      *
      * @summary Create a global course listing
@@ -6782,6 +6858,14 @@ export declare const CoursesApiFactory: (configuration?: Configuration, basePath
     listForUser1(requestParameters: CoursesApiListForUser1Request, options?: RawAxiosRequestConfig): AxiosPromise<CourseListResult>;
     /**
      *
+     * @summary Record anonymous course interaction (e.g. gated attend)
+     * @param {CoursesApiRecordAnonymousClick1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    recordAnonymousClick1(requestParameters: CoursesApiRecordAnonymousClick1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     *
      * @summary Update course
      * @param {CoursesApiUpdate1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -6801,6 +6885,25 @@ export interface CoursesApiDeleteRequest {
      * @memberof CoursesApiDelete
      */
     readonly courseId: number;
+}
+/**
+ * Request parameters for attendGo1 operation in CoursesApi.
+ * @export
+ * @interface CoursesApiAttendGo1Request
+ */
+export interface CoursesApiAttendGo1Request {
+    /**
+     *
+     * @type {number}
+     * @memberof CoursesApiAttendGo1
+     */
+    readonly courseId: number;
+    /**
+     *
+     * @type {string}
+     * @memberof CoursesApiAttendGo1
+     */
+    readonly source?: string;
 }
 /**
  * Request parameters for create1 operation in CoursesApi.
@@ -6832,7 +6935,7 @@ export interface CoursesApiGet1Request {
      * @type {number}
      * @memberof CoursesApiGet1
      */
-    readonly id: number;
+    readonly courseId: number;
 }
 /**
  * Request parameters for list1 operation in CoursesApi.
@@ -6903,6 +7006,31 @@ export interface CoursesApiListForUser1Request {
     readonly pageTo?: number;
 }
 /**
+ * Request parameters for recordAnonymousClick1 operation in CoursesApi.
+ * @export
+ * @interface CoursesApiRecordAnonymousClick1Request
+ */
+export interface CoursesApiRecordAnonymousClick1Request {
+    /**
+     *
+     * @type {number}
+     * @memberof CoursesApiRecordAnonymousClick1
+     */
+    readonly courseId: number;
+    /**
+     *
+     * @type {string}
+     * @memberof CoursesApiRecordAnonymousClick1
+     */
+    readonly source?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CoursesApiRecordAnonymousClick1
+     */
+    readonly eventType?: string;
+}
+/**
  * Request parameters for update1 operation in CoursesApi.
  * @export
  * @interface CoursesApiUpdate1Request
@@ -6939,6 +7067,15 @@ export declare class CoursesApi extends BaseAPI {
     _delete(requestParameters: CoursesApiDeleteRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
     /**
      *
+     * @summary Track attend click and redirect to external registration URL
+     * @param {CoursesApiAttendGo1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoursesApi
+     */
+    attendGo1(requestParameters: CoursesApiAttendGo1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    /**
+     *
      * @summary Create a global course listing
      * @param {CoursesApiCreate1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -6973,6 +7110,15 @@ export declare class CoursesApi extends BaseAPI {
      * @memberof CoursesApi
      */
     listForUser1(requestParameters: CoursesApiListForUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CourseListResult, any>>;
+    /**
+     *
+     * @summary Record anonymous course interaction (e.g. gated attend)
+     * @param {CoursesApiRecordAnonymousClick1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoursesApi
+     */
+    recordAnonymousClick1(requestParameters: CoursesApiRecordAnonymousClick1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
     /**
      *
      * @summary Update course
