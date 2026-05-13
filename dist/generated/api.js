@@ -2276,7 +2276,7 @@ const CoursesApiAxiosParamCreator = function (configuration) {
          * @summary List published courses
          * @param {number} [pageFrom] Pagination start (1-based)
          * @param {number} [pageTo] Pagination end (inclusive)
-         * @param {string} [language] BCP47 locale filter
+         * @param {string} [language] Instruction language filter
          * @param {List1FormatEnum} [format] Delivery mode filter
          * @param {List1DesignationEnum} [designation] Designation filter
          * @param {boolean} [ceCreditsOnly] Only state-approved CE courses
@@ -2511,7 +2511,7 @@ const CoursesApiFp = function (configuration) {
          * @summary List published courses
          * @param {number} [pageFrom] Pagination start (1-based)
          * @param {number} [pageTo] Pagination end (inclusive)
-         * @param {string} [language] BCP47 locale filter
+         * @param {string} [language] Instruction language filter
          * @param {List1FormatEnum} [format] Delivery mode filter
          * @param {List1DesignationEnum} [designation] Designation filter
          * @param {boolean} [ceCreditsOnly] Only state-approved CE courses

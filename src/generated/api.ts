@@ -1014,7 +1014,7 @@ export interface Course {
      */
     'location'?: string;
     /**
-     * Content locale BCP47 tag
+     * Instruction language label
      * @type {string}
      * @memberof Course
      */
@@ -1174,7 +1174,7 @@ export interface CourseWriteDto {
      */
     'location'?: string;
     /**
-     * Locale tag
+     * Instruction language label
      * @type {string}
      * @memberof CourseWriteDto
      */
@@ -8794,7 +8794,7 @@ export const CoursesApiAxiosParamCreator = function (configuration?: Configurati
          * @summary List published courses
          * @param {number} [pageFrom] Pagination start (1-based)
          * @param {number} [pageTo] Pagination end (inclusive)
-         * @param {string} [language] BCP47 locale filter
+         * @param {string} [language] Instruction language filter
          * @param {List1FormatEnum} [format] Delivery mode filter
          * @param {List1DesignationEnum} [designation] Designation filter
          * @param {boolean} [ceCreditsOnly] Only state-approved CE courses
@@ -9066,7 +9066,7 @@ export const CoursesApiFp = function(configuration?: Configuration) {
          * @summary List published courses
          * @param {number} [pageFrom] Pagination start (1-based)
          * @param {number} [pageTo] Pagination end (inclusive)
-         * @param {string} [language] BCP47 locale filter
+         * @param {string} [language] Instruction language filter
          * @param {List1FormatEnum} [format] Delivery mode filter
          * @param {List1DesignationEnum} [designation] Designation filter
          * @param {boolean} [ceCreditsOnly] Only state-approved CE courses
@@ -9307,7 +9307,7 @@ export interface CoursesApiList1Request {
     readonly pageTo?: number
 
     /**
-     * BCP47 locale filter
+     * Instruction language filter
      * @type {string}
      * @memberof CoursesApiList1
      */

@@ -7584,11 +7584,11 @@
         }, {
           "name" : "language",
           "in" : "query",
-          "description" : "BCP47 locale filter",
+          "description" : "Instruction language filter",
           "schema" : {
             "type" : "string"
           },
-          "example" : "en-US"
+          "example" : "English"
         }, {
           "name" : "format",
           "in" : "query",
@@ -8561,7 +8561,7 @@
                     "courseTimezone" : "America/New_York",
                     "format" : "HYBRID",
                     "location" : "Brickell Training Center + Zoom",
-                    "languageLocale" : "en-US",
+                    "languageLocale" : "English",
                     "priceAmount" : 199.0,
                     "priceCurrency" : "USD",
                     "designation" : "CRS",
@@ -13628,8 +13628,8 @@
           },
           "languageLocale" : {
             "type" : "string",
-            "description" : "Content locale BCP47 tag",
-            "example" : "en-US"
+            "description" : "Instruction language label",
+            "example" : "English"
           },
           "priceAmount" : {
             "type" : "number",
@@ -13748,11 +13748,11 @@
             "description" : "Venue or virtual dial-in details"
           },
           "languageLocale" : {
-            "maxLength" : 16,
+            "maxLength" : 128,
             "minLength" : 0,
             "type" : "string",
-            "description" : "Locale tag",
-            "example" : "en-US"
+            "description" : "Instruction language label",
+            "example" : "English"
           },
           "priceAmount" : {
             "type" : "number",
@@ -14313,6 +14313,12 @@
       }
     },
     "securitySchemes" : {
+      "xApiKey" : {
+        "type" : "apiKey",
+        "description" : "Integration API key (prefix hc_)",
+        "name" : "X-API-Key",
+        "in" : "header"
+      },
       "oAuthClientId" : {
         "type" : "apiKey",
         "description" : "OAuth client identifier (default: hallocasa_frontend)",
@@ -14329,12 +14335,6 @@
         "type" : "apiKey",
         "description" : "OAuth access token for authenticated requests",
         "name" : "O-Auth-Token",
-        "in" : "header"
-      },
-      "xApiKey" : {
-        "type" : "apiKey",
-        "description" : "Integration API key (prefix hc_)",
-        "name" : "X-API-Key",
         "in" : "header"
       }
     }
