@@ -941,6 +941,12 @@ export interface Course {
      */
     'hostProfileName'?: string;
     /**
+     * Instructor profile image key (same as user imageLink) or full URL when stored that way
+     * @type {string}
+     * @memberof Course
+     */
+    'hostImageLink'?: string;
+    /**
      * Marketing title
      * @type {string}
      * @memberof Course

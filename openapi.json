@@ -13588,6 +13588,11 @@
             "description" : "Public profile slug when available",
             "example" : "jane-instructor"
           },
+          "hostImageLink" : {
+            "type" : "string",
+            "description" : "Instructor profile image key (same as user imageLink) or full URL when stored that way",
+            "example" : "abc123.jpg"
+          },
           "title" : {
             "type" : "string",
             "description" : "Marketing title",
