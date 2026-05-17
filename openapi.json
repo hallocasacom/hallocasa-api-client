@@ -896,7 +896,7 @@
           "required" : true,
           "schema" : {
             "type" : "string",
-            "enum" : [ "TO_BROKER__ALERT_CREATED", "TO_USER__WEEKLY_PROPERTIES", "TO_USER__WEEKLY_PAYED_SUBSCRIBERS", "TO_USER__CUSTOMIZED_ALERT", "TO_USER__WEEKLY_GROUP_PROPERTIES", "TO_USER__NEWSLETTER_NEW_SUBSCRIBER", "TO_USER__NEWSLETTER_CONFIRMATION", "TO_USER__NEWSLETTER_LISTING" ]
+            "enum" : [ "TO_BROKER__ALERT_CREATED", "TO_USER__WEEKLY_PROPERTIES", "TO_USER__WEEKLY_PAYED_SUBSCRIBERS", "TO_USER__COURSE_PUBLISHED_THIS_WEEK", "TO_USER__COURSE_HAPPENING_THIS_WEEK", "TO_USER__CUSTOMIZED_ALERT", "TO_USER__WEEKLY_GROUP_PROPERTIES", "TO_USER__NEWSLETTER_NEW_SUBSCRIBER", "TO_USER__NEWSLETTER_CONFIRMATION", "TO_USER__NEWSLETTER_LISTING" ]
           },
           "example" : "MESSAGE"
         } ],
@@ -961,6 +961,69 @@
         "security" : [ {
           "token" : [ ]
         } ]
+      }
+    },
+    "/notifications/{type}/ortto-dynamic" : {
+      "get" : {
+        "tags" : [ "messages" ],
+        "operationId" : "previewOrttoDynamicContent_1",
+        "parameters" : [ {
+          "name" : "token",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "type",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "messages" ],
+        "operationId" : "getOrttoDynamicContent_1",
+        "parameters" : [ {
+          "name" : "token",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "type",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
       }
     },
     "/chat/user/{id}" : {
@@ -7643,19 +7706,18 @@
           "description" : "Course id",
           "required" : true,
           "schema" : {
-            "type" : "integer",
-            "format" : "int64"
+            "type" : "string"
           },
-          "example" : 501
+          "example" : "a1b2c3d4"
         }, {
           "name" : "source",
           "in" : "query",
-          "description" : "Analytics source tag",
+          "description" : "Analytics source tag (newsletter | website)",
           "schema" : {
             "type" : "string",
-            "default" : "detail"
+            "default" : "website"
           },
-          "example" : "detail"
+          "example" : "website"
         } ],
         "responses" : {
           "302" : {
@@ -7681,10 +7743,9 @@
           "description" : "Course id",
           "required" : true,
           "schema" : {
-            "type" : "integer",
-            "format" : "int64"
+            "type" : "string"
           },
-          "example" : 501
+          "example" : "a1b2c3d4"
         } ],
         "responses" : {
           "200" : {
@@ -7712,10 +7773,9 @@
           "description" : "Course id",
           "required" : true,
           "schema" : {
-            "type" : "integer",
-            "format" : "int64"
+            "type" : "string"
           },
-          "example" : 501
+          "example" : "a1b2c3d4"
         } ],
         "requestBody" : {
           "content" : {
@@ -7765,10 +7825,9 @@
           "description" : "Course id",
           "required" : true,
           "schema" : {
-            "type" : "integer",
-            "format" : "int64"
+            "type" : "string"
           },
-          "example" : 501
+          "example" : "a1b2c3d4"
         } ],
         "responses" : {
           "200" : {
@@ -7800,19 +7859,18 @@
           "description" : "Course id",
           "required" : true,
           "schema" : {
-            "type" : "integer",
-            "format" : "int64"
+            "type" : "string"
           },
-          "example" : 501
+          "example" : "a1b2c3d4"
         }, {
           "name" : "source",
           "in" : "query",
-          "description" : "Analytics funnel tag",
+          "description" : "Analytics funnel tag (newsletter | website)",
           "schema" : {
             "type" : "string",
-            "default" : "detail"
+            "default" : "website"
           },
-          "example" : "detail"
+          "example" : "website"
         }, {
           "name" : "eventType",
           "in" : "query",
@@ -7832,6 +7890,39 @@
           },
           "404" : {
             "description" : "Unknown course"
+          }
+        }
+      }
+    },
+    "/courses/slug/{slug}" : {
+      "get" : {
+        "tags" : [ "courses" ],
+        "summary" : "Get published course by URL slug",
+        "description" : "Globally visible active course matched by slug",
+        "operationId" : "getBySlug_1",
+        "parameters" : [ {
+          "name" : "slug",
+          "in" : "path",
+          "description" : "Public SEO slug",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "crs-prep-intensive-501"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Course payload",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Course"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Unknown slug or unpublished course"
           }
         }
       }
@@ -10678,7 +10769,7 @@
           "type" : {
             "type" : "string",
             "description" : "Channel/template discriminator",
-            "enum" : [ "TO_BROKER__ALERT_CREATED", "TO_USER__WEEKLY_PROPERTIES", "TO_USER__WEEKLY_PAYED_SUBSCRIBERS", "TO_USER__CUSTOMIZED_ALERT", "TO_USER__WEEKLY_GROUP_PROPERTIES", "TO_USER__NEWSLETTER_NEW_SUBSCRIBER", "TO_USER__NEWSLETTER_CONFIRMATION", "TO_USER__NEWSLETTER_LISTING" ]
+            "enum" : [ "TO_BROKER__ALERT_CREATED", "TO_USER__WEEKLY_PROPERTIES", "TO_USER__WEEKLY_PAYED_SUBSCRIBERS", "TO_USER__COURSE_PUBLISHED_THIS_WEEK", "TO_USER__COURSE_HAPPENING_THIS_WEEK", "TO_USER__CUSTOMIZED_ALERT", "TO_USER__WEEKLY_GROUP_PROPERTIES", "TO_USER__NEWSLETTER_NEW_SUBSCRIBER", "TO_USER__NEWSLETTER_CONFIRMATION", "TO_USER__NEWSLETTER_LISTING" ]
           },
           "currentDateTime" : {
             "type" : "string",
@@ -10697,7 +10788,6 @@
         "description" : "Queued outbound notification payload"
       },
       "AutopilotUser" : {
-        "required" : [ "contactId", "email" ],
         "type" : "object",
         "properties" : {
           "contactId" : {
@@ -13567,10 +13657,9 @@
         "type" : "object",
         "properties" : {
           "id" : {
-            "type" : "integer",
-            "description" : "Primary key",
-            "format" : "int64",
-            "example" : 501
+            "type" : "string",
+            "description" : "Opaque course id",
+            "example" : "a1b2c3d4"
           },
           "instructorUserId" : {
             "type" : "integer",
@@ -13597,6 +13686,11 @@
             "type" : "string",
             "description" : "Marketing title",
             "example" : "CRS Prep Intensive"
+          },
+          "slug" : {
+            "type" : "string",
+            "description" : "Public SEO URL slug (globally unique, lowercase)",
+            "example" : "crs-prep-intensive-501"
           },
           "description" : {
             "type" : "string",
@@ -13712,6 +13806,14 @@
             "type" : "string",
             "description" : "Marketing title",
             "example" : "ABR Crash Course"
+          },
+          "slug" : {
+            "maxLength" : 128,
+            "minLength" : 0,
+            "pattern" : "^$|^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "type" : "string",
+            "description" : "Optional custom public URL slug (letters, digits, hyphens)",
+            "example" : "abr-crash-course"
           },
           "description" : {
             "type" : "string",
@@ -14319,10 +14421,10 @@
         "name" : "X-API-Key",
         "in" : "header"
       },
-      "oAuthClientId" : {
+      "oAuthToken" : {
         "type" : "apiKey",
-        "description" : "OAuth client identifier (default: hallocasa_frontend)",
-        "name" : "O-Auth-Client-Id",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
         "in" : "header"
       },
       "oAuthCode" : {
@@ -14331,10 +14433,10 @@
         "name" : "O-Auth-Code",
         "in" : "header"
       },
-      "oAuthToken" : {
+      "oAuthClientId" : {
         "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
+        "description" : "OAuth client identifier (default: hallocasa_frontend)",
+        "name" : "O-Auth-Client-Id",
         "in" : "header"
       }
     }

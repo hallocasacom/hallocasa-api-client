@@ -375,13 +375,13 @@ export interface AutopilotUser {
      * @type {string}
      * @memberof AutopilotUser
      */
-    'contactId': string;
+    'contactId'?: string;
     /**
      *
      * @type {string}
      * @memberof AutopilotUser
      */
-    'email': string;
+    'email'?: string;
 }
 /**
  *
@@ -917,11 +917,11 @@ export interface CountryTelephonePrefix {
  */
 export interface Course {
     /**
-     * Primary key
-     * @type {number}
+     * Opaque course id
+     * @type {string}
      * @memberof Course
      */
-    'id'?: number;
+    'id'?: string;
     /**
      * Owning instructor user id
      * @type {number}
@@ -952,6 +952,12 @@ export interface Course {
      * @memberof Course
      */
     'title'?: string;
+    /**
+     * Public SEO URL slug (globally unique, lowercase)
+     * @type {string}
+     * @memberof Course
+     */
+    'slug'?: string;
     /**
      * Full HTML / markdown description body
      * @type {string}
@@ -1108,6 +1114,12 @@ export interface CourseWriteDto {
      * @memberof CourseWriteDto
      */
     'title': string;
+    /**
+     * Optional custom public URL slug (letters, digits, hyphens)
+     * @type {string}
+     * @memberof CourseWriteDto
+     */
+    'slug'?: string;
     /**
      * Long description body
      * @type {string}
@@ -3170,6 +3182,8 @@ export declare const NotificationTypeEnum: {
     readonly ToBrokerAlertCreated: "TO_BROKER__ALERT_CREATED";
     readonly ToUserWeeklyProperties: "TO_USER__WEEKLY_PROPERTIES";
     readonly ToUserWeeklyPayedSubscribers: "TO_USER__WEEKLY_PAYED_SUBSCRIBERS";
+    readonly ToUserCoursePublishedThisWeek: "TO_USER__COURSE_PUBLISHED_THIS_WEEK";
+    readonly ToUserCourseHappeningThisWeek: "TO_USER__COURSE_HAPPENING_THIS_WEEK";
     readonly ToUserCustomizedAlert: "TO_USER__CUSTOMIZED_ALERT";
     readonly ToUserWeeklyGroupProperties: "TO_USER__WEEKLY_GROUP_PROPERTIES";
     readonly ToUserNewsletterNewSubscriber: "TO_USER__NEWSLETTER_NEW_SUBSCRIBER";
@@ -6601,7 +6615,7 @@ export declare class AlertsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AlertsApi
      */
-    deleteAlert1(requestParameters: AlertsApiDeleteAlert1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any>>;
+    deleteAlert1(requestParameters: AlertsApiDeleteAlert1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any, {}>>;
     /**
      * Retrieves the results for a specific alert
      * @summary Get alert results
@@ -6610,7 +6624,7 @@ export declare class AlertsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AlertsApi
      */
-    getAlertResult1(requestParameters: AlertsApiGetAlertResult1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
+    getAlertResult1(requestParameters: AlertsApiGetAlertResult1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any, {}>>;
     /**
      * Returns all alerts from all users in the system. For users with non-Free subscription plans, the response includes their profile name. This is typically an admin-level operation.
      * @summary Get all alerts in the system
@@ -6618,7 +6632,7 @@ export declare class AlertsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AlertsApi
      */
-    getAllAlerts1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<AlertWithUserProfile[], any>>;
+    getAllAlerts1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<AlertWithUserProfile[], any, {}>>;
     /**
      * Returns all alerts associated with the specified user ID
      * @summary Get all alerts for a user
@@ -6627,7 +6641,7 @@ export declare class AlertsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AlertsApi
      */
-    getByUser2(requestParameters: AlertsApiGetByUser2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Alert[], any>>;
+    getByUser2(requestParameters: AlertsApiGetByUser2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Alert[], any, {}>>;
     /**
      * Retrieves all newsletters that the specified user has subscribed to
      * @summary Get newsletters subscribed to
@@ -6636,7 +6650,7 @@ export declare class AlertsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AlertsApi
      */
-    newsletterAlerts1(requestParameters: AlertsApiNewsletterAlerts1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<NewsletterSubscriberDto[], any>>;
+    newsletterAlerts1(requestParameters: AlertsApiNewsletterAlerts1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<NewsletterSubscriberDto[], any, {}>>;
     /**
      * Retrieves all subscribers to newsletters owned by the specified user
      * @summary Get newsletter subscribers
@@ -6645,7 +6659,7 @@ export declare class AlertsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AlertsApi
      */
-    newsletterSubscribers1(requestParameters: AlertsApiNewsletterSubscribers1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<NewsletterSubscriberDto[], any>>;
+    newsletterSubscribers1(requestParameters: AlertsApiNewsletterSubscribers1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<NewsletterSubscriberDto[], any, {}>>;
     /**
      * Creates a new alert for the specified user
      * @summary Create a new alert
@@ -6654,7 +6668,7 @@ export declare class AlertsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AlertsApi
      */
-    saveAlert1(requestParameters: AlertsApiSaveAlert1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Alert, any>>;
+    saveAlert1(requestParameters: AlertsApiSaveAlert1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Alert, any, {}>>;
     /**
      * Triggers the sending of customized property alerts to users
      * @summary Send customized property alerts
@@ -6663,7 +6677,7 @@ export declare class AlertsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AlertsApi
      */
-    sendAlert(requestParameters: AlertsApiSendAlertRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any>>;
+    sendAlert(requestParameters: AlertsApiSendAlertRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any, {}>>;
 }
 /**
  * AllowancesApi - axios parameter creator
@@ -6780,7 +6794,7 @@ export declare class AllowancesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AllowancesApi
      */
-    getChatAllowance1(requestParameters: AllowancesApiGetChatAllowance1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ChatAllowance, any>>;
+    getChatAllowance1(requestParameters: AllowancesApiGetChatAllowance1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ChatAllowance, any, {}>>;
     /**
      * Updates the chat allowance settings between two users
      * @summary Update chat allowance for a user pair
@@ -6789,7 +6803,7 @@ export declare class AllowancesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AllowancesApi
      */
-    updateChatAllowance1(requestParameters: AllowancesApiUpdateChatAllowance1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ChatAllowance, any>>;
+    updateChatAllowance1(requestParameters: AllowancesApiUpdateChatAllowance1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ChatAllowance, any, {}>>;
 }
 /**
  * ApiKeysApi - axios parameter creator
@@ -6956,7 +6970,7 @@ export declare class ApiKeysApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ApiKeysApi
      */
-    createApiKey1(requestParameters?: ApiKeysApiCreateApiKey1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ApiKeyDto, any>>;
+    createApiKey1(requestParameters?: ApiKeysApiCreateApiKey1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ApiKeyDto, any, {}>>;
     /**
      * Deactivate an API key belonging to the authenticated user
      * @summary Deactivate API key
@@ -6965,7 +6979,7 @@ export declare class ApiKeysApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ApiKeysApi
      */
-    deactivateApiKey1(requestParameters: ApiKeysApiDeactivateApiKey1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    deactivateApiKey1(requestParameters: ApiKeysApiDeactivateApiKey1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      * Delete an API key belonging to the authenticated user
      * @summary Delete API key
@@ -6974,7 +6988,7 @@ export declare class ApiKeysApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ApiKeysApi
      */
-    deleteApiKey1(requestParameters: ApiKeysApiDeleteApiKey1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    deleteApiKey1(requestParameters: ApiKeysApiDeleteApiKey1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      * Retrieve all API keys for the authenticated user
      * @summary Get user API keys
@@ -6982,7 +6996,7 @@ export declare class ApiKeysApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ApiKeysApi
      */
-    getUserApiKeys1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ApiKeyDto, any>>;
+    getUserApiKeys1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ApiKeyDto, any, {}>>;
 }
 /**
  * AttachmentsApi - axios parameter creator
@@ -7136,7 +7150,7 @@ export declare class AttachmentsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AttachmentsApi
      */
-    createAttachment1(requestParameters?: AttachmentsApiCreateAttachment1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Attachment, any>>;
+    createAttachment1(requestParameters?: AttachmentsApiCreateAttachment1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Attachment, any, {}>>;
     /**
      *
      * @summary Get details to download a file
@@ -7145,7 +7159,7 @@ export declare class AttachmentsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AttachmentsApi
      */
-    retrieveAttachment1(requestParameters: AttachmentsApiRetrieveAttachment1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Attachment, any>>;
+    retrieveAttachment1(requestParameters: AttachmentsApiRetrieveAttachment1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Attachment, any, {}>>;
     /**
      *
      * @summary Notify a new file has been loaded in S3
@@ -7154,7 +7168,7 @@ export declare class AttachmentsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AttachmentsApi
      */
-    updateAttachment1(requestParameters: AttachmentsApiUpdateAttachment1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    updateAttachment1(requestParameters: AttachmentsApiUpdateAttachment1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
 }
 /**
  * BrokeragesApi - axios parameter creator
@@ -7209,7 +7223,7 @@ export declare class BrokeragesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof BrokeragesApi
      */
-    retrieve1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Brokerage[], any>>;
+    retrieve1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Brokerage[], any, {}>>;
 }
 /**
  * ChatTicketsApi - axios parameter creator
@@ -7281,7 +7295,7 @@ export declare class ChatTicketsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ChatTicketsApi
      */
-    retrieveUserTicket1(requestParameters: ChatTicketsApiRetrieveUserTicket1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ChatTicket, any>>;
+    retrieveUserTicket1(requestParameters: ChatTicketsApiRetrieveUserTicket1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<ChatTicket, any, {}>>;
 }
 /**
  * CheckoutSessionsApi - axios parameter creator
@@ -7353,7 +7367,7 @@ export declare class CheckoutSessionsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof CheckoutSessionsApi
      */
-    createCheckoutSession2(requestParameters: CheckoutSessionsApiCreateCheckoutSession2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    createCheckoutSession2(requestParameters: CheckoutSessionsApiCreateCheckoutSession2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
 }
 /**
  * CountriesApi - axios parameter creator
@@ -7445,7 +7459,7 @@ export declare class CountriesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof CountriesApi
      */
-    getAllCountries2(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Country[], any>>;
+    getAllCountries2(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Country[], any, {}>>;
     /**
      *
      * @summary Method to find a country by the caller IP
@@ -7454,7 +7468,7 @@ export declare class CountriesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof CountriesApi
      */
-    getCountryByIp1(requestParameters?: CountriesApiGetCountryByIp1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Country, any>>;
+    getCountryByIp1(requestParameters?: CountriesApiGetCountryByIp1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Country, any, {}>>;
 }
 /**
  * CoursesApi - axios parameter creator
@@ -7464,20 +7478,20 @@ export declare const CoursesApiAxiosParamCreator: (configuration?: Configuration
     /**
      *
      * @summary Delete course
-     * @param {number} courseId Course id
+     * @param {string} courseId Course id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    _delete: (courseId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    _delete: (courseId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      *
      * @summary Track attend click and redirect to external registration URL
-     * @param {number} courseId Course id
-     * @param {string} [source] Analytics source tag
+     * @param {string} courseId Course id
+     * @param {string} [source] Analytics source tag (newsletter | website)
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    attendGo1: (courseId: number, source?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    attendGo1: (courseId: string, source?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      *
      * @summary Create a global course listing
@@ -7490,11 +7504,19 @@ export declare const CoursesApiAxiosParamCreator: (configuration?: Configuration
     /**
      *
      * @summary Get published course by id
-     * @param {number} courseId Course id
+     * @param {string} courseId Course id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    get1: (courseId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    get1: (courseId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Globally visible active course matched by slug
+     * @summary Get published course by URL slug
+     * @param {string} slug Public SEO slug
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getBySlug1: (slug: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Globally visible active courses
      * @summary List published courses
@@ -7521,22 +7543,22 @@ export declare const CoursesApiAxiosParamCreator: (configuration?: Configuration
     /**
      *
      * @summary Record anonymous course interaction (e.g. gated attend)
-     * @param {number} courseId Course id
+     * @param {string} courseId Course id
      * @param {string} eventType Known anonymous events
-     * @param {string} [source] Analytics funnel tag
+     * @param {string} [source] Analytics funnel tag (newsletter | website)
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    recordAnonymousClick1: (courseId: number, eventType: string, source?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    recordAnonymousClick1: (courseId: string, eventType: string, source?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      *
      * @summary Update course
-     * @param {number} courseId Course id
+     * @param {string} courseId Course id
      * @param {CourseWriteDto} courseWriteDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    update1: (courseId: number, courseWriteDto: CourseWriteDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    update1: (courseId: string, courseWriteDto: CourseWriteDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * CoursesApi - functional programming interface
@@ -7546,20 +7568,20 @@ export declare const CoursesApiFp: (configuration?: Configuration) => {
     /**
      *
      * @summary Delete course
-     * @param {number} courseId Course id
+     * @param {string} courseId Course id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    _delete(courseId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    _delete(courseId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
      *
      * @summary Track attend click and redirect to external registration URL
-     * @param {number} courseId Course id
-     * @param {string} [source] Analytics source tag
+     * @param {string} courseId Course id
+     * @param {string} [source] Analytics source tag (newsletter | website)
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    attendGo1(courseId: number, source?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    attendGo1(courseId: string, source?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
      *
      * @summary Create a global course listing
@@ -7572,11 +7594,19 @@ export declare const CoursesApiFp: (configuration?: Configuration) => {
     /**
      *
      * @summary Get published course by id
-     * @param {number} courseId Course id
+     * @param {string} courseId Course id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    get1(courseId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Course>>;
+    get1(courseId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Course>>;
+    /**
+     * Globally visible active course matched by slug
+     * @summary Get published course by URL slug
+     * @param {string} slug Public SEO slug
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getBySlug1(slug: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Course>>;
     /**
      * Globally visible active courses
      * @summary List published courses
@@ -7603,22 +7633,22 @@ export declare const CoursesApiFp: (configuration?: Configuration) => {
     /**
      *
      * @summary Record anonymous course interaction (e.g. gated attend)
-     * @param {number} courseId Course id
+     * @param {string} courseId Course id
      * @param {string} eventType Known anonymous events
-     * @param {string} [source] Analytics funnel tag
+     * @param {string} [source] Analytics funnel tag (newsletter | website)
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    recordAnonymousClick1(courseId: number, eventType: string, source?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    recordAnonymousClick1(courseId: string, eventType: string, source?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
      *
      * @summary Update course
-     * @param {number} courseId Course id
+     * @param {string} courseId Course id
      * @param {CourseWriteDto} courseWriteDto
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    update1(courseId: number, courseWriteDto: CourseWriteDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Course>>;
+    update1(courseId: string, courseWriteDto: CourseWriteDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Course>>;
 };
 /**
  * CoursesApi - factory interface
@@ -7657,6 +7687,14 @@ export declare const CoursesApiFactory: (configuration?: Configuration, basePath
      * @throws {RequiredError}
      */
     get1(requestParameters: CoursesApiGet1Request, options?: RawAxiosRequestConfig): AxiosPromise<Course>;
+    /**
+     * Globally visible active course matched by slug
+     * @summary Get published course by URL slug
+     * @param {CoursesApiGetBySlug1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getBySlug1(requestParameters: CoursesApiGetBySlug1Request, options?: RawAxiosRequestConfig): AxiosPromise<Course>;
     /**
      * Globally visible active courses
      * @summary List published courses
@@ -7698,10 +7736,10 @@ export declare const CoursesApiFactory: (configuration?: Configuration, basePath
 export interface CoursesApiDeleteRequest {
     /**
      * Course id
-     * @type {number}
+     * @type {string}
      * @memberof CoursesApiDelete
      */
-    readonly courseId: number;
+    readonly courseId: string;
 }
 /**
  * Request parameters for attendGo1 operation in CoursesApi.
@@ -7711,12 +7749,12 @@ export interface CoursesApiDeleteRequest {
 export interface CoursesApiAttendGo1Request {
     /**
      * Course id
-     * @type {number}
+     * @type {string}
      * @memberof CoursesApiAttendGo1
      */
-    readonly courseId: number;
+    readonly courseId: string;
     /**
-     * Analytics source tag
+     * Analytics source tag (newsletter | website)
      * @type {string}
      * @memberof CoursesApiAttendGo1
      */
@@ -7749,10 +7787,23 @@ export interface CoursesApiCreate1Request {
 export interface CoursesApiGet1Request {
     /**
      * Course id
-     * @type {number}
+     * @type {string}
      * @memberof CoursesApiGet1
      */
-    readonly courseId: number;
+    readonly courseId: string;
+}
+/**
+ * Request parameters for getBySlug1 operation in CoursesApi.
+ * @export
+ * @interface CoursesApiGetBySlug1Request
+ */
+export interface CoursesApiGetBySlug1Request {
+    /**
+     * Public SEO slug
+     * @type {string}
+     * @memberof CoursesApiGetBySlug1
+     */
+    readonly slug: string;
 }
 /**
  * Request parameters for list1 operation in CoursesApi.
@@ -7830,10 +7881,10 @@ export interface CoursesApiListForUser1Request {
 export interface CoursesApiRecordAnonymousClick1Request {
     /**
      * Course id
-     * @type {number}
+     * @type {string}
      * @memberof CoursesApiRecordAnonymousClick1
      */
-    readonly courseId: number;
+    readonly courseId: string;
     /**
      * Known anonymous events
      * @type {string}
@@ -7841,7 +7892,7 @@ export interface CoursesApiRecordAnonymousClick1Request {
      */
     readonly eventType: string;
     /**
-     * Analytics funnel tag
+     * Analytics funnel tag (newsletter | website)
      * @type {string}
      * @memberof CoursesApiRecordAnonymousClick1
      */
@@ -7855,10 +7906,10 @@ export interface CoursesApiRecordAnonymousClick1Request {
 export interface CoursesApiUpdate1Request {
     /**
      * Course id
-     * @type {number}
+     * @type {string}
      * @memberof CoursesApiUpdate1
      */
-    readonly courseId: number;
+    readonly courseId: string;
     /**
      *
      * @type {CourseWriteDto}
@@ -7881,7 +7932,7 @@ export declare class CoursesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof CoursesApi
      */
-    _delete(requestParameters: CoursesApiDeleteRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    _delete(requestParameters: CoursesApiDeleteRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      *
      * @summary Track attend click and redirect to external registration URL
@@ -7890,7 +7941,7 @@ export declare class CoursesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof CoursesApi
      */
-    attendGo1(requestParameters: CoursesApiAttendGo1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    attendGo1(requestParameters: CoursesApiAttendGo1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      *
      * @summary Create a global course listing
@@ -7899,7 +7950,7 @@ export declare class CoursesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof CoursesApi
      */
-    create1(requestParameters: CoursesApiCreate1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Course, any>>;
+    create1(requestParameters: CoursesApiCreate1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Course, any, {}>>;
     /**
      *
      * @summary Get published course by id
@@ -7908,7 +7959,16 @@ export declare class CoursesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof CoursesApi
      */
-    get1(requestParameters: CoursesApiGet1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Course, any>>;
+    get1(requestParameters: CoursesApiGet1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Course, any, {}>>;
+    /**
+     * Globally visible active course matched by slug
+     * @summary Get published course by URL slug
+     * @param {CoursesApiGetBySlug1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoursesApi
+     */
+    getBySlug1(requestParameters: CoursesApiGetBySlug1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Course, any, {}>>;
     /**
      * Globally visible active courses
      * @summary List published courses
@@ -7917,7 +7977,7 @@ export declare class CoursesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof CoursesApi
      */
-    list1(requestParameters?: CoursesApiList1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CourseListResult, any>>;
+    list1(requestParameters?: CoursesApiList1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CourseListResult, any, {}>>;
     /**
      *
      * @summary List courses owned by user
@@ -7926,7 +7986,7 @@ export declare class CoursesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof CoursesApi
      */
-    listForUser1(requestParameters: CoursesApiListForUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CourseListResult, any>>;
+    listForUser1(requestParameters: CoursesApiListForUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CourseListResult, any, {}>>;
     /**
      *
      * @summary Record anonymous course interaction (e.g. gated attend)
@@ -7935,7 +7995,7 @@ export declare class CoursesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof CoursesApi
      */
-    recordAnonymousClick1(requestParameters: CoursesApiRecordAnonymousClick1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    recordAnonymousClick1(requestParameters: CoursesApiRecordAnonymousClick1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      *
      * @summary Update course
@@ -7944,7 +8004,7 @@ export declare class CoursesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof CoursesApi
      */
-    update1(requestParameters: CoursesApiUpdate1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Course, any>>;
+    update1(requestParameters: CoursesApiUpdate1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Course, any, {}>>;
 }
 /**
  * @export
@@ -8027,7 +8087,7 @@ export declare class CurrencyManagementApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof CurrencyManagementApi
      */
-    getCurrencies1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Currency[], any>>;
+    getCurrencies1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Currency[], any, {}>>;
 }
 /**
  * CustomerSessionsApi - axios parameter creator
@@ -8099,7 +8159,7 @@ export declare class CustomerSessionsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof CustomerSessionsApi
      */
-    createCheckoutSession(requestParameters: CustomerSessionsApiCreateCheckoutSessionRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    createCheckoutSession(requestParameters: CustomerSessionsApiCreateCheckoutSessionRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
 }
 /**
  * EndorsementsApi - axios parameter creator
@@ -8179,7 +8239,7 @@ export declare class EndorsementsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof EndorsementsApi
      */
-    retrieveEndorsementsByUser1(requestParameters: EndorsementsApiRetrieveEndorsementsByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkillEndorsement[], any>>;
+    retrieveEndorsementsByUser1(requestParameters: EndorsementsApiRetrieveEndorsementsByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkillEndorsement[], any, {}>>;
 }
 /**
  * ExchangeRatesApi - axios parameter creator
@@ -8246,7 +8306,7 @@ export declare class ExchangeRatesApi extends BaseAPI {
         [key: string]: {
             [key: string]: number;
         };
-    }, any>>;
+    }, any, {}>>;
 }
 /**
  * FacebookPropertiesApi - axios parameter creator
@@ -8326,7 +8386,7 @@ export declare class FacebookPropertiesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FacebookPropertiesApi
      */
-    uploadKyeroProperties(requestParameters: FacebookPropertiesApiUploadKyeroPropertiesRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<FBPropertyDto[], any>>;
+    uploadKyeroProperties(requestParameters: FacebookPropertiesApiUploadKyeroPropertiesRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<FBPropertyDto[], any, {}>>;
 }
 /**
  * FavoritesApi - axios parameter creator
@@ -8496,7 +8556,7 @@ export declare class FavoritesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FavoritesApi
      */
-    getByUser(requestParameters: FavoritesApiGetByUserRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Favorite[], any>>;
+    getByUser(requestParameters: FavoritesApiGetByUserRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Favorite[], any, {}>>;
     /**
      * Adds a new favorite item for a specific user
      * @summary Add a favorite
@@ -8505,7 +8565,7 @@ export declare class FavoritesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FavoritesApi
      */
-    postUserFavorite1(requestParameters: FavoritesApiPostUserFavorite1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Favorite, any>>;
+    postUserFavorite1(requestParameters: FavoritesApiPostUserFavorite1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Favorite, any, {}>>;
     /**
      * Removes a specific favorite from a user\'s favorites list
      * @summary Remove a favorite
@@ -8514,7 +8574,7 @@ export declare class FavoritesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FavoritesApi
      */
-    removeUserFavorite1(requestParameters: FavoritesApiRemoveUserFavorite1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    removeUserFavorite1(requestParameters: FavoritesApiRemoveUserFavorite1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
 }
 /**
  * GeoLocationApi - axios parameter creator
@@ -8618,7 +8678,7 @@ export declare class GeoLocationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GeoLocationApi
      */
-    getGeoLocationsByLatLng1(requestParameters?: GeoLocationApiGetGeoLocationsByLatLng1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GeoPlace, any>>;
+    getGeoLocationsByLatLng1(requestParameters?: GeoLocationApiGetGeoLocationsByLatLng1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GeoPlace, any, {}>>;
 }
 /**
  * GroupNotificationsApi - axios parameter creator
@@ -8714,7 +8774,7 @@ export declare class GroupNotificationsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupNotificationsApi
      */
-    getGroupNotifications1(requestParameters?: GroupNotificationsApiGetGroupNotifications1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    getGroupNotifications1(requestParameters?: GroupNotificationsApiGetGroupNotifications1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
 }
 /**
  * GroupsApi - axios parameter creator
@@ -9879,7 +9939,7 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    archiveGroup1(requestParameters: GroupsApiArchiveGroup1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any>>;
+    archiveGroup1(requestParameters: GroupsApiArchiveGroup1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any, {}>>;
     /**
      * This process is reversible
      * @summary Deactivate the group with id supplied
@@ -9888,7 +9948,7 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    deactivateGroup1(requestParameters: GroupsApiDeactivateGroup1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any>>;
+    deactivateGroup1(requestParameters: GroupsApiDeactivateGroup1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any, {}>>;
     /**
      * This process is not reversible
      * @summary Delete the group with id supplied
@@ -9897,7 +9957,7 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    deleteGroup1(requestParameters: GroupsApiDeleteGroup1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any>>;
+    deleteGroup1(requestParameters: GroupsApiDeleteGroup1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any, {}>>;
     /**
      * Only group owners can demote admins. Can only demote ADMIN members.
      * @summary Demote group admins to regular members
@@ -9906,7 +9966,7 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    demoteFromAdmin1(requestParameters: GroupsApiDemoteFromAdmin1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupMember[], any>>;
+    demoteFromAdmin1(requestParameters: GroupsApiDemoteFromAdmin1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupMember[], any, {}>>;
     /**
      *
      * @summary Return the groups list with specified user id that user has archived
@@ -9915,7 +9975,7 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    findArchivedGroupsByUser1(requestParameters?: GroupsApiFindArchivedGroupsByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupFilterResult, any>>;
+    findArchivedGroupsByUser1(requestParameters?: GroupsApiFindArchivedGroupsByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupFilterResult, any, {}>>;
     /**
      * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it. Includes \'userAdmin\' field indicating whether the current user is an admin or owner of the group.
      * @summary Return the group with specified id
@@ -9924,7 +9984,7 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    findGroup1(requestParameters: GroupsApiFindGroup1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Group, any>>;
+    findGroup1(requestParameters: GroupsApiFindGroup1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Group, any, {}>>;
     /**
      * Returns the group with the specified slug. This endpoint is publicly accessible without authentication. Member count is always included in the response. If the user is authenticated and is a member or owner of the group, admin status information will be included. Slug lookup is case-insensitive.
      * @summary Return the group with specified slug
@@ -9933,7 +9993,7 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    findGroupBySlug1(requestParameters: GroupsApiFindGroupBySlug1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Group, any>>;
+    findGroupBySlug1(requestParameters: GroupsApiFindGroupBySlug1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Group, any, {}>>;
     /**
      * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
      * @summary Return the group with specified id
@@ -9942,7 +10002,7 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    findGroupProperties1(requestParameters: GroupsApiFindGroupProperties1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property[], any>>;
+    findGroupProperties1(requestParameters: GroupsApiFindGroupProperties1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property[], any, {}>>;
     /**
      * Retrieve groups of specific types (ASSOCIATION, CERTIFICATION). This endpoint is publicly accessible and allows filtering for association groups or certificate groups. Only active groups are returned.
      * @summary Return groups filtered by group type
@@ -9951,7 +10011,7 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    findGroupsByType1(requestParameters?: GroupsApiFindGroupsByType1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupFilterResult, any>>;
+    findGroupsByType1(requestParameters?: GroupsApiFindGroupsByType1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupFilterResult, any, {}>>;
     /**
      * This will return both owned Groups and Groups the user is a member of. Each group includes a \'userAdmin\' field indicating whether the current user is an admin or owner of that group.
      * @summary Return the groups list with specified user id
@@ -9960,7 +10020,7 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    findGroupsByUser1(requestParameters?: GroupsApiFindGroupsByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupFilterResult, any>>;
+    findGroupsByUser1(requestParameters?: GroupsApiFindGroupsByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupFilterResult, any, {}>>;
     /**
      *
      * @summary Return the groups list with specified user id that are inactive
@@ -9969,7 +10029,7 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    findInactiveGroupsByUser1(requestParameters?: GroupsApiFindInactiveGroupsByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupFilterResult, any>>;
+    findInactiveGroupsByUser1(requestParameters?: GroupsApiFindInactiveGroupsByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupFilterResult, any, {}>>;
     /**
      * Returns a paginated list of groups where the current user has been invited but has not yet accepted or declined the invitation. These are groups owned by other users who have sent invitations to the current user.
      * @summary Get groups where the user has pending invitations
@@ -9978,7 +10038,7 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    findInvitedGroupsByUser1(requestParameters?: GroupsApiFindInvitedGroupsByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupFilterResult, any>>;
+    findInvitedGroupsByUser1(requestParameters?: GroupsApiFindInvitedGroupsByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupFilterResult, any, {}>>;
     /**
      *
      * @summary Return the groups list with specified user id that user has requested
@@ -9987,7 +10047,7 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    findRequestedGroupsByUser1(requestParameters?: GroupsApiFindRequestedGroupsByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupFilterResult, any>>;
+    findRequestedGroupsByUser1(requestParameters?: GroupsApiFindRequestedGroupsByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupFilterResult, any, {}>>;
     /**
      * For Group Owners, this list will return removed, left, invited and requested members as well
      * @summary Show all members of Group
@@ -9996,7 +10056,7 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    getGroupMembers1(requestParameters: GroupsApiGetGroupMembers1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupMemberFilterResult, any>>;
+    getGroupMembers1(requestParameters: GroupsApiGetGroupMembers1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupMemberFilterResult, any, {}>>;
     /**
      *
      * @summary Request Invitation to Group
@@ -10005,7 +10065,7 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    groupInvite(requestParameters: GroupsApiGroupInviteRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupMember[], any>>;
+    groupInvite(requestParameters: GroupsApiGroupInviteRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupMember[], any, {}>>;
     /**
      *
      * @summary Accept Group Invitation
@@ -10014,7 +10074,7 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    groupInvite2(requestParameters: GroupsApiGroupInvite2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupMember, any>>;
+    groupInvite2(requestParameters: GroupsApiGroupInvite2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupMember, any, {}>>;
     /**
      *
      * @summary Leave Group
@@ -10023,7 +10083,7 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    groupLeave1(requestParameters: GroupsApiGroupLeave1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupMember, any>>;
+    groupLeave1(requestParameters: GroupsApiGroupLeave1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupMember, any, {}>>;
     /**
      *
      * @summary Request Admission to Group
@@ -10032,7 +10092,7 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    groupRequest1(requestParameters: GroupsApiGroupRequest1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupMember, any>>;
+    groupRequest1(requestParameters: GroupsApiGroupRequest1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupMember, any, {}>>;
     /**
      * Returns recent notifications for the group.
      * @summary List group notifications
@@ -10041,7 +10101,7 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    listNotifications1(requestParameters: GroupsApiListNotifications1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupNotification, any>>;
+    listNotifications1(requestParameters: GroupsApiListNotifications1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupNotification, any, {}>>;
     /**
      * Only group owners can promote members to admin. Can only promote ACCEPTED members.
      * @summary Promote group members to admin
@@ -10050,7 +10110,7 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    promoteToAdmin1(requestParameters: GroupsApiPromoteToAdmin1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupMember[], any>>;
+    promoteToAdmin1(requestParameters: GroupsApiPromoteToAdmin1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupMember[], any, {}>>;
     /**
      * Allows group owners to request a change in their group type from GROUP to ASSOCIATION or CERTIFICATION. IMPORTANT: Type changes are only allowed for basic groups (GROUP type). Once a group has been upgraded to ASSOCIATION or CERTIFICATION, no further type changes are possible. Only group owners can make these requests.
      * @summary Request a change in group type
@@ -10059,7 +10119,7 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    requestGroupTypeChange1(requestParameters: GroupsApiRequestGroupTypeChange1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Group, any>>;
+    requestGroupTypeChange1(requestParameters: GroupsApiRequestGroupTypeChange1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Group, any, {}>>;
     /**
      * Consider that only user can saveNew its groups
      * @summary Create or update the group supplied
@@ -10068,7 +10128,7 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    saveGroup1(requestParameters?: GroupsApiSaveGroup1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Group, any>>;
+    saveGroup1(requestParameters?: GroupsApiSaveGroup1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Group, any, {}>>;
     /**
      * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it
      * @summary Return the group with specified id
@@ -10077,7 +10137,7 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    searchGroupProperties1(requestParameters: GroupsApiSearchGroupProperties1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PropertyFilterResult, any>>;
+    searchGroupProperties1(requestParameters: GroupsApiSearchGroupProperties1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PropertyFilterResult, any, {}>>;
     /**
      * Searches for users within a specific group matching the specified filter criteria
      * @summary Search users within a specified group
@@ -10086,7 +10146,7 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    searchGroupUsers1(requestParameters: GroupsApiSearchGroupUsers1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserFilterResult, any>>;
+    searchGroupUsers1(requestParameters: GroupsApiSearchGroupUsers1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserFilterResult, any, {}>>;
     /**
      * Owner or admin sends a one-way notification to all members. Rate limit: 1 per minute.
      * @summary Send group notification
@@ -10095,7 +10155,7 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    sendNotification1(requestParameters: GroupsApiSendNotification1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    sendNotification1(requestParameters: GroupsApiSendNotification1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      * Acceptable Status values are:  ACCEPTED, ADMIN, REJECTED, REMOVED
      * @summary Update the group member status from groupId supplied
@@ -10104,7 +10164,7 @@ export declare class GroupsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GroupsApi
      */
-    updateGroupMembershipStatus1(requestParameters: GroupsApiUpdateGroupMembershipStatus1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupMember[], any>>;
+    updateGroupMembershipStatus1(requestParameters: GroupsApiUpdateGroupMembershipStatus1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupMember[], any, {}>>;
 }
 /**
  * @export
@@ -10211,7 +10271,7 @@ export declare class HomePreviewApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof HomePreviewApi
      */
-    previewHome1(requestParameters?: HomePreviewApiPreviewHome1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    previewHome1(requestParameters?: HomePreviewApiPreviewHome1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
 }
 /**
  * LanguagesApi - axios parameter creator
@@ -10283,7 +10343,7 @@ export declare class LanguagesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof LanguagesApi
      */
-    getAllLanguages1(requestParameters?: LanguagesApiGetAllLanguages1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Language[], any>>;
+    getAllLanguages1(requestParameters?: LanguagesApiGetAllLanguages1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Language[], any, {}>>;
 }
 /**
  * LocalesApi - axios parameter creator
@@ -10421,7 +10481,7 @@ export declare class LocalesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof LocalesApi
      */
-    delete2(requestParameters: LocalesApiDelete2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
+    delete2(requestParameters: LocalesApiDelete2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any, {}>>;
     /**
      * Retrieves the complete list of available locales in the system
      * @summary Returns all language list locale entries
@@ -10429,7 +10489,7 @@ export declare class LocalesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof LocalesApi
      */
-    find1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<LocaleSet[], any>>;
+    find1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<LocaleSet[], any, {}>>;
     /**
      * Retrieves the locale translations in the specified language
      * @summary Returns locale language list
@@ -10438,7 +10498,7 @@ export declare class LocalesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof LocalesApi
      */
-    getLanguages1(requestParameters?: LocalesApiGetLanguages1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
+    getLanguages1(requestParameters?: LocalesApiGetLanguages1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any, {}>>;
 }
 /**
  * LocationCacheApi - axios parameter creator
@@ -10641,7 +10701,7 @@ export declare class LocationCacheApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof LocationCacheApi
      */
-    getCacheStatistics1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    getCacheStatistics1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      * Invalidates all location caches. Use with caution - this will clear all cached location data.
      * @summary Invalidate all location caches
@@ -10649,7 +10709,7 @@ export declare class LocationCacheApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof LocationCacheApi
      */
-    invalidateAllCaches1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    invalidateAllCaches1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      * Invalidates the geocoding cache entry for a specific address and country
      * @summary Invalidate geocoding cache
@@ -10658,7 +10718,7 @@ export declare class LocationCacheApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof LocationCacheApi
      */
-    invalidateGeocodingCache1(requestParameters: LocationCacheApiInvalidateGeocodingCache1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    invalidateGeocodingCache1(requestParameters: LocationCacheApiInvalidateGeocodingCache1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      * Invalidates the places search cache entry for specific search text
      * @summary Invalidate places search cache
@@ -10667,7 +10727,7 @@ export declare class LocationCacheApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof LocationCacheApi
      */
-    invalidatePlacesSearchCache1(requestParameters: LocationCacheApiInvalidatePlacesSearchCache1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    invalidatePlacesSearchCache1(requestParameters: LocationCacheApiInvalidatePlacesSearchCache1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      * Invalidates the reverse geocoding cache entry for specific coordinates
      * @summary Invalidate reverse geocoding cache
@@ -10676,7 +10736,7 @@ export declare class LocationCacheApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof LocationCacheApi
      */
-    invalidateReverseGeocodingCache1(requestParameters: LocationCacheApiInvalidateReverseGeocodingCache1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    invalidateReverseGeocodingCache1(requestParameters: LocationCacheApiInvalidateReverseGeocodingCache1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
 }
 /**
  * MessagesApi - axios parameter creator
@@ -10704,6 +10764,23 @@ export declare const MessagesApiAxiosParamCreator: (configuration?: Configuratio
      * @throws {RequiredError}
      */
     getConversation1: (userAId?: number, userBId?: number, limit?: number, beforeDatetime?: LocalDateTimeQueryString, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} type
+     * @param {string} [token]
+     * @param {string} [body]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getOrttoDynamicContent1: (type: string, token?: string, body?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {string} type
+     * @param {string} [token]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    previewOrttoDynamicContent1: (type: string, token?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      *
      * @summary Retrieve a user chat
@@ -10757,6 +10834,23 @@ export declare const MessagesApiFp: (configuration?: Configuration) => {
     getConversation1(userAId?: number, userBId?: number, limit?: number, beforeDatetime?: LocalDateTimeQueryString, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Message>>>;
     /**
      *
+     * @param {string} type
+     * @param {string} [token]
+     * @param {string} [body]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getOrttoDynamicContent1(type: string, token?: string, body?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     *
+     * @param {string} type
+     * @param {string} [token]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    previewOrttoDynamicContent1(type: string, token?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     *
      * @summary Retrieve a user chat
      * @param {number} id user id
      * @param {*} [options] Override http request option.
@@ -10803,6 +10897,20 @@ export declare const MessagesApiFactory: (configuration?: Configuration, basePat
     getConversation1(requestParameters?: MessagesApiGetConversation1Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<Message>>;
     /**
      *
+     * @param {MessagesApiGetOrttoDynamicContent1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getOrttoDynamicContent1(requestParameters: MessagesApiGetOrttoDynamicContent1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     *
+     * @param {MessagesApiPreviewOrttoDynamicContent1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    previewOrttoDynamicContent1(requestParameters: MessagesApiPreviewOrttoDynamicContent1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     *
      * @summary Retrieve a user chat
      * @param {MessagesApiRetrieveChatUser1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -10840,7 +10948,7 @@ export interface MessagesApiGetByUserWithResult1Request {
     readonly token: string;
     /**
      * Notification type
-     * @type {'TO_BROKER__ALERT_CREATED' | 'TO_USER__WEEKLY_PROPERTIES' | 'TO_USER__WEEKLY_PAYED_SUBSCRIBERS' | 'TO_USER__CUSTOMIZED_ALERT' | 'TO_USER__WEEKLY_GROUP_PROPERTIES' | 'TO_USER__NEWSLETTER_NEW_SUBSCRIBER' | 'TO_USER__NEWSLETTER_CONFIRMATION' | 'TO_USER__NEWSLETTER_LISTING'}
+     * @type {'TO_BROKER__ALERT_CREATED' | 'TO_USER__WEEKLY_PROPERTIES' | 'TO_USER__WEEKLY_PAYED_SUBSCRIBERS' | 'TO_USER__COURSE_PUBLISHED_THIS_WEEK' | 'TO_USER__COURSE_HAPPENING_THIS_WEEK' | 'TO_USER__CUSTOMIZED_ALERT' | 'TO_USER__WEEKLY_GROUP_PROPERTIES' | 'TO_USER__NEWSLETTER_NEW_SUBSCRIBER' | 'TO_USER__NEWSLETTER_CONFIRMATION' | 'TO_USER__NEWSLETTER_LISTING'}
      * @memberof MessagesApiGetByUserWithResult1
      */
     readonly type: GetByUserWithResult1TypeEnum;
@@ -10881,6 +10989,50 @@ export interface MessagesApiGetConversation1Request {
      * @memberof MessagesApiGetConversation1
      */
     readonly beforeDatetime?: LocalDateTimeQueryString;
+}
+/**
+ * Request parameters for getOrttoDynamicContent1 operation in MessagesApi.
+ * @export
+ * @interface MessagesApiGetOrttoDynamicContent1Request
+ */
+export interface MessagesApiGetOrttoDynamicContent1Request {
+    /**
+     *
+     * @type {string}
+     * @memberof MessagesApiGetOrttoDynamicContent1
+     */
+    readonly type: string;
+    /**
+     *
+     * @type {string}
+     * @memberof MessagesApiGetOrttoDynamicContent1
+     */
+    readonly token?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof MessagesApiGetOrttoDynamicContent1
+     */
+    readonly body?: string;
+}
+/**
+ * Request parameters for previewOrttoDynamicContent1 operation in MessagesApi.
+ * @export
+ * @interface MessagesApiPreviewOrttoDynamicContent1Request
+ */
+export interface MessagesApiPreviewOrttoDynamicContent1Request {
+    /**
+     *
+     * @type {string}
+     * @memberof MessagesApiPreviewOrttoDynamicContent1
+     */
+    readonly type: string;
+    /**
+     *
+     * @type {string}
+     * @memberof MessagesApiPreviewOrttoDynamicContent1
+     */
+    readonly token?: string;
 }
 /**
  * Request parameters for retrieveChatUser1 operation in MessagesApi.
@@ -10936,7 +11088,7 @@ export declare class MessagesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MessagesApi
      */
-    getByUserWithResult1(requestParameters: MessagesApiGetByUserWithResult1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Notification, any>>;
+    getByUserWithResult1(requestParameters: MessagesApiGetByUserWithResult1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Notification, any, {}>>;
     /**
      *
      * @summary Get a message by conversation
@@ -10945,7 +11097,23 @@ export declare class MessagesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MessagesApi
      */
-    getConversation1(requestParameters?: MessagesApiGetConversation1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Message[], any>>;
+    getConversation1(requestParameters?: MessagesApiGetConversation1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Message[], any, {}>>;
+    /**
+     *
+     * @param {MessagesApiGetOrttoDynamicContent1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessagesApi
+     */
+    getOrttoDynamicContent1(requestParameters: MessagesApiGetOrttoDynamicContent1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
+    /**
+     *
+     * @param {MessagesApiPreviewOrttoDynamicContent1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessagesApi
+     */
+    previewOrttoDynamicContent1(requestParameters: MessagesApiPreviewOrttoDynamicContent1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      *
      * @summary Retrieve a user chat
@@ -10954,7 +11122,7 @@ export declare class MessagesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MessagesApi
      */
-    retrieveChatUser1(requestParameters: MessagesApiRetrieveChatUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<User, any>>;
+    retrieveChatUser1(requestParameters: MessagesApiRetrieveChatUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<User, any, {}>>;
     /**
      *
      * @summary Retrieve a user chat status
@@ -10963,7 +11131,7 @@ export declare class MessagesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MessagesApi
      */
-    retrieveChatUserStatus1(requestParameters: MessagesApiRetrieveChatUserStatus1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any>>;
+    retrieveChatUserStatus1(requestParameters: MessagesApiRetrieveChatUserStatus1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any, {}>>;
     /**
      *
      * @summary Post a message
@@ -10972,7 +11140,7 @@ export declare class MessagesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof MessagesApi
      */
-    sendMessage1(requestParameters?: MessagesApiSendMessage1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Message, any>>;
+    sendMessage1(requestParameters?: MessagesApiSendMessage1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Message, any, {}>>;
 }
 /**
  * @export
@@ -10981,6 +11149,8 @@ export declare const GetByUserWithResult1TypeEnum: {
     readonly ToBrokerAlertCreated: "TO_BROKER__ALERT_CREATED";
     readonly ToUserWeeklyProperties: "TO_USER__WEEKLY_PROPERTIES";
     readonly ToUserWeeklyPayedSubscribers: "TO_USER__WEEKLY_PAYED_SUBSCRIBERS";
+    readonly ToUserCoursePublishedThisWeek: "TO_USER__COURSE_PUBLISHED_THIS_WEEK";
+    readonly ToUserCourseHappeningThisWeek: "TO_USER__COURSE_HAPPENING_THIS_WEEK";
     readonly ToUserCustomizedAlert: "TO_USER__CUSTOMIZED_ALERT";
     readonly ToUserWeeklyGroupProperties: "TO_USER__WEEKLY_GROUP_PROPERTIES";
     readonly ToUserNewsletterNewSubscriber: "TO_USER__NEWSLETTER_NEW_SUBSCRIBER";
@@ -11116,7 +11286,7 @@ export declare class PasswordRecoveryApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PasswordRecoveryApi
      */
-    sendEmail1(requestParameters?: PasswordRecoveryApiSendEmail1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    sendEmail1(requestParameters?: PasswordRecoveryApiSendEmail1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      *
      * @summary Update the password user, finishing the recovery password process
@@ -11125,7 +11295,7 @@ export declare class PasswordRecoveryApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PasswordRecoveryApi
      */
-    updatePassword1(requestParameters?: PasswordRecoveryApiUpdatePassword1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    updatePassword1(requestParameters?: PasswordRecoveryApiUpdatePassword1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      *
      * @summary Validate that password recovery token supplied was valid and current
@@ -11133,7 +11303,7 @@ export declare class PasswordRecoveryApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PasswordRecoveryApi
      */
-    validateToken1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PasswordRecoveryRequest, any>>;
+    validateToken1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PasswordRecoveryRequest, any, {}>>;
 }
 /**
  * PhonePrefixesApi - axios parameter creator
@@ -11188,7 +11358,7 @@ export declare class PhonePrefixesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PhonePrefixesApi
      */
-    get3(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CountryPhonePrefix[], any>>;
+    get3(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<CountryPhonePrefix[], any, {}>>;
 }
 /**
  * PropertiesApi - axios parameter creator
@@ -11804,7 +11974,7 @@ export declare class PropertiesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertiesApi
      */
-    backfillPropertyImageOrientation1(requestParameters?: PropertiesApiBackfillPropertyImageOrientation1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    backfillPropertyImageOrientation1(requestParameters?: PropertiesApiBackfillPropertyImageOrientation1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      *
      * @summary Publication state update
@@ -11813,7 +11983,7 @@ export declare class PropertiesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertiesApi
      */
-    changePublicationStatus2(requestParameters: PropertiesApiChangePublicationStatus2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property, any>>;
+    changePublicationStatus2(requestParameters: PropertiesApiChangePublicationStatus2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property, any, {}>>;
     /**
      * This process is not reversible
      * @summary Delete the property with id supplied
@@ -11822,7 +11992,7 @@ export declare class PropertiesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertiesApi
      */
-    deleteProperty1(requestParameters: PropertiesApiDeleteProperty1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
+    deleteProperty1(requestParameters: PropertiesApiDeleteProperty1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any, {}>>;
     /**
      *
      * @summary Fetch random list of properties related to a given property
@@ -11831,7 +12001,7 @@ export declare class PropertiesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertiesApi
      */
-    fetchRandomProperties(requestParameters: PropertiesApiFetchRandomPropertiesRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property[], any>>;
+    fetchRandomProperties(requestParameters: PropertiesApiFetchRandomPropertiesRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property[], any, {}>>;
     /**
      * Returns a randomized list of properties with the specified count limit
      * @summary Fetch random list of properties, with basic data
@@ -11839,7 +12009,7 @@ export declare class PropertiesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertiesApi
      */
-    fetchRandomProperties2(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property[], any>>;
+    fetchRandomProperties2(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property[], any, {}>>;
     /**
      *
      * @summary Search properties with specified filters. Use the /property_filters endpoint before to get the available filters.
@@ -11848,7 +12018,7 @@ export declare class PropertiesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertiesApi
      */
-    findProperties1(requestParameters: PropertiesApiFindProperties1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PropertyFilterResult, any>>;
+    findProperties1(requestParameters: PropertiesApiFindProperties1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PropertyFilterResult, any, {}>>;
     /**
      *
      * @summary Return the property list with specified user id
@@ -11858,7 +12028,7 @@ export declare class PropertiesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertiesApi
      */
-    findPropertiesByLocationRange1(requestParameters: PropertiesApiFindPropertiesByLocationRange1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    findPropertiesByLocationRange1(requestParameters: PropertiesApiFindPropertiesByLocationRange1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      * Filter the properties existing in system with specified id. Returns empty if none property match the id
      * @summary Return the property with specified id
@@ -11867,7 +12037,7 @@ export declare class PropertiesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertiesApi
      */
-    findProperty1(requestParameters: PropertiesApiFindProperty1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property, any>>;
+    findProperty1(requestParameters: PropertiesApiFindProperty1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property, any, {}>>;
     /**
      * Filter the properties existing in system with specified id. Returns empty if none property match the id. The property user includes subscription plan information.
      * @summary Return the property with specified id
@@ -11876,7 +12046,7 @@ export declare class PropertiesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertiesApi
      */
-    findPropertyOldUrl1(requestParameters: PropertiesApiFindPropertyOldUrl1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property, any>>;
+    findPropertyOldUrl1(requestParameters: PropertiesApiFindPropertyOldUrl1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property, any, {}>>;
     /**
      *
      * @summary Password Protected Property for Signed in User
@@ -11884,7 +12054,7 @@ export declare class PropertiesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertiesApi
      */
-    getDraftsProperties1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property[], any>>;
+    getDraftsProperties1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property[], any, {}>>;
     /**
      * Returns recently created properties excluding password-protected and draft properties
      * @summary Get recently created properties within specified minutes (default 60)
@@ -11893,7 +12063,7 @@ export declare class PropertiesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertiesApi
      */
-    getRecentProperties1(requestParameters?: PropertiesApiGetRecentProperties1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property[], any>>;
+    getRecentProperties1(requestParameters?: PropertiesApiGetRecentProperties1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property[], any, {}>>;
     /**
      *
      * @summary Password Protected Property for Signed in User
@@ -11901,7 +12071,7 @@ export declare class PropertiesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertiesApi
      */
-    getSecuredProperties1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property[], any>>;
+    getSecuredProperties1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property[], any, {}>>;
     /**
      * Returns HTML preview for sharing a property on social media or messaging apps
      * @summary Get HTML preview for a property
@@ -11910,7 +12080,7 @@ export declare class PropertiesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertiesApi
      */
-    previewProperty2(requestParameters: PropertiesApiPreviewProperty2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any>>;
+    previewProperty2(requestParameters: PropertiesApiPreviewProperty2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any, {}>>;
     /**
      * Consider that only user can saveNew its properties
      * @summary Create or update the property supplied
@@ -11919,7 +12089,7 @@ export declare class PropertiesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertiesApi
      */
-    saveProperty1(requestParameters: PropertiesApiSaveProperty1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property, any>>;
+    saveProperty1(requestParameters: PropertiesApiSaveProperty1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property, any, {}>>;
     /**
      *
      * @param {PropertiesApiSendAlert2Request} requestParameters Request parameters.
@@ -11927,14 +12097,14 @@ export declare class PropertiesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertiesApi
      */
-    sendAlert2(requestParameters?: PropertiesApiSendAlert2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<number, any>>;
+    sendAlert2(requestParameters?: PropertiesApiSendAlert2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<number, any, {}>>;
     /**
      *
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PropertiesApi
      */
-    sendGroupAlert1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<number, any>>;
+    sendGroupAlert1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<number, any, {}>>;
 }
 /**
  * PropertyBulkDownloadApi - axios parameter creator
@@ -12082,7 +12252,7 @@ export declare class PropertyBulkDownloadApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertyBulkDownloadApi
      */
-    triggerKyeroExport1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any>>;
+    triggerKyeroExport1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any, {}>>;
     /**
      * Generates and returns property data in XML format for a specific user and format type.
      * @summary Get property XML for specific user
@@ -12091,7 +12261,7 @@ export declare class PropertyBulkDownloadApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertyBulkDownloadApi
      */
-    xml1(requestParameters: PropertyBulkDownloadApiXml1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    xml1(requestParameters: PropertyBulkDownloadApiXml1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      * Redirects to the XML file stored in S3 for a specific user and format. This endpoint is deprecated.
      * @summary Redirect to XML file (Deprecated)
@@ -12101,7 +12271,7 @@ export declare class PropertyBulkDownloadApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertyBulkDownloadApi
      */
-    xmlRedirect1(requestParameters: PropertyBulkDownloadApiXmlRedirect1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    xmlRedirect1(requestParameters: PropertyBulkDownloadApiXmlRedirect1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
 }
 /**
  * PropertyBulkUploadsApi - axios parameter creator
@@ -12399,7 +12569,7 @@ export declare class PropertyBulkUploadsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertyBulkUploadsApi
      */
-    getFormats1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string[], any>>;
+    getFormats1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string[], any, {}>>;
     /**
      * Get the history of all bulk upload jobs for the current user
      * @summary Get import job history
@@ -12407,7 +12577,7 @@ export declare class PropertyBulkUploadsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertyBulkUploadsApi
      */
-    getJobHistory1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BulkUploadJobStatusDto[], any>>;
+    getJobHistory1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BulkUploadJobStatusDto[], any, {}>>;
     /**
      * Get the status of a specific bulk upload job by its ID
      * @summary Get import job status by ID
@@ -12416,7 +12586,7 @@ export declare class PropertyBulkUploadsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertyBulkUploadsApi
      */
-    getJobStatus1(requestParameters: PropertyBulkUploadsApiGetJobStatus1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BulkUploadJobStatusDto, any>>;
+    getJobStatus1(requestParameters: PropertyBulkUploadsApiGetJobStatus1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BulkUploadJobStatusDto, any, {}>>;
     /**
      * Get the status of the most recent bulk upload job for the current user
      * @summary Get latest import job status
@@ -12424,7 +12594,7 @@ export declare class PropertyBulkUploadsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertyBulkUploadsApi
      */
-    getLatestJobStatus1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BulkUploadJobStatusDto, any>>;
+    getLatestJobStatus1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BulkUploadJobStatusDto, any, {}>>;
     /**
      * Upload properties using Kyero format with XML content in the request body
      * @summary Upload Kyero properties with XML in request body
@@ -12433,7 +12603,7 @@ export declare class PropertyBulkUploadsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertyBulkUploadsApi
      */
-    uploadKyeroProperties2(requestParameters?: PropertyBulkUploadsApiUploadKyeroProperties2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    uploadKyeroProperties2(requestParameters?: PropertyBulkUploadsApiUploadKyeroProperties2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      * Upload properties in Kyero format by providing a URL to an XML file
      * @summary Upload Kyero properties from URL
@@ -12442,7 +12612,7 @@ export declare class PropertyBulkUploadsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertyBulkUploadsApi
      */
-    uploadKyeroPropertiesFromUrl1(requestParameters?: PropertyBulkUploadsApiUploadKyeroPropertiesFromUrl1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    uploadKyeroPropertiesFromUrl1(requestParameters?: PropertyBulkUploadsApiUploadKyeroPropertiesFromUrl1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      * Upload properties with XML content in the request body using the specified format
      * @summary Upload properties in specified format with XML in request body
@@ -12451,7 +12621,7 @@ export declare class PropertyBulkUploadsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertyBulkUploadsApi
      */
-    uploadProperties1(requestParameters: PropertyBulkUploadsApiUploadProperties1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    uploadProperties1(requestParameters: PropertyBulkUploadsApiUploadProperties1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      * Upload properties in the specified format by providing a URL to an XML file
      * @summary Upload properties in specified format from URL
@@ -12460,7 +12630,7 @@ export declare class PropertyBulkUploadsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertyBulkUploadsApi
      */
-    uploadPropertiesFromUrl1(requestParameters: PropertyBulkUploadsApiUploadPropertiesFromUrl1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    uploadPropertiesFromUrl1(requestParameters: PropertyBulkUploadsApiUploadPropertiesFromUrl1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
 }
 /**
  * @export
@@ -12552,7 +12722,7 @@ export declare class PropertyFieldsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertyFieldsApi
      */
-    getPropertyFilters2(requestParameters: PropertyFieldsApiGetPropertyFilters2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PropertyField[], any>>;
+    getPropertyFilters2(requestParameters: PropertyFieldsApiGetPropertyFilters2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PropertyField[], any, {}>>;
 }
 /**
  * PropertyFiltersApi - axios parameter creator
@@ -12669,7 +12839,7 @@ export declare class PropertyFiltersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertyFiltersApi
      */
-    getPropertyFieldOptions1(requestParameters: PropertyFiltersApiGetPropertyFieldOptions1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
+    getPropertyFieldOptions1(requestParameters: PropertyFiltersApiGetPropertyFieldOptions1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any, {}>>;
     /**
      * Retrieves a list of property filters, optionally filtered by filter nature IDs
      * @summary Get property filters
@@ -12678,7 +12848,7 @@ export declare class PropertyFiltersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertyFiltersApi
      */
-    getPropertyFilters(requestParameters?: PropertyFiltersApiGetPropertyFiltersRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PropertyFilter[], any>>;
+    getPropertyFilters(requestParameters?: PropertyFiltersApiGetPropertyFiltersRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PropertyFilter[], any, {}>>;
 }
 /**
  * PropertyLocationsApi - axios parameter creator
@@ -12733,7 +12903,7 @@ export declare class PropertyLocationsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertyLocationsApi
      */
-    getAllCountries(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PropertyLocation[], any>>;
+    getAllCountries(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PropertyLocation[], any, {}>>;
 }
 /**
  * PropertyProposalsApi - axios parameter creator
@@ -12788,7 +12958,7 @@ export declare class PropertyProposalsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertyProposalsApi
      */
-    getAllPropertyProposals1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PropertyProposal[], any>>;
+    getAllPropertyProposals1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PropertyProposal[], any, {}>>;
 }
 /**
  * PropertyTypesApi - axios parameter creator
@@ -12843,7 +13013,7 @@ export declare class PropertyTypesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PropertyTypesApi
      */
-    getAllPropertyTypes1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PropertyType[], any>>;
+    getAllPropertyTypes1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PropertyType[], any, {}>>;
 }
 /**
  * SecurityApi - axios parameter creator
@@ -13089,7 +13259,7 @@ export declare class SecurityApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SecurityApi
      */
-    authorize1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    authorize1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      * Use a refresh token to obtain a new access token. The refresh token must be valid and not expired.
      * @summary Refresh access token
@@ -13098,7 +13268,7 @@ export declare class SecurityApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SecurityApi
      */
-    refreshToken1(requestParameters: SecurityApiRefreshToken1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<AuthInfoDto, any>>;
+    refreshToken1(requestParameters: SecurityApiRefreshToken1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<AuthInfoDto, any, {}>>;
     /**
      * Exchanges the provided authorization code, username, and password for a token through which private application resources can be accessed. Note that the token expires in 15 minutes. When this happens, you must invoke this service again with the previously described parameters.
      * @summary Exchange authorization code for access token
@@ -13107,7 +13277,7 @@ export declare class SecurityApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SecurityApi
      */
-    requestToken1(requestParameters: SecurityApiRequestToken1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<AuthInfoDto, any>>;
+    requestToken1(requestParameters: SecurityApiRequestToken1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<AuthInfoDto, any, {}>>;
     /**
      * Revoke an access token or refresh token
      * @summary Revoke a token
@@ -13116,7 +13286,7 @@ export declare class SecurityApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SecurityApi
      */
-    revokeToken1(requestParameters: SecurityApiRevokeToken1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    revokeToken1(requestParameters: SecurityApiRevokeToken1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
 }
 /**
  * SkillsApi - axios parameter creator
@@ -13171,7 +13341,7 @@ export declare class SkillsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SkillsApi
      */
-    retrieveUserSkills2(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Skill[], any>>;
+    retrieveUserSkills2(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Skill[], any, {}>>;
 }
 /**
  * StripeIdentityWebhooksApi - axios parameter creator
@@ -13317,7 +13487,7 @@ export declare class StripeIdentityWebhooksApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof StripeIdentityWebhooksApi
      */
-    handleVerificationCanceled1(requestParameters?: StripeIdentityWebhooksApiHandleVerificationCanceled1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    handleVerificationCanceled1(requestParameters?: StripeIdentityWebhooksApiHandleVerificationCanceled1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      * Called by Stripe when verification needs additional review or is flagged
      * @summary Handle verification requires input webhook
@@ -13326,7 +13496,7 @@ export declare class StripeIdentityWebhooksApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof StripeIdentityWebhooksApi
      */
-    handleVerificationRequiresInput1(requestParameters?: StripeIdentityWebhooksApiHandleVerificationRequiresInput1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    handleVerificationRequiresInput1(requestParameters?: StripeIdentityWebhooksApiHandleVerificationRequiresInput1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      * Called by Stripe when identity verification is successfully completed
      * @summary Handle verification verified webhook
@@ -13335,7 +13505,7 @@ export declare class StripeIdentityWebhooksApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof StripeIdentityWebhooksApi
      */
-    handleVerificationVerified1(requestParameters?: StripeIdentityWebhooksApiHandleVerificationVerified1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    handleVerificationVerified1(requestParameters?: StripeIdentityWebhooksApiHandleVerificationVerified1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
 }
 /**
  * StripeWebhooksApi - axios parameter creator
@@ -13518,7 +13688,7 @@ export declare class StripeWebhooksApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof StripeWebhooksApi
      */
-    postSubscriptionDeleted1(requestParameters?: StripeWebhooksApiPostSubscriptionDeleted1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    postSubscriptionDeleted1(requestParameters?: StripeWebhooksApiPostSubscriptionDeleted1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      *
      * @summary Notify subscription paused
@@ -13527,7 +13697,7 @@ export declare class StripeWebhooksApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof StripeWebhooksApi
      */
-    postSubscriptionPaused1(requestParameters?: StripeWebhooksApiPostSubscriptionPaused1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    postSubscriptionPaused1(requestParameters?: StripeWebhooksApiPostSubscriptionPaused1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      *
      * @summary Notify trial will end
@@ -13536,7 +13706,7 @@ export declare class StripeWebhooksApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof StripeWebhooksApi
      */
-    postTrialWillEnd1(requestParameters?: StripeWebhooksApiPostTrialWillEnd1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    postTrialWillEnd1(requestParameters?: StripeWebhooksApiPostTrialWillEnd1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      *
      * @summary Notify user subscription change
@@ -13545,7 +13715,7 @@ export declare class StripeWebhooksApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof StripeWebhooksApi
      */
-    postUserSubscriptionChange1(requestParameters?: StripeWebhooksApiPostUserSubscriptionChange1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    postUserSubscriptionChange1(requestParameters?: StripeWebhooksApiPostUserSubscriptionChange1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
 }
 /**
  * SubscriptionsApi - axios parameter creator
@@ -13684,7 +13854,7 @@ export declare class SubscriptionsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SubscriptionsApi
      */
-    get(requestParameters: SubscriptionsApiGetRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserSubscriptionDto, any>>;
+    get(requestParameters: SubscriptionsApiGetRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserSubscriptionDto, any, {}>>;
     /**
      *
      * @param {SubscriptionsApiGetActiveFeatures1Request} requestParameters Request parameters.
@@ -13692,7 +13862,7 @@ export declare class SubscriptionsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SubscriptionsApi
      */
-    getActiveFeatures1(requestParameters: SubscriptionsApiGetActiveFeatures1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SubscriptionPlanFeatureDto[], any>>;
+    getActiveFeatures1(requestParameters: SubscriptionsApiGetActiveFeatures1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SubscriptionPlanFeatureDto[], any, {}>>;
     /**
      *
      * @summary Return the active and available subscription plans
@@ -13701,7 +13871,7 @@ export declare class SubscriptionsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SubscriptionsApi
      */
-    getAll1(requestParameters?: SubscriptionsApiGetAll1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    getAll1(requestParameters?: SubscriptionsApiGetAll1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
 }
 /**
  * TestimonialApi - axios parameter creator
@@ -13987,7 +14157,7 @@ export declare class TestimonialApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TestimonialApi
      */
-    changePublicationStatus(requestParameters: TestimonialApiChangePublicationStatusRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Testimonial, any>>;
+    changePublicationStatus(requestParameters: TestimonialApiChangePublicationStatusRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Testimonial, any, {}>>;
     /**
      *
      * @summary Fetch User Posted list of testimonials
@@ -13996,7 +14166,7 @@ export declare class TestimonialApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TestimonialApi
      */
-    fetchPublishedTestimonials1(requestParameters?: TestimonialApiFetchPublishedTestimonials1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<TestimonialFilterResult, any>>;
+    fetchPublishedTestimonials1(requestParameters?: TestimonialApiFetchPublishedTestimonials1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<TestimonialFilterResult, any, {}>>;
     /**
      *
      * @summary Fetch User Received list of testimonials
@@ -14005,7 +14175,7 @@ export declare class TestimonialApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TestimonialApi
      */
-    fetchReceivedTestimonials1(requestParameters?: TestimonialApiFetchReceivedTestimonials1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<TestimonialFilterResult, any>>;
+    fetchReceivedTestimonials1(requestParameters?: TestimonialApiFetchReceivedTestimonials1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<TestimonialFilterResult, any, {}>>;
     /**
      *
      * @summary Return the testimonial with specified id, it needs to be published
@@ -14014,7 +14184,7 @@ export declare class TestimonialApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TestimonialApi
      */
-    findTestimonial1(requestParameters: TestimonialApiFindTestimonial1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Testimonial, any>>;
+    findTestimonial1(requestParameters: TestimonialApiFindTestimonial1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Testimonial, any, {}>>;
     /**
      *
      * @summary Return the testimonial Requests a user Created
@@ -14022,7 +14192,7 @@ export declare class TestimonialApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TestimonialApi
      */
-    findTestimonialRequests1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Testimonial[], any>>;
+    findTestimonialRequests1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Testimonial[], any, {}>>;
     /**
      *
      * @summary Return the testimonial Requests a user Received
@@ -14030,7 +14200,7 @@ export declare class TestimonialApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TestimonialApi
      */
-    findTestimonialRequestsReceived1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Testimonial[], any>>;
+    findTestimonialRequestsReceived1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Testimonial[], any, {}>>;
     /**
      * Consider that only user can save new testimonials
      * @summary Create or update the Testimonial supplied
@@ -14039,7 +14209,7 @@ export declare class TestimonialApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TestimonialApi
      */
-    saveTestimonial1(requestParameters: TestimonialApiSaveTestimonial1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Testimonial, any>>;
+    saveTestimonial1(requestParameters: TestimonialApiSaveTestimonial1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Testimonial, any, {}>>;
 }
 /**
  * TextTranslationsApi - axios parameter creator
@@ -14119,7 +14289,7 @@ export declare class TextTranslationsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TextTranslationsApi
      */
-    translateText1(requestParameters?: TextTranslationsApiTranslateText1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<TextTranslation, any>>;
+    translateText1(requestParameters?: TextTranslationsApiTranslateText1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<TextTranslation, any, {}>>;
 }
 /**
  * UserConnectionsApi - axios parameter creator
@@ -14191,7 +14361,7 @@ export declare class UserConnectionsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UserConnectionsApi
      */
-    findUserConnections2(requestParameters: UserConnectionsApiFindUserConnections2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<User[], any>>;
+    findUserConnections2(requestParameters: UserConnectionsApiFindUserConnections2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<User[], any, {}>>;
 }
 /**
  * UserContractsApi - axios parameter creator
@@ -14283,7 +14453,7 @@ export declare class UserContractsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UserContractsApi
      */
-    findUserContracts1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Contract[], any>>;
+    findUserContracts1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Contract[], any, {}>>;
     /**
      *
      * @summary Save a user Contract
@@ -14292,7 +14462,7 @@ export declare class UserContractsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UserContractsApi
      */
-    save2(requestParameters: UserContractsApiSave2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Contract, any>>;
+    save2(requestParameters: UserContractsApiSave2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Contract, any, {}>>;
 }
 /**
  * UserSummaryApi - axios parameter creator
@@ -14380,7 +14550,7 @@ export declare class UserSummaryApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UserSummaryApi
      */
-    getChatSummaryByUser1(requestParameters: UserSummaryApiGetChatSummaryByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserChatsSummary, any>>;
+    getChatSummaryByUser1(requestParameters: UserSummaryApiGetChatSummaryByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserChatsSummary, any, {}>>;
 }
 /**
  * UserTypesApi - axios parameter creator
@@ -14435,7 +14605,7 @@ export declare class UserTypesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UserTypesApi
      */
-    getUserTypes1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserType[], any>>;
+    getUserTypes1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserType[], any, {}>>;
 }
 /**
  * UsersApi - axios parameter creator
@@ -15706,7 +15876,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    activateUser1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
+    activateUser1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any, {}>>;
     /**
      * This endpoint is not supported. Use save user profile to update skills instead.
      * @summary Add user skills
@@ -15715,7 +15885,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    addUserSkills1(requestParameters: UsersApiAddUserSkills1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    addUserSkills1(requestParameters: UsersApiAddUserSkills1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      * Re-download fullsize from S3, rotate, overwrite all sizes. Use when EXIF was stripped from stored images.
      * @summary Backfill profile image orientation
@@ -15724,7 +15894,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    backfillImageOrientation1(requestParameters?: UsersApiBackfillImageOrientation1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    backfillImageOrientation1(requestParameters?: UsersApiBackfillImageOrientation1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      * One-time: publishes UserChangeEvent for each user to push main language and service category to Ortto/Autopilot. Remove after execution.
      * @summary Backfill profile to Ortto
@@ -15732,7 +15902,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    backfillProfileToOrtto1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    backfillProfileToOrtto1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      * Updates subscription_tier column for all users based on their current subscription. Should be called once after migration.
      * @summary Backfill subscription tiers
@@ -15740,7 +15910,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    backfillSubscriptionTiers1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    backfillSubscriptionTiers1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      * Checks the status of a Stripe Identity verification session and marks user as verified if successful
      * @summary Check identity verification status
@@ -15749,7 +15919,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    checkIdentityVerification1(requestParameters: UsersApiCheckIdentityVerification1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
+    checkIdentityVerification1(requestParameters: UsersApiCheckIdentityVerification1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any, {}>>;
     /**
      * Verifies the code that was sent to the user\'s phone
      * @summary Verify the phone code sent to user
@@ -15758,7 +15928,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    checkPhoneVerificationCodeCommand1(requestParameters: UsersApiCheckPhoneVerificationCodeCommand1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PhoneCodeCheckResource, any>>;
+    checkPhoneVerificationCodeCommand1(requestParameters: UsersApiCheckPhoneVerificationCodeCommand1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PhoneCodeCheckResource, any, {}>>;
     /**
      * Allows a user to endorse another user\'s skill
      * @summary Endorse a user skill
@@ -15767,7 +15937,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    endorseUserSkill1(requestParameters: UsersApiEndorseUserSkill1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkillEndorsement, any>>;
+    endorseUserSkill1(requestParameters: UsersApiEndorseUserSkill1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkillEndorsement, any, {}>>;
     /**
      * Retrieves a random selection of users based on specified criteria
      * @summary Fetch random list of users, with basic data
@@ -15776,7 +15946,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    fetchRandomUsers1(requestParameters: UsersApiFetchRandomUsers1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkilledUser[], any>>;
+    fetchRandomUsers1(requestParameters: UsersApiFetchRandomUsers1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkilledUser[], any, {}>>;
     /**
      *
      * @summary Return the property list with specified user id (public; no OAuth client headers required)
@@ -15785,7 +15955,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    findPropertiesByUser1(requestParameters: UsersApiFindPropertiesByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PropertyFilterResult, any>>;
+    findPropertiesByUser1(requestParameters: UsersApiFindPropertiesByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PropertyFilterResult, any, {}>>;
     /**
      *
      * @summary Return the testimonials list with specified user id
@@ -15794,7 +15964,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    findTestimonialsByUser1(requestParameters: UsersApiFindTestimonialsByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<TestimonialFilterResult, any>>;
+    findTestimonialsByUser1(requestParameters: UsersApiFindTestimonialsByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<TestimonialFilterResult, any, {}>>;
     /**
      * Gets detailed user information by user ID
      * @summary Fetch user detail according to its id
@@ -15803,7 +15973,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    findUserById1(requestParameters: UsersApiFindUserById1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkilledUser, any>>;
+    findUserById1(requestParameters: UsersApiFindUserById1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkilledUser, any, {}>>;
     /**
      * Gets user information by their unique profile name
      * @summary Fetch user detail according to its profile name
@@ -15812,7 +15982,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    findUserByProfileName1(requestParameters?: UsersApiFindUserByProfileName1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkilledUser, any>>;
+    findUserByProfileName1(requestParameters?: UsersApiFindUserByProfileName1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkilledUser, any, {}>>;
     /**
      * Retrieves the list of connections for a specific user
      * @summary Get a user connections
@@ -15821,7 +15991,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    findUserConnections(requestParameters: UsersApiFindUserConnectionsRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkilledUser[], any>>;
+    findUserConnections(requestParameters: UsersApiFindUserConnectionsRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkilledUser[], any, {}>>;
     /**
      * Gets detailed information for multiple users by their IDs
      * @summary Fetch multiple user detail according to its ids
@@ -15830,7 +16000,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    findUsersByIds1(requestParameters: UsersApiFindUsersByIds1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkilledUser[], any>>;
+    findUsersByIds1(requestParameters: UsersApiFindUsersByIds1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkilledUser[], any, {}>>;
     /**
      * Retrieves all users who have subscribed to the specified subscription plan
      * @summary Gets the users subscribed to a subscription plan name like Professional
@@ -15839,7 +16009,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    getSubscribedUsers1(requestParameters: UsersApiGetSubscribedUsers1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SubscribedUser[], any>>;
+    getSubscribedUsers1(requestParameters: UsersApiGetSubscribedUsers1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SubscribedUser[], any, {}>>;
     /**
      * Returns up to 5 ranked suggestions (12h cooldown, excludes seen/pending/connected).
      * @summary Suggested profiles to connect with
@@ -15847,7 +16017,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    getSuggestions1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<NetworkSuggestionDto, any>>;
+    getSuggestions1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<NetworkSuggestionDto, any, {}>>;
     /**
      *
      * @summary Record network suggestion analytics events
@@ -15856,7 +16026,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    postEvent1(requestParameters?: UsersApiPostEvent1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    postEvent1(requestParameters?: UsersApiPostEvent1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      * Generates an HTML preview of a user profile for sharing purposes
      * @summary Get HTML preview of a user profile
@@ -15865,7 +16035,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    previewProperty(requestParameters?: UsersApiPreviewPropertyRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any>>;
+    previewProperty(requestParameters?: UsersApiPreviewPropertyRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any, {}>>;
     /**
      * Creates a new user account in the system
      * @summary Register new user in the system
@@ -15874,7 +16044,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    register1(requestParameters: UsersApiRegister1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
+    register1(requestParameters: UsersApiRegister1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any, {}>>;
     /**
      * Sends an activation link to the user\'s email for account verification
      * @summary Request activation link
@@ -15883,7 +16053,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    requestActivationLink1(requestParameters?: UsersApiRequestActivationLink1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    requestActivationLink1(requestParameters?: UsersApiRequestActivationLink1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      *
      * @summary Request testimonial from specified user id
@@ -15892,7 +16062,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    requestTestimonialFromUser1(requestParameters: UsersApiRequestTestimonialFromUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<TestimonialRequest, any>>;
+    requestTestimonialFromUser1(requestParameters: UsersApiRequestTestimonialFromUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<TestimonialRequest, any, {}>>;
     /**
      * Returns all endorsements for a specific user skill
      * @summary Retrieve skill endorsements
@@ -15901,7 +16071,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    retrieveSkillEndorsements1(requestParameters: UsersApiRetrieveSkillEndorsements1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkillEndorsement[], any>>;
+    retrieveSkillEndorsements1(requestParameters: UsersApiRetrieveSkillEndorsements1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<SkillEndorsement[], any, {}>>;
     /**
      * Returns all skills associated with a user
      * @summary Retrieve user skills
@@ -15910,7 +16080,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    retrieveUserSkills(requestParameters: UsersApiRetrieveUserSkillsRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserSkill[], any>>;
+    retrieveUserSkills(requestParameters: UsersApiRetrieveUserSkillsRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserSkill[], any, {}>>;
     /**
      * Updates user profile information in the system
      * @summary Save the data of user in the system
@@ -15919,7 +16089,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    save(requestParameters: UsersApiSaveRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any>>;
+    save(requestParameters: UsersApiSaveRequest, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any, {}>>;
     /**
      *
      * @param {UsersApiSaveLog1Request} requestParameters Request parameters.
@@ -15927,7 +16097,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    saveLog1(requestParameters?: UsersApiSaveLog1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    saveLog1(requestParameters?: UsersApiSaveLog1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      * Searches for users matching the specified filter criteria. When authenticated (O-Auth-Token header provided), includes connection degrees (1st, 2nd, 3rd+) to other users.
      * @summary Search users with specified filters
@@ -15936,7 +16106,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    searchUsers1(requestParameters: UsersApiSearchUsers1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserFilterResult, any>>;
+    searchUsers1(requestParameters: UsersApiSearchUsers1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<UserFilterResult, any, {}>>;
     /**
      * Sends an email verification link to the authenticated user\'s email address
      * @summary Send email verification to logged-in user
@@ -15945,14 +16115,14 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    sendEmailVerification1(requestParameters?: UsersApiSendEmailVerification1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    sendEmailVerification1(requestParameters?: UsersApiSendEmailVerification1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      *
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    sendPayedSusbscribersAlert1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any>>;
+    sendPayedSusbscribersAlert1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      * Sends a verification code to the user\'s phone number for verification purposes
      * @summary Send a code to the previously saved phone number of the user
@@ -15961,7 +16131,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    sendPhoneVerificationCodeCommand1(requestParameters: UsersApiSendPhoneVerificationCodeCommand1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PhoneCodeRequestResource, any>>;
+    sendPhoneVerificationCodeCommand1(requestParameters: UsersApiSendPhoneVerificationCodeCommand1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<PhoneCodeRequestResource, any, {}>>;
     /**
      * Initiates Stripe Identity verification and returns a verification URL and session ID
      * @summary Start identity verification for user
@@ -15970,7 +16140,7 @@ export declare class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    startIdentityVerification1(requestParameters: UsersApiStartIdentityVerification1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<IdentityVerificationStartResponse, any>>;
+    startIdentityVerification1(requestParameters: UsersApiStartIdentityVerification1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<IdentityVerificationStartResponse, any, {}>>;
 }
 /**
  * @export

@@ -391,13 +391,13 @@ export interface AutopilotUser {
      * @type {string}
      * @memberof AutopilotUser
      */
-    'contactId': string;
+    'contactId'?: string;
     /**
      * 
      * @type {string}
      * @memberof AutopilotUser
      */
-    'email': string;
+    'email'?: string;
 }
 /**
  * 
@@ -942,11 +942,11 @@ export interface CountryTelephonePrefix {
  */
 export interface Course {
     /**
-     * Primary key
-     * @type {number}
+     * Opaque course id
+     * @type {string}
      * @memberof Course
      */
-    'id'?: number;
+    'id'?: string;
     /**
      * Owning instructor user id
      * @type {number}
@@ -977,6 +977,12 @@ export interface Course {
      * @memberof Course
      */
     'title'?: string;
+    /**
+     * Public SEO URL slug (globally unique, lowercase)
+     * @type {string}
+     * @memberof Course
+     */
+    'slug'?: string;
     /**
      * Full HTML / markdown description body
      * @type {string}
@@ -1137,6 +1143,12 @@ export interface CourseWriteDto {
      * @memberof CourseWriteDto
      */
     'title': string;
+    /**
+     * Optional custom public URL slug (letters, digits, hyphens)
+     * @type {string}
+     * @memberof CourseWriteDto
+     */
+    'slug'?: string;
     /**
      * Long description body
      * @type {string}
@@ -3242,6 +3254,8 @@ export const NotificationTypeEnum = {
     ToBrokerAlertCreated: 'TO_BROKER__ALERT_CREATED',
     ToUserWeeklyProperties: 'TO_USER__WEEKLY_PROPERTIES',
     ToUserWeeklyPayedSubscribers: 'TO_USER__WEEKLY_PAYED_SUBSCRIBERS',
+    ToUserCoursePublishedThisWeek: 'TO_USER__COURSE_PUBLISHED_THIS_WEEK',
+    ToUserCourseHappeningThisWeek: 'TO_USER__COURSE_HAPPENING_THIS_WEEK',
     ToUserCustomizedAlert: 'TO_USER__CUSTOMIZED_ALERT',
     ToUserWeeklyGroupProperties: 'TO_USER__WEEKLY_GROUP_PROPERTIES',
     ToUserNewsletterNewSubscriber: 'TO_USER__NEWSLETTER_NEW_SUBSCRIBER',
@@ -8630,11 +8644,11 @@ export const CoursesApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary Delete course
-         * @param {number} courseId Course id
+         * @param {string} courseId Course id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        _delete: async (courseId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        _delete: async (courseId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'courseId' is not null or undefined
             assertParamExists('_delete', 'courseId', courseId)
             const localVarPath = `/courses/{courseId}`
@@ -8667,12 +8681,12 @@ export const CoursesApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary Track attend click and redirect to external registration URL
-         * @param {number} courseId Course id
-         * @param {string} [source] Analytics source tag
+         * @param {string} courseId Course id
+         * @param {string} [source] Analytics source tag (newsletter | website)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        attendGo1: async (courseId: number, source?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        attendGo1: async (courseId: string, source?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'courseId' is not null or undefined
             assertParamExists('attendGo1', 'courseId', courseId)
             const localVarPath = `/courses/{courseId}/go`
@@ -8752,15 +8766,55 @@ export const CoursesApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary Get published course by id
-         * @param {number} courseId Course id
+         * @param {string} courseId Course id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        get1: async (courseId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        get1: async (courseId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'courseId' is not null or undefined
             assertParamExists('get1', 'courseId', courseId)
             const localVarPath = `/courses/{courseId}`
                 .replace(`{${"courseId"}}`, encodeURIComponent(String(courseId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Globally visible active course matched by slug
+         * @summary Get published course by URL slug
+         * @param {string} slug Public SEO slug
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getBySlug1: async (slug: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'slug' is not null or undefined
+            assertParamExists('getBySlug1', 'slug', slug)
+            const localVarPath = `/courses/slug/{slug}`
+                .replace(`{${"slug"}}`, encodeURIComponent(String(slug)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -8905,13 +8959,13 @@ export const CoursesApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary Record anonymous course interaction (e.g. gated attend)
-         * @param {number} courseId Course id
+         * @param {string} courseId Course id
          * @param {string} eventType Known anonymous events
-         * @param {string} [source] Analytics funnel tag
+         * @param {string} [source] Analytics funnel tag (newsletter | website)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        recordAnonymousClick1: async (courseId: number, eventType: string, source?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        recordAnonymousClick1: async (courseId: string, eventType: string, source?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'courseId' is not null or undefined
             assertParamExists('recordAnonymousClick1', 'courseId', courseId)
             // verify required parameter 'eventType' is not null or undefined
@@ -8957,12 +9011,12 @@ export const CoursesApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary Update course
-         * @param {number} courseId Course id
+         * @param {string} courseId Course id
          * @param {CourseWriteDto} courseWriteDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        update1: async (courseId: number, courseWriteDto: CourseWriteDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        update1: async (courseId: string, courseWriteDto: CourseWriteDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'courseId' is not null or undefined
             assertParamExists('update1', 'courseId', courseId)
             // verify required parameter 'courseWriteDto' is not null or undefined
@@ -9010,11 +9064,11 @@ export const CoursesApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Delete course
-         * @param {number} courseId Course id
+         * @param {string} courseId Course id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async _delete(courseId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async _delete(courseId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator._delete(courseId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CoursesApi._delete']?.[localVarOperationServerIndex]?.url;
@@ -9023,12 +9077,12 @@ export const CoursesApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Track attend click and redirect to external registration URL
-         * @param {number} courseId Course id
-         * @param {string} [source] Analytics source tag
+         * @param {string} courseId Course id
+         * @param {string} [source] Analytics source tag (newsletter | website)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async attendGo1(courseId: number, source?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async attendGo1(courseId: string, source?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.attendGo1(courseId, source, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CoursesApi.attendGo1']?.[localVarOperationServerIndex]?.url;
@@ -9051,14 +9105,27 @@ export const CoursesApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Get published course by id
-         * @param {number} courseId Course id
+         * @param {string} courseId Course id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async get1(courseId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Course>> {
+        async get1(courseId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Course>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.get1(courseId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CoursesApi.get1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Globally visible active course matched by slug
+         * @summary Get published course by URL slug
+         * @param {string} slug Public SEO slug
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getBySlug1(slug: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Course>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getBySlug1(slug, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CoursesApi.getBySlug1']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -9097,13 +9164,13 @@ export const CoursesApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Record anonymous course interaction (e.g. gated attend)
-         * @param {number} courseId Course id
+         * @param {string} courseId Course id
          * @param {string} eventType Known anonymous events
-         * @param {string} [source] Analytics funnel tag
+         * @param {string} [source] Analytics funnel tag (newsletter | website)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async recordAnonymousClick1(courseId: number, eventType: string, source?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async recordAnonymousClick1(courseId: string, eventType: string, source?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.recordAnonymousClick1(courseId, eventType, source, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CoursesApi.recordAnonymousClick1']?.[localVarOperationServerIndex]?.url;
@@ -9112,12 +9179,12 @@ export const CoursesApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Update course
-         * @param {number} courseId Course id
+         * @param {string} courseId Course id
          * @param {CourseWriteDto} courseWriteDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async update1(courseId: number, courseWriteDto: CourseWriteDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Course>> {
+        async update1(courseId: string, courseWriteDto: CourseWriteDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Course>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.update1(courseId, courseWriteDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CoursesApi.update1']?.[localVarOperationServerIndex]?.url;
@@ -9174,6 +9241,16 @@ export const CoursesApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.get1(requestParameters.courseId, options).then((request) => request(axios, basePath));
         },
         /**
+         * Globally visible active course matched by slug
+         * @summary Get published course by URL slug
+         * @param {CoursesApiGetBySlug1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getBySlug1(requestParameters: CoursesApiGetBySlug1Request, options?: RawAxiosRequestConfig): AxiosPromise<Course> {
+            return localVarFp.getBySlug1(requestParameters.slug, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Globally visible active courses
          * @summary List published courses
          * @param {CoursesApiList1Request} requestParameters Request parameters.
@@ -9224,10 +9301,10 @@ export const CoursesApiFactory = function (configuration?: Configuration, basePa
 export interface CoursesApiDeleteRequest {
     /**
      * Course id
-     * @type {number}
+     * @type {string}
      * @memberof CoursesApiDelete
      */
-    readonly courseId: number
+    readonly courseId: string
 }
 
 /**
@@ -9238,13 +9315,13 @@ export interface CoursesApiDeleteRequest {
 export interface CoursesApiAttendGo1Request {
     /**
      * Course id
-     * @type {number}
+     * @type {string}
      * @memberof CoursesApiAttendGo1
      */
-    readonly courseId: number
+    readonly courseId: string
 
     /**
-     * Analytics source tag
+     * Analytics source tag (newsletter | website)
      * @type {string}
      * @memberof CoursesApiAttendGo1
      */
@@ -9280,10 +9357,24 @@ export interface CoursesApiCreate1Request {
 export interface CoursesApiGet1Request {
     /**
      * Course id
-     * @type {number}
+     * @type {string}
      * @memberof CoursesApiGet1
      */
-    readonly courseId: number
+    readonly courseId: string
+}
+
+/**
+ * Request parameters for getBySlug1 operation in CoursesApi.
+ * @export
+ * @interface CoursesApiGetBySlug1Request
+ */
+export interface CoursesApiGetBySlug1Request {
+    /**
+     * Public SEO slug
+     * @type {string}
+     * @memberof CoursesApiGetBySlug1
+     */
+    readonly slug: string
 }
 
 /**
@@ -9371,10 +9462,10 @@ export interface CoursesApiListForUser1Request {
 export interface CoursesApiRecordAnonymousClick1Request {
     /**
      * Course id
-     * @type {number}
+     * @type {string}
      * @memberof CoursesApiRecordAnonymousClick1
      */
-    readonly courseId: number
+    readonly courseId: string
 
     /**
      * Known anonymous events
@@ -9384,7 +9475,7 @@ export interface CoursesApiRecordAnonymousClick1Request {
     readonly eventType: string
 
     /**
-     * Analytics funnel tag
+     * Analytics funnel tag (newsletter | website)
      * @type {string}
      * @memberof CoursesApiRecordAnonymousClick1
      */
@@ -9399,10 +9490,10 @@ export interface CoursesApiRecordAnonymousClick1Request {
 export interface CoursesApiUpdate1Request {
     /**
      * Course id
-     * @type {number}
+     * @type {string}
      * @memberof CoursesApiUpdate1
      */
-    readonly courseId: number
+    readonly courseId: string
 
     /**
      * 
@@ -9465,6 +9556,18 @@ export class CoursesApi extends BaseAPI {
      */
     public get1(requestParameters: CoursesApiGet1Request, options?: RawAxiosRequestConfig) {
         return CoursesApiFp(this.configuration).get1(requestParameters.courseId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Globally visible active course matched by slug
+     * @summary Get published course by URL slug
+     * @param {CoursesApiGetBySlug1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoursesApi
+     */
+    public getBySlug1(requestParameters: CoursesApiGetBySlug1Request, options?: RawAxiosRequestConfig) {
+        return CoursesApiFp(this.configuration).getBySlug1(requestParameters.slug, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -14704,6 +14807,98 @@ export const MessagesApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
+         * @param {string} type 
+         * @param {string} [token] 
+         * @param {string} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getOrttoDynamicContent1: async (type: string, token?: string, body?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'type' is not null or undefined
+            assertParamExists('getOrttoDynamicContent1', 'type', type)
+            const localVarPath = `/notifications/{type}/ortto-dynamic`
+                .replace(`{${"type"}}`, encodeURIComponent(String(type)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+            if (token !== undefined) {
+                localVarQueryParameter['token'] = token;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} type 
+         * @param {string} [token] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        previewOrttoDynamicContent1: async (type: string, token?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'type' is not null or undefined
+            assertParamExists('previewOrttoDynamicContent1', 'type', type)
+            const localVarPath = `/notifications/{type}/ortto-dynamic`
+                .replace(`{${"type"}}`, encodeURIComponent(String(type)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+            if (token !== undefined) {
+                localVarQueryParameter['token'] = token;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Retrieve a user chat
          * @param {number} id user id
          * @param {*} [options] Override http request option.
@@ -14865,6 +15060,33 @@ export const MessagesApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {string} type 
+         * @param {string} [token] 
+         * @param {string} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getOrttoDynamicContent1(type: string, token?: string, body?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getOrttoDynamicContent1(type, token, body, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['MessagesApi.getOrttoDynamicContent1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} type 
+         * @param {string} [token] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async previewOrttoDynamicContent1(type: string, token?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.previewOrttoDynamicContent1(type, token, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['MessagesApi.previewOrttoDynamicContent1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Retrieve a user chat
          * @param {number} id user id
          * @param {*} [options] Override http request option.
@@ -14934,6 +15156,24 @@ export const MessagesApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * 
+         * @param {MessagesApiGetOrttoDynamicContent1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getOrttoDynamicContent1(requestParameters: MessagesApiGetOrttoDynamicContent1Request, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.getOrttoDynamicContent1(requestParameters.type, requestParameters.token, requestParameters.body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {MessagesApiPreviewOrttoDynamicContent1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        previewOrttoDynamicContent1(requestParameters: MessagesApiPreviewOrttoDynamicContent1Request, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.previewOrttoDynamicContent1(requestParameters.type, requestParameters.token, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Retrieve a user chat
          * @param {MessagesApiRetrieveChatUser1Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -14980,7 +15220,7 @@ export interface MessagesApiGetByUserWithResult1Request {
 
     /**
      * Notification type
-     * @type {'TO_BROKER__ALERT_CREATED' | 'TO_USER__WEEKLY_PROPERTIES' | 'TO_USER__WEEKLY_PAYED_SUBSCRIBERS' | 'TO_USER__CUSTOMIZED_ALERT' | 'TO_USER__WEEKLY_GROUP_PROPERTIES' | 'TO_USER__NEWSLETTER_NEW_SUBSCRIBER' | 'TO_USER__NEWSLETTER_CONFIRMATION' | 'TO_USER__NEWSLETTER_LISTING'}
+     * @type {'TO_BROKER__ALERT_CREATED' | 'TO_USER__WEEKLY_PROPERTIES' | 'TO_USER__WEEKLY_PAYED_SUBSCRIBERS' | 'TO_USER__COURSE_PUBLISHED_THIS_WEEK' | 'TO_USER__COURSE_HAPPENING_THIS_WEEK' | 'TO_USER__CUSTOMIZED_ALERT' | 'TO_USER__WEEKLY_GROUP_PROPERTIES' | 'TO_USER__NEWSLETTER_NEW_SUBSCRIBER' | 'TO_USER__NEWSLETTER_CONFIRMATION' | 'TO_USER__NEWSLETTER_LISTING'}
      * @memberof MessagesApiGetByUserWithResult1
      */
     readonly type: GetByUserWithResult1TypeEnum
@@ -15026,6 +15266,55 @@ export interface MessagesApiGetConversation1Request {
      * @memberof MessagesApiGetConversation1
      */
     readonly beforeDatetime?: LocalDateTimeQueryString
+}
+
+/**
+ * Request parameters for getOrttoDynamicContent1 operation in MessagesApi.
+ * @export
+ * @interface MessagesApiGetOrttoDynamicContent1Request
+ */
+export interface MessagesApiGetOrttoDynamicContent1Request {
+    /**
+     * 
+     * @type {string}
+     * @memberof MessagesApiGetOrttoDynamicContent1
+     */
+    readonly type: string
+
+    /**
+     * 
+     * @type {string}
+     * @memberof MessagesApiGetOrttoDynamicContent1
+     */
+    readonly token?: string
+
+    /**
+     * 
+     * @type {string}
+     * @memberof MessagesApiGetOrttoDynamicContent1
+     */
+    readonly body?: string
+}
+
+/**
+ * Request parameters for previewOrttoDynamicContent1 operation in MessagesApi.
+ * @export
+ * @interface MessagesApiPreviewOrttoDynamicContent1Request
+ */
+export interface MessagesApiPreviewOrttoDynamicContent1Request {
+    /**
+     * 
+     * @type {string}
+     * @memberof MessagesApiPreviewOrttoDynamicContent1
+     */
+    readonly type: string
+
+    /**
+     * 
+     * @type {string}
+     * @memberof MessagesApiPreviewOrttoDynamicContent1
+     */
+    readonly token?: string
 }
 
 /**
@@ -15103,6 +15392,28 @@ export class MessagesApi extends BaseAPI {
 
     /**
      * 
+     * @param {MessagesApiGetOrttoDynamicContent1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessagesApi
+     */
+    public getOrttoDynamicContent1(requestParameters: MessagesApiGetOrttoDynamicContent1Request, options?: RawAxiosRequestConfig) {
+        return MessagesApiFp(this.configuration).getOrttoDynamicContent1(requestParameters.type, requestParameters.token, requestParameters.body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {MessagesApiPreviewOrttoDynamicContent1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessagesApi
+     */
+    public previewOrttoDynamicContent1(requestParameters: MessagesApiPreviewOrttoDynamicContent1Request, options?: RawAxiosRequestConfig) {
+        return MessagesApiFp(this.configuration).previewOrttoDynamicContent1(requestParameters.type, requestParameters.token, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Retrieve a user chat
      * @param {MessagesApiRetrieveChatUser1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -15145,6 +15456,8 @@ export const GetByUserWithResult1TypeEnum = {
     ToBrokerAlertCreated: 'TO_BROKER__ALERT_CREATED',
     ToUserWeeklyProperties: 'TO_USER__WEEKLY_PROPERTIES',
     ToUserWeeklyPayedSubscribers: 'TO_USER__WEEKLY_PAYED_SUBSCRIBERS',
+    ToUserCoursePublishedThisWeek: 'TO_USER__COURSE_PUBLISHED_THIS_WEEK',
+    ToUserCourseHappeningThisWeek: 'TO_USER__COURSE_HAPPENING_THIS_WEEK',
     ToUserCustomizedAlert: 'TO_USER__CUSTOMIZED_ALERT',
     ToUserWeeklyGroupProperties: 'TO_USER__WEEKLY_GROUP_PROPERTIES',
     ToUserNewsletterNewSubscriber: 'TO_USER__NEWSLETTER_NEW_SUBSCRIBER',

@@ -236,6 +236,8 @@ exports.NotificationTypeEnum = {
     ToBrokerAlertCreated: 'TO_BROKER__ALERT_CREATED',
     ToUserWeeklyProperties: 'TO_USER__WEEKLY_PROPERTIES',
     ToUserWeeklyPayedSubscribers: 'TO_USER__WEEKLY_PAYED_SUBSCRIBERS',
+    ToUserCoursePublishedThisWeek: 'TO_USER__COURSE_PUBLISHED_THIS_WEEK',
+    ToUserCourseHappeningThisWeek: 'TO_USER__COURSE_HAPPENING_THIS_WEEK',
     ToUserCustomizedAlert: 'TO_USER__CUSTOMIZED_ALERT',
     ToUserWeeklyGroupProperties: 'TO_USER__WEEKLY_GROUP_PROPERTIES',
     ToUserNewsletterNewSubscriber: 'TO_USER__NEWSLETTER_NEW_SUBSCRIBER',
@@ -2139,7 +2141,7 @@ const CoursesApiAxiosParamCreator = function (configuration) {
         /**
          *
          * @summary Delete course
-         * @param {number} courseId Course id
+         * @param {string} courseId Course id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -2170,8 +2172,8 @@ const CoursesApiAxiosParamCreator = function (configuration) {
         /**
          *
          * @summary Track attend click and redirect to external registration URL
-         * @param {number} courseId Course id
-         * @param {string} [source] Analytics source tag
+         * @param {string} courseId Course id
+         * @param {string} [source] Analytics source tag (newsletter | website)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -2241,7 +2243,7 @@ const CoursesApiAxiosParamCreator = function (configuration) {
         /**
          *
          * @summary Get published course by id
-         * @param {number} courseId Course id
+         * @param {string} courseId Course id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -2250,6 +2252,39 @@ const CoursesApiAxiosParamCreator = function (configuration) {
             (0, common_1.assertParamExists)('get1', 'courseId', courseId);
             const localVarPath = `/courses/{courseId}`
                 .replace(`{${"courseId"}}`, encodeURIComponent(String(courseId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Globally visible active course matched by slug
+         * @summary Get published course by URL slug
+         * @param {string} slug Public SEO slug
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getBySlug1: async (slug, options = {}) => {
+            // verify required parameter 'slug' is not null or undefined
+            (0, common_1.assertParamExists)('getBySlug1', 'slug', slug);
+            const localVarPath = `/courses/slug/{slug}`
+                .replace(`{${"slug"}}`, encodeURIComponent(String(slug)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
             let baseOptions;
@@ -2366,9 +2401,9 @@ const CoursesApiAxiosParamCreator = function (configuration) {
         /**
          *
          * @summary Record anonymous course interaction (e.g. gated attend)
-         * @param {number} courseId Course id
+         * @param {string} courseId Course id
          * @param {string} eventType Known anonymous events
-         * @param {string} [source] Analytics funnel tag
+         * @param {string} [source] Analytics funnel tag (newsletter | website)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -2409,7 +2444,7 @@ const CoursesApiAxiosParamCreator = function (configuration) {
         /**
          *
          * @summary Update course
-         * @param {number} courseId Course id
+         * @param {string} courseId Course id
          * @param {CourseWriteDto} courseWriteDto
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2455,7 +2490,7 @@ const CoursesApiFp = function (configuration) {
         /**
          *
          * @summary Delete course
-         * @param {number} courseId Course id
+         * @param {string} courseId Course id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -2468,8 +2503,8 @@ const CoursesApiFp = function (configuration) {
         /**
          *
          * @summary Track attend click and redirect to external registration URL
-         * @param {number} courseId Course id
-         * @param {string} [source] Analytics source tag
+         * @param {string} courseId Course id
+         * @param {string} [source] Analytics source tag (newsletter | website)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -2496,7 +2531,7 @@ const CoursesApiFp = function (configuration) {
         /**
          *
          * @summary Get published course by id
-         * @param {number} courseId Course id
+         * @param {string} courseId Course id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -2504,6 +2539,19 @@ const CoursesApiFp = function (configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.get1(courseId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = base_1.operationServerMap['CoursesApi.get1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Globally visible active course matched by slug
+         * @summary Get published course by URL slug
+         * @param {string} slug Public SEO slug
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getBySlug1(slug, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getBySlug1(slug, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['CoursesApi.getBySlug1']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2542,9 +2590,9 @@ const CoursesApiFp = function (configuration) {
         /**
          *
          * @summary Record anonymous course interaction (e.g. gated attend)
-         * @param {number} courseId Course id
+         * @param {string} courseId Course id
          * @param {string} eventType Known anonymous events
-         * @param {string} [source] Analytics funnel tag
+         * @param {string} [source] Analytics funnel tag (newsletter | website)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -2557,7 +2605,7 @@ const CoursesApiFp = function (configuration) {
         /**
          *
          * @summary Update course
-         * @param {number} courseId Course id
+         * @param {string} courseId Course id
          * @param {CourseWriteDto} courseWriteDto
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2617,6 +2665,16 @@ const CoursesApiFactory = function (configuration, basePath, axios) {
          */
         get1(requestParameters, options) {
             return localVarFp.get1(requestParameters.courseId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Globally visible active course matched by slug
+         * @summary Get published course by URL slug
+         * @param {CoursesApiGetBySlug1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getBySlug1(requestParameters, options) {
+            return localVarFp.getBySlug1(requestParameters.slug, options).then((request) => request(axios, basePath));
         },
         /**
          * Globally visible active courses
@@ -2711,6 +2769,17 @@ class CoursesApi extends base_1.BaseAPI {
      */
     get1(requestParameters, options) {
         return (0, exports.CoursesApiFp)(this.configuration).get1(requestParameters.courseId, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Globally visible active course matched by slug
+     * @summary Get published course by URL slug
+     * @param {CoursesApiGetBySlug1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoursesApi
+     */
+    getBySlug1(requestParameters, options) {
+        return (0, exports.CoursesApiFp)(this.configuration).getBySlug1(requestParameters.slug, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Globally visible active courses
@@ -6649,6 +6718,81 @@ const MessagesApiAxiosParamCreator = function (configuration) {
         },
         /**
          *
+         * @param {string} type
+         * @param {string} [token]
+         * @param {string} [body]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getOrttoDynamicContent1: async (type, token, body, options = {}) => {
+            // verify required parameter 'type' is not null or undefined
+            (0, common_1.assertParamExists)('getOrttoDynamicContent1', 'type', type);
+            const localVarPath = `/notifications/{type}/ortto-dynamic`
+                .replace(`{${"type"}}`, encodeURIComponent(String(type)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            if (token !== undefined) {
+                localVarQueryParameter['token'] = token;
+            }
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(body, localVarRequestOptions, configuration);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @param {string} type
+         * @param {string} [token]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        previewOrttoDynamicContent1: async (type, token, options = {}) => {
+            // verify required parameter 'type' is not null or undefined
+            (0, common_1.assertParamExists)('previewOrttoDynamicContent1', 'type', type);
+            const localVarPath = `/notifications/{type}/ortto-dynamic`
+                .replace(`{${"type"}}`, encodeURIComponent(String(type)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            if (token !== undefined) {
+                localVarQueryParameter['token'] = token;
+            }
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
          * @summary Retrieve a user chat
          * @param {number} id user id
          * @param {*} [options] Override http request option.
@@ -6788,6 +6932,33 @@ const MessagesApiFp = function (configuration) {
         },
         /**
          *
+         * @param {string} type
+         * @param {string} [token]
+         * @param {string} [body]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getOrttoDynamicContent1(type, token, body, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getOrttoDynamicContent1(type, token, body, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['MessagesApi.getOrttoDynamicContent1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         *
+         * @param {string} type
+         * @param {string} [token]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async previewOrttoDynamicContent1(type, token, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.previewOrttoDynamicContent1(type, token, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['MessagesApi.previewOrttoDynamicContent1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         *
          * @summary Retrieve a user chat
          * @param {number} id user id
          * @param {*} [options] Override http request option.
@@ -6857,6 +7028,24 @@ const MessagesApiFactory = function (configuration, basePath, axios) {
         },
         /**
          *
+         * @param {MessagesApiGetOrttoDynamicContent1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getOrttoDynamicContent1(requestParameters, options) {
+            return localVarFp.getOrttoDynamicContent1(requestParameters.type, requestParameters.token, requestParameters.body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         *
+         * @param {MessagesApiPreviewOrttoDynamicContent1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        previewOrttoDynamicContent1(requestParameters, options) {
+            return localVarFp.previewOrttoDynamicContent1(requestParameters.type, requestParameters.token, options).then((request) => request(axios, basePath));
+        },
+        /**
+         *
          * @summary Retrieve a user chat
          * @param {MessagesApiRetrieveChatUser1Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -6919,6 +7108,26 @@ class MessagesApi extends base_1.BaseAPI {
     }
     /**
      *
+     * @param {MessagesApiGetOrttoDynamicContent1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessagesApi
+     */
+    getOrttoDynamicContent1(requestParameters, options) {
+        return (0, exports.MessagesApiFp)(this.configuration).getOrttoDynamicContent1(requestParameters.type, requestParameters.token, requestParameters.body, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @param {MessagesApiPreviewOrttoDynamicContent1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessagesApi
+     */
+    previewOrttoDynamicContent1(requestParameters, options) {
+        return (0, exports.MessagesApiFp)(this.configuration).previewOrttoDynamicContent1(requestParameters.type, requestParameters.token, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
      * @summary Retrieve a user chat
      * @param {MessagesApiRetrieveChatUser1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -6959,6 +7168,8 @@ exports.GetByUserWithResult1TypeEnum = {
     ToBrokerAlertCreated: 'TO_BROKER__ALERT_CREATED',
     ToUserWeeklyProperties: 'TO_USER__WEEKLY_PROPERTIES',
     ToUserWeeklyPayedSubscribers: 'TO_USER__WEEKLY_PAYED_SUBSCRIBERS',
+    ToUserCoursePublishedThisWeek: 'TO_USER__COURSE_PUBLISHED_THIS_WEEK',
+    ToUserCourseHappeningThisWeek: 'TO_USER__COURSE_HAPPENING_THIS_WEEK',
     ToUserCustomizedAlert: 'TO_USER__CUSTOMIZED_ALERT',
     ToUserWeeklyGroupProperties: 'TO_USER__WEEKLY_GROUP_PROPERTIES',
     ToUserNewsletterNewSubscriber: 'TO_USER__NEWSLETTER_NEW_SUBSCRIBER',
