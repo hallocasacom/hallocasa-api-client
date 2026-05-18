@@ -7622,7 +7622,7 @@
       "get" : {
         "tags" : [ "courses" ],
         "summary" : "List published courses",
-        "description" : "Globally visible active courses",
+        "description" : "Globally visible active courses. When createdInLastDays is set, returns the same set as the weekly Ortto job (created_at in the last N days, UTC); other filters and pagination are ignored for that mode.",
         "operationId" : "list_1",
         "parameters" : [ {
           "name" : "pageFrom",
@@ -7680,6 +7680,14 @@
             "type" : "boolean"
           },
           "example" : false
+        }, {
+          "name" : "createdInLastDays",
+          "in" : "query",
+          "description" : "If set (1–90), list courses whose created_at is in the last N days UTC; matches instructor newsletter selection.",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -7691,6 +7699,9 @@
                 }
               }
             }
+          },
+          "400" : {
+            "description" : "createdInLastDays out of range (allowed: 1–90)"
           }
         }
       }
@@ -13773,6 +13784,13 @@
             "type" : "string",
             "description" : "Last update time",
             "format" : "date-time"
+          },
+          "userFaqs" : {
+            "type" : "array",
+            "description" : "Optional Frequently Asked Questions (same structure as profile userFaqs)",
+            "items" : {
+              "$ref" : "#/components/schemas/UserFaq"
+            }
           }
         },
         "description" : "Instructor course exposed to directory + detail APIs"
@@ -13908,6 +13926,15 @@
           "active" : {
             "type" : "boolean",
             "description" : "Ignored on write (courses remain globally visible flag managed server-side)"
+          },
+          "userFaqs" : {
+            "maxItems" : 10,
+            "minItems" : 0,
+            "type" : "array",
+            "description" : "Optional FAQs (max 10). Omit or null to clear all; same structure as profile userFaqs.",
+            "items" : {
+              "$ref" : "#/components/schemas/UserFaq"
+            }
           }
         },
         "description" : "Create/update payload for instructor-maintained courses"

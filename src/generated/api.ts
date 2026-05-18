@@ -1085,6 +1085,12 @@ export interface Course {
      * @memberof Course
      */
     'updatedAt'?: string;
+    /**
+     * Optional Frequently Asked Questions (same structure as profile userFaqs)
+     * @type {Array<UserFaq>}
+     * @memberof Course
+     */
+    'userFaqs'?: Array<UserFaq>;
 }
 
 export const CourseFormatEnum = {
@@ -1245,6 +1251,12 @@ export interface CourseWriteDto {
      * @memberof CourseWriteDto
      */
     'active'?: boolean;
+    /**
+     * Optional FAQs (max 10). Omit or null to clear all; same structure as profile userFaqs.
+     * @type {Array<UserFaq>}
+     * @memberof CourseWriteDto
+     */
+    'userFaqs'?: Array<UserFaq>;
 }
 
 export const CourseWriteDtoFormatEnum = {
@@ -8844,7 +8856,7 @@ export const CoursesApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Globally visible active courses
+         * Globally visible active courses. When createdInLastDays is set, returns the same set as the weekly Ortto job (created_at in the last N days, UTC); other filters and pagination are ignored for that mode.
          * @summary List published courses
          * @param {number} [pageFrom] Pagination start (1-based)
          * @param {number} [pageTo] Pagination end (inclusive)
@@ -8852,10 +8864,11 @@ export const CoursesApiAxiosParamCreator = function (configuration?: Configurati
          * @param {List1FormatEnum} [format] Delivery mode filter
          * @param {List1DesignationEnum} [designation] Designation filter
          * @param {boolean} [ceCreditsOnly] Only state-approved CE courses
+         * @param {number} [createdInLastDays] If set (1–90), list courses whose created_at is in the last N days UTC; matches instructor newsletter selection.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        list1: async (pageFrom?: number, pageTo?: number, language?: string, format?: List1FormatEnum, designation?: List1DesignationEnum, ceCreditsOnly?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        list1: async (pageFrom?: number, pageTo?: number, language?: string, format?: List1FormatEnum, designation?: List1DesignationEnum, ceCreditsOnly?: boolean, createdInLastDays?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/courses`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -8896,6 +8909,10 @@ export const CoursesApiAxiosParamCreator = function (configuration?: Configurati
 
             if (ceCreditsOnly !== undefined) {
                 localVarQueryParameter['ceCreditsOnly'] = ceCreditsOnly;
+            }
+
+            if (createdInLastDays !== undefined) {
+                localVarQueryParameter['createdInLastDays'] = createdInLastDays;
             }
 
 
@@ -9129,7 +9146,7 @@ export const CoursesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Globally visible active courses
+         * Globally visible active courses. When createdInLastDays is set, returns the same set as the weekly Ortto job (created_at in the last N days, UTC); other filters and pagination are ignored for that mode.
          * @summary List published courses
          * @param {number} [pageFrom] Pagination start (1-based)
          * @param {number} [pageTo] Pagination end (inclusive)
@@ -9137,11 +9154,12 @@ export const CoursesApiFp = function(configuration?: Configuration) {
          * @param {List1FormatEnum} [format] Delivery mode filter
          * @param {List1DesignationEnum} [designation] Designation filter
          * @param {boolean} [ceCreditsOnly] Only state-approved CE courses
+         * @param {number} [createdInLastDays] If set (1–90), list courses whose created_at is in the last N days UTC; matches instructor newsletter selection.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async list1(pageFrom?: number, pageTo?: number, language?: string, format?: List1FormatEnum, designation?: List1DesignationEnum, ceCreditsOnly?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CourseListResult>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.list1(pageFrom, pageTo, language, format, designation, ceCreditsOnly, options);
+        async list1(pageFrom?: number, pageTo?: number, language?: string, format?: List1FormatEnum, designation?: List1DesignationEnum, ceCreditsOnly?: boolean, createdInLastDays?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CourseListResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.list1(pageFrom, pageTo, language, format, designation, ceCreditsOnly, createdInLastDays, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CoursesApi.list1']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -9251,14 +9269,14 @@ export const CoursesApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getBySlug1(requestParameters.slug, options).then((request) => request(axios, basePath));
         },
         /**
-         * Globally visible active courses
+         * Globally visible active courses. When createdInLastDays is set, returns the same set as the weekly Ortto job (created_at in the last N days, UTC); other filters and pagination are ignored for that mode.
          * @summary List published courses
          * @param {CoursesApiList1Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         list1(requestParameters: CoursesApiList1Request = {}, options?: RawAxiosRequestConfig): AxiosPromise<CourseListResult> {
-            return localVarFp.list1(requestParameters.pageFrom, requestParameters.pageTo, requestParameters.language, requestParameters.format, requestParameters.designation, requestParameters.ceCreditsOnly, options).then((request) => request(axios, basePath));
+            return localVarFp.list1(requestParameters.pageFrom, requestParameters.pageTo, requestParameters.language, requestParameters.format, requestParameters.designation, requestParameters.ceCreditsOnly, requestParameters.createdInLastDays, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -9424,6 +9442,13 @@ export interface CoursesApiList1Request {
      * @memberof CoursesApiList1
      */
     readonly ceCreditsOnly?: boolean
+
+    /**
+     * If set (1–90), list courses whose created_at is in the last N days UTC; matches instructor newsletter selection.
+     * @type {number}
+     * @memberof CoursesApiList1
+     */
+    readonly createdInLastDays?: number
 }
 
 /**
@@ -9571,7 +9596,7 @@ export class CoursesApi extends BaseAPI {
     }
 
     /**
-     * Globally visible active courses
+     * Globally visible active courses. When createdInLastDays is set, returns the same set as the weekly Ortto job (created_at in the last N days, UTC); other filters and pagination are ignored for that mode.
      * @summary List published courses
      * @param {CoursesApiList1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -9579,7 +9604,7 @@ export class CoursesApi extends BaseAPI {
      * @memberof CoursesApi
      */
     public list1(requestParameters: CoursesApiList1Request = {}, options?: RawAxiosRequestConfig) {
-        return CoursesApiFp(this.configuration).list1(requestParameters.pageFrom, requestParameters.pageTo, requestParameters.language, requestParameters.format, requestParameters.designation, requestParameters.ceCreditsOnly, options).then((request) => request(this.axios, this.basePath));
+        return CoursesApiFp(this.configuration).list1(requestParameters.pageFrom, requestParameters.pageTo, requestParameters.language, requestParameters.format, requestParameters.designation, requestParameters.ceCreditsOnly, requestParameters.createdInLastDays, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
