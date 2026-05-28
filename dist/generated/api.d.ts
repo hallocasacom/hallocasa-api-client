@@ -441,6 +441,12 @@ export interface Brokerage {
     'name'?: string;
     /**
      *
+     * @type {string}
+     * @memberof Brokerage
+     */
+    'url'?: string;
+    /**
+     *
      * @type {boolean}
      * @memberof Brokerage
      */
@@ -1222,6 +1228,12 @@ export interface CourseWriteDto {
      * @memberof CourseWriteDto
      */
     'active'?: boolean;
+    /**
+     * Optional creation timestamp (create only). When omitted, server uses current time.
+     * @type {string}
+     * @memberof CourseWriteDto
+     */
+    'createdAt'?: string;
     /**
      * Optional FAQs (max 10). Omit or null to clear all; same structure as profile userFaqs.
      * @type {Array<UserFaq>}
@@ -7530,7 +7542,7 @@ export declare const CoursesApiAxiosParamCreator: (configuration?: Configuration
      */
     getBySlug1: (slug: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
-     * Globally visible active courses. When createdInLastDays is set, returns the same set as the weekly Ortto job (created_at in the last N days, UTC); other filters and pagination are ignored for that mode.
+     * Globally visible active courses. When createdInLastDays or happeningInNextDays is set, returns the same set as the matching instructor Ortto job (UTC windows); other filters and pagination are ignored for those modes.
      * @summary List published courses
      * @param {number} [pageFrom] Pagination start (1-based)
      * @param {number} [pageTo] Pagination end (inclusive)
@@ -7539,10 +7551,11 @@ export declare const CoursesApiAxiosParamCreator: (configuration?: Configuration
      * @param {List1DesignationEnum} [designation] Designation filter
      * @param {boolean} [ceCreditsOnly] Only state-approved CE courses
      * @param {number} [createdInLastDays] If set (1–90), list courses whose created_at is in the last N days UTC; matches instructor newsletter selection.
+     * @param {number} [happeningInNextDays] If set (1–90), list courses whose course_datetime is in the next N days UTC; matches instructor happening newsletter selection.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    list1: (pageFrom?: number, pageTo?: number, language?: string, format?: List1FormatEnum, designation?: List1DesignationEnum, ceCreditsOnly?: boolean, createdInLastDays?: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    list1: (pageFrom?: number, pageTo?: number, language?: string, format?: List1FormatEnum, designation?: List1DesignationEnum, ceCreditsOnly?: boolean, createdInLastDays?: number, happeningInNextDays?: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      *
      * @summary List courses owned by user
@@ -7621,7 +7634,7 @@ export declare const CoursesApiFp: (configuration?: Configuration) => {
      */
     getBySlug1(slug: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Course>>;
     /**
-     * Globally visible active courses. When createdInLastDays is set, returns the same set as the weekly Ortto job (created_at in the last N days, UTC); other filters and pagination are ignored for that mode.
+     * Globally visible active courses. When createdInLastDays or happeningInNextDays is set, returns the same set as the matching instructor Ortto job (UTC windows); other filters and pagination are ignored for those modes.
      * @summary List published courses
      * @param {number} [pageFrom] Pagination start (1-based)
      * @param {number} [pageTo] Pagination end (inclusive)
@@ -7630,10 +7643,11 @@ export declare const CoursesApiFp: (configuration?: Configuration) => {
      * @param {List1DesignationEnum} [designation] Designation filter
      * @param {boolean} [ceCreditsOnly] Only state-approved CE courses
      * @param {number} [createdInLastDays] If set (1–90), list courses whose created_at is in the last N days UTC; matches instructor newsletter selection.
+     * @param {number} [happeningInNextDays] If set (1–90), list courses whose course_datetime is in the next N days UTC; matches instructor happening newsletter selection.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    list1(pageFrom?: number, pageTo?: number, language?: string, format?: List1FormatEnum, designation?: List1DesignationEnum, ceCreditsOnly?: boolean, createdInLastDays?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CourseListResult>>;
+    list1(pageFrom?: number, pageTo?: number, language?: string, format?: List1FormatEnum, designation?: List1DesignationEnum, ceCreditsOnly?: boolean, createdInLastDays?: number, happeningInNextDays?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CourseListResult>>;
     /**
      *
      * @summary List courses owned by user
@@ -7710,7 +7724,7 @@ export declare const CoursesApiFactory: (configuration?: Configuration, basePath
      */
     getBySlug1(requestParameters: CoursesApiGetBySlug1Request, options?: RawAxiosRequestConfig): AxiosPromise<Course>;
     /**
-     * Globally visible active courses. When createdInLastDays is set, returns the same set as the weekly Ortto job (created_at in the last N days, UTC); other filters and pagination are ignored for that mode.
+     * Globally visible active courses. When createdInLastDays or happeningInNextDays is set, returns the same set as the matching instructor Ortto job (UTC windows); other filters and pagination are ignored for those modes.
      * @summary List published courses
      * @param {CoursesApiList1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -7867,6 +7881,12 @@ export interface CoursesApiList1Request {
      * @memberof CoursesApiList1
      */
     readonly createdInLastDays?: number;
+    /**
+     * If set (1–90), list courses whose course_datetime is in the next N days UTC; matches instructor happening newsletter selection.
+     * @type {number}
+     * @memberof CoursesApiList1
+     */
+    readonly happeningInNextDays?: number;
 }
 /**
  * Request parameters for listForUser1 operation in CoursesApi.
@@ -7990,7 +8010,7 @@ export declare class CoursesApi extends BaseAPI {
      */
     getBySlug1(requestParameters: CoursesApiGetBySlug1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Course, any, {}>>;
     /**
-     * Globally visible active courses. When createdInLastDays is set, returns the same set as the weekly Ortto job (created_at in the last N days, UTC); other filters and pagination are ignored for that mode.
+     * Globally visible active courses. When createdInLastDays or happeningInNextDays is set, returns the same set as the matching instructor Ortto job (UTC windows); other filters and pagination are ignored for those modes.
      * @summary List published courses
      * @param {CoursesApiList1Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

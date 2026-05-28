@@ -7587,6 +7587,7 @@
                     "value" : [ {
                       "id" : 1,
                       "name" : "Premium Real Estate",
+                      "url" : "https://example.com",
                       "enabled" : true,
                       "createdAt" : 1609459200000,
                       "updatedAt" : 1609545600000,
@@ -7622,7 +7623,7 @@
       "get" : {
         "tags" : [ "courses" ],
         "summary" : "List published courses",
-        "description" : "Globally visible active courses. When createdInLastDays is set, returns the same set as the weekly Ortto job (created_at in the last N days, UTC); other filters and pagination are ignored for that mode.",
+        "description" : "Globally visible active courses. When createdInLastDays or happeningInNextDays is set, returns the same set as the matching instructor Ortto job (UTC windows); other filters and pagination are ignored for those modes.",
         "operationId" : "list_1",
         "parameters" : [ {
           "name" : "pageFrom",
@@ -7688,6 +7689,14 @@
             "type" : "integer",
             "format" : "int32"
           }
+        }, {
+          "name" : "happeningInNextDays",
+          "in" : "query",
+          "description" : "If set (1–90), list courses whose course_datetime is in the next N days UTC; matches instructor happening newsletter selection.",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -7701,7 +7710,7 @@
             }
           },
           "400" : {
-            "description" : "createdInLastDays out of range (allowed: 1–90)"
+            "description" : "Invalid query: conflicting filters or day range not in 1–90"
           }
         }
       }
@@ -10354,7 +10363,7 @@
             "$ref" : "#/components/schemas/GeoPlace"
           },
           "chamberOfCommerceUrl" : {
-            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "Chamber of commerce registry URL"
           },
@@ -10364,22 +10373,22 @@
             "example" : "00009-PJ-MVCS"
           },
           "facebookUrl" : {
-            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "Facebook profile URL"
           },
           "instagramUrl" : {
-            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "Instagram profile URL"
           },
           "twitterUrl" : {
-            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "X/Twitter profile URL"
           },
           "wechatUrl" : {
-            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "WeChat profile URL"
           },
@@ -10389,17 +10398,17 @@
             "description" : "WeChat QR image data URL"
           },
           "vkUrl" : {
-            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "VK profile URL"
           },
           "videoUrl" : {
-            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "Introduction video URL"
           },
           "bookAnAppointmentUrl" : {
-            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "Calendar booking link"
           },
@@ -13147,6 +13156,9 @@
           "name" : {
             "type" : "string"
           },
+          "url" : {
+            "type" : "string"
+          },
           "enabled" : {
             "type" : "boolean"
           },
@@ -13358,7 +13370,7 @@
             "$ref" : "#/components/schemas/GeoPlace"
           },
           "chamberOfCommerceUrl" : {
-            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "Chamber of commerce registry URL"
           },
@@ -13368,22 +13380,22 @@
             "example" : "00009-PJ-MVCS"
           },
           "facebookUrl" : {
-            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "Facebook profile URL"
           },
           "instagramUrl" : {
-            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "Instagram profile URL"
           },
           "twitterUrl" : {
-            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "X/Twitter profile URL"
           },
           "wechatUrl" : {
-            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "WeChat profile URL"
           },
@@ -13393,17 +13405,17 @@
             "description" : "WeChat QR image data URL"
           },
           "vkUrl" : {
-            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "VK profile URL"
           },
           "videoUrl" : {
-            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "Introduction video URL"
           },
           "bookAnAppointmentUrl" : {
-            "pattern" : "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "Calendar booking link"
           },
@@ -13927,6 +13939,12 @@
             "type" : "boolean",
             "description" : "Ignored on write (courses remain globally visible flag managed server-side)"
           },
+          "createdAt" : {
+            "type" : "string",
+            "description" : "Optional creation timestamp (create only). When omitted, server uses current time.",
+            "format" : "date-time",
+            "writeOnly" : true
+          },
           "userFaqs" : {
             "maxItems" : 10,
             "minItems" : 0,
@@ -14448,10 +14466,10 @@
         "name" : "X-API-Key",
         "in" : "header"
       },
-      "oAuthToken" : {
+      "oAuthClientId" : {
         "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
+        "description" : "OAuth client identifier (default: hallocasa_frontend)",
+        "name" : "O-Auth-Client-Id",
         "in" : "header"
       },
       "oAuthCode" : {
@@ -14460,10 +14478,10 @@
         "name" : "O-Auth-Code",
         "in" : "header"
       },
-      "oAuthClientId" : {
+      "oAuthToken" : {
         "type" : "apiKey",
-        "description" : "OAuth client identifier (default: hallocasa_frontend)",
-        "name" : "O-Auth-Client-Id",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
         "in" : "header"
       }
     }
