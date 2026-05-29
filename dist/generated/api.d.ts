@@ -4497,6 +4497,12 @@ export interface SkilledUser {
      */
     'bookAnAppointmentUrl'?: string;
     /**
+     * Personal brokerage or company website URL shown on profile
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'brokerageUrl'?: string;
+    /**
      * Google Place id for office
      * @type {string}
      * @memberof SkilledUser
@@ -5348,6 +5354,12 @@ export interface User {
      * @memberof User
      */
     'bookAnAppointmentUrl'?: string;
+    /**
+     * Personal brokerage or company website URL shown on profile
+     * @type {string}
+     * @memberof User
+     */
+    'brokerageUrl'?: string;
     /**
      * Google Place id for office
      * @type {string}

@@ -10412,6 +10412,13 @@
             "type" : "string",
             "description" : "Calendar booking link"
           },
+          "brokerageUrl" : {
+            "maxLength" : 512,
+            "minLength" : 0,
+            "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "type" : "string",
+            "description" : "Personal brokerage or company website URL shown on profile"
+          },
           "googlePlaceId" : {
             "type" : "string",
             "description" : "Google Place id for office"
@@ -13419,6 +13426,13 @@
             "type" : "string",
             "description" : "Calendar booking link"
           },
+          "brokerageUrl" : {
+            "maxLength" : 512,
+            "minLength" : 0,
+            "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
+            "type" : "string",
+            "description" : "Personal brokerage or company website URL shown on profile"
+          },
           "googlePlaceId" : {
             "type" : "string",
             "description" : "Google Place id for office"
@@ -14460,10 +14474,10 @@
       }
     },
     "securitySchemes" : {
-      "xApiKey" : {
+      "oAuthCode" : {
         "type" : "apiKey",
-        "description" : "Integration API key (prefix hc_)",
-        "name" : "X-API-Key",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
         "in" : "header"
       },
       "oAuthClientId" : {
@@ -14472,10 +14486,10 @@
         "name" : "O-Auth-Client-Id",
         "in" : "header"
       },
-      "oAuthCode" : {
+      "xApiKey" : {
         "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
+        "description" : "Integration API key (prefix hc_)",
+        "name" : "X-API-Key",
         "in" : "header"
       },
       "oAuthToken" : {
