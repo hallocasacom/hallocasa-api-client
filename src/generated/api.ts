@@ -4818,6 +4818,12 @@ export interface SkilledUser {
      */
     'connectionDegree'?: SkilledUserConnectionDegreeEnum;
     /**
+     * Platform invite token (register only, not persisted)
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'inviteToken'?: string;
+    /**
      * 
      * @type {string}
      * @memberof SkilledUser
@@ -6272,6 +6278,19 @@ export interface UserPermission {
      * @memberof UserPermission
      */
     'metadata'?: { [key: string]: object; };
+}
+/**
+ * Request to invite someone to HalloCasa by email
+ * @export
+ * @interface UserPlatformInviteRequest
+ */
+export interface UserPlatformInviteRequest {
+    /**
+     * Invitee email address
+     * @type {string}
+     * @memberof UserPlatformInviteRequest
+     */
+    'email'?: string;
 }
 /**
  * 
@@ -22896,6 +22915,50 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
+         * Sends a platform invite email or auto-connects if the invitee already has an account
+         * @summary Invite someone to HalloCasa by email
+         * @param {string} [origin] 
+         * @param {UserPlatformInviteRequest} [userPlatformInviteRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        inviteByEmail1: async (origin?: string, userPlatformInviteRequest?: UserPlatformInviteRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/users/invite-by-email`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            if (origin != null) {
+                localVarHeaderParameter['Origin'] = String(origin);
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(userPlatformInviteRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * 
          * @summary Record network suggestion analytics events
          * @param {NetworkSuggestionEventRequest} [networkSuggestionEventRequest] 
@@ -23746,6 +23809,20 @@ export const UsersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Sends a platform invite email or auto-connects if the invitee already has an account
+         * @summary Invite someone to HalloCasa by email
+         * @param {string} [origin] 
+         * @param {UserPlatformInviteRequest} [userPlatformInviteRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async inviteByEmail1(origin?: string, userPlatformInviteRequest?: UserPlatformInviteRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.inviteByEmail1(origin, userPlatformInviteRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['UsersApi.inviteByEmail1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * 
          * @summary Record network suggestion analytics events
          * @param {NetworkSuggestionEventRequest} [networkSuggestionEventRequest] 
@@ -24109,6 +24186,16 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          */
         getSuggestions1(options?: RawAxiosRequestConfig): AxiosPromise<NetworkSuggestionDto> {
             return localVarFp.getSuggestions1(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Sends a platform invite email or auto-connects if the invitee already has an account
+         * @summary Invite someone to HalloCasa by email
+         * @param {UsersApiInviteByEmail1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        inviteByEmail1(requestParameters: UsersApiInviteByEmail1Request = {}, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.inviteByEmail1(requestParameters.origin, requestParameters.userPlatformInviteRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -24514,6 +24601,27 @@ export interface UsersApiGetSubscribedUsers1Request {
      * @memberof UsersApiGetSubscribedUsers1
      */
     readonly subscriptionPlanName: GetSubscribedUsers1SubscriptionPlanNameEnum
+}
+
+/**
+ * Request parameters for inviteByEmail1 operation in UsersApi.
+ * @export
+ * @interface UsersApiInviteByEmail1Request
+ */
+export interface UsersApiInviteByEmail1Request {
+    /**
+     * 
+     * @type {string}
+     * @memberof UsersApiInviteByEmail1
+     */
+    readonly origin?: string
+
+    /**
+     * 
+     * @type {UserPlatformInviteRequest}
+     * @memberof UsersApiInviteByEmail1
+     */
+    readonly userPlatformInviteRequest?: UserPlatformInviteRequest
 }
 
 /**
@@ -24973,6 +25081,18 @@ export class UsersApi extends BaseAPI {
      */
     public getSuggestions1(options?: RawAxiosRequestConfig) {
         return UsersApiFp(this.configuration).getSuggestions1(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Sends a platform invite email or auto-connects if the invitee already has an account
+     * @summary Invite someone to HalloCasa by email
+     * @param {UsersApiInviteByEmail1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    public inviteByEmail1(requestParameters: UsersApiInviteByEmail1Request = {}, options?: RawAxiosRequestConfig) {
+        return UsersApiFp(this.configuration).inviteByEmail1(requestParameters.origin, requestParameters.userPlatformInviteRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

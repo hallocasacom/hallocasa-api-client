@@ -9412,6 +9412,44 @@
         }
       }
     },
+    "/users/invite-by-email" : {
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Invite someone to HalloCasa by email",
+        "description" : "Sends a platform invite email or auto-connects if the invitee already has an account",
+        "operationId" : "inviteByEmail_1",
+        "parameters" : [ {
+          "name" : "Origin",
+          "in" : "header",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UserPlatformInviteRequest"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Invite sent or user connected"
+          },
+          "400" : {
+            "description" : "Invalid email or self-invite"
+          },
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "429" : {
+            "description" : "Rate limit reached"
+          }
+        }
+      }
+    },
     "/users/previews" : {
       "get" : {
         "tags" : [ "users" ],
@@ -13617,6 +13655,10 @@
             "example" : "1st",
             "enum" : [ "1st", "2nd", "3rd+" ]
           },
+          "inviteToken" : {
+            "type" : "string",
+            "description" : "Platform invite token (register only, not persisted)"
+          },
           "imprintImageLink" : {
             "type" : "string",
             "writeOnly" : true
@@ -14451,6 +14493,17 @@
           }
         }
       },
+      "UserPlatformInviteRequest" : {
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string",
+            "description" : "Invitee email address",
+            "example" : "friend@example.com"
+          }
+        },
+        "description" : "Request to invite someone to HalloCasa by email"
+      },
       "PhoneCodeRequestResource" : {
         "required" : [ "verificationType" ],
         "type" : "object",
@@ -14474,10 +14527,10 @@
       }
     },
     "securitySchemes" : {
-      "oAuthCode" : {
+      "xApiKey" : {
         "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
+        "description" : "Integration API key (prefix hc_)",
+        "name" : "X-API-Key",
         "in" : "header"
       },
       "oAuthClientId" : {
@@ -14486,10 +14539,10 @@
         "name" : "O-Auth-Client-Id",
         "in" : "header"
       },
-      "xApiKey" : {
+      "oAuthCode" : {
         "type" : "apiKey",
-        "description" : "Integration API key (prefix hc_)",
-        "name" : "X-API-Key",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
         "in" : "header"
       },
       "oAuthToken" : {

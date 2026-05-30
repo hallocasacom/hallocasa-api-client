@@ -4731,6 +4731,12 @@ export interface SkilledUser {
      */
     'connectionDegree'?: SkilledUserConnectionDegreeEnum;
     /**
+     * Platform invite token (register only, not persisted)
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'inviteToken'?: string;
+    /**
      *
      * @type {string}
      * @memberof SkilledUser
@@ -6174,6 +6180,19 @@ export interface UserPermission {
     'metadata'?: {
         [key: string]: object;
     };
+}
+/**
+ * Request to invite someone to HalloCasa by email
+ * @export
+ * @interface UserPlatformInviteRequest
+ */
+export interface UserPlatformInviteRequest {
+    /**
+     * Invitee email address
+     * @type {string}
+     * @memberof UserPlatformInviteRequest
+     */
+    'email'?: string;
 }
 /**
  *
@@ -14809,6 +14828,15 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      */
     getSuggestions1: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Sends a platform invite email or auto-connects if the invitee already has an account
+     * @summary Invite someone to HalloCasa by email
+     * @param {string} [origin]
+     * @param {UserPlatformInviteRequest} [userPlatformInviteRequest]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    inviteByEmail1: (origin?: string, userPlatformInviteRequest?: UserPlatformInviteRequest, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      *
      * @summary Record network suggestion analytics events
      * @param {NetworkSuggestionEventRequest} [networkSuggestionEventRequest]
@@ -15078,6 +15106,15 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      */
     getSuggestions1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworkSuggestionDto>>;
     /**
+     * Sends a platform invite email or auto-connects if the invitee already has an account
+     * @summary Invite someone to HalloCasa by email
+     * @param {string} [origin]
+     * @param {UserPlatformInviteRequest} [userPlatformInviteRequest]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    inviteByEmail1(origin?: string, userPlatformInviteRequest?: UserPlatformInviteRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
      *
      * @summary Record network suggestion analytics events
      * @param {NetworkSuggestionEventRequest} [networkSuggestionEventRequest]
@@ -15334,6 +15371,14 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
      * @throws {RequiredError}
      */
     getSuggestions1(options?: RawAxiosRequestConfig): AxiosPromise<NetworkSuggestionDto>;
+    /**
+     * Sends a platform invite email or auto-connects if the invitee already has an account
+     * @summary Invite someone to HalloCasa by email
+     * @param {UsersApiInviteByEmail1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    inviteByEmail1(requestParameters?: UsersApiInviteByEmail1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
     /**
      *
      * @summary Record network suggestion analytics events
@@ -15684,6 +15729,25 @@ export interface UsersApiGetSubscribedUsers1Request {
      * @memberof UsersApiGetSubscribedUsers1
      */
     readonly subscriptionPlanName: GetSubscribedUsers1SubscriptionPlanNameEnum;
+}
+/**
+ * Request parameters for inviteByEmail1 operation in UsersApi.
+ * @export
+ * @interface UsersApiInviteByEmail1Request
+ */
+export interface UsersApiInviteByEmail1Request {
+    /**
+     *
+     * @type {string}
+     * @memberof UsersApiInviteByEmail1
+     */
+    readonly origin?: string;
+    /**
+     *
+     * @type {UserPlatformInviteRequest}
+     * @memberof UsersApiInviteByEmail1
+     */
+    readonly userPlatformInviteRequest?: UserPlatformInviteRequest;
 }
 /**
  * Request parameters for postEvent1 operation in UsersApi.
@@ -16070,6 +16134,15 @@ export declare class UsersApi extends BaseAPI {
      * @memberof UsersApi
      */
     getSuggestions1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<NetworkSuggestionDto, any, {}>>;
+    /**
+     * Sends a platform invite email or auto-connects if the invitee already has an account
+     * @summary Invite someone to HalloCasa by email
+     * @param {UsersApiInviteByEmail1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    inviteByEmail1(requestParameters?: UsersApiInviteByEmail1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      *
      * @summary Record network suggestion analytics events
