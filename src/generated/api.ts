@@ -6291,7 +6291,36 @@ export interface UserPlatformInviteRequest {
      * @memberof UserPlatformInviteRequest
      */
     'email'?: string;
+    /**
+     * UI entry point: HEADER, PROFILE_INVITE_FRIEND, NETWORK_GROWTH_POPUP, or UNKNOWN
+     * @type {string}
+     * @memberof UserPlatformInviteRequest
+     */
+    'source'?: UserPlatformInviteRequestSourceEnum;
+    /**
+     * Invite email language: EN, ES, or DE (default EN)
+     * @type {string}
+     * @memberof UserPlatformInviteRequest
+     */
+    'language'?: UserPlatformInviteRequestLanguageEnum;
 }
+
+export const UserPlatformInviteRequestSourceEnum = {
+    Header: 'HEADER',
+    ProfileInviteFriend: 'PROFILE_INVITE_FRIEND',
+    NetworkGrowthPopup: 'NETWORK_GROWTH_POPUP',
+    Unknown: 'UNKNOWN'
+} as const;
+
+export type UserPlatformInviteRequestSourceEnum = typeof UserPlatformInviteRequestSourceEnum[keyof typeof UserPlatformInviteRequestSourceEnum];
+export const UserPlatformInviteRequestLanguageEnum = {
+    En: 'EN',
+    Es: 'ES',
+    De: 'DE'
+} as const;
+
+export type UserPlatformInviteRequestLanguageEnum = typeof UserPlatformInviteRequestLanguageEnum[keyof typeof UserPlatformInviteRequestLanguageEnum];
+
 /**
  * 
  * @export

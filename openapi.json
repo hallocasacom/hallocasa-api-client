@@ -14500,6 +14500,18 @@
             "type" : "string",
             "description" : "Invitee email address",
             "example" : "friend@example.com"
+          },
+          "source" : {
+            "type" : "string",
+            "description" : "UI entry point: HEADER, PROFILE_INVITE_FRIEND, NETWORK_GROWTH_POPUP, or UNKNOWN",
+            "example" : "HEADER",
+            "enum" : [ "HEADER", "PROFILE_INVITE_FRIEND", "NETWORK_GROWTH_POPUP", "UNKNOWN" ]
+          },
+          "language" : {
+            "type" : "string",
+            "description" : "Invite email language: EN, ES, or DE (default EN)",
+            "example" : "EN",
+            "enum" : [ "EN", "ES", "DE" ]
           }
         },
         "description" : "Request to invite someone to HalloCasa by email"
@@ -14527,16 +14539,10 @@
       }
     },
     "securitySchemes" : {
-      "xApiKey" : {
+      "oAuthToken" : {
         "type" : "apiKey",
-        "description" : "Integration API key (prefix hc_)",
-        "name" : "X-API-Key",
-        "in" : "header"
-      },
-      "oAuthClientId" : {
-        "type" : "apiKey",
-        "description" : "OAuth client identifier (default: hallocasa_frontend)",
-        "name" : "O-Auth-Client-Id",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
         "in" : "header"
       },
       "oAuthCode" : {
@@ -14545,10 +14551,16 @@
         "name" : "O-Auth-Code",
         "in" : "header"
       },
-      "oAuthToken" : {
+      "oAuthClientId" : {
         "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
+        "description" : "OAuth client identifier (default: hallocasa_frontend)",
+        "name" : "O-Auth-Client-Id",
+        "in" : "header"
+      },
+      "xApiKey" : {
+        "type" : "apiKey",
+        "description" : "Integration API key (prefix hc_)",
+        "name" : "X-API-Key",
         "in" : "header"
       }
     }
