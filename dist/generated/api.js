@@ -16,11 +16,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AlertsApiFp = exports.AlertsApiAxiosParamCreator = exports.UserSubscriptionDtoStatusEnum = exports.UserSubscriptionDtoRenewalTypeEnum = exports.UserPlatformInviteRequestLanguageEnum = exports.UserPlatformInviteRequestSourceEnum = exports.UserGroupGroupTypeEnum = exports.UserPublicProfileDesignEnum = exports.UserSubscriptionPlanNameEnum = exports.SubscriptionPriceDtoRenewalTypeEnum = exports.SkilledUserConnectionDegreeEnum = exports.SkilledUserPublicProfileDesignEnum = exports.SkilledUserSubscriptionPlanNameEnum = exports.PropertyPublicationStateRequestStatusEnum = exports.PropertyFieldHcListerOptionEnum = exports.PropertyFieldData3TypeEnum = exports.PropertyFieldData2TypeEnum = exports.PropertyFieldData1TypeEnum = exports.PropertyFieldTextTypeEnum = exports.PropertyPublicationStateEnum = exports.NotificationTypeEnum = exports.NetworkSuggestionEventRequestEventTypeEnum = exports.HcFilterTypeEntryRangeFieldPresentationEnum = exports.HcFilterTypeEntryFilterTypeNatureEnum = exports.HcFilterTypeRangeFieldPresentationEnum = exports.HcFilterTypeFilterTypeNatureEnum = exports.HcFilterEntryFilterWorkerOptionEnum = exports.HcFilterEntryChoiceEnum = exports.HcFilterConditionMaxOperandEnum = exports.HcFilterConditionMinOperandEnum = exports.HcFilterHcListerOptionEnum = exports.HcFilterFilterWorkerOptionEnum = exports.HcFilterChoiceEnum = exports.GroupMemberGroupMemberStatusEnum = exports.GroupRequestStatusEnum = exports.GroupGroupTypeEnum = exports.GroupGroupStatusEnum = exports.FilterShowingStepSequenceAfterEnum = exports.FilterShowingStepSequenceBeforeEnum = exports.FavoriteResourceTypeEnum = exports.DropdownOptionGroupTranslationManagementEnum = exports.CourseWriteDtoDesignationEnum = exports.CourseWriteDtoFormatEnum = exports.CourseDesignationEnum = exports.CourseFormatEnum = exports.ConversationSummaryChatAllowanceTypeEnum = exports.CheckoutSessionDtoStatusEnum = exports.ChatAllowanceChatAllowanceTypeEnum = exports.AlertWithUserProfileUserAlertTypeEnum = exports.AlertUserAlertTypeEnum = void 0;
-exports.ExchangeRatesApiFp = exports.ExchangeRatesApiAxiosParamCreator = exports.EndorsementsApi = exports.EndorsementsApiFactory = exports.EndorsementsApiFp = exports.EndorsementsApiAxiosParamCreator = exports.CustomerSessionsApi = exports.CustomerSessionsApiFactory = exports.CustomerSessionsApiFp = exports.CustomerSessionsApiAxiosParamCreator = exports.CurrencyManagementApi = exports.CurrencyManagementApiFactory = exports.CurrencyManagementApiFp = exports.CurrencyManagementApiAxiosParamCreator = exports.List1DesignationEnum = exports.List1FormatEnum = exports.CoursesApi = exports.CoursesApiFactory = exports.CoursesApiFp = exports.CoursesApiAxiosParamCreator = exports.CountriesApi = exports.CountriesApiFactory = exports.CountriesApiFp = exports.CountriesApiAxiosParamCreator = exports.CheckoutSessionsApi = exports.CheckoutSessionsApiFactory = exports.CheckoutSessionsApiFp = exports.CheckoutSessionsApiAxiosParamCreator = exports.ChatTicketsApi = exports.ChatTicketsApiFactory = exports.ChatTicketsApiFp = exports.ChatTicketsApiAxiosParamCreator = exports.BrokeragesApi = exports.BrokeragesApiFactory = exports.BrokeragesApiFp = exports.BrokeragesApiAxiosParamCreator = exports.AttachmentsApi = exports.AttachmentsApiFactory = exports.AttachmentsApiFp = exports.AttachmentsApiAxiosParamCreator = exports.ApiKeysApi = exports.ApiKeysApiFactory = exports.ApiKeysApiFp = exports.ApiKeysApiAxiosParamCreator = exports.AllowancesApi = exports.AllowancesApiFactory = exports.AllowancesApiFp = exports.AllowancesApiAxiosParamCreator = exports.AlertsApi = exports.AlertsApiFactory = void 0;
-exports.PhonePrefixesApiAxiosParamCreator = exports.PasswordRecoveryApi = exports.PasswordRecoveryApiFactory = exports.PasswordRecoveryApiFp = exports.PasswordRecoveryApiAxiosParamCreator = exports.GetByUserWithResult1TypeEnum = exports.MessagesApi = exports.MessagesApiFactory = exports.MessagesApiFp = exports.MessagesApiAxiosParamCreator = exports.LocationCacheApi = exports.LocationCacheApiFactory = exports.LocationCacheApiFp = exports.LocationCacheApiAxiosParamCreator = exports.LocalesApi = exports.LocalesApiFactory = exports.LocalesApiFp = exports.LocalesApiAxiosParamCreator = exports.LanguagesApi = exports.LanguagesApiFactory = exports.LanguagesApiFp = exports.LanguagesApiAxiosParamCreator = exports.HomePreviewApi = exports.HomePreviewApiFactory = exports.HomePreviewApiFp = exports.HomePreviewApiAxiosParamCreator = exports.UpdateGroupMembershipStatus1StatusEnum = exports.RequestGroupTypeChange1RequestStatusEnum = exports.GroupsApi = exports.GroupsApiFactory = exports.GroupsApiFp = exports.GroupsApiAxiosParamCreator = exports.GroupNotificationsApi = exports.GroupNotificationsApiFactory = exports.GroupNotificationsApiFp = exports.GroupNotificationsApiAxiosParamCreator = exports.GeoLocationApi = exports.GeoLocationApiFactory = exports.GeoLocationApiFp = exports.GeoLocationApiAxiosParamCreator = exports.FavoritesApi = exports.FavoritesApiFactory = exports.FavoritesApiFp = exports.FavoritesApiAxiosParamCreator = exports.FacebookPropertiesApi = exports.FacebookPropertiesApiFactory = exports.FacebookPropertiesApiFp = exports.FacebookPropertiesApiAxiosParamCreator = exports.ExchangeRatesApi = exports.ExchangeRatesApiFactory = void 0;
-exports.StripeWebhooksApiAxiosParamCreator = exports.StripeIdentityWebhooksApi = exports.StripeIdentityWebhooksApiFactory = exports.StripeIdentityWebhooksApiFp = exports.StripeIdentityWebhooksApiAxiosParamCreator = exports.SkillsApi = exports.SkillsApiFactory = exports.SkillsApiFp = exports.SkillsApiAxiosParamCreator = exports.SecurityApi = exports.SecurityApiFactory = exports.SecurityApiFp = exports.SecurityApiAxiosParamCreator = exports.PropertyTypesApi = exports.PropertyTypesApiFactory = exports.PropertyTypesApiFp = exports.PropertyTypesApiAxiosParamCreator = exports.PropertyProposalsApi = exports.PropertyProposalsApiFactory = exports.PropertyProposalsApiFp = exports.PropertyProposalsApiAxiosParamCreator = exports.PropertyLocationsApi = exports.PropertyLocationsApiFactory = exports.PropertyLocationsApiFp = exports.PropertyLocationsApiAxiosParamCreator = exports.PropertyFiltersApi = exports.PropertyFiltersApiFactory = exports.PropertyFiltersApiFp = exports.PropertyFiltersApiAxiosParamCreator = exports.PropertyFieldsApi = exports.PropertyFieldsApiFactory = exports.PropertyFieldsApiFp = exports.PropertyFieldsApiAxiosParamCreator = exports.UploadPropertiesFromUrl1FormatEnum = exports.UploadProperties1FormatEnum = exports.PropertyBulkUploadsApi = exports.PropertyBulkUploadsApiFactory = exports.PropertyBulkUploadsApiFp = exports.PropertyBulkUploadsApiAxiosParamCreator = exports.PropertyBulkDownloadApi = exports.PropertyBulkDownloadApiFactory = exports.PropertyBulkDownloadApiFp = exports.PropertyBulkDownloadApiAxiosParamCreator = exports.PropertiesApi = exports.PropertiesApiFactory = exports.PropertiesApiFp = exports.PropertiesApiAxiosParamCreator = exports.PhonePrefixesApi = exports.PhonePrefixesApiFactory = exports.PhonePrefixesApiFp = void 0;
-exports.GetSubscribedUsers1SubscriptionPlanNameEnum = exports.UsersApi = exports.UsersApiFactory = exports.UsersApiFp = exports.UsersApiAxiosParamCreator = exports.UserTypesApi = exports.UserTypesApiFactory = exports.UserTypesApiFp = exports.UserTypesApiAxiosParamCreator = exports.UserSummaryApi = exports.UserSummaryApiFactory = exports.UserSummaryApiFp = exports.UserSummaryApiAxiosParamCreator = exports.UserContractsApi = exports.UserContractsApiFactory = exports.UserContractsApiFp = exports.UserContractsApiAxiosParamCreator = exports.UserConnectionsApi = exports.UserConnectionsApiFactory = exports.UserConnectionsApiFp = exports.UserConnectionsApiAxiosParamCreator = exports.TextTranslationsApi = exports.TextTranslationsApiFactory = exports.TextTranslationsApiFp = exports.TextTranslationsApiAxiosParamCreator = exports.TestimonialApi = exports.TestimonialApiFactory = exports.TestimonialApiFp = exports.TestimonialApiAxiosParamCreator = exports.SubscriptionsApi = exports.SubscriptionsApiFactory = exports.SubscriptionsApiFp = exports.SubscriptionsApiAxiosParamCreator = exports.StripeWebhooksApi = exports.StripeWebhooksApiFactory = exports.StripeWebhooksApiFp = void 0;
+exports.AlertsApiAxiosParamCreator = exports.UserSubscriptionDtoStatusEnum = exports.UserSubscriptionDtoRenewalTypeEnum = exports.UserPlatformInviteRequestLanguageEnum = exports.UserPlatformInviteRequestSourceEnum = exports.UserGroupGroupTypeEnum = exports.UserPublicProfileDesignEnum = exports.UserSubscriptionPlanNameEnum = exports.SubscriptionPriceDtoRenewalTypeEnum = exports.SkilledUserConnectionDegreeEnum = exports.SkilledUserPublicProfileDesignEnum = exports.SkilledUserSubscriptionPlanNameEnum = exports.PropertyPublicationStateRequestStatusEnum = exports.PropertyFieldHcListerOptionEnum = exports.PropertyFieldData3TypeEnum = exports.PropertyFieldData2TypeEnum = exports.PropertyFieldData1TypeEnum = exports.PropertyFieldTextTypeEnum = exports.PropertyPublicationStateEnum = exports.NotificationTypeEnum = exports.NetworkSuggestionEventRequestEventTypeEnum = exports.HcFilterTypeEntryRangeFieldPresentationEnum = exports.HcFilterTypeEntryFilterTypeNatureEnum = exports.HcFilterTypeRangeFieldPresentationEnum = exports.HcFilterTypeFilterTypeNatureEnum = exports.HcFilterEntryFilterWorkerOptionEnum = exports.HcFilterEntryChoiceEnum = exports.HcFilterConditionMaxOperandEnum = exports.HcFilterConditionMinOperandEnum = exports.HcFilterHcListerOptionEnum = exports.HcFilterFilterWorkerOptionEnum = exports.HcFilterChoiceEnum = exports.GroupMemberGroupMemberStatusEnum = exports.GroupChildGroupMemberStatusEnum = exports.GroupRequestStatusEnum = exports.GroupGroupTypeEnum = exports.GroupGroupStatusEnum = exports.FilterShowingStepSequenceAfterEnum = exports.FilterShowingStepSequenceBeforeEnum = exports.FavoriteResourceTypeEnum = exports.DropdownOptionGroupTranslationManagementEnum = exports.CourseWriteDtoDesignationEnum = exports.CourseWriteDtoFormatEnum = exports.CourseDesignationEnum = exports.CourseFormatEnum = exports.ConversationSummaryChatAllowanceTypeEnum = exports.CheckoutSessionDtoStatusEnum = exports.ChatAllowanceChatAllowanceTypeEnum = exports.AlertWithUserProfileUserAlertTypeEnum = exports.AlertUserAlertTypeEnum = void 0;
+exports.ExchangeRatesApiAxiosParamCreator = exports.EndorsementsApi = exports.EndorsementsApiFactory = exports.EndorsementsApiFp = exports.EndorsementsApiAxiosParamCreator = exports.CustomerSessionsApi = exports.CustomerSessionsApiFactory = exports.CustomerSessionsApiFp = exports.CustomerSessionsApiAxiosParamCreator = exports.CurrencyManagementApi = exports.CurrencyManagementApiFactory = exports.CurrencyManagementApiFp = exports.CurrencyManagementApiAxiosParamCreator = exports.List1DesignationEnum = exports.List1FormatEnum = exports.CoursesApi = exports.CoursesApiFactory = exports.CoursesApiFp = exports.CoursesApiAxiosParamCreator = exports.CountriesApi = exports.CountriesApiFactory = exports.CountriesApiFp = exports.CountriesApiAxiosParamCreator = exports.CheckoutSessionsApi = exports.CheckoutSessionsApiFactory = exports.CheckoutSessionsApiFp = exports.CheckoutSessionsApiAxiosParamCreator = exports.ChatTicketsApi = exports.ChatTicketsApiFactory = exports.ChatTicketsApiFp = exports.ChatTicketsApiAxiosParamCreator = exports.BrokeragesApi = exports.BrokeragesApiFactory = exports.BrokeragesApiFp = exports.BrokeragesApiAxiosParamCreator = exports.AttachmentsApi = exports.AttachmentsApiFactory = exports.AttachmentsApiFp = exports.AttachmentsApiAxiosParamCreator = exports.ApiKeysApi = exports.ApiKeysApiFactory = exports.ApiKeysApiFp = exports.ApiKeysApiAxiosParamCreator = exports.AllowancesApi = exports.AllowancesApiFactory = exports.AllowancesApiFp = exports.AllowancesApiAxiosParamCreator = exports.AlertsApi = exports.AlertsApiFactory = exports.AlertsApiFp = void 0;
+exports.PasswordRecoveryApi = exports.PasswordRecoveryApiFactory = exports.PasswordRecoveryApiFp = exports.PasswordRecoveryApiAxiosParamCreator = exports.GetByUserWithResult1TypeEnum = exports.MessagesApi = exports.MessagesApiFactory = exports.MessagesApiFp = exports.MessagesApiAxiosParamCreator = exports.LocationCacheApi = exports.LocationCacheApiFactory = exports.LocationCacheApiFp = exports.LocationCacheApiAxiosParamCreator = exports.LocalesApi = exports.LocalesApiFactory = exports.LocalesApiFp = exports.LocalesApiAxiosParamCreator = exports.LanguagesApi = exports.LanguagesApiFactory = exports.LanguagesApiFp = exports.LanguagesApiAxiosParamCreator = exports.HomePreviewApi = exports.HomePreviewApiFactory = exports.HomePreviewApiFp = exports.HomePreviewApiAxiosParamCreator = exports.UpdateGroupMembershipStatus1StatusEnum = exports.RequestGroupTypeChange1RequestStatusEnum = exports.GroupsApi = exports.GroupsApiFactory = exports.GroupsApiFp = exports.GroupsApiAxiosParamCreator = exports.GroupNotificationsApi = exports.GroupNotificationsApiFactory = exports.GroupNotificationsApiFp = exports.GroupNotificationsApiAxiosParamCreator = exports.GeoLocationApi = exports.GeoLocationApiFactory = exports.GeoLocationApiFp = exports.GeoLocationApiAxiosParamCreator = exports.FavoritesApi = exports.FavoritesApiFactory = exports.FavoritesApiFp = exports.FavoritesApiAxiosParamCreator = exports.FacebookPropertiesApi = exports.FacebookPropertiesApiFactory = exports.FacebookPropertiesApiFp = exports.FacebookPropertiesApiAxiosParamCreator = exports.ExchangeRatesApi = exports.ExchangeRatesApiFactory = exports.ExchangeRatesApiFp = void 0;
+exports.StripeIdentityWebhooksApi = exports.StripeIdentityWebhooksApiFactory = exports.StripeIdentityWebhooksApiFp = exports.StripeIdentityWebhooksApiAxiosParamCreator = exports.SkillsApi = exports.SkillsApiFactory = exports.SkillsApiFp = exports.SkillsApiAxiosParamCreator = exports.SecurityApi = exports.SecurityApiFactory = exports.SecurityApiFp = exports.SecurityApiAxiosParamCreator = exports.PropertyTypesApi = exports.PropertyTypesApiFactory = exports.PropertyTypesApiFp = exports.PropertyTypesApiAxiosParamCreator = exports.PropertyProposalsApi = exports.PropertyProposalsApiFactory = exports.PropertyProposalsApiFp = exports.PropertyProposalsApiAxiosParamCreator = exports.PropertyLocationsApi = exports.PropertyLocationsApiFactory = exports.PropertyLocationsApiFp = exports.PropertyLocationsApiAxiosParamCreator = exports.PropertyFiltersApi = exports.PropertyFiltersApiFactory = exports.PropertyFiltersApiFp = exports.PropertyFiltersApiAxiosParamCreator = exports.PropertyFieldsApi = exports.PropertyFieldsApiFactory = exports.PropertyFieldsApiFp = exports.PropertyFieldsApiAxiosParamCreator = exports.UploadPropertiesFromUrl1FormatEnum = exports.UploadProperties1FormatEnum = exports.PropertyBulkUploadsApi = exports.PropertyBulkUploadsApiFactory = exports.PropertyBulkUploadsApiFp = exports.PropertyBulkUploadsApiAxiosParamCreator = exports.PropertyBulkDownloadApi = exports.PropertyBulkDownloadApiFactory = exports.PropertyBulkDownloadApiFp = exports.PropertyBulkDownloadApiAxiosParamCreator = exports.PropertiesApi = exports.PropertiesApiFactory = exports.PropertiesApiFp = exports.PropertiesApiAxiosParamCreator = exports.PhonePrefixesApi = exports.PhonePrefixesApiFactory = exports.PhonePrefixesApiFp = exports.PhonePrefixesApiAxiosParamCreator = void 0;
+exports.GetSubscribedUsers1SubscriptionPlanNameEnum = exports.UsersApi = exports.UsersApiFactory = exports.UsersApiFp = exports.UsersApiAxiosParamCreator = exports.UserTypesApi = exports.UserTypesApiFactory = exports.UserTypesApiFp = exports.UserTypesApiAxiosParamCreator = exports.UserSummaryApi = exports.UserSummaryApiFactory = exports.UserSummaryApiFp = exports.UserSummaryApiAxiosParamCreator = exports.UserContractsApi = exports.UserContractsApiFactory = exports.UserContractsApiFp = exports.UserContractsApiAxiosParamCreator = exports.UserConnectionsApi = exports.UserConnectionsApiFactory = exports.UserConnectionsApiFp = exports.UserConnectionsApiAxiosParamCreator = exports.TextTranslationsApi = exports.TextTranslationsApiFactory = exports.TextTranslationsApiFp = exports.TextTranslationsApiAxiosParamCreator = exports.TestimonialApi = exports.TestimonialApiFactory = exports.TestimonialApiFp = exports.TestimonialApiAxiosParamCreator = exports.SubscriptionsApi = exports.SubscriptionsApiFactory = exports.SubscriptionsApiFp = exports.SubscriptionsApiAxiosParamCreator = exports.StripeWebhooksApi = exports.StripeWebhooksApiFactory = exports.StripeWebhooksApiFp = exports.StripeWebhooksApiAxiosParamCreator = void 0;
 const axios_1 = __importDefault(require("axios"));
 // Some imports not used depending on template conditions
 // @ts-ignore
@@ -123,12 +123,22 @@ exports.GroupGroupStatusEnum = {
 exports.GroupGroupTypeEnum = {
     Group: 'GROUP',
     Association: 'ASSOCIATION',
-    Certification: 'CERTIFICATION'
+    Certification: 'CERTIFICATION',
+    Federation: 'FEDERATION'
 };
 exports.GroupRequestStatusEnum = {
     None: 'NONE',
     RequestingAssociation: 'REQUESTING_ASSOCIATION',
     RequestingCertification: 'REQUESTING_CERTIFICATION'
+};
+exports.GroupChildGroupMemberStatusEnum = {
+    Invited: 'INVITED',
+    Requested: 'REQUESTED',
+    Accepted: 'ACCEPTED',
+    Admin: 'ADMIN',
+    Rejected: 'REJECTED',
+    Removed: 'REMOVED',
+    Left: 'LEFT'
 };
 exports.GroupMemberGroupMemberStatusEnum = {
     Invited: 'INVITED',
@@ -341,7 +351,8 @@ exports.UserPublicProfileDesignEnum = {
 exports.UserGroupGroupTypeEnum = {
     Group: 'GROUP',
     Association: 'ASSOCIATION',
-    Certification: 'CERTIFICATION'
+    Certification: 'CERTIFICATION',
+    Federation: 'FEDERATION'
 };
 exports.UserPlatformInviteRequestSourceEnum = {
     Header: 'HEADER',
@@ -4375,6 +4386,47 @@ const GroupsApiAxiosParamCreator = function (configuration) {
             };
         },
         /**
+         *
+         * @summary List child groups of a federation
+         * @param {string} groupId Federation group id
+         * @param {number} [pageFrom]
+         * @param {number} [pageTo]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getGroupChildren1: async (groupId, pageFrom, pageTo, options = {}) => {
+            // verify required parameter 'groupId' is not null or undefined
+            (0, common_1.assertParamExists)('getGroupChildren1', 'groupId', groupId);
+            const localVarPath = `/groups/{groupId}/children`
+                .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            if (pageFrom !== undefined) {
+                localVarQueryParameter['pageFrom'] = pageFrom;
+            }
+            if (pageTo !== undefined) {
+                localVarQueryParameter['pageTo'] = pageTo;
+            }
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * For Group Owners, this list will return removed, left, invited and requested members as well
          * @summary Show all members of Group
          * @param {string} groupId group id
@@ -4543,6 +4595,47 @@ const GroupsApiAxiosParamCreator = function (configuration) {
             await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
             // authentication oAuthClientId required
             await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Link a child group to a federation
+         * @param {string} groupId
+         * @param {string} [childGroupId]
+         * @param {string} [status]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        linkChildGroup1: async (groupId, childGroupId, status, options = {}) => {
+            // verify required parameter 'groupId' is not null or undefined
+            (0, common_1.assertParamExists)('linkChildGroup1', 'groupId', groupId);
+            const localVarPath = `/groups/{groupId}/children`
+                .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            if (childGroupId !== undefined) {
+                localVarQueryParameter['childGroupId'] = childGroupId;
+            }
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
+            }
             (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
@@ -4740,10 +4833,11 @@ const GroupsApiAxiosParamCreator = function (configuration) {
          * @param {string} groupId Group ID
          * @param {UserFilterRequest} userFilterRequest User search filters within the group. Supports filtering by user attributes, location, skills, and social preferences. The resultRequest field controls pagination and sorting. Only one sort order can be specified at a time.
          * @param {boolean} [bypassCache] Bypass cache and fetch fresh data from database
+         * @param {string} [childGroupId] Scope search to a child association/federation of a federation group
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        searchGroupUsers1: async (groupId, userFilterRequest, bypassCache, options = {}) => {
+        searchGroupUsers1: async (groupId, userFilterRequest, bypassCache, childGroupId, options = {}) => {
             // verify required parameter 'groupId' is not null or undefined
             (0, common_1.assertParamExists)('searchGroupUsers1', 'groupId', groupId);
             // verify required parameter 'userFilterRequest' is not null or undefined
@@ -4763,6 +4857,9 @@ const GroupsApiAxiosParamCreator = function (configuration) {
             await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Token", configuration);
             if (bypassCache !== undefined) {
                 localVarQueryParameter['bypassCache'] = bypassCache;
+            }
+            if (childGroupId !== undefined) {
+                localVarQueryParameter['childGroupId'] = childGroupId;
             }
             localVarHeaderParameter['Content-Type'] = 'application/json';
             (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
@@ -4805,6 +4902,47 @@ const GroupsApiAxiosParamCreator = function (configuration) {
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
             localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(sendGroupNotificationRequest, localVarRequestOptions, configuration);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Update federation child link status
+         * @param {string} groupId
+         * @param {string} childGroupId
+         * @param {string} [status]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateChildStatus1: async (groupId, childGroupId, status, options = {}) => {
+            // verify required parameter 'groupId' is not null or undefined
+            (0, common_1.assertParamExists)('updateChildStatus1', 'groupId', groupId);
+            // verify required parameter 'childGroupId' is not null or undefined
+            (0, common_1.assertParamExists)('updateChildStatus1', 'childGroupId', childGroupId);
+            const localVarPath = `/groups/{groupId}/children/{childGroupId}/status`
+                .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)))
+                .replace(`{${"childGroupId"}}`, encodeURIComponent(String(childGroupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
+            }
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
             return {
                 url: (0, common_1.toPathString)(localVarUrlObj),
                 options: localVarRequestOptions,
@@ -5039,6 +5177,21 @@ const GroupsApiFp = function (configuration) {
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         *
+         * @summary List child groups of a federation
+         * @param {string} groupId Federation group id
+         * @param {number} [pageFrom]
+         * @param {number} [pageTo]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getGroupChildren1(groupId, pageFrom, pageTo, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getGroupChildren1(groupId, pageFrom, pageTo, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['GroupsApi.getGroupChildren1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * For Group Owners, this list will return removed, left, invited and requested members as well
          * @summary Show all members of Group
          * @param {string} groupId group id
@@ -5104,6 +5257,21 @@ const GroupsApiFp = function (configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.groupRequest1(groupId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = base_1.operationServerMap['GroupsApi.groupRequest1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         *
+         * @summary Link a child group to a federation
+         * @param {string} groupId
+         * @param {string} [childGroupId]
+         * @param {string} [status]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async linkChildGroup1(groupId, childGroupId, status, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.linkChildGroup1(groupId, childGroupId, status, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['GroupsApi.linkChildGroup1']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5182,11 +5350,12 @@ const GroupsApiFp = function (configuration) {
          * @param {string} groupId Group ID
          * @param {UserFilterRequest} userFilterRequest User search filters within the group. Supports filtering by user attributes, location, skills, and social preferences. The resultRequest field controls pagination and sorting. Only one sort order can be specified at a time.
          * @param {boolean} [bypassCache] Bypass cache and fetch fresh data from database
+         * @param {string} [childGroupId] Scope search to a child association/federation of a federation group
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async searchGroupUsers1(groupId, userFilterRequest, bypassCache, options) {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.searchGroupUsers1(groupId, userFilterRequest, bypassCache, options);
+        async searchGroupUsers1(groupId, userFilterRequest, bypassCache, childGroupId, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.searchGroupUsers1(groupId, userFilterRequest, bypassCache, childGroupId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = base_1.operationServerMap['GroupsApi.searchGroupUsers1']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -5203,6 +5372,21 @@ const GroupsApiFp = function (configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.sendNotification1(groupId, sendGroupNotificationRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = base_1.operationServerMap['GroupsApi.sendNotification1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         *
+         * @summary Update federation child link status
+         * @param {string} groupId
+         * @param {string} childGroupId
+         * @param {string} [status]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateChildStatus1(groupId, childGroupId, status, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateChildStatus1(groupId, childGroupId, status, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['GroupsApi.updateChildStatus1']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5361,6 +5545,16 @@ const GroupsApiFactory = function (configuration, basePath, axios) {
             return localVarFp.findRequestedGroupsByUser1(requestParameters.pageFrom, requestParameters.pageTo, options).then((request) => request(axios, basePath));
         },
         /**
+         *
+         * @summary List child groups of a federation
+         * @param {GroupsApiGetGroupChildren1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getGroupChildren1(requestParameters, options) {
+            return localVarFp.getGroupChildren1(requestParameters.groupId, requestParameters.pageFrom, requestParameters.pageTo, options).then((request) => request(axios, basePath));
+        },
+        /**
          * For Group Owners, this list will return removed, left, invited and requested members as well
          * @summary Show all members of Group
          * @param {GroupsApiGetGroupMembers1Request} requestParameters Request parameters.
@@ -5409,6 +5603,16 @@ const GroupsApiFactory = function (configuration, basePath, axios) {
          */
         groupRequest1(requestParameters, options) {
             return localVarFp.groupRequest1(requestParameters.groupId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         *
+         * @summary Link a child group to a federation
+         * @param {GroupsApiLinkChildGroup1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        linkChildGroup1(requestParameters, options) {
+            return localVarFp.linkChildGroup1(requestParameters.groupId, requestParameters.childGroupId, requestParameters.status, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns recent notifications for the group.
@@ -5468,7 +5672,7 @@ const GroupsApiFactory = function (configuration, basePath, axios) {
          * @throws {RequiredError}
          */
         searchGroupUsers1(requestParameters, options) {
-            return localVarFp.searchGroupUsers1(requestParameters.groupId, requestParameters.userFilterRequest, requestParameters.bypassCache, options).then((request) => request(axios, basePath));
+            return localVarFp.searchGroupUsers1(requestParameters.groupId, requestParameters.userFilterRequest, requestParameters.bypassCache, requestParameters.childGroupId, options).then((request) => request(axios, basePath));
         },
         /**
          * Owner or admin sends a one-way notification to all members. Rate limit: 1 per minute.
@@ -5479,6 +5683,16 @@ const GroupsApiFactory = function (configuration, basePath, axios) {
          */
         sendNotification1(requestParameters, options) {
             return localVarFp.sendNotification1(requestParameters.groupId, requestParameters.sendGroupNotificationRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         *
+         * @summary Update federation child link status
+         * @param {GroupsApiUpdateChildStatus1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateChildStatus1(requestParameters, options) {
+            return localVarFp.updateChildStatus1(requestParameters.groupId, requestParameters.childGroupId, requestParameters.status, options).then((request) => request(axios, basePath));
         },
         /**
          * Acceptable Status values are:  ACCEPTED, ADMIN, REJECTED, REMOVED
@@ -5644,6 +5858,17 @@ class GroupsApi extends base_1.BaseAPI {
         return (0, exports.GroupsApiFp)(this.configuration).findRequestedGroupsByUser1(requestParameters.pageFrom, requestParameters.pageTo, options).then((request) => request(this.axios, this.basePath));
     }
     /**
+     *
+     * @summary List child groups of a federation
+     * @param {GroupsApiGetGroupChildren1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    getGroupChildren1(requestParameters, options) {
+        return (0, exports.GroupsApiFp)(this.configuration).getGroupChildren1(requestParameters.groupId, requestParameters.pageFrom, requestParameters.pageTo, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
      * For Group Owners, this list will return removed, left, invited and requested members as well
      * @summary Show all members of Group
      * @param {GroupsApiGetGroupMembers1Request} requestParameters Request parameters.
@@ -5697,6 +5922,17 @@ class GroupsApi extends base_1.BaseAPI {
      */
     groupRequest1(requestParameters, options) {
         return (0, exports.GroupsApiFp)(this.configuration).groupRequest1(requestParameters.groupId, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary Link a child group to a federation
+     * @param {GroupsApiLinkChildGroup1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    linkChildGroup1(requestParameters, options) {
+        return (0, exports.GroupsApiFp)(this.configuration).linkChildGroup1(requestParameters.groupId, requestParameters.childGroupId, requestParameters.status, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Returns recent notifications for the group.
@@ -5762,7 +5998,7 @@ class GroupsApi extends base_1.BaseAPI {
      * @memberof GroupsApi
      */
     searchGroupUsers1(requestParameters, options) {
-        return (0, exports.GroupsApiFp)(this.configuration).searchGroupUsers1(requestParameters.groupId, requestParameters.userFilterRequest, requestParameters.bypassCache, options).then((request) => request(this.axios, this.basePath));
+        return (0, exports.GroupsApiFp)(this.configuration).searchGroupUsers1(requestParameters.groupId, requestParameters.userFilterRequest, requestParameters.bypassCache, requestParameters.childGroupId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Owner or admin sends a one-way notification to all members. Rate limit: 1 per minute.
@@ -5774,6 +6010,17 @@ class GroupsApi extends base_1.BaseAPI {
      */
     sendNotification1(requestParameters, options) {
         return (0, exports.GroupsApiFp)(this.configuration).sendNotification1(requestParameters.groupId, requestParameters.sendGroupNotificationRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary Update federation child link status
+     * @param {GroupsApiUpdateChildStatus1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    updateChildStatus1(requestParameters, options) {
+        return (0, exports.GroupsApiFp)(this.configuration).updateChildStatus1(requestParameters.groupId, requestParameters.childGroupId, requestParameters.status, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Acceptable Status values are:  ACCEPTED, ADMIN, REJECTED, REMOVED

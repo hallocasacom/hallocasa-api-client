@@ -14,11 +14,13 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createHallocasaClient = void 0;
-// Re-export everything from the generated API
-// This will be uncommented after generation
+exports.linkGroupChild = exports.fetchGroupChildren = exports.createHallocasaClient = exports.Configuration = void 0;
 __exportStar(require("./generated"), exports);
-// Export client creation utilities
+var configuration_1 = require("./generated/configuration");
+Object.defineProperty(exports, "Configuration", { enumerable: true, get: function () { return configuration_1.Configuration; } });
 var client_1 = require("./client");
 Object.defineProperty(exports, "createHallocasaClient", { enumerable: true, get: function () { return client_1.createHallocasaClient; } });
+var federation_1 = require("./federation");
+Object.defineProperty(exports, "fetchGroupChildren", { enumerable: true, get: function () { return federation_1.fetchGroupChildren; } });
+Object.defineProperty(exports, "linkGroupChild", { enumerable: true, get: function () { return federation_1.linkGroupChild; } });
 // Additional utilities and client configurations can be added here

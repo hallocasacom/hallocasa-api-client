@@ -2011,6 +2011,12 @@ export interface Group {
     'noOfMembers'?: number;
     /**
      * 
+     * @type {number}
+     * @memberof Group
+     */
+    'noOfChildren'?: number;
+    /**
+     * 
      * @type {boolean}
      * @memberof Group
      */
@@ -2029,7 +2035,8 @@ export type GroupGroupStatusEnum = typeof GroupGroupStatusEnum[keyof typeof Grou
 export const GroupGroupTypeEnum = {
     Group: 'GROUP',
     Association: 'ASSOCIATION',
-    Certification: 'CERTIFICATION'
+    Certification: 'CERTIFICATION',
+    Federation: 'FEDERATION'
 } as const;
 
 export type GroupGroupTypeEnum = typeof GroupGroupTypeEnum[keyof typeof GroupGroupTypeEnum];
@@ -2041,6 +2048,75 @@ export const GroupRequestStatusEnum = {
 
 export type GroupRequestStatusEnum = typeof GroupRequestStatusEnum[keyof typeof GroupRequestStatusEnum];
 
+/**
+ * 
+ * @export
+ * @interface GroupChild
+ */
+export interface GroupChild {
+    /**
+     * 
+     * @type {number}
+     * @memberof GroupChild
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {Group}
+     * @memberof GroupChild
+     */
+    'parentGroup'?: Group;
+    /**
+     * 
+     * @type {Group}
+     * @memberof GroupChild
+     */
+    'childGroup'?: Group;
+    /**
+     * 
+     * @type {string}
+     * @memberof GroupChild
+     */
+    'creationDate'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GroupChild
+     */
+    'groupMemberStatus'?: GroupChildGroupMemberStatusEnum;
+}
+
+export const GroupChildGroupMemberStatusEnum = {
+    Invited: 'INVITED',
+    Requested: 'REQUESTED',
+    Accepted: 'ACCEPTED',
+    Admin: 'ADMIN',
+    Rejected: 'REJECTED',
+    Removed: 'REMOVED',
+    Left: 'LEFT'
+} as const;
+
+export type GroupChildGroupMemberStatusEnum = typeof GroupChildGroupMemberStatusEnum[keyof typeof GroupChildGroupMemberStatusEnum];
+
+/**
+ * 
+ * @export
+ * @interface GroupChildFilterResult
+ */
+export interface GroupChildFilterResult {
+    /**
+     * 
+     * @type {number}
+     * @memberof GroupChildFilterResult
+     */
+    'count'?: number;
+    /**
+     * 
+     * @type {Array<GroupChild>}
+     * @memberof GroupChildFilterResult
+     */
+    'list'?: Array<GroupChild>;
+}
 /**
  * 
  * @export
@@ -5975,6 +6051,12 @@ export interface UserFilterRequest {
      */
     'brokerages'?: Array<number>;
     /**
+     * When searching within a federation, scope to this child group id
+     * @type {string}
+     * @memberof UserFilterRequest
+     */
+    'childGroupId'?: string;
+    /**
      * Include users without completed basic profile (group search only). When true, returns all group members including those with basic_profile_completed_at = NULL
      * @type {boolean}
      * @memberof UserFilterRequest
@@ -6198,7 +6280,8 @@ export interface UserGroup {
 export const UserGroupGroupTypeEnum = {
     Group: 'GROUP',
     Association: 'ASSOCIATION',
-    Certification: 'CERTIFICATION'
+    Certification: 'CERTIFICATION',
+    Federation: 'FEDERATION'
 } as const;
 
 export type UserGroupGroupTypeEnum = typeof UserGroupGroupTypeEnum[keyof typeof UserGroupGroupTypeEnum];
@@ -11664,6 +11747,56 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
+         * 
+         * @summary List child groups of a federation
+         * @param {string} groupId Federation group id
+         * @param {number} [pageFrom] 
+         * @param {number} [pageTo] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getGroupChildren1: async (groupId: string, pageFrom?: number, pageTo?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'groupId' is not null or undefined
+            assertParamExists('getGroupChildren1', 'groupId', groupId)
+            const localVarPath = `/groups/{groupId}/children`
+                .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+            if (pageFrom !== undefined) {
+                localVarQueryParameter['pageFrom'] = pageFrom;
+            }
+
+            if (pageTo !== undefined) {
+                localVarQueryParameter['pageTo'] = pageTo;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * For Group Owners, this list will return removed, left, invited and requested members as well
          * @summary Show all members of Group
          * @param {string} groupId group id
@@ -11866,6 +11999,56 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
 
             // authentication oAuthClientId required
             await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Link a child group to a federation
+         * @param {string} groupId 
+         * @param {string} [childGroupId] 
+         * @param {string} [status] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        linkChildGroup1: async (groupId: string, childGroupId?: string, status?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'groupId' is not null or undefined
+            assertParamExists('linkChildGroup1', 'groupId', groupId)
+            const localVarPath = `/groups/{groupId}/children`
+                .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+            if (childGroupId !== undefined) {
+                localVarQueryParameter['childGroupId'] = childGroupId;
+            }
+
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
+            }
 
 
     
@@ -12108,10 +12291,11 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {string} groupId Group ID
          * @param {UserFilterRequest} userFilterRequest User search filters within the group. Supports filtering by user attributes, location, skills, and social preferences. The resultRequest field controls pagination and sorting. Only one sort order can be specified at a time.
          * @param {boolean} [bypassCache] Bypass cache and fetch fresh data from database
+         * @param {string} [childGroupId] Scope search to a child association/federation of a federation group
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        searchGroupUsers1: async (groupId: string, userFilterRequest: UserFilterRequest, bypassCache?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        searchGroupUsers1: async (groupId: string, userFilterRequest: UserFilterRequest, bypassCache?: boolean, childGroupId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'groupId' is not null or undefined
             assertParamExists('searchGroupUsers1', 'groupId', groupId)
             // verify required parameter 'userFilterRequest' is not null or undefined
@@ -12134,6 +12318,10 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
 
             if (bypassCache !== undefined) {
                 localVarQueryParameter['bypassCache'] = bypassCache;
+            }
+
+            if (childGroupId !== undefined) {
+                localVarQueryParameter['childGroupId'] = childGroupId;
             }
 
 
@@ -12188,6 +12376,55 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(sendGroupNotificationRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Update federation child link status
+         * @param {string} groupId 
+         * @param {string} childGroupId 
+         * @param {string} [status] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateChildStatus1: async (groupId: string, childGroupId: string, status?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'groupId' is not null or undefined
+            assertParamExists('updateChildStatus1', 'groupId', groupId)
+            // verify required parameter 'childGroupId' is not null or undefined
+            assertParamExists('updateChildStatus1', 'childGroupId', childGroupId)
+            const localVarPath = `/groups/{groupId}/children/{childGroupId}/status`
+                .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)))
+                .replace(`{${"childGroupId"}}`, encodeURIComponent(String(childGroupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -12432,6 +12669,21 @@ export const GroupsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * 
+         * @summary List child groups of a federation
+         * @param {string} groupId Federation group id
+         * @param {number} [pageFrom] 
+         * @param {number} [pageTo] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getGroupChildren1(groupId: string, pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupChildFilterResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getGroupChildren1(groupId, pageFrom, pageTo, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GroupsApi.getGroupChildren1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * For Group Owners, this list will return removed, left, invited and requested members as well
          * @summary Show all members of Group
          * @param {string} groupId group id
@@ -12497,6 +12749,21 @@ export const GroupsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.groupRequest1(groupId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GroupsApi.groupRequest1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Link a child group to a federation
+         * @param {string} groupId 
+         * @param {string} [childGroupId] 
+         * @param {string} [status] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async linkChildGroup1(groupId: string, childGroupId?: string, status?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.linkChildGroup1(groupId, childGroupId, status, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GroupsApi.linkChildGroup1']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -12575,11 +12842,12 @@ export const GroupsApiFp = function(configuration?: Configuration) {
          * @param {string} groupId Group ID
          * @param {UserFilterRequest} userFilterRequest User search filters within the group. Supports filtering by user attributes, location, skills, and social preferences. The resultRequest field controls pagination and sorting. Only one sort order can be specified at a time.
          * @param {boolean} [bypassCache] Bypass cache and fetch fresh data from database
+         * @param {string} [childGroupId] Scope search to a child association/federation of a federation group
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async searchGroupUsers1(groupId: string, userFilterRequest: UserFilterRequest, bypassCache?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserFilterResult>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.searchGroupUsers1(groupId, userFilterRequest, bypassCache, options);
+        async searchGroupUsers1(groupId: string, userFilterRequest: UserFilterRequest, bypassCache?: boolean, childGroupId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserFilterResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.searchGroupUsers1(groupId, userFilterRequest, bypassCache, childGroupId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GroupsApi.searchGroupUsers1']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -12596,6 +12864,21 @@ export const GroupsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.sendNotification1(groupId, sendGroupNotificationRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GroupsApi.sendNotification1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Update federation child link status
+         * @param {string} groupId 
+         * @param {string} childGroupId 
+         * @param {string} [status] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateChildStatus1(groupId: string, childGroupId: string, status?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateChildStatus1(groupId, childGroupId, status, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GroupsApi.updateChildStatus1']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -12754,6 +13037,16 @@ export const GroupsApiFactory = function (configuration?: Configuration, basePat
             return localVarFp.findRequestedGroupsByUser1(requestParameters.pageFrom, requestParameters.pageTo, options).then((request) => request(axios, basePath));
         },
         /**
+         * 
+         * @summary List child groups of a federation
+         * @param {GroupsApiGetGroupChildren1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getGroupChildren1(requestParameters: GroupsApiGetGroupChildren1Request, options?: RawAxiosRequestConfig): AxiosPromise<GroupChildFilterResult> {
+            return localVarFp.getGroupChildren1(requestParameters.groupId, requestParameters.pageFrom, requestParameters.pageTo, options).then((request) => request(axios, basePath));
+        },
+        /**
          * For Group Owners, this list will return removed, left, invited and requested members as well
          * @summary Show all members of Group
          * @param {GroupsApiGetGroupMembers1Request} requestParameters Request parameters.
@@ -12802,6 +13095,16 @@ export const GroupsApiFactory = function (configuration?: Configuration, basePat
          */
         groupRequest1(requestParameters: GroupsApiGroupRequest1Request, options?: RawAxiosRequestConfig): AxiosPromise<GroupMember> {
             return localVarFp.groupRequest1(requestParameters.groupId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Link a child group to a federation
+         * @param {GroupsApiLinkChildGroup1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        linkChildGroup1(requestParameters: GroupsApiLinkChildGroup1Request, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.linkChildGroup1(requestParameters.groupId, requestParameters.childGroupId, requestParameters.status, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns recent notifications for the group.
@@ -12861,7 +13164,7 @@ export const GroupsApiFactory = function (configuration?: Configuration, basePat
          * @throws {RequiredError}
          */
         searchGroupUsers1(requestParameters: GroupsApiSearchGroupUsers1Request, options?: RawAxiosRequestConfig): AxiosPromise<UserFilterResult> {
-            return localVarFp.searchGroupUsers1(requestParameters.groupId, requestParameters.userFilterRequest, requestParameters.bypassCache, options).then((request) => request(axios, basePath));
+            return localVarFp.searchGroupUsers1(requestParameters.groupId, requestParameters.userFilterRequest, requestParameters.bypassCache, requestParameters.childGroupId, options).then((request) => request(axios, basePath));
         },
         /**
          * Owner or admin sends a one-way notification to all members. Rate limit: 1 per minute.
@@ -12872,6 +13175,16 @@ export const GroupsApiFactory = function (configuration?: Configuration, basePat
          */
         sendNotification1(requestParameters: GroupsApiSendNotification1Request, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.sendNotification1(requestParameters.groupId, requestParameters.sendGroupNotificationRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Update federation child link status
+         * @param {GroupsApiUpdateChildStatus1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateChildStatus1(requestParameters: GroupsApiUpdateChildStatus1Request, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.updateChildStatus1(requestParameters.groupId, requestParameters.childGroupId, requestParameters.status, options).then((request) => request(axios, basePath));
         },
         /**
          * Acceptable Status values are:  ACCEPTED, ADMIN, REJECTED, REMOVED
@@ -13125,6 +13438,34 @@ export interface GroupsApiFindRequestedGroupsByUser1Request {
 }
 
 /**
+ * Request parameters for getGroupChildren1 operation in GroupsApi.
+ * @export
+ * @interface GroupsApiGetGroupChildren1Request
+ */
+export interface GroupsApiGetGroupChildren1Request {
+    /**
+     * Federation group id
+     * @type {string}
+     * @memberof GroupsApiGetGroupChildren1
+     */
+    readonly groupId: string
+
+    /**
+     * 
+     * @type {number}
+     * @memberof GroupsApiGetGroupChildren1
+     */
+    readonly pageFrom?: number
+
+    /**
+     * 
+     * @type {number}
+     * @memberof GroupsApiGetGroupChildren1
+     */
+    readonly pageTo?: number
+}
+
+/**
  * Request parameters for getGroupMembers1 operation in GroupsApi.
  * @export
  * @interface GroupsApiGetGroupMembers1Request
@@ -13213,6 +13554,34 @@ export interface GroupsApiGroupRequest1Request {
      * @memberof GroupsApiGroupRequest1
      */
     readonly groupId: string
+}
+
+/**
+ * Request parameters for linkChildGroup1 operation in GroupsApi.
+ * @export
+ * @interface GroupsApiLinkChildGroup1Request
+ */
+export interface GroupsApiLinkChildGroup1Request {
+    /**
+     * 
+     * @type {string}
+     * @memberof GroupsApiLinkChildGroup1
+     */
+    readonly groupId: string
+
+    /**
+     * 
+     * @type {string}
+     * @memberof GroupsApiLinkChildGroup1
+     */
+    readonly childGroupId?: string
+
+    /**
+     * 
+     * @type {string}
+     * @memberof GroupsApiLinkChildGroup1
+     */
+    readonly status?: string
 }
 
 /**
@@ -13346,6 +13715,13 @@ export interface GroupsApiSearchGroupUsers1Request {
      * @memberof GroupsApiSearchGroupUsers1
      */
     readonly bypassCache?: boolean
+
+    /**
+     * Scope search to a child association/federation of a federation group
+     * @type {string}
+     * @memberof GroupsApiSearchGroupUsers1
+     */
+    readonly childGroupId?: string
 }
 
 /**
@@ -13367,6 +13743,34 @@ export interface GroupsApiSendNotification1Request {
      * @memberof GroupsApiSendNotification1
      */
     readonly sendGroupNotificationRequest?: SendGroupNotificationRequest
+}
+
+/**
+ * Request parameters for updateChildStatus1 operation in GroupsApi.
+ * @export
+ * @interface GroupsApiUpdateChildStatus1Request
+ */
+export interface GroupsApiUpdateChildStatus1Request {
+    /**
+     * 
+     * @type {string}
+     * @memberof GroupsApiUpdateChildStatus1
+     */
+    readonly groupId: string
+
+    /**
+     * 
+     * @type {string}
+     * @memberof GroupsApiUpdateChildStatus1
+     */
+    readonly childGroupId: string
+
+    /**
+     * 
+     * @type {string}
+     * @memberof GroupsApiUpdateChildStatus1
+     */
+    readonly status?: string
 }
 
 /**
@@ -13561,6 +13965,18 @@ export class GroupsApi extends BaseAPI {
     }
 
     /**
+     * 
+     * @summary List child groups of a federation
+     * @param {GroupsApiGetGroupChildren1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    public getGroupChildren1(requestParameters: GroupsApiGetGroupChildren1Request, options?: RawAxiosRequestConfig) {
+        return GroupsApiFp(this.configuration).getGroupChildren1(requestParameters.groupId, requestParameters.pageFrom, requestParameters.pageTo, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * For Group Owners, this list will return removed, left, invited and requested members as well
      * @summary Show all members of Group
      * @param {GroupsApiGetGroupMembers1Request} requestParameters Request parameters.
@@ -13618,6 +14034,18 @@ export class GroupsApi extends BaseAPI {
      */
     public groupRequest1(requestParameters: GroupsApiGroupRequest1Request, options?: RawAxiosRequestConfig) {
         return GroupsApiFp(this.configuration).groupRequest1(requestParameters.groupId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Link a child group to a federation
+     * @param {GroupsApiLinkChildGroup1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    public linkChildGroup1(requestParameters: GroupsApiLinkChildGroup1Request, options?: RawAxiosRequestConfig) {
+        return GroupsApiFp(this.configuration).linkChildGroup1(requestParameters.groupId, requestParameters.childGroupId, requestParameters.status, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -13689,7 +14117,7 @@ export class GroupsApi extends BaseAPI {
      * @memberof GroupsApi
      */
     public searchGroupUsers1(requestParameters: GroupsApiSearchGroupUsers1Request, options?: RawAxiosRequestConfig) {
-        return GroupsApiFp(this.configuration).searchGroupUsers1(requestParameters.groupId, requestParameters.userFilterRequest, requestParameters.bypassCache, options).then((request) => request(this.axios, this.basePath));
+        return GroupsApiFp(this.configuration).searchGroupUsers1(requestParameters.groupId, requestParameters.userFilterRequest, requestParameters.bypassCache, requestParameters.childGroupId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -13702,6 +14130,18 @@ export class GroupsApi extends BaseAPI {
      */
     public sendNotification1(requestParameters: GroupsApiSendNotification1Request, options?: RawAxiosRequestConfig) {
         return GroupsApiFp(this.configuration).sendNotification1(requestParameters.groupId, requestParameters.sendGroupNotificationRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Update federation child link status
+     * @param {GroupsApiUpdateChildStatus1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    public updateChildStatus1(requestParameters: GroupsApiUpdateChildStatus1Request, options?: RawAxiosRequestConfig) {
+        return GroupsApiFp(this.configuration).updateChildStatus1(requestParameters.groupId, requestParameters.childGroupId, requestParameters.status, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

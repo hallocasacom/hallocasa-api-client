@@ -1970,6 +1970,12 @@ export interface Group {
     'noOfMembers'?: number;
     /**
      *
+     * @type {number}
+     * @memberof Group
+     */
+    'noOfChildren'?: number;
+    /**
+     *
      * @type {boolean}
      * @memberof Group
      */
@@ -1987,6 +1993,7 @@ export declare const GroupGroupTypeEnum: {
     readonly Group: "GROUP";
     readonly Association: "ASSOCIATION";
     readonly Certification: "CERTIFICATION";
+    readonly Federation: "FEDERATION";
 };
 export type GroupGroupTypeEnum = typeof GroupGroupTypeEnum[keyof typeof GroupGroupTypeEnum];
 export declare const GroupRequestStatusEnum: {
@@ -1995,6 +2002,72 @@ export declare const GroupRequestStatusEnum: {
     readonly RequestingCertification: "REQUESTING_CERTIFICATION";
 };
 export type GroupRequestStatusEnum = typeof GroupRequestStatusEnum[keyof typeof GroupRequestStatusEnum];
+/**
+ *
+ * @export
+ * @interface GroupChild
+ */
+export interface GroupChild {
+    /**
+     *
+     * @type {number}
+     * @memberof GroupChild
+     */
+    'id'?: number;
+    /**
+     *
+     * @type {Group}
+     * @memberof GroupChild
+     */
+    'parentGroup'?: Group;
+    /**
+     *
+     * @type {Group}
+     * @memberof GroupChild
+     */
+    'childGroup'?: Group;
+    /**
+     *
+     * @type {string}
+     * @memberof GroupChild
+     */
+    'creationDate'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GroupChild
+     */
+    'groupMemberStatus'?: GroupChildGroupMemberStatusEnum;
+}
+export declare const GroupChildGroupMemberStatusEnum: {
+    readonly Invited: "INVITED";
+    readonly Requested: "REQUESTED";
+    readonly Accepted: "ACCEPTED";
+    readonly Admin: "ADMIN";
+    readonly Rejected: "REJECTED";
+    readonly Removed: "REMOVED";
+    readonly Left: "LEFT";
+};
+export type GroupChildGroupMemberStatusEnum = typeof GroupChildGroupMemberStatusEnum[keyof typeof GroupChildGroupMemberStatusEnum];
+/**
+ *
+ * @export
+ * @interface GroupChildFilterResult
+ */
+export interface GroupChildFilterResult {
+    /**
+     *
+     * @type {number}
+     * @memberof GroupChildFilterResult
+     */
+    'count'?: number;
+    /**
+     *
+     * @type {Array<GroupChild>}
+     * @memberof GroupChildFilterResult
+     */
+    'list'?: Array<GroupChild>;
+}
 /**
  *
  * @export
@@ -5878,6 +5951,12 @@ export interface UserFilterRequest {
      */
     'brokerages'?: Array<number>;
     /**
+     * When searching within a federation, scope to this child group id
+     * @type {string}
+     * @memberof UserFilterRequest
+     */
+    'childGroupId'?: string;
+    /**
      * Include users without completed basic profile (group search only). When true, returns all group members including those with basic_profile_completed_at = NULL
      * @type {boolean}
      * @memberof UserFilterRequest
@@ -6101,6 +6180,7 @@ export declare const UserGroupGroupTypeEnum: {
     readonly Group: "GROUP";
     readonly Association: "ASSOCIATION";
     readonly Certification: "CERTIFICATION";
+    readonly Federation: "FEDERATION";
 };
 export type UserGroupGroupTypeEnum = typeof UserGroupGroupTypeEnum[keyof typeof UserGroupGroupTypeEnum];
 /**
@@ -8991,6 +9071,16 @@ export declare const GroupsApiAxiosParamCreator: (configuration?: Configuration)
      */
     findRequestedGroupsByUser1: (pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     *
+     * @summary List child groups of a federation
+     * @param {string} groupId Federation group id
+     * @param {number} [pageFrom]
+     * @param {number} [pageTo]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getGroupChildren1: (groupId: string, pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * For Group Owners, this list will return removed, left, invited and requested members as well
      * @summary Show all members of Group
      * @param {string} groupId group id
@@ -9033,6 +9123,16 @@ export declare const GroupsApiAxiosParamCreator: (configuration?: Configuration)
      * @throws {RequiredError}
      */
     groupRequest1: (groupId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @summary Link a child group to a federation
+     * @param {string} groupId
+     * @param {string} [childGroupId]
+     * @param {string} [status]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    linkChildGroup1: (groupId: string, childGroupId?: string, status?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Returns recent notifications for the group.
      * @summary List group notifications
@@ -9084,10 +9184,11 @@ export declare const GroupsApiAxiosParamCreator: (configuration?: Configuration)
      * @param {string} groupId Group ID
      * @param {UserFilterRequest} userFilterRequest User search filters within the group. Supports filtering by user attributes, location, skills, and social preferences. The resultRequest field controls pagination and sorting. Only one sort order can be specified at a time.
      * @param {boolean} [bypassCache] Bypass cache and fetch fresh data from database
+     * @param {string} [childGroupId] Scope search to a child association/federation of a federation group
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    searchGroupUsers1: (groupId: string, userFilterRequest: UserFilterRequest, bypassCache?: boolean, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    searchGroupUsers1: (groupId: string, userFilterRequest: UserFilterRequest, bypassCache?: boolean, childGroupId?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Owner or admin sends a one-way notification to all members. Rate limit: 1 per minute.
      * @summary Send group notification
@@ -9097,6 +9198,16 @@ export declare const GroupsApiAxiosParamCreator: (configuration?: Configuration)
      * @throws {RequiredError}
      */
     sendNotification1: (groupId: string, sendGroupNotificationRequest?: SendGroupNotificationRequest, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @summary Update federation child link status
+     * @param {string} groupId
+     * @param {string} childGroupId
+     * @param {string} [status]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    updateChildStatus1: (groupId: string, childGroupId: string, status?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Acceptable Status values are:  ACCEPTED, ADMIN, REJECTED, REMOVED
      * @summary Update the group member status from groupId supplied
@@ -9226,6 +9337,16 @@ export declare const GroupsApiFp: (configuration?: Configuration) => {
      */
     findRequestedGroupsByUser1(pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupFilterResult>>;
     /**
+     *
+     * @summary List child groups of a federation
+     * @param {string} groupId Federation group id
+     * @param {number} [pageFrom]
+     * @param {number} [pageTo]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getGroupChildren1(groupId: string, pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupChildFilterResult>>;
+    /**
      * For Group Owners, this list will return removed, left, invited and requested members as well
      * @summary Show all members of Group
      * @param {string} groupId group id
@@ -9268,6 +9389,16 @@ export declare const GroupsApiFp: (configuration?: Configuration) => {
      * @throws {RequiredError}
      */
     groupRequest1(groupId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupMember>>;
+    /**
+     *
+     * @summary Link a child group to a federation
+     * @param {string} groupId
+     * @param {string} [childGroupId]
+     * @param {string} [status]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    linkChildGroup1(groupId: string, childGroupId?: string, status?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
      * Returns recent notifications for the group.
      * @summary List group notifications
@@ -9319,10 +9450,11 @@ export declare const GroupsApiFp: (configuration?: Configuration) => {
      * @param {string} groupId Group ID
      * @param {UserFilterRequest} userFilterRequest User search filters within the group. Supports filtering by user attributes, location, skills, and social preferences. The resultRequest field controls pagination and sorting. Only one sort order can be specified at a time.
      * @param {boolean} [bypassCache] Bypass cache and fetch fresh data from database
+     * @param {string} [childGroupId] Scope search to a child association/federation of a federation group
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    searchGroupUsers1(groupId: string, userFilterRequest: UserFilterRequest, bypassCache?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserFilterResult>>;
+    searchGroupUsers1(groupId: string, userFilterRequest: UserFilterRequest, bypassCache?: boolean, childGroupId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserFilterResult>>;
     /**
      * Owner or admin sends a one-way notification to all members. Rate limit: 1 per minute.
      * @summary Send group notification
@@ -9332,6 +9464,16 @@ export declare const GroupsApiFp: (configuration?: Configuration) => {
      * @throws {RequiredError}
      */
     sendNotification1(groupId: string, sendGroupNotificationRequest?: SendGroupNotificationRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     *
+     * @summary Update federation child link status
+     * @param {string} groupId
+     * @param {string} childGroupId
+     * @param {string} [status]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    updateChildStatus1(groupId: string, childGroupId: string, status?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
      * Acceptable Status values are:  ACCEPTED, ADMIN, REJECTED, REMOVED
      * @summary Update the group member status from groupId supplied
@@ -9453,6 +9595,14 @@ export declare const GroupsApiFactory: (configuration?: Configuration, basePath?
      */
     findRequestedGroupsByUser1(requestParameters?: GroupsApiFindRequestedGroupsByUser1Request, options?: RawAxiosRequestConfig): AxiosPromise<GroupFilterResult>;
     /**
+     *
+     * @summary List child groups of a federation
+     * @param {GroupsApiGetGroupChildren1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getGroupChildren1(requestParameters: GroupsApiGetGroupChildren1Request, options?: RawAxiosRequestConfig): AxiosPromise<GroupChildFilterResult>;
+    /**
      * For Group Owners, this list will return removed, left, invited and requested members as well
      * @summary Show all members of Group
      * @param {GroupsApiGetGroupMembers1Request} requestParameters Request parameters.
@@ -9492,6 +9642,14 @@ export declare const GroupsApiFactory: (configuration?: Configuration, basePath?
      * @throws {RequiredError}
      */
     groupRequest1(requestParameters: GroupsApiGroupRequest1Request, options?: RawAxiosRequestConfig): AxiosPromise<GroupMember>;
+    /**
+     *
+     * @summary Link a child group to a federation
+     * @param {GroupsApiLinkChildGroup1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    linkChildGroup1(requestParameters: GroupsApiLinkChildGroup1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
     /**
      * Returns recent notifications for the group.
      * @summary List group notifications
@@ -9548,6 +9706,14 @@ export declare const GroupsApiFactory: (configuration?: Configuration, basePath?
      * @throws {RequiredError}
      */
     sendNotification1(requestParameters: GroupsApiSendNotification1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     *
+     * @summary Update federation child link status
+     * @param {GroupsApiUpdateChildStatus1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    updateChildStatus1(requestParameters: GroupsApiUpdateChildStatus1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
     /**
      * Acceptable Status values are:  ACCEPTED, ADMIN, REJECTED, REMOVED
      * @summary Update the group member status from groupId supplied
@@ -9775,6 +9941,31 @@ export interface GroupsApiFindRequestedGroupsByUser1Request {
     readonly pageTo?: number;
 }
 /**
+ * Request parameters for getGroupChildren1 operation in GroupsApi.
+ * @export
+ * @interface GroupsApiGetGroupChildren1Request
+ */
+export interface GroupsApiGetGroupChildren1Request {
+    /**
+     * Federation group id
+     * @type {string}
+     * @memberof GroupsApiGetGroupChildren1
+     */
+    readonly groupId: string;
+    /**
+     *
+     * @type {number}
+     * @memberof GroupsApiGetGroupChildren1
+     */
+    readonly pageFrom?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof GroupsApiGetGroupChildren1
+     */
+    readonly pageTo?: number;
+}
+/**
  * Request parameters for getGroupMembers1 operation in GroupsApi.
  * @export
  * @interface GroupsApiGetGroupMembers1Request
@@ -9856,6 +10047,31 @@ export interface GroupsApiGroupRequest1Request {
      * @memberof GroupsApiGroupRequest1
      */
     readonly groupId: string;
+}
+/**
+ * Request parameters for linkChildGroup1 operation in GroupsApi.
+ * @export
+ * @interface GroupsApiLinkChildGroup1Request
+ */
+export interface GroupsApiLinkChildGroup1Request {
+    /**
+     *
+     * @type {string}
+     * @memberof GroupsApiLinkChildGroup1
+     */
+    readonly groupId: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GroupsApiLinkChildGroup1
+     */
+    readonly childGroupId?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GroupsApiLinkChildGroup1
+     */
+    readonly status?: string;
 }
 /**
  * Request parameters for listNotifications1 operation in GroupsApi.
@@ -9976,6 +10192,12 @@ export interface GroupsApiSearchGroupUsers1Request {
      * @memberof GroupsApiSearchGroupUsers1
      */
     readonly bypassCache?: boolean;
+    /**
+     * Scope search to a child association/federation of a federation group
+     * @type {string}
+     * @memberof GroupsApiSearchGroupUsers1
+     */
+    readonly childGroupId?: string;
 }
 /**
  * Request parameters for sendNotification1 operation in GroupsApi.
@@ -9995,6 +10217,31 @@ export interface GroupsApiSendNotification1Request {
      * @memberof GroupsApiSendNotification1
      */
     readonly sendGroupNotificationRequest?: SendGroupNotificationRequest;
+}
+/**
+ * Request parameters for updateChildStatus1 operation in GroupsApi.
+ * @export
+ * @interface GroupsApiUpdateChildStatus1Request
+ */
+export interface GroupsApiUpdateChildStatus1Request {
+    /**
+     *
+     * @type {string}
+     * @memberof GroupsApiUpdateChildStatus1
+     */
+    readonly groupId: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GroupsApiUpdateChildStatus1
+     */
+    readonly childGroupId: string;
+    /**
+     *
+     * @type {string}
+     * @memberof GroupsApiUpdateChildStatus1
+     */
+    readonly status?: string;
 }
 /**
  * Request parameters for updateGroupMembershipStatus1 operation in GroupsApi.
@@ -10146,6 +10393,15 @@ export declare class GroupsApi extends BaseAPI {
      */
     findRequestedGroupsByUser1(requestParameters?: GroupsApiFindRequestedGroupsByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupFilterResult, any, {}>>;
     /**
+     *
+     * @summary List child groups of a federation
+     * @param {GroupsApiGetGroupChildren1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    getGroupChildren1(requestParameters: GroupsApiGetGroupChildren1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupChildFilterResult, any, {}>>;
+    /**
      * For Group Owners, this list will return removed, left, invited and requested members as well
      * @summary Show all members of Group
      * @param {GroupsApiGetGroupMembers1Request} requestParameters Request parameters.
@@ -10190,6 +10446,15 @@ export declare class GroupsApi extends BaseAPI {
      * @memberof GroupsApi
      */
     groupRequest1(requestParameters: GroupsApiGroupRequest1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupMember, any, {}>>;
+    /**
+     *
+     * @summary Link a child group to a federation
+     * @param {GroupsApiLinkChildGroup1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    linkChildGroup1(requestParameters: GroupsApiLinkChildGroup1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      * Returns recent notifications for the group.
      * @summary List group notifications
@@ -10253,6 +10518,15 @@ export declare class GroupsApi extends BaseAPI {
      * @memberof GroupsApi
      */
     sendNotification1(requestParameters: GroupsApiSendNotification1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
+    /**
+     *
+     * @summary Update federation child link status
+     * @param {GroupsApiUpdateChildStatus1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    updateChildStatus1(requestParameters: GroupsApiUpdateChildStatus1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      * Acceptable Status values are:  ACCEPTED, ADMIN, REJECTED, REMOVED
      * @summary Update the group member status from groupId supplied

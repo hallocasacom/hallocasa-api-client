@@ -2492,6 +2492,126 @@
         }
       }
     },
+    "/groups/{groupId}/children" : {
+      "get" : {
+        "tags" : [ "groups" ],
+        "summary" : "List child groups of a federation",
+        "operationId" : "getGroupChildren_1",
+        "parameters" : [ {
+          "name" : "groupId",
+          "in" : "path",
+          "description" : "Federation group id",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "pageFrom",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "default" : 0
+          }
+        }, {
+          "name" : "pageTo",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "default" : 99
+          }
+        } ],
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "403" : {
+            "description" : "If user cannot view federation children"
+          },
+          "200" : {
+            "description" : "Ok",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GroupChildFilterResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "groups" ],
+        "summary" : "Link a child group to a federation",
+        "operationId" : "linkChildGroup_1",
+        "parameters" : [ {
+          "name" : "groupId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "childGroupId",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "schema" : {
+            "type" : "string",
+            "default" : "ACCEPTED"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
+    "/groups/{groupId}/children/{childGroupId}/status" : {
+      "post" : {
+        "tags" : [ "groups" ],
+        "summary" : "Update federation child link status",
+        "operationId" : "updateChildStatus_1",
+        "parameters" : [ {
+          "name" : "groupId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "childGroupId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
     "/groups/{groupId}/demote-admin" : {
       "post" : {
         "tags" : [ "groups" ],
@@ -8194,6 +8314,13 @@
             "default" : false
           },
           "example" : true
+        }, {
+          "name" : "childGroupId",
+          "in" : "query",
+          "description" : "Scope search to a child association/federation of a federation group",
+          "schema" : {
+            "type" : "string"
+          }
         } ],
         "requestBody" : {
           "description" : "User search filters within the group. Supports filtering by user attributes, location, skills, and social preferences. The resultRequest field controls pagination and sorting. Only one sort order can be specified at a time.",
@@ -11344,7 +11471,7 @@
           },
           "groupType" : {
             "type" : "string",
-            "enum" : [ "GROUP", "ASSOCIATION", "CERTIFICATION" ]
+            "enum" : [ "GROUP", "ASSOCIATION", "CERTIFICATION", "FEDERATION" ]
           },
           "requestStatus" : {
             "type" : "string",
@@ -11360,22 +11487,26 @@
             "type" : "integer",
             "format" : "int64"
           },
+          "noOfChildren" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
           "userAdmin" : {
             "type" : "boolean"
           }
         }
       },
-      "GroupMember" : {
+      "GroupChild" : {
         "type" : "object",
         "properties" : {
           "id" : {
             "type" : "integer",
             "format" : "int64"
           },
-          "user" : {
-            "$ref" : "#/components/schemas/User"
+          "parentGroup" : {
+            "$ref" : "#/components/schemas/Group"
           },
-          "group" : {
+          "childGroup" : {
             "$ref" : "#/components/schemas/Group"
           },
           "creationDate" : {
@@ -11385,6 +11516,21 @@
           "groupMemberStatus" : {
             "type" : "string",
             "enum" : [ "INVITED", "REQUESTED", "ACCEPTED", "ADMIN", "REJECTED", "REMOVED", "LEFT" ]
+          }
+        }
+      },
+      "GroupChildFilterResult" : {
+        "type" : "object",
+        "properties" : {
+          "count" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "list" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/GroupChild"
+            }
           }
         }
       },
@@ -11483,6 +11629,29 @@
           }
         },
         "description" : "Professional roles (broker, agent, …)"
+      },
+      "GroupMember" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "user" : {
+            "$ref" : "#/components/schemas/User"
+          },
+          "group" : {
+            "$ref" : "#/components/schemas/Group"
+          },
+          "creationDate" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "groupMemberStatus" : {
+            "type" : "string",
+            "enum" : [ "INVITED", "REQUESTED", "ACCEPTED", "ADMIN", "REJECTED", "REMOVED", "LEFT" ]
+          }
+        }
       },
       "GroupMemberFilterResult" : {
         "type" : "object",
@@ -13702,7 +13871,7 @@
           },
           "groupType" : {
             "type" : "string",
-            "enum" : [ "GROUP", "ASSOCIATION", "CERTIFICATION" ]
+            "enum" : [ "GROUP", "ASSOCIATION", "CERTIFICATION", "FEDERATION" ]
           }
         }
       },
@@ -14201,6 +14370,11 @@
               "format" : "int64"
             }
           },
+          "childGroupId" : {
+            "type" : "string",
+            "description" : "When searching within a federation, scope to this child group id",
+            "example" : "childGroup123"
+          },
           "includeIncompleteProfiles" : {
             "type" : "boolean",
             "description" : "Include users without completed basic profile (group search only). When true, returns all group members including those with basic_profile_completed_at = NULL",
@@ -14539,16 +14713,10 @@
       }
     },
     "securitySchemes" : {
-      "oAuthToken" : {
+      "xApiKey" : {
         "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
-        "in" : "header"
-      },
-      "oAuthCode" : {
-        "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
+        "description" : "Integration API key (prefix hc_)",
+        "name" : "X-API-Key",
         "in" : "header"
       },
       "oAuthClientId" : {
@@ -14557,10 +14725,16 @@
         "name" : "O-Auth-Client-Id",
         "in" : "header"
       },
-      "xApiKey" : {
+      "oAuthCode" : {
         "type" : "apiKey",
-        "description" : "Integration API key (prefix hc_)",
-        "name" : "X-API-Key",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
+        "in" : "header"
+      },
+      "oAuthToken" : {
+        "type" : "apiKey",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
         "in" : "header"
       }
     }
