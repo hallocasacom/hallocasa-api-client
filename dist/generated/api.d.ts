@@ -6200,7 +6200,7 @@ export interface UserPlatformInviteRequest {
      */
     'source'?: UserPlatformInviteRequestSourceEnum;
     /**
-     * Invite email language: EN, ES, or DE (default EN)
+     * Invite email language: EN, ES, DE, or IT (default EN)
      * @type {string}
      * @memberof UserPlatformInviteRequest
      */
@@ -6217,6 +6217,7 @@ export declare const UserPlatformInviteRequestLanguageEnum: {
     readonly En: "EN";
     readonly Es: "ES";
     readonly De: "DE";
+    readonly It: "IT";
 };
 export type UserPlatformInviteRequestLanguageEnum = typeof UserPlatformInviteRequestLanguageEnum[keyof typeof UserPlatformInviteRequestLanguageEnum];
 /**

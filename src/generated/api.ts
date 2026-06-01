@@ -6298,7 +6298,7 @@ export interface UserPlatformInviteRequest {
      */
     'source'?: UserPlatformInviteRequestSourceEnum;
     /**
-     * Invite email language: EN, ES, or DE (default EN)
+     * Invite email language: EN, ES, DE, or IT (default EN)
      * @type {string}
      * @memberof UserPlatformInviteRequest
      */
@@ -6316,7 +6316,8 @@ export type UserPlatformInviteRequestSourceEnum = typeof UserPlatformInviteReque
 export const UserPlatformInviteRequestLanguageEnum = {
     En: 'EN',
     Es: 'ES',
-    De: 'DE'
+    De: 'DE',
+    It: 'IT'
 } as const;
 
 export type UserPlatformInviteRequestLanguageEnum = typeof UserPlatformInviteRequestLanguageEnum[keyof typeof UserPlatformInviteRequestLanguageEnum];

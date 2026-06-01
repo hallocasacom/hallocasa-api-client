@@ -14509,9 +14509,9 @@
           },
           "language" : {
             "type" : "string",
-            "description" : "Invite email language: EN, ES, or DE (default EN)",
+            "description" : "Invite email language: EN, ES, DE, or IT (default EN)",
             "example" : "EN",
-            "enum" : [ "EN", "ES", "DE" ]
+            "enum" : [ "EN", "ES", "DE", "IT" ]
           }
         },
         "description" : "Request to invite someone to HalloCasa by email"

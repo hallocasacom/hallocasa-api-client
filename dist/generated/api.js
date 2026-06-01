@@ -352,7 +352,8 @@ exports.UserPlatformInviteRequestSourceEnum = {
 exports.UserPlatformInviteRequestLanguageEnum = {
     En: 'EN',
     Es: 'ES',
-    De: 'DE'
+    De: 'DE',
+    It: 'IT'
 };
 exports.UserSubscriptionDtoRenewalTypeEnum = {
     Daily: 'DAILY',
