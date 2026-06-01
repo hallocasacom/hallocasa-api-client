@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.fetchGroupChildren = fetchGroupChildren;
 exports.linkGroupChild = linkGroupChild;
-async function fetchGroupChildren(axios, basePath, groupId, pageFrom = 0, pageTo = 99) {
+async function fetchGroupChildren(axios, basePath, groupId, pageFrom = 1, pageTo = 99) {
     const base = basePath.replace(/\/$/, '');
     const response = await axios.get(`${base}/groups/${encodeURIComponent(groupId)}/children`, { params: { pageFrom, pageTo } });
     return response.data;

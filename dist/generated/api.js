@@ -4199,7 +4199,7 @@ const GroupsApiAxiosParamCreator = function (configuration) {
         /**
          * Retrieve groups of specific types (ASSOCIATION, CERTIFICATION). This endpoint is publicly accessible and allows filtering for association groups or certificate groups. Only active groups are returned.
          * @summary Return groups filtered by group type
-         * @param {string} [types] Comma-separated list of group types to filter by. Valid values: ASSOCIATION, CERTIFICATION
+         * @param {string} [types] Comma-separated list of group types to filter by. Valid values: ASSOCIATION, CERTIFICATION, FEDERATION
          * @param {number} [pageFrom] Starting page number for pagination (0-based)
          * @param {number} [pageTo] Ending page number for pagination (exclusive)
          * @param {*} [options] Override http request option.
@@ -5108,7 +5108,7 @@ const GroupsApiFp = function (configuration) {
         /**
          * Retrieve groups of specific types (ASSOCIATION, CERTIFICATION). This endpoint is publicly accessible and allows filtering for association groups or certificate groups. Only active groups are returned.
          * @summary Return groups filtered by group type
-         * @param {string} [types] Comma-separated list of group types to filter by. Valid values: ASSOCIATION, CERTIFICATION
+         * @param {string} [types] Comma-separated list of group types to filter by. Valid values: ASSOCIATION, CERTIFICATION, FEDERATION
          * @param {number} [pageFrom] Starting page number for pagination (0-based)
          * @param {number} [pageTo] Ending page number for pagination (exclusive)
          * @param {*} [options] Override http request option.

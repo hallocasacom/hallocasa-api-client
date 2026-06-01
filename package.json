@@ -4,6 +4,14 @@
   "description": "TypeScript client for Hallocasa API",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
   "scripts": {
     "generate": "openapi-generator-cli generate -i openapi.json -g typescript-axios -o src/generated --additional-properties=useSingleRequestParameter=true && npm run validate",
     "build": "tsc",

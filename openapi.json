@@ -2511,7 +2511,7 @@
           "schema" : {
             "type" : "integer",
             "format" : "int32",
-            "default" : 0
+            "default" : 1
           }
         }, {
           "name" : "pageTo",
@@ -3663,7 +3663,7 @@
         "parameters" : [ {
           "name" : "types",
           "in" : "query",
-          "description" : "Comma-separated list of group types to filter by. Valid values: ASSOCIATION, CERTIFICATION",
+          "description" : "Comma-separated list of group types to filter by. Valid values: ASSOCIATION, CERTIFICATION, FEDERATION",
           "schema" : {
             "type" : "string"
           },
@@ -11491,6 +11491,12 @@
             "type" : "integer",
             "format" : "int64"
           },
+          "parentFederations" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Group"
+            }
+          },
           "userAdmin" : {
             "type" : "boolean"
           }
@@ -14713,16 +14719,10 @@
       }
     },
     "securitySchemes" : {
-      "xApiKey" : {
+      "oAuthToken" : {
         "type" : "apiKey",
-        "description" : "Integration API key (prefix hc_)",
-        "name" : "X-API-Key",
-        "in" : "header"
-      },
-      "oAuthClientId" : {
-        "type" : "apiKey",
-        "description" : "OAuth client identifier (default: hallocasa_frontend)",
-        "name" : "O-Auth-Client-Id",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
         "in" : "header"
       },
       "oAuthCode" : {
@@ -14731,10 +14731,16 @@
         "name" : "O-Auth-Code",
         "in" : "header"
       },
-      "oAuthToken" : {
+      "oAuthClientId" : {
         "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
+        "description" : "OAuth client identifier (default: hallocasa_frontend)",
+        "name" : "O-Auth-Client-Id",
+        "in" : "header"
+      },
+      "xApiKey" : {
+        "type" : "apiKey",
+        "description" : "Integration API key (prefix hc_)",
+        "name" : "X-API-Key",
         "in" : "header"
       }
     }

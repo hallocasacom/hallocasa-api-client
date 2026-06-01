@@ -2017,6 +2017,12 @@ export interface Group {
     'noOfChildren'?: number;
     /**
      * 
+     * @type {Array<Group>}
+     * @memberof Group
+     */
+    'parentFederations'?: Array<Group>;
+    /**
+     * 
      * @type {boolean}
      * @memberof Group
      */
@@ -11514,7 +11520,7 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * Retrieve groups of specific types (ASSOCIATION, CERTIFICATION). This endpoint is publicly accessible and allows filtering for association groups or certificate groups. Only active groups are returned.
          * @summary Return groups filtered by group type
-         * @param {string} [types] Comma-separated list of group types to filter by. Valid values: ASSOCIATION, CERTIFICATION
+         * @param {string} [types] Comma-separated list of group types to filter by. Valid values: ASSOCIATION, CERTIFICATION, FEDERATION
          * @param {number} [pageFrom] Starting page number for pagination (0-based)
          * @param {number} [pageTo] Ending page number for pagination (exclusive)
          * @param {*} [options] Override http request option.
@@ -12600,7 +12606,7 @@ export const GroupsApiFp = function(configuration?: Configuration) {
         /**
          * Retrieve groups of specific types (ASSOCIATION, CERTIFICATION). This endpoint is publicly accessible and allows filtering for association groups or certificate groups. Only active groups are returned.
          * @summary Return groups filtered by group type
-         * @param {string} [types] Comma-separated list of group types to filter by. Valid values: ASSOCIATION, CERTIFICATION
+         * @param {string} [types] Comma-separated list of group types to filter by. Valid values: ASSOCIATION, CERTIFICATION, FEDERATION
          * @param {number} [pageFrom] Starting page number for pagination (0-based)
          * @param {number} [pageTo] Ending page number for pagination (exclusive)
          * @param {*} [options] Override http request option.
@@ -13332,7 +13338,7 @@ export interface GroupsApiFindGroupProperties1Request {
  */
 export interface GroupsApiFindGroupsByType1Request {
     /**
-     * Comma-separated list of group types to filter by. Valid values: ASSOCIATION, CERTIFICATION
+     * Comma-separated list of group types to filter by. Valid values: ASSOCIATION, CERTIFICATION, FEDERATION
      * @type {string}
      * @memberof GroupsApiFindGroupsByType1
      */

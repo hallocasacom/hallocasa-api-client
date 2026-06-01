@@ -18,7 +18,7 @@ export async function fetchGroupChildren(
     axios: AxiosInstance,
     basePath: string,
     groupId: string,
-    pageFrom = 0,
+    pageFrom = 1,
     pageTo = 99
 ): Promise<GroupChildFilterResult> {
     const base = basePath.replace(/\/$/, '');
