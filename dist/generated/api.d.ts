@@ -9007,6 +9007,16 @@ export declare const GroupsApiAxiosParamCreator: (configuration?: Configuration)
      */
     findArchivedGroupsByUser1: (pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     * Public endpoint for federation landing pages. Returns chapter associations linked to an active federation. No user authentication required.
+     * @summary List accepted child groups of a federation by slug
+     * @param {string} slug Federation group slug
+     * @param {number} [pageFrom]
+     * @param {number} [pageTo]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findFederationChildrenBySlug1: (slug: string, pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it. Includes \'userAdmin\' field indicating whether the current user is an admin or owner of the group.
      * @summary Return the group with specified id
      * @param {string} groupId group id
@@ -9273,6 +9283,16 @@ export declare const GroupsApiFp: (configuration?: Configuration) => {
      */
     findArchivedGroupsByUser1(pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupFilterResult>>;
     /**
+     * Public endpoint for federation landing pages. Returns chapter associations linked to an active federation. No user authentication required.
+     * @summary List accepted child groups of a federation by slug
+     * @param {string} slug Federation group slug
+     * @param {number} [pageFrom]
+     * @param {number} [pageTo]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findFederationChildrenBySlug1(slug: string, pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupChildFilterResult>>;
+    /**
      * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it. Includes \'userAdmin\' field indicating whether the current user is an admin or owner of the group.
      * @summary Return the group with specified id
      * @param {string} groupId group id
@@ -9536,6 +9556,14 @@ export declare const GroupsApiFactory: (configuration?: Configuration, basePath?
      * @throws {RequiredError}
      */
     findArchivedGroupsByUser1(requestParameters?: GroupsApiFindArchivedGroupsByUser1Request, options?: RawAxiosRequestConfig): AxiosPromise<GroupFilterResult>;
+    /**
+     * Public endpoint for federation landing pages. Returns chapter associations linked to an active federation. No user authentication required.
+     * @summary List accepted child groups of a federation by slug
+     * @param {GroupsApiFindFederationChildrenBySlug1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    findFederationChildrenBySlug1(requestParameters: GroupsApiFindFederationChildrenBySlug1Request, options?: RawAxiosRequestConfig): AxiosPromise<GroupChildFilterResult>;
     /**
      * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it. Includes \'userAdmin\' field indicating whether the current user is an admin or owner of the group.
      * @summary Return the group with specified id
@@ -9803,6 +9831,31 @@ export interface GroupsApiFindArchivedGroupsByUser1Request {
      *
      * @type {number}
      * @memberof GroupsApiFindArchivedGroupsByUser1
+     */
+    readonly pageTo?: number;
+}
+/**
+ * Request parameters for findFederationChildrenBySlug1 operation in GroupsApi.
+ * @export
+ * @interface GroupsApiFindFederationChildrenBySlug1Request
+ */
+export interface GroupsApiFindFederationChildrenBySlug1Request {
+    /**
+     * Federation group slug
+     * @type {string}
+     * @memberof GroupsApiFindFederationChildrenBySlug1
+     */
+    readonly slug: string;
+    /**
+     *
+     * @type {number}
+     * @memberof GroupsApiFindFederationChildrenBySlug1
+     */
+    readonly pageFrom?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof GroupsApiFindFederationChildrenBySlug1
      */
     readonly pageTo?: number;
 }
@@ -10326,6 +10379,15 @@ export declare class GroupsApi extends BaseAPI {
      * @memberof GroupsApi
      */
     findArchivedGroupsByUser1(requestParameters?: GroupsApiFindArchivedGroupsByUser1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupFilterResult, any, {}>>;
+    /**
+     * Public endpoint for federation landing pages. Returns chapter associations linked to an active federation. No user authentication required.
+     * @summary List accepted child groups of a federation by slug
+     * @param {GroupsApiFindFederationChildrenBySlug1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    findFederationChildrenBySlug1(requestParameters: GroupsApiFindFederationChildrenBySlug1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<GroupChildFilterResult, any, {}>>;
     /**
      * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it. Includes \'userAdmin\' field indicating whether the current user is an admin or owner of the group.
      * @summary Return the group with specified id

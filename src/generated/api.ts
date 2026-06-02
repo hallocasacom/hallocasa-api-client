@@ -11398,6 +11398,56 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
+         * Public endpoint for federation landing pages. Returns chapter associations linked to an active federation. No user authentication required.
+         * @summary List accepted child groups of a federation by slug
+         * @param {string} slug Federation group slug
+         * @param {number} [pageFrom] 
+         * @param {number} [pageTo] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findFederationChildrenBySlug1: async (slug: string, pageFrom?: number, pageTo?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'slug' is not null or undefined
+            assertParamExists('findFederationChildrenBySlug1', 'slug', slug)
+            const localVarPath = `/groups/slug/{slug}/children`
+                .replace(`{${"slug"}}`, encodeURIComponent(String(slug)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+            if (pageFrom !== undefined) {
+                localVarQueryParameter['pageFrom'] = pageFrom;
+            }
+
+            if (pageTo !== undefined) {
+                localVarQueryParameter['pageTo'] = pageTo;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it. Includes \'userAdmin\' field indicating whether the current user is an admin or owner of the group.
          * @summary Return the group with specified id
          * @param {string} groupId group id
@@ -12565,6 +12615,21 @@ export const GroupsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Public endpoint for federation landing pages. Returns chapter associations linked to an active federation. No user authentication required.
+         * @summary List accepted child groups of a federation by slug
+         * @param {string} slug Federation group slug
+         * @param {number} [pageFrom] 
+         * @param {number} [pageTo] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async findFederationChildrenBySlug1(slug: string, pageFrom?: number, pageTo?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupChildFilterResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.findFederationChildrenBySlug1(slug, pageFrom, pageTo, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GroupsApi.findFederationChildrenBySlug1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it. Includes \'userAdmin\' field indicating whether the current user is an admin or owner of the group.
          * @summary Return the group with specified id
          * @param {string} groupId group id
@@ -12963,6 +13028,16 @@ export const GroupsApiFactory = function (configuration?: Configuration, basePat
             return localVarFp.findArchivedGroupsByUser1(requestParameters.pageFrom, requestParameters.pageTo, options).then((request) => request(axios, basePath));
         },
         /**
+         * Public endpoint for federation landing pages. Returns chapter associations linked to an active federation. No user authentication required.
+         * @summary List accepted child groups of a federation by slug
+         * @param {GroupsApiFindFederationChildrenBySlug1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        findFederationChildrenBySlug1(requestParameters: GroupsApiFindFederationChildrenBySlug1Request, options?: RawAxiosRequestConfig): AxiosPromise<GroupChildFilterResult> {
+            return localVarFp.findFederationChildrenBySlug1(requestParameters.slug, requestParameters.pageFrom, requestParameters.pageTo, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Filter the groups existing in system with specified id. Returns empty if none group match the id and user is not member/owner of it. Includes \'userAdmin\' field indicating whether the current user is an admin or owner of the group.
          * @summary Return the group with specified id
          * @param {GroupsApiFindGroup1Request} requestParameters Request parameters.
@@ -13285,6 +13360,34 @@ export interface GroupsApiFindArchivedGroupsByUser1Request {
      * 
      * @type {number}
      * @memberof GroupsApiFindArchivedGroupsByUser1
+     */
+    readonly pageTo?: number
+}
+
+/**
+ * Request parameters for findFederationChildrenBySlug1 operation in GroupsApi.
+ * @export
+ * @interface GroupsApiFindFederationChildrenBySlug1Request
+ */
+export interface GroupsApiFindFederationChildrenBySlug1Request {
+    /**
+     * Federation group slug
+     * @type {string}
+     * @memberof GroupsApiFindFederationChildrenBySlug1
+     */
+    readonly slug: string
+
+    /**
+     * 
+     * @type {number}
+     * @memberof GroupsApiFindFederationChildrenBySlug1
+     */
+    readonly pageFrom?: number
+
+    /**
+     * 
+     * @type {number}
+     * @memberof GroupsApiFindFederationChildrenBySlug1
      */
     readonly pageTo?: number
 }
@@ -13872,6 +13975,18 @@ export class GroupsApi extends BaseAPI {
      */
     public findArchivedGroupsByUser1(requestParameters: GroupsApiFindArchivedGroupsByUser1Request = {}, options?: RawAxiosRequestConfig) {
         return GroupsApiFp(this.configuration).findArchivedGroupsByUser1(requestParameters.pageFrom, requestParameters.pageTo, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Public endpoint for federation landing pages. Returns chapter associations linked to an active federation. No user authentication required.
+     * @summary List accepted child groups of a federation by slug
+     * @param {GroupsApiFindFederationChildrenBySlug1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GroupsApi
+     */
+    public findFederationChildrenBySlug1(requestParameters: GroupsApiFindFederationChildrenBySlug1Request, options?: RawAxiosRequestConfig) {
+        return GroupsApiFp(this.configuration).findFederationChildrenBySlug1(requestParameters.slug, requestParameters.pageFrom, requestParameters.pageTo, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

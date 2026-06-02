@@ -3486,6 +3486,55 @@
         }
       }
     },
+    "/groups/slug/{slug}/children" : {
+      "get" : {
+        "tags" : [ "groups" ],
+        "summary" : "List accepted child groups of a federation by slug",
+        "description" : "Public endpoint for federation landing pages. Returns chapter associations linked to an active federation. No user authentication required.",
+        "operationId" : "findFederationChildrenBySlug_1",
+        "parameters" : [ {
+          "name" : "slug",
+          "in" : "path",
+          "description" : "Federation group slug",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "fiabci"
+        }, {
+          "name" : "pageFrom",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "default" : 1
+          }
+        }, {
+          "name" : "pageTo",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "default" : 99
+          }
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "Federation not found"
+          },
+          "200" : {
+            "description" : "Ok",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GroupChildFilterResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/groups/{groupId}" : {
       "get" : {
         "tags" : [ "groups" ],
@@ -14719,16 +14768,10 @@
       }
     },
     "securitySchemes" : {
-      "oAuthToken" : {
+      "xApiKey" : {
         "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
-        "in" : "header"
-      },
-      "oAuthCode" : {
-        "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
+        "description" : "Integration API key (prefix hc_)",
+        "name" : "X-API-Key",
         "in" : "header"
       },
       "oAuthClientId" : {
@@ -14737,10 +14780,16 @@
         "name" : "O-Auth-Client-Id",
         "in" : "header"
       },
-      "xApiKey" : {
+      "oAuthCode" : {
         "type" : "apiKey",
-        "description" : "Integration API key (prefix hc_)",
-        "name" : "X-API-Key",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
+        "in" : "header"
+      },
+      "oAuthToken" : {
+        "type" : "apiKey",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
         "in" : "header"
       }
     }
