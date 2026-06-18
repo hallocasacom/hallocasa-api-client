@@ -5831,6 +5831,53 @@
         }
       }
     },
+    "/properties/{propertyId}/translations" : {
+      "post" : {
+        "tags" : [ "properties" ],
+        "summary" : "Translate and persist missing property text variants",
+        "description" : "Generates machine translations for title, description, and location description when no variant exists for the target language. Owner-authored variants are never overwritten.",
+        "operationId" : "translateProperty_1",
+        "parameters" : [ {
+          "name" : "propertyId",
+          "in" : "path",
+          "description" : "Property ID",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "prop123456"
+        }, {
+          "name" : "targetLang",
+          "in" : "query",
+          "description" : "Target locale",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "de-DE"
+        } ],
+        "responses" : {
+          "401" : {
+            "description" : "If client credentials are missing"
+          },
+          "404" : {
+            "description" : "If property not found"
+          },
+          "400" : {
+            "description" : "If targetLang is missing or unsupported"
+          },
+          "200" : {
+            "description" : "OK. Property with translations persisted",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Property"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/property-types" : {
       "get" : {
         "tags" : [ "property types" ],
@@ -10776,6 +10823,11 @@
             "description" : "Active subscription tier name",
             "enum" : [ "Free", "Professional", "Business", "Brokerage" ]
           },
+          "subscriptionTrialing" : {
+            "type" : "boolean",
+            "description" : "True while user is on a free trial subscription",
+            "example" : false
+          },
           "hidePublicProfile" : {
             "type" : "boolean",
             "description" : "Hide profile from directory search",
@@ -10785,7 +10837,7 @@
             "type" : "string",
             "description" : "Public profile theme",
             "example" : "classic",
-            "enum" : [ "classic", "luxury", "redWhiteGray" ]
+            "enum" : [ "classic", "luxury", "redWhiteGray", "andes" ]
           },
           "imprintImageLink" : {
             "type" : "string",
@@ -13838,6 +13890,11 @@
             "description" : "Active subscription tier name",
             "enum" : [ "Free", "Professional", "Business", "Brokerage" ]
           },
+          "subscriptionTrialing" : {
+            "type" : "boolean",
+            "description" : "True while user is on a free trial subscription",
+            "example" : false
+          },
           "hidePublicProfile" : {
             "type" : "boolean",
             "description" : "Hide profile from directory search",
@@ -13847,7 +13904,7 @@
             "type" : "string",
             "description" : "Public profile theme",
             "example" : "classic",
-            "enum" : [ "classic", "luxury", "redWhiteGray" ]
+            "enum" : [ "classic", "luxury", "redWhiteGray", "andes" ]
           },
           "skills" : {
             "type" : "array",
@@ -14768,6 +14825,12 @@
       }
     },
     "securitySchemes" : {
+      "oAuthToken" : {
+        "type" : "apiKey",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
+        "in" : "header"
+      },
       "xApiKey" : {
         "type" : "apiKey",
         "description" : "Integration API key (prefix hc_)",
@@ -14784,12 +14847,6 @@
         "type" : "apiKey",
         "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
         "name" : "O-Auth-Code",
-        "in" : "header"
-      },
-      "oAuthToken" : {
-        "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
         "in" : "header"
       }
     }

@@ -4852,6 +4852,12 @@ export interface SkilledUser {
      */
     'subscriptionPlanName'?: SkilledUserSubscriptionPlanNameEnum;
     /**
+     * True while user is on a free trial subscription
+     * @type {boolean}
+     * @memberof SkilledUser
+     */
+    'subscriptionTrialing'?: boolean;
+    /**
      * Hide profile from directory search
      * @type {boolean}
      * @memberof SkilledUser
@@ -4924,7 +4930,8 @@ export type SkilledUserSubscriptionPlanNameEnum = typeof SkilledUserSubscription
 export const SkilledUserPublicProfileDesignEnum = {
     Classic: 'classic',
     Luxury: 'luxury',
-    RedWhiteGray: 'redWhiteGray'
+    RedWhiteGray: 'redWhiteGray',
+    Andes: 'andes'
 } as const;
 
 export type SkilledUserPublicProfileDesignEnum = typeof SkilledUserPublicProfileDesignEnum[keyof typeof SkilledUserPublicProfileDesignEnum];
@@ -5722,6 +5729,12 @@ export interface User {
      */
     'subscriptionPlanName'?: UserSubscriptionPlanNameEnum;
     /**
+     * True while user is on a free trial subscription
+     * @type {boolean}
+     * @memberof User
+     */
+    'subscriptionTrialing'?: boolean;
+    /**
      * Hide profile from directory search
      * @type {boolean}
      * @memberof User
@@ -5752,7 +5765,8 @@ export type UserSubscriptionPlanNameEnum = typeof UserSubscriptionPlanNameEnum[k
 export const UserPublicProfileDesignEnum = {
     Classic: 'classic',
     Luxury: 'luxury',
-    RedWhiteGray: 'redWhiteGray'
+    RedWhiteGray: 'redWhiteGray',
+    Andes: 'andes'
 } as const;
 
 export type UserPublicProfileDesignEnum = typeof UserPublicProfileDesignEnum[keyof typeof UserPublicProfileDesignEnum];
@@ -17203,6 +17217,51 @@ export const PropertiesApiAxiosParamCreator = function (configuration?: Configur
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Generates machine translations for title, description, and location description when no variant exists for the target language. Owner-authored variants are never overwritten.
+         * @summary Translate and persist missing property text variants
+         * @param {string} propertyId Property ID
+         * @param {string} [targetLang] Target locale
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        translateProperty1: async (propertyId: string, targetLang?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'propertyId' is not null or undefined
+            assertParamExists('translateProperty1', 'propertyId', propertyId)
+            const localVarPath = `/properties/{propertyId}/translations`
+                .replace(`{${"propertyId"}}`, encodeURIComponent(String(propertyId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+            if (targetLang !== undefined) {
+                localVarQueryParameter['targetLang'] = targetLang;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -17423,6 +17482,20 @@ export const PropertiesApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['PropertiesApi.sendGroupAlert1']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * Generates machine translations for title, description, and location description when no variant exists for the target language. Owner-authored variants are never overwritten.
+         * @summary Translate and persist missing property text variants
+         * @param {string} propertyId Property ID
+         * @param {string} [targetLang] Target locale
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async translateProperty1(propertyId: string, targetLang?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Property>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.translateProperty1(propertyId, targetLang, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PropertiesApi.translateProperty1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -17587,6 +17660,16 @@ export const PropertiesApiFactory = function (configuration?: Configuration, bas
          */
         sendGroupAlert1(options?: RawAxiosRequestConfig): AxiosPromise<number> {
             return localVarFp.sendGroupAlert1(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Generates machine translations for title, description, and location description when no variant exists for the target language. Owner-authored variants are never overwritten.
+         * @summary Translate and persist missing property text variants
+         * @param {PropertiesApiTranslateProperty1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        translateProperty1(requestParameters: PropertiesApiTranslateProperty1Request, options?: RawAxiosRequestConfig): AxiosPromise<Property> {
+            return localVarFp.translateProperty1(requestParameters.propertyId, requestParameters.targetLang, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -17809,6 +17892,27 @@ export interface PropertiesApiSendAlert2Request {
 }
 
 /**
+ * Request parameters for translateProperty1 operation in PropertiesApi.
+ * @export
+ * @interface PropertiesApiTranslateProperty1Request
+ */
+export interface PropertiesApiTranslateProperty1Request {
+    /**
+     * Property ID
+     * @type {string}
+     * @memberof PropertiesApiTranslateProperty1
+     */
+    readonly propertyId: string
+
+    /**
+     * Target locale
+     * @type {string}
+     * @memberof PropertiesApiTranslateProperty1
+     */
+    readonly targetLang?: string
+}
+
+/**
  * PropertiesApi - object-oriented interface
  * @export
  * @class PropertiesApi
@@ -18000,6 +18104,18 @@ export class PropertiesApi extends BaseAPI {
      */
     public sendGroupAlert1(options?: RawAxiosRequestConfig) {
         return PropertiesApiFp(this.configuration).sendGroupAlert1(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Generates machine translations for title, description, and location description when no variant exists for the target language. Owner-authored variants are never overwritten.
+     * @summary Translate and persist missing property text variants
+     * @param {PropertiesApiTranslateProperty1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertiesApi
+     */
+    public translateProperty1(requestParameters: PropertiesApiTranslateProperty1Request, options?: RawAxiosRequestConfig) {
+        return PropertiesApiFp(this.configuration).translateProperty1(requestParameters.propertyId, requestParameters.targetLang, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

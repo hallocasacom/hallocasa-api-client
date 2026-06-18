@@ -4762,6 +4762,12 @@ export interface SkilledUser {
      */
     'subscriptionPlanName'?: SkilledUserSubscriptionPlanNameEnum;
     /**
+     * True while user is on a free trial subscription
+     * @type {boolean}
+     * @memberof SkilledUser
+     */
+    'subscriptionTrialing'?: boolean;
+    /**
      * Hide profile from directory search
      * @type {boolean}
      * @memberof SkilledUser
@@ -4833,6 +4839,7 @@ export declare const SkilledUserPublicProfileDesignEnum: {
     readonly Classic: "classic";
     readonly Luxury: "luxury";
     readonly RedWhiteGray: "redWhiteGray";
+    readonly Andes: "andes";
 };
 export type SkilledUserPublicProfileDesignEnum = typeof SkilledUserPublicProfileDesignEnum[keyof typeof SkilledUserPublicProfileDesignEnum];
 export declare const SkilledUserConnectionDegreeEnum: {
@@ -5626,6 +5633,12 @@ export interface User {
      */
     'subscriptionPlanName'?: UserSubscriptionPlanNameEnum;
     /**
+     * True while user is on a free trial subscription
+     * @type {boolean}
+     * @memberof User
+     */
+    'subscriptionTrialing'?: boolean;
+    /**
      * Hide profile from directory search
      * @type {boolean}
      * @memberof User
@@ -5655,6 +5668,7 @@ export declare const UserPublicProfileDesignEnum: {
     readonly Classic: "classic";
     readonly Luxury: "luxury";
     readonly RedWhiteGray: "redWhiteGray";
+    readonly Andes: "andes";
 };
 export type UserPublicProfileDesignEnum = typeof UserPublicProfileDesignEnum[keyof typeof UserPublicProfileDesignEnum];
 /**
@@ -11934,6 +11948,15 @@ export declare const PropertiesApiAxiosParamCreator: (configuration?: Configurat
      * @throws {RequiredError}
      */
     sendGroupAlert1: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Generates machine translations for title, description, and location description when no variant exists for the target language. Owner-authored variants are never overwritten.
+     * @summary Translate and persist missing property text variants
+     * @param {string} propertyId Property ID
+     * @param {string} [targetLang] Target locale
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    translateProperty1: (propertyId: string, targetLang?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * PropertiesApi - functional programming interface
@@ -12070,6 +12093,15 @@ export declare const PropertiesApiFp: (configuration?: Configuration) => {
      * @throws {RequiredError}
      */
     sendGroupAlert1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<number>>;
+    /**
+     * Generates machine translations for title, description, and location description when no variant exists for the target language. Owner-authored variants are never overwritten.
+     * @summary Translate and persist missing property text variants
+     * @param {string} propertyId Property ID
+     * @param {string} [targetLang] Target locale
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    translateProperty1(propertyId: string, targetLang?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Property>>;
 };
 /**
  * PropertiesApi - factory interface
@@ -12199,6 +12231,14 @@ export declare const PropertiesApiFactory: (configuration?: Configuration, baseP
      * @throws {RequiredError}
      */
     sendGroupAlert1(options?: RawAxiosRequestConfig): AxiosPromise<number>;
+    /**
+     * Generates machine translations for title, description, and location description when no variant exists for the target language. Owner-authored variants are never overwritten.
+     * @summary Translate and persist missing property text variants
+     * @param {PropertiesApiTranslateProperty1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    translateProperty1(requestParameters: PropertiesApiTranslateProperty1Request, options?: RawAxiosRequestConfig): AxiosPromise<Property>;
 };
 /**
  * Request parameters for backfillPropertyImageOrientation1 operation in PropertiesApi.
@@ -12399,6 +12439,25 @@ export interface PropertiesApiSendAlert2Request {
     readonly weeklyAlertRange?: WeeklyAlertRange;
 }
 /**
+ * Request parameters for translateProperty1 operation in PropertiesApi.
+ * @export
+ * @interface PropertiesApiTranslateProperty1Request
+ */
+export interface PropertiesApiTranslateProperty1Request {
+    /**
+     * Property ID
+     * @type {string}
+     * @memberof PropertiesApiTranslateProperty1
+     */
+    readonly propertyId: string;
+    /**
+     * Target locale
+     * @type {string}
+     * @memberof PropertiesApiTranslateProperty1
+     */
+    readonly targetLang?: string;
+}
+/**
  * PropertiesApi - object-oriented interface
  * @export
  * @class PropertiesApi
@@ -12544,6 +12603,15 @@ export declare class PropertiesApi extends BaseAPI {
      * @memberof PropertiesApi
      */
     sendGroupAlert1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<number, any, {}>>;
+    /**
+     * Generates machine translations for title, description, and location description when no variant exists for the target language. Owner-authored variants are never overwritten.
+     * @summary Translate and persist missing property text variants
+     * @param {PropertiesApiTranslateProperty1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertiesApi
+     */
+    translateProperty1(requestParameters: PropertiesApiTranslateProperty1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property, any, {}>>;
 }
 /**
  * PropertyBulkDownloadApi - axios parameter creator
