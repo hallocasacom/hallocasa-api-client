@@ -5957,7 +5957,7 @@ export interface UserFilterRequest {
      */
     'name'?: string;
     /**
-     * Filter by countries where users operate
+     * Filter by countries where users operate. Accepts objects with id, ISO codes like \"US\", or numeric ids.
      * @type {Array<Country>}
      * @memberof UserFilterRequest
      */

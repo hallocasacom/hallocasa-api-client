@@ -8442,7 +8442,11 @@
                       "orderBy" : [ "lastName", "firstName" ]
                     },
                     "name" : "John",
-                    "countries" : [ "US", "CA" ],
+                    "countries" : [ {
+                      "id" : 1
+                    }, {
+                      "id" : 2
+                    } ],
                     "latitude" : 40.7128,
                     "longitude" : -74.006,
                     "radius" : 50,
@@ -9861,7 +9865,11 @@
                       "orderByMostRecent" : true
                     },
                     "name" : "John",
-                    "countries" : [ "US", "CA" ]
+                    "countries" : [ {
+                      "id" : 1
+                    }, {
+                      "id" : 2
+                    } ]
                   }
                 },
                 "locationBasedSearch" : {
@@ -9887,7 +9895,9 @@
                       "pageNumber" : 1,
                       "orderByMostRecentLogin" : true
                     },
-                    "countries" : [ "US" ],
+                    "countries" : [ {
+                      "id" : 1
+                    } ],
                     "userTypes" : [ "BROKER" ],
                     "languages" : [ "EN", "ES" ],
                     "skills" : [ {
@@ -9947,7 +9957,9 @@
                       "id" : 5,
                       "label" : "Property Management"
                     } ],
-                    "countries" : [ "US" ],
+                    "countries" : [ {
+                      "id" : 1
+                    } ],
                     "filterFocusOnCommercial" : true
                   }
                 }
@@ -14372,8 +14384,12 @@
           },
           "countries" : {
             "type" : "array",
-            "description" : "Filter by countries where users operate",
-            "example" : [ "US", "CA" ],
+            "description" : "Filter by countries where users operate. Accepts objects with id, ISO codes like \"US\", or numeric ids.",
+            "example" : [ {
+              "id" : 1
+            }, {
+              "id" : 2
+            } ],
             "items" : {
               "$ref" : "#/components/schemas/Country"
             }
@@ -14825,18 +14841,6 @@
       }
     },
     "securitySchemes" : {
-      "oAuthToken" : {
-        "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
-        "in" : "header"
-      },
-      "xApiKey" : {
-        "type" : "apiKey",
-        "description" : "Integration API key (prefix hc_)",
-        "name" : "X-API-Key",
-        "in" : "header"
-      },
       "oAuthClientId" : {
         "type" : "apiKey",
         "description" : "OAuth client identifier (default: hallocasa_frontend)",
@@ -14847,6 +14851,18 @@
         "type" : "apiKey",
         "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
         "name" : "O-Auth-Code",
+        "in" : "header"
+      },
+      "oAuthToken" : {
+        "type" : "apiKey",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
+        "in" : "header"
+      },
+      "xApiKey" : {
+        "type" : "apiKey",
+        "description" : "Integration API key (prefix hc_)",
+        "name" : "X-API-Key",
         "in" : "header"
       }
     }
