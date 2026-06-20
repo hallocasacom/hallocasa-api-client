@@ -10636,6 +10636,8 @@
             "$ref" : "#/components/schemas/GeoPlace"
           },
           "chamberOfCommerceUrl" : {
+            "maxLength" : 512,
+            "minLength" : 0,
             "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "Chamber of commerce registry URL"
@@ -10646,21 +10648,29 @@
             "example" : "00009-PJ-MVCS"
           },
           "facebookUrl" : {
+            "maxLength" : 512,
+            "minLength" : 0,
             "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "Facebook profile URL"
           },
           "instagramUrl" : {
+            "maxLength" : 512,
+            "minLength" : 0,
             "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "Instagram profile URL"
           },
           "twitterUrl" : {
+            "maxLength" : 512,
+            "minLength" : 0,
             "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "X/Twitter profile URL"
           },
           "wechatUrl" : {
+            "maxLength" : 512,
+            "minLength" : 0,
             "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "WeChat profile URL"
@@ -10671,16 +10681,22 @@
             "description" : "WeChat QR image data URL"
           },
           "vkUrl" : {
+            "maxLength" : 512,
+            "minLength" : 0,
             "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "VK profile URL"
           },
           "videoUrl" : {
+            "maxLength" : 512,
+            "minLength" : 0,
             "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "Introduction video URL"
           },
           "bookAnAppointmentUrl" : {
+            "maxLength" : 512,
+            "minLength" : 0,
             "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "Calendar booking link"
@@ -13703,6 +13719,8 @@
             "$ref" : "#/components/schemas/GeoPlace"
           },
           "chamberOfCommerceUrl" : {
+            "maxLength" : 512,
+            "minLength" : 0,
             "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "Chamber of commerce registry URL"
@@ -13713,21 +13731,29 @@
             "example" : "00009-PJ-MVCS"
           },
           "facebookUrl" : {
+            "maxLength" : 512,
+            "minLength" : 0,
             "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "Facebook profile URL"
           },
           "instagramUrl" : {
+            "maxLength" : 512,
+            "minLength" : 0,
             "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "Instagram profile URL"
           },
           "twitterUrl" : {
+            "maxLength" : 512,
+            "minLength" : 0,
             "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "X/Twitter profile URL"
           },
           "wechatUrl" : {
+            "maxLength" : 512,
+            "minLength" : 0,
             "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "WeChat profile URL"
@@ -13738,16 +13764,22 @@
             "description" : "WeChat QR image data URL"
           },
           "vkUrl" : {
+            "maxLength" : 512,
+            "minLength" : 0,
             "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "VK profile URL"
           },
           "videoUrl" : {
+            "maxLength" : 512,
+            "minLength" : 0,
             "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "Introduction video URL"
           },
           "bookAnAppointmentUrl" : {
+            "maxLength" : 512,
+            "minLength" : 0,
             "pattern" : "^$|https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z]{2,63}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)",
             "type" : "string",
             "description" : "Calendar booking link"
@@ -14841,28 +14873,28 @@
       }
     },
     "securitySchemes" : {
-      "oAuthClientId" : {
-        "type" : "apiKey",
-        "description" : "OAuth client identifier (default: hallocasa_frontend)",
-        "name" : "O-Auth-Client-Id",
-        "in" : "header"
-      },
       "oAuthCode" : {
         "type" : "apiKey",
         "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
         "name" : "O-Auth-Code",
         "in" : "header"
       },
-      "oAuthToken" : {
+      "oAuthClientId" : {
         "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
+        "description" : "OAuth client identifier (default: hallocasa_frontend)",
+        "name" : "O-Auth-Client-Id",
         "in" : "header"
       },
       "xApiKey" : {
         "type" : "apiKey",
         "description" : "Integration API key (prefix hc_)",
         "name" : "X-API-Key",
+        "in" : "header"
+      },
+      "oAuthToken" : {
+        "type" : "apiKey",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
         "in" : "header"
       }
     }
