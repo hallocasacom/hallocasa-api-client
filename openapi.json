@@ -11208,27 +11208,6 @@
       },
       "ExchangeRateMap" : {
         "type" : "object",
-        "additionalProperties" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "number",
-            "description" : "Exchange rate map where each currency code maps to its exchange rates with other currencies",
-            "format" : "double"
-          },
-          "description" : "Exchange rate map where each currency code maps to its exchange rates with other currencies",
-          "example" : {
-            "USD" : {
-              "EUR" : 0.85,
-              "GBP" : 0.74,
-              "CAD" : 1.31
-            },
-            "EUR" : {
-              "USD" : 1.18,
-              "GBP" : 0.87,
-              "CAD" : 1.12
-            }
-          }
-        },
         "description" : "Exchange rate map where each currency code maps to its exchange rates with other currencies",
         "example" : {
           "USD" : {
@@ -14873,28 +14852,28 @@
       }
     },
     "securitySchemes" : {
-      "oAuthCode" : {
-        "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
-        "in" : "header"
-      },
       "oAuthClientId" : {
         "type" : "apiKey",
         "description" : "OAuth client identifier (default: hallocasa_frontend)",
         "name" : "O-Auth-Client-Id",
         "in" : "header"
       },
-      "xApiKey" : {
+      "oAuthCode" : {
         "type" : "apiKey",
-        "description" : "Integration API key (prefix hc_)",
-        "name" : "X-API-Key",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
         "in" : "header"
       },
       "oAuthToken" : {
         "type" : "apiKey",
         "description" : "OAuth access token for authenticated requests",
         "name" : "O-Auth-Token",
+        "in" : "header"
+      },
+      "xApiKey" : {
+        "type" : "apiKey",
+        "description" : "Integration API key (prefix hc_)",
+        "name" : "X-API-Key",
         "in" : "header"
       }
     }

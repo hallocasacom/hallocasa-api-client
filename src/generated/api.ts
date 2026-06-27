@@ -10299,7 +10299,7 @@ export const ExchangeRatesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async findExchangeRates1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<{ [key: string]: { [key: string]: number; }; }>> {
+        async findExchangeRates1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.findExchangeRates1(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ExchangeRatesApi.findExchangeRates1']?.[localVarOperationServerIndex]?.url;
@@ -10321,7 +10321,7 @@ export const ExchangeRatesApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        findExchangeRates1(options?: RawAxiosRequestConfig): AxiosPromise<{ [key: string]: { [key: string]: number; }; }> {
+        findExchangeRates1(options?: RawAxiosRequestConfig): AxiosPromise<object> {
             return localVarFp.findExchangeRates1(options).then((request) => request(axios, basePath));
         },
     };

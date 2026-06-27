@@ -8462,11 +8462,7 @@ export declare const ExchangeRatesApiFp: (configuration?: Configuration) => {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    findExchangeRates1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<{
-        [key: string]: {
-            [key: string]: number;
-        };
-    }>>;
+    findExchangeRates1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>>;
 };
 /**
  * ExchangeRatesApi - factory interface
@@ -8479,11 +8475,7 @@ export declare const ExchangeRatesApiFactory: (configuration?: Configuration, ba
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    findExchangeRates1(options?: RawAxiosRequestConfig): AxiosPromise<{
-        [key: string]: {
-            [key: string]: number;
-        };
-    }>;
+    findExchangeRates1(options?: RawAxiosRequestConfig): AxiosPromise<object>;
 };
 /**
  * ExchangeRatesApi - object-oriented interface
@@ -8499,11 +8491,7 @@ export declare class ExchangeRatesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ExchangeRatesApi
      */
-    findExchangeRates1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<{
-        [key: string]: {
-            [key: string]: number;
-        };
-    }, any, {}>>;
+    findExchangeRates1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<object, any, {}>>;
 }
 /**
  * FacebookPropertiesApi - axios parameter creator
