@@ -2050,6 +2050,47 @@
         "deprecated" : true
       }
     },
+    "/property-bulk-uploads/status/{jobId}/cancel" : {
+      "post" : {
+        "tags" : [ "property-bulk-uploads" ],
+        "summary" : "Cancel an active import job",
+        "description" : "Cancel a pending or processing bulk upload job for the current user",
+        "operationId" : "cancelJob_1",
+        "parameters" : [ {
+          "name" : "jobId",
+          "in" : "path",
+          "description" : "Job ID",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Job cancelled",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BulkUploadJobStatusDto"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Job not found or not cancellable",
+            "content" : {
+              "application/json" : { }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized - Authentication required",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
     "/property-bulk-uploads/formats" : {
       "get" : {
         "tags" : [ "property-bulk-uploads" ],
@@ -11373,6 +11414,10 @@
             "type" : "string",
             "format" : "date-time"
           },
+          "lastActivityAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
           "completedAt" : {
             "type" : "string",
             "format" : "date-time"
@@ -14858,10 +14903,10 @@
         "name" : "O-Auth-Client-Id",
         "in" : "header"
       },
-      "oAuthCode" : {
+      "xApiKey" : {
         "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
+        "description" : "Integration API key (prefix hc_)",
+        "name" : "X-API-Key",
         "in" : "header"
       },
       "oAuthToken" : {
@@ -14870,10 +14915,10 @@
         "name" : "O-Auth-Token",
         "in" : "header"
       },
-      "xApiKey" : {
+      "oAuthCode" : {
         "type" : "apiKey",
-        "description" : "Integration API key (prefix hc_)",
-        "name" : "X-API-Key",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
         "in" : "header"
       }
     }

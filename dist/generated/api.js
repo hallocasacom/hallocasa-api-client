@@ -9294,6 +9294,39 @@ exports.PropertyBulkDownloadApi = PropertyBulkDownloadApi;
 const PropertyBulkUploadsApiAxiosParamCreator = function (configuration) {
     return {
         /**
+         * Cancel a pending or processing bulk upload job for the current user
+         * @summary Cancel an active import job
+         * @param {string} jobId Job ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        cancelJob1: async (jobId, options = {}) => {
+            // verify required parameter 'jobId' is not null or undefined
+            (0, common_1.assertParamExists)('cancelJob1', 'jobId', jobId);
+            const localVarPath = `/property-bulk-uploads/status/{jobId}/cancel`
+                .replace(`{${"jobId"}}`, encodeURIComponent(String(jobId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Get the list of supported file formats for bulk upload
          * @summary Get available formats
          * @param {*} [options] Override http request option.
@@ -9560,6 +9593,19 @@ const PropertyBulkUploadsApiFp = function (configuration) {
     const localVarAxiosParamCreator = (0, exports.PropertyBulkUploadsApiAxiosParamCreator)(configuration);
     return {
         /**
+         * Cancel a pending or processing bulk upload job for the current user
+         * @summary Cancel an active import job
+         * @param {string} jobId Job ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async cancelJob1(jobId, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.cancelJob1(jobId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['PropertyBulkUploadsApi.cancelJob1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Get the list of supported file formats for bulk upload
          * @summary Get available formats
          * @param {*} [options] Override http request option.
@@ -9673,6 +9719,16 @@ const PropertyBulkUploadsApiFactory = function (configuration, basePath, axios) 
     const localVarFp = (0, exports.PropertyBulkUploadsApiFp)(configuration);
     return {
         /**
+         * Cancel a pending or processing bulk upload job for the current user
+         * @summary Cancel an active import job
+         * @param {PropertyBulkUploadsApiCancelJob1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        cancelJob1(requestParameters, options) {
+            return localVarFp.cancelJob1(requestParameters.jobId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Get the list of supported file formats for bulk upload
          * @summary Get available formats
          * @param {*} [options] Override http request option.
@@ -9759,6 +9815,17 @@ exports.PropertyBulkUploadsApiFactory = PropertyBulkUploadsApiFactory;
  * @extends {BaseAPI}
  */
 class PropertyBulkUploadsApi extends base_1.BaseAPI {
+    /**
+     * Cancel a pending or processing bulk upload job for the current user
+     * @summary Cancel an active import job
+     * @param {PropertyBulkUploadsApiCancelJob1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertyBulkUploadsApi
+     */
+    cancelJob1(requestParameters, options) {
+        return (0, exports.PropertyBulkUploadsApiFp)(this.configuration).cancelJob1(requestParameters.jobId, options).then((request) => request(this.axios, this.basePath));
+    }
     /**
      * Get the list of supported file formats for bulk upload
      * @summary Get available formats

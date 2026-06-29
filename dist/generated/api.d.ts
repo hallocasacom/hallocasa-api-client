@@ -535,6 +535,12 @@ export interface BulkUploadJobStatusDto {
      * @type {string}
      * @memberof BulkUploadJobStatusDto
      */
+    'lastActivityAt'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof BulkUploadJobStatusDto
+     */
     'completedAt'?: string;
     /**
      *
@@ -12774,6 +12780,14 @@ export declare class PropertyBulkDownloadApi extends BaseAPI {
  */
 export declare const PropertyBulkUploadsApiAxiosParamCreator: (configuration?: Configuration) => {
     /**
+     * Cancel a pending or processing bulk upload job for the current user
+     * @summary Cancel an active import job
+     * @param {string} jobId Job ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    cancelJob1: (jobId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Get the list of supported file formats for bulk upload
      * @summary Get available formats
      * @param {*} [options] Override http request option.
@@ -12842,6 +12856,14 @@ export declare const PropertyBulkUploadsApiAxiosParamCreator: (configuration?: C
  * @export
  */
 export declare const PropertyBulkUploadsApiFp: (configuration?: Configuration) => {
+    /**
+     * Cancel a pending or processing bulk upload job for the current user
+     * @summary Cancel an active import job
+     * @param {string} jobId Job ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    cancelJob1(jobId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BulkUploadJobStatusDto>>;
     /**
      * Get the list of supported file formats for bulk upload
      * @summary Get available formats
@@ -12912,6 +12934,14 @@ export declare const PropertyBulkUploadsApiFp: (configuration?: Configuration) =
  */
 export declare const PropertyBulkUploadsApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
     /**
+     * Cancel a pending or processing bulk upload job for the current user
+     * @summary Cancel an active import job
+     * @param {PropertyBulkUploadsApiCancelJob1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    cancelJob1(requestParameters: PropertyBulkUploadsApiCancelJob1Request, options?: RawAxiosRequestConfig): AxiosPromise<BulkUploadJobStatusDto>;
+    /**
      * Get the list of supported file formats for bulk upload
      * @summary Get available formats
      * @param {*} [options] Override http request option.
@@ -12973,6 +13003,19 @@ export declare const PropertyBulkUploadsApiFactory: (configuration?: Configurati
      */
     uploadPropertiesFromUrl1(requestParameters: PropertyBulkUploadsApiUploadPropertiesFromUrl1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
 };
+/**
+ * Request parameters for cancelJob1 operation in PropertyBulkUploadsApi.
+ * @export
+ * @interface PropertyBulkUploadsApiCancelJob1Request
+ */
+export interface PropertyBulkUploadsApiCancelJob1Request {
+    /**
+     * Job ID
+     * @type {string}
+     * @memberof PropertyBulkUploadsApiCancelJob1
+     */
+    readonly jobId: string;
+}
 /**
  * Request parameters for getJobStatus1 operation in PropertyBulkUploadsApi.
  * @export
@@ -13057,6 +13100,15 @@ export interface PropertyBulkUploadsApiUploadPropertiesFromUrl1Request {
  * @extends {BaseAPI}
  */
 export declare class PropertyBulkUploadsApi extends BaseAPI {
+    /**
+     * Cancel a pending or processing bulk upload job for the current user
+     * @summary Cancel an active import job
+     * @param {PropertyBulkUploadsApiCancelJob1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertyBulkUploadsApi
+     */
+    cancelJob1(requestParameters: PropertyBulkUploadsApiCancelJob1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BulkUploadJobStatusDto, any, {}>>;
     /**
      * Get the list of supported file formats for bulk upload
      * @summary Get available formats
