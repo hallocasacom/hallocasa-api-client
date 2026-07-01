@@ -715,6 +715,12 @@ export interface CheckoutSessionDto {
      * @memberof CheckoutSessionDto
      */
     'locale'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CheckoutSessionDto
+     */
+    'promoCode'?: string;
 }
 export declare const CheckoutSessionDtoStatusEnum: {
     readonly InProcess: "IN_PROCESS";
@@ -1386,6 +1392,31 @@ export interface CustomerSessionDto {
      * @memberof CustomerSessionDto
      */
     'returnUrl'?: string;
+}
+/**
+ *
+ * @export
+ * @interface DeleteMessageRequestDto
+ */
+export interface DeleteMessageRequestDto {
+    /**
+     *
+     * @type {number}
+     * @memberof DeleteMessageRequestDto
+     */
+    'messageUserFromId'?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof DeleteMessageRequestDto
+     */
+    'messageUserToId'?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof DeleteMessageRequestDto
+     */
+    'messageDateTime'?: string;
 }
 /**
  *
@@ -3159,6 +3190,62 @@ export interface Message {
      * @memberof Message
      */
     'notifiedByChat'?: boolean;
+    /**
+     *
+     * @type {Array<MessageReaction>}
+     * @memberof Message
+     */
+    'reactions'?: Array<MessageReaction>;
+}
+/**
+ *
+ * @export
+ * @interface MessageReaction
+ */
+export interface MessageReaction {
+    /**
+     *
+     * @type {number}
+     * @memberof MessageReaction
+     */
+    'userId'?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof MessageReaction
+     */
+    'emoji'?: string;
+}
+/**
+ *
+ * @export
+ * @interface MessageReactionRequestDto
+ */
+export interface MessageReactionRequestDto {
+    /**
+     *
+     * @type {number}
+     * @memberof MessageReactionRequestDto
+     */
+    'messageUserFromId'?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof MessageReactionRequestDto
+     */
+    'messageUserToId'?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof MessageReactionRequestDto
+     */
+    'messageDateTime'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof MessageReactionRequestDto
+     */
+    'emoji'?: string;
 }
 /**
  *
@@ -11191,6 +11278,14 @@ export declare class LocationCacheApi extends BaseAPI {
  */
 export declare const MessagesApiAxiosParamCreator: (configuration?: Configuration) => {
     /**
+     *
+     * @summary Delete a message (sender only, within 2 hours)
+     * @param {DeleteMessageRequestDto} [deleteMessageRequestDto] message identity
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteMessage1: (deleteMessageRequestDto?: DeleteMessageRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Retrieves notifications for a specific user and notification type. Designed for autopilot integration.
      * @summary Get user notifications by type
      * @param {string} token Authentication token
@@ -11252,12 +11347,28 @@ export declare const MessagesApiAxiosParamCreator: (configuration?: Configuratio
      * @throws {RequiredError}
      */
     sendMessage1: (message?: Message, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @summary Toggle a reaction on a chat message
+     * @param {MessageReactionRequestDto} [messageReactionRequestDto]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    toggleReaction1: (messageReactionRequestDto?: MessageReactionRequestDto, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * MessagesApi - functional programming interface
  * @export
  */
 export declare const MessagesApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @summary Delete a message (sender only, within 2 hours)
+     * @param {DeleteMessageRequestDto} [deleteMessageRequestDto] message identity
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteMessage1(deleteMessageRequestDto?: DeleteMessageRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
      * Retrieves notifications for a specific user and notification type. Designed for autopilot integration.
      * @summary Get user notifications by type
@@ -11320,12 +11431,28 @@ export declare const MessagesApiFp: (configuration?: Configuration) => {
      * @throws {RequiredError}
      */
     sendMessage1(message?: Message, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Message>>;
+    /**
+     *
+     * @summary Toggle a reaction on a chat message
+     * @param {MessageReactionRequestDto} [messageReactionRequestDto]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    toggleReaction1(messageReactionRequestDto?: MessageReactionRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
 };
 /**
  * MessagesApi - factory interface
  * @export
  */
 export declare const MessagesApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     *
+     * @summary Delete a message (sender only, within 2 hours)
+     * @param {MessagesApiDeleteMessage1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteMessage1(requestParameters?: MessagesApiDeleteMessage1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
     /**
      * Retrieves notifications for a specific user and notification type. Designed for autopilot integration.
      * @summary Get user notifications by type
@@ -11380,7 +11507,28 @@ export declare const MessagesApiFactory: (configuration?: Configuration, basePat
      * @throws {RequiredError}
      */
     sendMessage1(requestParameters?: MessagesApiSendMessage1Request, options?: RawAxiosRequestConfig): AxiosPromise<Message>;
+    /**
+     *
+     * @summary Toggle a reaction on a chat message
+     * @param {MessagesApiToggleReaction1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    toggleReaction1(requestParameters?: MessagesApiToggleReaction1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
 };
+/**
+ * Request parameters for deleteMessage1 operation in MessagesApi.
+ * @export
+ * @interface MessagesApiDeleteMessage1Request
+ */
+export interface MessagesApiDeleteMessage1Request {
+    /**
+     * message identity
+     * @type {DeleteMessageRequestDto}
+     * @memberof MessagesApiDeleteMessage1
+     */
+    readonly deleteMessageRequestDto?: DeleteMessageRequestDto;
+}
 /**
  * Request parameters for getByUserWithResult1 operation in MessagesApi.
  * @export
@@ -11521,12 +11669,34 @@ export interface MessagesApiSendMessage1Request {
     readonly message?: Message;
 }
 /**
+ * Request parameters for toggleReaction1 operation in MessagesApi.
+ * @export
+ * @interface MessagesApiToggleReaction1Request
+ */
+export interface MessagesApiToggleReaction1Request {
+    /**
+     *
+     * @type {MessageReactionRequestDto}
+     * @memberof MessagesApiToggleReaction1
+     */
+    readonly messageReactionRequestDto?: MessageReactionRequestDto;
+}
+/**
  * MessagesApi - object-oriented interface
  * @export
  * @class MessagesApi
  * @extends {BaseAPI}
  */
 export declare class MessagesApi extends BaseAPI {
+    /**
+     *
+     * @summary Delete a message (sender only, within 2 hours)
+     * @param {MessagesApiDeleteMessage1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessagesApi
+     */
+    deleteMessage1(requestParameters?: MessagesApiDeleteMessage1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      * Retrieves notifications for a specific user and notification type. Designed for autopilot integration.
      * @summary Get user notifications by type
@@ -11588,6 +11758,15 @@ export declare class MessagesApi extends BaseAPI {
      * @memberof MessagesApi
      */
     sendMessage1(requestParameters?: MessagesApiSendMessage1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Message, any, {}>>;
+    /**
+     *
+     * @summary Toggle a reaction on a chat message
+     * @param {MessagesApiToggleReaction1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessagesApi
+     */
+    toggleReaction1(requestParameters?: MessagesApiToggleReaction1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
 }
 /**
  * @export

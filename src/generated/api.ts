@@ -734,6 +734,12 @@ export interface CheckoutSessionDto {
      * @memberof CheckoutSessionDto
      */
     'locale'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CheckoutSessionDto
+     */
+    'promoCode'?: string;
 }
 
 export const CheckoutSessionDtoStatusEnum = {
@@ -1419,6 +1425,31 @@ export interface CustomerSessionDto {
      * @memberof CustomerSessionDto
      */
     'returnUrl'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface DeleteMessageRequestDto
+ */
+export interface DeleteMessageRequestDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof DeleteMessageRequestDto
+     */
+    'messageUserFromId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof DeleteMessageRequestDto
+     */
+    'messageUserToId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof DeleteMessageRequestDto
+     */
+    'messageDateTime'?: string;
 }
 /**
  * 
@@ -3232,6 +3263,62 @@ export interface Message {
      * @memberof Message
      */
     'notifiedByChat'?: boolean;
+    /**
+     * 
+     * @type {Array<MessageReaction>}
+     * @memberof Message
+     */
+    'reactions'?: Array<MessageReaction>;
+}
+/**
+ * 
+ * @export
+ * @interface MessageReaction
+ */
+export interface MessageReaction {
+    /**
+     * 
+     * @type {number}
+     * @memberof MessageReaction
+     */
+    'userId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof MessageReaction
+     */
+    'emoji'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface MessageReactionRequestDto
+ */
+export interface MessageReactionRequestDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof MessageReactionRequestDto
+     */
+    'messageUserFromId'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof MessageReactionRequestDto
+     */
+    'messageUserToId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof MessageReactionRequestDto
+     */
+    'messageDateTime'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MessageReactionRequestDto
+     */
+    'emoji'?: string;
 }
 /**
  * 
@@ -15387,6 +15474,46 @@ export class LocationCacheApi extends BaseAPI {
 export const MessagesApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
+         * 
+         * @summary Delete a message (sender only, within 2 hours)
+         * @param {DeleteMessageRequestDto} [deleteMessageRequestDto] message identity
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteMessage1: async (deleteMessageRequestDto?: DeleteMessageRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/chat/messages`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(deleteMessageRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Retrieves notifications for a specific user and notification type. Designed for autopilot integration.
          * @summary Get user notifications by type
          * @param {string} token Authentication token
@@ -15709,6 +15836,46 @@ export const MessagesApiAxiosParamCreator = function (configuration?: Configurat
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @summary Toggle a reaction on a chat message
+         * @param {MessageReactionRequestDto} [messageReactionRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        toggleReaction1: async (messageReactionRequestDto?: MessageReactionRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/chat/messages/reactions`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(messageReactionRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -15719,6 +15886,19 @@ export const MessagesApiAxiosParamCreator = function (configuration?: Configurat
 export const MessagesApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = MessagesApiAxiosParamCreator(configuration)
     return {
+        /**
+         * 
+         * @summary Delete a message (sender only, within 2 hours)
+         * @param {DeleteMessageRequestDto} [deleteMessageRequestDto] message identity
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteMessage1(deleteMessageRequestDto?: DeleteMessageRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteMessage1(deleteMessageRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['MessagesApi.deleteMessage1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
         /**
          * Retrieves notifications for a specific user and notification type. Designed for autopilot integration.
          * @summary Get user notifications by type
@@ -15816,6 +15996,19 @@ export const MessagesApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['MessagesApi.sendMessage1']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @summary Toggle a reaction on a chat message
+         * @param {MessageReactionRequestDto} [messageReactionRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async toggleReaction1(messageReactionRequestDto?: MessageReactionRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.toggleReaction1(messageReactionRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['MessagesApi.toggleReaction1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -15826,6 +16019,16 @@ export const MessagesApiFp = function(configuration?: Configuration) {
 export const MessagesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = MessagesApiFp(configuration)
     return {
+        /**
+         * 
+         * @summary Delete a message (sender only, within 2 hours)
+         * @param {MessagesApiDeleteMessage1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteMessage1(requestParameters: MessagesApiDeleteMessage1Request = {}, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteMessage1(requestParameters.deleteMessageRequestDto, options).then((request) => request(axios, basePath));
+        },
         /**
          * Retrieves notifications for a specific user and notification type. Designed for autopilot integration.
          * @summary Get user notifications by type
@@ -15894,8 +16097,32 @@ export const MessagesApiFactory = function (configuration?: Configuration, baseP
         sendMessage1(requestParameters: MessagesApiSendMessage1Request = {}, options?: RawAxiosRequestConfig): AxiosPromise<Message> {
             return localVarFp.sendMessage1(requestParameters.message, options).then((request) => request(axios, basePath));
         },
+        /**
+         * 
+         * @summary Toggle a reaction on a chat message
+         * @param {MessagesApiToggleReaction1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        toggleReaction1(requestParameters: MessagesApiToggleReaction1Request = {}, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.toggleReaction1(requestParameters.messageReactionRequestDto, options).then((request) => request(axios, basePath));
+        },
     };
 };
+
+/**
+ * Request parameters for deleteMessage1 operation in MessagesApi.
+ * @export
+ * @interface MessagesApiDeleteMessage1Request
+ */
+export interface MessagesApiDeleteMessage1Request {
+    /**
+     * message identity
+     * @type {DeleteMessageRequestDto}
+     * @memberof MessagesApiDeleteMessage1
+     */
+    readonly deleteMessageRequestDto?: DeleteMessageRequestDto
+}
 
 /**
  * Request parameters for getByUserWithResult1 operation in MessagesApi.
@@ -16052,12 +16279,38 @@ export interface MessagesApiSendMessage1Request {
 }
 
 /**
+ * Request parameters for toggleReaction1 operation in MessagesApi.
+ * @export
+ * @interface MessagesApiToggleReaction1Request
+ */
+export interface MessagesApiToggleReaction1Request {
+    /**
+     * 
+     * @type {MessageReactionRequestDto}
+     * @memberof MessagesApiToggleReaction1
+     */
+    readonly messageReactionRequestDto?: MessageReactionRequestDto
+}
+
+/**
  * MessagesApi - object-oriented interface
  * @export
  * @class MessagesApi
  * @extends {BaseAPI}
  */
 export class MessagesApi extends BaseAPI {
+    /**
+     * 
+     * @summary Delete a message (sender only, within 2 hours)
+     * @param {MessagesApiDeleteMessage1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessagesApi
+     */
+    public deleteMessage1(requestParameters: MessagesApiDeleteMessage1Request = {}, options?: RawAxiosRequestConfig) {
+        return MessagesApiFp(this.configuration).deleteMessage1(requestParameters.deleteMessageRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * Retrieves notifications for a specific user and notification type. Designed for autopilot integration.
      * @summary Get user notifications by type
@@ -16138,6 +16391,18 @@ export class MessagesApi extends BaseAPI {
      */
     public sendMessage1(requestParameters: MessagesApiSendMessage1Request = {}, options?: RawAxiosRequestConfig) {
         return MessagesApiFp(this.configuration).sendMessage1(requestParameters.message, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Toggle a reaction on a chat message
+     * @param {MessagesApiToggleReaction1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessagesApi
+     */
+    public toggleReaction1(requestParameters: MessagesApiToggleReaction1Request = {}, options?: RawAxiosRequestConfig) {
+        return MessagesApiFp(this.configuration).toggleReaction1(requestParameters.messageReactionRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

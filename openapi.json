@@ -781,6 +781,30 @@
         }
       }
     },
+    "/chat/messages/reactions" : {
+      "put" : {
+        "tags" : [ "messages" ],
+        "summary" : "Toggle a reaction on a chat message",
+        "operationId" : "toggleReaction_1",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/MessageReactionRequestDto"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
     "/chat/messages" : {
       "get" : {
         "tags" : [ "messages" ],
@@ -870,6 +894,38 @@
                 }
               }
             }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "messages" ],
+        "summary" : "Delete a message (sender only, within 2 hours)",
+        "operationId" : "deleteMessage_1",
+        "requestBody" : {
+          "description" : "message identity",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/DeleteMessageRequestDto"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "400" : {
+            "description" : "If message is too old or not found"
+          },
+          "403" : {
+            "description" : "If user is not the sender"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Ok. Message deleted"
           }
         }
       }
@@ -11086,6 +11142,43 @@
           }
         }
       },
+      "MessageReactionRequestDto" : {
+        "type" : "object",
+        "properties" : {
+          "messageUserFromId" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "messageUserToId" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "messageDateTime" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "emoji" : {
+            "type" : "string"
+          }
+        }
+      },
+      "DeleteMessageRequestDto" : {
+        "type" : "object",
+        "properties" : {
+          "messageUserFromId" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "messageUserToId" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "messageDateTime" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
       "Message" : {
         "type" : "object",
         "properties" : {
@@ -11110,6 +11203,24 @@
           },
           "notifiedByChat" : {
             "type" : "boolean"
+          },
+          "reactions" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/MessageReaction"
+            }
+          }
+        }
+      },
+      "MessageReaction" : {
+        "type" : "object",
+        "properties" : {
+          "userId" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "emoji" : {
+            "type" : "string"
           }
         }
       },
@@ -13295,6 +13406,9 @@
           },
           "locale" : {
             "type" : "string"
+          },
+          "promoCode" : {
+            "type" : "string"
           }
         }
       },
@@ -14903,10 +15017,10 @@
         "name" : "O-Auth-Client-Id",
         "in" : "header"
       },
-      "xApiKey" : {
+      "oAuthCode" : {
         "type" : "apiKey",
-        "description" : "Integration API key (prefix hc_)",
-        "name" : "X-API-Key",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
         "in" : "header"
       },
       "oAuthToken" : {
@@ -14915,10 +15029,10 @@
         "name" : "O-Auth-Token",
         "in" : "header"
       },
-      "oAuthCode" : {
+      "xApiKey" : {
         "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
+        "description" : "Integration API key (prefix hc_)",
+        "name" : "X-API-Key",
         "in" : "header"
       }
     }

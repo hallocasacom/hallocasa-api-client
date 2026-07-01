@@ -6974,6 +6974,38 @@ exports.LocationCacheApi = LocationCacheApi;
 const MessagesApiAxiosParamCreator = function (configuration) {
     return {
         /**
+         *
+         * @summary Delete a message (sender only, within 2 hours)
+         * @param {DeleteMessageRequestDto} [deleteMessageRequestDto] message identity
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteMessage1: async (deleteMessageRequestDto, options = {}) => {
+            const localVarPath = `/chat/messages`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(deleteMessageRequestDto, localVarRequestOptions, configuration);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Retrieves notifications for a specific user and notification type. Designed for autopilot integration.
          * @summary Get user notifications by type
          * @param {string} token Authentication token
@@ -7237,6 +7269,38 @@ const MessagesApiAxiosParamCreator = function (configuration) {
                 options: localVarRequestOptions,
             };
         },
+        /**
+         *
+         * @summary Toggle a reaction on a chat message
+         * @param {MessageReactionRequestDto} [messageReactionRequestDto]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        toggleReaction1: async (messageReactionRequestDto, options = {}) => {
+            const localVarPath = `/chat/messages/reactions`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(messageReactionRequestDto, localVarRequestOptions, configuration);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     };
 };
 exports.MessagesApiAxiosParamCreator = MessagesApiAxiosParamCreator;
@@ -7247,6 +7311,19 @@ exports.MessagesApiAxiosParamCreator = MessagesApiAxiosParamCreator;
 const MessagesApiFp = function (configuration) {
     const localVarAxiosParamCreator = (0, exports.MessagesApiAxiosParamCreator)(configuration);
     return {
+        /**
+         *
+         * @summary Delete a message (sender only, within 2 hours)
+         * @param {DeleteMessageRequestDto} [deleteMessageRequestDto] message identity
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteMessage1(deleteMessageRequestDto, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteMessage1(deleteMessageRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['MessagesApi.deleteMessage1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
         /**
          * Retrieves notifications for a specific user and notification type. Designed for autopilot integration.
          * @summary Get user notifications by type
@@ -7344,6 +7421,19 @@ const MessagesApiFp = function (configuration) {
             const localVarOperationServerBasePath = base_1.operationServerMap['MessagesApi.sendMessage1']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         *
+         * @summary Toggle a reaction on a chat message
+         * @param {MessageReactionRequestDto} [messageReactionRequestDto]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async toggleReaction1(messageReactionRequestDto, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.toggleReaction1(messageReactionRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['MessagesApi.toggleReaction1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     };
 };
 exports.MessagesApiFp = MessagesApiFp;
@@ -7354,6 +7444,16 @@ exports.MessagesApiFp = MessagesApiFp;
 const MessagesApiFactory = function (configuration, basePath, axios) {
     const localVarFp = (0, exports.MessagesApiFp)(configuration);
     return {
+        /**
+         *
+         * @summary Delete a message (sender only, within 2 hours)
+         * @param {MessagesApiDeleteMessage1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteMessage1(requestParameters = {}, options) {
+            return localVarFp.deleteMessage1(requestParameters.deleteMessageRequestDto, options).then((request) => request(axios, basePath));
+        },
         /**
          * Retrieves notifications for a specific user and notification type. Designed for autopilot integration.
          * @summary Get user notifications by type
@@ -7422,6 +7522,16 @@ const MessagesApiFactory = function (configuration, basePath, axios) {
         sendMessage1(requestParameters = {}, options) {
             return localVarFp.sendMessage1(requestParameters.message, options).then((request) => request(axios, basePath));
         },
+        /**
+         *
+         * @summary Toggle a reaction on a chat message
+         * @param {MessagesApiToggleReaction1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        toggleReaction1(requestParameters = {}, options) {
+            return localVarFp.toggleReaction1(requestParameters.messageReactionRequestDto, options).then((request) => request(axios, basePath));
+        },
     };
 };
 exports.MessagesApiFactory = MessagesApiFactory;
@@ -7432,6 +7542,17 @@ exports.MessagesApiFactory = MessagesApiFactory;
  * @extends {BaseAPI}
  */
 class MessagesApi extends base_1.BaseAPI {
+    /**
+     *
+     * @summary Delete a message (sender only, within 2 hours)
+     * @param {MessagesApiDeleteMessage1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessagesApi
+     */
+    deleteMessage1(requestParameters = {}, options) {
+        return (0, exports.MessagesApiFp)(this.configuration).deleteMessage1(requestParameters.deleteMessageRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
     /**
      * Retrieves notifications for a specific user and notification type. Designed for autopilot integration.
      * @summary Get user notifications by type
@@ -7506,6 +7627,17 @@ class MessagesApi extends base_1.BaseAPI {
      */
     sendMessage1(requestParameters = {}, options) {
         return (0, exports.MessagesApiFp)(this.configuration).sendMessage1(requestParameters.message, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary Toggle a reaction on a chat message
+     * @param {MessagesApiToggleReaction1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessagesApi
+     */
+    toggleReaction1(requestParameters = {}, options) {
+        return (0, exports.MessagesApiFp)(this.configuration).toggleReaction1(requestParameters.messageReactionRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 exports.MessagesApi = MessagesApi;
