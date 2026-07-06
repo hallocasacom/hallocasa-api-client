@@ -45,6 +45,19 @@ export interface AccessToken {
     'expired'?: boolean;
 }
 /**
+ * Request to add a co-broker to a property listing
+ * @export
+ * @interface AddPropertyCoBrokerRequest
+ */
+export interface AddPropertyCoBrokerRequest {
+    /**
+     * User id of the broker to add
+     * @type {number}
+     * @memberof AddPropertyCoBrokerRequest
+     */
+    'brokerUserId': number;
+}
+/**
  *
  * @export
  * @interface Address
@@ -554,6 +567,55 @@ export interface BulkUploadJobStatusDto {
      * @memberof BulkUploadJobStatusDto
      */
     'errorDetails'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof BulkUploadJobStatusDto
+     */
+    'feedSourceId'?: string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof BulkUploadJobStatusDto
+     */
+    'reconcileApproved'?: boolean;
+    /**
+     *
+     * @type {number}
+     * @memberof BulkUploadJobStatusDto
+     */
+    'deletedCount'?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof BulkUploadJobStatusDto
+     */
+    'deletedDetails'?: string;
+}
+/**
+ *
+ * @export
+ * @interface BulkUploadReconcilePreviewUrlRequest
+ */
+export interface BulkUploadReconcilePreviewUrlRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof BulkUploadReconcilePreviewUrlRequest
+     */
+    'url'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof BulkUploadReconcilePreviewUrlRequest
+     */
+    'feedSourceId'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof BulkUploadReconcilePreviewUrlRequest
+     */
+    'newFeedSourceName'?: string;
 }
 /**
  *
@@ -1299,6 +1361,31 @@ export interface CreateApiKeyRequestDto {
      * @memberof CreateApiKeyRequestDto
      */
     'expiresAt'?: string;
+}
+/**
+ *
+ * @export
+ * @interface CreateFeedSourceRequest
+ */
+export interface CreateFeedSourceRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof CreateFeedSourceRequest
+     */
+    'format'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateFeedSourceRequest
+     */
+    'name'?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateFeedSourceRequest
+     */
+    'url'?: string;
 }
 /**
  * Currency information
@@ -3596,6 +3683,12 @@ export interface Property {
      * @memberof Property
      */
     'isPasswordProtected'?: boolean;
+    /**
+     * Whether listing is ready for global co-marketing
+     * @type {boolean}
+     * @memberof Property
+     */
+    'globalCoMarketingReady'?: boolean;
 }
 export declare const PropertyPublicationStateEnum: {
     readonly Available: "AVAILABLE";
@@ -11992,6 +12085,15 @@ export declare class PhonePrefixesApi extends BaseAPI {
  */
 export declare const PropertiesApiAxiosParamCreator: (configuration?: Configuration) => {
     /**
+     *
+     * @summary Add a co-broker to a property (owner only)
+     * @param {string} propertyId Property ID
+     * @param {AddPropertyCoBrokerRequest} [addPropertyCoBrokerRequest]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    addPropertyCoBroker1: (propertyId: string, addPropertyCoBrokerRequest?: AddPropertyCoBrokerRequest, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Re-download fullsize from S3, rotate, overwrite all sizes for each image filename on the property.
      * @summary Backfill property image orientation
      * @param {BackfillPropertyImageOrientationRequest} [backfillPropertyImageOrientationRequest]
@@ -12075,6 +12177,14 @@ export declare const PropertiesApiAxiosParamCreator: (configuration?: Configurat
      */
     getDraftsProperties1: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     *
+     * @summary List co-brokers for a property
+     * @param {string} propertyId Property ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getPropertyCoBrokers1: (propertyId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Returns recently created properties excluding password-protected and draft properties
      * @summary Get recently created properties within specified minutes (default 60)
      * @param {string} [email] Email to filter properties by user
@@ -12136,6 +12246,15 @@ export declare const PropertiesApiAxiosParamCreator: (configuration?: Configurat
  * @export
  */
 export declare const PropertiesApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @summary Add a co-broker to a property (owner only)
+     * @param {string} propertyId Property ID
+     * @param {AddPropertyCoBrokerRequest} [addPropertyCoBrokerRequest]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    addPropertyCoBroker1(propertyId: string, addPropertyCoBrokerRequest?: AddPropertyCoBrokerRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
      * Re-download fullsize from S3, rotate, overwrite all sizes for each image filename on the property.
      * @summary Backfill property image orientation
@@ -12220,6 +12339,14 @@ export declare const PropertiesApiFp: (configuration?: Configuration) => {
      */
     getDraftsProperties1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Property>>>;
     /**
+     *
+     * @summary List co-brokers for a property
+     * @param {string} propertyId Property ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getPropertyCoBrokers1(propertyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<User>>>;
+    /**
      * Returns recently created properties excluding password-protected and draft properties
      * @summary Get recently created properties within specified minutes (default 60)
      * @param {string} [email] Email to filter properties by user
@@ -12281,6 +12408,14 @@ export declare const PropertiesApiFp: (configuration?: Configuration) => {
  * @export
  */
 export declare const PropertiesApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     *
+     * @summary Add a co-broker to a property (owner only)
+     * @param {PropertiesApiAddPropertyCoBroker1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    addPropertyCoBroker1(requestParameters: PropertiesApiAddPropertyCoBroker1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
     /**
      * Re-download fullsize from S3, rotate, overwrite all sizes for each image filename on the property.
      * @summary Backfill property image orientation
@@ -12361,6 +12496,14 @@ export declare const PropertiesApiFactory: (configuration?: Configuration, baseP
      */
     getDraftsProperties1(options?: RawAxiosRequestConfig): AxiosPromise<Array<Property>>;
     /**
+     *
+     * @summary List co-brokers for a property
+     * @param {PropertiesApiGetPropertyCoBrokers1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getPropertyCoBrokers1(requestParameters: PropertiesApiGetPropertyCoBrokers1Request, options?: RawAxiosRequestConfig): AxiosPromise<Array<User>>;
+    /**
      * Returns recently created properties excluding password-protected and draft properties
      * @summary Get recently created properties within specified minutes (default 60)
      * @param {PropertiesApiGetRecentProperties1Request} requestParameters Request parameters.
@@ -12413,6 +12556,25 @@ export declare const PropertiesApiFactory: (configuration?: Configuration, baseP
      */
     translateProperty1(requestParameters: PropertiesApiTranslateProperty1Request, options?: RawAxiosRequestConfig): AxiosPromise<Property>;
 };
+/**
+ * Request parameters for addPropertyCoBroker1 operation in PropertiesApi.
+ * @export
+ * @interface PropertiesApiAddPropertyCoBroker1Request
+ */
+export interface PropertiesApiAddPropertyCoBroker1Request {
+    /**
+     * Property ID
+     * @type {string}
+     * @memberof PropertiesApiAddPropertyCoBroker1
+     */
+    readonly propertyId: string;
+    /**
+     *
+     * @type {AddPropertyCoBrokerRequest}
+     * @memberof PropertiesApiAddPropertyCoBroker1
+     */
+    readonly addPropertyCoBrokerRequest?: AddPropertyCoBrokerRequest;
+}
 /**
  * Request parameters for backfillPropertyImageOrientation1 operation in PropertiesApi.
  * @export
@@ -12542,6 +12704,19 @@ export interface PropertiesApiFindPropertyOldUrl1Request {
     readonly id: string;
 }
 /**
+ * Request parameters for getPropertyCoBrokers1 operation in PropertiesApi.
+ * @export
+ * @interface PropertiesApiGetPropertyCoBrokers1Request
+ */
+export interface PropertiesApiGetPropertyCoBrokers1Request {
+    /**
+     * Property ID
+     * @type {string}
+     * @memberof PropertiesApiGetPropertyCoBrokers1
+     */
+    readonly propertyId: string;
+}
+/**
  * Request parameters for getRecentProperties1 operation in PropertiesApi.
  * @export
  * @interface PropertiesApiGetRecentProperties1Request
@@ -12638,6 +12813,15 @@ export interface PropertiesApiTranslateProperty1Request {
  */
 export declare class PropertiesApi extends BaseAPI {
     /**
+     *
+     * @summary Add a co-broker to a property (owner only)
+     * @param {PropertiesApiAddPropertyCoBroker1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertiesApi
+     */
+    addPropertyCoBroker1(requestParameters: PropertiesApiAddPropertyCoBroker1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
+    /**
      * Re-download fullsize from S3, rotate, overwrite all sizes for each image filename on the property.
      * @summary Backfill property image orientation
      * @param {PropertiesApiBackfillPropertyImageOrientation1Request} requestParameters Request parameters.
@@ -12726,6 +12910,15 @@ export declare class PropertiesApi extends BaseAPI {
      * @memberof PropertiesApi
      */
     getDraftsProperties1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property[], any, {}>>;
+    /**
+     *
+     * @summary List co-brokers for a property
+     * @param {PropertiesApiGetPropertyCoBrokers1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertiesApi
+     */
+    getPropertyCoBrokers1(requestParameters: PropertiesApiGetPropertyCoBrokers1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<User[], any, {}>>;
     /**
      * Returns recently created properties excluding password-protected and draft properties
      * @summary Get recently created properties within specified minutes (default 60)
@@ -12967,6 +13160,22 @@ export declare const PropertyBulkUploadsApiAxiosParamCreator: (configuration?: C
      */
     cancelJob1: (jobId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     *
+     * @summary Create a feed source
+     * @param {CreateFeedSourceRequest} [createFeedSourceRequest]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    createFeedSource1: (createFeedSourceRequest?: CreateFeedSourceRequest, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @summary Delete feed source (does not delete properties)
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteFeedSource1: (id: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Get the list of supported file formats for bulk upload
      * @summary Get available formats
      * @param {*} [options] Override http request option.
@@ -12996,13 +13205,43 @@ export declare const PropertyBulkUploadsApiAxiosParamCreator: (configuration?: C
      */
     getLatestJobStatus1: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     *
+     * @summary List feed sources for current user
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    listFeedSources1: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @summary Preview listings that would be removed on import
+     * @param {string} format
+     * @param {string} [feedSourceId]
+     * @param {string} [newFeedSourceName]
+     * @param {string} [body]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    reconcilePreviewInBody1: (format: string, feedSourceId?: string, newFeedSourceName?: string, body?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @summary Preview listings that would be removed on URL import
+     * @param {string} format
+     * @param {BulkUploadReconcilePreviewUrlRequest} [bulkUploadReconcilePreviewUrlRequest]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    reconcilePreviewInUrl1: (format: string, bulkUploadReconcilePreviewUrlRequest?: BulkUploadReconcilePreviewUrlRequest, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Upload properties using Kyero format with XML content in the request body
      * @summary Upload Kyero properties with XML in request body
+     * @param {string} [feedSourceId]
+     * @param {string} [newFeedSourceName]
+     * @param {boolean} [reconcileApproved]
      * @param {string} [body] Properties XML content in Kyero format
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    uploadKyeroProperties2: (body?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    uploadKyeroProperties2: (feedSourceId?: string, newFeedSourceName?: string, reconcileApproved?: boolean, body?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Upload properties in Kyero format by providing a URL to an XML file
      * @summary Upload Kyero properties from URL
@@ -13015,11 +13254,14 @@ export declare const PropertyBulkUploadsApiAxiosParamCreator: (configuration?: C
      * Upload properties with XML content in the request body using the specified format
      * @summary Upload properties in specified format with XML in request body
      * @param {UploadProperties1FormatEnum} format Format identifier
+     * @param {string} [feedSourceId]
+     * @param {string} [newFeedSourceName]
+     * @param {boolean} [reconcileApproved]
      * @param {string} [body] Properties XML content
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    uploadProperties1: (format: UploadProperties1FormatEnum, body?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    uploadProperties1: (format: UploadProperties1FormatEnum, feedSourceId?: string, newFeedSourceName?: string, reconcileApproved?: boolean, body?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      * Upload properties in the specified format by providing a URL to an XML file
      * @summary Upload properties in specified format from URL
@@ -13043,6 +13285,22 @@ export declare const PropertyBulkUploadsApiFp: (configuration?: Configuration) =
      * @throws {RequiredError}
      */
     cancelJob1(jobId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BulkUploadJobStatusDto>>;
+    /**
+     *
+     * @summary Create a feed source
+     * @param {CreateFeedSourceRequest} [createFeedSourceRequest]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    createFeedSource1(createFeedSourceRequest?: CreateFeedSourceRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     *
+     * @summary Delete feed source (does not delete properties)
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteFeedSource1(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
      * Get the list of supported file formats for bulk upload
      * @summary Get available formats
@@ -13073,13 +13331,43 @@ export declare const PropertyBulkUploadsApiFp: (configuration?: Configuration) =
      */
     getLatestJobStatus1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BulkUploadJobStatusDto>>;
     /**
+     *
+     * @summary List feed sources for current user
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    listFeedSources1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     *
+     * @summary Preview listings that would be removed on import
+     * @param {string} format
+     * @param {string} [feedSourceId]
+     * @param {string} [newFeedSourceName]
+     * @param {string} [body]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    reconcilePreviewInBody1(format: string, feedSourceId?: string, newFeedSourceName?: string, body?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     *
+     * @summary Preview listings that would be removed on URL import
+     * @param {string} format
+     * @param {BulkUploadReconcilePreviewUrlRequest} [bulkUploadReconcilePreviewUrlRequest]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    reconcilePreviewInUrl1(format: string, bulkUploadReconcilePreviewUrlRequest?: BulkUploadReconcilePreviewUrlRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
      * Upload properties using Kyero format with XML content in the request body
      * @summary Upload Kyero properties with XML in request body
+     * @param {string} [feedSourceId]
+     * @param {string} [newFeedSourceName]
+     * @param {boolean} [reconcileApproved]
      * @param {string} [body] Properties XML content in Kyero format
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    uploadKyeroProperties2(body?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    uploadKyeroProperties2(feedSourceId?: string, newFeedSourceName?: string, reconcileApproved?: boolean, body?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
      * Upload properties in Kyero format by providing a URL to an XML file
      * @summary Upload Kyero properties from URL
@@ -13092,11 +13380,14 @@ export declare const PropertyBulkUploadsApiFp: (configuration?: Configuration) =
      * Upload properties with XML content in the request body using the specified format
      * @summary Upload properties in specified format with XML in request body
      * @param {UploadProperties1FormatEnum} format Format identifier
+     * @param {string} [feedSourceId]
+     * @param {string} [newFeedSourceName]
+     * @param {boolean} [reconcileApproved]
      * @param {string} [body] Properties XML content
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    uploadProperties1(format: UploadProperties1FormatEnum, body?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    uploadProperties1(format: UploadProperties1FormatEnum, feedSourceId?: string, newFeedSourceName?: string, reconcileApproved?: boolean, body?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
      * Upload properties in the specified format by providing a URL to an XML file
      * @summary Upload properties in specified format from URL
@@ -13120,6 +13411,22 @@ export declare const PropertyBulkUploadsApiFactory: (configuration?: Configurati
      * @throws {RequiredError}
      */
     cancelJob1(requestParameters: PropertyBulkUploadsApiCancelJob1Request, options?: RawAxiosRequestConfig): AxiosPromise<BulkUploadJobStatusDto>;
+    /**
+     *
+     * @summary Create a feed source
+     * @param {PropertyBulkUploadsApiCreateFeedSource1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    createFeedSource1(requestParameters?: PropertyBulkUploadsApiCreateFeedSource1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     *
+     * @summary Delete feed source (does not delete properties)
+     * @param {PropertyBulkUploadsApiDeleteFeedSource1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteFeedSource1(requestParameters: PropertyBulkUploadsApiDeleteFeedSource1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
     /**
      * Get the list of supported file formats for bulk upload
      * @summary Get available formats
@@ -13149,6 +13456,29 @@ export declare const PropertyBulkUploadsApiFactory: (configuration?: Configurati
      * @throws {RequiredError}
      */
     getLatestJobStatus1(options?: RawAxiosRequestConfig): AxiosPromise<BulkUploadJobStatusDto>;
+    /**
+     *
+     * @summary List feed sources for current user
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    listFeedSources1(options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     *
+     * @summary Preview listings that would be removed on import
+     * @param {PropertyBulkUploadsApiReconcilePreviewInBody1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    reconcilePreviewInBody1(requestParameters: PropertyBulkUploadsApiReconcilePreviewInBody1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     *
+     * @summary Preview listings that would be removed on URL import
+     * @param {PropertyBulkUploadsApiReconcilePreviewInUrl1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    reconcilePreviewInUrl1(requestParameters: PropertyBulkUploadsApiReconcilePreviewInUrl1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
     /**
      * Upload properties using Kyero format with XML content in the request body
      * @summary Upload Kyero properties with XML in request body
@@ -13196,6 +13526,32 @@ export interface PropertyBulkUploadsApiCancelJob1Request {
     readonly jobId: string;
 }
 /**
+ * Request parameters for createFeedSource1 operation in PropertyBulkUploadsApi.
+ * @export
+ * @interface PropertyBulkUploadsApiCreateFeedSource1Request
+ */
+export interface PropertyBulkUploadsApiCreateFeedSource1Request {
+    /**
+     *
+     * @type {CreateFeedSourceRequest}
+     * @memberof PropertyBulkUploadsApiCreateFeedSource1
+     */
+    readonly createFeedSourceRequest?: CreateFeedSourceRequest;
+}
+/**
+ * Request parameters for deleteFeedSource1 operation in PropertyBulkUploadsApi.
+ * @export
+ * @interface PropertyBulkUploadsApiDeleteFeedSource1Request
+ */
+export interface PropertyBulkUploadsApiDeleteFeedSource1Request {
+    /**
+     *
+     * @type {string}
+     * @memberof PropertyBulkUploadsApiDeleteFeedSource1
+     */
+    readonly id: string;
+}
+/**
  * Request parameters for getJobStatus1 operation in PropertyBulkUploadsApi.
  * @export
  * @interface PropertyBulkUploadsApiGetJobStatus1Request
@@ -13209,11 +13565,79 @@ export interface PropertyBulkUploadsApiGetJobStatus1Request {
     readonly jobId: string;
 }
 /**
+ * Request parameters for reconcilePreviewInBody1 operation in PropertyBulkUploadsApi.
+ * @export
+ * @interface PropertyBulkUploadsApiReconcilePreviewInBody1Request
+ */
+export interface PropertyBulkUploadsApiReconcilePreviewInBody1Request {
+    /**
+     *
+     * @type {string}
+     * @memberof PropertyBulkUploadsApiReconcilePreviewInBody1
+     */
+    readonly format: string;
+    /**
+     *
+     * @type {string}
+     * @memberof PropertyBulkUploadsApiReconcilePreviewInBody1
+     */
+    readonly feedSourceId?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof PropertyBulkUploadsApiReconcilePreviewInBody1
+     */
+    readonly newFeedSourceName?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof PropertyBulkUploadsApiReconcilePreviewInBody1
+     */
+    readonly body?: string;
+}
+/**
+ * Request parameters for reconcilePreviewInUrl1 operation in PropertyBulkUploadsApi.
+ * @export
+ * @interface PropertyBulkUploadsApiReconcilePreviewInUrl1Request
+ */
+export interface PropertyBulkUploadsApiReconcilePreviewInUrl1Request {
+    /**
+     *
+     * @type {string}
+     * @memberof PropertyBulkUploadsApiReconcilePreviewInUrl1
+     */
+    readonly format: string;
+    /**
+     *
+     * @type {BulkUploadReconcilePreviewUrlRequest}
+     * @memberof PropertyBulkUploadsApiReconcilePreviewInUrl1
+     */
+    readonly bulkUploadReconcilePreviewUrlRequest?: BulkUploadReconcilePreviewUrlRequest;
+}
+/**
  * Request parameters for uploadKyeroProperties2 operation in PropertyBulkUploadsApi.
  * @export
  * @interface PropertyBulkUploadsApiUploadKyeroProperties2Request
  */
 export interface PropertyBulkUploadsApiUploadKyeroProperties2Request {
+    /**
+     *
+     * @type {string}
+     * @memberof PropertyBulkUploadsApiUploadKyeroProperties2
+     */
+    readonly feedSourceId?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof PropertyBulkUploadsApiUploadKyeroProperties2
+     */
+    readonly newFeedSourceName?: string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof PropertyBulkUploadsApiUploadKyeroProperties2
+     */
+    readonly reconcileApproved?: boolean;
     /**
      * Properties XML content in Kyero format
      * @type {string}
@@ -13246,6 +13670,24 @@ export interface PropertyBulkUploadsApiUploadProperties1Request {
      * @memberof PropertyBulkUploadsApiUploadProperties1
      */
     readonly format: UploadProperties1FormatEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof PropertyBulkUploadsApiUploadProperties1
+     */
+    readonly feedSourceId?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof PropertyBulkUploadsApiUploadProperties1
+     */
+    readonly newFeedSourceName?: string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof PropertyBulkUploadsApiUploadProperties1
+     */
+    readonly reconcileApproved?: boolean;
     /**
      * Properties XML content
      * @type {string}
@@ -13289,6 +13731,24 @@ export declare class PropertyBulkUploadsApi extends BaseAPI {
      */
     cancelJob1(requestParameters: PropertyBulkUploadsApiCancelJob1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BulkUploadJobStatusDto, any, {}>>;
     /**
+     *
+     * @summary Create a feed source
+     * @param {PropertyBulkUploadsApiCreateFeedSource1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertyBulkUploadsApi
+     */
+    createFeedSource1(requestParameters?: PropertyBulkUploadsApiCreateFeedSource1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
+    /**
+     *
+     * @summary Delete feed source (does not delete properties)
+     * @param {PropertyBulkUploadsApiDeleteFeedSource1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertyBulkUploadsApi
+     */
+    deleteFeedSource1(requestParameters: PropertyBulkUploadsApiDeleteFeedSource1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
+    /**
      * Get the list of supported file formats for bulk upload
      * @summary Get available formats
      * @param {*} [options] Override http request option.
@@ -13321,6 +13781,32 @@ export declare class PropertyBulkUploadsApi extends BaseAPI {
      * @memberof PropertyBulkUploadsApi
      */
     getLatestJobStatus1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<BulkUploadJobStatusDto, any, {}>>;
+    /**
+     *
+     * @summary List feed sources for current user
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertyBulkUploadsApi
+     */
+    listFeedSources1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
+    /**
+     *
+     * @summary Preview listings that would be removed on import
+     * @param {PropertyBulkUploadsApiReconcilePreviewInBody1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertyBulkUploadsApi
+     */
+    reconcilePreviewInBody1(requestParameters: PropertyBulkUploadsApiReconcilePreviewInBody1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
+    /**
+     *
+     * @summary Preview listings that would be removed on URL import
+     * @param {PropertyBulkUploadsApiReconcilePreviewInUrl1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertyBulkUploadsApi
+     */
+    reconcilePreviewInUrl1(requestParameters: PropertyBulkUploadsApiReconcilePreviewInUrl1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      * Upload properties using Kyero format with XML content in the request body
      * @summary Upload Kyero properties with XML in request body

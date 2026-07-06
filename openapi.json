@@ -2147,6 +2147,66 @@
         }
       }
     },
+    "/property-bulk-uploads/feed-sources" : {
+      "get" : {
+        "tags" : [ "property-bulk-uploads" ],
+        "summary" : "List feed sources for current user",
+        "operationId" : "listFeedSources_1",
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "property-bulk-uploads" ],
+        "summary" : "Create a feed source",
+        "operationId" : "createFeedSource_1",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreateFeedSourceRequest"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
+    "/property-bulk-uploads/feed-sources/{id}" : {
+      "delete" : {
+        "tags" : [ "property-bulk-uploads" ],
+        "summary" : "Delete feed source (does not delete properties)",
+        "operationId" : "deleteFeedSource_1",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
     "/property-bulk-uploads/formats" : {
       "get" : {
         "tags" : [ "property-bulk-uploads" ],
@@ -2272,12 +2332,107 @@
         }
       }
     },
+    "/property-bulk-uploads/{format}/reconcile-preview/in-body" : {
+      "post" : {
+        "tags" : [ "property-bulk-uploads" ],
+        "summary" : "Preview listings that would be removed on import",
+        "operationId" : "reconcilePreviewInBody_1",
+        "parameters" : [ {
+          "name" : "format",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "feedSourceId",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "newFeedSourceName",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/xml" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
+    "/property-bulk-uploads/{format}/reconcile-preview/in-url" : {
+      "post" : {
+        "tags" : [ "property-bulk-uploads" ],
+        "summary" : "Preview listings that would be removed on URL import",
+        "operationId" : "reconcilePreviewInUrl_1",
+        "parameters" : [ {
+          "name" : "format",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/BulkUploadReconcilePreviewUrlRequest"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
     "/property-bulk-uploads/in-body" : {
       "post" : {
         "tags" : [ "property-bulk-uploads" ],
         "summary" : "Upload Kyero properties with XML in request body",
         "description" : "Upload properties using Kyero format with XML content in the request body",
         "operationId" : "uploadKyeroProperties_2",
+        "parameters" : [ {
+          "name" : "feedSourceId",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "newFeedSourceName",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "reconcileApproved",
+          "in" : "query",
+          "schema" : {
+            "type" : "boolean"
+          }
+        } ],
         "requestBody" : {
           "description" : "Properties XML content in Kyero format",
           "content" : {
@@ -2375,6 +2530,24 @@
           "schema" : {
             "type" : "string",
             "enum" : [ "kyero", "wasico", "xml2u", "hallocasa" ]
+          }
+        }, {
+          "name" : "feedSourceId",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "newFeedSourceName",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "reconcileApproved",
+          "in" : "query",
+          "schema" : {
+            "type" : "boolean"
           }
         } ],
         "requestBody" : {
@@ -4927,6 +5100,86 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/properties/{propertyId}/co-brokers" : {
+      "get" : {
+        "tags" : [ "properties" ],
+        "summary" : "List co-brokers for a property",
+        "operationId" : "getPropertyCoBrokers_1",
+        "parameters" : [ {
+          "name" : "propertyId",
+          "in" : "path",
+          "description" : "Property ID",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "Property not found"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "200" : {
+            "description" : "Co-broker profiles",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "properties" ],
+        "summary" : "Add a co-broker to a property (owner only)",
+        "operationId" : "addPropertyCoBroker_1",
+        "parameters" : [ {
+          "name" : "propertyId",
+          "in" : "path",
+          "description" : "Property ID",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AddPropertyCoBrokerRequest"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "401" : {
+            "description" : "If user is unauthorized"
+          },
+          "403" : {
+            "description" : "If user is not the property owner"
+          },
+          "404" : {
+            "description" : "Property or broker user not found"
+          },
+          "400" : {
+            "description" : "Invalid request"
+          },
+          "500" : {
+            "description" : "If server internal error"
+          },
+          "201" : {
+            "description" : "Co-broker added"
           }
         }
       }
@@ -11538,6 +11791,47 @@
           },
           "errorDetails" : {
             "type" : "string"
+          },
+          "feedSourceId" : {
+            "type" : "string"
+          },
+          "reconcileApproved" : {
+            "type" : "boolean"
+          },
+          "deletedCount" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "deletedDetails" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CreateFeedSourceRequest" : {
+        "type" : "object",
+        "properties" : {
+          "format" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "url" : {
+            "type" : "string"
+          }
+        }
+      },
+      "BulkUploadReconcilePreviewUrlRequest" : {
+        "type" : "object",
+        "properties" : {
+          "url" : {
+            "type" : "string"
+          },
+          "feedSourceId" : {
+            "type" : "string"
+          },
+          "newFeedSourceName" : {
+            "type" : "string"
           }
         }
       },
@@ -12135,6 +12429,11 @@
           "isPasswordProtected" : {
             "type" : "boolean",
             "description" : "Whether a gate password is active",
+            "example" : false
+          },
+          "globalCoMarketingReady" : {
+            "type" : "boolean",
+            "description" : "Whether listing is ready for global co-marketing",
             "example" : false
           }
         },
@@ -12954,6 +13253,19 @@
             "type" : "boolean"
           }
         }
+      },
+      "AddPropertyCoBrokerRequest" : {
+        "required" : [ "brokerUserId" ],
+        "type" : "object",
+        "properties" : {
+          "brokerUserId" : {
+            "type" : "integer",
+            "description" : "User id of the broker to add",
+            "format" : "int64",
+            "example" : 12345
+          }
+        },
+        "description" : "Request to add a co-broker to a property listing"
       },
       "BackfillPropertyImageOrientationRequest" : {
         "type" : "object",
@@ -15011,12 +15323,6 @@
       }
     },
     "securitySchemes" : {
-      "oAuthClientId" : {
-        "type" : "apiKey",
-        "description" : "OAuth client identifier (default: hallocasa_frontend)",
-        "name" : "O-Auth-Client-Id",
-        "in" : "header"
-      },
       "oAuthCode" : {
         "type" : "apiKey",
         "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
@@ -15033,6 +15339,12 @@
         "type" : "apiKey",
         "description" : "Integration API key (prefix hc_)",
         "name" : "X-API-Key",
+        "in" : "header"
+      },
+      "oAuthClientId" : {
+        "type" : "apiKey",
+        "description" : "OAuth client identifier (default: hallocasa_frontend)",
+        "name" : "O-Auth-Client-Id",
         "in" : "header"
       }
     }

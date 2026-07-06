@@ -7992,6 +7992,42 @@ exports.PhonePrefixesApi = PhonePrefixesApi;
 const PropertiesApiAxiosParamCreator = function (configuration) {
     return {
         /**
+         *
+         * @summary Add a co-broker to a property (owner only)
+         * @param {string} propertyId Property ID
+         * @param {AddPropertyCoBrokerRequest} [addPropertyCoBrokerRequest]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addPropertyCoBroker1: async (propertyId, addPropertyCoBrokerRequest, options = {}) => {
+            // verify required parameter 'propertyId' is not null or undefined
+            (0, common_1.assertParamExists)('addPropertyCoBroker1', 'propertyId', propertyId);
+            const localVarPath = `/properties/{propertyId}/co-brokers`
+                .replace(`{${"propertyId"}}`, encodeURIComponent(String(propertyId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(addPropertyCoBrokerRequest, localVarRequestOptions, configuration);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Re-download fullsize from S3, rotate, overwrite all sizes for each image filename on the property.
          * @summary Backfill property image orientation
          * @param {BackfillPropertyImageOrientationRequest} [backfillPropertyImageOrientationRequest]
@@ -8332,6 +8368,39 @@ const PropertiesApiAxiosParamCreator = function (configuration) {
             };
         },
         /**
+         *
+         * @summary List co-brokers for a property
+         * @param {string} propertyId Property ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPropertyCoBrokers1: async (propertyId, options = {}) => {
+            // verify required parameter 'propertyId' is not null or undefined
+            (0, common_1.assertParamExists)('getPropertyCoBrokers1', 'propertyId', propertyId);
+            const localVarPath = `/properties/{propertyId}/co-brokers`
+                .replace(`{${"propertyId"}}`, encodeURIComponent(String(propertyId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns recently created properties excluding password-protected and draft properties
          * @summary Get recently created properties within specified minutes (default 60)
          * @param {string} [email] Email to filter properties by user
@@ -8581,6 +8650,20 @@ const PropertiesApiFp = function (configuration) {
     const localVarAxiosParamCreator = (0, exports.PropertiesApiAxiosParamCreator)(configuration);
     return {
         /**
+         *
+         * @summary Add a co-broker to a property (owner only)
+         * @param {string} propertyId Property ID
+         * @param {AddPropertyCoBrokerRequest} [addPropertyCoBrokerRequest]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async addPropertyCoBroker1(propertyId, addPropertyCoBrokerRequest, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.addPropertyCoBroker1(propertyId, addPropertyCoBrokerRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['PropertiesApi.addPropertyCoBroker1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Re-download fullsize from S3, rotate, overwrite all sizes for each image filename on the property.
          * @summary Backfill property image orientation
          * @param {BackfillPropertyImageOrientationRequest} [backfillPropertyImageOrientationRequest]
@@ -8714,6 +8797,19 @@ const PropertiesApiFp = function (configuration) {
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         *
+         * @summary List co-brokers for a property
+         * @param {string} propertyId Property ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getPropertyCoBrokers1(propertyId, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPropertyCoBrokers1(propertyId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['PropertiesApi.getPropertyCoBrokers1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Returns recently created properties excluding password-protected and draft properties
          * @summary Get recently created properties within specified minutes (default 60)
          * @param {string} [email] Email to filter properties by user
@@ -8815,6 +8911,16 @@ const PropertiesApiFactory = function (configuration, basePath, axios) {
     const localVarFp = (0, exports.PropertiesApiFp)(configuration);
     return {
         /**
+         *
+         * @summary Add a co-broker to a property (owner only)
+         * @param {PropertiesApiAddPropertyCoBroker1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addPropertyCoBroker1(requestParameters, options) {
+            return localVarFp.addPropertyCoBroker1(requestParameters.propertyId, requestParameters.addPropertyCoBrokerRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Re-download fullsize from S3, rotate, overwrite all sizes for each image filename on the property.
          * @summary Backfill property image orientation
          * @param {PropertiesApiBackfillPropertyImageOrientation1Request} requestParameters Request parameters.
@@ -8914,6 +9020,16 @@ const PropertiesApiFactory = function (configuration, basePath, axios) {
             return localVarFp.getDraftsProperties1(options).then((request) => request(axios, basePath));
         },
         /**
+         *
+         * @summary List co-brokers for a property
+         * @param {PropertiesApiGetPropertyCoBrokers1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPropertyCoBrokers1(requestParameters, options) {
+            return localVarFp.getPropertyCoBrokers1(requestParameters.propertyId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns recently created properties excluding password-protected and draft properties
          * @summary Get recently created properties within specified minutes (default 60)
          * @param {PropertiesApiGetRecentProperties1Request} requestParameters Request parameters.
@@ -8989,6 +9105,17 @@ exports.PropertiesApiFactory = PropertiesApiFactory;
  * @extends {BaseAPI}
  */
 class PropertiesApi extends base_1.BaseAPI {
+    /**
+     *
+     * @summary Add a co-broker to a property (owner only)
+     * @param {PropertiesApiAddPropertyCoBroker1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertiesApi
+     */
+    addPropertyCoBroker1(requestParameters, options) {
+        return (0, exports.PropertiesApiFp)(this.configuration).addPropertyCoBroker1(requestParameters.propertyId, requestParameters.addPropertyCoBrokerRequest, options).then((request) => request(this.axios, this.basePath));
+    }
     /**
      * Re-download fullsize from S3, rotate, overwrite all sizes for each image filename on the property.
      * @summary Backfill property image orientation
@@ -9097,6 +9224,17 @@ class PropertiesApi extends base_1.BaseAPI {
      */
     getDraftsProperties1(options) {
         return (0, exports.PropertiesApiFp)(this.configuration).getDraftsProperties1(options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary List co-brokers for a property
+     * @param {PropertiesApiGetPropertyCoBrokers1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertiesApi
+     */
+    getPropertyCoBrokers1(requestParameters, options) {
+        return (0, exports.PropertiesApiFp)(this.configuration).getPropertyCoBrokers1(requestParameters.propertyId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Returns recently created properties excluding password-protected and draft properties
@@ -9459,6 +9597,71 @@ const PropertyBulkUploadsApiAxiosParamCreator = function (configuration) {
             };
         },
         /**
+         *
+         * @summary Create a feed source
+         * @param {CreateFeedSourceRequest} [createFeedSourceRequest]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createFeedSource1: async (createFeedSourceRequest, options = {}) => {
+            const localVarPath = `/property-bulk-uploads/feed-sources`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(createFeedSourceRequest, localVarRequestOptions, configuration);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Delete feed source (does not delete properties)
+         * @param {string} id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteFeedSource1: async (id, options = {}) => {
+            // verify required parameter 'id' is not null or undefined
+            (0, common_1.assertParamExists)('deleteFeedSource1', 'id', id);
+            const localVarPath = `/property-bulk-uploads/feed-sources/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Get the list of supported file formats for bulk upload
          * @summary Get available formats
          * @param {*} [options] Override http request option.
@@ -9579,13 +9782,125 @@ const PropertyBulkUploadsApiAxiosParamCreator = function (configuration) {
             };
         },
         /**
+         *
+         * @summary List feed sources for current user
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listFeedSources1: async (options = {}) => {
+            const localVarPath = `/property-bulk-uploads/feed-sources`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Preview listings that would be removed on import
+         * @param {string} format
+         * @param {string} [feedSourceId]
+         * @param {string} [newFeedSourceName]
+         * @param {string} [body]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        reconcilePreviewInBody1: async (format, feedSourceId, newFeedSourceName, body, options = {}) => {
+            // verify required parameter 'format' is not null or undefined
+            (0, common_1.assertParamExists)('reconcilePreviewInBody1', 'format', format);
+            const localVarPath = `/property-bulk-uploads/{format}/reconcile-preview/in-body`
+                .replace(`{${"format"}}`, encodeURIComponent(String(format)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            if (feedSourceId !== undefined) {
+                localVarQueryParameter['feedSourceId'] = feedSourceId;
+            }
+            if (newFeedSourceName !== undefined) {
+                localVarQueryParameter['newFeedSourceName'] = newFeedSourceName;
+            }
+            localVarHeaderParameter['Content-Type'] = 'application/xml';
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(body, localVarRequestOptions, configuration);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Preview listings that would be removed on URL import
+         * @param {string} format
+         * @param {BulkUploadReconcilePreviewUrlRequest} [bulkUploadReconcilePreviewUrlRequest]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        reconcilePreviewInUrl1: async (format, bulkUploadReconcilePreviewUrlRequest, options = {}) => {
+            // verify required parameter 'format' is not null or undefined
+            (0, common_1.assertParamExists)('reconcilePreviewInUrl1', 'format', format);
+            const localVarPath = `/property-bulk-uploads/{format}/reconcile-preview/in-url`
+                .replace(`{${"format"}}`, encodeURIComponent(String(format)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(bulkUploadReconcilePreviewUrlRequest, localVarRequestOptions, configuration);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Upload properties using Kyero format with XML content in the request body
          * @summary Upload Kyero properties with XML in request body
+         * @param {string} [feedSourceId]
+         * @param {string} [newFeedSourceName]
+         * @param {boolean} [reconcileApproved]
          * @param {string} [body] Properties XML content in Kyero format
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadKyeroProperties2: async (body, options = {}) => {
+        uploadKyeroProperties2: async (feedSourceId, newFeedSourceName, reconcileApproved, body, options = {}) => {
             const localVarPath = `/property-bulk-uploads/in-body`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
@@ -9600,6 +9915,15 @@ const PropertyBulkUploadsApiAxiosParamCreator = function (configuration) {
             await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
             // authentication oAuthClientId required
             await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            if (feedSourceId !== undefined) {
+                localVarQueryParameter['feedSourceId'] = feedSourceId;
+            }
+            if (newFeedSourceName !== undefined) {
+                localVarQueryParameter['newFeedSourceName'] = newFeedSourceName;
+            }
+            if (reconcileApproved !== undefined) {
+                localVarQueryParameter['reconcileApproved'] = reconcileApproved;
+            }
             localVarHeaderParameter['Content-Type'] = 'application/xml';
             (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -9646,11 +9970,14 @@ const PropertyBulkUploadsApiAxiosParamCreator = function (configuration) {
          * Upload properties with XML content in the request body using the specified format
          * @summary Upload properties in specified format with XML in request body
          * @param {UploadProperties1FormatEnum} format Format identifier
+         * @param {string} [feedSourceId]
+         * @param {string} [newFeedSourceName]
+         * @param {boolean} [reconcileApproved]
          * @param {string} [body] Properties XML content
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadProperties1: async (format, body, options = {}) => {
+        uploadProperties1: async (format, feedSourceId, newFeedSourceName, reconcileApproved, body, options = {}) => {
             // verify required parameter 'format' is not null or undefined
             (0, common_1.assertParamExists)('uploadProperties1', 'format', format);
             const localVarPath = `/property-bulk-uploads/{format}/in-body`
@@ -9668,6 +9995,15 @@ const PropertyBulkUploadsApiAxiosParamCreator = function (configuration) {
             await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
             // authentication oAuthClientId required
             await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            if (feedSourceId !== undefined) {
+                localVarQueryParameter['feedSourceId'] = feedSourceId;
+            }
+            if (newFeedSourceName !== undefined) {
+                localVarQueryParameter['newFeedSourceName'] = newFeedSourceName;
+            }
+            if (reconcileApproved !== undefined) {
+                localVarQueryParameter['reconcileApproved'] = reconcileApproved;
+            }
             localVarHeaderParameter['Content-Type'] = 'application/xml';
             (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -9738,6 +10074,32 @@ const PropertyBulkUploadsApiFp = function (configuration) {
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         *
+         * @summary Create a feed source
+         * @param {CreateFeedSourceRequest} [createFeedSourceRequest]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createFeedSource1(createFeedSourceRequest, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createFeedSource1(createFeedSourceRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['PropertyBulkUploadsApi.createFeedSource1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         *
+         * @summary Delete feed source (does not delete properties)
+         * @param {string} id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteFeedSource1(id, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteFeedSource1(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['PropertyBulkUploadsApi.deleteFeedSource1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Get the list of supported file formats for bulk upload
          * @summary Get available formats
          * @param {*} [options] Override http request option.
@@ -9787,14 +10149,59 @@ const PropertyBulkUploadsApiFp = function (configuration) {
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         *
+         * @summary List feed sources for current user
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listFeedSources1(options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listFeedSources1(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['PropertyBulkUploadsApi.listFeedSources1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         *
+         * @summary Preview listings that would be removed on import
+         * @param {string} format
+         * @param {string} [feedSourceId]
+         * @param {string} [newFeedSourceName]
+         * @param {string} [body]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async reconcilePreviewInBody1(format, feedSourceId, newFeedSourceName, body, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.reconcilePreviewInBody1(format, feedSourceId, newFeedSourceName, body, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['PropertyBulkUploadsApi.reconcilePreviewInBody1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         *
+         * @summary Preview listings that would be removed on URL import
+         * @param {string} format
+         * @param {BulkUploadReconcilePreviewUrlRequest} [bulkUploadReconcilePreviewUrlRequest]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async reconcilePreviewInUrl1(format, bulkUploadReconcilePreviewUrlRequest, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.reconcilePreviewInUrl1(format, bulkUploadReconcilePreviewUrlRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['PropertyBulkUploadsApi.reconcilePreviewInUrl1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Upload properties using Kyero format with XML content in the request body
          * @summary Upload Kyero properties with XML in request body
+         * @param {string} [feedSourceId]
+         * @param {string} [newFeedSourceName]
+         * @param {boolean} [reconcileApproved]
          * @param {string} [body] Properties XML content in Kyero format
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadKyeroProperties2(body, options) {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadKyeroProperties2(body, options);
+        async uploadKyeroProperties2(feedSourceId, newFeedSourceName, reconcileApproved, body, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadKyeroProperties2(feedSourceId, newFeedSourceName, reconcileApproved, body, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = base_1.operationServerMap['PropertyBulkUploadsApi.uploadKyeroProperties2']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -9816,12 +10223,15 @@ const PropertyBulkUploadsApiFp = function (configuration) {
          * Upload properties with XML content in the request body using the specified format
          * @summary Upload properties in specified format with XML in request body
          * @param {UploadProperties1FormatEnum} format Format identifier
+         * @param {string} [feedSourceId]
+         * @param {string} [newFeedSourceName]
+         * @param {boolean} [reconcileApproved]
          * @param {string} [body] Properties XML content
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadProperties1(format, body, options) {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadProperties1(format, body, options);
+        async uploadProperties1(format, feedSourceId, newFeedSourceName, reconcileApproved, body, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadProperties1(format, feedSourceId, newFeedSourceName, reconcileApproved, body, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = base_1.operationServerMap['PropertyBulkUploadsApi.uploadProperties1']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -9861,6 +10271,26 @@ const PropertyBulkUploadsApiFactory = function (configuration, basePath, axios) 
             return localVarFp.cancelJob1(requestParameters.jobId, options).then((request) => request(axios, basePath));
         },
         /**
+         *
+         * @summary Create a feed source
+         * @param {PropertyBulkUploadsApiCreateFeedSource1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createFeedSource1(requestParameters = {}, options) {
+            return localVarFp.createFeedSource1(requestParameters.createFeedSourceRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         *
+         * @summary Delete feed source (does not delete properties)
+         * @param {PropertyBulkUploadsApiDeleteFeedSource1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteFeedSource1(requestParameters, options) {
+            return localVarFp.deleteFeedSource1(requestParameters.id, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Get the list of supported file formats for bulk upload
          * @summary Get available formats
          * @param {*} [options] Override http request option.
@@ -9898,6 +10328,35 @@ const PropertyBulkUploadsApiFactory = function (configuration, basePath, axios) 
             return localVarFp.getLatestJobStatus1(options).then((request) => request(axios, basePath));
         },
         /**
+         *
+         * @summary List feed sources for current user
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listFeedSources1(options) {
+            return localVarFp.listFeedSources1(options).then((request) => request(axios, basePath));
+        },
+        /**
+         *
+         * @summary Preview listings that would be removed on import
+         * @param {PropertyBulkUploadsApiReconcilePreviewInBody1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        reconcilePreviewInBody1(requestParameters, options) {
+            return localVarFp.reconcilePreviewInBody1(requestParameters.format, requestParameters.feedSourceId, requestParameters.newFeedSourceName, requestParameters.body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         *
+         * @summary Preview listings that would be removed on URL import
+         * @param {PropertyBulkUploadsApiReconcilePreviewInUrl1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        reconcilePreviewInUrl1(requestParameters, options) {
+            return localVarFp.reconcilePreviewInUrl1(requestParameters.format, requestParameters.bulkUploadReconcilePreviewUrlRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Upload properties using Kyero format with XML content in the request body
          * @summary Upload Kyero properties with XML in request body
          * @param {PropertyBulkUploadsApiUploadKyeroProperties2Request} requestParameters Request parameters.
@@ -9905,7 +10364,7 @@ const PropertyBulkUploadsApiFactory = function (configuration, basePath, axios) 
          * @throws {RequiredError}
          */
         uploadKyeroProperties2(requestParameters = {}, options) {
-            return localVarFp.uploadKyeroProperties2(requestParameters.body, options).then((request) => request(axios, basePath));
+            return localVarFp.uploadKyeroProperties2(requestParameters.feedSourceId, requestParameters.newFeedSourceName, requestParameters.reconcileApproved, requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * Upload properties in Kyero format by providing a URL to an XML file
@@ -9925,7 +10384,7 @@ const PropertyBulkUploadsApiFactory = function (configuration, basePath, axios) 
          * @throws {RequiredError}
          */
         uploadProperties1(requestParameters, options) {
-            return localVarFp.uploadProperties1(requestParameters.format, requestParameters.body, options).then((request) => request(axios, basePath));
+            return localVarFp.uploadProperties1(requestParameters.format, requestParameters.feedSourceId, requestParameters.newFeedSourceName, requestParameters.reconcileApproved, requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * Upload properties in the specified format by providing a URL to an XML file
@@ -9957,6 +10416,28 @@ class PropertyBulkUploadsApi extends base_1.BaseAPI {
      */
     cancelJob1(requestParameters, options) {
         return (0, exports.PropertyBulkUploadsApiFp)(this.configuration).cancelJob1(requestParameters.jobId, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary Create a feed source
+     * @param {PropertyBulkUploadsApiCreateFeedSource1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertyBulkUploadsApi
+     */
+    createFeedSource1(requestParameters = {}, options) {
+        return (0, exports.PropertyBulkUploadsApiFp)(this.configuration).createFeedSource1(requestParameters.createFeedSourceRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary Delete feed source (does not delete properties)
+     * @param {PropertyBulkUploadsApiDeleteFeedSource1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertyBulkUploadsApi
+     */
+    deleteFeedSource1(requestParameters, options) {
+        return (0, exports.PropertyBulkUploadsApiFp)(this.configuration).deleteFeedSource1(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get the list of supported file formats for bulk upload
@@ -10000,6 +10481,38 @@ class PropertyBulkUploadsApi extends base_1.BaseAPI {
         return (0, exports.PropertyBulkUploadsApiFp)(this.configuration).getLatestJobStatus1(options).then((request) => request(this.axios, this.basePath));
     }
     /**
+     *
+     * @summary List feed sources for current user
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertyBulkUploadsApi
+     */
+    listFeedSources1(options) {
+        return (0, exports.PropertyBulkUploadsApiFp)(this.configuration).listFeedSources1(options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary Preview listings that would be removed on import
+     * @param {PropertyBulkUploadsApiReconcilePreviewInBody1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertyBulkUploadsApi
+     */
+    reconcilePreviewInBody1(requestParameters, options) {
+        return (0, exports.PropertyBulkUploadsApiFp)(this.configuration).reconcilePreviewInBody1(requestParameters.format, requestParameters.feedSourceId, requestParameters.newFeedSourceName, requestParameters.body, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary Preview listings that would be removed on URL import
+     * @param {PropertyBulkUploadsApiReconcilePreviewInUrl1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertyBulkUploadsApi
+     */
+    reconcilePreviewInUrl1(requestParameters, options) {
+        return (0, exports.PropertyBulkUploadsApiFp)(this.configuration).reconcilePreviewInUrl1(requestParameters.format, requestParameters.bulkUploadReconcilePreviewUrlRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
      * Upload properties using Kyero format with XML content in the request body
      * @summary Upload Kyero properties with XML in request body
      * @param {PropertyBulkUploadsApiUploadKyeroProperties2Request} requestParameters Request parameters.
@@ -10008,7 +10521,7 @@ class PropertyBulkUploadsApi extends base_1.BaseAPI {
      * @memberof PropertyBulkUploadsApi
      */
     uploadKyeroProperties2(requestParameters = {}, options) {
-        return (0, exports.PropertyBulkUploadsApiFp)(this.configuration).uploadKyeroProperties2(requestParameters.body, options).then((request) => request(this.axios, this.basePath));
+        return (0, exports.PropertyBulkUploadsApiFp)(this.configuration).uploadKyeroProperties2(requestParameters.feedSourceId, requestParameters.newFeedSourceName, requestParameters.reconcileApproved, requestParameters.body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Upload properties in Kyero format by providing a URL to an XML file
@@ -10030,7 +10543,7 @@ class PropertyBulkUploadsApi extends base_1.BaseAPI {
      * @memberof PropertyBulkUploadsApi
      */
     uploadProperties1(requestParameters, options) {
-        return (0, exports.PropertyBulkUploadsApiFp)(this.configuration).uploadProperties1(requestParameters.format, requestParameters.body, options).then((request) => request(this.axios, this.basePath));
+        return (0, exports.PropertyBulkUploadsApiFp)(this.configuration).uploadProperties1(requestParameters.format, requestParameters.feedSourceId, requestParameters.newFeedSourceName, requestParameters.reconcileApproved, requestParameters.body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Upload properties in the specified format by providing a URL to an XML file
