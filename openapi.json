@@ -15323,16 +15323,10 @@
       }
     },
     "securitySchemes" : {
-      "oAuthCode" : {
+      "oAuthClientId" : {
         "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
-        "in" : "header"
-      },
-      "oAuthToken" : {
-        "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
+        "description" : "OAuth client identifier (default: hallocasa_frontend)",
+        "name" : "O-Auth-Client-Id",
         "in" : "header"
       },
       "xApiKey" : {
@@ -15341,10 +15335,16 @@
         "name" : "X-API-Key",
         "in" : "header"
       },
-      "oAuthClientId" : {
+      "oAuthToken" : {
         "type" : "apiKey",
-        "description" : "OAuth client identifier (default: hallocasa_frontend)",
-        "name" : "O-Auth-Client-Id",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
+        "in" : "header"
+      },
+      "oAuthCode" : {
+        "type" : "apiKey",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
         "in" : "header"
       }
     }
