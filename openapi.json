@@ -9157,6 +9157,22 @@
         }
       }
     },
+    "/users/me/upgrade-promo-start" : {
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Start free header upgrade promo window",
+        "description" : "Idempotent. Sets upgrade_promo_started_at on first explicit login for FREE non-trialing users.",
+        "operationId" : "startUpgradePromo_1",
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
     "/users/{userId}/courses" : {
       "get" : {
         "tags" : [ "courses" ],
@@ -11205,6 +11221,11 @@
             "type" : "boolean",
             "description" : "True while user is on a free trial subscription",
             "example" : false
+          },
+          "upgradePromoStartedAt" : {
+            "type" : "string",
+            "description" : "When the free header upgrade promo window started (login activation)",
+            "format" : "date-time"
           },
           "hidePublicProfile" : {
             "type" : "boolean",
@@ -14389,6 +14410,11 @@
             "description" : "True while user is on a free trial subscription",
             "example" : false
           },
+          "upgradePromoStartedAt" : {
+            "type" : "string",
+            "description" : "When the free header upgrade promo window started (login activation)",
+            "format" : "date-time"
+          },
           "hidePublicProfile" : {
             "type" : "boolean",
             "description" : "Hide profile from directory search",
@@ -15323,16 +15349,10 @@
       }
     },
     "securitySchemes" : {
-      "oAuthClientId" : {
+      "oAuthCode" : {
         "type" : "apiKey",
-        "description" : "OAuth client identifier (default: hallocasa_frontend)",
-        "name" : "O-Auth-Client-Id",
-        "in" : "header"
-      },
-      "xApiKey" : {
-        "type" : "apiKey",
-        "description" : "Integration API key (prefix hc_)",
-        "name" : "X-API-Key",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
         "in" : "header"
       },
       "oAuthToken" : {
@@ -15341,10 +15361,16 @@
         "name" : "O-Auth-Token",
         "in" : "header"
       },
-      "oAuthCode" : {
+      "xApiKey" : {
         "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
+        "description" : "Integration API key (prefix hc_)",
+        "name" : "X-API-Key",
+        "in" : "header"
+      },
+      "oAuthClientId" : {
+        "type" : "apiKey",
+        "description" : "OAuth client identifier (default: hallocasa_frontend)",
+        "name" : "O-Auth-Client-Id",
         "in" : "header"
       }
     }

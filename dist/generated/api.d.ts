@@ -4954,6 +4954,12 @@ export interface SkilledUser {
      */
     'subscriptionTrialing'?: boolean;
     /**
+     * When the free header upgrade promo window started (login activation)
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'upgradePromoStartedAt'?: string;
+    /**
      * Hide profile from directory search
      * @type {boolean}
      * @memberof SkilledUser
@@ -5824,6 +5830,12 @@ export interface User {
      * @memberof User
      */
     'subscriptionTrialing'?: boolean;
+    /**
+     * When the free header upgrade promo window started (login activation)
+     * @type {string}
+     * @memberof User
+     */
+    'upgradePromoStartedAt'?: string;
     /**
      * Hide profile from directory search
      * @type {boolean}
@@ -16096,6 +16108,13 @@ export declare const UsersApiAxiosParamCreator: (configuration?: Configuration) 
      * @throws {RequiredError}
      */
     startIdentityVerification1: (userId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     * Idempotent. Sets upgrade_promo_started_at on first explicit login for FREE non-trialing users.
+     * @summary Start free header upgrade promo window
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    startUpgradePromo1: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * UsersApi - functional programming interface
@@ -16374,6 +16393,13 @@ export declare const UsersApiFp: (configuration?: Configuration) => {
      * @throws {RequiredError}
      */
     startIdentityVerification1(userId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IdentityVerificationStartResponse>>;
+    /**
+     * Idempotent. Sets upgrade_promo_started_at on first explicit login for FREE non-trialing users.
+     * @summary Start free header upgrade promo window
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    startUpgradePromo1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
 };
 /**
  * UsersApi - factory interface
@@ -16629,6 +16655,13 @@ export declare const UsersApiFactory: (configuration?: Configuration, basePath?:
      * @throws {RequiredError}
      */
     startIdentityVerification1(requestParameters: UsersApiStartIdentityVerification1Request, options?: RawAxiosRequestConfig): AxiosPromise<IdentityVerificationStartResponse>;
+    /**
+     * Idempotent. Sets upgrade_promo_started_at on first explicit login for FREE non-trialing users.
+     * @summary Start free header upgrade promo window
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    startUpgradePromo1(options?: RawAxiosRequestConfig): AxiosPromise<void>;
 };
 /**
  * Request parameters for addUserSkills1 operation in UsersApi.
@@ -17407,6 +17440,14 @@ export declare class UsersApi extends BaseAPI {
      * @memberof UsersApi
      */
     startIdentityVerification1(requestParameters: UsersApiStartIdentityVerification1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<IdentityVerificationStartResponse, any, {}>>;
+    /**
+     * Idempotent. Sets upgrade_promo_started_at on first explicit login for FREE non-trialing users.
+     * @summary Start free header upgrade promo window
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    startUpgradePromo1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
 }
 /**
  * @export

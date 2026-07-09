@@ -5044,6 +5044,12 @@ export interface SkilledUser {
      */
     'subscriptionTrialing'?: boolean;
     /**
+     * When the free header upgrade promo window started (login activation)
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'upgradePromoStartedAt'?: string;
+    /**
      * Hide profile from directory search
      * @type {boolean}
      * @memberof SkilledUser
@@ -5920,6 +5926,12 @@ export interface User {
      * @memberof User
      */
     'subscriptionTrialing'?: boolean;
+    /**
+     * When the free header upgrade promo window started (login activation)
+     * @type {string}
+     * @memberof User
+     */
+    'upgradePromoStartedAt'?: string;
     /**
      * Hide profile from directory search
      * @type {boolean}
@@ -25471,6 +25483,42 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Idempotent. Sets upgrade_promo_started_at on first explicit login for FREE non-trialing users.
+         * @summary Start free header upgrade promo window
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        startUpgradePromo1: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/users/me/upgrade-promo-start`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthCode required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Code", configuration)
+
+            // authentication oAuthClientId required
+            await setApiKeyToObject(localVarHeaderParameter, "O-Auth-Client-Id", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -25913,6 +25961,18 @@ export const UsersApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['UsersApi.startIdentityVerification1']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * Idempotent. Sets upgrade_promo_started_at on first explicit login for FREE non-trialing users.
+         * @summary Start free header upgrade promo window
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async startUpgradePromo1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.startUpgradePromo1(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['UsersApi.startUpgradePromo1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -26235,6 +26295,15 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          */
         startIdentityVerification1(requestParameters: UsersApiStartIdentityVerification1Request, options?: RawAxiosRequestConfig): AxiosPromise<IdentityVerificationStartResponse> {
             return localVarFp.startIdentityVerification1(requestParameters.userId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Idempotent. Sets upgrade_promo_started_at on first explicit login for FREE non-trialing users.
+         * @summary Start free header upgrade promo window
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        startUpgradePromo1(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.startUpgradePromo1(options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -27160,6 +27229,17 @@ export class UsersApi extends BaseAPI {
      */
     public startIdentityVerification1(requestParameters: UsersApiStartIdentityVerification1Request, options?: RawAxiosRequestConfig) {
         return UsersApiFp(this.configuration).startIdentityVerification1(requestParameters.userId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Idempotent. Sets upgrade_promo_started_at on first explicit login for FREE non-trialing users.
+     * @summary Start free header upgrade promo window
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    public startUpgradePromo1(options?: RawAxiosRequestConfig) {
+        return UsersApiFp(this.configuration).startUpgradePromo1(options).then((request) => request(this.axios, this.basePath));
     }
 }
 
