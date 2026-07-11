@@ -2649,6 +2649,100 @@
         }
       }
     },
+    "/properties/{propertyId}/co-brokerage-requests" : {
+      "post" : {
+        "tags" : [ "co-brokerage" ],
+        "summary" : "Request co-brokerage on a co-marketing-ready listing",
+        "operationId" : "createRequest_1",
+        "parameters" : [ {
+          "name" : "propertyId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json;charset=UTF-8" : { }
+            }
+          }
+        }
+      }
+    },
+    "/users/me/co-brokerage-listings" : {
+      "get" : {
+        "tags" : [ "co-brokerage" ],
+        "summary" : "List co-brokerage listings for current user",
+        "operationId" : "listMyCoBrokerageListings_1",
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json;charset=UTF-8" : { }
+            }
+          }
+        }
+      }
+    },
+    "/users/me/co-brokerage-requests" : {
+      "get" : {
+        "tags" : [ "co-brokerage" ],
+        "summary" : "List incoming or outgoing co-brokerage requests",
+        "operationId" : "listMyRequests_1",
+        "parameters" : [ {
+          "name" : "direction",
+          "in" : "query",
+          "schema" : {
+            "type" : "string",
+            "default" : "incoming"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json;charset=UTF-8" : { }
+            }
+          }
+        }
+      }
+    },
+    "/co-brokerage-requests/{requestId}" : {
+      "patch" : {
+        "tags" : [ "co-brokerage" ],
+        "summary" : "Approve or decline a co-brokerage request",
+        "operationId" : "resolveRequest_1",
+        "parameters" : [ {
+          "name" : "requestId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json;charset=UTF-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ResolveCoBrokerageRequestBody"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json;charset=UTF-8" : { }
+            }
+          }
+        }
+      }
+    },
     "/facebook-properties" : {
       "get" : {
         "tags" : [ "facebook-properties" ],
@@ -5285,6 +5379,70 @@
         }
       }
     },
+    "/properties/{propertyId}/seller-authorization/confirm" : {
+      "post" : {
+        "tags" : [ "properties" ],
+        "summary" : "Confirm seller authorization and enable global co-marketing",
+        "operationId" : "confirmSellerAuthorization_1",
+        "parameters" : [ {
+          "name" : "propertyId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ConfirmSellerAuthorizationRequest"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
+    "/properties/{propertyId}/seller-authorization/upload-url" : {
+      "post" : {
+        "tags" : [ "properties" ],
+        "summary" : "Create presigned URL for seller authorization document upload",
+        "operationId" : "createSellerAuthorizationUploadUrl_1",
+        "parameters" : [ {
+          "name" : "propertyId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/SellerAuthorizationUploadUrlRequest"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
     "/properties/{id}" : {
       "delete" : {
         "tags" : [ "properties" ],
@@ -6008,6 +6166,52 @@
                   }
                 }
               }
+            }
+          }
+        }
+      }
+    },
+    "/properties/{propertyId}/seller-authorization/download-url" : {
+      "get" : {
+        "tags" : [ "properties" ],
+        "summary" : "Get presigned download URL for seller authorization document (owner only)",
+        "operationId" : "getSellerAuthorizationDownloadUrl_1",
+        "parameters" : [ {
+          "name" : "propertyId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
+    "/properties/{propertyId}/seller-authorization" : {
+      "get" : {
+        "tags" : [ "properties" ],
+        "summary" : "Get seller authorization / co-marketing status for a property",
+        "operationId" : "getSellerAuthorizationStatus_1",
+        "parameters" : [ {
+          "name" : "propertyId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : { }
             }
           }
         }
@@ -9480,7 +9684,10 @@
             "description" : "If server internal error"
           },
           "400" : {
-            "description" : "Verification not completed, failed, or invalid session ID"
+            "description" : "Verification failed or invalid session ID"
+          },
+          "409" : {
+            "description" : "Verification still processing"
           },
           "200" : {
             "description" : "Ok. Verification successful",
@@ -11868,6 +12075,14 @@
           "url" : "https://example.com/properties.xml"
         }
       },
+      "ResolveCoBrokerageRequestBody" : {
+        "type" : "object",
+        "properties" : {
+          "action" : {
+            "type" : "string"
+          }
+        }
+      },
       "FBPropertyDto" : {
         "type" : "object",
         "properties" : {
@@ -12817,7 +13032,7 @@
           },
           "filterWorkerOption" : {
             "type" : "string",
-            "enum" : [ "PROPERTY_LOCATION_KEY", "COUNTRY_KEY", "PROPERTY_PROPOSAL_KEY", "RANGE", "DROPDOWN", "BOOLEAN", "CURRENCY_RANGE", "ROI", "FREE_TEXT", "ID", "PUBLICATION_STATE", "PUBLICATION_DATE", "GEOLOCATION_AREA", "GROUPS", "USER_ID", "XML_ID" ]
+            "enum" : [ "PROPERTY_LOCATION_KEY", "COUNTRY_KEY", "PROPERTY_PROPOSAL_KEY", "RANGE", "DROPDOWN", "BOOLEAN", "CURRENCY_RANGE", "ROI", "FREE_TEXT", "ID", "PUBLICATION_STATE", "PUBLICATION_DATE", "GEOLOCATION_AREA", "GROUPS", "USER_ID", "XML_ID", "GLOBAL_CO_MARKETING_READY" ]
           },
           "hcListerOption" : {
             "type" : "string",
@@ -12928,7 +13143,7 @@
           },
           "filterWorkerOption" : {
             "type" : "string",
-            "enum" : [ "PROPERTY_LOCATION_KEY", "COUNTRY_KEY", "PROPERTY_PROPOSAL_KEY", "RANGE", "DROPDOWN", "BOOLEAN", "CURRENCY_RANGE", "ROI", "FREE_TEXT", "ID", "PUBLICATION_STATE", "PUBLICATION_DATE", "GEOLOCATION_AREA", "GROUPS", "USER_ID", "XML_ID" ]
+            "enum" : [ "PROPERTY_LOCATION_KEY", "COUNTRY_KEY", "PROPERTY_PROPOSAL_KEY", "RANGE", "DROPDOWN", "BOOLEAN", "CURRENCY_RANGE", "ROI", "FREE_TEXT", "ID", "PUBLICATION_STATE", "PUBLICATION_DATE", "GEOLOCATION_AREA", "GROUPS", "USER_ID", "XML_ID", "GLOBAL_CO_MARKETING_READY" ]
           },
           "minValue" : {
             "type" : "number",
@@ -13315,6 +13530,40 @@
           }
         },
         "description" : "Request object for updating property publication state"
+      },
+      "ConfirmSellerAuthorizationRequest" : {
+        "required" : [ "contentType", "filename", "s3Key", "sellerConsentConfirmed" ],
+        "type" : "object",
+        "properties" : {
+          "s3Key" : {
+            "type" : "string"
+          },
+          "filename" : {
+            "type" : "string"
+          },
+          "contentType" : {
+            "type" : "string"
+          },
+          "sellerConsentConfirmed" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "SellerAuthorizationUploadUrlRequest" : {
+        "required" : [ "contentType", "filename" ],
+        "type" : "object",
+        "properties" : {
+          "filename" : {
+            "type" : "string",
+            "description" : "Original filename including extension",
+            "example" : "seller-consent.pdf"
+          },
+          "contentType" : {
+            "type" : "string",
+            "description" : "MIME type",
+            "example" : "application/pdf"
+          }
+        }
       },
       "WeeklyAlertRange" : {
         "type" : "object",
@@ -14956,6 +15205,11 @@
             "description" : "Filter users focused on commercial properties",
             "example" : true
           },
+          "filterAvailableForCoBrokerage" : {
+            "type" : "boolean",
+            "description" : "Filter users with at least one co-marketing-ready published listing",
+            "example" : true
+          },
           "filterFocusOnResidential" : {
             "type" : "boolean",
             "description" : "Filter users focused on residential properties",
@@ -15349,16 +15603,10 @@
       }
     },
     "securitySchemes" : {
-      "oAuthCode" : {
+      "oAuthClientId" : {
         "type" : "apiKey",
-        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
-        "name" : "O-Auth-Code",
-        "in" : "header"
-      },
-      "oAuthToken" : {
-        "type" : "apiKey",
-        "description" : "OAuth access token for authenticated requests",
-        "name" : "O-Auth-Token",
+        "description" : "OAuth client identifier (default: hallocasa_frontend)",
+        "name" : "O-Auth-Client-Id",
         "in" : "header"
       },
       "xApiKey" : {
@@ -15367,10 +15615,16 @@
         "name" : "X-API-Key",
         "in" : "header"
       },
-      "oAuthClientId" : {
+      "oAuthToken" : {
         "type" : "apiKey",
-        "description" : "OAuth client identifier (default: hallocasa_frontend)",
-        "name" : "O-Auth-Client-Id",
+        "description" : "OAuth access token for authenticated requests",
+        "name" : "O-Auth-Token",
+        "in" : "header"
+      },
+      "oAuthCode" : {
+        "type" : "apiKey",
+        "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
+        "name" : "O-Auth-Code",
         "in" : "header"
       }
     }

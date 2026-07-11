@@ -17,10 +17,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AlertsApiAxiosParamCreator = exports.UserSubscriptionDtoStatusEnum = exports.UserSubscriptionDtoRenewalTypeEnum = exports.UserPlatformInviteRequestLanguageEnum = exports.UserPlatformInviteRequestSourceEnum = exports.UserGroupGroupTypeEnum = exports.UserPublicProfileDesignEnum = exports.UserSubscriptionPlanNameEnum = exports.SubscriptionPriceDtoRenewalTypeEnum = exports.SkilledUserConnectionDegreeEnum = exports.SkilledUserPublicProfileDesignEnum = exports.SkilledUserSubscriptionPlanNameEnum = exports.PropertyPublicationStateRequestStatusEnum = exports.PropertyFieldHcListerOptionEnum = exports.PropertyFieldData3TypeEnum = exports.PropertyFieldData2TypeEnum = exports.PropertyFieldData1TypeEnum = exports.PropertyFieldTextTypeEnum = exports.PropertyPublicationStateEnum = exports.NotificationTypeEnum = exports.NetworkSuggestionEventRequestEventTypeEnum = exports.HcFilterTypeEntryRangeFieldPresentationEnum = exports.HcFilterTypeEntryFilterTypeNatureEnum = exports.HcFilterTypeRangeFieldPresentationEnum = exports.HcFilterTypeFilterTypeNatureEnum = exports.HcFilterEntryFilterWorkerOptionEnum = exports.HcFilterEntryChoiceEnum = exports.HcFilterConditionMaxOperandEnum = exports.HcFilterConditionMinOperandEnum = exports.HcFilterHcListerOptionEnum = exports.HcFilterFilterWorkerOptionEnum = exports.HcFilterChoiceEnum = exports.GroupMemberGroupMemberStatusEnum = exports.GroupChildGroupMemberStatusEnum = exports.GroupRequestStatusEnum = exports.GroupGroupTypeEnum = exports.GroupGroupStatusEnum = exports.FilterShowingStepSequenceAfterEnum = exports.FilterShowingStepSequenceBeforeEnum = exports.FavoriteResourceTypeEnum = exports.DropdownOptionGroupTranslationManagementEnum = exports.CourseWriteDtoDesignationEnum = exports.CourseWriteDtoFormatEnum = exports.CourseDesignationEnum = exports.CourseFormatEnum = exports.ConversationSummaryChatAllowanceTypeEnum = exports.CheckoutSessionDtoStatusEnum = exports.ChatAllowanceChatAllowanceTypeEnum = exports.AlertWithUserProfileUserAlertTypeEnum = exports.AlertUserAlertTypeEnum = void 0;
-exports.ExchangeRatesApiAxiosParamCreator = exports.EndorsementsApi = exports.EndorsementsApiFactory = exports.EndorsementsApiFp = exports.EndorsementsApiAxiosParamCreator = exports.CustomerSessionsApi = exports.CustomerSessionsApiFactory = exports.CustomerSessionsApiFp = exports.CustomerSessionsApiAxiosParamCreator = exports.CurrencyManagementApi = exports.CurrencyManagementApiFactory = exports.CurrencyManagementApiFp = exports.CurrencyManagementApiAxiosParamCreator = exports.List1DesignationEnum = exports.List1FormatEnum = exports.CoursesApi = exports.CoursesApiFactory = exports.CoursesApiFp = exports.CoursesApiAxiosParamCreator = exports.CountriesApi = exports.CountriesApiFactory = exports.CountriesApiFp = exports.CountriesApiAxiosParamCreator = exports.CheckoutSessionsApi = exports.CheckoutSessionsApiFactory = exports.CheckoutSessionsApiFp = exports.CheckoutSessionsApiAxiosParamCreator = exports.ChatTicketsApi = exports.ChatTicketsApiFactory = exports.ChatTicketsApiFp = exports.ChatTicketsApiAxiosParamCreator = exports.BrokeragesApi = exports.BrokeragesApiFactory = exports.BrokeragesApiFp = exports.BrokeragesApiAxiosParamCreator = exports.AttachmentsApi = exports.AttachmentsApiFactory = exports.AttachmentsApiFp = exports.AttachmentsApiAxiosParamCreator = exports.ApiKeysApi = exports.ApiKeysApiFactory = exports.ApiKeysApiFp = exports.ApiKeysApiAxiosParamCreator = exports.AllowancesApi = exports.AllowancesApiFactory = exports.AllowancesApiFp = exports.AllowancesApiAxiosParamCreator = exports.AlertsApi = exports.AlertsApiFactory = exports.AlertsApiFp = void 0;
-exports.PasswordRecoveryApi = exports.PasswordRecoveryApiFactory = exports.PasswordRecoveryApiFp = exports.PasswordRecoveryApiAxiosParamCreator = exports.GetByUserWithResult1TypeEnum = exports.MessagesApi = exports.MessagesApiFactory = exports.MessagesApiFp = exports.MessagesApiAxiosParamCreator = exports.LocationCacheApi = exports.LocationCacheApiFactory = exports.LocationCacheApiFp = exports.LocationCacheApiAxiosParamCreator = exports.LocalesApi = exports.LocalesApiFactory = exports.LocalesApiFp = exports.LocalesApiAxiosParamCreator = exports.LanguagesApi = exports.LanguagesApiFactory = exports.LanguagesApiFp = exports.LanguagesApiAxiosParamCreator = exports.HomePreviewApi = exports.HomePreviewApiFactory = exports.HomePreviewApiFp = exports.HomePreviewApiAxiosParamCreator = exports.UpdateGroupMembershipStatus1StatusEnum = exports.RequestGroupTypeChange1RequestStatusEnum = exports.GroupsApi = exports.GroupsApiFactory = exports.GroupsApiFp = exports.GroupsApiAxiosParamCreator = exports.GroupNotificationsApi = exports.GroupNotificationsApiFactory = exports.GroupNotificationsApiFp = exports.GroupNotificationsApiAxiosParamCreator = exports.GeoLocationApi = exports.GeoLocationApiFactory = exports.GeoLocationApiFp = exports.GeoLocationApiAxiosParamCreator = exports.FavoritesApi = exports.FavoritesApiFactory = exports.FavoritesApiFp = exports.FavoritesApiAxiosParamCreator = exports.FacebookPropertiesApi = exports.FacebookPropertiesApiFactory = exports.FacebookPropertiesApiFp = exports.FacebookPropertiesApiAxiosParamCreator = exports.ExchangeRatesApi = exports.ExchangeRatesApiFactory = exports.ExchangeRatesApiFp = void 0;
-exports.StripeIdentityWebhooksApi = exports.StripeIdentityWebhooksApiFactory = exports.StripeIdentityWebhooksApiFp = exports.StripeIdentityWebhooksApiAxiosParamCreator = exports.SkillsApi = exports.SkillsApiFactory = exports.SkillsApiFp = exports.SkillsApiAxiosParamCreator = exports.SecurityApi = exports.SecurityApiFactory = exports.SecurityApiFp = exports.SecurityApiAxiosParamCreator = exports.PropertyTypesApi = exports.PropertyTypesApiFactory = exports.PropertyTypesApiFp = exports.PropertyTypesApiAxiosParamCreator = exports.PropertyProposalsApi = exports.PropertyProposalsApiFactory = exports.PropertyProposalsApiFp = exports.PropertyProposalsApiAxiosParamCreator = exports.PropertyLocationsApi = exports.PropertyLocationsApiFactory = exports.PropertyLocationsApiFp = exports.PropertyLocationsApiAxiosParamCreator = exports.PropertyFiltersApi = exports.PropertyFiltersApiFactory = exports.PropertyFiltersApiFp = exports.PropertyFiltersApiAxiosParamCreator = exports.PropertyFieldsApi = exports.PropertyFieldsApiFactory = exports.PropertyFieldsApiFp = exports.PropertyFieldsApiAxiosParamCreator = exports.UploadPropertiesFromUrl1FormatEnum = exports.UploadProperties1FormatEnum = exports.PropertyBulkUploadsApi = exports.PropertyBulkUploadsApiFactory = exports.PropertyBulkUploadsApiFp = exports.PropertyBulkUploadsApiAxiosParamCreator = exports.PropertyBulkDownloadApi = exports.PropertyBulkDownloadApiFactory = exports.PropertyBulkDownloadApiFp = exports.PropertyBulkDownloadApiAxiosParamCreator = exports.PropertiesApi = exports.PropertiesApiFactory = exports.PropertiesApiFp = exports.PropertiesApiAxiosParamCreator = exports.PhonePrefixesApi = exports.PhonePrefixesApiFactory = exports.PhonePrefixesApiFp = exports.PhonePrefixesApiAxiosParamCreator = void 0;
-exports.GetSubscribedUsers1SubscriptionPlanNameEnum = exports.UsersApi = exports.UsersApiFactory = exports.UsersApiFp = exports.UsersApiAxiosParamCreator = exports.UserTypesApi = exports.UserTypesApiFactory = exports.UserTypesApiFp = exports.UserTypesApiAxiosParamCreator = exports.UserSummaryApi = exports.UserSummaryApiFactory = exports.UserSummaryApiFp = exports.UserSummaryApiAxiosParamCreator = exports.UserContractsApi = exports.UserContractsApiFactory = exports.UserContractsApiFp = exports.UserContractsApiAxiosParamCreator = exports.UserConnectionsApi = exports.UserConnectionsApiFactory = exports.UserConnectionsApiFp = exports.UserConnectionsApiAxiosParamCreator = exports.TextTranslationsApi = exports.TextTranslationsApiFactory = exports.TextTranslationsApiFp = exports.TextTranslationsApiAxiosParamCreator = exports.TestimonialApi = exports.TestimonialApiFactory = exports.TestimonialApiFp = exports.TestimonialApiAxiosParamCreator = exports.SubscriptionsApi = exports.SubscriptionsApiFactory = exports.SubscriptionsApiFp = exports.SubscriptionsApiAxiosParamCreator = exports.StripeWebhooksApi = exports.StripeWebhooksApiFactory = exports.StripeWebhooksApiFp = exports.StripeWebhooksApiAxiosParamCreator = void 0;
+exports.EndorsementsApiAxiosParamCreator = exports.CustomerSessionsApi = exports.CustomerSessionsApiFactory = exports.CustomerSessionsApiFp = exports.CustomerSessionsApiAxiosParamCreator = exports.CurrencyManagementApi = exports.CurrencyManagementApiFactory = exports.CurrencyManagementApiFp = exports.CurrencyManagementApiAxiosParamCreator = exports.List1DesignationEnum = exports.List1FormatEnum = exports.CoursesApi = exports.CoursesApiFactory = exports.CoursesApiFp = exports.CoursesApiAxiosParamCreator = exports.CountriesApi = exports.CountriesApiFactory = exports.CountriesApiFp = exports.CountriesApiAxiosParamCreator = exports.CoBrokerageApi = exports.CoBrokerageApiFactory = exports.CoBrokerageApiFp = exports.CoBrokerageApiAxiosParamCreator = exports.CheckoutSessionsApi = exports.CheckoutSessionsApiFactory = exports.CheckoutSessionsApiFp = exports.CheckoutSessionsApiAxiosParamCreator = exports.ChatTicketsApi = exports.ChatTicketsApiFactory = exports.ChatTicketsApiFp = exports.ChatTicketsApiAxiosParamCreator = exports.BrokeragesApi = exports.BrokeragesApiFactory = exports.BrokeragesApiFp = exports.BrokeragesApiAxiosParamCreator = exports.AttachmentsApi = exports.AttachmentsApiFactory = exports.AttachmentsApiFp = exports.AttachmentsApiAxiosParamCreator = exports.ApiKeysApi = exports.ApiKeysApiFactory = exports.ApiKeysApiFp = exports.ApiKeysApiAxiosParamCreator = exports.AllowancesApi = exports.AllowancesApiFactory = exports.AllowancesApiFp = exports.AllowancesApiAxiosParamCreator = exports.AlertsApi = exports.AlertsApiFactory = exports.AlertsApiFp = void 0;
+exports.GetByUserWithResult1TypeEnum = exports.MessagesApi = exports.MessagesApiFactory = exports.MessagesApiFp = exports.MessagesApiAxiosParamCreator = exports.LocationCacheApi = exports.LocationCacheApiFactory = exports.LocationCacheApiFp = exports.LocationCacheApiAxiosParamCreator = exports.LocalesApi = exports.LocalesApiFactory = exports.LocalesApiFp = exports.LocalesApiAxiosParamCreator = exports.LanguagesApi = exports.LanguagesApiFactory = exports.LanguagesApiFp = exports.LanguagesApiAxiosParamCreator = exports.HomePreviewApi = exports.HomePreviewApiFactory = exports.HomePreviewApiFp = exports.HomePreviewApiAxiosParamCreator = exports.UpdateGroupMembershipStatus1StatusEnum = exports.RequestGroupTypeChange1RequestStatusEnum = exports.GroupsApi = exports.GroupsApiFactory = exports.GroupsApiFp = exports.GroupsApiAxiosParamCreator = exports.GroupNotificationsApi = exports.GroupNotificationsApiFactory = exports.GroupNotificationsApiFp = exports.GroupNotificationsApiAxiosParamCreator = exports.GeoLocationApi = exports.GeoLocationApiFactory = exports.GeoLocationApiFp = exports.GeoLocationApiAxiosParamCreator = exports.FavoritesApi = exports.FavoritesApiFactory = exports.FavoritesApiFp = exports.FavoritesApiAxiosParamCreator = exports.FacebookPropertiesApi = exports.FacebookPropertiesApiFactory = exports.FacebookPropertiesApiFp = exports.FacebookPropertiesApiAxiosParamCreator = exports.ExchangeRatesApi = exports.ExchangeRatesApiFactory = exports.ExchangeRatesApiFp = exports.ExchangeRatesApiAxiosParamCreator = exports.EndorsementsApi = exports.EndorsementsApiFactory = exports.EndorsementsApiFp = void 0;
+exports.SkillsApi = exports.SkillsApiFactory = exports.SkillsApiFp = exports.SkillsApiAxiosParamCreator = exports.SecurityApi = exports.SecurityApiFactory = exports.SecurityApiFp = exports.SecurityApiAxiosParamCreator = exports.PropertyTypesApi = exports.PropertyTypesApiFactory = exports.PropertyTypesApiFp = exports.PropertyTypesApiAxiosParamCreator = exports.PropertyProposalsApi = exports.PropertyProposalsApiFactory = exports.PropertyProposalsApiFp = exports.PropertyProposalsApiAxiosParamCreator = exports.PropertyLocationsApi = exports.PropertyLocationsApiFactory = exports.PropertyLocationsApiFp = exports.PropertyLocationsApiAxiosParamCreator = exports.PropertyFiltersApi = exports.PropertyFiltersApiFactory = exports.PropertyFiltersApiFp = exports.PropertyFiltersApiAxiosParamCreator = exports.PropertyFieldsApi = exports.PropertyFieldsApiFactory = exports.PropertyFieldsApiFp = exports.PropertyFieldsApiAxiosParamCreator = exports.UploadPropertiesFromUrl1FormatEnum = exports.UploadProperties1FormatEnum = exports.PropertyBulkUploadsApi = exports.PropertyBulkUploadsApiFactory = exports.PropertyBulkUploadsApiFp = exports.PropertyBulkUploadsApiAxiosParamCreator = exports.PropertyBulkDownloadApi = exports.PropertyBulkDownloadApiFactory = exports.PropertyBulkDownloadApiFp = exports.PropertyBulkDownloadApiAxiosParamCreator = exports.PropertiesApi = exports.PropertiesApiFactory = exports.PropertiesApiFp = exports.PropertiesApiAxiosParamCreator = exports.PhonePrefixesApi = exports.PhonePrefixesApiFactory = exports.PhonePrefixesApiFp = exports.PhonePrefixesApiAxiosParamCreator = exports.PasswordRecoveryApi = exports.PasswordRecoveryApiFactory = exports.PasswordRecoveryApiFp = exports.PasswordRecoveryApiAxiosParamCreator = void 0;
+exports.GetSubscribedUsers1SubscriptionPlanNameEnum = exports.UsersApi = exports.UsersApiFactory = exports.UsersApiFp = exports.UsersApiAxiosParamCreator = exports.UserTypesApi = exports.UserTypesApiFactory = exports.UserTypesApiFp = exports.UserTypesApiAxiosParamCreator = exports.UserSummaryApi = exports.UserSummaryApiFactory = exports.UserSummaryApiFp = exports.UserSummaryApiAxiosParamCreator = exports.UserContractsApi = exports.UserContractsApiFactory = exports.UserContractsApiFp = exports.UserContractsApiAxiosParamCreator = exports.UserConnectionsApi = exports.UserConnectionsApiFactory = exports.UserConnectionsApiFp = exports.UserConnectionsApiAxiosParamCreator = exports.TextTranslationsApi = exports.TextTranslationsApiFactory = exports.TextTranslationsApiFp = exports.TextTranslationsApiAxiosParamCreator = exports.TestimonialApi = exports.TestimonialApiFactory = exports.TestimonialApiFp = exports.TestimonialApiAxiosParamCreator = exports.SubscriptionsApi = exports.SubscriptionsApiFactory = exports.SubscriptionsApiFp = exports.SubscriptionsApiAxiosParamCreator = exports.StripeWebhooksApi = exports.StripeWebhooksApiFactory = exports.StripeWebhooksApiFp = exports.StripeWebhooksApiAxiosParamCreator = exports.StripeIdentityWebhooksApi = exports.StripeIdentityWebhooksApiFactory = exports.StripeIdentityWebhooksApiFp = exports.StripeIdentityWebhooksApiAxiosParamCreator = void 0;
 const axios_1 = __importDefault(require("axios"));
 // Some imports not used depending on template conditions
 // @ts-ignore
@@ -169,7 +169,8 @@ exports.HcFilterFilterWorkerOptionEnum = {
     GeolocationArea: 'GEOLOCATION_AREA',
     Groups: 'GROUPS',
     UserId: 'USER_ID',
-    XmlId: 'XML_ID'
+    XmlId: 'XML_ID',
+    GlobalCoMarketingReady: 'GLOBAL_CO_MARKETING_READY'
 };
 exports.HcFilterHcListerOptionEnum = {
     PropertyType: 'PROPERTY_TYPE'
@@ -208,7 +209,8 @@ exports.HcFilterEntryFilterWorkerOptionEnum = {
     GeolocationArea: 'GEOLOCATION_AREA',
     Groups: 'GROUPS',
     UserId: 'USER_ID',
-    XmlId: 'XML_ID'
+    XmlId: 'XML_ID',
+    GlobalCoMarketingReady: 'GLOBAL_CO_MARKETING_READY'
 };
 exports.HcFilterTypeFilterTypeNatureEnum = {
     Dropdown: 'DROPDOWN',
@@ -1992,6 +1994,309 @@ class CheckoutSessionsApi extends base_1.BaseAPI {
     }
 }
 exports.CheckoutSessionsApi = CheckoutSessionsApi;
+/**
+ * CoBrokerageApi - axios parameter creator
+ * @export
+ */
+const CoBrokerageApiAxiosParamCreator = function (configuration) {
+    return {
+        /**
+         *
+         * @summary Request co-brokerage on a co-marketing-ready listing
+         * @param {string} propertyId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createRequest1: async (propertyId, options = {}) => {
+            // verify required parameter 'propertyId' is not null or undefined
+            (0, common_1.assertParamExists)('createRequest1', 'propertyId', propertyId);
+            const localVarPath = `/properties/{propertyId}/co-brokerage-requests`
+                .replace(`{${"propertyId"}}`, encodeURIComponent(String(propertyId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary List co-brokerage listings for current user
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listMyCoBrokerageListings1: async (options = {}) => {
+            const localVarPath = `/users/me/co-brokerage-listings`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary List incoming or outgoing co-brokerage requests
+         * @param {string} [direction]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listMyRequests1: async (direction, options = {}) => {
+            const localVarPath = `/users/me/co-brokerage-requests`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            if (direction !== undefined) {
+                localVarQueryParameter['direction'] = direction;
+            }
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Approve or decline a co-brokerage request
+         * @param {number} requestId
+         * @param {ResolveCoBrokerageRequestBody} [resolveCoBrokerageRequestBody]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        resolveRequest1: async (requestId, resolveCoBrokerageRequestBody, options = {}) => {
+            // verify required parameter 'requestId' is not null or undefined
+            (0, common_1.assertParamExists)('resolveRequest1', 'requestId', requestId);
+            const localVarPath = `/co-brokerage-requests/{requestId}`
+                .replace(`{${"requestId"}}`, encodeURIComponent(String(requestId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            localVarHeaderParameter['Content-Type'] = 'application/json;charset=UTF-8';
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(resolveCoBrokerageRequestBody, localVarRequestOptions, configuration);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    };
+};
+exports.CoBrokerageApiAxiosParamCreator = CoBrokerageApiAxiosParamCreator;
+/**
+ * CoBrokerageApi - functional programming interface
+ * @export
+ */
+const CoBrokerageApiFp = function (configuration) {
+    const localVarAxiosParamCreator = (0, exports.CoBrokerageApiAxiosParamCreator)(configuration);
+    return {
+        /**
+         *
+         * @summary Request co-brokerage on a co-marketing-ready listing
+         * @param {string} propertyId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createRequest1(propertyId, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createRequest1(propertyId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['CoBrokerageApi.createRequest1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         *
+         * @summary List co-brokerage listings for current user
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listMyCoBrokerageListings1(options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listMyCoBrokerageListings1(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['CoBrokerageApi.listMyCoBrokerageListings1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         *
+         * @summary List incoming or outgoing co-brokerage requests
+         * @param {string} [direction]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listMyRequests1(direction, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listMyRequests1(direction, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['CoBrokerageApi.listMyRequests1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         *
+         * @summary Approve or decline a co-brokerage request
+         * @param {number} requestId
+         * @param {ResolveCoBrokerageRequestBody} [resolveCoBrokerageRequestBody]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async resolveRequest1(requestId, resolveCoBrokerageRequestBody, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.resolveRequest1(requestId, resolveCoBrokerageRequestBody, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['CoBrokerageApi.resolveRequest1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    };
+};
+exports.CoBrokerageApiFp = CoBrokerageApiFp;
+/**
+ * CoBrokerageApi - factory interface
+ * @export
+ */
+const CoBrokerageApiFactory = function (configuration, basePath, axios) {
+    const localVarFp = (0, exports.CoBrokerageApiFp)(configuration);
+    return {
+        /**
+         *
+         * @summary Request co-brokerage on a co-marketing-ready listing
+         * @param {CoBrokerageApiCreateRequest1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createRequest1(requestParameters, options) {
+            return localVarFp.createRequest1(requestParameters.propertyId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         *
+         * @summary List co-brokerage listings for current user
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listMyCoBrokerageListings1(options) {
+            return localVarFp.listMyCoBrokerageListings1(options).then((request) => request(axios, basePath));
+        },
+        /**
+         *
+         * @summary List incoming or outgoing co-brokerage requests
+         * @param {CoBrokerageApiListMyRequests1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listMyRequests1(requestParameters = {}, options) {
+            return localVarFp.listMyRequests1(requestParameters.direction, options).then((request) => request(axios, basePath));
+        },
+        /**
+         *
+         * @summary Approve or decline a co-brokerage request
+         * @param {CoBrokerageApiResolveRequest1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        resolveRequest1(requestParameters, options) {
+            return localVarFp.resolveRequest1(requestParameters.requestId, requestParameters.resolveCoBrokerageRequestBody, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+exports.CoBrokerageApiFactory = CoBrokerageApiFactory;
+/**
+ * CoBrokerageApi - object-oriented interface
+ * @export
+ * @class CoBrokerageApi
+ * @extends {BaseAPI}
+ */
+class CoBrokerageApi extends base_1.BaseAPI {
+    /**
+     *
+     * @summary Request co-brokerage on a co-marketing-ready listing
+     * @param {CoBrokerageApiCreateRequest1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoBrokerageApi
+     */
+    createRequest1(requestParameters, options) {
+        return (0, exports.CoBrokerageApiFp)(this.configuration).createRequest1(requestParameters.propertyId, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary List co-brokerage listings for current user
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoBrokerageApi
+     */
+    listMyCoBrokerageListings1(options) {
+        return (0, exports.CoBrokerageApiFp)(this.configuration).listMyCoBrokerageListings1(options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary List incoming or outgoing co-brokerage requests
+     * @param {CoBrokerageApiListMyRequests1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoBrokerageApi
+     */
+    listMyRequests1(requestParameters = {}, options) {
+        return (0, exports.CoBrokerageApiFp)(this.configuration).listMyRequests1(requestParameters.direction, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary Approve or decline a co-brokerage request
+     * @param {CoBrokerageApiResolveRequest1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoBrokerageApi
+     */
+    resolveRequest1(requestParameters, options) {
+        return (0, exports.CoBrokerageApiFp)(this.configuration).resolveRequest1(requestParameters.requestId, requestParameters.resolveCoBrokerageRequestBody, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+exports.CoBrokerageApi = CoBrokerageApi;
 /**
  * CountriesApi - axios parameter creator
  * @export
@@ -8098,6 +8403,78 @@ const PropertiesApiAxiosParamCreator = function (configuration) {
             };
         },
         /**
+         *
+         * @summary Confirm seller authorization and enable global co-marketing
+         * @param {string} propertyId
+         * @param {ConfirmSellerAuthorizationRequest} [confirmSellerAuthorizationRequest]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        confirmSellerAuthorization1: async (propertyId, confirmSellerAuthorizationRequest, options = {}) => {
+            // verify required parameter 'propertyId' is not null or undefined
+            (0, common_1.assertParamExists)('confirmSellerAuthorization1', 'propertyId', propertyId);
+            const localVarPath = `/properties/{propertyId}/seller-authorization/confirm`
+                .replace(`{${"propertyId"}}`, encodeURIComponent(String(propertyId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(confirmSellerAuthorizationRequest, localVarRequestOptions, configuration);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Create presigned URL for seller authorization document upload
+         * @param {string} propertyId
+         * @param {SellerAuthorizationUploadUrlRequest} [sellerAuthorizationUploadUrlRequest]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createSellerAuthorizationUploadUrl1: async (propertyId, sellerAuthorizationUploadUrlRequest, options = {}) => {
+            // verify required parameter 'propertyId' is not null or undefined
+            (0, common_1.assertParamExists)('createSellerAuthorizationUploadUrl1', 'propertyId', propertyId);
+            const localVarPath = `/properties/{propertyId}/seller-authorization/upload-url`
+                .replace(`{${"propertyId"}}`, encodeURIComponent(String(propertyId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            localVarRequestOptions.data = (0, common_1.serializeDataIfNeeded)(sellerAuthorizationUploadUrlRequest, localVarRequestOptions, configuration);
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * This process is not reversible
          * @summary Delete the property with id supplied
          * @param {string} id Property ID
@@ -8467,6 +8844,72 @@ const PropertiesApiAxiosParamCreator = function (configuration) {
             };
         },
         /**
+         *
+         * @summary Get presigned download URL for seller authorization document (owner only)
+         * @param {string} propertyId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSellerAuthorizationDownloadUrl1: async (propertyId, options = {}) => {
+            // verify required parameter 'propertyId' is not null or undefined
+            (0, common_1.assertParamExists)('getSellerAuthorizationDownloadUrl1', 'propertyId', propertyId);
+            const localVarPath = `/properties/{propertyId}/seller-authorization/download-url`
+                .replace(`{${"propertyId"}}`, encodeURIComponent(String(propertyId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         *
+         * @summary Get seller authorization / co-marketing status for a property
+         * @param {string} propertyId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSellerAuthorizationStatus1: async (propertyId, options = {}) => {
+            // verify required parameter 'propertyId' is not null or undefined
+            (0, common_1.assertParamExists)('getSellerAuthorizationStatus1', 'propertyId', propertyId);
+            const localVarPath = `/properties/{propertyId}/seller-authorization`
+                .replace(`{${"propertyId"}}`, encodeURIComponent(String(propertyId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, common_1.DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options };
+            const localVarHeaderParameter = {};
+            const localVarQueryParameter = {};
+            // authentication oAuthCode required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Code", configuration);
+            // authentication oAuthClientId required
+            await (0, common_1.setApiKeyToObject)(localVarHeaderParameter, "O-Auth-Client-Id", configuration);
+            (0, common_1.setSearchParams)(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = { ...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers };
+            return {
+                url: (0, common_1.toPathString)(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns HTML preview for sharing a property on social media or messaging apps
          * @summary Get HTML preview for a property
          * @param {string} id Property ID to generate preview for
@@ -8691,6 +9134,34 @@ const PropertiesApiFp = function (configuration) {
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         *
+         * @summary Confirm seller authorization and enable global co-marketing
+         * @param {string} propertyId
+         * @param {ConfirmSellerAuthorizationRequest} [confirmSellerAuthorizationRequest]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async confirmSellerAuthorization1(propertyId, confirmSellerAuthorizationRequest, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.confirmSellerAuthorization1(propertyId, confirmSellerAuthorizationRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['PropertiesApi.confirmSellerAuthorization1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         *
+         * @summary Create presigned URL for seller authorization document upload
+         * @param {string} propertyId
+         * @param {SellerAuthorizationUploadUrlRequest} [sellerAuthorizationUploadUrlRequest]
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createSellerAuthorizationUploadUrl1(propertyId, sellerAuthorizationUploadUrlRequest, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createSellerAuthorizationUploadUrl1(propertyId, sellerAuthorizationUploadUrlRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['PropertiesApi.createSellerAuthorizationUploadUrl1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * This process is not reversible
          * @summary Delete the property with id supplied
          * @param {string} id Property ID
@@ -8836,6 +9307,32 @@ const PropertiesApiFp = function (configuration) {
             return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         *
+         * @summary Get presigned download URL for seller authorization document (owner only)
+         * @param {string} propertyId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getSellerAuthorizationDownloadUrl1(propertyId, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSellerAuthorizationDownloadUrl1(propertyId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['PropertiesApi.getSellerAuthorizationDownloadUrl1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         *
+         * @summary Get seller authorization / co-marketing status for a property
+         * @param {string} propertyId
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getSellerAuthorizationStatus1(propertyId, options) {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSellerAuthorizationStatus1(propertyId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = base_1.operationServerMap['PropertiesApi.getSellerAuthorizationStatus1']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => (0, common_1.createRequestFunction)(localVarAxiosArgs, axios_1.default, base_1.BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Returns HTML preview for sharing a property on social media or messaging apps
          * @summary Get HTML preview for a property
          * @param {string} id Property ID to generate preview for
@@ -8939,6 +9436,26 @@ const PropertiesApiFactory = function (configuration, basePath, axios) {
          */
         changePublicationStatus2(requestParameters, options) {
             return localVarFp.changePublicationStatus2(requestParameters.propertyId, requestParameters.propertyPublicationStateRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         *
+         * @summary Confirm seller authorization and enable global co-marketing
+         * @param {PropertiesApiConfirmSellerAuthorization1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        confirmSellerAuthorization1(requestParameters, options) {
+            return localVarFp.confirmSellerAuthorization1(requestParameters.propertyId, requestParameters.confirmSellerAuthorizationRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         *
+         * @summary Create presigned URL for seller authorization document upload
+         * @param {PropertiesApiCreateSellerAuthorizationUploadUrl1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createSellerAuthorizationUploadUrl1(requestParameters, options) {
+            return localVarFp.createSellerAuthorizationUploadUrl1(requestParameters.propertyId, requestParameters.sellerAuthorizationUploadUrlRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * This process is not reversible
@@ -9049,6 +9566,26 @@ const PropertiesApiFactory = function (configuration, basePath, axios) {
             return localVarFp.getSecuredProperties1(options).then((request) => request(axios, basePath));
         },
         /**
+         *
+         * @summary Get presigned download URL for seller authorization document (owner only)
+         * @param {PropertiesApiGetSellerAuthorizationDownloadUrl1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSellerAuthorizationDownloadUrl1(requestParameters, options) {
+            return localVarFp.getSellerAuthorizationDownloadUrl1(requestParameters.propertyId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         *
+         * @summary Get seller authorization / co-marketing status for a property
+         * @param {PropertiesApiGetSellerAuthorizationStatus1Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSellerAuthorizationStatus1(requestParameters, options) {
+            return localVarFp.getSellerAuthorizationStatus1(requestParameters.propertyId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns HTML preview for sharing a property on social media or messaging apps
          * @summary Get HTML preview for a property
          * @param {PropertiesApiPreviewProperty2Request} requestParameters Request parameters.
@@ -9137,6 +9674,28 @@ class PropertiesApi extends base_1.BaseAPI {
      */
     changePublicationStatus2(requestParameters, options) {
         return (0, exports.PropertiesApiFp)(this.configuration).changePublicationStatus2(requestParameters.propertyId, requestParameters.propertyPublicationStateRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary Confirm seller authorization and enable global co-marketing
+     * @param {PropertiesApiConfirmSellerAuthorization1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertiesApi
+     */
+    confirmSellerAuthorization1(requestParameters, options) {
+        return (0, exports.PropertiesApiFp)(this.configuration).confirmSellerAuthorization1(requestParameters.propertyId, requestParameters.confirmSellerAuthorizationRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary Create presigned URL for seller authorization document upload
+     * @param {PropertiesApiCreateSellerAuthorizationUploadUrl1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertiesApi
+     */
+    createSellerAuthorizationUploadUrl1(requestParameters, options) {
+        return (0, exports.PropertiesApiFp)(this.configuration).createSellerAuthorizationUploadUrl1(requestParameters.propertyId, requestParameters.sellerAuthorizationUploadUrlRequest, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * This process is not reversible
@@ -9256,6 +9815,28 @@ class PropertiesApi extends base_1.BaseAPI {
      */
     getSecuredProperties1(options) {
         return (0, exports.PropertiesApiFp)(this.configuration).getSecuredProperties1(options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary Get presigned download URL for seller authorization document (owner only)
+     * @param {PropertiesApiGetSellerAuthorizationDownloadUrl1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertiesApi
+     */
+    getSellerAuthorizationDownloadUrl1(requestParameters, options) {
+        return (0, exports.PropertiesApiFp)(this.configuration).getSellerAuthorizationDownloadUrl1(requestParameters.propertyId, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     *
+     * @summary Get seller authorization / co-marketing status for a property
+     * @param {PropertiesApiGetSellerAuthorizationStatus1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertiesApi
+     */
+    getSellerAuthorizationStatus1(requestParameters, options) {
+        return (0, exports.PropertiesApiFp)(this.configuration).getSellerAuthorizationStatus1(requestParameters.propertyId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Returns HTML preview for sharing a property on social media or messaging apps

@@ -794,6 +794,37 @@ export type CheckoutSessionDtoStatusEnum = typeof CheckoutSessionDtoStatusEnum[k
 /**
  *
  * @export
+ * @interface ConfirmSellerAuthorizationRequest
+ */
+export interface ConfirmSellerAuthorizationRequest {
+    /**
+     *
+     * @type {string}
+     * @memberof ConfirmSellerAuthorizationRequest
+     */
+    's3Key': string;
+    /**
+     *
+     * @type {string}
+     * @memberof ConfirmSellerAuthorizationRequest
+     */
+    'filename': string;
+    /**
+     *
+     * @type {string}
+     * @memberof ConfirmSellerAuthorizationRequest
+     */
+    'contentType': string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof ConfirmSellerAuthorizationRequest
+     */
+    'sellerConsentConfirmed': boolean;
+}
+/**
+ *
+ * @export
  * @interface Contract
  */
 export interface Contract {
@@ -2476,6 +2507,7 @@ export declare const HcFilterFilterWorkerOptionEnum: {
     readonly Groups: "GROUPS";
     readonly UserId: "USER_ID";
     readonly XmlId: "XML_ID";
+    readonly GlobalCoMarketingReady: "GLOBAL_CO_MARKETING_READY";
 };
 export type HcFilterFilterWorkerOptionEnum = typeof HcFilterFilterWorkerOptionEnum[keyof typeof HcFilterFilterWorkerOptionEnum];
 export declare const HcFilterHcListerOptionEnum: {
@@ -2744,6 +2776,7 @@ export declare const HcFilterEntryFilterWorkerOptionEnum: {
     readonly Groups: "GROUPS";
     readonly UserId: "USER_ID";
     readonly XmlId: "XML_ID";
+    readonly GlobalCoMarketingReady: "GLOBAL_CO_MARKETING_READY";
 };
 export type HcFilterEntryFilterWorkerOptionEnum = typeof HcFilterEntryFilterWorkerOptionEnum[keyof typeof HcFilterEntryFilterWorkerOptionEnum];
 /**
@@ -4388,6 +4421,19 @@ export interface RefreshToken {
 /**
  *
  * @export
+ * @interface ResolveCoBrokerageRequestBody
+ */
+export interface ResolveCoBrokerageRequestBody {
+    /**
+     *
+     * @type {string}
+     * @memberof ResolveCoBrokerageRequestBody
+     */
+    'action'?: string;
+}
+/**
+ *
+ * @export
  * @interface ResultRequest
  */
 export interface ResultRequest {
@@ -4433,6 +4479,25 @@ export interface ResultRequest {
      * @memberof ResultRequest
      */
     'pageFrom'?: number;
+}
+/**
+ *
+ * @export
+ * @interface SellerAuthorizationUploadUrlRequest
+ */
+export interface SellerAuthorizationUploadUrlRequest {
+    /**
+     * Original filename including extension
+     * @type {string}
+     * @memberof SellerAuthorizationUploadUrlRequest
+     */
+    'filename': string;
+    /**
+     * MIME type
+     * @type {string}
+     * @memberof SellerAuthorizationUploadUrlRequest
+     */
+    'contentType': string;
 }
 /**
  *
@@ -6115,6 +6180,12 @@ export interface UserFilterRequest {
      */
     'filterFocusOnCommercial'?: boolean;
     /**
+     * Filter users with at least one co-marketing-ready published listing
+     * @type {boolean}
+     * @memberof UserFilterRequest
+     */
+    'filterAvailableForCoBrokerage'?: boolean;
+    /**
      * Filter users focused on residential properties
      * @type {boolean}
      * @memberof UserFilterRequest
@@ -7747,6 +7818,207 @@ export declare class CheckoutSessionsApi extends BaseAPI {
      * @memberof CheckoutSessionsApi
      */
     createCheckoutSession2(requestParameters: CheckoutSessionsApiCreateCheckoutSession2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
+}
+/**
+ * CoBrokerageApi - axios parameter creator
+ * @export
+ */
+export declare const CoBrokerageApiAxiosParamCreator: (configuration?: Configuration) => {
+    /**
+     *
+     * @summary Request co-brokerage on a co-marketing-ready listing
+     * @param {string} propertyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    createRequest1: (propertyId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @summary List co-brokerage listings for current user
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    listMyCoBrokerageListings1: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @summary List incoming or outgoing co-brokerage requests
+     * @param {string} [direction]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    listMyRequests1: (direction?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @summary Approve or decline a co-brokerage request
+     * @param {number} requestId
+     * @param {ResolveCoBrokerageRequestBody} [resolveCoBrokerageRequestBody]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    resolveRequest1: (requestId: number, resolveCoBrokerageRequestBody?: ResolveCoBrokerageRequestBody, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+};
+/**
+ * CoBrokerageApi - functional programming interface
+ * @export
+ */
+export declare const CoBrokerageApiFp: (configuration?: Configuration) => {
+    /**
+     *
+     * @summary Request co-brokerage on a co-marketing-ready listing
+     * @param {string} propertyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    createRequest1(propertyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     *
+     * @summary List co-brokerage listings for current user
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    listMyCoBrokerageListings1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     *
+     * @summary List incoming or outgoing co-brokerage requests
+     * @param {string} [direction]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    listMyRequests1(direction?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     *
+     * @summary Approve or decline a co-brokerage request
+     * @param {number} requestId
+     * @param {ResolveCoBrokerageRequestBody} [resolveCoBrokerageRequestBody]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    resolveRequest1(requestId: number, resolveCoBrokerageRequestBody?: ResolveCoBrokerageRequestBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+};
+/**
+ * CoBrokerageApi - factory interface
+ * @export
+ */
+export declare const CoBrokerageApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
+    /**
+     *
+     * @summary Request co-brokerage on a co-marketing-ready listing
+     * @param {CoBrokerageApiCreateRequest1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    createRequest1(requestParameters: CoBrokerageApiCreateRequest1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     *
+     * @summary List co-brokerage listings for current user
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    listMyCoBrokerageListings1(options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     *
+     * @summary List incoming or outgoing co-brokerage requests
+     * @param {CoBrokerageApiListMyRequests1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    listMyRequests1(requestParameters?: CoBrokerageApiListMyRequests1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     *
+     * @summary Approve or decline a co-brokerage request
+     * @param {CoBrokerageApiResolveRequest1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    resolveRequest1(requestParameters: CoBrokerageApiResolveRequest1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+};
+/**
+ * Request parameters for createRequest1 operation in CoBrokerageApi.
+ * @export
+ * @interface CoBrokerageApiCreateRequest1Request
+ */
+export interface CoBrokerageApiCreateRequest1Request {
+    /**
+     *
+     * @type {string}
+     * @memberof CoBrokerageApiCreateRequest1
+     */
+    readonly propertyId: string;
+}
+/**
+ * Request parameters for listMyRequests1 operation in CoBrokerageApi.
+ * @export
+ * @interface CoBrokerageApiListMyRequests1Request
+ */
+export interface CoBrokerageApiListMyRequests1Request {
+    /**
+     *
+     * @type {string}
+     * @memberof CoBrokerageApiListMyRequests1
+     */
+    readonly direction?: string;
+}
+/**
+ * Request parameters for resolveRequest1 operation in CoBrokerageApi.
+ * @export
+ * @interface CoBrokerageApiResolveRequest1Request
+ */
+export interface CoBrokerageApiResolveRequest1Request {
+    /**
+     *
+     * @type {number}
+     * @memberof CoBrokerageApiResolveRequest1
+     */
+    readonly requestId: number;
+    /**
+     *
+     * @type {ResolveCoBrokerageRequestBody}
+     * @memberof CoBrokerageApiResolveRequest1
+     */
+    readonly resolveCoBrokerageRequestBody?: ResolveCoBrokerageRequestBody;
+}
+/**
+ * CoBrokerageApi - object-oriented interface
+ * @export
+ * @class CoBrokerageApi
+ * @extends {BaseAPI}
+ */
+export declare class CoBrokerageApi extends BaseAPI {
+    /**
+     *
+     * @summary Request co-brokerage on a co-marketing-ready listing
+     * @param {CoBrokerageApiCreateRequest1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoBrokerageApi
+     */
+    createRequest1(requestParameters: CoBrokerageApiCreateRequest1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
+    /**
+     *
+     * @summary List co-brokerage listings for current user
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoBrokerageApi
+     */
+    listMyCoBrokerageListings1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
+    /**
+     *
+     * @summary List incoming or outgoing co-brokerage requests
+     * @param {CoBrokerageApiListMyRequests1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoBrokerageApi
+     */
+    listMyRequests1(requestParameters?: CoBrokerageApiListMyRequests1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
+    /**
+     *
+     * @summary Approve or decline a co-brokerage request
+     * @param {CoBrokerageApiResolveRequest1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CoBrokerageApi
+     */
+    resolveRequest1(requestParameters: CoBrokerageApiResolveRequest1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
 }
 /**
  * CountriesApi - axios parameter creator
@@ -12123,6 +12395,24 @@ export declare const PropertiesApiAxiosParamCreator: (configuration?: Configurat
      */
     changePublicationStatus2: (propertyId: string, propertyPublicationStateRequest: PropertyPublicationStateRequest, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     *
+     * @summary Confirm seller authorization and enable global co-marketing
+     * @param {string} propertyId
+     * @param {ConfirmSellerAuthorizationRequest} [confirmSellerAuthorizationRequest]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    confirmSellerAuthorization1: (propertyId: string, confirmSellerAuthorizationRequest?: ConfirmSellerAuthorizationRequest, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @summary Create presigned URL for seller authorization document upload
+     * @param {string} propertyId
+     * @param {SellerAuthorizationUploadUrlRequest} [sellerAuthorizationUploadUrlRequest]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    createSellerAuthorizationUploadUrl1: (propertyId: string, sellerAuthorizationUploadUrlRequest?: SellerAuthorizationUploadUrlRequest, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * This process is not reversible
      * @summary Delete the property with id supplied
      * @param {string} id Property ID
@@ -12213,6 +12503,22 @@ export declare const PropertiesApiAxiosParamCreator: (configuration?: Configurat
      */
     getSecuredProperties1: (options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     *
+     * @summary Get presigned download URL for seller authorization document (owner only)
+     * @param {string} propertyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getSellerAuthorizationDownloadUrl1: (propertyId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @summary Get seller authorization / co-marketing status for a property
+     * @param {string} propertyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getSellerAuthorizationStatus1: (propertyId: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Returns HTML preview for sharing a property on social media or messaging apps
      * @summary Get HTML preview for a property
      * @param {string} id Property ID to generate preview for
@@ -12284,6 +12590,24 @@ export declare const PropertiesApiFp: (configuration?: Configuration) => {
      * @throws {RequiredError}
      */
     changePublicationStatus2(propertyId: string, propertyPublicationStateRequest: PropertyPublicationStateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Property>>;
+    /**
+     *
+     * @summary Confirm seller authorization and enable global co-marketing
+     * @param {string} propertyId
+     * @param {ConfirmSellerAuthorizationRequest} [confirmSellerAuthorizationRequest]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    confirmSellerAuthorization1(propertyId: string, confirmSellerAuthorizationRequest?: ConfirmSellerAuthorizationRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     *
+     * @summary Create presigned URL for seller authorization document upload
+     * @param {string} propertyId
+     * @param {SellerAuthorizationUploadUrlRequest} [sellerAuthorizationUploadUrlRequest]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    createSellerAuthorizationUploadUrl1(propertyId: string, sellerAuthorizationUploadUrlRequest?: SellerAuthorizationUploadUrlRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
     /**
      * This process is not reversible
      * @summary Delete the property with id supplied
@@ -12375,6 +12699,22 @@ export declare const PropertiesApiFp: (configuration?: Configuration) => {
      */
     getSecuredProperties1(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Property>>>;
     /**
+     *
+     * @summary Get presigned download URL for seller authorization document (owner only)
+     * @param {string} propertyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getSellerAuthorizationDownloadUrl1(propertyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     *
+     * @summary Get seller authorization / co-marketing status for a property
+     * @param {string} propertyId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getSellerAuthorizationStatus1(propertyId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
      * Returns HTML preview for sharing a property on social media or messaging apps
      * @summary Get HTML preview for a property
      * @param {string} id Property ID to generate preview for
@@ -12444,6 +12784,22 @@ export declare const PropertiesApiFactory: (configuration?: Configuration, baseP
      * @throws {RequiredError}
      */
     changePublicationStatus2(requestParameters: PropertiesApiChangePublicationStatus2Request, options?: RawAxiosRequestConfig): AxiosPromise<Property>;
+    /**
+     *
+     * @summary Confirm seller authorization and enable global co-marketing
+     * @param {PropertiesApiConfirmSellerAuthorization1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    confirmSellerAuthorization1(requestParameters: PropertiesApiConfirmSellerAuthorization1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     *
+     * @summary Create presigned URL for seller authorization document upload
+     * @param {PropertiesApiCreateSellerAuthorizationUploadUrl1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    createSellerAuthorizationUploadUrl1(requestParameters: PropertiesApiCreateSellerAuthorizationUploadUrl1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
     /**
      * This process is not reversible
      * @summary Delete the property with id supplied
@@ -12530,6 +12886,22 @@ export declare const PropertiesApiFactory: (configuration?: Configuration, baseP
      * @throws {RequiredError}
      */
     getSecuredProperties1(options?: RawAxiosRequestConfig): AxiosPromise<Array<Property>>;
+    /**
+     *
+     * @summary Get presigned download URL for seller authorization document (owner only)
+     * @param {PropertiesApiGetSellerAuthorizationDownloadUrl1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getSellerAuthorizationDownloadUrl1(requestParameters: PropertiesApiGetSellerAuthorizationDownloadUrl1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     *
+     * @summary Get seller authorization / co-marketing status for a property
+     * @param {PropertiesApiGetSellerAuthorizationStatus1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getSellerAuthorizationStatus1(requestParameters: PropertiesApiGetSellerAuthorizationStatus1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
     /**
      * Returns HTML preview for sharing a property on social media or messaging apps
      * @summary Get HTML preview for a property
@@ -12618,6 +12990,44 @@ export interface PropertiesApiChangePublicationStatus2Request {
      * @memberof PropertiesApiChangePublicationStatus2
      */
     readonly propertyPublicationStateRequest: PropertyPublicationStateRequest;
+}
+/**
+ * Request parameters for confirmSellerAuthorization1 operation in PropertiesApi.
+ * @export
+ * @interface PropertiesApiConfirmSellerAuthorization1Request
+ */
+export interface PropertiesApiConfirmSellerAuthorization1Request {
+    /**
+     *
+     * @type {string}
+     * @memberof PropertiesApiConfirmSellerAuthorization1
+     */
+    readonly propertyId: string;
+    /**
+     *
+     * @type {ConfirmSellerAuthorizationRequest}
+     * @memberof PropertiesApiConfirmSellerAuthorization1
+     */
+    readonly confirmSellerAuthorizationRequest?: ConfirmSellerAuthorizationRequest;
+}
+/**
+ * Request parameters for createSellerAuthorizationUploadUrl1 operation in PropertiesApi.
+ * @export
+ * @interface PropertiesApiCreateSellerAuthorizationUploadUrl1Request
+ */
+export interface PropertiesApiCreateSellerAuthorizationUploadUrl1Request {
+    /**
+     *
+     * @type {string}
+     * @memberof PropertiesApiCreateSellerAuthorizationUploadUrl1
+     */
+    readonly propertyId: string;
+    /**
+     *
+     * @type {SellerAuthorizationUploadUrlRequest}
+     * @memberof PropertiesApiCreateSellerAuthorizationUploadUrl1
+     */
+    readonly sellerAuthorizationUploadUrlRequest?: SellerAuthorizationUploadUrlRequest;
 }
 /**
  * Request parameters for deleteProperty1 operation in PropertiesApi.
@@ -12748,6 +13158,32 @@ export interface PropertiesApiGetRecentProperties1Request {
     readonly minutes?: number;
 }
 /**
+ * Request parameters for getSellerAuthorizationDownloadUrl1 operation in PropertiesApi.
+ * @export
+ * @interface PropertiesApiGetSellerAuthorizationDownloadUrl1Request
+ */
+export interface PropertiesApiGetSellerAuthorizationDownloadUrl1Request {
+    /**
+     *
+     * @type {string}
+     * @memberof PropertiesApiGetSellerAuthorizationDownloadUrl1
+     */
+    readonly propertyId: string;
+}
+/**
+ * Request parameters for getSellerAuthorizationStatus1 operation in PropertiesApi.
+ * @export
+ * @interface PropertiesApiGetSellerAuthorizationStatus1Request
+ */
+export interface PropertiesApiGetSellerAuthorizationStatus1Request {
+    /**
+     *
+     * @type {string}
+     * @memberof PropertiesApiGetSellerAuthorizationStatus1
+     */
+    readonly propertyId: string;
+}
+/**
  * Request parameters for previewProperty2 operation in PropertiesApi.
  * @export
  * @interface PropertiesApiPreviewProperty2Request
@@ -12852,6 +13288,24 @@ export declare class PropertiesApi extends BaseAPI {
      */
     changePublicationStatus2(requestParameters: PropertiesApiChangePublicationStatus2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property, any, {}>>;
     /**
+     *
+     * @summary Confirm seller authorization and enable global co-marketing
+     * @param {PropertiesApiConfirmSellerAuthorization1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertiesApi
+     */
+    confirmSellerAuthorization1(requestParameters: PropertiesApiConfirmSellerAuthorization1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
+    /**
+     *
+     * @summary Create presigned URL for seller authorization document upload
+     * @param {PropertiesApiCreateSellerAuthorizationUploadUrl1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertiesApi
+     */
+    createSellerAuthorizationUploadUrl1(requestParameters: PropertiesApiCreateSellerAuthorizationUploadUrl1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
+    /**
      * This process is not reversible
      * @summary Delete the property with id supplied
      * @param {PropertiesApiDeleteProperty1Request} requestParameters Request parameters.
@@ -12948,6 +13402,24 @@ export declare class PropertiesApi extends BaseAPI {
      * @memberof PropertiesApi
      */
     getSecuredProperties1(options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property[], any, {}>>;
+    /**
+     *
+     * @summary Get presigned download URL for seller authorization document (owner only)
+     * @param {PropertiesApiGetSellerAuthorizationDownloadUrl1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertiesApi
+     */
+    getSellerAuthorizationDownloadUrl1(requestParameters: PropertiesApiGetSellerAuthorizationDownloadUrl1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
+    /**
+     *
+     * @summary Get seller authorization / co-marketing status for a property
+     * @param {PropertiesApiGetSellerAuthorizationStatus1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertiesApi
+     */
+    getSellerAuthorizationStatus1(requestParameters: PropertiesApiGetSellerAuthorizationStatus1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
     /**
      * Returns HTML preview for sharing a property on social media or messaging apps
      * @summary Get HTML preview for a property
