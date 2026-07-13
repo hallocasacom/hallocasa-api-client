@@ -2649,67 +2649,6 @@
         }
       }
     },
-    "/properties/{propertyId}/co-brokerage-requests" : {
-      "post" : {
-        "tags" : [ "co-brokerage" ],
-        "summary" : "Request co-brokerage on a co-marketing-ready listing",
-        "operationId" : "createRequest_1",
-        "parameters" : [ {
-          "name" : "propertyId",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "default" : {
-            "description" : "default response",
-            "content" : {
-              "application/json;charset=UTF-8" : { }
-            }
-          }
-        }
-      }
-    },
-    "/users/me/co-brokerage-listings" : {
-      "get" : {
-        "tags" : [ "co-brokerage" ],
-        "summary" : "List co-brokerage listings for current user",
-        "operationId" : "listMyCoBrokerageListings_1",
-        "responses" : {
-          "default" : {
-            "description" : "default response",
-            "content" : {
-              "application/json;charset=UTF-8" : { }
-            }
-          }
-        }
-      }
-    },
-    "/users/me/co-brokerage-requests" : {
-      "get" : {
-        "tags" : [ "co-brokerage" ],
-        "summary" : "List incoming or outgoing co-brokerage requests",
-        "operationId" : "listMyRequests_1",
-        "parameters" : [ {
-          "name" : "direction",
-          "in" : "query",
-          "schema" : {
-            "type" : "string",
-            "default" : "incoming"
-          }
-        } ],
-        "responses" : {
-          "default" : {
-            "description" : "default response",
-            "content" : {
-              "application/json;charset=UTF-8" : { }
-            }
-          }
-        }
-      }
-    },
     "/co-brokerage-requests/{requestId}" : {
       "patch" : {
         "tags" : [ "co-brokerage" ],
@@ -4861,6 +4800,67 @@
             "description" : "default response",
             "content" : {
               "text/html;charset=utf-8" : { }
+            }
+          }
+        }
+      }
+    },
+    "/users/me/co-brokerage-listings" : {
+      "get" : {
+        "tags" : [ "co-brokerage" ],
+        "summary" : "List co-brokerage listings for current user",
+        "operationId" : "listMyCoBrokerageListings_1",
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json;charset=UTF-8" : { }
+            }
+          }
+        }
+      }
+    },
+    "/users/me/co-brokerage-requests" : {
+      "get" : {
+        "tags" : [ "co-brokerage" ],
+        "summary" : "List incoming or outgoing co-brokerage requests",
+        "operationId" : "listMyRequests_1",
+        "parameters" : [ {
+          "name" : "direction",
+          "in" : "query",
+          "schema" : {
+            "type" : "string",
+            "default" : "incoming"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json;charset=UTF-8" : { }
+            }
+          }
+        }
+      }
+    },
+    "/properties/{propertyId}/co-brokerage-requests" : {
+      "post" : {
+        "tags" : [ "co-brokerage" ],
+        "summary" : "Request co-brokerage on a co-marketing-ready listing",
+        "operationId" : "createRequest_1",
+        "parameters" : [ {
+          "name" : "propertyId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json;charset=UTF-8" : { }
             }
           }
         }
@@ -11179,6 +11179,16 @@
             "description" : "Public profile slug",
             "example" : "jane-doe-miami"
           },
+          "previousProfileName" : {
+            "type" : "string",
+            "description" : "Previous public profile slug before the most recent rename",
+            "example" : "jane.doe.miami"
+          },
+          "profileNameChangedAt" : {
+            "type" : "string",
+            "description" : "When the profile slug was last changed (epoch millis in JSON)",
+            "format" : "date-time"
+          },
           "lastActivity" : {
             "type" : "string",
             "description" : "Last activity timestamp (epoch millis in JSON)",
@@ -13532,7 +13542,7 @@
         "description" : "Request object for updating property publication state"
       },
       "ConfirmSellerAuthorizationRequest" : {
-        "required" : [ "contentType", "filename", "s3Key", "sellerConsentConfirmed" ],
+        "required" : [ "sellerConsentConfirmed" ],
         "type" : "object",
         "properties" : {
           "s3Key" : {
@@ -14408,6 +14418,16 @@
             "type" : "string",
             "description" : "Public profile slug",
             "example" : "jane-doe-miami"
+          },
+          "previousProfileName" : {
+            "type" : "string",
+            "description" : "Previous public profile slug before the most recent rename",
+            "example" : "jane.doe.miami"
+          },
+          "profileNameChangedAt" : {
+            "type" : "string",
+            "description" : "When the profile slug was last changed (epoch millis in JSON)",
+            "format" : "date-time"
           },
           "lastActivity" : {
             "type" : "string",

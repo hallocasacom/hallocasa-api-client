@@ -802,19 +802,19 @@ export interface ConfirmSellerAuthorizationRequest {
      * @type {string}
      * @memberof ConfirmSellerAuthorizationRequest
      */
-    's3Key': string;
+    's3Key'?: string;
     /**
      *
      * @type {string}
      * @memberof ConfirmSellerAuthorizationRequest
      */
-    'filename': string;
+    'filename'?: string;
     /**
      *
      * @type {string}
      * @memberof ConfirmSellerAuthorizationRequest
      */
-    'contentType': string;
+    'contentType'?: string;
     /**
      *
      * @type {boolean}
@@ -4731,6 +4731,18 @@ export interface SkilledUser {
      */
     'profileName'?: string;
     /**
+     * Previous public profile slug before the most recent rename
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'previousProfileName'?: string;
+    /**
+     * When the profile slug was last changed (epoch millis in JSON)
+     * @type {string}
+     * @memberof SkilledUser
+     */
+    'profileNameChangedAt'?: string;
+    /**
      * Last activity timestamp (epoch millis in JSON)
      * @type {string}
      * @memberof SkilledUser
@@ -5607,6 +5619,18 @@ export interface User {
      * @memberof User
      */
     'profileName'?: string;
+    /**
+     * Previous public profile slug before the most recent rename
+     * @type {string}
+     * @memberof User
+     */
+    'previousProfileName'?: string;
+    /**
+     * When the profile slug was last changed (epoch millis in JSON)
+     * @type {string}
+     * @memberof User
+     */
+    'profileNameChangedAt'?: string;
     /**
      * Last activity timestamp (epoch millis in JSON)
      * @type {string}
