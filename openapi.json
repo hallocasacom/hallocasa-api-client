@@ -5937,6 +5937,43 @@
         }
       }
     },
+    "/properties/{propertyId}/co-broker-share" : {
+      "get" : {
+        "tags" : [ "properties" ],
+        "summary" : "Check whether a co-broker share link is still active",
+        "operationId" : "getCoBrokerShareStatus_1",
+        "parameters" : [ {
+          "name" : "propertyId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "ownerUserId",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "brokerUserId",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
     "/properties/drafts" : {
       "get" : {
         "tags" : [ "properties" ],
@@ -6275,6 +6312,75 @@
                   }
                 }
               }
+            }
+          }
+        }
+      }
+    },
+    "/properties/{propertyId}/co-brokers/{brokerUserId}" : {
+      "delete" : {
+        "tags" : [ "properties" ],
+        "summary" : "Remove a co-broker from a property (owner only)",
+        "operationId" : "removePropertyCoBroker_1",
+        "parameters" : [ {
+          "name" : "propertyId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "brokerUserId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json;charset=UTF-8" : { }
+            }
+          }
+        }
+      },
+      "patch" : {
+        "tags" : [ "properties" ],
+        "summary" : "Update co-broker profile visibility flags",
+        "operationId" : "updatePropertyCoBroker_1",
+        "parameters" : [ {
+          "name" : "propertyId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "brokerUserId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdatePropertyCoBrokerRequest"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : { }
             }
           }
         }
@@ -12681,6 +12787,11 @@
             "type" : "boolean",
             "description" : "Whether listing is ready for global co-marketing",
             "example" : false
+          },
+          "coBrokerShareOwnerUserId" : {
+            "type" : "integer",
+            "description" : "Owner user id when listing is shown on a co-broker profile via share link",
+            "format" : "int64"
           }
         },
         "description" : "Property listing; dynamic attributes live in fieldList (typed PropertyField entries)"
@@ -13585,6 +13696,17 @@
           "to" : {
             "type" : "string",
             "format" : "date-time"
+          }
+        }
+      },
+      "UpdatePropertyCoBrokerRequest" : {
+        "type" : "object",
+        "properties" : {
+          "ownerAllowsProfile" : {
+            "type" : "boolean"
+          },
+          "brokerShowsOnProfile" : {
+            "type" : "boolean"
           }
         }
       },
@@ -15623,18 +15745,6 @@
       }
     },
     "securitySchemes" : {
-      "oAuthClientId" : {
-        "type" : "apiKey",
-        "description" : "OAuth client identifier (default: hallocasa_frontend)",
-        "name" : "O-Auth-Client-Id",
-        "in" : "header"
-      },
-      "xApiKey" : {
-        "type" : "apiKey",
-        "description" : "Integration API key (prefix hc_)",
-        "name" : "X-API-Key",
-        "in" : "header"
-      },
       "oAuthToken" : {
         "type" : "apiKey",
         "description" : "OAuth access token for authenticated requests",
@@ -15645,6 +15755,18 @@
         "type" : "apiKey",
         "description" : "OAuth authorization code (default: mFQDZKXBtVkoUofIOsmhuyxnyvOcmMPT)",
         "name" : "O-Auth-Code",
+        "in" : "header"
+      },
+      "oAuthClientId" : {
+        "type" : "apiKey",
+        "description" : "OAuth client identifier (default: hallocasa_frontend)",
+        "name" : "O-Auth-Client-Id",
+        "in" : "header"
+      },
+      "xApiKey" : {
+        "type" : "apiKey",
+        "description" : "Integration API key (prefix hc_)",
+        "name" : "X-API-Key",
         "in" : "header"
       }
     }

@@ -3722,6 +3722,12 @@ export interface Property {
      * @memberof Property
      */
     'globalCoMarketingReady'?: boolean;
+    /**
+     * Owner user id when listing is shown on a co-broker profile via share link
+     * @type {number}
+     * @memberof Property
+     */
+    'coBrokerShareOwnerUserId'?: number;
 }
 export declare const PropertyPublicationStateEnum: {
     readonly Available: "AVAILABLE";
@@ -5462,6 +5468,25 @@ export interface TextTranslation {
      * @memberof TextTranslation
      */
     'originalText'?: string;
+}
+/**
+ *
+ * @export
+ * @interface UpdatePropertyCoBrokerRequest
+ */
+export interface UpdatePropertyCoBrokerRequest {
+    /**
+     *
+     * @type {boolean}
+     * @memberof UpdatePropertyCoBrokerRequest
+     */
+    'ownerAllowsProfile'?: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof UpdatePropertyCoBrokerRequest
+     */
+    'brokerShowsOnProfile'?: boolean;
 }
 /**
  * HalloCasa user profile (extends contact)
@@ -12497,6 +12522,16 @@ export declare const PropertiesApiAxiosParamCreator: (configuration?: Configurat
     findPropertyOldUrl1: (id: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
      *
+     * @summary Check whether a co-broker share link is still active
+     * @param {string} propertyId
+     * @param {number} [ownerUserId]
+     * @param {number} [brokerUserId]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getCoBrokerShareStatus1: (propertyId: string, ownerUserId?: number, brokerUserId?: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
      * @summary Password Protected Property for Signed in User
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -12553,6 +12588,15 @@ export declare const PropertiesApiAxiosParamCreator: (configuration?: Configurat
      */
     previewProperty2: (id: string, lang?: string, acceptLanguage?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
     /**
+     *
+     * @summary Remove a co-broker from a property (owner only)
+     * @param {string} propertyId
+     * @param {number} brokerUserId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    removePropertyCoBroker1: (propertyId: string, brokerUserId: number, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
      * Consider that only user can saveNew its properties
      * @summary Create or update the property supplied
      * @param {Property} property Property to persist
@@ -12582,6 +12626,16 @@ export declare const PropertiesApiAxiosParamCreator: (configuration?: Configurat
      * @throws {RequiredError}
      */
     translateProperty1: (propertyId: string, targetLang?: string, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @summary Update co-broker profile visibility flags
+     * @param {string} propertyId
+     * @param {number} brokerUserId
+     * @param {UpdatePropertyCoBrokerRequest} [updatePropertyCoBrokerRequest]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    updatePropertyCoBroker1: (propertyId: string, brokerUserId: number, updatePropertyCoBrokerRequest?: UpdatePropertyCoBrokerRequest, options?: RawAxiosRequestConfig) => Promise<RequestArgs>;
 };
 /**
  * PropertiesApi - functional programming interface
@@ -12693,6 +12747,16 @@ export declare const PropertiesApiFp: (configuration?: Configuration) => {
     findPropertyOldUrl1(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Property>>;
     /**
      *
+     * @summary Check whether a co-broker share link is still active
+     * @param {string} propertyId
+     * @param {number} [ownerUserId]
+     * @param {number} [brokerUserId]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getCoBrokerShareStatus1(propertyId: string, ownerUserId?: number, brokerUserId?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
+     *
      * @summary Password Protected Property for Signed in User
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -12749,6 +12813,15 @@ export declare const PropertiesApiFp: (configuration?: Configuration) => {
      */
     previewProperty2(id: string, lang?: string, acceptLanguage?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>>;
     /**
+     *
+     * @summary Remove a co-broker from a property (owner only)
+     * @param {string} propertyId
+     * @param {number} brokerUserId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    removePropertyCoBroker1(propertyId: string, brokerUserId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
+    /**
      * Consider that only user can saveNew its properties
      * @summary Create or update the property supplied
      * @param {Property} property Property to persist
@@ -12778,6 +12851,16 @@ export declare const PropertiesApiFp: (configuration?: Configuration) => {
      * @throws {RequiredError}
      */
     translateProperty1(propertyId: string, targetLang?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Property>>;
+    /**
+     *
+     * @summary Update co-broker profile visibility flags
+     * @param {string} propertyId
+     * @param {number} brokerUserId
+     * @param {UpdatePropertyCoBrokerRequest} [updatePropertyCoBrokerRequest]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    updatePropertyCoBroker1(propertyId: string, brokerUserId: number, updatePropertyCoBrokerRequest?: UpdatePropertyCoBrokerRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>>;
 };
 /**
  * PropertiesApi - factory interface
@@ -12882,6 +12965,14 @@ export declare const PropertiesApiFactory: (configuration?: Configuration, baseP
     findPropertyOldUrl1(requestParameters: PropertiesApiFindPropertyOldUrl1Request, options?: RawAxiosRequestConfig): AxiosPromise<Property>;
     /**
      *
+     * @summary Check whether a co-broker share link is still active
+     * @param {PropertiesApiGetCoBrokerShareStatus1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getCoBrokerShareStatus1(requestParameters: PropertiesApiGetCoBrokerShareStatus1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
+     *
      * @summary Password Protected Property for Signed in User
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -12935,6 +13026,14 @@ export declare const PropertiesApiFactory: (configuration?: Configuration, baseP
      */
     previewProperty2(requestParameters: PropertiesApiPreviewProperty2Request, options?: RawAxiosRequestConfig): AxiosPromise<string>;
     /**
+     *
+     * @summary Remove a co-broker from a property (owner only)
+     * @param {PropertiesApiRemovePropertyCoBroker1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    removePropertyCoBroker1(requestParameters: PropertiesApiRemovePropertyCoBroker1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    /**
      * Consider that only user can saveNew its properties
      * @summary Create or update the property supplied
      * @param {PropertiesApiSaveProperty1Request} requestParameters Request parameters.
@@ -12963,6 +13062,14 @@ export declare const PropertiesApiFactory: (configuration?: Configuration, baseP
      * @throws {RequiredError}
      */
     translateProperty1(requestParameters: PropertiesApiTranslateProperty1Request, options?: RawAxiosRequestConfig): AxiosPromise<Property>;
+    /**
+     *
+     * @summary Update co-broker profile visibility flags
+     * @param {PropertiesApiUpdatePropertyCoBroker1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    updatePropertyCoBroker1(requestParameters: PropertiesApiUpdatePropertyCoBroker1Request, options?: RawAxiosRequestConfig): AxiosPromise<void>;
 };
 /**
  * Request parameters for addPropertyCoBroker1 operation in PropertiesApi.
@@ -13150,6 +13257,31 @@ export interface PropertiesApiFindPropertyOldUrl1Request {
     readonly id: string;
 }
 /**
+ * Request parameters for getCoBrokerShareStatus1 operation in PropertiesApi.
+ * @export
+ * @interface PropertiesApiGetCoBrokerShareStatus1Request
+ */
+export interface PropertiesApiGetCoBrokerShareStatus1Request {
+    /**
+     *
+     * @type {string}
+     * @memberof PropertiesApiGetCoBrokerShareStatus1
+     */
+    readonly propertyId: string;
+    /**
+     *
+     * @type {number}
+     * @memberof PropertiesApiGetCoBrokerShareStatus1
+     */
+    readonly ownerUserId?: number;
+    /**
+     *
+     * @type {number}
+     * @memberof PropertiesApiGetCoBrokerShareStatus1
+     */
+    readonly brokerUserId?: number;
+}
+/**
  * Request parameters for getPropertyCoBrokers1 operation in PropertiesApi.
  * @export
  * @interface PropertiesApiGetPropertyCoBrokers1Request
@@ -13233,6 +13365,25 @@ export interface PropertiesApiPreviewProperty2Request {
     readonly acceptLanguage?: string;
 }
 /**
+ * Request parameters for removePropertyCoBroker1 operation in PropertiesApi.
+ * @export
+ * @interface PropertiesApiRemovePropertyCoBroker1Request
+ */
+export interface PropertiesApiRemovePropertyCoBroker1Request {
+    /**
+     *
+     * @type {string}
+     * @memberof PropertiesApiRemovePropertyCoBroker1
+     */
+    readonly propertyId: string;
+    /**
+     *
+     * @type {number}
+     * @memberof PropertiesApiRemovePropertyCoBroker1
+     */
+    readonly brokerUserId: number;
+}
+/**
  * Request parameters for saveProperty1 operation in PropertiesApi.
  * @export
  * @interface PropertiesApiSaveProperty1Request
@@ -13276,6 +13427,31 @@ export interface PropertiesApiTranslateProperty1Request {
      * @memberof PropertiesApiTranslateProperty1
      */
     readonly targetLang?: string;
+}
+/**
+ * Request parameters for updatePropertyCoBroker1 operation in PropertiesApi.
+ * @export
+ * @interface PropertiesApiUpdatePropertyCoBroker1Request
+ */
+export interface PropertiesApiUpdatePropertyCoBroker1Request {
+    /**
+     *
+     * @type {string}
+     * @memberof PropertiesApiUpdatePropertyCoBroker1
+     */
+    readonly propertyId: string;
+    /**
+     *
+     * @type {number}
+     * @memberof PropertiesApiUpdatePropertyCoBroker1
+     */
+    readonly brokerUserId: number;
+    /**
+     *
+     * @type {UpdatePropertyCoBrokerRequest}
+     * @memberof PropertiesApiUpdatePropertyCoBroker1
+     */
+    readonly updatePropertyCoBrokerRequest?: UpdatePropertyCoBrokerRequest;
 }
 /**
  * PropertiesApi - object-oriented interface
@@ -13394,6 +13570,15 @@ export declare class PropertiesApi extends BaseAPI {
     findPropertyOldUrl1(requestParameters: PropertiesApiFindPropertyOldUrl1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property, any, {}>>;
     /**
      *
+     * @summary Check whether a co-broker share link is still active
+     * @param {PropertiesApiGetCoBrokerShareStatus1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertiesApi
+     */
+    getCoBrokerShareStatus1(requestParameters: PropertiesApiGetCoBrokerShareStatus1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
+    /**
+     *
      * @summary Password Protected Property for Signed in User
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -13454,6 +13639,15 @@ export declare class PropertiesApi extends BaseAPI {
      */
     previewProperty2(requestParameters: PropertiesApiPreviewProperty2Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<string, any, {}>>;
     /**
+     *
+     * @summary Remove a co-broker from a property (owner only)
+     * @param {PropertiesApiRemovePropertyCoBroker1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertiesApi
+     */
+    removePropertyCoBroker1(requestParameters: PropertiesApiRemovePropertyCoBroker1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
+    /**
      * Consider that only user can saveNew its properties
      * @summary Create or update the property supplied
      * @param {PropertiesApiSaveProperty1Request} requestParameters Request parameters.
@@ -13486,6 +13680,15 @@ export declare class PropertiesApi extends BaseAPI {
      * @memberof PropertiesApi
      */
     translateProperty1(requestParameters: PropertiesApiTranslateProperty1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<Property, any, {}>>;
+    /**
+     *
+     * @summary Update co-broker profile visibility flags
+     * @param {PropertiesApiUpdatePropertyCoBroker1Request} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PropertiesApi
+     */
+    updatePropertyCoBroker1(requestParameters: PropertiesApiUpdatePropertyCoBroker1Request, options?: RawAxiosRequestConfig): Promise<import("axios").AxiosResponse<void, any, {}>>;
 }
 /**
  * PropertyBulkDownloadApi - axios parameter creator
